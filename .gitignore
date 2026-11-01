@@ -22,3 +22,6 @@ social-feed.json
 .env
 .env.*
 __pycache__/
+
+dynasty-enhancer.json
+/RuntimeHistory/

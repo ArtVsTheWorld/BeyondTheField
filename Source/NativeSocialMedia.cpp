@@ -22,6 +22,7 @@
 #include "NewsScopeInput.h"
 #include "NewsDropdowns.h"
 #include "NewsPolish.h"
+#include "RuntimeFeed.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
@@ -39,6 +40,8 @@ std::mutex feedMutex;
 std::shared_ptr<const social::Feed> latestFeed=social::sampleFeed(feedPostCount),pageFeed=latestFeed;
 void adoptFeed(){std::lock_guard<std::mutex> lock(feedMutex);pageFeed=latestFeed;feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;}
 void publishFeed(const Json&);
+void waitingFeed(){auto feed=std::make_shared<social::Feed>();feed->key="runtime-waiting";feed->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","Preparing news for the active Dynasty. Return to the hub briefly, then reopen Social Media.","News",79,598});std::lock_guard<std::mutex> lock(feedMutex);latestFeed=std::move(feed);}
+
 #ifdef SOCIAL_READ_ONLY_FEED
 constexpr bool selectablePosts=false;
 #else
@@ -640,7 +643,7 @@ void flush(){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(logMutex);
 DWORD WINAPI worker(void*){
     wchar_t path[32768]{};GetModuleFileNameW(module,path,32768);folder=std::filesystem::path(path).parent_path();buildId=std::filesystem::path(path).filename().u8string();base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
     try{
-        social::refresh::Worker refresh;refresh.configure(folder);publishFeed(refresh.initial());adoptFeed();
+        dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
         if(!locateNewsLayout())throw std::runtime_error("Native NewsStory layout is absent, ambiguous, or unsupported");
@@ -654,8 +657,8 @@ DWORD WINAPI worker(void*){
         filterChanged=reinterpret_cast<FilterChanged>(base+0x7a2def0);
         HMODULE pinned=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&tileHook),&pinned))throw std::runtime_error("Cannot pin runtime");
         for(auto& b:bindings){if(!replace(reinterpret_cast<void**>(base+b.vt+b.offset),reinterpret_cast<void*>(base+b.rva),b.hook))throw std::runtime_error("UI hook ownership changed during activation");b.installed=true;}
-        note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","CFB Social Media weekly saved-Dynasty feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
-        while(!disabled){flush();if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));}))publishFeed(*feed);Sleep(200);}note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
+        note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
+        while(!disabled){flush();if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);Sleep(200);}note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
     }catch(const std::exception& e){stop();note({{"event","activation_failed"},{"error",e.what()}});flush();}
     return 0;
 }

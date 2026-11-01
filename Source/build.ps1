@@ -22,6 +22,8 @@ try {
     if($LASTEXITCODE -ne 0){throw 'Native Social Media tests build failed'}
     & (Join-Path $analyticsOut 'NativeSocialMediaTests.exe')
     if($LASTEXITCODE -ne 0){throw 'Native Social Media checks failed'}
+    & $analyticsCl @analyticsCommon (Join-Path $PSScriptRoot 'LiveCapture.cpp') /Fe:LiveCapture.exe /link @analyticsLib /INCREMENTAL:NO
+    if($LASTEXITCODE -ne 0){throw 'Live reader build failed'}
     & $analyticsCl @analyticsCommon (Join-Path $PSScriptRoot 'LoadRuntime.cpp') /Fe:LoadDynastyEnhancer.exe /link @analyticsLib /INCREMENTAL:NO
     if($LASTEXITCODE -ne 0){throw 'Loader build failed'}
 } finally {Pop-Location}

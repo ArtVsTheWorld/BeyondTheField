@@ -25,6 +25,17 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        {
+            std::vector<unsigned char> packed(48);uint32_t first=0xfedcba98u,second=0x12345678u;
+            memcpy(packed.data()+32,&first,4);memcpy(packed.data()+36,&second,4);
+            require(dynasty::live::bits(packed,1,8,0,0,32)==first,"Live 32-bit fields were truncated");
+            require(dynasty::live::bits(packed,1,8,1,4,8)==0x67,"Live row stride/bit offset changed");
+            bool rejected=false;try{dynasty::live::bits(packed,1,8,0,31,2);}catch(const std::exception&){rejected=true;}
+            require(rejected,"Unverified packed layout was accepted");
+            dynasty::live::Memory memory;require(memory.at<uint32_t>(reinterpret_cast<uintptr_t>(&first))==first,"Read-only native memory accessor changed");
+            rejected=false;try{memory.at<uint32_t>(0);}catch(const std::exception&){rejected=true;}
+            require(rejected,"Unavailable native memory did not fail closed");
+        }
         Collector out{vt,{}};ContainerProxy proxy{containerVt,&out,{}};
         const char* coordinates[]={"1","2","3","5","6","7"};
         for(unsigned row=0;row<6;++row){containerString(&proxy,row,"tileCoords",coordinates[row]);containerInt(&proxy,row,"Priority",0);containerFloat(&proxy,row,"Opacity",0.875f);containerBool(&proxy,row,"AllowFocus",true);}
