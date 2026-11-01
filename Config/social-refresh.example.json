@@ -1,0 +1,9 @@
+{
+  "save": "C:/PATH/TO/DYNASTY-SAVE",
+  "node": "C:/Program Files/nodejs/node.exe",
+  "exporter": "C:/PATH/TO/DynastyEnhancer/Tools/export_feed.mjs",
+  "schema": "C:/PATH/TO/C27_SCHEMA.gz",
+  "parser": "C:/PATH/TO/madden-franchise/dist/index.mjs",
+  "leagueId": 0,
+  "userTeamIndex": 0
+}

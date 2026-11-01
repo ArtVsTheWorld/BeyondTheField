@@ -1,0 +1,28 @@
+{
+  "baseline": "Verified Social Media v45 native UI prototype",
+  "originalDllSha256": "f5d99bc8b915b867caf66647d9127a33bde9e812b40962b64965d9e4eeeb99ce",
+  "originalSourceSha256": {
+    "build.ps1": "cc371f16467213971275b08e9b78d62f24f19f8cc63fa6ac8e46512d7e5e2409",
+    "CurrentBindings.h": "e47181c8fce931c22efde0253ce98b6851c07a627ce2fcbf20cc2aef10ee97d9",
+    "FeedData.h": "18ceaca8bf80d8f57e568aa463317f3b5b5e3bc0d43e3b94c981c7a2ae7a7d3c",
+    "FeedRefresh.h": "91f6af6bdfc424721f6d6d6dc3b3ceb085d25e5aa3c9b1ea3f3a3b82373f976d",
+    "LoadRuntime.cpp": "1d1b94db2ee4937fb75c653399f29dd7c18c66fcbdf15e45c585b0a5967e3e9b",
+    "NativeSocialMedia.cpp": "897d72498b6a2d4399f7f85b1adb90e773aee4614744d9d37871f6f4270e0859",
+    "NewsDropdowns.h": "48940da3fd1ae1419f809b502b3e1e04dfc668fffe4cf8bd333d8acafddd4ba0",
+    "NewsFlow.h": "6559fd6c0f2af6a8580daa4992e34c8238cd57665cb9c7c9bce2753be7c7c24f",
+    "NewsLayout.h": "c0fd1320af3bac97bb8d58de504254b79ffe36cd309be3793858a017b4e2ddfa",
+    "NewsNavigation.h": "aaf4ad241ab3d2a5f9f375168ae920ed4e75256653728a90f27696c5e5e84032",
+    "NewsPolish.h": "f25fb90fb4de2593e6eb728f0c87851a53d9dd60c447a3e346818094134695fa",
+    "NewsScopeInput.h": "bb2c0b1855de43b8968c546699dd35b053d93dc68538899c3d4fc2a43ec6e47e",
+    "NewsScroll.h": "6a0b3b08072f4a1ec9b635e0aa52b58ef15aa0564acf41ac540b7de116a7e1ee",
+    "NewsStyle.h": "5e929ee4be1909ce84d2a5ce6c1a851353563d730567d0d41376ed1da88141e8",
+    "SamplePosts.h": "9112027ab7f7e50b8ffb9999ba32e4878d6067467e830f89e3d0ca2313c152d8"
+  },
+  "packagingChanges": [
+    "Standalone vendored JSON include",
+    "Default DynastyEnhancer.dll and LoadDynastyEnhancer.exe names",
+    "Dual dropdowns enabled by default",
+    "DynastyEnhancerStop export with compatibility exports retained"
+  ],
+  "verification": "User verified long text, viewport clipping, heading, metadata, both dropdowns, and vertical scrolling. Live-data lifecycle is not part of this baseline."
+}

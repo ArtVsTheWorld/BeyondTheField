@@ -1,0 +1,22 @@
+// Rebuild a historical edition only from a verified, read-only save snapshot.
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {readDynasty} from './read_dynasty.mjs';
+import {buildFeed} from './feed_engine.mjs';
+const [configPath,backup]=process.argv.slice(2);
+if(!configPath||!backup)throw Error('Usage: node backfill_week.mjs social-refresh.json backup-directory');
+const c=JSON.parse(await fs.readFile(configPath,'utf8'));
+const manifest=JSON.parse((await fs.readFile(path.join(backup,'backup-manifest.json'),'utf8')).replace(/^\uFEFF/,''));
+const file=manifest.files.find(f=>f.source.replaceAll('\\','/')===c.save.replaceAll('\\','/'));
+if(!file||!manifest.verified)throw Error('Backup has no verified copy of this Dynasty source');
+const bytes=await fs.readFile(file.backup);
+if(createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw Error('Backup checksum mismatch');
+const s=await readDynasty(file.backup,c.schema,c.parser);
+if(s.leagueId!==c.leagueId||s.userTeamIndex!==c.userTeamIndex||s.season.CurrentWeek!==manifest.week)throw Error('Historical source identity mismatch');
+s.source=c.save;s.newOffers=[];
+const feed=buildFeed(s);feed.sourceBackup=file.backup;feed.sourceModifiedMs=(await fs.stat(file.backup)).mtimeMs;
+const dir=path.resolve(path.dirname(configPath),'History',String(feed.leagueId),String(feed.season),feed.phase);
+await fs.mkdir(dir,{recursive:true});const out=path.join(dir,`${feed.week}.${feed.sha256}.feed.json`),temp=out+'.backfill.tmp';
+await fs.writeFile(temp,JSON.stringify(feed));await fs.rename(temp,out);
+console.log(JSON.stringify({week:feed.week,sourceUnchanged:true,stories:feed.stories.length,scopeCounts:Object.fromEntries(Object.entries(feed.views).map(([k,v])=>[k,v.length]))}));
