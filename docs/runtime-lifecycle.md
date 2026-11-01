@@ -24,7 +24,7 @@ Generated JSON/history are mod-owned caches. Reading or writing them never requi
 - Team facts, game/stat facts consumed by templates, Heisman entries, recruiting commitments, and offers were compared with the save reader. All 122 generated stories matched in body, category, and avatar selection. Runtime can contain additional unused/unaffiliated player rows; raw record dumps are not expected to match save serialization byte-for-byte.
 - 27 Node tests cover content/curation and runtime lifecycle, including week rollover, an unsaved offer and commitment, current-week game completion, midweek recovery, deduplication, earlier-week rollback/replay, and cross-identity isolation.
 - Native UI/build tests pass with the active reader included.
-- Controller validation of this candidate, an actual unsaved recruiting event, and a real subsequent week advance remain pending.
+- The user verified the live Week 8 feed, USC recap, both dropdowns, and scrolling. An actual unsaved recruiting event and a real subsequent week advance remain pending.
 
 ## Remaining limits
 
