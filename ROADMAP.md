@@ -1,12 +1,14 @@
 # Dynasty Enhancer roadmap
 
-## Next: native Dynasty lifecycle
+## Current prototype: native Dynasty lifecycle
 
-- Read the active Dynasty and user program from runtime state instead of a configured save file.
-- Publish an edition after week advancement finishes updating results, statistics, polls, recruiting, and injuries.
-- Add midweek events to that same publication week without requiring a save.
-- Keep events stable and deduplicated, isolate leagues/seasons, and handle loading an older save or replaying a week with different outcomes.
-- Preserve native menu behavior, controller navigation, and read-only simulation access.
+- Active Dynasty and controlled program read from runtime tables instead of a configured save.
+- Stable editions published after regular-season week advancement, with a live Week 8 → Week 9 rollover verified.
+- Midweek scholarship offers verified in the native feed; commitments, injuries/recovery, and current-week results share the same publication path.
+- Deterministic IDs, scoped history, and fixture coverage for identity changes, earlier-week loading, and replay with different outcomes.
+- Native menu/controller behavior retained; simulation access remains read-only.
+
+Before broader release, validate active-Dynasty switching, an actual older-save restore/replay, offseason/year transitions, and cold launch. The runtime observer currently waits for stable state rather than hooking the native advance-completion callback.
 
 ## Then: richer Social Media
 
