@@ -90,7 +90,8 @@ export async function normalizeDynasty({records,resolve,array},identity) {
     const board=await resolve(t.RecruitingBoard);
     if(board)for(const target of await array(board.v.Recruits)){
       const r=await resolve(target.v.Recruit),commit=r&&recruitRefs.get(r.key);
-      if(r&&target.v.ScholarshipStatus==='Offered'){
+      // New is the native current-week offer state; Offered is the carried state.
+      if(r&&['New','Offered'].includes(target.v.ScholarshipStatus)){
         const p=await resolve(r.v.Player);if(p)offers.push({player:p.key,team:t.TeamIndex,rank:r.v.NationalRank});
       }
       if(!commit||commit.team!==t.TeamIndex)continue;

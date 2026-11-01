@@ -31,7 +31,7 @@ Node.js is required for the story generator. Copy `Config/dynasty-enhancer.examp
 The legacy save adapter remains as a diagnostic comparison tool: `Config/social-refresh.example.json` documents its external dependencies. It is not the candidate DLL's data source.
 
 ```powershell
-node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs
+node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs
 Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```

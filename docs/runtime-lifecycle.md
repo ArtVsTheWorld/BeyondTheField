@@ -12,7 +12,7 @@ Bindings are specific to the inspected game executable. This is a development DL
 
 The shared normalizer consumes either the native record adapter or the diagnostic save adapter. `runtime_lifecycle.mjs` stores history by league, controlled team, season, and phase. Its weekly editions use the publication week, include prior-week recaps and current-week developments, and retain deterministic story IDs. All Posts remains curated; dedicated scopes retain their full qualifying stories.
 
-Offers and commitments use observed differences. Initial offers seed a baseline quietly; midweek discoveries become current-week stories and survive repeated observations without duplicates. Existing commitment-week evidence is retained. Injury status updates and midweek recoveries use observed injury episodes and the game's injury metadata. Completed current-week games replace their upcoming previews and use current-week wording for player performances.
+Offers and commitments use observed differences. Native scholarship status `New` means a current-week offer and is included alongside carried status `Offered`; moving from `New` to `Offered` does not create a second event. The first live offer test exposed that filtering only `Offered` omitted all three new user offers; the adapter and regression coverage now include both states. Initial offers seed a baseline quietly; midweek discoveries become current-week stories and survive repeated observations without duplicates. Existing commitment-week evidence is retained. Injury status updates and midweek recoveries use observed injury episodes and the game's injury metadata. Completed current-week games replace their upcoming previews and use current-week wording for player performances.
 
 Loading an earlier week drops future editions from the active history branch. Replaying to a later week generates from its newly observed facts. Same-week rollback prunes offer and commitment events absent from the active state. Poll and Heisman posts reflect the latest authoritative state; this candidate does not keep an event-by-event timeline of every intermediate poll or injury transition. It observes only while loaded; it cannot reconstruct exact midweek events that happened before observation.
 
@@ -22,7 +22,7 @@ Generated JSON/history are mod-owned caches. Reading or writing them never requi
 
 - The native reader captured 119,646 records from the active Week 8 Dynasty with read-only process rights.
 - Team facts, game/stat facts consumed by templates, Heisman entries, recruiting commitments, and offers were compared with the save reader. All 122 generated stories matched in body, category, and avatar selection. Runtime can contain additional unused/unaffiliated player rows; raw record dumps are not expected to match save serialization byte-for-byte.
-- 27 Node tests cover content/curation and runtime lifecycle, including week rollover, an unsaved offer and commitment, current-week game completion, midweek recovery, deduplication, earlier-week rollback/replay, and cross-identity isolation.
+- 29 Node tests cover content/curation and runtime lifecycle, including week rollover, an unsaved offer and commitment, current-week game completion, midweek recovery, deduplication, earlier-week rollback/replay, and cross-identity isolation.
 - Native UI/build tests pass with the active reader included.
 - The user verified the live Week 8 feed, USC recap, both dropdowns, and scrolling. An actual unsaved recruiting event and a real subsequent week advance remain pending.
 
