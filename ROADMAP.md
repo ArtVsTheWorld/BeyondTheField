@@ -10,9 +10,11 @@
 
 Before broader release, validate active-Dynasty switching, an actual older-save restore/replay, offseason/year transitions, and cold launch. The runtime observer currently waits for stable state rather than hooking the native advance-completion callback.
 
-## Then: richer Social Media
+## Current content work: new voice foundation
 
-Expand conditional prewritten voices and stories for depth-chart status, injuries, age, transfer risk, NIL, rivalries, awards, and the national postseason picture. Preserve a curated combined feed and complete category feeds.
+Step 1 now has six voice guides, a native personality policy, and thirty new review drafts. All former tweet wording and the original sample cards are retired on this branch. Drafts are unapproved and excluded from runtime; event detection remains available as structured facts.
+
+Next, revise the voices from user feedback, build the verified condition matrix, and implement the new author/template renderer. Then expand the approved catalog, repetition controls, and curated publication. Depth-chart status, transfer risk, NIL, awards, and broader postseason stories need their data conditions verified before publication. Preserve single publication-week filtering and complete dedicated scopes.
 
 ## Planned 1.0 integration
 

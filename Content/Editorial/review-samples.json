@@ -1,0 +1,544 @@
+{
+  "format": 1,
+  "status": "draft-for-review",
+  "approvedForRuntime": false,
+  "scenarioNotice": "Fictional, independent editorial scenarios for reviewing tone. These do not describe the active Dynasty. Media/fan accounts and example people are fictional.",
+  "posts": [
+    {
+      "id": "TEAM-01",
+      "voice": "official",
+      "author": "Harbor State Football",
+      "handle": "@HarborFootball",
+      "body": "Hard-earned. {school} leaves with a {score} win.",
+      "exampleValues": {
+        "school": "Harbor State",
+        "score": "36–31"
+      },
+      "trigger": "Verified completed win; margin seven points or fewer.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Hard-earned. Harbor State leaves with a 36–31 win."
+    },
+    {
+      "id": "TEAM-02",
+      "voice": "official",
+      "author": "Harbor State Football",
+      "handle": "@HarborFootball",
+      "body": "Nothing on their side of the scoreboard. {school} wins {score}.",
+      "exampleValues": {
+        "school": "Harbor State",
+        "score": "24–0"
+      },
+      "trigger": "Verified win with opponent score zero.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Nothing on their side of the scoreboard. Harbor State wins 24–0."
+    },
+    {
+      "id": "TEAM-03",
+      "voice": "official",
+      "author": "Harbor State Football",
+      "handle": "@HarborFootball",
+      "body": "Up to No. {rank}. Proud of this group, and plenty left in front of us.",
+      "exampleValues": {
+        "rank": 8
+      },
+      "trigger": "Current poll rank improved; program is in the Top 25.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Up to No. 8. Proud of this group, and plenty left in front of us."
+    },
+    {
+      "id": "TEAM-04",
+      "voice": "official",
+      "author": "Harbor State Football",
+      "handle": "@HarborFootball",
+      "body": "{opponent} is coming to town. See you Saturday.",
+      "exampleValues": {
+        "opponent": "North Valley"
+      },
+      "trigger": "Verified upcoming home game on Saturday; opponent known.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "North Valley is coming to town. See you Saturday."
+    },
+    {
+      "id": "TEAM-05",
+      "voice": "official",
+      "author": "Harbor State Football",
+      "handle": "@HarborFootball",
+      "body": "{playerName}: {rushingYards} on the ground and {rushingTouchdowns} trips to the end zone.",
+      "exampleValues": {
+        "playerName": "Darius Vann",
+        "rushingYards": 114,
+        "rushingTouchdowns": 2
+      },
+      "trigger": "Verified player rushing performance; at least two rushing touchdowns.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Darius Vann: 114 on the ground and 2 trips to the end zone."
+    },
+    {
+      "id": "BEAT-01",
+      "voice": "beat",
+      "author": "Maya Wells",
+      "handle": "@MayaOnHarbor",
+      "body": "{school} gets out with a {score} win over {opponent}. Close result, important win.",
+      "exampleValues": {
+        "school": "Harbor State",
+        "score": "36–31",
+        "opponent": "Red Mesa"
+      },
+      "trigger": "Verified narrow win; interpretation stays limited to the result.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Harbor State gets out with a 36–31 win over Red Mesa. Close result, important win."
+    },
+    {
+      "id": "BEAT-02",
+      "voice": "beat",
+      "author": "Maya Wells",
+      "handle": "@MayaOnHarbor",
+      "body": "{rushingYards} rushing yards for {school}, including {playerName}’s {playerRushingYards}. The ground game did its part.",
+      "exampleValues": {
+        "rushingYards": 235,
+        "school": "Harbor State",
+        "playerName": "Darius Vann",
+        "playerRushingYards": 114
+      },
+      "trigger": "Team and player rushing totals from the same completed game; team total at least 200.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "235 rushing yards for Harbor State, including Darius Vann’s 114. The ground game did its part."
+    },
+    {
+      "id": "BEAT-03",
+      "voice": "beat",
+      "author": "Maya Wells",
+      "handle": "@MayaOnHarbor",
+      "body": "{playerName} remains on {school}’s injury report. Availability is still worth watching.",
+      "exampleValues": {
+        "playerName": "Marcus Hale",
+        "school": "Harbor State"
+      },
+      "trigger": "Player remains injured across observations; no claim about diagnosis, clearance, or return date.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Marcus Hale remains on Harbor State’s injury report. Availability is still worth watching."
+    },
+    {
+      "id": "BEAT-04",
+      "voice": "beat",
+      "author": "Maya Wells",
+      "handle": "@MayaOnHarbor",
+      "body": "{school} moves from No. {previousRank} to No. {rank}. A {places}-spot climb in the new poll.",
+      "exampleValues": {
+        "school": "Harbor State",
+        "previousRank": 12,
+        "rank": 8,
+        "places": 4
+      },
+      "trigger": "Verified previous and current poll places; places is their positive difference.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Harbor State moves from No. 12 to No. 8. A 4-spot climb in the new poll."
+    },
+    {
+      "id": "BEAT-05",
+      "voice": "beat",
+      "author": "Maya Wells",
+      "handle": "@MayaOnHarbor",
+      "body": "{playerName} has committed to {school}. A {position} ranked No. {recruitRank} nationally joins the recruiting class.",
+      "exampleValues": {
+        "playerName": "Evan Mercer",
+        "school": "Harbor State",
+        "position": "quarterback",
+        "recruitRank": 38
+      },
+      "trigger": "Verified hard commitment and recruiting rank; no signing or enrollment claim.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Evan Mercer has committed to Harbor State. A quarterback ranked No. 38 nationally joins the recruiting class."
+    },
+    {
+      "id": "ANALYST-01",
+      "voice": "analyst",
+      "author": "Saturday Perspective",
+      "handle": "@SaturdayViewCFB",
+      "body": "{school} at No. {rank}. Fair placement, or does the résumé deserve another look?",
+      "exampleValues": {
+        "school": "Harbor State",
+        "rank": 8
+      },
+      "trigger": "Verified current Top 25 place. The question is opinion, not an invented poll movement.",
+      "scope": "National",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Harbor State at No. 8. Fair placement, or does the résumé deserve another look?"
+    },
+    {
+      "id": "ANALYST-02",
+      "voice": "analyst",
+      "author": "Saturday Perspective",
+      "handle": "@SaturdayViewCFB",
+      "body": "No. {homeRank} {home} against No. {awayRank} {away}. This one has my attention.",
+      "exampleValues": {
+        "homeRank": 8,
+        "home": "Harbor State",
+        "awayRank": 14,
+        "away": "North Valley"
+      },
+      "trigger": "Upcoming game with both teams currently ranked; these are preview rankings.",
+      "scope": "National",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "No. 8 Harbor State against No. 14 North Valley. This one has my attention."
+    },
+    {
+      "id": "ANALYST-03",
+      "voice": "analyst",
+      "author": "Saturday Perspective",
+      "handle": "@SaturdayViewCFB",
+      "body": "{playerName} is up to No. {rank} in the Heisman race. The next game comes with a few more eyes on him.",
+      "exampleValues": {
+        "playerName": "Evan Mercer",
+        "rank": 2
+      },
+      "trigger": "Verified Heisman place improved from a known previous place.",
+      "scope": "National",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Evan Mercer is up to No. 2 in the Heisman race. The next game comes with a few more eyes on him."
+    },
+    {
+      "id": "ANALYST-04",
+      "voice": "analyst",
+      "author": "Conference Notebook",
+      "handle": "@ConferenceNotes",
+      "body": "{conference} leaders: {leaderOne} {recordOne}, {leaderTwo} {recordTwo}. Every conference game gets a little heavier from here.",
+      "exampleValues": {
+        "conference": "Coastal Conference",
+        "leaderOne": "Harbor State",
+        "recordOne": "4–0",
+        "leaderTwo": "North Valley",
+        "recordTwo": "3–1"
+      },
+      "trigger": "Verified conference standings in the middle/later regular season; records are conference records.",
+      "scope": "Conference",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Coastal Conference leaders: Harbor State 4–0, North Valley 3–1. Every conference game gets a little heavier from here."
+    },
+    {
+      "id": "ANALYST-05",
+      "voice": "analyst",
+      "author": "Saturday Projection",
+      "handle": "@SaturdayProjection",
+      "body": "Fictional line: {favorite} -{spread} against {opponent}. Who covers?",
+      "exampleValues": {
+        "favorite": "Harbor State",
+        "spread": 3.5,
+        "opponent": "North Valley"
+      },
+      "trigger": "Mod-generated simulated spread with a favorite; never an actual sportsbook quote.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Fictional line: Harbor State -3.5 against North Valley. Who covers?"
+    },
+    {
+      "id": "RECRUIT-01",
+      "voice": "recruit",
+      "author": "Evan Mercer",
+      "handle": "@EvanMercerQB",
+      "body": "Thankful to receive an offer from {school}. Appreciate the opportunity.",
+      "exampleValues": {
+        "school": "Harbor State"
+      },
+      "trigger": "Newly observed scholarship offer.",
+      "scope": "My Team",
+      "nativePersonality": "Leader",
+      "position": "QB",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Thankful to receive an offer from Harbor State. Appreciate the opportunity."
+    },
+    {
+      "id": "RECRUIT-02",
+      "voice": "recruit",
+      "author": "Noah Redd",
+      "handle": "@NoahReddWR",
+      "body": "{school} offered. Yeah, I’m smiling at this one.",
+      "exampleValues": {
+        "school": "Harbor State"
+      },
+      "trigger": "Newly observed scholarship offer; expressive reaction does not imply a favorite school.",
+      "scope": "My Team",
+      "nativePersonality": "Entertainer",
+      "position": "WR",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Harbor State offered. Yeah, I’m smiling at this one."
+    },
+    {
+      "id": "RECRUIT-03",
+      "voice": "recruit",
+      "author": "Caleb Moss",
+      "handle": "@CalebMossOL",
+      "body": "I’m committing to {school}. Excited to be part of what they’re building.",
+      "exampleValues": {
+        "school": "Harbor State"
+      },
+      "trigger": "Verified hard commitment; no claim of signing or enrollment.",
+      "scope": "My Team",
+      "nativePersonality": "TeamPlayer",
+      "position": "LT",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "I’m committing to Harbor State. Excited to be part of what they’re building."
+    },
+    {
+      "id": "RECRUIT-04",
+      "voice": "recruit",
+      "author": "Jalen Avery",
+      "handle": "@JalenAveryCB",
+      "body": "{school} offered. Grateful for it. More to prove.",
+      "exampleValues": {
+        "school": "Harbor State"
+      },
+      "trigger": "Newly observed scholarship offer.",
+      "scope": "My Team",
+      "nativePersonality": "Intense",
+      "position": "CB",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Harbor State offered. Grateful for it. More to prove."
+    },
+    {
+      "id": "RECRUIT-05",
+      "voice": "recruit",
+      "author": "Darius Vann",
+      "handle": "@DariusVannRB",
+      "body": "All glory to God. Grateful for an offer from {school} and another opportunity ahead.",
+      "exampleValues": {
+        "school": "Harbor State"
+      },
+      "trigger": "Newly observed offer plus an explicitly approved persistent faith-language preference.",
+      "scope": "My Team",
+      "nativePersonality": "TeamPlayer",
+      "position": "HB",
+      "notes": [
+        "Optional faith-language example. Personality and position do not establish this preference; it has no automatic runtime eligibility."
+      ],
+      "approvedForRuntime": false,
+      "previewText": "All glory to God. Grateful for an offer from Harbor State and another opportunity ahead."
+    },
+    {
+      "id": "PLAYER-01",
+      "voice": "player",
+      "author": "Evan Mercer",
+      "handle": "@EvanMercerQB",
+      "body": "Good team win. Plenty for me to clean up before {opponent}.",
+      "exampleValues": {
+        "opponent": "North Valley"
+      },
+      "trigger": "Completed team win and a known next opponent. No assertion of a particular mistake.",
+      "scope": "My Team",
+      "nativePersonality": "Leader",
+      "position": "QB",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Good team win. Plenty for me to clean up before North Valley."
+    },
+    {
+      "id": "PLAYER-02",
+      "voice": "player",
+      "author": "Trey Coleman",
+      "handle": "@TreyColemanQB",
+      "body": "That loss hurts. I’ve got to be better. Back to work.",
+      "exampleValues": {},
+      "trigger": "Verified team loss; direct self-accountability, without inventing a dispute.",
+      "scope": "My Team",
+      "nativePersonality": "Intense",
+      "position": "QB",
+      "notes": [
+        "An Intense QB remains more restrained than the expressive WR example."
+      ],
+      "approvedForRuntime": false,
+      "previewText": "That loss hurts. I’ve got to be better. Back to work."
+    },
+    {
+      "id": "PLAYER-03",
+      "voice": "player",
+      "author": "Noah Redd",
+      "handle": "@NoahReddWR",
+      "body": "{receivingYards} and a W. I can work with that.",
+      "exampleValues": {
+        "receivingYards": 126
+      },
+      "trigger": "Verified receiving performance and a team win in the same game.",
+      "scope": "My Team",
+      "nativePersonality": "Entertainer",
+      "position": "WR",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "126 and a W. I can work with that."
+    },
+    {
+      "id": "PLAYER-04",
+      "voice": "player",
+      "author": "Caleb Moss",
+      "handle": "@CalebMossOL",
+      "body": "Love seeing the backs eat. Proud of this group.",
+      "exampleValues": {},
+      "trigger": "Team rushing performance of at least 200 yards; author is an offensive lineman. No claim that he started or played.",
+      "scope": "My Team",
+      "nativePersonality": "TeamPlayer",
+      "position": "LT",
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Love seeing the backs eat. Proud of this group."
+    },
+    {
+      "id": "PLAYER-05",
+      "voice": "player",
+      "author": "Darius Vann",
+      "handle": "@DariusVannRB",
+      "body": "Good to be back. Missed this.",
+      "exampleValues": {},
+      "trigger": "Verified prior injury followed by recovery AND participation in a later completed game. Healthy status alone is insufficient.",
+      "scope": "My Team",
+      "nativePersonality": "Unpredictable",
+      "position": "HB",
+      "notes": [
+        "Unpredictable does not mean constantly loud or chaotic. This is a restrained example within a wider stable voice range."
+      ],
+      "approvedForRuntime": false,
+      "previewText": "Good to be back. Missed this."
+    },
+    {
+      "id": "FAN-01",
+      "voice": "fan",
+      "author": "Harbor After Dark",
+      "handle": "@HarborAfterDark",
+      "body": "A {margin}-point win. Wonderful for the standings. Terrible for my blood pressure.",
+      "exampleValues": {
+        "margin": 5
+      },
+      "trigger": "Verified narrow win; fan emotion is fictional color.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "A 5-point win. Wonderful for the standings. Terrible for my blood pressure."
+    },
+    {
+      "id": "FAN-02",
+      "voice": "fan",
+      "author": "Harbor Replies",
+      "handle": "@HarborReplies",
+      "body": "{rival} fans got real quiet. Funny how that works.",
+      "exampleValues": {
+        "rival": "Red Mesa"
+      },
+      "trigger": "Verified win against an actual rival; playful fictional reaction, not a sourced crowd report.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Red Mesa fans got real quiet. Funny how that works."
+    },
+    {
+      "id": "FAN-03",
+      "voice": "fan",
+      "author": "Harbor After Dark",
+      "handle": "@HarborAfterDark",
+      "body": "I had an entire optimistic post ready. Deleted it.",
+      "exampleValues": {},
+      "trigger": "Verified team loss; self-directed fan humor.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "I had an entire optimistic post ready. Deleted it."
+    },
+    {
+      "id": "FAN-04",
+      "voice": "fan",
+      "author": "Harbor Replies",
+      "handle": "@HarborReplies",
+      "body": "No. {rank} looks nice next to {school}. Just saying.",
+      "exampleValues": {
+        "rank": 8,
+        "school": "Harbor State"
+      },
+      "trigger": "Verified current Top 25 place.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "No. 8 looks nice next to Harbor State. Just saying."
+    },
+    {
+      "id": "FAN-05",
+      "voice": "fan",
+      "author": "Harbor After Dark",
+      "handle": "@HarborAfterDark",
+      "body": "Me: don’t spend the whole week thinking about {opponent}. Also me: immediately checks the schedule again.",
+      "exampleValues": {
+        "opponent": "North Valley"
+      },
+      "trigger": "Known upcoming opponent; no invented result or team news.",
+      "scope": "My Team",
+      "nativePersonality": null,
+      "position": null,
+      "notes": [],
+      "approvedForRuntime": false,
+      "previewText": "Me: don’t spend the whole week thinking about North Valley. Also me: immediately checks the schedule again."
+    }
+  ]
+}

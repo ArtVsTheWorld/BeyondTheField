@@ -4,6 +4,20 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Editorial reset: Step 1
+
+This branch starts the Social Media writing from scratch. The original three illustrative cards and all prior authored runtime tweet wording have been removed. `Tools/story_events.mjs` retains the verified event facts and conditions. `Tools/feed_engine.mjs` currently publishes zero authored stories with `contentStatus: drafting`; only system status/empty-state rows remain available to the native UI. Draft writing is not a production template pack.
+
+The user selected grounded college-football Twitter, all six account types, fictional media/fan accounts, personality-led player/recruit voices, secondary position influences (usually more restrained QBs), and no numerical ability values or game-system language in posts.
+
+- `Content/Editorial/voice-guide.json`: six voice guides, writing boundaries, native personality mapping, and position guidance.
+- `Content/Editorial/review-samples.json`: thirty new independent review scenarios, five per voice, all unapproved for runtime.
+- `Tools/render_voice_review.mjs`: creates a readable local review page. Run `node Tools/render_voice_review.mjs`, then open `Build/voice-review.html` and give feedback by post ID.
+
+The native `Player.Personality` field was verified read-only and added to this branch's capture/normalization path: Leader, Intense, Entertainer, TeamPlayer, and Unpredictable. The prose associations are editorial proposals, not measured psychological rules. Position is a secondary influence. Missing/sentinel personalities normalize to null. Personality labels, codes, and internal values never appear in the review posts.
+
+The historical live v47 build and its published archives remain available at tag `prototype-active-dynasty-v47`. This isolated content worktree has not replaced the currently loaded DLL. The remaining sections describe that verified native UI/data foundation; story publication on this branch resumes only after the replacement content and renderer are implemented.
+
 ## Current component: Social Media
 
 A Social Media button in the CFB tab opens a native vertical feed with opaque tweet cards, account images, adaptive card heights, smooth controller scrolling, and two native dropdowns. LT chooses All Posts, National, Conference, or My Team. RT selects one publication week, oldest to newest; the active week is the default. All Posts uses a curated mix with soft targets of 35% national, 25% conference, and 40% team news. Dedicated views expose all qualifying stories.
@@ -31,7 +45,7 @@ Node.js is required for the story generator. Copy `Config/dynasty-enhancer.examp
 The legacy save adapter remains as a diagnostic comparison tool: `Config/social-refresh.example.json` documents its external dependencies. It is not the candidate DLL's data source.
 
 ```powershell
-node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs
+node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs
 Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```

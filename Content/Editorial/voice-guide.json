@@ -1,0 +1,258 @@
+{
+  "format": 1,
+  "status": "draft-for-review",
+  "approvedForRuntime": false,
+  "tone": "Grounded college-football Twitter, with distinct voices, occasional slang, and selective humor.",
+  "scope": "Step 1: editorial voice foundation and thirty new review scenarios. These files are not a production template pack.",
+  "freshStart": {
+    "legacyTweetWording": "retired",
+    "originalThreeCards": "removed",
+    "existingRuntimeTemplates": "removed from this branch",
+    "approvedRuntimeTemplates": 0,
+    "historicalBaselineTag": "prototype-active-dynasty-v47",
+    "publishedArchives": "not rewritten"
+  },
+  "writingRules": [
+    "Begin from a specific football event or reaction. Avoid interchangeable motivational filler.",
+    "Use ordinary football language. Never mention numerical ability values, game UI, progression currencies, or hidden simulation fields in a post.",
+    "Box-score statistics, scores, records, poll places, and recruiting rankings are ordinary sports facts and remain usable.",
+    "Personality influences expression, not facts. Do not invent a visit, coach conversation, medical clearance, comeback, promise, or transfer decision to fit a voice.",
+    "Media and fan accounts are fictional and retain stable identities. Player and recruit accounts belong to the relevant in-Dynasty person.",
+    "Keep player and recruit posts short. Most should cover one idea without explaining the story generation system.",
+    "Occasional slang, lowercase, or repeated punctuation can distinguish an author. Do not apply them to everyone.",
+    "Humor belongs mostly to fans and entertainer personalities. A serious injury is not a joke trigger.",
+    "No automatic hashtags or emojis. Emoji use can be reviewed later after native glyph support is checked.",
+    "Avoid invented accusations, personal abuse, and alleged insider sourcing. Rivalry banter should concern football.",
+    "Target one or two short sentences and generally stay below 220 characters; never truncate a name or a factual slot to make a draft fit."
+  ],
+  "personalityPolicy": {
+    "nativeField": "Player.Personality",
+    "verifiedFrom": "Local schema and read-only live Player metadata; all five values were present in active rosters.",
+    "nativeValueMap": {
+      "0": "Leader",
+      "1": "Intense",
+      "2": "Entertainer",
+      "3": "TeamPlayer",
+      "4": "Unpredictable"
+    },
+    "invalidValues": [
+      "Invalid_",
+      "First_",
+      "Last_",
+      "UserAvailableCount_",
+      "NPCAvailableCount_"
+    ],
+    "precedence": [
+      "native personality",
+      "secondary position influence",
+      "event-appropriate emotion",
+      "persistent individual punctuation and vocabulary preferences"
+    ],
+    "positionRule": "Position is a soft editorial influence, never a personality assignment. A restrained receiver and an expressive quarterback must remain possible.",
+    "unknownRule": "Use a neutral, consistent voice when the field is missing or invalid. Do not claim a personality has been detected.",
+    "unpredictableRule": "The native Unpredictable category permits a wider approved range. Keep recurring author habits stable; do not reroll a different character every post.",
+    "faithLanguage": "Optional editorial style, never inferred from personality or position. The faith-language review example is not automatically eligible for a real player.",
+    "profiles": {
+      "Leader": {
+        "emphasis": [
+          "accountability",
+          "shared goals",
+          "measured confidence"
+        ],
+        "avoid": [
+          "long captain speeches",
+          "assuming the player is a captain"
+        ]
+      },
+      "Intense": {
+        "emphasis": [
+          "direct competitive language",
+          "short emphatic sentences",
+          "frustration turned toward preparation"
+        ],
+        "avoid": [
+          "constant anger",
+          "invented disputes with coaches or teammates"
+        ]
+      },
+      "Entertainer": {
+        "emphasis": [
+          "playful confidence",
+          "audience awareness",
+          "occasional light humor"
+        ],
+        "avoid": [
+          "a punchline in every post",
+          "copying a real athlete catchphrase"
+        ]
+      },
+      "TeamPlayer": {
+        "emphasis": [
+          "credit to teammates",
+          "collective pride",
+          "specific unit appreciation when appropriate"
+        ],
+        "avoid": [
+          "identical gratitude in every post",
+          "assuming playing time or a starting role"
+        ]
+      },
+      "Unpredictable": {
+        "emphasis": [
+          "a wider expressive range",
+          "consistent individual habits"
+        ],
+        "avoid": [
+          "random mood changes",
+          "equating the label with misconduct"
+        ]
+      }
+    },
+    "positionInfluences": {
+      "QB": "Usually more restrained and accountable, as requested. An Intense QB can be forceful without becoming reckless or theatrical.",
+      "WR/CB": "Expressive confidence is an available secondary flavor, not a requirement and not stronger than native personality.",
+      "OL/DL": "Unit pride or compact directness can be appropriate; do not assume every lineman is quiet.",
+      "HB/RB/TE/FB": "Balanced confidence and team credit; native personality chooses the emphasis.",
+      "K/P": "Understatement or occasional dry humor is available; do not manufacture pressure situations.",
+      "recruits": "Use their native personality and position when present, with recruiting-stage-appropriate certainty. Never describe a soft commitment as signed or enrolled."
+    },
+    "importantDistinction": "These are proposed writing choices for the mod. The game enum is verified; the prose associations and position influences are editorial choices.",
+    "positionGroups": {
+      "QB": [
+        "QB"
+      ],
+      "WR/CB": [
+        "WR",
+        "CB"
+      ],
+      "OL": [
+        "LT",
+        "LG",
+        "C",
+        "RG",
+        "RT"
+      ],
+      "DL": [
+        "LE",
+        "RE",
+        "DT"
+      ],
+      "HB/RB/TE/FB": [
+        "HB",
+        "RB",
+        "TE",
+        "FB"
+      ],
+      "K/P": [
+        "K",
+        "P"
+      ]
+    }
+  },
+  "voices": [
+    {
+      "id": "official",
+      "label": "Official team",
+      "purpose": "Celebrate and inform with the program voice.",
+      "style": [
+        "concise",
+        "confident",
+        "polished",
+        "selective enthusiasm"
+      ],
+      "avoid": [
+        "reporter speculation",
+        "insider recruiting claims",
+        "disparaging players"
+      ],
+      "identity": "School-specific display name and a clearly fictional school account handle; native team logo."
+    },
+    {
+      "id": "beat",
+      "label": "Beat reporter",
+      "purpose": "Give specific program context without sounding like a press release.",
+      "style": [
+        "factual first sentence",
+        "restrained interpretation",
+        "plain language"
+      ],
+      "avoid": [
+        "fabricated sources",
+        "unsupported tactical explanations",
+        "identical wire copy"
+      ],
+      "identity": "Persistent fictional reporter associated with a program."
+    },
+    {
+      "id": "analyst",
+      "label": "National / conference analyst",
+      "purpose": "Put polls, contenders, matchups, and performances in the broader football conversation.",
+      "style": [
+        "clear point of view",
+        "comparisons supported by data",
+        "occasional question"
+      ],
+      "avoid": [
+        "claiming current rankings were kickoff rankings",
+        "unearned postseason certainty"
+      ],
+      "identity": "Persistent fictional media account; simulated-line posts use a distinct fictional model account."
+    },
+    {
+      "id": "recruit",
+      "label": "Recruit",
+      "purpose": "React to an actual offer or announce an actual commitment.",
+      "style": [
+        "brief",
+        "age-appropriate",
+        "personality-led",
+        "vary confidence and gratitude"
+      ],
+      "avoid": [
+        "making every recruit religious",
+        "invented visits or conversations",
+        "implied enrollment"
+      ],
+      "identity": "Recruit name, stable generated handle, native portrait where supported or team-logo fallback."
+    },
+    {
+      "id": "player",
+      "label": "Player",
+      "purpose": "React to a real team or individual development in the player own voice.",
+      "style": [
+        "personality-led",
+        "position is secondary",
+        "short",
+        "emotion fits the event"
+      ],
+      "avoid": [
+        "assuming starter status",
+        "announcing a medical return solely from an injury flag",
+        "game-system language"
+      ],
+      "identity": "Player name and stable generated handle; use supported native imagery."
+    },
+    {
+      "id": "fan",
+      "label": "Fan",
+      "purpose": "Bring joy, nerves, frustration, and rivalry humor to the surrounding world.",
+      "style": [
+        "opinionated",
+        "occasionally funny",
+        "recognizable recurring persona"
+      ],
+      "avoid": [
+        "abuse",
+        "every post as a meme",
+        "presenting invented allegations as fact"
+      ],
+      "identity": "Fictional school-linked fan accounts with stable attitudes and handles."
+    }
+  ],
+  "reviewInstructions": [
+    "Refer to a post by its ID when giving feedback.",
+    "Judge voice, naturalness, intensity, and how much humor feels right.",
+    "Review scenarios are independent examples, not a single chronological feed.",
+    "All thirty drafts are new. No draft is enabled in the game."
+  ]
+}
