@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildFeed,weekKey,trackOffers} from '../Tools/feed_engine.mjs';
-
+import {buildFeed,detectEvents,weekKey,trackOffers} from '../Tools/feed_engine.mjs';
 function fixture(){return {format:2,gameYear:27,sourceUnchanged:true,sha256:'a'.repeat(64),source:'C:/saves/DYNASTY-TEST',leagueId:10,userTeamIndex:1,
   season:{CurrentSeasonYear:2027,CurrentYear:1,CurrentWeek:7,CurrentWeekType:'RegularSeason',CurrentStage:'NFLSeason'},
   teams:[{id:1,name:'Home',logo:11,mediaRank:6,mediaLastRank:8},{id:2,name:'Away',logo:22,mediaRank:24,mediaLastRank:20}],
@@ -11,67 +10,64 @@ function fixture(){return {format:2,gameYear:27,sourceUnchanged:true,sha256:'a'.
     {id:'future',year:1,week:8,phase:'RegularSeason',status:'HomeWon',home:1,away:2,homeScore:99,awayScore:3}],
   performances:[{player:'p',team:1,game:'last',type:'GameOffensiveStats',stats:{PASSATTEMPTS:20,PASSCOMPLETED:15,PASSYARDS:200,PASSTDS:3,PASSINTS:1}}],
   heisman:[{player:'p',team:1,rank:1,lastRank:2}],commitments:[]};}
-const bodies=f=>f.posts.map(p=>p.body).join('\n');
-test('uses exact prior-week games and stats; excludes future, other-year and unfinished results',()=>{
-  const s=fixture();s.games.push({...s.games[0],id:'old-year',year:0,homeScore:88},{...s.games[0],id:'unfinished',status:'Unplayed',homeScore:77});
-  const f=buildFeed(s);assert.match(bodies(f),/Home 32, Away 24/);assert.match(bodies(f),/200 yards, 3 TD, 1 INT/);
-  assert.doesNotMatch(bodies(f),/99|88|77/);assert.ok(!f.posts.some(p=>p.id.includes('future')));
-  assert.match(f.posts.find(p=>p.category==='results').stamp,/Week 6/);assert.match(f.posts.find(p=>p.category==='schedule').stamp,/Week 7/);
+
+const find=(s,id,previous)=>detectEvents(s,previous).find(e=>e.id===id);
+test('event detection retains verified prior-week results and performances without authored prose',()=>{
+ const s=fixture();s.games.push({...s.games[0],id:'old-year',year:0,homeScore:88},{...s.games[0],id:'unfinished',status:'Unplayed',homeScore:77});
+ const e=detectEvents(s);assert.equal(find(s,'result:last').facts.homeScore,32);assert.equal(find(s,'performance:last:p:GameOffensiveStats').facts.stats.passingYards,200);
+ assert.ok(!e.some(e=>e.id.includes('future')||e.id.includes('old-year')||e.id.includes('unfinished')));assert.ok(e.every(e=>!('body' in e)&&!('author' in e)));
 });
-test('deterministic reload, stable IDs, quotas and visible simulated-line attribution',()=>{
-  const s=fixture(),a=buildFeed(s),b=buildFeed(structuredClone(s));assert.deepEqual(a,b);assert.equal(new Set(a.posts.map(p=>p.id)).size,a.posts.length);
-  assert.ok(a.posts.length<=24);assert.match(a.posts.find(p=>p.category==='lines').body,/SIMULATED LINE.*Fictional estimate; not a sportsbook/);
-  assert.equal(a.posts.find(p=>p.category==='player-stats').imageLibrary,0); // generated player falls back to actual team logo
+test('drafting starts with no publishable legacy or review tweets, while retaining event facts',()=>{
+ const s=fixture(),a=buildFeed(s),b=buildFeed(structuredClone(s));assert.deepEqual(a,b);assert.equal(a.contentStatus,'drafting');assert.ok(a.events.length>0);
+ assert.deepEqual(a.stories,[]);assert.deepEqual(a.posts,[]);for(const view of Object.values(a.views))assert.deepEqual(view,[]);
+ assert.ok(a.events.every(e=>e.publication.week===7));assert.equal(new Set(a.events.map(e=>e.id)).size,a.events.length);
 });
-test('week and season rollover cannot leak previous results or future stats',()=>{
-  const s=fixture();s.season.CurrentWeek=0;assert.ok(!buildFeed(s).posts.some(p=>['results','player-stats'].includes(p.category)));
-  s.season.CurrentWeek=7;s.season.CurrentYear=2;s.season.CurrentSeasonYear=2028;
-  assert.ok(!buildFeed(s).posts.some(p=>['results','player-stats','schedule'].includes(p.category)));assert.match(weekKey(s),/2028/);
-  s.season.CurrentStage='OffSeason';assert.ok(!buildFeed(s).posts.some(p=>['results','player-stats','schedule','heisman','lines'].includes(p.category)));
+test('week, phase, and season boundaries reject unrelated results',()=>{
+ const s=fixture();s.season.CurrentWeek=0;assert.ok(!detectEvents(s).some(e=>['results','player-stats'].includes(e.category)));
+ s.season.CurrentSeasonYear=2028;s.season.CurrentYear=2;s.season.CurrentWeek=7;assert.ok(!detectEvents(s).some(e=>['results','player-stats','schedule'].includes(e.category)));assert.match(weekKey(s),/2028/);
+ s.season.CurrentStage='OffSeason';assert.ok(!detectEvents(s).some(e=>['results','player-stats','schedule','heisman','lines'].includes(e.category)));
 });
-test('poll history comes from the game; no invented previous rank for new entries',()=>{
-  const s=fixture();s.teams[0].mediaLastRank=0;const p=buildFeed(s).posts.find(p=>p.id==='poll:1');assert.match(p.body,/enters the Top 25/);assert.doesNotMatch(p.body,/#0/);
+test('poll facts distinguish entry from a verified previous rank',()=>{
+ const s=fixture();s.teams[0].mediaLastRank=0;const p=find(s,'poll:1');assert.equal(p.facts.movement,'entry');assert.equal(p.facts.previousRank,null);
 });
-test('commitments need an observed event or verified week; old board entries are not new',()=>{
-  const s=fixture();s.commitments=[{player:'q',team:1,rank:33,stage:'HardCommitted',week:2}];
-  assert.match(buildFeed(s).stories.find(p=>p.category==='recruiting').body,/Commitment board check/);
-  s.commitments[0].week=6;assert.match(buildFeed(s).stories.find(p=>p.category==='recruiting').body,/Commitment update/);
-  s.commitments[0].week=0;const prior=fixture();prior.season.CurrentWeek=6;
-  assert.match(buildFeed(s,prior).stories.find(p=>p.category==='recruiting').body,/Commitment update/);
-  prior.leagueId=99;assert.match(buildFeed(s,prior).stories.find(p=>p.category==='recruiting').body,/Commitment board check/);
+test('commitment detection retains board checks separately from newly observed events',()=>{
+ const s=fixture();s.commitments=[{player:'q',team:1,rank:33,stage:'HardCommitted',week:2}];assert.equal(find(s,'commit:1:q').facts.newlyObserved,false);
+ s.commitments[0].week=6;assert.equal(find(s,'commit:1:q').facts.newlyObserved,true);
+ s.commitments[0].week=0;const prior=fixture();prior.season.CurrentWeek=6;assert.equal(find(s,'commit:1:q',prior).facts.newlyObserved,true);
+ prior.leagueId=99;assert.equal(find(s,'commit:1:q',prior).facts.newlyObserved,false);
 });
-test('injury reports distinguish current status, newly sustained injury and recovery',()=>{
-  const s=fixture();s.players[0].injury='Injured';s.players[0].injuryType='BrokenHand';
-  assert.match(buildFeed(s).posts.find(p=>p.category==='injuries').body,/Current injury report/);
-  Object.assign(s.players[0],{injuryYear:1,injuryWeek:6,injuryStage:'NFLSeason'});
-  assert.match(buildFeed(s).posts.find(p=>p.category==='injuries').body,/Injury update from last week/);
-  const prior=structuredClone(s);prior.season.CurrentWeek=6;s.players[0].injury='Uninjured';
-  assert.match(buildFeed(s,prior).posts.find(p=>p.category==='injuries').body,/listed as uninjured/);
-  prior.season.CurrentWeek=5;assert.ok(!buildFeed(s,prior).posts.some(p=>p.id.startsWith('healthy:')));
+test('injury facts distinguish new status and recovery without inventing unavailable details',()=>{
+ const s=fixture();Object.assign(s.players[0],{injury:'Injured',injuryType:'Invalid_'});assert.equal(find(s,'injury:p').facts.newlyInjured,false);assert.equal(find(s,'injury:p').facts.injuryType,null);
+ Object.assign(s.players[0],{injuryYear:1,injuryWeek:6,injuryStage:'NFLSeason'});assert.equal(find(s,'injury:p').facts.newlyInjured,true);
+ const prior=structuredClone(s);prior.season.CurrentWeek=6;s.players[0].injury='Uninjured';assert.equal(find(s,'healthy:p',prior).facts.recovered,true);prior.season.CurrentWeek=5;assert.equal(find(s,'healthy:p',prior),undefined);
 });
-test('holidays follow the in-game calendar and explicit flags',()=>{
-  const s=fixture();assert.match(bodies(buildFeed(s)),/Halloween/);s.games[1].day=15;
-  assert.doesNotMatch(bodies(buildFeed(s)),/Halloween/);s.games[1].thanksgiving=true;
-  assert.match(bodies(buildFeed(s)),/Thanksgiving/);
+test('calendar events use game dates and flags',()=>{
+ const s=fixture();assert.equal(find(s,'holiday:halloween').facts.holiday,'Halloween');s.games[1].day=15;assert.equal(find(s,'holiday:halloween'),undefined);
+ s.games[1].thanksgiving=true;assert.equal(find(s,'holiday:thanksgiving').facts.holiday,'Thanksgiving');
 });
-test('defensive stat lines include whole and half sacks from actual game fields',()=>{
-  const s=fixture();s.performances=[{player:'p',team:1,game:'last',type:'GameDefensiveStats',stats:{DLINESACKS:2,DLINEHALFSACK:1,DSECINTS:1}}];
-  assert.match(bodies(buildFeed(s)),/2.5 sacks; 1 interceptions/);
+test('defensive performance facts include half sacks',()=>{
+ const s=fixture();s.performances=[{player:'p',team:1,game:'last',type:'GameDefensiveStats',stats:{DLINESACKS:2,DLINEHALFSACK:1,DSECINTS:1}}];
+ assert.equal(find(s,'performance:last:p:GameDefensiveStats').facts.stats.sacks,2.5);
 });
-test('wrong game, malformed identity and missing controlled team fail closed',()=>{
-  for(const mutate of [s=>s.gameYear=26,s=>s.sourceUnchanged=false,s=>s.sha256='bad',s=>s.userTeamIndex=999]){const s=fixture();mutate(s);assert.throws(()=>buildFeed(s));}
+test('invalid Dynasty snapshots fail closed',()=>{
+ for(const mutate of [s=>s.gameYear=26,s=>s.sourceUnchanged=false,s=>s.sha256='bad',s=>s.userTeamIndex=999]){const s=fixture();mutate(s);assert.throws(()=>buildFeed(s));}
 });
-test('new offer uses the requested player wording and stays separate from commitments',()=>{
-  const s=fixture();s.newOffers=[{player:'q',team:1}];const f=buildFeed(s),p=f.posts.find(p=>p.category==='offers');
-  assert.equal(p.body,'AGTG! Blessed to receive an offer from Home');assert.equal(p.author,'Other Player');assert.equal(p.handle,'@OtherPlayer');
-  assert.ok(!f.posts.some(p=>p.category==='recruiting'));delete s.newOffers;assert.ok(!buildFeed(s).posts.some(p=>p.category==='offers'));
+test('new offers retain identity and native personality without an old tweet template',()=>{
+ const s=fixture();s.players[1].personality='Intense';s.newOffers=[{player:'q',team:1}];const e=find(s,'offer:1:q');
+ assert.equal(e.facts.school,'Home');assert.equal(e.facts.playerName,'Other Player');assert.equal(e.personality,'Intense');assert.equal(e.position,'QB');assert.equal(e.body,undefined);
+ assert.ok(!detectEvents(s).some(e=>e.category==='recruiting'));delete s.newOffers;assert.equal(find(s,'offer:1:q'),undefined);
 });
-test('offer observation seeds quietly, preserves same-week news, and handles reloads and rollbacks',()=>{
-  const s=fixture();s.offers=[{player:'p',team:1}];assert.deepEqual(trackOffers(s),[]);
-  const old=structuredClone(s);s.offers.push({player:'q',team:1});
-  const events=trackOffers(s,old);assert.deepEqual(events,[{player:'q',team:1}]);
-  const current={...structuredClone(s),offerEvents:events};assert.deepEqual(trackOffers(s,current),events);
-  const next=structuredClone(s);next.season.CurrentWeek=8;assert.deepEqual(trackOffers(next,null,current),[]);
-  assert.deepEqual(trackOffers(old,current),[]); // later observed offer is absent after rewind
-  const unrelated=structuredClone(old);unrelated.leagueId=20;assert.deepEqual(trackOffers(s,unrelated),[]);
+test('offer observation seeds quietly and retains same-week news without duplicates',()=>{
+ const s=fixture();s.offers=[{player:'q',team:1}];assert.deepEqual(trackOffers(s),[]);
+ const same=structuredClone(s);same.offers=[];const news=trackOffers(s,same);assert.equal(news.length,1);same.offers=s.offers;same.offerEvents=news;assert.equal(trackOffers(s,same).length,1);
+ s.offers=[];assert.deepEqual(trackOffers(s,same),[]);
+ const prior=fixture();prior.season.CurrentWeek=6;prior.offers=[];s.offers=[{player:'q',team:1}];assert.equal(trackOffers(s,null,prior).length,1);prior.leagueId=99;assert.deepEqual(trackOffers(s,null,prior),[]);
+});
+test('current-week team and player facts retain their actual event week',()=>{
+ const s=fixture();Object.assign(s.games[1],{status:'HomeWon',homeScore:21,awayScore:6,homeStats:s.games[0].homeStats});
+ s.performances.push({...s.performances[0],game:'now'});for(const id of ['result:now','teamstats:now:1','performance:now:p:GameOffensiveStats'])assert.equal(find(s,id).eventWeek,7);
+});
+test('spotlight facts use demonstrated performance rather than ability labels',()=>{
+ const s=fixture();const p=find(s,'watch:now:p');assert.equal(p.facts.basis,'recentPerformance');assert.ok(!('overall' in p.facts));assert.ok(!('rating' in p.facts));
+ s.performances=[];s.heisman=[];assert.ok(!detectEvents(s).some(e=>e.category==='watch'));
 });

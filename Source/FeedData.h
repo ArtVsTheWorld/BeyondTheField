@@ -6,7 +6,6 @@
 #include <array>
 #include <algorithm>
 #include <string_view>
-#include "SamplePosts.h"
 #include "FeedRefresh.h"
 namespace social {
 struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;};
@@ -51,10 +50,11 @@ inline constexpr std::array<const char*,4> scopeKeys={"all","national","conferen
 inline constexpr std::array<const char*,4> scopeLabels={"All Posts","National","Conference","My Team"};
 struct Edition {std::string key,label,conference;int season=0,week=0;std::map<std::string,FeedPost> stories;std::array<std::vector<std::string>,4> views;};
 struct Catalog {std::vector<Edition> weeks;size_t active=0;};
-struct Feed {std::vector<FeedPost> posts;std::string key="prototype",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0;};
-inline std::shared_ptr<const Feed> sampleFeed(unsigned count){
+struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0;};
+// System status is the only fallback; there are no illustrative tweet cards.
+inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();
-    for(unsigned n=0;n<count;++n){const auto& p=samplePosts[n%samplePosts.size()];f->posts.push_back({p.author,p.handle,p.body,"Sample post "+std::to_string(n+1),p.imageLibrary,p.imageValue});}
+    for(unsigned n=0;n<count;++n)f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","Preparing news for the active Dynasty. Return to the hub briefly, then reopen Social Media.","Status",79,598});
     return f;
 }
 inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> catalog,size_t week,unsigned scope){
@@ -62,7 +62,7 @@ inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> cat
     const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->key=e.key;
     f->label="Social Media";
     for(const auto& id:e.views[scope])f->posts.push_back(e.stories.at(id));
-    if(f->posts.empty())f->posts.push_back({"Campus Football Wire","@CampusFBWire","No "+std::string(scopeLabels[scope])+" stories were published in this weekly edition.","News",79,598});
+    if(f->posts.empty())f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","No "+std::string(scopeLabels[scope])+" stories were published in this weekly edition.","News",79,598});
     return f;
 }
 inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){

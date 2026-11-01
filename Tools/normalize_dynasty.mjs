@@ -36,7 +36,7 @@ export async function normalizeDynasty({records,resolve,array},identity) {
     for(const ref of [t.Rival1TeamRef,t.Rival2TeamRef,t.Rival3TeamRef]){const id=await teamIndex(ref);if(id!=null)team.rivals.push(id);}}
   const players=[],playerRefs=new Map(),rawPlayers=[];
   for(const {key,v:p} of await records('Player')){
-    const player={id:key,name:`${p.FirstName} ${p.LastName}`,position:p.Position,team:p.TeamIndex,
+    const player={id:key,name:`${p.FirstName} ${p.LastName}`,position:p.Position,personality:['Leader','Intense','Entertainer','TeamPlayer','Unpredictable'].includes(p.Personality)?p.Personality:null,team:p.TeamIndex,
       portrait:p.PLYR_PORTRAIT,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,
       injury:p.InjuryStatus,injuryType:p.InjuryType,injuryWeek:p.LatestInjuryWeek,injuryYear:p.LatestInjuryYear,
       injuryStage:p.LatestInjuryStage,minInjury:p.MinInjuryDuration,maxInjury:p.MaxInjuryDuration,

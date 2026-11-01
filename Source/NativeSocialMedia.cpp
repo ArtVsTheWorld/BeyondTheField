@@ -28,7 +28,7 @@ using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
 unsigned feedPostCount=12;
 #else
-unsigned feedPostCount=static_cast<unsigned>(social::samplePosts.size());
+unsigned feedPostCount=1;
 #endif
 #ifdef SOCIAL_LIST_FEED
 constexpr bool listFeed=true;
@@ -37,10 +37,10 @@ constexpr bool listFeed=false;
 #endif
 unsigned feedContainerCount=listFeed?1:feedPostCount;
 std::mutex feedMutex;
-std::shared_ptr<const social::Feed> latestFeed=social::sampleFeed(feedPostCount),pageFeed=latestFeed;
+std::shared_ptr<const social::Feed> latestFeed=social::statusFeed(feedPostCount),pageFeed=latestFeed;
 void adoptFeed(){std::lock_guard<std::mutex> lock(feedMutex);pageFeed=latestFeed;feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;}
 void publishFeed(const Json&);
-void waitingFeed(){auto feed=std::make_shared<social::Feed>();feed->key="runtime-waiting";feed->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","Preparing news for the active Dynasty. Return to the hub briefly, then reopen Social Media.","News",79,598});std::lock_guard<std::mutex> lock(feedMutex);latestFeed=std::move(feed);}
+void waitingFeed(){auto feed=social::statusFeed();std::lock_guard<std::mutex> lock(feedMutex);latestFeed=std::move(feed);}
 
 #ifdef SOCIAL_READ_ONLY_FEED
 constexpr bool selectablePosts=false;

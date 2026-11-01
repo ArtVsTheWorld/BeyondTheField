@@ -222,11 +222,12 @@ int main(int argc,char** argv){
         static_cast<unsigned char*>(layoutFixture)[0]^=1;
         require(!alignNewsFrame(true)&&!layoutOwned,"Foreign bytecode must be rejected");
         VirtualFree(layoutFixture,0,MEM_RELEASE);newsLayout=0;newsTemplate=0;newsHandle=0;
-        std::set<std::string> handles;
-        for(const auto& p:social::samplePosts){require(strlen(p.body)>0&&strlen(p.body)<=280,"Post exceeds tweet limit");require(p.handle[0]=='@',"Handle requires @");require(handles.insert(p.handle).second,"Duplicate sample author");}
+        auto status=social::statusFeed();
+        require(status->posts.size()==1&&status->key=="runtime-waiting","Startup must expose only a system status row");
+        require(status->posts[0].author=="Dynasty Enhancer"&&status->posts[0].stamp=="Status","Startup fallback must not masquerade as a social account");
         // An unsupported process must refuse activation before installing slots.
         if(argc==3){auto config=social::refresh::readJson(argv[1]),data=social::refresh::readJson(argv[2]);social::refresh::validate(data,config);auto decoded=social::decodeFeed(data);require(decoded->catalog&&decoded->posts.size()<=20,"Actual catalog did not decode as a curated single-week feed");for(size_t week=0;week<decoded->catalog->weeks.size();++week)for(unsigned scope=0;scope<4;++scope){auto view=social::selectFeed(decoded->catalog,week,scope);require(!view->posts.empty(),"Actual scope has no renderable native row");}std::cout<<"Actual catalog validated: "<<decoded->catalog->weeks.size()<<" publication weeks and four scopes per week.\n";}
-        std::cout<<"Passed: filtered CFB identity/order and typed ABI, missing-donor preservation, three sample posts, "<<feedPostCount<<" posts in "<<feedContainerCount<<" feed containers, coordinate boundaries, scoped native category, exact layout correction/restoration and foreign ownership rejection.\n";
+        std::cout<<"Passed: filtered CFB identity/order and typed ABI, missing-donor preservation, system-status fallback, "<<feedPostCount<<" posts in "<<feedContainerCount<<" feed containers, coordinate boundaries, scoped native category, exact layout correction/restoration and foreign ownership rejection.\n";
     }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
     return 0;
 }
