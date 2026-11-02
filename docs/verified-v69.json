@@ -28,12 +28,21 @@
   "publicationPolicyVersion": 1,
   "cpuUserSameChance": true,
   "livePending": [
-    "v69 native Week1 page, archives and controls"
+    "Fresh v69 MMC/game cold launch"
   ],
-  "adapterInstalledForNextMmcStartup": false,
+  "adapterInstalledForNextMmcStartup": true,
   "preparingFilterGuardTested": true,
-  "deploymentPending": [
-    "Return to CFB hub for native stop guard",
-    "Close MMC to release its managed adapter DLL"
+  "installedAdapterSmokePassed": true,
+  "liveWeek1Published": {
+    "gamePid": 16048,
+    "week": 1,
+    "stories": 2413,
+    "forYou": 30,
+    "saveRequired": false
+  },
+  "liveUserConfirmed": [
+    "Preparing message cleared and Week1 feed displays",
+    "RT defaults to Week1 and retains Preseason and Week0",
+    "Scrolling and Back work"
   ]
 }
