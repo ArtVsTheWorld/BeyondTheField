@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "build": "DynastyEnhancer-v50-heisman-ranks.dll",
+  "nativeDllSha256": "d43091eb09a0929fbc8f64f57e337c958e9618b144f2562f1f79c2240de2c924",
+  "generatorRevision": "voices-1",
+  "status": "user-verified-in-game",
+  "publicationWeek": 9,
+  "stories": 169,
+  "curatedPosts": 20,
+  "testsPassed": 65,
+  "verified": [
+    "native generated feed displays",
+    "Heisman places match native panel",
+    "text fits cards",
+    "LT My Team filter",
+    "controller vertical scrolling"
+  ],
+  "fix": "Convert zero-based Heisman candidate and previous places to displayed ranks; preserve -1 as unknown.",
+  "nativeUi": "Same compiled native UI/reader as v49; v50 is a fresh pinned-module filename to reload the corrected generator.",
+  "saveRequired": false,
+  "legacyArchives": "Preserved separately; fresh generator history begins at its first observed active week."
+}
