@@ -24,7 +24,7 @@ export function addConversations({s,events,stories,byId,teams,players,games,regi
   }
   if(['recruiting','offers'].includes(e.category)&&(root.voice==='recruit'||e.category==='recruiting'&&f.newlyObserved)){
    const recruit=players.get(e.playerId),team=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.school));if(!team||!recruit)continue;
-   const hard=e.category==='recruiting'&&f.newlyObserved&&f.commitment==='HardCommitted',offer=e.category==='offers',majorCommit=e.category==='recruiting'&&f.newlyObserved&&(f.stars===5||f.nationalRecruitRank===1);if(!hard&&!offer&&!majorCommit)continue;
+   const hard=e.category==='recruiting'&&f.newlyObserved&&(f.commitment==='HardCommitted'||f.signed===true),offer=e.category==='offers',majorCommit=e.category==='recruiting'&&f.newlyObserved&&(f.stars===5||f.nationalRecruitRank===1);if(!hard&&!offer&&!majorCommit)continue;
    const athlete=authorFor(team,e,'welcome',null,recruit.position),values={...teamValues(team),...f};
    if(athlete&&(hard||offer)){const personality=personalities.has(athlete.personality)?athlete.personality:'Neutral';add(e,hard?'reply.player.commit.'+personality:'reply.player.offer',values,{role:'player',team,player:athlete,suffix:'welcome',priority:e.priority+1,replyTo:root.id});}
    // One recruit is not greeted by an automatic wall of accounts.

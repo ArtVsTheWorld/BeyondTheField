@@ -14,6 +14,8 @@ const historyPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/history
 Object.assign(contentPack.families,historyPack.families);contentPack.revision=historyPack.revision;
 const matchupPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/matchup-season-pack.json',import.meta.url),'utf8'));
 Object.assign(contentPack.families,matchupPack.families);contentPack.revision=matchupPack.revision;
+const postseasonPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/postseason-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,postseasonPack.families);contentPack.revision=postseasonPack.revision;
 const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g,ids=new Set();
 for(const variants of Object.values(contentPack.families))for(const t of variants){
  if(!t.id||ids.has(t.id)||typeof t.body!=='string'||/[\uFFFD\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(t.body))throw Error('Invalid runtime template '+t.id);ids.add(t.id);

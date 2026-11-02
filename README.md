@@ -151,3 +151,8 @@ v74 adds verified conference championship invitations from Week 14, late-season 
 ## Matchups, fan voices and season endings (v75)
 
 v75 adds occasional opponent-unit/player comparisons with entering-game baselines and actual recaps; independent Barstool fan posts; clean language in new and archived prose; supported season wrapups, senior thanks/farewells and undefeated/winless reactions. Week 15 gets fresh championship-week hype instead of another Week 14 invitation. [Conditions and live checks](docs/matchup-season-v75.md). Current DLL/package: `Build/DynastyEnhancerNative-v75.dll` and `Build/DynastyEnhancer-v75-MMC.zip`. 185 Node tests and the actual seventeen-edition native catalog checks pass.
+
+
+## Postseason decisions (v76)
+
+v76 treats Week 16 as a waiting week and Week 17 as selection/award/signing time. Native partial bracket slots preserve bye-team paths without inventing opponents; explicit awards/signatures/coaching records drive confirmations. Conference standings stop after CCG week, nonselected five-plus-win teams can close their seasons, and confirmed stories retain their publication edition. [Conditions and evidence](docs/postseason-decisions-v76.md). Current DLL/package: `Build/DynastyEnhancerNative-v76.dll` and `Build/DynastyEnhancer-v76-MMC.zip`. 201 Node tests pass; the real nineteen-edition catalog validates in every native scope.

@@ -1,3 +1,4 @@
+import {postseasonCandidates} from '../Tools/postseason_events.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';
 import {historyMilestoneEvents,milestoneTotals,historicalEvent,lastHistoricalEvent,ordinal} from '../Tools/history_milestones.mjs';
 import {lateSeasonEvents} from '../Tools/late_season_events.mjs';
@@ -48,7 +49,7 @@ test('Week 14 invitations need actual assigned fixtures in the configured champi
 });
 test('late standings are discussion, not clinches; bowl thresholds are not invitations',()=>{
  const s=fixture();s.season.CurrentWeek=11;s.teams[0].wins=5;s.games=[game('remaining',12)];const e=lateSeasonEvents(s);assert.ok(e.some(e=>e.facts.family==='late.conference-race'));assert.ok(e.some(e=>e.facts.family==='late.bowl-one-away'));assert.ok(!e.some(e=>/invite|berth/.test(e.facts.family)));
- s.season.CurrentWeek=15;s.games=[{...game('bowl',17),phase:'BowlSeason1',bowlName:'Harbor Bowl',isPlayoff:false},{...game('playoff',17),phase:'BowlSeason1',home:1,away:255,isPlayoff:true}];const invites=lateSeasonEvents(s).filter(e=>e.facts.family==='late.bowl-invite');assert.equal(invites.length,2);assert.ok(!lateSeasonEvents(s).some(e=>e.facts.family==='late.playoff-berth'));
+ s.season.CurrentWeek=15;s.games=[{...game('bowl',17),phase:'BowlSeason1',bowlName:'Harbor Bowl',isPlayoff:false},{...game('playoff',17),phase:'BowlSeason1',home:1,away:255,isPlayoff:true}];assert.ok(!postseasonCandidates(s).some(e=>e.facts.family==='postseason.bowl-invite'));s.season.CurrentWeekType='BowlSeason1';s.season.CurrentWeek=17;const invites=postseasonCandidates(s).filter(e=>e.facts.family==='postseason.bowl-invite');assert.equal(invites.length,2);assert.ok(!postseasonCandidates(s).some(e=>e.facts.family==='postseason.playoff-invite'));
 });
 test('rivalry hype belongs to the current scheduled week and fan replies retain a real parent',()=>{
  const s=fixture();s.games=[game('rival',14)];const f=buildFeed(s),rival=f.events.filter(e=>e.id.startsWith('late:rivalry'));assert.ok(rival.some(e=>e.facts.voice==='fan'));assert.ok(rival.some(e=>e.facts.voice==='official'));assert.ok(f.stories.filter(p=>p.replyTo).every(p=>f.stories.some(parent=>parent.id===p.replyTo)));s.games[0].week=13;assert.ok(!lateSeasonEvents(s).some(e=>e.id.startsWith('late:rivalry')));

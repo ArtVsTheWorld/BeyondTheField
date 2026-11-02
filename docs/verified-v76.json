@@ -1,0 +1,62 @@
+{
+  "build": "v76",
+  "contentRevision": "postseason-decisions-v76",
+  "nodeTests": {
+    "pass": 201,
+    "fail": 0
+  },
+  "native": {
+    "unitChecks": true,
+    "realCatalogEditions": 19,
+    "allDynamicScopes": true
+  },
+  "mmc": {
+    "registration": true,
+    "protectedPayload": true,
+    "tamperRejection": true,
+    "installedVerification": true
+  },
+  "runtime": {
+    "active": true,
+    "pid": 18340,
+    "league": -107703141,
+    "team": 15,
+    "calendarYear": 2026,
+    "phase": "BowlSeason1",
+    "week": 17,
+    "stories": 3707,
+    "forYou": 30,
+    "saveRequired": false
+  },
+  "liveUserConfirmed": [
+    "BYU quarterfinal path to Missouri-Iowa winner",
+    "Signed-recruit posts",
+    "Week 16 waiting news without standings",
+    "Scrolling",
+    "Back"
+  ],
+  "data": {
+    "issuedAnnualAwardRecords": 24,
+    "postseasonAllAmericanRecords": 899,
+    "signedRecruits": 1621,
+    "individualSigningPosts": 432,
+    "classSummaries": 138,
+    "waitingWeekCorrectedPosts": 157
+  },
+  "backups": {
+    "historyFiles": 4,
+    "saves": 4,
+    "checksumVerified": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v76.dll": "c409f11a283c1561416d41d358ca476e4398d68475180928dee85296f34c65f3",
+    "DynastyEnhancer-v76-MMC.zip": "ea81c632809c89fcaebadc6cf89ac9491e44dc0acb61f025c8292a24797deb1e",
+    "DynastyEnhancer.dll": "0893ce11c9efea9f729199a436f76fd5088901e0b350b265a9a4d8a559818333"
+  },
+  "remainingLiveChecks": [
+    "First-round completion and actual quarterfinal opponent assignment",
+    "Accepted staff offers, completed departures and hires",
+    "New-year reset",
+    "Fresh v76 MMC cold launch"
+  ]
+}

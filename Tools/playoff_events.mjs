@@ -1,3 +1,4 @@
+import {postseasonTiming} from './postseason_timing.mjs';
 import {publicPoll} from './public_polls.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
 const ranked=n=>Number.isInteger(n)&&n>=1&&n<=25;
@@ -14,7 +15,7 @@ export function playoffEvents(s,previous=null){
  const completed=actual.filter(g=>isPlayoff(g)&&complete(g)&&notFuture(g));
  const championship=completed.find(g=>g.phase==='NationalChampionship');
  const first=phase==='RegularSeason'&&week===10;
- if(!championship&&phase==='RegularSeason'){
+ if(!championship&&postseasonTiming(s).standings){
   for(const t of [...teams.values()].filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank)){
    const old=!first&&poll.comparable&&ranked(t.cfpLastRank)?t.cfpLastRank:null;
    if(t.cfpRank<=3)emit('rank:'+t.id,first?'first_rank':old&&old!==t.cfpRank?'rank_move':'rank','cfp',{school:t.name,rank:t.cfpRank,previousRank:old,movement:old>t.cfpRank?'up':'down',places:old?Math.abs(old-t.cfpRank):0},t,{priority:98-t.cfpRank});

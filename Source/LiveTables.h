@@ -51,21 +51,25 @@ template<class Read>SessionBinding activeSession(Address image,Read q){
     return b;
 }
 inline std::set<std::string> wanted(const std::string& name){
-    if(name=="SeasonInfo")return {"CurrentWeek","CurrentSeasonYear","CurrentYear","CurrentWeekType","CurrentStage","RegularSeasonWeekConferenceChampionship"};
+    if(name=="SeasonInfo")return {"CurrentWeek","CurrentSeasonYear","CurrentYear","CurrentWeekType","CurrentStage","RegularSeasonWeekConferenceChampionship","IsAnnualAwardPeriodActive","IsSigningPeriodActive","IsStaffHiringCreateOfferPeriodActive","IsStaffHiringEvaluateOfferPeriodActive"};
     if(name=="Franchise")return {"LeagueID"};
     if(name=="FranchiseServer_CareerFlow")return {"IsStageAdvancing","IsStageActive"};
     if(name=="FranchiseUser")return {"Team","UserEntity","IsRetired","AdminLevel"};
     if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","NickName","NickNameAlt","Hashtag1","Hashtag2","HeadCoach","TeamSeasonStats","TeamHistoricalData","TeamSeriesHistory","TopClassRank","TopClassConferenceRank","PlayoffStatus","IsTeamBuilder","DepthChart","TEAM_PREVSEASWINS","TEAM_PREVSEASLOSSES","LastSeasonPlayoffRoundReached","PlayoffRoundReached","LastSeasonTransfersSigned","TEAM_LOGO","TEAM_ALT_LOGO","TEAM_LOGO_SMALL_ALT","TEAM_LOGO_ASSETNAME","TEAM_ALT_LOGO_ASSETNAME","TEAM_LOGO_SMALL_ALT_ASSETNAME","TeamBuilderData","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","HomeTie","RoadTie","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard","ProgramPointsBrandExposureGrade","BrandExposureProgramPoints","City","SchoolPipelineInfluenceList","Stadium","AltStadium","OffensiveCoordinator","DefensiveCoordinator","PrestigeDisplay","TeamPrestige","SeasonWinLossStreak","GameStatRecords","SeasonStatRecords"};
     if(name=="TeamBuilderData")return {"PrimaryLogoURL","SecondaryLogoURL","TertiaryLogoURL"};
-    if(name=="Coach")return {"FirstName","LastName","TeamIndex","SeasonsWithTeam","YearsCoaching","DominantArchetype","CareerStats","SeasonStats","CurrentJobSecurityStatus"};
+    if(name=="Coach")return {"FirstName","LastName","TeamIndex","SeasonsWithTeam","YearsCoaching","DominantArchetype","CareerStats","SeasonStats","CurrentJobSecurityStatus","Position","PrevPosition","PrevTeamIndex","ContractStatus","COACH_LASTTEAMFIRED","COACH_LASTTEAMRESIGNED","COACH_FIREREPORTED","COACH_RESIGNREPORTED"};
     if(name=="Stadium")return {"Name","STADIUM_DISPLAYNAME"};
     if(name=="DepthChart")return {"QB","HB","FB","WR","TE","LT","LG","C","RG","RT","LE","RE","DT","LOLB","MLB","ROLB","CB","FS","SS","K","P"};
     if(name=="Conference")return {"Name","TeamSlots","Divisions","ConferenceEnum","ChampionshipGameType","ConfChampGameName","ChampionshipStadium","GameStatRecords","SeasonStatRecords"};
     if(name=="Player")return {"FirstName","LastName","Position","Personality","JerseyNum","TeamIndex","PLYR_PORTRAIT","PortraitForceSilhouette","IsNIL","OverallRating","Age","SchoolYear","RedshirtStatus","PLYR_CONSECYEARSWITHTEAM","InjuryStatus","InjuryType","InjurySeverity","TotalInjuryDuration","CurrentYearSeasonEndingInjuryWeek","LatestInjuryWeek","LatestInjuryYear","LatestInjuryStage","MinInjuryDuration","MaxInjuryDuration","AbsoluteTransferChance","CurrentNILCompensation","ProspectStarRating","GameStats","CareerStats","HomePipeline","PLYR_HOME_STATE","SeasonStats"};
     if(name=="SeasonGame")return {"IsPractice","SeasonYear","SeasonWeek","SeasonWeekType","GameStatus","HasBeenPublished","HomeTeam","AwayTeam","HomeScore","AwayScore","HomeScoreQuarter1","HomeScoreQuarter2","HomeScoreQuarter3","HomeScoreQuarter4","HomeScoreOT","AwayScoreQuarter1","AwayScoreQuarter2","AwayScoreQuarter3","AwayScoreQuarter4","AwayScoreOT","GameDateMonth","GameDateDay","DayOfWeek","TimeOfDay","GameOfTheWeekScore","ThanksgivingFlag","ChristmasFlag","NewYearsFlag","HomeTeamStatCache","AwayTeamStatCache","Stadium","BowlGame"};
     if(name=="BowlGame")return {"Name","IsPlayoffBowl","PlayoffBracketSlot"};
-    if(name=="Awards")return {"HeismanRanking","WeeklyAwards","AllAmAwards"};
-    if(name=="Recruit")return {"RecruitStage","Player","TopSchoolsList","NationalRank","PositionRank","StateRank"};
+    if(name=="Awards")return {"HeismanRanking","WeeklyAwards","AllAmAwards","AnnualAwards"};
+    if(name=="CoachAward")return {"AwardType","Period","PeriodIndex","Coach","Team"};
+    if(name=="StaffHiringEval")return {"JobOpenings","OutstandingStaffPersonOffersList"};
+    if(name=="JobOpening")return {"Team","Position","PrevCoach","SelectedCoach","Reason","Filled","ContractOfferList"};
+    if(name=="StaffPersonContractOffer")return {"StaffPerson","StaffPersonTeam","Team","ContractPosition","Status","OfferIndex"};
+    if(name=="Recruit")return {"RecruitStage","Class","Player","TopSchoolsList","NationalRank","PositionRank","StateRank"};
     if(name=="League")return {"PlayerGameStatRecords","PlayerSeasonStatRecords"};
     if(name=="PlayerAward")return {"AwardType","Period","PeriodIndex","Player","Team","Conference"};
     if(name=="PlayerStatRecords"||name=="PlayerStatRecord")return {};
@@ -183,7 +187,7 @@ public:
     }
     Json run(){
         const auto before=status();
-        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
+        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
         for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size())!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
         if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session)||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");

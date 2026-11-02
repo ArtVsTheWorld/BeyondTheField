@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v75
+# Dynasty Enhancer - MMC prototype v76
 
 Native Social Media inside the offline Dynasty CFB hub. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v75/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v75/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v76/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v76/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,17 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - For You shows up to 30 posts, National 100 and a conference 60. Likes order parent threads; replies remain attached. Missing real candidates are not replaced with sample tweets.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v75 changes
+## v76 changes
+
+- Week 16 awaits official selections; Week 17 confirms native bowls, playoff berths/byes and partial-bracket paths. Missing bye opponents remain conditional.
+- Five-plus win teams without assignments learn their season is over at selection week. Fewer-than-five-win teams can finish at CCG week. Partial future assignments protect live seasons.
+- Final annual awards, Heisman and national/conference All-American selections use actual issued records. Heisman watch/poll/standings updates stop after CCG week.
+- Signed recruits are distinct from verbal commitments, with individual announcements, welcomes and school signing-group summaries.
+- Native coaching openings/offers distinguish pending changes, departures, completed hires and retained contracts. Confirmed news uses a publication ledger across phases.
+- Stored Week 16 premature confirmations/standings are corrected without reconstructing unavailable historical injuries or recruiting.
+- 201 Node tests plus native/MMC checks. Live bracket, awards, signing and coaching page checks remain part of verification.
+
+## Previous v75 changes
 
 - Occasional opposing-unit and receiver/secondary comparisons, with per-game/per-attempt baselines and actual-game recaps. Recaps exclude the game itself from entering averages.
 - Independent Barstool fan posts; more personal and volatile After Dark season reactions. Both remain Fans, with clean language across new and archived prose.
@@ -48,12 +58,12 @@ TeamBuilder fan/beat accounts use the primary logo because the alternate numeric
 
 ## History, diagnostics and limits
 
-Preserve `Runtime-v75/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
+Preserve `Runtime-v76/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
 
 - MMC status: `Plugins/DynastyEnhancer-launcher.log`.
-- Runtime/UI status: `Runtime-v75/social-media.jsonl`.
-- Generator diagnostics: `Runtime-v75/runtime-generator.log`.
+- Runtime/UI status: `Runtime-v76/social-media.jsonl`.
+- Generator diagnostics: `Runtime-v76/runtime-generator.log`.
 
 `active` and `runtime_feed_published` identify successful readiness/publication; `runtime_feed_resumed` identifies an exact cache match after reload. Unsupported native code, conflicting UI ownership, invalid catalogues and changed protected payloads are rejected. User configuration/history are editable; changing protected runtime/content files requires rebuilding the package manifest.
 
-The mod observes Dynasty data and changes presentation only. It does not write simulation/save records or change save structure. Live postseason/year-rollover and fresh v75 cold-launch checks remain follow-up validation. See the source repository's `docs/matchup-season-v75.md` for evidence and coverage details.
+The mod observes Dynasty data and changes presentation only. It does not write simulation/save records or change save structure. Live postseason/year-rollover and fresh v76 cold-launch checks remain follow-up validation. See the source repository's `docs/postseason-decisions-v76.md` for evidence and coverage details.

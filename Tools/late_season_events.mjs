@@ -1,3 +1,4 @@
+import {postseasonTiming} from './postseason_timing.mjs';
 import {publicPoll} from './public_polls.mjs';
 import {lastHistoricalEvent} from './history_milestones.mjs';
 const final=g=>g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
@@ -22,9 +23,9 @@ export function lateSeasonEvents(s){
  }
  // Week 14 invitations come from the assigned championship-week fixtures.
  // Neither a standings lead nor a projected tiebreaker establishes an invite.
- if(regular&&week>=14&&Number.isInteger(championshipWeek)&&week<=championshipWeek)for(const g of actualTitles){
+ if(regular&&week>=14&&Number.isInteger(championshipWeek)&&week<=championshipWeek+1)for(const g of actualTitles){
   const h=teams.get(g.home),a=teams.get(g.away),c=conferences.get(h.conferenceId);
-  if(g.status==='Unplayed')for(const [t,opponent] of [[h,a],[a,h]]){
+  if(g.status==='Unplayed'&&week<=championshipWeek)for(const [t,opponent] of [[h,a],[a,h]]){
    add((week===14?'title-invite:':'title-week:')+g.id+':'+t.id,week===14?'title-invite':'title-week','official',t,{conference:c.name,opponent:opponent.name,championshipWeek,importance:'major'},{relatedTeams:[opponent.id],national:true,priority:112,thread:'game:'+g.id,category:'championship'});
    add('title-fan:'+g.id+':'+t.id,week===14?'title-fan':'title-week-fan','fan',t,{conference:c.name,opponent:opponent.name,rivalReplyTeam:opponent.id},{relatedTeams:[opponent.id],priority:98,thread:'game:'+g.id,category:'championship'});
    const lastWin=lastHistoricalEvent(t,year,'conferenceWin');
@@ -35,7 +36,7 @@ export function lateSeasonEvents(s){
    add('title-result:'+g.id,'title-result','analyst',winner,{conference:c.name,opponent:loser.name,score:Math.max(g.homeScore,g.awayScore)+'\u2013'+Math.min(g.homeScore,g.awayScore),importance:'major'},{relatedTeams:[loser.id],national:true,priority:115,category:'championship'});
   }
  }
- if(regular&&week>=9)for(const t of teams.values()){
+ if(regular&&week>=9&&week<=championshipWeek)for(const t of teams.values()){
   if(!integer(t.wins)||!integer(t.losses)||t.wins+t.losses<6)continue;
   const remaining=games.filter(g=>g.phase==='RegularSeason'&&g.status==='Unplayed'&&g.week>=week&&g.week!==championshipWeek&&(g.home===t.id||g.away===t.id)).length;
   if(t.wins===5&&remaining>0)add('bowl-watch:'+t.id,'bowl-one-away','beat',t,{wins:t.wins,losses:t.losses,remaining},{category:'bowls',priority:91});
@@ -48,23 +49,13 @@ export function lateSeasonEvents(s){
   const opponent=teams.get(next.home===t.id?next.away:next.home);
   add('cfp-stakes:'+t.id,'cfp-stakes','analyst',t,{rank:t.cfpRank,wins:t.wins,losses:t.losses,opponent:opponent.name},{category:'cfp',national:true,relatedTeams:[opponent.id],priority:102,thread:'game:'+next.id});
  }
- const postseason=phase.startsWith('BowlSeason')||phase==='NationalChampionship';
- if(postseason||regular&&Number.isInteger(championshipWeek)&&week>=championshipWeek){
-  // Only the earliest assigned playoff round can establish the initial berth;
-  // later-round placeholders are never presented as another invitation.
-  const selected=new Set();
-  const assigned=games.filter(g=>g.status==='Unplayed'&&(g.bowlName&&!g.isPlayoff&&g.phase.startsWith('BowlSeason')||g.isPlayoff&&g.phase==='BowlSeason1'));
-  for(const g of assigned)for(const [id,opp] of [[g.home,g.away],[g.away,g.home]]){if(selected.has(id))continue;selected.add(id);const t=teams.get(id),opponent=teams.get(opp),last=lastHistoricalEvent(t,year,g.isPlayoff?'playoffAppearance':'bowlAppearance');
-   add('berth:'+g.id+':'+id,g.isPlayoff?'playoff-berth':'bowl-invite',g.isPlayoff?'cfp':'official',t,{opponent:opponent.name,venue:g.bowlName??'the College Football Playoff',historyDetail:last!==null&&last<year-1?` The program last appeared in ${last}.`:'',importance:g.isPlayoff?'major':'normal'},{category:g.isPlayoff?'cfp':'bowls',national:g.isPlayoff,priority:g.isPlayoff?113:100,relatedTeams:[opp],thread:'game:'+g.id});
-  }
- }
  for(const g of games.filter(g=>phase==='NationalChampionship'&&g.phase===phase&&g.week===week&&g.status==='Unplayed'))for(const [id,opp] of [[g.home,g.away],[g.away,g.home]]){const t=teams.get(id),last=lastHistoricalEvent(t,year,'nationalAppearance');if(last!==null&&last<year-1)add('national-title-history:'+id,'title-appearance-history','analyst',t,{lastYear:last,opponent:teams.get(opp).name},{category:'history',national:true,priority:110});}
  if(week>=8)for(const t of teams.values()){
   const rows=(t.seasonHistory??[]).filter(r=>r.Year===year-1);if(rows.length!==1)continue;const prior=rows[0];
   if(!integer(prior.Wins)||!integer(prior.Losses)||!integer(t.wins)||!integer(t.losses)||prior.Wins+prior.Losses<6)continue;
   if(t.wins>=prior.Wins+3)add('turnaround:'+t.id,'turnaround','beat',t,{wins:t.wins,losses:t.losses,priorWins:prior.Wins,priorLosses:prior.Losses,previousYear:year-1,previousConference:prior.ConferenceName??t.conferenceName},{category:'history',priority:94});
   else if(t.losses>=prior.Losses+3)add('regression:'+t.id,'regression','beat',t,{wins:t.wins,losses:t.losses,priorWins:prior.Wins,priorLosses:prior.Losses,previousYear:year-1,previousConference:prior.ConferenceName??t.conferenceName},{category:'history',priority:88});
-  if(regular&&prior.ConferenceName===t.conferenceName&&Number.isInteger(prior.FinalConferenceStanding)&&prior.FinalConferenceStanding>0&&Number.isInteger(t.conferenceRank)&&t.conferenceRank>0&&Math.abs(prior.FinalConferenceStanding-t.conferenceRank)>=4&&integer(prior.ConferenceWins)&&integer(prior.ConferenceLosses))add('conference-change:'+t.id,'conference-change','beat',t,{conference:t.conferenceName,place:t.conferenceRank,wins:t.conferenceWins,losses:t.conferenceLosses,previousYear:year-1,priorPlace:prior.FinalConferenceStanding,priorWins:prior.ConferenceWins,priorLosses:prior.ConferenceLosses},{category:'history',priority:90});
+  if(postseasonTiming(s).standings&&prior.ConferenceName===t.conferenceName&&Number.isInteger(prior.FinalConferenceStanding)&&prior.FinalConferenceStanding>0&&Number.isInteger(t.conferenceRank)&&t.conferenceRank>0&&Math.abs(prior.FinalConferenceStanding-t.conferenceRank)>=4&&integer(prior.ConferenceWins)&&integer(prior.ConferenceLosses))add('conference-change:'+t.id,'conference-change','beat',t,{conference:t.conferenceName,place:t.conferenceRank,wins:t.conferenceWins,losses:t.conferenceLosses,previousYear:year-1,priorPlace:prior.FinalConferenceStanding,priorWins:prior.ConferenceWins,priorLosses:prior.ConferenceLosses},{category:'history',priority:90});
  }
  // The rivalry must be on the current week's unplayed schedule. Both fanbases
  // get a voice; the optional cross-fan reply still goes through the 33% gate.

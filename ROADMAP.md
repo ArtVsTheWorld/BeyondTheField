@@ -84,3 +84,11 @@ All five national writers now receive regular-season coverage; outside-top-60 me
 - Implemented: verified end-of-season publication ledger, team/player/senior/fan/media wrapups, native class/job-security fields, staff/QB accountability, appropriate perfect/winless tone and conservative pending bowls. Exact bowl-selection week is still under user testing.
 - Fixed: Week 15 title-week hype replaces duplicated Week 14 invitations.
 - Validation: 185 Node tests, native tests and all dynamic scopes across 17 real editions. Live v75 activation requires a clean session after the long-running game's guarded standalone lookup failed; postseason transitions and native class/job-security comparisons remain live checks.
+
+
+## v76 selection / awards / signing / carousel checkpoint
+
+- Implemented: configured CCG-week boundary, waiting week and Week 17 selection publication; no stale standings/race posts after CCG; targeted waiting-week archive correction.
+- Implemented: partial postseason assignments, native first-round/quarterfinal bracket paths, actual byes, final awards/All-Americans, Signed cohort and signing-group summaries.
+- Implemented: current coaching openings/offers with pending/confirmed distinctions; cross-phase publication ledgers; selection-week closure for nonselected five-plus-win teams.
+- Validation: 201 Node tests, native tests and nineteen real editions/all scopes. Live UI/actual subsequent-round confirmations remain checks; no simulation/save writes.

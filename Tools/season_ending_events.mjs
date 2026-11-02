@@ -1,3 +1,4 @@
+import {postseasonTiming} from './postseason_timing.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
 import {hash} from './story_authors.mjs';
 import {verifiedPlayerStats} from './deep_analytics.mjs';
@@ -10,7 +11,7 @@ export function seasonEndings(s){
  if(s.season.CurrentWeekType==='RegularSeason'&&(!Number.isInteger(champWeek)||s.season.CurrentWeek<champWeek))return ended;
  for(const t of s.teams.filter(t=>t.id!==255)){
   const games=s.games.filter(g=>g.year===s.season.CurrentYear&&(g.home===t.id||g.away===t.id));
-  if(games.some(g=>g.status==='Unplayed'))continue;
+  if(games.some(g=>['Unplayed','HomeScheduled','AwayScheduled'].includes(g.status))||(s.postseasonAssignments??s.playoffBracket??[]).some(g=>g.year===s.season.CurrentYear&&(g.home===t.id||g.away===t.id)&&!final(g)))continue;
   const played=games.filter(g=>notFuture(s,g)&&final(g));
   if(played.length<8||!Number.isInteger(t.wins)||!Number.isInteger(t.losses))continue;
   const own=g=>g.home===t.id?g.homeScore:g.awayScore,other=g=>g.home===t.id?g.awayScore:g.homeScore;
@@ -20,17 +21,16 @@ export function seasonEndings(s){
   const postseasonFinished=last.phase==='NationalChampionship'||playoff&&lost||bowl&&!playoff;
   // A missing bowl assignment during title week cannot finish an eligible
   // season. Keep five-win teams pending as well until postseason scheduling.
-  const postseasonStarted=phaseIndex(s.season.CurrentWeekType)>=phaseIndex('BowlSeason1');
   const seasonClosed=phaseIndex(s.season.CurrentWeekType)>=phaseIndex('NationalChampionship');
-  const noPostseason=last.phase==='RegularSeason'&&(t.wins<5||t.wins===5&&postseasonStarted||seasonClosed);
+  const noPostseason=last.phase==='RegularSeason'&&(t.wins<5||postseasonTiming(s).locked||seasonClosed);
   if(!postseasonFinished&&!noPostseason)continue;
-  if(!postseasonFinished&&last.week===champWeek)continue;
+  if(!postseasonFinished&&last.week===champWeek&&!postseasonTiming(s).locked)continue;
   ended.set(t.id,{team:t,last,played,winless:t.wins===0,undefeated:(postseasonFinished||seasonClosed)&&t.wins>0&&t.losses===0&&(t.ties??0)===0,pointsFor:played.reduce((n,g)=>n+own(g),0),pointsAgainst:played.reduce((n,g)=>n+other(g),0)});
  }
  return ended;
 }
 export function recruitingClassRanks(s){
- const committed=new Set((s.commitments??[]).map(c=>c.team)),rows=s.teams.filter(t=>t.id!==255&&committed.has(t.id)&&Number.isInteger(t.nativeRecruitingRank)&&t.nativeRecruitingRank>=0);
+ const committed=new Set([...(s.commitments??[]),...(s.signings??[])].map(c=>c.team)),rows=s.teams.filter(t=>t.id!==255&&committed.has(t.id)&&Number.isInteger(t.nativeRecruitingRank)&&t.nativeRecruitingRank>=0);
  const ranks=rows.map(t=>t.nativeRecruitingRank);if(rows.length<2||new Set(ranks).size!==ranks.length)return new Map();
  // Native order is audited separately; never fabricate a ranking from stars.
  const base=Math.min(...ranks)===0?0:Math.min(...ranks)===1?1:null;if(base===null)return new Map();

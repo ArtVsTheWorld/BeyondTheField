@@ -18,6 +18,8 @@ inline std::string storyLabel(const nlohmann::json& post){
     if(post.contains("replyTo"))return "Reply";
     const auto category=post.value("category",std::string());
     if(category=="upsets")return "Upset";
+    if(category=="coaching")return "Coaching";
+    if(category=="postseason")return "Postseason";
     if(category=="season-end")return "Season Review";
     if(category=="matchup-preview")return "Matchup";
     if(category=="matchup-recap")return "Matchup Recap";

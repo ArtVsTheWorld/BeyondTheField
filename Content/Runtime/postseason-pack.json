@@ -1,0 +1,306 @@
+{
+  "format": 1,
+  "revision": "postseason-decisions-v76",
+  "families": {
+    "postseason.waiting-playoff": [
+      {
+        "id": "P76-waiting-playoff-1",
+        "body": "A {record} record is in the books for {school}. This is the waiting week: the official playoff field, byes and matchups come next week. Plenty of arguments left; no need to turn a projection into an announcement."
+      },
+      {
+        "id": "P76-waiting-playoff-2",
+        "body": "{school} is {record} and waiting for the official postseason picture next week. The games have paused. The resume arguments absolutely have not."
+      }
+    ],
+    "postseason.waiting-bowl": [
+      {
+        "id": "P76-waiting-bowl-1",
+        "body": "{school} finishes the regular slate at {record}. Bowl selections aren't official until next week. For now it's a waiting game, rather than a confirmed destination or an end-of-season farewell."
+      },
+      {
+        "id": "P76-waiting-bowl-2",
+        "body": "At {record}, {school} is waiting to learn its postseason plans next week. Nothing official to announce yet; an empty future schedule this week is not the final answer."
+      }
+    ],
+    "postseason.waiting-fan": [
+      {
+        "id": "P76-waiting-fan-1",
+        "body": "One week until it's official. {school} fans are refreshing everything like the bowl people are going to notice our dedication"
+      },
+      {
+        "id": "P76-waiting-fan-2",
+        "body": "{school} postseason waiting week. I have read the projections. All of them. Repeatedly. Would really enjoy an actual announcement next week"
+      }
+    ],
+    "postseason.playoff-invite": [
+      {
+        "id": "P76-playoff-invite-1",
+        "body": "Playoff matchup confirmed. {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "P76-playoff-invite-2",
+        "body": "The field is official. {nickname} will face {opponent} in {venue}. {hashtag}"
+      }
+    ],
+    "postseason.bowl-invite": [
+      {
+        "id": "P76-bowl-invite-1",
+        "body": "Bowl plans are official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "P76-bowl-invite-2",
+        "body": "Destination confirmed. {nickname} are headed to {venue} to face {opponent}. {hashtag}"
+      }
+    ],
+    "postseason.bye-path": [
+      {
+        "id": "P76-bye-path-1",
+        "body": "{school} has a first-round bye. Its Week {quarterWeek} quarterfinal opponent will be the winner of {first} vs. {second}. That side of the bracket is set; the opponent is still to be decided."
+      },
+      {
+        "id": "P76-bye-path-2",
+        "body": "The path for {school}: a first-round bye, then the {first}-{second} winner in the Week {quarterWeek} quarterfinal. A confirmed bracket connection, with a game still needed to fill it."
+      }
+    ],
+    "postseason.bye-opponent": [
+      {
+        "id": "P76-bye-opponent-1",
+        "body": "{school}'s quarterfinal opponent is now {opponent}, after the first-round result. The matchup is set for Week {quarterWeek}."
+      },
+      {
+        "id": "P76-bye-opponent-2",
+        "body": "The bye is over for {school}: {opponent} is the confirmed Week {quarterWeek} quarterfinal opponent."
+      }
+    ],
+    "postseason.bye-team": [
+      {
+        "id": "P76-bye-team-1",
+        "body": "Quarterfinal bound. {nickname} will face the {first}-{second} winner in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "P76-bye-team-2",
+        "body": "A first-round bye, then the winner of {first} vs. {second}. See you in the Week {quarterWeek} quarterfinal. {hashtag}"
+      }
+    ],
+    "postseason.bye-team-opponent": [
+      {
+        "id": "P76-bye-team-opponent-1",
+        "body": "Quarterfinal matchup set. {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      }
+    ],
+    "postseason.bye-fan": [
+      {
+        "id": "P76-bye-fan-1",
+        "body": "{school} gets to watch {first} and {second} play for the right to ruin our week. Bye secured. Stress somehow still fully operational"
+      },
+      {
+        "id": "P76-bye-fan-2",
+        "body": "A bye does not mean {school} fans are taking a week off. We're becoming extremely opinionated about {first} vs {second}"
+      }
+    ],
+    "postseason.bye-fan-opponent": [
+      {
+        "id": "P76-bye-fan-opponent-1",
+        "body": "{opponent} it is. {school} fans had one week with no game and somehow spent all of it stressed anyway. Quarterfinal time"
+      }
+    ],
+    "postseason.heisman": [
+      {
+        "id": "P76-heisman-1",
+        "body": "The Heisman Trophy goes to {school}'s {playerName}. The race is finished, the award is official, and this season has its winner."
+      },
+      {
+        "id": "P76-heisman-2",
+        "body": "Official: {playerName} of {school} wins the Heisman Trophy. An award-season conversation becomes a place in college football history."
+      }
+    ],
+    "postseason.award": [
+      {
+        "id": "P76-award-1",
+        "body": "{playerName} receives the {award} for his season with {school}. The annual award is official."
+      },
+      {
+        "id": "P76-award-2",
+        "body": "An official award-season honor for {playerName} at {school}: the {award}."
+      }
+    ],
+    "postseason.award-multiple": [
+      {
+        "id": "P76-award-multiple-1",
+        "body": "{school}'s {playerName} has collected {count} national defensive player honors. The annual awards are official; this is more than one entry on the resume."
+      },
+      {
+        "id": "P76-award-multiple-2",
+        "body": "Multiple national defensive honors for {playerName} at {school}: {count} annual awards. A season recognized in more than one award decision."
+      }
+    ],
+    "postseason.award-team": [
+      {
+        "id": "P76-award-team-1",
+        "body": "{playerName}. {award}. Bringing it home to the {nickname}. {hashtag}"
+      },
+      {
+        "id": "P76-award-team-2",
+        "body": "Congratulations to {playerName}, winner of the {award}. {nickname} proud. {hashtag}"
+      }
+    ],
+    "postseason.award-player": [
+      {
+        "id": "P76-award-player-1",
+        "body": "Appreciate everybody who helped me get here. The {award} means a lot but nobody does this alone. Love my teammates and everyone at {school}"
+      },
+      {
+        "id": "P76-award-player-2",
+        "body": "Thank you {school}. My teammates, my family, everyone who supported me. Honored to receive the {award}"
+      }
+    ],
+    "postseason.all-american": [
+      {
+        "id": "P76-all-american-1",
+        "body": "{school}'s {playerName} is an official {honor}. The postseason selections are out, and this is a final season honor rather than a preseason projection."
+      },
+      {
+        "id": "P76-all-american-2",
+        "body": "Postseason honors: {playerName} of {school} has been named a {honor}. The selection is official."
+      }
+    ],
+    "postseason.honors-team": [
+      {
+        "id": "P76-honors-team-1",
+        "body": "Postseason honors for the {nickname}: {nationalCount} All-Americans and {conferenceCount} All-Conference players. Congratulations to our guys. {hashtag}"
+      },
+      {
+        "id": "P76-honors-team-2",
+        "body": "The selections are official. {nickname}: {nationalCount} All-Americans | {conferenceCount} All-Conference honorees. {hashtag}"
+      }
+    ],
+    "postseason.signed": [
+      {
+        "id": "P76-signed-1",
+        "body": "Signed {document}. It's official, {school}! Appreciate everyone who helped me get here. Ready for this next chapter"
+      },
+      {
+        "id": "P76-signed-2",
+        "body": "Pen to paper. Officially signed with {school}. This {starDescription}{position} is ready to get to work. Love everyone who's been part of the journey"
+      }
+    ],
+    "postseason.signed-class": [
+      {
+        "id": "P76-signed-class-1",
+        "body": "Early signing check for {school}: {count} recruits have signed, including {fiveStars} five-stars and {fourStars} four-stars.{rankDetail} These are signatures, not just verbal commitments."
+      },
+      {
+        "id": "P76-signed-class-2",
+        "body": "{school} has {count} signed additions at this point, with {fiveStars} five-stars and {fourStars} four-stars.{rankDetail} The remaining recruiting work continues beyond this first signing group."
+      }
+    ],
+    "postseason.coach-fired": [
+      {
+        "id": "P76-coach-fired-1",
+        "body": "{school} has moved on from {coachName} as {role}. The opening is confirmed; the next hire is a separate decision."
+      },
+      {
+        "id": "P76-coach-fired-2",
+        "body": "Coaching change at {school}: {coachName} is out as {role}. Attention turns to the search."
+      }
+    ],
+    "postseason.coach-pending": [
+      {
+        "id": "P76-coach-pending-1",
+        "body": "{school} has a pending change at {role}, with {coachName}'s position entering the transition. The replacement has not been confirmed."
+      },
+      {
+        "id": "P76-coach-pending-2",
+        "body": "The {role} situation at {school} is moving toward a change involving {coachName}. The departure process is pending; this is not a completed replacement hire."
+      }
+    ],
+    "postseason.coach-retired": [
+      {
+        "id": "P76-coach-retired-1",
+        "body": "A retirement transition at {school}: {coachName} is leaving the {role} position. That creates an offseason decision for the program."
+      },
+      {
+        "id": "P76-coach-retired-2",
+        "body": "{school} is navigating {coachName}'s retirement from the {role} role. The next appointment will matter for the program's direction."
+      }
+    ],
+    "postseason.coach-pro": [
+      {
+        "id": "P76-coach-pro-1",
+        "body": "{school}'s {coachName} is set to leave the {role} position for the pro game. The college staff now has a transition to manage."
+      },
+      {
+        "id": "P76-coach-pro-2",
+        "body": "A pro-football departure is part of {school}'s staff picture: {coachName}, the {role}, is on that path. The replacement decision comes next."
+      }
+    ],
+    "postseason.coach-departed": [
+      {
+        "id": "P76-coach-departed-1",
+        "body": "{school} is dealing with a job-move departure involving {coachName} at {role}. The opening is part of this year's coaching carousel."
+      },
+      {
+        "id": "P76-coach-departed-2",
+        "body": "A staff transition for {school}: {coachName}'s move creates a {role} decision for the program."
+      }
+    ],
+    "postseason.coach-open": [
+      {
+        "id": "P76-coach-open-1",
+        "body": "{school} has a {role} opening after the contract situation involving {coachName}. A replacement has not been confirmed."
+      }
+    ],
+    "postseason.coach-contract": [
+      {
+        "id": "P76-coach-contract-1",
+        "body": "{school}'s {role} contract decision involving {coachName} remains open. An offer or a vacancy listing is not a confirmed new hire."
+      }
+    ],
+    "postseason.coach-hired": [
+      {
+        "id": "P76-coach-hired-1",
+        "body": "{school} has appointed {coachName} as {role}. The hire is confirmed, rather than just an outstanding offer."
+      },
+      {
+        "id": "P76-coach-hired-2",
+        "body": "A coaching appointment is set: {coachName} is {school}'s {role}."
+      }
+    ],
+    "postseason.coach-retained": [
+      {
+        "id": "P76-coach-retained-1",
+        "body": "{school} is retaining {coachName} as {role} after an accepted contract offer. Continuity wins out in this staff decision."
+      },
+      {
+        "id": "P76-coach-retained-2",
+        "body": "{coachName} will stay with {school} as {role}. The contract offer has been accepted."
+      }
+    ],
+    "postseason.coach-offer": [
+      {
+        "id": "P76-coach-offer-1",
+        "body": "{school} has an outstanding offer to {coachName} for the {role} job. An offer is on the table; an acceptance has not been confirmed."
+      },
+      {
+        "id": "P76-coach-offer-2",
+        "body": "Coaching carousel: {school} has offered its {role} position to {coachName}. The offer is pending, so this is a candidate development rather than a hire announcement."
+      }
+    ],
+    "postseason.coach-renewal-offer": [
+      {
+        "id": "P76-coach-renewal-offer-1",
+        "body": "{school} has a pending contract offer to retain {coachName} as {role}. An agreement has not been confirmed."
+      }
+    ],
+    "postseason.coach-fan": [
+      {
+        "id": "P76-coach-fan-1",
+        "body": "The {role} situation is now part of {school}'s offseason. Please let the next decision be about good football and not just winning the introductory press conference"
+      },
+      {
+        "id": "P76-coach-fan-2",
+        "body": "{school} fans are about to become experts on the {role} candidate pool. I am asking for a normal, sensible coaching decision. Apparently that's a lot to ask"
+      }
+    ]
+  }
+}
