@@ -19,7 +19,9 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     const currentStats=seasonSlots[0];
     const seasonStats=currentStats?.type==='TeamStats'?{season:season.CurrentSeasonYear,slot:0,stats:currentStats.v}:null;
     const headCoach=coachName?{id:coach.key,name:coachName,firstName:coachFirst,lastName:coachLast}:null;
-    teams.push({id:v.TeamIndex,seasonStats,nickname:cleanText(v.NickName),nicknameAlt:cleanText(v.NickNameAlt),hashtags:[...new Set([tag(v.Hashtag1),tag(v.Hashtag2)].filter(Boolean))],headCoach,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
+    const city=await resolve(v.City);
+    const pipelines=(await array(v.SchoolPipelineInfluenceList)).filter(x=>x.v.InfluenceLevel!=='None'&&x.v.InfluenceValue>0).map(x=>x.v.Pipeline).filter(Boolean);
+    teams.push({id:v.TeamIndex,recordKey:key,brandExposure:v.ProgramPointsBrandExposureGrade??null,brandExposurePoints:v.BrandExposureProgramPoints??null,homeState:city?.v.State??null,pipelines,seasonStats,nickname:cleanText(v.NickName),nicknameAlt:cleanText(v.NickNameAlt),hashtags:[...new Set([tag(v.Hashtag1),tag(v.Hashtag2)].filter(Boolean))],headCoach,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
       mediaRank:v.MediaPoll_CurrentRank,mediaLastRank:v.MediaPoll_LastWeeksRank,
       coachesRank:v.CoachesPoll_CurrentRank,coachesLastRank:v.CoachesPoll_LastWeeksRank,
       cfpRank:v.CFPPoll_CurrentRank,cfpLastRank:v.CFPPoll_LastWeeksRank,
@@ -48,7 +50,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   const players=[],playerRefs=new Map(),rawPlayers=[];
   for(const {key,v:p} of await records('Player')){
     const player={id:key,name:`${p.FirstName} ${p.LastName}`,position:p.Position,personality:['Leader','Intense','Entertainer','TeamPlayer','Unpredictable'].includes(p.Personality)?p.Personality:null,team:p.TeamIndex,
-      jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,portraitForcedSilhouette:p.PortraitForceSilhouette===true,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,
+      homePipeline:p.HomePipeline??null,homeState:p.PLYR_HOME_STATE??null,jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,portraitForcedSilhouette:p.PortraitForceSilhouette===true,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,
       injury:p.InjuryStatus,injuryType:p.InjuryType,injuryWeek:p.LatestInjuryWeek,injuryYear:p.LatestInjuryYear,
       injuryStage:p.LatestInjuryStage,minInjury:p.MinInjuryDuration,maxInjury:p.MaxInjuryDuration,
       transferRisk:p.AbsoluteTransferChance,nil:p.CurrentNILCompensation,stars:p.ProspectStarRating};
@@ -100,11 +102,12 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     if(schools.slice(1).some(sc=>sc.v.TeamInfluence>=winner.TeamInfluence))continue;
     recruitRefs.set(r.key,{player:p.key,rank:r.v.NationalRank,stage:r.v.RecruitStage,team:winner.TeamId});
   }
-  const commitments=[],offers=[];
+  const commitments=[],offers=[],recruitInterests=[];
   for(const t of rawTeams){
     const board=await resolve(t.RecruitingBoard);
     if(board)for(const target of await array(board.v.Recruits)){
       const r=await resolve(target.v.Recruit),commit=r&&recruitRefs.get(r.key);
+      if(r&&t.TeamIndex===userTeamIndex){const p=await resolve(r.v.Player);if(p)recruitInterests.push(p.key);}
       // New is the native current-week offer state; Offered is the carried state.
       if(r&&['New','Offered'].includes(target.v.ScholarshipStatus)){
         const p=await resolve(r.v.Player);if(p)offers.push({player:p.key,team:t.TeamIndex,rank:r.v.NationalRank});
@@ -114,5 +117,5 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     }
   }
   return {format:2,sourceUnchanged:true,gameYear:27,...identity,leagueId:franchise.LeagueID,
-    season,userTeamIndex,teams,conferences,players,games,performances,heisman,commitments,offers};
+    season,userTeamIndex,teams,conferences,players,games,performances,heisman,commitments,offers,recruitInterests};
 }

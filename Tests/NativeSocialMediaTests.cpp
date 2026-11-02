@@ -60,10 +60,10 @@ int main(int argc,char** argv){
         if constexpr(listFeed)require(feed.rows.at(0).at("linkage")=="art_control.group.PanelListContainer","List feed must use the native list control");
         filterData=originalFilter;
         Collector filter{vt,{}};Alias kind{aliasVt,"NEWS_CATEGORY"};filterDataHook(nullptr,&filter,&panel,&kind);
-        require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="All Posts"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");
+        require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="For You"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");
         require(filterForwardCalls==0,"Custom category queried unrelated native filters");
         Alias unsetPanel{aliasVt,""};Collector stockNewsCategory{vt,{}};filterDataHook(nullptr,&stockNewsCategory,&unsetPanel,&kind);
-        require(stockNewsCategory.rows.at(0).at("display")=="All Posts","Stock News unset panel ID lost the category");
+        require(stockNewsCategory.rows.at(0).at("display")=="For You","Stock News unset panel ID lost the category");
         Alias otherPanel{aliasVt,"OTHER_PANEL"};Collector otherCategory{vt,{}};filterDataHook(nullptr,&otherCategory,&otherPanel,&kind);
         require(filterForwardCalls==1&&otherCategory.rows.at(0).at("display")=="Original category","Other panel category was replaced");
         opened=false;Collector ordinary{vt,{}};filterDataHook(nullptr,&ordinary,&panel,&kind);
@@ -89,13 +89,13 @@ int main(int argc,char** argv){
             auto catalog=social::decodeFeed(data)->catalog;
             auto teamView=social::selectFeed(catalog,0,3);require(teamView->scope==3&&teamView->key==data["key"],"Scope changed the selected publication week");
             bool badWeek=false;try{social::selectFeed(catalog,99,0);}catch(...){badWeek=true;}require(badWeek,"Invalid single-week selection accepted");
-            auto empty=std::make_shared<social::Catalog>(*catalog);empty->weeks[0].views[2].clear();require(social::selectFeed(empty,0,2)->posts.size()==1,"Empty scope must provide a readable native placeholder");
+            auto empty=std::make_shared<social::Catalog>(*catalog);empty->weeks[0].views["conference"].clear();require(social::selectFeed(empty,0,2)->posts.size()==1,"Empty scope must provide a readable native placeholder");
             auto original=pageFeed;publishFeed(data);require(pageFeed==original,"Background refresh changed the visible page");adoptFeed();
             require(feedPostCount==5&&postNumber("5")==5&&postNumber("6")==0,"Dynamic feed count is not applied on entry");
             opened=true;Collector dynamic{vt,{}};containerHook(nullptr,&panel,&dynamic);require(dynamic.rows.size()==(listFeed?1u:5u),"Dynamic feed omitted native containers");
 #ifdef SOCIAL_DUAL_DROPDOWN
             Collector scopes{vt,{}};filterDataHook(nullptr,&scopes,const_cast<char*>("CM_NEWSSUB"),const_cast<char*>("filter_one"));
-            require(scopes.rows.size()==4&&scopes.rows.at(0).at("display")=="All Posts"&&scopes.rows.at(3).at("display")=="My Team","Raw native LT scope binding did not return four independent choices");
+            require(scopes.rows.size()==4&&scopes.rows.at(0).at("display")=="For You"&&scopes.rows.at(3).at("display")=="My Team","Raw native LT scope binding did not return four independent choices");
             require(scopes.rows.at(0).at("isDefault")==true,"Scope dropdown lost its selected default");
             require(socialFilter("filter_one")==SocialFilter::scopeDropdown,"Native LT selection must select rather than cycle scopes");
 #endif
@@ -118,6 +118,20 @@ int main(int argc,char** argv){
             require(changedForwardCalls==1,"Another native panel's filter callback was intercepted");
             {std::lock_guard<std::mutex> lock(feedMutex);latestFeed=original;}adoptFeed();opened=false;
         }
+        {
+            auto catalog=std::make_shared<social::Catalog>();social::Edition edition;edition.key="one";
+            social::FeedPost parent{"Team","@team","Result","Recap"};parent.category="results";parent.voice="official";
+            social::FeedPost reply{"Fan","@fan","Reply","Reply"};reply.category="results";reply.voice="fan";reply.replyTo="parent";
+            social::FeedPost recruit{"Recruit","@recruit","Offer","Recruiting"};recruit.category="offers";recruit.voice="recruit";
+            edition.stories.emplace("parent",parent);edition.stories.emplace("reply",reply);edition.stories.emplace("recruit",recruit);
+            for(unsigned i=0;i<151;++i){const auto key=i?"team:"+std::to_string(i):"all";catalog->scopes.push_back({key,"Scope "+std::to_string(i)});edition.views[key]={"parent","reply","recruit"};}catalog->weeks.push_back(edition);
+            auto view=social::selectFeed(catalog,0,150,7);require(view->posts.size()==2&&view->posts[1].voice=="fan","Native account filter detached a reply from its parent");
+            require(view->label=="Social Media - Team Accounts","Category is not visible in the native header");
+            require(social::selectFeed(catalog,0,150,9)->posts[0].stamp=="News","A reply must not appear without its parent when filtering Fans");
+            require(social::selectFeed(catalog,0,150,1)->posts.size()==1,"Recruiting filter included another root category");
+            bool bad=false;try{social::selectFeed(catalog,0,151);}catch(...){bad=true;}require(bad,"Dynamic scope boundary was not enforced");
+        }
+        require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");
         unsigned changed=0;
         {
             using social::storyLabel;
@@ -128,15 +142,15 @@ int main(int argc,char** argv){
             require(social::postHeight("A short post.")==160,"Short posts must keep compact cards");
             require(social::postHeight(std::string(380,'W'))>160,"Wide long text requires a taller card");
             require(social::postHeight("One\nTwo\nThree\nFour\nFive\nSix")>=288,"Explicit lines were omitted from card sizing");
-            auto* memory=static_cast<unsigned char*>(VirtualAlloc(nullptr,8192,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));require(memory!=nullptr,"Polish fixture allocation failed");
-            newsBodyStyle=reinterpret_cast<uintptr_t>(memory);newsViewport=newsBodyStyle+4096;
+            auto* allocation=static_cast<unsigned char*>(VirtualAlloc(nullptr,8192,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));require(allocation!=nullptr,"Polish fixture allocation failed");auto* memory=allocation+128;
+            newsBodyStyle=reinterpret_cast<uintptr_t>(memory);newsViewport=newsBodyStyle+4096;newsLayout=newsBodyStyle-(0x2ccd2-0x2c658);for(const auto& patch:discoveryPatches)memcpy(reinterpret_cast<void*>(newsLayout-0x2c658+patch.offset),patch.original.data(),patch.original.size());
             memcpy(memory,social::polish::bodyOriginal.data(),social::polish::bodyOriginal.size());memcpy(memory+4096,social::polish::viewportOriginal.data(),social::polish::viewportOriginal.size());
             memory[4096]^=1;require(!configureNewsPolish(true)&&!polishOwned,"Polish must reject the complete mismatched batch");require(memcmp(memory,social::polish::bodyOriginal.data(),58)==0,"Failed viewport gate changed body style");memory[4096]^=1;
             require(configureNewsPolish(true)&&polishOwned&&configureNewsPolish(true),"Text/viewport activation or idempotence failed");
             require(memcmp(memory,social::polish::bodyWide.data(),58)==0&&memcmp(memory+4096,maskedViewport.data(),432)==0,"Polish bytes do not match the candidate");
             memory[4096]^=1;require(!configureNewsPolish(false)&&polishOwned,"Polish must preserve foreign viewport changes");memory[4096]^=1;
             require(configureNewsPolish(false)&&!polishOwned&&memcmp(memory,social::polish::bodyOriginal.data(),58)==0&&memcmp(memory+4096,social::polish::viewportOriginal.data(),432)==0,"Polish did not restore the original functions");
-            VirtualFree(memory,0,MEM_RELEASE);newsBodyStyle=0;newsViewport=0;
+            VirtualFree(allocation,0,MEM_RELEASE);newsBodyStyle=0;newsViewport=0;newsLayout=0;
         }
 #ifdef SOCIAL_DUAL_DROPDOWN
         {
@@ -228,7 +242,7 @@ int main(int argc,char** argv){
         require(status->posts.size()==1&&status->key=="runtime-waiting","Startup must expose only a system status row");
         require(status->posts[0].author=="Dynasty Enhancer"&&status->posts[0].stamp=="Status","Startup fallback must not masquerade as a social account");
         // An unsupported process must refuse activation before installing slots.
-        if(argc==3){auto config=social::refresh::readJson(argv[1]),data=social::refresh::readJson(argv[2]);social::refresh::validate(data,config);auto decoded=social::decodeFeed(data);require(decoded->catalog&&decoded->posts.size()<=20,"Actual catalog did not decode as a curated single-week feed");for(size_t week=0;week<decoded->catalog->weeks.size();++week)for(unsigned scope=0;scope<4;++scope){auto view=social::selectFeed(decoded->catalog,week,scope);require(!view->posts.empty(),"Actual scope has no renderable native row");}std::cout<<"Actual catalog validated: "<<decoded->catalog->weeks.size()<<" publication weeks and four scopes per week.\n";}
+        if(argc==3){auto config=social::refresh::readJson(argv[1]),data=social::refresh::readJson(argv[2]);social::refresh::validate(data,config);auto decoded=social::decodeFeed(data);require(decoded->catalog&&decoded->posts.size()<=20,"Actual catalog did not decode as a curated single-week feed");for(size_t week=0;week<decoded->catalog->weeks.size();++week)for(unsigned scope=0;scope<social::scopesFor(*decoded->catalog).size();++scope){auto view=social::selectFeed(decoded->catalog,week,scope);require(!view->posts.empty(),"Actual scope has no renderable native row");}std::cout<<"Actual catalog validated: "<<decoded->catalog->weeks.size()<<" publication weeks; every dynamic scope validated.\n";}
         std::cout<<"Passed: filtered CFB identity/order and typed ABI, missing-donor preservation, system-status fallback, "<<feedPostCount<<" posts in "<<feedContainerCount<<" feed containers, coordinate boundaries, scoped native category, exact layout correction/restoration and foreign ownership rejection.\n";
     }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
     return 0;

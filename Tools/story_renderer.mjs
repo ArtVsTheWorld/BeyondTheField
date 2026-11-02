@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {hash,authorRegistry} from './story_authors.mjs';
+import {likesFor} from './story_engagement.mjs';
 import {avatarFor} from './story_avatars.mjs';
 import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
 import {addConversations} from './story_conversations.mjs';
@@ -25,7 +26,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
   if(reaction&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
   if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
-  const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
+  const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player),likes:likesFor(s,id,role,team,e,sameStories.get(id)),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
   if(parent){p.replyTo=parent.id;replyCounts.set(parent.id,(replyCounts.get(parent.id)??0)+1);}
   if(reaction){reactionAccounts.set(accountKey,(reactionAccounts.get(accountKey)??0)+1);if(topic)reactionTopics.set(topic,(reactionTopics.get(topic)??0)+1);}
   stories.push(p);byId.set(p.id,p);return p;
@@ -93,7 +94,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   }else if(e.category==='watch'){
    v.watchDetail=f.basis==='heisman'?' He’s already part of the Heisman conversation.':' His recent production put him on this week’s watch list.';add(e,'beat.watch',v);
   }else if(e.category==='standings'){
-   v.leaders=f.leaders.map(x=>`${x.school} (${x.wins}–${x.losses})`).join(', ');add(e,f.independent?'beat.independents':'beat.standings',v,{team:teams.get(s.userTeamIndex)});
+   v.leaders=f.leaders.map(x=>`${x.school} (${x.wins}–${x.losses})`).join(', ');add(e,f.independent?'beat.independents':'beat.standings',v,{team:t});
   }else if(e.category==='cfp')add(e,'beat.cfp',v);
   else if(e.category==='heisman'){
    v.rankChange=numeric(f.previousRank)&&f.previousRank!==f.rank?`moves ${f.previousRank>f.rank?'up':'down'} from No. ${f.previousRank} to No. ${f.rank}`:`is No. ${f.rank}`;

@@ -7,8 +7,8 @@ import {renderStories} from '../Tools/story_renderer.mjs';
 const root=(id,extra={})=>({id,category:'results',priority:80,thread:id,curated:true,scopes:['team','national'],voice:'beat',handle:'@'+id,...extra});
 const fixture=()=>({leagueId:10,userTeamIndex:1,season:{CurrentSeasonYear:2027,CurrentWeek:8,CurrentWeekType:'RegularSeason'},teams:[{id:1,name:'Harbor State',nickname:'Captains',logo:11,hashtags:['#AllAboard']}],players:[{id:'recruit',name:'Evan Mercer',team:255,position:'QB',personality:'Leader',portrait:234},{id:'qb',name:'Caleb Moss',team:1,position:'QB',personality:'Leader',injury:'Uninjured',portrait:146}],games:[]});
 test('generated recruits and players use nonblank native portraits without an NIL requirement',()=>{
- for(const role of ['player','recruit'])assert.deepEqual(avatarFor(role,{logo:11},{portrait:146,isNil:false}),{imageLibrary:1,imageValue:146});
- for(const player of [{portrait:0},{portrait:65535},{portrait:146,portraitForcedSilhouette:true}])assert.deepEqual(avatarFor('player',{logo:11},player),{imageLibrary:0,imageValue:11});
+ for(const role of ['player','recruit'])assert.deepEqual(avatarFor(role,{id:1,logo:11},{team:255,portrait:146,isNil:false}),{imageLibrary:1,imageValue:146});
+ for(const player of [{portrait:0},{portrait:65535},{portrait:146,portraitForcedSilhouette:true}])assert.deepEqual(avatarFor('player',{logo:11},player),{imageLibrary:79,imageValue:974});
  assert.deepEqual(avatarFor('official',{logo:11},{portrait:146}),{imageLibrary:0,imageValue:11});
 });
 test('cooldowns prefer another phrase for the same author across weeks and freeze same-week wording',()=>{

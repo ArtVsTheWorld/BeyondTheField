@@ -22,6 +22,7 @@
 #include "NewsScopeInput.h"
 #include "NewsDropdowns.h"
 #include "NewsPolish.h"
+#include "NewsDiscovery.h"
 #include "RuntimeFeed.h"
 namespace {
 using Json=nlohmann::json;
@@ -83,7 +84,7 @@ bool flowOwned=false;
 uintptr_t newsScroll=0;
 bool scrollOwned=false;
 #ifdef SOCIAL_DUAL_DROPDOWN
-const auto scopedScroll=social::newsScrollSmooth;
+const auto scopedScroll=social::scopedNewsScroll();
 #else
 const auto scopedScroll=social::scopedNewsScroll();
 #endif
@@ -92,7 +93,7 @@ uintptr_t newsModelBase=0,dropdownScreenBase=0;
 bool dropdownModelOwned=false,dropdownScreenOwned=false;
 bool configureNewsDropdowns(bool enable);
 uintptr_t newsBodyStyle=0,newsViewport=0;
-bool polishOwned=false;
+bool polishOwned=false;bool discoveryOwned=false;auto discoveryPatches=social::discoveryui::patches();
 const auto maskedViewport=social::polish::viewportMasked();
 bool configureNewsPolish(bool enable);
 bool locateNewsLayout(){
@@ -164,12 +165,16 @@ bool configureNewsPolish(bool enable){
     std::vector<unsigned char> body(oldBody.size()),viewport(oldViewport.size());
     if(!newsBodyStyle||!newsViewport||!read(newsBodyStyle,body.data(),body.size())||body!=oldBody||!read(newsViewport,viewport.data(),viewport.size())||viewport!=oldViewport){note({{"event","news_polish_rejected"},{"enable",enable}});return false;}
     if(enable==polishOwned)return true;
+    const auto tileBase=newsLayout-0x2c658;
+    for(const auto& p:discoveryPatches){const auto& expected=discoveryOwned?p.changed:p.original;std::vector<unsigned char> actual(expected.size());if(!read(tileBase+p.offset,actual.data(),actual.size())||actual!=expected){note({{"event","discovery_ui_rejected"},{"offset",p.offset}});return false;}}
     auto write=[](uintptr_t address,const std::vector<unsigned char>& bytes){DWORD old=0,unused=0;if(!VirtualProtect(reinterpret_cast<void*>(address),bytes.size(),PAGE_READWRITE,&old))return false;memcpy(reinterpret_cast<void*>(address),bytes.data(),bytes.size());VirtualProtect(reinterpret_cast<void*>(address),bytes.size(),old,&unused);return true;};
     const auto& bodyBytes=enable?social::polish::bodyWide:social::polish::bodyOriginal;
     const auto& viewportBytes=enable?maskedViewport:social::polish::viewportOriginal;
-    if(!write(newsBodyStyle,bodyBytes))return false;
-    if(!write(newsViewport,viewportBytes)){write(newsBodyStyle,oldBody);return false;}
-    polishOwned=enable;note({{"event",enable?"news_polish_enabled":"news_polish_restored"},{"bodyWidth",enable?1065:630},{"viewportMask",enable}});return true;
+    struct Change {uintptr_t address;std::vector<unsigned char> before,after;};
+    std::vector<Change> changes={{newsBodyStyle,oldBody,bodyBytes},{newsViewport,oldViewport,viewportBytes}};
+    for(const auto& p:discoveryPatches)changes.push_back({tileBase+p.offset,discoveryOwned?p.changed:p.original,enable?p.changed:p.original});
+    for(size_t i=0;i<changes.size();++i)if(!write(changes[i].address,changes[i].after)){while(i){--i;write(changes[i].address,changes[i].before);}return false;}
+    discoveryOwned=enable;polishOwned=enable;note({{"event",enable?"news_polish_enabled":"news_polish_restored"},{"bodyWidth",enable?1065:630},{"viewportMask",enable}});return true;
 }
 bool configureNewsFlow(bool enable){
     std::lock_guard<std::mutex> lock(layoutMutex);
@@ -443,8 +448,8 @@ void populatePost(void* tile,unsigned number){
             // News needs a focusable input target to keep native panning active.
             // AllowFocus controls the card accent separately; DO_NOTHING keeps
             // the posts read-only even though the input route remains enabled.
-            tileText(tile,"linkage","art_control.paneltile.NewsStoryTile");tileText(tile,"display",handleOwned.load()?post.author.c_str():author.c_str());tileInt(tile,"Width",1200);tileInt(tile,"Height",social::postHeight(post.body));tileBool(tile,"isFocusable",true);tileBool(tile,"isInteractive",true);tileBool(tile,"ForceContainer",listFeed);
-            void* extra=makeObject();tileText(extra,"SubText",post.body.c_str());auto stamp=post.stamp+" | "+c+"/"+std::to_string(feedPostCount);tileText(extra,"DateText",stamp.c_str());tileText(extra,"TertiaryText",handleOwned.load()?post.handle.c_str():"");tileInt(extra,"ImageLibrary",post.imageLibrary);tileInt(extra,"ImageValue",post.imageValue);tileText(extra,"ImageRenderType","SwappableImage");tileInt(extra,"VisualStyle",2);tileBool(extra,"UseFrame",false);tileBool(extra,"AllowFocus",selectablePosts);tileBool(extra,"ShowDisableOverlay",false);tileInt(extra,"DisableButtonAlpha",0);tileInt(extra,"FillFocusAlpha",100);tileInt(extra,"FillUnFocusAlpha",100);tileInt(extra,"FillUnfocusAlpha",100);tileBool(extra,"StrokeEnabled",false);tileBool(extra,"SendAsData",true);tileBool(extra,"ImmediateUpdate",true);tileInt(tile,"VisualStyle",2);
+            tileText(tile,"linkage","art_control.paneltile.NewsStoryTile");tileText(tile,"display",author.c_str());tileInt(tile,"Width",1200);tileInt(tile,"Height",social::postHeight(post.body)+32);tileBool(tile,"isFocusable",true);tileBool(tile,"isInteractive",true);tileBool(tile,"ForceContainer",listFeed);
+            void* extra=makeObject();tileText(extra,"SubText",post.body.c_str());auto stamp=post.stamp+" | "+c+"/"+std::to_string(feedPostCount);tileText(extra,"DateText",stamp.c_str());auto likes=post.likes>=0?(post.likes>=10000?std::to_string(post.likes/1000)+"K":post.likes>=1000?std::to_string(post.likes/1000)+"."+std::to_string(post.likes%1000/100)+"K":std::to_string(post.likes))+" likes":std::string();tileText(extra,"TertiaryText",likes.c_str());tileBool(extra,"UseJersey",post.uniformTeamLogo>=0);tileInt(extra,"UniformTeamLogo",post.uniformTeamLogo);tileInt(extra,"AltImageLibrary",92);tileInt(extra,"AltImageValue",post.uniformTeamLogo>=0?post.uniformTeamLogo+1:0);tileText(extra,"AltImageRenderType","SwappableImage");tileInt(extra,"ImageLibrary",post.imageLibrary);tileInt(extra,"ImageValue",post.imageValue);tileText(extra,"ImageRenderType","SwappableImage");tileInt(extra,"VisualStyle",2);tileBool(extra,"UseFrame",false);tileBool(extra,"AllowFocus",selectablePosts);tileBool(extra,"ShowDisableOverlay",false);tileInt(extra,"DisableButtonAlpha",0);tileInt(extra,"FillFocusAlpha",100);tileInt(extra,"FillUnFocusAlpha",100);tileInt(extra,"FillUnfocusAlpha",100);tileBool(extra,"StrokeEnabled",false);tileBool(extra,"SendAsData",true);tileBool(extra,"ImmediateUpdate",true);tileInt(tile,"VisualStyle",2);
             objectValue(tile,"ExtraInfo",extra);releaseValue(extra);
             note({{"event","weekly_post_tile"},{"post",c},{"author",author}});
 }
@@ -500,19 +505,21 @@ void __fastcall filterDataHook(void* self,void* out,void* panel,void* kind){
         if(pageFeed->catalog){
 #ifdef SOCIAL_DUAL_DROPDOWN
             if(_stricmp(filterKind.c_str(),"filter_one")==0){
-                for(unsigned i=0;i<social::scopeLabels.size();++i){rowText(out,i,"display",social::scopeLabels[i]);rowText(out,i,"icon","");rowSet(out,i,"key",static_cast<int>(i+1),4);rowSet(out,i,"isDefault",i==pageFeed->scope,3);}
+                for(unsigned i=0;i<social::scopesFor(*pageFeed->catalog).size();++i){auto display=social::scopesFor(*pageFeed->catalog)[i].label;rowText(out,i,"display",display.c_str());rowText(out,i,"icon","");rowSet(out,i,"key",static_cast<int>(i+1),4);rowSet(out,i,"isDefault",i==pageFeed->scope,3);}
                 note({{"event","social_scope_filter_supplied"},{"scope",pageFeed->scope}});return;
             }
 #endif
             for(unsigned i=0;i<pageFeed->catalog->weeks.size();++i){const auto& e=pageFeed->catalog->weeks[i];rowText(out,i,"display",e.label.c_str());rowText(out,i,"icon","");rowSet(out,i,"key",static_cast<int>(i+1),4);rowSet(out,i,"isDefault",i==pageFeed->edition,3);}
-        }else{rowText(out,0,"display","All Posts");rowText(out,0,"icon","");rowSet(out,0,"key",0,4);rowSet(out,0,"isDefault",true,3);}
+        }else{rowText(out,0,"display","For You");rowText(out,0,"icon","");rowSet(out,0,"key",0,4);rowSet(out,0,"isDefault",true,3);}
         note({{"event","social_filter_supplied"},{"kind",filterKind}});return;
     }
     filterData(self,out,panel,kind);
 }
 std::string nativeString(const char* p){char b[128]{};return p&&read(reinterpret_cast<uintptr_t>(p),b,sizeof(b))&&memchr(b,0,sizeof(b))?b:"";}
-enum class SocialFilter {unknown,scope,week,scopeDropdown};
+enum class SocialFilter {unknown,scope,week,scopeDropdown,type,typePrev};
 SocialFilter socialFilter(const std::string& kind){
+    if(_stricmp(kind.c_str(),"SOCIAL_TYPE_PREV")==0)return SocialFilter::typePrev;
+    if(_stricmp(kind.c_str(),"SOCIAL_TYPE")==0)return SocialFilter::type;
     if(_stricmp(kind.c_str(),"SOCIAL_SCOPE")==0)return SocialFilter::scope;
     if(_stricmp(kind.c_str(),"NEWS_CATEGORY")==0)return SocialFilter::week;
 #ifdef SOCIAL_DUAL_DROPDOWN
@@ -531,17 +538,19 @@ void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,
         if(selectedFilter==SocialFilter::unknown){note({{"event","social_filter_ignored"},{"panel",p},{"kind",k}});return;}
         if(changingSelection)return;
         try{
-            auto week=pageFeed->edition;auto scope=pageFeed->scope;
-            if(selectedFilter==SocialFilter::scope)scope=(scope+1)%4;
+            auto week=pageFeed->edition;auto scope=pageFeed->scope;auto type=pageFeed->type;
+            if(selectedFilter==SocialFilter::typePrev)type=(type+static_cast<unsigned>(social::typeLabels.size())-1)%static_cast<unsigned>(social::typeLabels.size());
+            else if(selectedFilter==SocialFilter::type)type=(type+1)%static_cast<unsigned>(social::typeLabels.size());
+            else if(selectedFilter==SocialFilter::scope)scope=(scope+1)%static_cast<unsigned>(social::scopesFor(*pageFeed->catalog).size());
             else{
                 uintptr_t vt=0,fn=0;if(!read(reinterpret_cast<uintptr_t>(value),&vt,8)||!read(vt+0x18,&fn,8)||fn<base||fn>=base+0x11ffe000)throw std::runtime_error("Unsupported week filter value");
                 const int key=reinterpret_cast<int(__fastcall*)(void*)>(fn)(value);
-                if(selectedFilter==SocialFilter::scopeDropdown){if(key<1||key>4)return;scope=static_cast<unsigned>(key-1);}
+                if(selectedFilter==SocialFilter::scopeDropdown){if(key<1||static_cast<size_t>(key)>social::scopesFor(*pageFeed->catalog).size())return;scope=static_cast<unsigned>(key-1);}
                 else{if(key<1||static_cast<size_t>(key)>pageFeed->catalog->weeks.size())return;week=static_cast<size_t>(key-1);}
             }
-            if(week==pageFeed->edition&&scope==pageFeed->scope)return;
-            pageFeed=social::selectFeed(pageFeed->catalog,week,scope);feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;
-            note({{"event","social_selection_changed"},{"week",pageFeed->key},{"scope",social::scopeKeys[scope]},{"posts",feedPostCount}});
+            if(week==pageFeed->edition&&scope==pageFeed->scope&&type==pageFeed->type)return;
+            pageFeed=social::selectFeed(pageFeed->catalog,week,scope,type);feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;
+            note({{"event","social_selection_changed"},{"week",pageFeed->key},{"scope",social::scopesFor(*pageFeed->catalog)[scope].key},{"type",social::typeLabels[type]},{"posts",feedPostCount}});
             changingSelection=true;void* params=makeObject();Alias donor{aliasVt,"CM_NEWSTAB"};const bool requested=requestPanel(self,&donor,params);releaseValue(params);changingSelection=false;
             note({{"event","social_selection_refresh"},{"requested",requested}});
         }catch(const std::exception& e){changingSelection=false;note({{"event","social_selection_failed"},{"error",e.what()}});}

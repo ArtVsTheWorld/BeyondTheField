@@ -15,7 +15,8 @@ export function detectEvents(s,previous=null){
   const emit=(id,category,facts,{team=null,player=null,relatedTeams=[],national=null,eventWeek=null,priority=50,thread=null,curated=true,primaryScope=null}={})=>{
     if(ids.has(id))return;const p=players.get(player);const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
     if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
-    if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');if(!scopes.length)return;
+    if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');// Every program retains its dedicated news, even outside the personalized feed.
+    if(['recruiting','offers'].includes(category)&&p&&(s.recruitInterests?.includes(p.id)||(p.homePipeline&&own.pipelines?.includes(p.homePipeline))||(p.homeState&&p.homeState===own.homeState)))scopes.push('relevant');
     ids.add(id);const teamContext=teamIds.map(id=>teams.get(id)).filter(Boolean).map(t=>({teamId:t.id,school:t.name,nickname:t.nickname??null,nicknameAlt:t.nicknameAlt??null,hashtags:t.hashtags??[],headCoach:t.headCoach??null}));
     events.push({id,category,facts,teamIds,teamContext,playerId:player,personality:p?.personality??null,position:p?.position??null,scopes,eventWeek,priority,thread:thread??id,curated,primaryScope});
   };
@@ -27,7 +28,7 @@ export function detectEvents(s,previous=null){
     const winner=tie?null:g.homeScore>g.awayScore?g.home:g.away,loser=tie?null:winner===g.home?g.away:g.home;
     emit(`result:${g.id}`,'results',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeScore:g.homeScore,awayScore:g.awayScore,winner:tie?null:winner===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,loser:tie?null:loser===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,margin,tie,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home)),timing:g.week===week?'current':'previous'},
       {team:winner,relatedTeams:[g.home,g.away],national:rank(g.home)<=25||rank(g.away)<=25,eventWeek:g.week,priority:user?100:60,thread:`game:${g.id}`});
-    if(user)for(const [id,st] of [[g.home,g.homeStats],[g.away,g.awayStats]])if(id===s.userTeamIndex&&st&&['OFFPASSYARDS','OFFRUSHYARDS','FIRSTDOWNS','GIVEAWAYS'].every(k=>Number.isFinite(st[k])))
+    for(const [id,st] of [[g.home,g.homeStats],[g.away,g.awayStats]])if(teams.has(id)&&id!==255&&st&&['OFFPASSYARDS','OFFRUSHYARDS','FIRSTDOWNS','GIVEAWAYS'].every(k=>Number.isFinite(st[k])))
       emit(`teamstats:${g.id}:${id}`,'team-stats',{gameId:g.id,school:teams.get(id).name,passingYards:st.OFFPASSYARDS,rushingYards:st.OFFRUSHYARDS,firstDowns:st.FIRSTDOWNS,giveaways:st.GIVEAWAYS},{team:id,eventWeek:g.week,priority:94,thread:`game:${g.id}`});
   }
   const games=new Map(recent.map(g=>[g.id,g])),form=new Map();
@@ -48,10 +49,10 @@ export function detectEvents(s,previous=null){
   }
   const prior=previous&&previous.leagueId===s.leagueId&&previous.season.CurrentSeasonYear===s.season.CurrentSeasonYear&&previous.season.CurrentWeekType===phase&&previous.season.CurrentWeek===week-1?previous:null;
   const previousPlayers=new Map((s.midweekBaseline?.players??prior?.players??[]).map(p=>[p.id,p]));
-  for(const p of s.players){if(p.team!==s.userTeamIndex||!p.injury||p.injury==='Uninjured')continue;
+  for(const p of s.players){if(!teams.has(p.team)||p.team===255||!p.injury||p.injury==='Uninjured')continue;
     const fresh=inSeason&&p.injuryYear===year&&p.injuryWeek===week-1&&p.injuryStage===s.season.CurrentStage;
-    emit(`injury:${p.id}`,'injuries',{playerName:p.name,school:own.name,status:p.injury,injuryType:p.injuryType&&p.injuryType!=='Invalid_'&&p.injuryType!=='None'?p.injuryType:null,newlyInjured:fresh},
-      {player:p.id,priority:96,eventWeek:fresh?p.injuryWeek:null});
+    emit(`injury:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:p.injury,injuryType:p.injuryType&&p.injuryType!=='Invalid_'&&p.injuryType!=='None'?p.injuryType:null,newlyInjured:fresh},
+      {player:p.id,team:p.team,priority:p.team===s.userTeamIndex?96:55,eventWeek:fresh?p.injuryWeek:null});
   }
   if(prior||s.midweekBaseline)for(const p of s.players){const old=previousPlayers.get(p.id);if(p.team===s.userTeamIndex&&p.injury==='Uninjured'&&old?.injury&&old.injury!=='Uninjured')
     emit(`healthy:${p.id}`,'injuries',{playerName:p.name,school:own.name,status:'Uninjured',recovered:true},{player:p.id,priority:95});}
@@ -83,10 +84,11 @@ export function detectEvents(s,previous=null){
   if(inSeason){for(const [flag,name] of [['thanksgiving','Thanksgiving'],['christmas','Christmas'],['newYears','New Year']])if(upcoming.some(g=>g[flag]))emit(`holiday:${flag}`,'holiday',{holiday:name},{priority:82});
     if(upcoming.some(g=>g.month===10&&g.day===31))emit('holiday:halloween','holiday',{holiday:'Halloween'},{priority:82});
   }
-  if(inSeason&&conferenceTeams.size){const independent=own.independent;
-    const leaders=s.teams.filter(t=>conferenceTeams.has(t.id)&&Number.isFinite(independent?t.wins:t.conferenceRank)).sort((a,b)=>independent?b.wins-a.wins||a.losses-b.losses:a.conferenceRank-b.conferenceRank).slice(0,3);
-    if(leaders.length)emit(`standings:${own.conferenceId}`,'standings',{conference:own.conferenceName,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
-      {relatedTeams:[...conferenceTeams],national:false,priority:84,primaryScope:'conference'});
+  if(inSeason)for(const conference of s.conferences??[]){
+    const members=new Set(conference.teams),independent=conference.independent;
+    const leaders=s.teams.filter(t=>members.has(t.id)&&Number.isFinite(independent?t.wins:t.conferenceRank)).sort((a,b)=>independent?b.wins-a.wins||a.losses-b.losses:a.conferenceRank-b.conferenceRank).slice(0,3);
+    if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
+      {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
   if(inSeason)for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
   const analytics=teamAnalytics(s);

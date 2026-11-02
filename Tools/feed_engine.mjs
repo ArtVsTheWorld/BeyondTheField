@@ -1,4 +1,5 @@
 // Approved prewritten voices applied only to verified Dynasty event facts.
+import {scopeCatalog} from './social_discovery.mjs';
 import {publishWeek} from './feed_selection.mjs';
 import {detectEvents,weekKey} from './story_events.mjs';
 import {renderStories,CONTENT_REVISION} from './story_renderer.mjs';
@@ -24,5 +25,5 @@ export function buildFeed(s,previous=null,options={}){
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,
-    events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
+    scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
 }

@@ -1,6 +1,7 @@
+import {discoveryViews} from './social_discovery.mjs';
 export const SCOPES=['all','national','conference','team'];
 const order=(a,b)=>b.priority-a.priority||a.id.localeCompare(b.id);
-const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:p.scopes.includes('team')?'team':p.scopes.includes('conference')?'conference':'national';
+const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:(p.scopes.includes('team')||p.scopes.includes('relevant'))?'team':p.scopes.includes('conference')?'conference':'national';
 // Order a real conversation with its parent immediately before the replies.
 // Orphans and cycles never become visible, including in dedicated scope views.
 export function conversationOrder(stories){
@@ -10,7 +11,7 @@ export function conversationOrder(stories){
  for(const p of roots.sort(order))visit(p);return result;
 }
 export function curate(stories,limit=20){
- const pool=stories.filter(p=>p.curated!==false).sort(order),map=new Map(pool.map(p=>[p.id,p]));
+ const pool=stories.filter(p=>p.curated!==false&&p.scopes.length).sort(order),map=new Map(pool.map(p=>[p.id,p]));
  const target={national:Math.round(limit*.35),conference:Math.round(limit*.25),team:0};target.team=limit-target.national-target.conference;
  const selected=[],used=new Set(),counts={national:0,conference:0,team:0},categories=new Map(),threads=new Map(),templates=new Map(),accounts=new Map(),voices=new Map();
  const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5};
@@ -31,7 +32,7 @@ export function curate(stories,limit=20){
  }
  // Keep the actual user result before reserving room for personality/reactions.
  for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
- for(const voice of ['player','fan','recruit'])for(const p of pool){if((voices.get(voice)??0)>=(voice==='recruit'?1:2))break;if(p.voice===voice)accept(p,true);}
+ for(const voice of ['player','fan','recruit'])for(const p of voice==='recruit'?[...pool].sort((a,b)=>Number(b.scopes.includes('team')||b.scopes.includes('relevant'))-Number(a.scopes.includes('team')||a.scopes.includes('relevant'))||order(a,b)):pool){if((voices.get(voice)??0)>=(voice==='recruit'?1:2))break;if(p.voice===voice)accept(p,true);}
  for(const scope of ['team','conference','national'])for(const p of pool){if(counts[scope]>=target[scope])break;if(bucketFor(p)===scope)accept(p,true);}
  for(const p of pool){if(selected.length>=limit)break;accept(p);}
  // Interleave complete blocks rather than separating a reply from its parent.
@@ -48,7 +49,7 @@ export function scopeViews(stories){
 export function publishWeek(feed){
   const publication={key:feed.key,season:feed.season,phase:feed.phase,week:feed.week};
   const stories=feed.stories.map(p=>({...p,publication}));
-  const views=scopeViews(stories),map=new Map(stories.map(p=>[p.id,p]));
+  const views={...scopeViews(stories),...(feed.scopeOptions?discoveryViews(conversationOrder(stories),feed.scopeOptions):{})},map=new Map(stories.map(p=>[p.id,p]));
   return {...feed,stories,views,posts:views.all.map(id=>map.get(id)),publication};
 }
 

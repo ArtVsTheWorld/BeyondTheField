@@ -43,13 +43,14 @@ inline std::wstring quote(const std::wstring& input){
     out.append(slashes*2,L'\\');return out+L"\"";
 }
 inline Json readJson(const fs::path& path){
-    if(fs::file_size(path)>16ull*1024*1024)throw std::runtime_error("Weekly feed JSON exceeds size limit");
+    if(fs::file_size(path)>64ull*1024*1024)throw std::runtime_error("Weekly feed JSON exceeds size limit");
     std::ifstream in(path);if(!in)throw std::runtime_error("Cannot read weekly feed JSON");Json j;in>>j;return j;
 }
 inline void validate(const Json& j,const Json& config){
     if(j.at("format")!=1||j.at("engineVersion")!=2||!j.at("sourceUnchanged").get<bool>()||j.at("leagueId")!=config.at("leagueId")||j.at("userTeamIndex")!=config.at("userTeamIndex"))throw std::runtime_error("Feed identity or version mismatch");
     if(j.at("source").get<std::string>()!=config.at("save").get<std::string>())throw std::runtime_error("Feed source differs from the watched save");
     const auto& weeks=j.at("weeks");if(!weeks.is_array()||weeks.empty()||weeks.size()>48)throw std::runtime_error("Invalid weekly catalog size");
+    if(j.contains("scopeOptions")){const auto& options=j.at("scopeOptions");if(!options.is_array()||options.size()<2||options.size()>512)throw std::runtime_error("Invalid scope catalog");std::set<std::string> scopeIds;for(const auto& o:options){auto key=o.at("key").get<std::string>(),label=o.at("label").get<std::string>();if(key.empty()||key.size()>128||label.empty()||label.size()>128||!scopeIds.insert(key).second)throw std::runtime_error("Invalid scope identity");}if(options[0].at("key")!="all"||options[1].at("key")!="national")throw std::runtime_error("Missing default scopes");}
     std::set<std::string> keys;bool active=false;
     for(const auto& w:weeks){
       if(w.at("leagueId")!=j.at("leagueId")||w.at("userTeamIndex")!=j.at("userTeamIndex")||w.at("season")!=j.at("season")||w.at("phase")!=j.at("phase")||w.at("week").get<int>()>j.at("week").get<int>())throw std::runtime_error("Catalog contains another Dynasty or future publication week");
@@ -62,8 +63,8 @@ inline void validate(const Json& j,const Json& config){
         for(const char* k:{"author","handle","body","stamp"})if(!p.at(k).is_string()||p.at(k).get_ref<const std::string&>().empty()||p.at(k).get_ref<const std::string&>().size()>512)throw std::runtime_error("Invalid feed text");
         if(p.at("imageLibrary").get<int>()<0||p.at("imageValue").get<int>()<0)throw std::runtime_error("Invalid feed avatar");
       }
-      for(const char* scope:{"all","national","conference","team"}){
-        const auto& view=w.at("views").at(scope);if(!view.is_array()||view.size()>(std::string(scope)=="all"?20u:4096u))throw std::runtime_error("Invalid scope view size");
+      if(!w.at("views").is_object()||w.at("views").size()>516)throw std::runtime_error("Invalid scope views");
+      for(const auto& [scope,view]:w.at("views").items()){if(!view.is_array()||view.size()>(scope=="all"?20u:4096u))throw std::runtime_error("Invalid scope view size");
         std::set<std::string> seen;for(const auto& id:view){const auto v=id.get<std::string>();if(!ids.count(v)||!seen.insert(v).second)throw std::runtime_error("Invalid or duplicate scope story reference");}
       }
     }

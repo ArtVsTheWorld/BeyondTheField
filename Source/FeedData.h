@@ -8,7 +8,7 @@
 #include <string_view>
 #include "FeedRefresh.h"
 namespace social {
-struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;};
+struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;int likes=-1,uniformTeamLogo=-1;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
 inline std::string storyLabel(const nlohmann::json& post){
     if(post.contains("replyTo"))return "Reply";
     const auto category=post.value("category",std::string());
@@ -49,34 +49,40 @@ inline int postHeight(std::string_view body){
     flush();return (std::max)(160,((68+lines*36+15)/16)*16);
 }
 inline constexpr std::array<const char*,4> scopeKeys={"all","national","conference","team"};
-inline constexpr std::array<const char*,4> scopeLabels={"All Posts","National","Conference","My Team"};
-struct Edition {std::string key,label,conference;int season=0,week=0;std::map<std::string,FeedPost> stories;std::array<std::vector<std::string>,4> views;};
-struct Catalog {std::vector<Edition> weeks;size_t active=0;};
-struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0;};
+inline constexpr std::array<const char*,4> scopeLabels={"For You","National","Conference","My Team"};
+struct Scope {std::string key,label;};
+struct Edition {std::string key,label,conference;int season=0,week=0;std::map<std::string,FeedPost> stories;std::map<std::string,std::vector<std::string>> views;};
+struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> scopes;};
+struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;};
+inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
+inline constexpr std::array<const char*,10> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Team Accounts","Players & Recruits","Fans"};
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();
     for(unsigned n=0;n<count;++n)f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","Preparing news for the active Dynasty. Return to the hub briefly, then reopen Social Media.","Status",79,598});
     return f;
 }
-inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> catalog,size_t week,unsigned scope){
-    if(!catalog||week>=catalog->weeks.size()||scope>=scopeKeys.size())throw std::runtime_error("Invalid single-week feed selection");
-    const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->key=e.key;
-    f->label="Social Media";
-    for(const auto& id:e.views[scope])f->posts.push_back(e.stories.at(id));
-    if(f->posts.empty())f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","No "+std::string(scopeLabels[scope])+" stories were published in this weekly edition.","News",79,598});
+inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> catalog,size_t week,unsigned scope,unsigned type=0){
+    if(!catalog||week>=catalog->weeks.size()||scope>=scopesFor(*catalog).size()||type>=typeLabels.size())throw std::runtime_error("Invalid single-week feed selection");
+    const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->type=type;f->key=e.key;
+    f->label="Social Media";if(type)f->label+=" - "+std::string(typeLabels[type]);
+    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);std::set<std::string> accepted;
+    if(view!=e.views.end())for(const auto& id:view->second){const auto& post=e.stories.at(id);if(post.replyTo.empty()?matchesType(post,type):accepted.count(post.replyTo)>0){accepted.insert(id);f->posts.push_back(post);}}
+    if(f->posts.empty())f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","No "+option.label+" stories were published in this weekly edition.","News",79,598});
     return f;
 }
 inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
     auto catalog=std::make_shared<Catalog>();
+    if(j.contains("scopeOptions"))for(const auto& o:j.at("scopeOptions"))catalog->scopes.push_back({o.at("key").get<std::string>(),o.at("label").get<std::string>()});
     for(const auto& w:j.at("weeks")){
         Edition e;e.key=w.at("key").get<std::string>();e.week=w.at("week").get<int>();e.season=w.at("season").get<int>();e.conference=w.value("conference",nlohmann::json()).is_string()?w.at("conference").get<std::string>():"";
         e.label="Week "+std::to_string(e.week)+", "+std::to_string(e.season);
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
-            e.stories.emplace(p.at("id").get<std::string>(),FeedPost{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()});
+            FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
         }
-        for(unsigned scope=0;scope<scopeKeys.size();++scope)e.views[scope]=w.at("views").at(scopeKeys[scope]).get<std::vector<std::string>>();
+        for(const auto& [key,view]:w.at("views").items())e.views[key]=view.get<std::vector<std::string>>();
         catalog->weeks.push_back(std::move(e));
     }
     std::sort(catalog->weeks.begin(),catalog->weeks.end(),[](const Edition& a,const Edition& b){return a.week<b.week;});
