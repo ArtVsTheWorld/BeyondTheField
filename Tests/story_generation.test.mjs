@@ -43,12 +43,12 @@ test('generated English posts fit native byte and character budgets with no emoj
  const f=buildFeed(fixture());for(const p of f.stories){assert.ok([...p.body].length<=280,p.id);assert.ok(Buffer.byteLength(p.body)<=512,p.id);assert.ok(!/[\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(p.body),p.id);assert.ok(!/undefined|NaN|\b(?:OVR|overall|ratings?)\b/i.test(p.body),p.id);assert.ok(!/\{[A-Za-z]/.test(p.body));}
 });
 test('midweek unsaved recruiting renders once, persists identity, and does not reroll existing stories',()=>{
- const s=fixture(),a=updateRuntime(structuredClone(s));s.offers=[{team:1,player:'r',rank:20}];const b=updateRuntime(structuredClone(s),a.state),c=updateRuntime(structuredClone(s),b.state);assert.equal(b.catalog.stories.filter(p=>p.eventId==='offer:1:r').length,1);assert.deepEqual(b.catalog,c.catalog);
+ const s=fixture(),a=updateRuntime(structuredClone(s));s.offers=[{team:1,player:'r',rank:20}];const b=updateRuntime(structuredClone(s),a.state),c=updateRuntime(structuredClone(s),b.state);assert.equal(b.catalog.stories.filter(p=>p.eventId==='offer:1:r'&&!p.replyTo).length,1);assert.deepEqual(b.catalog,c.catalog);
  for(const p of a.catalog.stories)assert.equal(b.catalog.stories.find(x=>x.id===p.id)?.body,p.body,p.id);
 });
 test('analyst replies quote a real parent, retain school context, and stay out of All Posts without a parent',()=>{
  const s=fixture(),e=event('analytics',{metric:'rushingYardsPerGame',school:'Harbor State',sampleGames:7,rushingYards:1643,rushingYardsPerGame:1643/7,nationalRank:3,nationalRankTied:false,pollRank:8,previousPollRank:12},{scopes:['team','national']});
- const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.ok(reply);assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8 feels about right'));assert.equal(reply.curated,false);
+ const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.ok(reply);assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8 feels about right'));assert.equal(reply.curated,true);
 });
 
 test('all five supported analyst measures resolve their actual denominators and polarity',()=>{
@@ -59,5 +59,5 @@ test('all five supported analyst measures resolve their actual denominators and 
   {metric:'turnoverMargin',school:'Harbor State',sampleGames:4,takeaways:10,giveaways:3,margin:7},
   {metric:'turnoverMargin',school:'Harbor State',sampleGames:4,takeaways:1,giveaways:8,margin:-7},
   {kind:'season_largest_winning_margin',school:'Harbor State',winnerScore:44,loserScore:7,margin:37,opponent:'Red Mesa',comparisonGames:100}
- ];for(const facts of cases){const out=renderStories(s,[event('analytics',facts)]).stories;assert.equal(out.length,1,JSON.stringify(facts));assert.equal(out[0].voice,'analyst');assert.ok(!/undefined|NaN|\{/.test(out[0].body));}
+ ];for(const facts of cases){const out=renderStories(s,[event('analytics',facts)]).stories.filter(p=>p.voice==='analyst');assert.equal(out.length,1,JSON.stringify(facts));assert.equal(out[0].voice,'analyst');assert.ok(!/undefined|NaN|\{/.test(out[0].body));}
 });

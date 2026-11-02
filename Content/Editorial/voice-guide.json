@@ -8,7 +8,7 @@
     "legacyTweetWording": "retired",
     "originalThreeCards": "removed",
     "existingRuntimeTemplates": "removed from this branch",
-    "approvedRuntimeTemplates": 89,
+    "approvedRuntimeTemplates": 180,
     "historicalBaselineTag": "prototype-active-dynasty-v47",
     "publishedArchives": "not rewritten",
     "atResetApprovedRuntimeTemplates": 0
@@ -349,7 +349,8 @@
   "fanConversationPolicy": {
     "analystReplies": "Only reference a real published mod-authored opinion. Keep the parent available or make the reaction self-contained without a false quote.",
     "positiveAndNegative": "Both may target named players and coaches when grounded in actual football events. Criticism is opinion; allegations of crimes or private misconduct are excluded.",
-    "drama": "Emotional exaggeration and football trash talk are permitted; literal scores/statistics remain correct."
+    "drama": "Emotional exaggeration and football trash talk are permitted; literal scores/statistics remain correct.",
+    "replies": "Every reply references a real generated parent and uses its persistent handle. All Posts selects complete conversation blocks; dedicated views hide orphan replies and keep parents with their replies."
   },
   "analystAnalyticsPolicy": {
     "standard": "Lead with a calculated football insight, then a supported interpretation. Merely repeating a ranking or asking a generic question is not enough.",
@@ -382,5 +383,7 @@
       "variation selectors/skin tones/flag/ZWJ family"
     ],
     "fallback": "Plain text. Do not silently substitute boxes or strip names."
-  }
+  },
+  "publicationPolicy": "Two-week per-account template cooldown preference; least-recent fallback when all eligible variants are cooling down. Same-week selections and conversation admission order persist. All Posts limits account frequency and voice repetition; optional reactions have per-account, game/team and parent limits.",
+  "portraitPolicy": "Use verified nonblank native portrait IDs for players/recruits, including generated players. Respect PortraitForceSilhouette; use the team logo when the native portrait is unavailable. The availability file contains numeric ID ranges only."
 }

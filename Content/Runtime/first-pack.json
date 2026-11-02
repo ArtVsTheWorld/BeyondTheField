@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "revision": "voices-1",
+  "revision": "voices-2",
   "enabled": true,
   "emojiEnabled": false,
   "directionApproval": "User approved Review 03 and requested generation after native emoji testing.",
@@ -104,6 +104,10 @@
       {
         "id": "beat.poll_up.1",
         "body": "{school} moves from No. {previousRank} to No. {rank} in the latest poll. The {nickname} have climbed {places} {placeLabel} this week."
+      },
+      {
+        "id": "beat.poll_up.2",
+        "body": "No. {rank} for {school} in the latest poll, up from No. {previousRank}. A climb of {places} {placeLabel} for the {nickname}."
       }
     ],
     "beat.poll_down": [
@@ -190,42 +194,70 @@
       {
         "id": "analyst.rushing_poll.1",
         "body": "{school} is up from No. {previousPollRank} to No. {pollRank}. The {nickname} average {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. No. {pollRank} feels about right."
+      },
+      {
+        "id": "analyst.rushing_poll.2",
+        "body": "The {nickname} climb from No. {previousPollRank} to No. {pollRank}. {school} is {rankPhrase} in FBS at {rushingYardsPerGame} rushing yards per game through {sampleGames} games. No. {pollRank} feels about right."
       }
     ],
     "analyst.third_low": [
       {
         "id": "analyst.third_low.1",
         "body": "{school} is {conversions}-for-{attempts} on third down through {sampleGames} games ({percent}%). That leaves very little margin for error on early downs. It’s hard to sustain an offense without extending drives."
+      },
+      {
+        "id": "analyst.third_low.2",
+        "body": "{school} is converting just {percent}% of its third downs: {conversions} of {attempts} through {sampleGames} games. Total yardage alone won’t tell you how often this offense runs into trouble extending drives."
       }
     ],
     "analyst.third_high": [
       {
         "id": "analyst.third_high.1",
         "body": "{school} has converted {conversions} of {attempts} third downs through {sampleGames} games ({percent}%). A lot of chances to get this offense off the field have ended with another set of downs."
+      },
+      {
+        "id": "analyst.third_high.2",
+        "body": "{conversions} conversions on {attempts} third downs for {school} through {sampleGames} games ({percent}%). Defenses are getting chances to end possessions and this offense keeps earning another set of downs."
       }
     ],
     "analyst.red_low": [
       {
         "id": "analyst.red_low.1",
         "body": "{school} has turned {trips} red-zone trips into just {touchdowns} touchdowns through {sampleGames} games ({percent}%). Getting there isn’t the problem. Finishing with six is."
+      },
+      {
+        "id": "analyst.red_low.2",
+        "body": "Red-zone touchdowns for {school}: {touchdowns} on {trips} trips through {sampleGames} games, or {percent}%. Yardage totals alone can flatter an offense that is leaving that many touchdown opportunities behind."
       }
     ],
     "analyst.red_high": [
       {
         "id": "analyst.red_high.1",
         "body": "{touchdowns} touchdowns on {trips} red-zone trips for {school}: {percent}% through {sampleGames} games. This offense is making those visits count for six."
+      },
+      {
+        "id": "analyst.red_high.2",
+        "body": "{school} is turning {percent}% of its red-zone trips into touchdowns: {touchdowns} of {trips} through {sampleGames} games. Getting inside the 20 has usually meant six for this group."
       }
     ],
     "analyst.turnover_plus": [
       {
         "id": "analyst.turnover_plus.1",
         "body": "{school} is plus-{margin} in turnover margin through {sampleGames} games: {takeaways} takeaways and {giveaways} {giveawayLabel}. That’s a major cushion. If those takeaways cool off, there will be less room for mistakes elsewhere."
+      },
+      {
+        "id": "analyst.turnover_plus.2",
+        "body": "{takeaways} takeaways against {giveaways} giveaways for {school} through {sampleGames} games. That plus-{margin} margin gives Coach {coachLastName}’s team a real cushion, with no guarantee the next game follows the same pattern."
       }
     ],
     "analyst.turnover_minus": [
       {
         "id": "analyst.turnover_minus.1",
         "body": "{school} has given it away {giveaways} times and taken it back {takeaways} times through {sampleGames} games. A turnover margin of {margin} keeps handing the opponent extra opportunities."
+      },
+      {
+        "id": "analyst.turnover_minus.2",
+        "body": "A {margin} turnover margin for {school} through {sampleGames} games: {giveaways} giveaways, {takeaways} takeaways. Those are extra possessions this team keeps giving its opponents."
       }
     ],
     "analyst.margin": [
@@ -244,6 +276,10 @@
       {
         "id": "beat.heisman.1",
         "body": "{school}’s {playerName} {rankChange} in the Heisman race. One name to keep an eye on as the season moves along."
+      },
+      {
+        "id": "beat.heisman.2",
+        "body": "Current Heisman watch: {school}’s {playerName} {rankChange}. Still part of the conversation as the season moves along."
       }
     ],
     "recruit.offer.Leader": [
@@ -352,6 +388,14 @@
       {
         "id": "player.win.Leader.2",
         "body": "Another W with my guys. Appreciate everybody who’s been riding with us"
+      },
+      {
+        "id": "player.win.Leader.3",
+        "body": "Love doing this with my guys. Appreciate everyone who’s with us {hashtag}"
+      },
+      {
+        "id": "player.win.Leader.4",
+        "body": "Team W. nothing better"
       }
     ],
     "player.win.Intense": [
@@ -363,11 +407,19 @@
     "player.win.Entertainer": [
       {
         "id": "player.win.Entertainer.1",
-        "body": "{receivingYards} and the W? i’ll take that every Saturday lol\nappreciate y’all {hashtag}"
+        "body": "{receivingYards} and the W? i’ll take that every week lol\nappreciate y’all {hashtag}"
       },
       {
         "id": "player.win.Entertainer.2",
         "body": "win with my guys. yeah today was a good day {hashtag}"
+      },
+      {
+        "id": "player.win.Entertainer.3",
+        "body": "good win. the mentions can be open tonight lol"
+      },
+      {
+        "id": "player.win.Entertainer.4",
+        "body": "that was fun. let’s do it again {hashtag}"
       }
     ],
     "player.win.TeamPlayer": [
@@ -430,6 +482,14 @@
       {
         "id": "fan.win.2",
         "body": "weekend saved. thank you {nickname}"
+      },
+      {
+        "id": "fan.win.3",
+        "body": "{nickname} win. i am officially available to talk shit again"
+      },
+      {
+        "id": "fan.win.4",
+        "body": "thank you {nickname}. i can enjoy the rest of my day now"
       }
     ],
     "fan.rivalry": [
@@ -446,6 +506,14 @@
       {
         "id": "fan.loss.2",
         "body": "Coach {coachLastName}, at what point do we try something else. {opponent} {opponentScore}, {school} {ownScore}. my patience is hanging by a thread"
+      },
+      {
+        "id": "fan.loss.3",
+        "body": "{nickname} lose {score} to {opponent}. i have closed the standings tab for my own peace"
+      },
+      {
+        "id": "fan.loss.4",
+        "body": "{opponent} {opponentScore}, {school} {ownScore}. do not ask me how my weekend is going"
       }
     ],
     "fan.picks": [
@@ -499,6 +567,364 @@
         "id": "beat.new_injury.1",
         "body": "{school}’s {playerName} has been added to the injury list.{injuryDetail} No confirmed return date to report."
       }
+    ],
+    "reply.player.commit.Leader": [
+      {
+        "id": "reply.player.commit.Leader.1",
+        "body": "{parentHandle} welcome to the {nickname}! glad you’re joining us"
+      },
+      {
+        "id": "reply.player.commit.Leader.2",
+        "body": "{parentHandle} big decision. excited for you and your family"
+      },
+      {
+        "id": "reply.player.commit.Leader.3",
+        "body": "{parentHandle} let’s go! looking forward to having you with us {hashtag}"
+      }
+    ],
+    "reply.player.commit.Intense": [
+      {
+        "id": "reply.player.commit.Intense.1",
+        "body": "{parentHandle} let’s get it. {hashtag}"
+      },
+      {
+        "id": "reply.player.commit.Intense.2",
+        "body": "{parentHandle} good choice. let’s do something with it"
+      },
+      {
+        "id": "reply.player.commit.Intense.3",
+        "body": "{parentHandle} yeah we needed this one"
+      }
+    ],
+    "reply.player.commit.Entertainer": [
+      {
+        "id": "reply.player.commit.Entertainer.1",
+        "body": "{parentHandle} y’all see who we just got??"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.2",
+        "body": "{parentHandle} okay then!! welcome to the {nickname}"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.3",
+        "body": "{parentHandle} had to come say welcome. good choice lol"
+      }
+    ],
+    "reply.player.commit.TeamPlayer": [
+      {
+        "id": "reply.player.commit.TeamPlayer.1",
+        "body": "{parentHandle} happy for you and your people. welcome aboard"
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.2",
+        "body": "{parentHandle} congrats man. looking forward to having you around"
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.3",
+        "body": "{parentHandle} welcome to the {nickname}!"
+      }
+    ],
+    "reply.player.commit.Unpredictable": [
+      {
+        "id": "reply.player.commit.Unpredictable.1",
+        "body": "{parentHandle} oh we got one"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.2",
+        "body": "{parentHandle} i see you. {hashtag}"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.3",
+        "body": "{parentHandle} this just made my day"
+      }
+    ],
+    "reply.player.commit.Neutral": [
+      {
+        "id": "reply.player.commit.Neutral.1",
+        "body": "{parentHandle} congrats on the commitment! {hashtag}"
+      },
+      {
+        "id": "reply.player.commit.Neutral.2",
+        "body": "{parentHandle} welcome to the {nickname}"
+      }
+    ],
+    "reply.fan.commit": [
+      {
+        "id": "reply.fan.commit.1",
+        "body": "{parentHandle} welcome to the {nickname}. i am choosing to be completely unreasonable about how good you’re gonna be"
+      },
+      {
+        "id": "reply.fan.commit.2",
+        "body": "{parentHandle} that’s the school right there. welcome aboard {hashtag}"
+      },
+      {
+        "id": "reply.fan.commit.3",
+        "body": "{parentHandle} Coach {coachLastName} i was unfamiliar with your recruiting game"
+      },
+      {
+        "id": "reply.fan.commit.4",
+        "body": "{parentHandle} suddenly i’m an expert on your highlights. welcome to the {nickname}"
+      }
+    ],
+    "reply.fan.player_win": [
+      {
+        "id": "reply.fan.player_win.1",
+        "body": "{parentHandle} you earned every bit of the love you’re getting"
+      },
+      {
+        "id": "reply.fan.player_win.2",
+        "body": "{parentHandle} i’m gonna be talking about this one all week"
+      },
+      {
+        "id": "reply.fan.player_win.3",
+        "body": "{parentHandle} my group chat owes you an apology"
+      },
+      {
+        "id": "reply.fan.player_win.4",
+        "body": "{parentHandle} yeah i’m not hearing any slander about you this week"
+      }
+    ],
+    "reply.fan.beat_win": [
+      {
+        "id": "reply.fan.beat_win.1",
+        "body": "{parentHandle} i know you have to be professional about it. i do not. {hashtag}"
+      },
+      {
+        "id": "reply.fan.beat_win.2",
+        "body": "{parentHandle} please let me enjoy this before we start talking about the next game"
+      },
+      {
+        "id": "reply.fan.beat_win.3",
+        "body": "{parentHandle} the {nickname} win and my entire personality improves"
+      },
+      {
+        "id": "reply.fan.beat_win.4",
+        "body": "{parentHandle} that score looks even better when somebody else types it"
+      }
+    ],
+    "reply.fan.beat_loss": [
+      {
+        "id": "reply.fan.beat_loss.1",
+        "body": "{parentHandle} reading it a second time did not help"
+      },
+      {
+        "id": "reply.fan.beat_loss.2",
+        "body": "{parentHandle} i was having a perfectly good day before this game"
+      },
+      {
+        "id": "reply.fan.beat_loss.3",
+        "body": "{parentHandle} Coach {coachLastName} has some explaining to do. i’m tired of defending this"
+      },
+      {
+        "id": "reply.fan.beat_loss.4",
+        "body": "{parentHandle} i need to put my phone down before i start suggesting lineup changes"
+      }
+    ],
+    "reply.fan.analyst_low": [
+      {
+        "id": "reply.fan.analyst_low.1",
+        "body": "{parentHandle} i hate that you brought actual numbers into this because now i can’t even argue"
+      },
+      {
+        "id": "reply.fan.analyst_low.2",
+        "body": "{parentHandle} somehow it felt worse watching it"
+      },
+      {
+        "id": "reply.fan.analyst_low.3",
+        "body": "{parentHandle} you could’ve kept this one to yourself. i was trying to have a good day"
+      }
+    ],
+    "reply.fan.analyst_high": [
+      {
+        "id": "reply.fan.analyst_high.1",
+        "body": "{parentHandle} finally some numbers i’m willing to read. {hashtag}"
+      },
+      {
+        "id": "reply.fan.analyst_high.2",
+        "body": "{parentHandle} keep going i’m sending this to everyone"
+      },
+      {
+        "id": "reply.fan.analyst_high.3",
+        "body": "{parentHandle} i’ve been saying this. without the math, obviously"
+      }
+    ],
+    "reply.player.teammate": [
+      {
+        "id": "reply.player.teammate.1",
+        "body": "{parentHandle} was fun watching you get yours"
+      },
+      {
+        "id": "reply.player.teammate.2",
+        "body": "{parentHandle} you were moving out there"
+      },
+      {
+        "id": "reply.player.teammate.3",
+        "body": "{parentHandle} love seeing the work show up"
+      },
+      {
+        "id": "reply.player.teammate.4",
+        "body": "{parentHandle} yeah that one deserves some love"
+      }
+    ],
+    "player.performance.Leader": [
+      {
+        "id": "player.performance.Leader.1",
+        "body": "Appreciate my guys. A lot of people go into a game like that {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.2",
+        "body": "Good win. Appreciate everybody who showed love after the game"
+      },
+      {
+        "id": "player.performance.Leader.3",
+        "body": "{statLine} and a team W. love this group {hashtag}"
+      }
+    ],
+    "player.performance.Intense": [
+      {
+        "id": "player.performance.Intense.1",
+        "body": "{statLine}. W. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.2",
+        "body": "good win with my guys. remember this one"
+      }
+    ],
+    "player.performance.Entertainer": [
+      {
+        "id": "player.performance.Entertainer.1",
+        "body": "{statLine} and the W? yeah i’m keeping that one"
+      },
+      {
+        "id": "player.performance.Entertainer.2",
+        "body": "not a bad one with my guys lol {hashtag}"
+      }
+    ],
+    "player.performance.TeamPlayer": [
+      {
+        "id": "player.performance.TeamPlayer.1",
+        "body": "couldn’t do any of this without my guys. appreciate y’all"
+      },
+      {
+        "id": "player.performance.TeamPlayer.2",
+        "body": "{statLine}. shoutout to everybody who made it possible {hashtag}"
+      }
+    ],
+    "player.performance.Unpredictable": [
+      {
+        "id": "player.performance.Unpredictable.1",
+        "body": "might read the mentions tonight. good win"
+      },
+      {
+        "id": "player.performance.Unpredictable.2",
+        "body": "{statLine} and we won. phone’s staying on"
+      }
+    ],
+    "player.performance.Neutral": [
+      {
+        "id": "player.performance.Neutral.1",
+        "body": "Good win with this team. Appreciate all the support"
+      }
+    ],
+    "player.performance.QB": [
+      {
+        "id": "player.performance.QB.1",
+        "body": "Appreciate my guys making plays. good win {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.2",
+        "body": "Good win. Love doing this with this team"
+      },
+      {
+        "id": "player.performance.QB.3",
+        "body": "Appreciate all the support. glad we got this one"
+      }
+    ],
+    "fan.rank_up": [
+      {
+        "id": "fan.rank_up.1",
+        "body": "{parentHandle} No. {rank} for the {nickname}. i’m being perfectly normal about this"
+      },
+      {
+        "id": "fan.rank_up.2",
+        "body": "{parentHandle} from No. {previousRank} to No. {rank}. i have screenshots to send"
+      },
+      {
+        "id": "fan.rank_up.3",
+        "body": "{parentHandle} No. {rank}. everybody who was talking last week please keep that same energy {hashtag}"
+      }
+    ],
+    "fan.preview.rivalry": [
+      {
+        "id": "fan.preview.rivalry.1",
+        "body": "{parentHandle} {opponent} week. if you need me i’ll be arguing with strangers"
+      },
+      {
+        "id": "fan.preview.rivalry.2",
+        "body": "{parentHandle} {nickname} vs. {opponent}. suddenly nothing else on my calendar matters"
+      },
+      {
+        "id": "fan.preview.rivalry.3",
+        "body": "{parentHandle} it’s {opponent} week and i’m already being annoying. {hashtag}"
+      }
+    ],
+    "official.performance.tag": [
+      {
+        "id": "official.performance.tag.1",
+        "body": "{playerName} ({playerHandle}) was DIFFERENT.\n{statLine}. {hashtag}"
+      },
+      {
+        "id": "official.performance.tag.2",
+        "body": "Give {playerHandle} some love.\n{statLine} for {playerName}. {hashtag}"
+      },
+      {
+        "id": "official.performance.tag.3",
+        "body": "{playerHandle}.\n{statLine}. {hashtag}"
+      }
+    ],
+    "fan.breakout": [
+      {
+        "id": "fan.breakout.1",
+        "body": "{playerHandle} with {statLine}. Coach {coachLastName} please keep that man involved"
+      },
+      {
+        "id": "fan.breakout.2",
+        "body": "{playerHandle}. {statLine}.\nthat’s the tweet {hashtag}"
+      },
+      {
+        "id": "fan.breakout.3",
+        "body": "i would like to personally thank {playerHandle} for {statLine} and a much better weekend"
+      }
+    ],
+    "reply.player.offer": [
+      {
+        "id": "reply.player.offer.1",
+        "body": "{parentHandle} congrats on the offer!"
+      },
+      {
+        "id": "reply.player.offer.2",
+        "body": "{parentHandle} let’s go. happy for you"
+      }
+    ],
+    "reply.fan.offer": [
+      {
+        "id": "reply.fan.offer.1",
+        "body": "{parentHandle} congrats on the offer! hope we get to see you in {school} colors"
+      },
+      {
+        "id": "reply.fan.offer.2",
+        "body": "{parentHandle} okay Coach {coachLastName}. keep them coming"
+      }
     ]
+  },
+  "publicationPolicy": {
+    "templateCooldownWeeks": 2,
+    "allPostsPerAccount": 3,
+    "allPostsPerPlayer": 2,
+    "allPostsPerFan": 2,
+    "reactionPostsPerAccount": 3,
+    "reactionsPerGameTeam": 3,
+    "maximumRepliesPerParent": 2,
+    "notes": "Dedicated scopes keep qualifying facts. Conversation reactions have generation caps; All Posts additionally limits account frequency and retains reply ancestors."
   }
 }

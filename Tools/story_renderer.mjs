@@ -1,33 +1,33 @@
-import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {hash,authorRegistry} from './story_authors.mjs';
-const pack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/first-pack.json',import.meta.url),'utf8'));
+import {avatarFor} from './story_avatars.mjs';
+import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
+import {addConversations} from './story_conversations.mjs';
 export const CONTENT_REVISION=pack.revision;
 export const stampFor=category=>({'results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis'}[category]??'News');
 const personalities=new Set(['Leader','Intense','Entertainer','TeamPlayer','Unpredictable']);
 const final=g=>g&&g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
 const ranked=n=>Number.isInteger(n)&&n>0&&n<=25;
 const numeric=x=>Number.isFinite(x);
-const limitOK=text=>[...text].length<=280&&Buffer.byteLength(text,'utf8')<=512;
-const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g;
-function selectTemplate(family,values,seed){
- const eligible=(pack.families[family]??[]).filter(t=>[...t.body.matchAll(slots)].every(m=>values[m[1]]!==null&&values[m[1]]!==undefined));
- if(!eligible.length)return null;const start=hash(seed+'|'+family)%eligible.length;
- for(let i=0;i<eligible.length;i++){const t=eligible[(start+i)%eligible.length];const body=t.body.replace(slots,(_,k)=>values[k]).replace(/[ \t]+\n/g,'\n').replace(/[ \t]{2,}/g,' ').trim();if(body&&limitOK(body))return {body,templateId:t.id};}
- return null; // Missing facts or overflow suppress the variant; never truncate a name/stat.
-}
-export function renderStories(s,events,{authors={}}={}){
+export function renderStories(s,events,{authors={},history=[],sameWeek=null}={}){
  if(!pack.enabled)return {stories:[],authors};
  const registry=authorRegistry(authors),teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),players=new Map(s.players.map(p=>[p.id,p])),games=new Map(s.games.map(g=>[g.id,g]));
- const stories=[],byId=new Map(),reactionGames=new Set();
+ const stories=[],byId=new Map(),reactionGames=new Set(),sameStories=new Map((sameWeek?.stories??[]).map(p=>[p.id,p])),reactionAccounts=new Map(),reactionTopics=new Map(),replyCounts=new Map();
  const edition=`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
  const teamValues=t=>({school:t?.name,nickname:t?.nickname??t?.name,coachLastName:t?.headCoach?.lastName??null,hashtag:t?.hashtags?.[0]??''});
- function add(e,family,values,{role='beat',team=teams.get(e.teamIds[0]),player=null,suffix='main',priority=e.priority,curated=e.curated,replyTo=null}={}){
+ function add(e,family,values,{role='beat',team=teams.get(e.teamIds[0]),player=null,suffix='main',priority=e.priority,curated=e.curated,replyTo=null,persona=0}={}){
   if(!team&&['official','fan'].includes(role)||['player','recruit'].includes(role)&&!player)return null;
-  const account=registry.get(s,role,team,player),chosen=selectTemplate(family,values,edition+'|'+e.id+'|'+suffix+'|'+account.handle);if(!chosen)return null;
-  const individual=['player','recruit'].includes(role);const portrait=individual&&player?.isNil&&Number.isInteger(player.portrait)&&player.portrait>0;
-  const logo=team&&Number.isInteger(team.logo)&&team.logo>=0&&['official','fan','beat','player','recruit'].includes(role);
-  const p={id:e.id+':'+suffix,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,stamp:stampFor(e.category),imageLibrary:portrait?1:logo?0:79,imageValue:portrait?player.portrait:logo?team.logo:598,priority,scopes:e.scopes,teamIds:e.teamIds,playerId:individual?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
-  if(replyTo){p.replyTo=replyTo;p.curated=false;}
+  const parent=replyTo?byId.get(replyTo):null;if(replyTo&&!parent)return null;
+  const account=registry.get(s,role,team,player,persona),id=e.id+':'+suffix;
+  const filled={...values,...(parent?{parentHandle:parent.handle}:{})};
+  const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
+  const chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:sameStories.get(id),renderKey});if(!chosen)return null;
+  const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
+  if(reaction&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
+  if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
+  const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
+  if(parent){p.replyTo=parent.id;replyCounts.set(parent.id,(replyCounts.get(parent.id)??0)+1);}
+  if(reaction){reactionAccounts.set(accountKey,(reactionAccounts.get(accountKey)??0)+1);if(topic)reactionTopics.set(topic,(reactionTopics.get(topic)??0)+1);}
   stories.push(p);byId.set(p.id,p);return p;
  }
  function performanceLine(stats){
@@ -75,7 +75,6 @@ export function renderStories(s,events,{authors={}}={}){
    const g=games.get(f.gameId);v.opponent=g&&(t?.id===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name);add(e,'beat.team_stats',v,{curated:false});
   }else if(e.category==='player-stats'){
    const c=perfContext(e);if(!c||!c.statLine)continue;const p=players.get(e.playerId),team=teams.get(p.team);add(e,'beat.performance',c,{team});
-   if(c.win&&p.team===s.userTeamIndex&&(f.stats.rushingTouchdowns>=2||f.stats.receivingTouchdowns>=2))add(e,'team.performance',c,{role:'official',team,suffix:'team',priority:e.priority-3,curated:false});
   }else if(e.category==='polls'){
    v.places=Math.abs(f.rank-f.previousRank);v.placeLabel=v.places===1?'place':'places';if(t?.id===s.userTeamIndex&&f.movement==='up')add(e,'team.poll_up',v,{role:'official'});
    else add(e,'beat.poll_'+({up:'up',down:'down',entry:'entry',unchanged:'same'}[f.movement]),v);
@@ -110,11 +109,12 @@ export function renderStories(s,events,{authors={}}={}){
    else if(f.metric==='redZoneTouchdownRate'){v.percent=(f.rate*100).toFixed(1);family=f.rate<=.45?'analyst.red_low':'analyst.red_high';}
    else if(f.metric==='turnoverMargin')family=f.margin>=0?'analyst.turnover_plus':'analyst.turnover_minus';
    else if(f.kind==='season_largest_winning_margin'){v.score=f.winnerScore+'–'+f.loserScore;family='analyst.margin';}
-   if(family){const parent=add(e,family,v,{role:'analyst'});
-    if(parent&&family==='analyst.rushing_poll'&&e.teamIds.includes(s.userTeamIndex)&&s.games.some(g=>final(g)&&g.week===s.season.CurrentWeek-1&&((g.home===s.userTeamIndex&&g.homeScore>g.awayScore)||(g.away===s.userTeamIndex&&g.awayScore>g.homeScore))))add(e,'fan.poll_reply',{...v,analystHandle:parent.handle},{role:'fan',team:teams.get(s.userTeamIndex),suffix:'reply',priority:e.priority-5,curated:false,replyTo:parent.id});
+   if(family){const parent=add(e,family,v,{role:'analyst',persona:['thirdDownConversionRate','redZoneTouchdownRate'].includes(f.metric)?1:f.metric==='turnoverMargin'?2:0});
+    if(parent&&family==='analyst.rushing_poll'&&e.teamIds.includes(s.userTeamIndex)&&s.games.some(g=>final(g)&&g.week===s.season.CurrentWeek-1&&((g.home===s.userTeamIndex&&g.homeScore>g.awayScore)||(g.away===s.userTeamIndex&&g.awayScore>g.homeScore))))add(e,'fan.poll_reply',{...v,analystHandle:parent.handle},{role:'fan',team:teams.get(s.userTeamIndex),suffix:'reply',priority:e.priority+1,replyTo:parent.id});
    }
   }
  }
+ const dialogueEventOrder=addConversations({s,events,stories,byId,teams,players,games,registry,add,teamValues,perfContext,edition,schedule:sameWeek?.dialogueEventOrder??[]});
  // Dependent replies only exist alongside the actual generated parent.
- return {stories:stories.filter(p=>!p.replyTo||byId.has(p.replyTo)),authors:registry.entries};
+ return {stories:stories.filter(p=>!p.replyTo||byId.has(p.replyTo)),authors:registry.entries,dialogueEventOrder};
 }

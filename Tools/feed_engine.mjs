@@ -18,11 +18,11 @@ export function trackOffers(s,sameWeek=null,previous=null){
 }
 export function buildFeed(s,previous=null,options={}){
   const events=detectEvents(s,previous),key=weekKey(s);
-  const rendered=renderStories(s,events,{authors:options.authors??{}});
+  const rendered=renderStories(s,events,{authors:options.authors??{},history:options.history??[],sameWeek:options.sameWeek??null});
   options.onAuthors?.(rendered.authors);
   const publication={key,season:s.season.CurrentSeasonYear,phase:s.season.CurrentWeekType,week:s.season.CurrentWeek};
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,
-    events:events.map(e=>({...e,publication})),stories:rendered.stories});
+    events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
 }

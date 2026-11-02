@@ -24,7 +24,7 @@ export function updateRuntime(s,state={format:1,editions:[]}){
   const midweekBaseline=injured.size?{players:[...injured.values()]}:null;
   if(midweekBaseline)s.midweekBaseline=midweekBaseline;
   let authors=state.authors??{};
-  const feed=buildFeed(s,previous?.snapshot??null,{authors,onAuthors:value=>{authors=value;}});
+  const feed=buildFeed(s,previous?.snapshot??null,{authors,history:editions.filter(e=>e.week<week).map(e=>e.feed),sameWeek:same?.feed??null,onAuthors:value=>{authors=value;}});
   const snapshot={format:2,sourceKind:'runtime',leagueId:s.leagueId,season:s.season,userTeamIndex:s.userTeamIndex,sha256:s.sha256,
     players:s.players.filter(p=>p.team===s.userTeamIndex),commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,midweekBaseline};
   const entry={scope,week,key:weekKey(s),snapshot,feed};

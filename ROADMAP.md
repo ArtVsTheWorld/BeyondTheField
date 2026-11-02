@@ -10,11 +10,16 @@
 
 Before broader release, validate active-Dynasty switching, an actual older-save restore/replay, offseason/year transitions, and cold launch. The runtime observer currently waits for stable state rather than hooking the native advance-completion callback.
 
-## Current content work: new voice foundation
+## Six-stage Social Media content plan
 
-Step 1 now has six voice guides, a native personality policy, and thirty new review drafts. All former tweet wording and the original sample cards are retired on this branch. Drafts are unapproved and excluded from runtime; event detection remains available as structured facts.
+1. Voice/tone direction approved from thirty samples and subsequent revisions. Legacy prototype wording is retired.
+2. Core event conditions verified; deeper depth-chart, NIL, transfers, awards and historical claims remain gated on more evidence.
+3. Event detection, persistent authors, editable templates and native avatar routing are separate components.
+4. Expanded catalog reaches the initial target with 180 variants, including more player/fan perspectives and replies.
+5. Two-week template cooldown preferences, stable same-week selections/admission order, account/voice caps, reply dependencies and complete curated conversation blocks are implemented. Multiweek in-game tuning remains.
+6. First pack verified live as v50 with 65 tests. The conversation/portrait candidate adds coverage and awaits its native visual check and longer rollover testing.
 
-Next, revise the voices from user feedback, build the verified condition matrix, and implement the new author/template renderer. Then expand the approved catalog, repetition controls, and curated publication. Depth-chart status, transfer risk, NIL, awards, and broader postseason stories need their data conditions verified before publication. Preserve single publication-week filtering and complete dedicated scopes.
+Publication week remains the single week filter. Dedicated scopes retain qualifying stories; All Posts selects up to twenty with soft 35/25/40 scope targets and no filler to hit quotas.
 
 ## Planned 1.0 integration
 

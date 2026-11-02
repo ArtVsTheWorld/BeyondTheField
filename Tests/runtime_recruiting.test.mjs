@@ -68,3 +68,7 @@ test('native zero-based Heisman ranks match the menu and preserve the leader and
  }
  const snapshot=await readRuntime(input);assert.deepEqual(snapshot.heisman.map(h=>[h.rank,h.lastRank]),[[1,1],[2,3],[3,2],[4,null]]);
 });
+
+test('native forced-silhouette preference survives portrait normalization',async()=>{
+ const input=raw('None');input.records.player.v.PLYR_PORTRAIT=146;input.records.player.v.PortraitForceSilhouette=true;const s=await readRuntime(input);assert.equal(s.players[0].portrait,146);assert.equal(s.players[0].portraitForcedSilhouette,true);
+});

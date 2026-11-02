@@ -25,6 +25,8 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        require(social::storyLabel(Json{{"category","recruiting"}})=="Recruiting","Recruiting category label changed");
+        require(social::storyLabel(Json{{"category","recruiting"},{"replyTo","real-parent"}})=="Reply","Native reply label is missing");
         {
             std::vector<unsigned char> packed(48);uint32_t first=0xfedcba98u,second=0x12345678u;
             memcpy(packed.data()+32,&first,4);memcpy(packed.data()+36,&second,4);
