@@ -26,10 +26,11 @@
     "All four preseason/Week0 saves match SHA-256 verified backups after the v66 failure",
     "Preseason save opens normally with Dynasty Enhancer disabled",
     "Corrected read-only capture resolves native front-end/CareerManager/database ownership",
-    "v67 native runtime activated and published preseason news directly from the active Dynasty"
+    "v67 native runtime activated and published preseason news directly from the active Dynasty",
+    "User confirmed preseason posts visible, Preseason 2026 choice, and B returns normally to CFB; logs confirm native dropdown/layout/scroll restoration",
+    "Same-session preseason-to-RegularSeason Week0 advance published 62 stories without a DLL reload or save requirement; native decoder accepted all scopes"
   ],
   "livePending": [
-    "Native preseason page and Back navigation",
     "Preseason to regular-season Week0 transition",
     "Main-menu exit and Dynasty reload",
     "v67 MMC cold start without title-screen delay"
@@ -41,5 +42,15 @@
     "entry": "failed: reader ownership invalid and early guard returned without completing native navigation",
     "stop": "success",
     "saveFilesChanged": false
+  },
+  "latestBackup": "Backups/Preseason-v67-20261102-074409",
+  "regularSeasonWeek0": {
+    "phase": "RegularSeason",
+    "week": 0,
+    "stories": 62,
+    "forYou": 9,
+    "nativeCatalogDecodePassed": true,
+    "automaticPublicationAfterAdvance": true,
+    "nativePageAndBackPending": true
   }
 }
