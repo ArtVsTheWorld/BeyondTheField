@@ -164,12 +164,15 @@ int main(int argc,char** argv){
             social::FeedPost parent{"Team","@team","Result","Recap"};parent.category="results";parent.voice="official";
             social::FeedPost reply{"Fan","@fan","Reply","Reply"};reply.category="results";reply.voice="fan";reply.replyTo="parent";
             social::FeedPost recruit{"Recruit","@recruit","Offer","Recruiting"};recruit.category="offers";recruit.voice="recruit";
+            social::FeedPost injury{"Beat","@beat","Estimated return: 1-2 weeks.","Injury Report"};injury.category="injuries";injury.voice="beat";
+            auto injuryReply=reply;injuryReply.category="other";injuryReply.replyTo="injury";edition.stories.emplace("injury",injury);edition.stories.emplace("injury-reply",injuryReply);
+            social::FeedPost playoff{"CFP","@CFBPlayoff","Rankings","Playoff Watch"};playoff.voice="cfp";playoff.category="cfp";require(social::matchesType(playoff,7)&&social::matchesType(playoff,4),"CFP official account is missing its official/rankings categories");
             edition.stories.emplace("parent",parent);edition.stories.emplace("reply",reply);edition.stories.emplace("recruit",recruit);
-            for(unsigned i=0;i<151;++i){const auto key=i?"team:"+std::to_string(i):"all";catalog->scopes.push_back({key,"Scope "+std::to_string(i)});edition.views[key]={"parent","reply","recruit"};}catalog->weeks.push_back(edition);
+            for(unsigned i=0;i<151;++i){const auto key=i?"team:"+std::to_string(i):"all";catalog->scopes.push_back({key,"Scope "+std::to_string(i)});edition.views[key]={"parent","reply","recruit","injury","injury-reply"};}catalog->weeks.push_back(edition);
             auto view=social::selectFeed(catalog,0,150,7);require(view->posts.size()==2&&view->posts[1].voice=="fan","Native account filter detached a reply from its parent");
-            require(view->label=="Social Media - Team Accounts","Category is not visible in the native header");
+            require(view->label=="Social Media - Official Accounts","Category is not visible in the native header");
             require(social::selectFeed(catalog,0,150,10)->posts[0].stamp=="News","A reply must not appear without its parent when filtering Fans");
-            require(social::selectFeed(catalog,0,150,9)->posts.size()==1&&social::selectFeed(catalog,0,150,9)->posts[0].voice=="recruit","Recruit filter did not separate recruit roots from player roots");
+            require(social::selectFeed(catalog,0,150,9)->posts.size()==2&&social::selectFeed(catalog,0,150,9)->posts[1].voice=="fan","Injury filter failed to keep its category-agnostic reply");
             require(social::selectFeed(catalog,0,150,8)->posts[0].stamp=="News","Player filter included a recruit root");
             require(social::selectFeed(catalog,0,150,1)->posts.size()==1,"Recruiting filter included another root category");
             bool bad=false;try{social::selectFeed(catalog,0,151);}catch(...){bad=true;}require(bad,"Dynamic scope boundary was not enforced");

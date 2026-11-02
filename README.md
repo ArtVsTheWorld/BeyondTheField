@@ -136,3 +136,8 @@ The current package adds supported skipped-week recovery, native on-white/second
 ## Account and recruiting continuity update (v72)
 
 v72 adds CanDuel Sports, separate Players/Recruits types, requested native analyst/helmet/mascot images, TeamBuilder secondary images, given-name teammate references and native state/position recruiting ranks. It repairs the observed skipped-week recruiting gap using explicit catch-up reporting and a retained historical observation. [Implementation, artwork IDs and test status](docs/account-refresh-v72.md). Current artifacts: `Build/DynastyEnhancerNative-v72.dll` and `Build/DynastyEnhancer-v72-MMC.zip`.
+
+
+## National desk, injury windows and CFP (v73)
+
+v73 distributes regular-season national analysis across all five named writers, focuses it on the current poll's top 60 and retains smaller-program metrics with school beats. It adds native injury return estimates and an Injuries category, merges Recruiting/Recruits, restores TeamBuilder primary logos, and adds CFP (@CFBPlayoff) ranking/playoff coverage from Week 10. [Evidence, conditions and remaining live checks](docs/playoff-desk-v73.md). Current DLL/package are `Build/DynastyEnhancerNative-v73.dll` and `Build/DynastyEnhancer-v73-MMC.zip`. 149 Node tests plus native/MMC checks pass; the user verified the live injury estimate and category controls.

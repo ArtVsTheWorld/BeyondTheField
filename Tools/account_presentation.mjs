@@ -2,7 +2,7 @@
 import {avatarFor} from './story_avatars.mjs';
 const analysts=[['ESPNCFB','ESPNCFB'],['Jake Whitmore','JakeWhitmoreCFB'],['Marcus Bennett','MBennettSports'],['Tina Brooks','TinaBrooksCFB'],['David Ellison','DavidEllisonFB'],['Chris Maddox','ChrisMaddoxCFB']];
 export function refreshAccountPresentation(feed,s){
- if(feed.presentationVersion===2)return feed;
+ if(feed.presentationVersion===3)return feed;
  const players=new Map(s.players.map(p=>[p.id,p])),teams=new Map(s.teams.map(t=>[t.id,t]));
  const stories=feed.stories.map(original=>{
   const p={...original,body:original.body.replaceAll('@FanDuelSports','@CanDuelSports')};let team=teams.get(p.teamIds?.[0]),person=players.get(p.playerId),persona=0;
@@ -18,8 +18,8 @@ export function refreshAccountPresentation(feed,s){
   }else if(p.voice==='analyst'){
    persona=analysts.findIndex(([name])=>name===p.author);if(persona<0)persona=({'Saturday Perspective':0,'Situational Football':1,'Field Position':2})[p.author]??-1;if(persona<0)return p;
   }else if(p.voice==='model'){p.author='CanDuel Sports';p.handle='@CanDuelSports';}
-  else if(p.voice!=='beat'&&p.voice!=='official')return p;
+  else if(p.voice!=='beat'&&p.voice!=='official'&&p.voice!=='cfp')return p;
   Object.assign(p,avatarFor(p.voice,team,person,persona));return p;
  });
- const map=new Map(stories.map(p=>[p.id,p]));return {...feed,presentationVersion:2,stories,posts:(feed.views?.all??feed.posts?.map(p=>p.id)??[]).map(id=>map.get(id)).filter(Boolean)};
+ const map=new Map(stories.map(p=>[p.id,p]));return {...feed,presentationVersion:3,stories,posts:(feed.views?.all??feed.posts?.map(p=>p.id)??[]).map(id=>map.get(id)).filter(Boolean)};
 }

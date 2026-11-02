@@ -6,10 +6,10 @@ import {worldEvents} from '../Tools/world_events.mjs';
 const fixture=()=>({format:2,gameYear:27,sourceKind:'runtime',source:'runtime:polls',sourceUnchanged:true,sha256:'a'.repeat(64),leagueId:8,userTeamIndex:0,
  season:{CurrentYear:0,CurrentSeasonYear:2026,CurrentWeek:9,CurrentWeekType:'RegularSeason',CurrentStage:'NFLSeason'},
  teams:Array.from({length:26},(_,id)=>({id,name:'School '+id,mediaRank:id<25?25-id:99,mediaLastRank:id<25?25-id:99,cfpRank:id<25?id+1:99,cfpLastRank:99,rank:26-id,coachesRank:1})),players:[],games:[],performances:[],offers:[],commitments:[],heisman:[],conferences:[]});
-test('AP remains public during preseason and until a complete native CFP Top 25 exists, irrespective of week',()=>{
+test('AP remains public before Week 10 and until a complete native CFP Top 25 exists',()=>{
  const s=fixture();s.season.CurrentStage='PreSeason';s.season.CurrentWeekType='PreSeason';assert.equal(publicPoll(s).key,'ap');
  s.season.CurrentStage='NFLSeason';s.season.CurrentWeekType='RegularSeason';s.teams[24].cfpRank=null;s.season.CurrentWeek=15;assert.equal(publicPoll(s).key,'ap');
- s.teams[24].cfpRank=24;assert.equal(publicPoll(s).key,'ap');s.teams[24].cfpRank=25;s.season.CurrentWeek=8;assert.equal(publicPoll(s).key,'cfp');
+ s.teams[24].cfpRank=24;assert.equal(publicPoll(s).key,'ap');s.teams[24].cfpRank=25;s.season.CurrentWeek=8;assert.equal(publicPoll(s).key,'ap');s.season.CurrentWeek=10;assert.equal(publicPoll(s).key,'cfp');
 });
 test('the first CFP publication never reports AP-to-CFP differences as weekly movement',()=>{
  const s=fixture();s.teams[24].cfpRank=null;const ap=updateRuntime(structuredClone(s));s.teams[24].cfpRank=25;s.season.CurrentWeek++;
@@ -26,5 +26,5 @@ test('pregame ranks retain their actual public-poll basis after the primary poll
 });
 test('unpublished CFP and hidden Rank cannot create playoff news or change public ranks',()=>{
  const s=fixture();s.teams[24].cfpRank=null;const f=updateRuntime(s);assert.ok(!f.catalog.events.some(e=>e.category==='cfp'));assert.equal(f.catalog.events.find(e=>e.id==='poll:0').facts.rank,25);assert.equal(f.catalog.events.find(e=>e.id==='poll:0').facts.pollName,'AP poll');
- const w=fixture();w.games=[{id:'x',year:0,phase:'RegularSeason',week:8,status:'AwayWon',home:0,away:25,homeScore:3,awayScore:20}];assert.ok(!worldEvents(w).some(e=>e.category==='upsets'));
+ const w=fixture();w.season.CurrentWeek=10;w.games=[{id:'x',year:0,phase:'RegularSeason',week:9,status:'AwayWon',home:0,away:25,homeScore:3,awayScore:20}];assert.ok(!worldEvents(w).some(e=>e.category==='upsets'));
 });

@@ -5,8 +5,9 @@ const national=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/national-a
 export function avatarFor(role,team,player,persona=0){
  const personal=['player','recruit'].includes(role),id=player?.portrait;
  if(personal&&!player?.portraitForcedSilhouette&&Number.isInteger(id)&&id>0&&bank.ranges.some(([lo,hi])=>id>=lo&&id<=hi))return {imageLibrary:bank.libraryId,imageValue:id,...(role==='player'&&Number.isInteger(player.team)&&player.team!==255&&player.team===team?.id&&Number.isInteger(team.logo)?{uniformTeamLogo:team.logo}:{})};
+ if(role==='cfp')return {imageLibrary:34,imageValue:41};
  if(role==='analyst'&&national[persona]){const {imageLibrary,imageValue}=national[persona];return {imageLibrary,imageValue};}
- if(team?.isTeamBuilder&&['beat','fan'].includes(role)){const v=team.logoVariants??{},valid=id=>Number.isInteger(id)&&id!==team.logo&&logoBank.teamBuilderLogoIds.includes(id);const secondary=v.secondaryAvailable&&valid(v.secondary)?v.secondary:null,tertiary=v.tertiaryAvailable&&valid(v.tertiary)?v.tertiary:null;const id=role==='fan'&&persona===0?tertiary??secondary:secondary??tertiary;if(id!==null)return {imageLibrary:0,imageValue:id};}
+ if(team?.isTeamBuilder&&['beat','fan'].includes(role)&&Number.isInteger(team.logo))return {imageLibrary:0,imageValue:team.logo};
  if(Number.isInteger(team?.logo)&&team.logo>=0){
   if(role==='official')return !team.isTeamBuilder&&logos[team.logo]?.onwhite||{imageLibrary:0,imageValue:team.logo};
   if(role==='beat')return !team.isTeamBuilder&&logos[team.logo]?.helmet||{imageLibrary:0,imageValue:team.logo};

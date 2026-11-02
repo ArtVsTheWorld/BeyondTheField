@@ -6,9 +6,9 @@ export function completePoll(teams,field){
  return rows.length===25&&new Set(rows.map(t=>t[field])).size===25;
 }
 export function publicPoll(s,previous=null){
- const cfp=s.season.CurrentStage==='NFLSeason'&&s.season.CurrentWeekType!=='PreSeason'&&completePoll(s.teams,'cfpRank');
+ const cfp=s.season.CurrentStage==='NFLSeason'&&!(s.season.CurrentWeekType==='RegularSeason'&&s.season.CurrentWeek<10)&&s.season.CurrentWeekType!=='PreSeason'&&completePoll(s.teams,'cfpRank');
  const key=cfp?'cfp':'ap',field=cfp?'cfpRank':'mediaRank',lastField=cfp?'cfpLastRank':'mediaLastRank';
- const comparable=!cfp||completePoll(s.teams,lastField)&&(!previous?.publicPoll||previous.publicPoll.key===key);
+ const comparable=!cfp||!(s.season.CurrentWeekType==='RegularSeason'&&s.season.CurrentWeek===10)&&completePoll(s.teams,lastField)&&(!previous?.publicPoll||previous.publicPoll.key===key);
  return {key,name:cfp?'CFP rankings':'AP poll',field,lastField,comparable,
   ranks:Object.fromEntries(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t[field]??null]))};
 }

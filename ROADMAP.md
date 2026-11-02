@@ -62,3 +62,8 @@ Remaining checks: fresh MMC cold launch of v71, a genuine new preseason-to-openi
 ## v72 continuation
 
 The account artwork and granular writer filters are wired, with native state/position recruit ranks and gap-aware recruiting catch-up. The BYU Week 4 archive repair preserves its original stories and later observations. 137 Node tests plus native/MMC checks pass. Remaining live checks and the season-to-offseason validation sequence are in [the v72 note](docs/account-refresh-v72.md). First complete that lifecycle test, then expand recruiting systems and proceed toward the two other 1.0 components.
+
+
+## v73 CFP / national desk checkpoint
+
+All five national writers now receive regular-season coverage; outside-top-60 metrics pass to beats. Native injury estimates and the merged Recruiting/new Injuries categories are implemented and live-tested for estimates/controls. CFP coverage begins at the verified Week 10 release with complete native rankings; native playoff fixtures cover later movement, bowl discrimination, round transitions and title results. The next live checkpoints remain actual Week 11+ movement, playoff rounds/championship, offseason/year reset and a cold launch. Then continue recruiting depth/content tuning and the two later 1.0 integrations.

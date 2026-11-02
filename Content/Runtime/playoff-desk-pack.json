@@ -1,0 +1,269 @@
+{
+  "revision": "playoff-desk-v73",
+  "families": {
+    "desk.marcus.positive": [
+      {
+        "id": "desk.marcus.positive.1",
+        "body": "Put some respect on {school}. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.2",
+        "body": "{analysisText} I am buying what this team is doing."
+      },
+      {
+        "id": "desk.marcus.positive.3",
+        "body": "{analysisText} That is a case I will happily defend."
+      }
+    ],
+    "desk.marcus.negative": [
+      {
+        "id": "desk.marcus.negative.1",
+        "body": "That is a problem. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.2",
+        "body": "{analysisText} Hard to sell me on this until it improves."
+      },
+      {
+        "id": "desk.marcus.negative.3",
+        "body": "{analysisText} I would not brush that off."
+      }
+    ],
+    "desk.tina.positive": [
+      {
+        "id": "desk.tina.positive.1",
+        "body": "{analysisText} Have fun with that, next opponent."
+      },
+      {
+        "id": "desk.tina.positive.2",
+        "body": "{analysisText} Sounds like a fun scouting report to receive."
+      },
+      {
+        "id": "desk.tina.positive.3",
+        "body": "{analysisText} The next opponent has some homework."
+      }
+    ],
+    "desk.tina.negative": [
+      {
+        "id": "desk.tina.negative.1",
+        "body": "{analysisText} Not exactly the plan, I am guessing."
+      },
+      {
+        "id": "desk.tina.negative.2",
+        "body": "{analysisText} Surely this will be fine."
+      },
+      {
+        "id": "desk.tina.negative.3",
+        "body": "{analysisText} Going to need a different answer next Saturday."
+      }
+    ],
+    "desk.chris.positive": [
+      {
+        "id": "desk.chris.positive.1",
+        "body": "{analysisText} A name worth keeping on the radar."
+      },
+      {
+        "id": "desk.chris.positive.2",
+        "body": "{analysisText} Adding that to the evaluation file."
+      },
+      {
+        "id": "desk.chris.positive.3",
+        "body": "{analysisText} A profile worth following as the evaluation develops."
+      }
+    ],
+    "desk.chris.negative": [
+      {
+        "id": "desk.chris.negative.1",
+        "body": "{analysisText} Something to watch in the next evaluation."
+      },
+      {
+        "id": "desk.chris.negative.2",
+        "body": "{analysisText} The next few games matter for the evaluation."
+      }
+    ],
+    "injury.report": [
+      {
+        "id": "injury.report.1",
+        "body": "{school} injury report: {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.2",
+        "body": "{playerName} remains on {school}'s injury list.{injuryDetail} {timetable}"
+      }
+    ],
+    "playoff.first_rank": [
+      {
+        "id": "playoff.first_rank.1",
+        "body": "The first CFP rankings are here. No. {rank}: {school}."
+      },
+      {
+        "id": "playoff.first_rank.2",
+        "body": "No. {rank} in the first College Football Playoff rankings: {school}."
+      }
+    ],
+    "playoff.rank": [
+      {
+        "id": "playoff.rank.1",
+        "body": "CFP rankings update: {school} is No. {rank}."
+      },
+      {
+        "id": "playoff.rank.2",
+        "body": "No. {rank} in this edition of the CFP rankings: {school}."
+      }
+    ],
+    "playoff.rank_move": [
+      {
+        "id": "playoff.rank_move.1",
+        "body": "CFP rankings: {school} moves {movement} from No. {previousRank} to No. {rank}."
+      },
+      {
+        "id": "playoff.rank_move.2",
+        "body": "{school}: No. {rank} in the CFP rankings, previously No. {previousRank}."
+      }
+    ],
+    "playoff.position": [
+      {
+        "id": "playoff.position.1",
+        "body": "{school} is No. {rank} in the CFP rankings. That is a strong position at this point. The ranking puts the program in the conversation; the remaining games still matter."
+      },
+      {
+        "id": "playoff.position.2",
+        "body": "CFP No. {rank} {school} has a real playoff argument. A place in the rankings is not an invitation, but this is a position worth protecting."
+      }
+    ],
+    "playoff.bubble": [
+      {
+        "id": "playoff.bubble.1",
+        "body": "CFP No. {rank}: {school}. Welcome to the part of the season where everyone suddenly cares about someone else's schedule. There is a playoff case here; it is still a case, not a berth."
+      },
+      {
+        "id": "playoff.bubble.2",
+        "body": "{school} sits No. {rank} in the CFP rankings. A nervous neighborhood. Every remaining result is going to get picked apart now."
+      }
+    ],
+    "playoff.local": [
+      {
+        "id": "playoff.local.1",
+        "body": "{school} is No. {rank} in the CFP rankings. That is the current playoff-picture reference point for this program. A ranking does not by itself confirm a berth."
+      },
+      {
+        "id": "playoff.local.2",
+        "body": "Local playoff picture: {school} checks in at CFP No. {rank}. The rankings make this a real conversation, with the remaining results still to come."
+      }
+    ],
+    "playoff.fan_position": [
+      {
+        "id": "playoff.fan_position.1",
+        "body": "CFP No. {rank} for {school}. I am trying to be normal about this and it is not going well"
+      },
+      {
+        "id": "playoff.fan_position.2",
+        "body": "{school} at No. {rank} in the CFP rankings. Just keep winning please. I cannot spend the rest of the year arguing resumes"
+      }
+    ],
+    "playoff.fan_bubble": [
+      {
+        "id": "playoff.fan_bubble.1",
+        "body": "{school} is CFP No. {rank} and apparently my new hobby is watching every other contender. Cool cool"
+      },
+      {
+        "id": "playoff.fan_bubble.2",
+        "body": "CFP No. {rank}. This {school} playoff argument is about to become my whole personality"
+      }
+    ],
+    "playoff.preview": [
+      {
+        "id": "playoff.preview.1",
+        "body": "College Football Playoff matchup: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.preview.2",
+        "body": "The CFP stage is set: {away} vs. {home}."
+      }
+    ],
+    "playoff.title_preview": [
+      {
+        "id": "playoff.title_preview.1",
+        "body": "For the national championship: {away} vs. {home}. One game for the title."
+      },
+      {
+        "id": "playoff.title_preview.2",
+        "body": "The national championship matchup is {away} vs. {home}."
+      }
+    ],
+    "playoff.matchup": [
+      {
+        "id": "playoff.matchup.1",
+        "body": "CFP No. {awayRank} {away} faces CFP No. {homeRank} {home}. The rankings describe how they got here. This playoff matchup gets decided on the field."
+      },
+      {
+        "id": "playoff.matchup.2",
+        "body": "A playoff matchup to study: {away} (CFP No. {awayRank}) vs. {home} (CFP No. {homeRank}). The stakes make every matchup worth a closer look."
+      },
+      {
+        "id": "playoff.matchup.3",
+        "body": "A playoff matchup to study: {away} vs. {home}. Every personnel matchup matters with a season on the line."
+      }
+    ],
+    "playoff.result": [
+      {
+        "id": "playoff.result.1",
+        "body": "CFP final: {school} defeats {opponent}, {score}. {school} advances."
+      },
+      {
+        "id": "playoff.result.2",
+        "body": "{school} wins its College Football Playoff matchup, {score} over {opponent}, and advances."
+      }
+    ],
+    "playoff.champion": [
+      {
+        "id": "playoff.champion.1",
+        "body": "NATIONAL CHAMPIONS: {school}. A {score} win over {opponent} in the national championship game."
+      },
+      {
+        "id": "playoff.champion.2",
+        "body": "{school} wins the national championship. Final: {score} over {opponent}."
+      }
+    ],
+    "playoff.result_analysis": [
+      {
+        "id": "playoff.result_analysis.1",
+        "body": "{school} moves on in the playoff after a {score} win over {opponent}. Whatever the argument was before kickoff, the result is on the board now."
+      },
+      {
+        "id": "playoff.result_analysis.2",
+        "body": "{school} over {opponent}, {score}, in the playoff. One step closer. That is the only answer a contender needs to give at this stage."
+      }
+    ],
+    "playoff.champion_analysis": [
+      {
+        "id": "playoff.champion_analysis.1",
+        "body": "{school} is the national champion after beating {opponent}, {score}. The season ends with this program holding the title."
+      },
+      {
+        "id": "playoff.champion_analysis.2",
+        "body": "The final word belongs to {school}: national champions, {score} over {opponent}. A season that now has its permanent place in the program's history."
+      }
+    ],
+    "playoff.result_fan": [
+      {
+        "id": "playoff.result_fan.1",
+        "body": "{school} advances. I have no voice left and absolutely no plans to be reasonable about this"
+      },
+      {
+        "id": "playoff.result_fan.2",
+        "body": "Playoff win over {opponent}. {school} is still alive. See everybody in the group chat immediately"
+      }
+    ],
+    "playoff.champion_fan": [
+      {
+        "id": "playoff.champion_fan.1",
+        "body": "{school}. NATIONAL CHAMPIONS. I will be talking about this one for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.2",
+        "body": "National champs. {school} actually did it. I am never shutting up about this season"
+      }
+    ]
+  }
+}

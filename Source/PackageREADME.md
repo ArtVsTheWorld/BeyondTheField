@@ -1,44 +1,42 @@
-# Dynasty Enhancer — MMC prototype v72
+# Dynasty Enhancer - MMC prototype v73
 
-This package adds preseason coverage and startup/phase-transition corrections to the verified Social Media feature set. It is a development prototype, not Dynasty Enhancer 1.0. Player Analytics and Roster Fog have not yet been merged into it.
+Native Social Media inside the offline Dynasty CFB hub. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
-## Install and use
+## Installation
 
-1. Close MMC and the game. Copy this package's complete `Plugins` folder into the folder containing the MMC executable, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter; `Plugins/DynastyEnhancer/Runtime-v72/` contains the native game DLL, loader, generator and content.
-3. Node.js must be installed. The runtime's `dynasty-enhancer.json` contains its executable path; update that path if Node is installed elsewhere. The exporter path should remain `Tools/export_runtime.mjs`.
-4. Open MMC and launch College Football 27 normally. Open or create an offline Dynasty immediately; there is no fixed title-screen delay. The adapter loads the runtime once per game process and installs verified menu hooks before the first hub is constructed. Native UI readiness is separate from feed generation: the page can display its status card while the first two stable observations are collected. Reopening adopts the newest edition. Before native assets are ready, entry uses the game's inert action rather than leaving a pending navigation transaction.
+1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v73/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v73/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
-You do not need to manually run the loader or save your Dynasty to publish news. Reopening Social Media adopts the latest stable weekly/midweek edition. For You shows up to 30 posts, National 100 and each conference 60, sorted by parent likes with replies attached. Team feeds keep their existing capacity.
+Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
 
-The old standalone native `DynastyEnhancer.dll` does not belong directly in MMC's `Plugins` folder. Replace it with this package's MMC adapter. Do not enable multiple Social Media/Dynasty Enhancer loaders together. To disable this loader, close MMC/game and rename the top-level adapter to `DynastyEnhancer.dll.disabled`.
+## Feed and controls
 
-## History and diagnostics
+- LT selects For You, National, a native conference or a native team.
+- RT selects one publication edition, with the active week selected initially and older editions listed first.
+- LB/RB cycle topic/account categories in both directions. Recruiting includes recruit-written posts; Players remains separate. Injuries is a dedicated category. Official Accounts includes CFP.
+- For You shows up to 30 posts, National 100 and a conference 60. Likes order parent threads; replies remain attached. Missing real candidates are not replaced with sample tweets.
+- Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-Account identities and publication history are stored in `Plugins/DynastyEnhancer/Runtime-v72/RuntimeHistory`. Keep this folder when updating. Existing development history can be copied into it while the game is closed; the installer supports checksum-verified history migration. ZIP packages intentionally contain no user history, Dynasty saves or extracted game assets.
+## v73 changes
 
-- MMC launch status: `Plugins/DynastyEnhancer-launcher.log`.
-- Game startup, UI hooks and feed publication: `Plugins/DynastyEnhancer/Runtime-v72/social-media.jsonl`.
-- Generator errors: `Plugins/DynastyEnhancer/Runtime-v72/runtime-generator.log`.
+National analytics focus on the current poll's top 60; school beats retain the smaller-program analysis. Jake Whitmore, Marcus Bennett, Tina Brooks, David Ellison and Chris Maddox all receive regular-season stories, with distinct opinion/humor/evaluation wording. ESPNCFB remains a separate account.
 
-`startup_waiting` at the title screen or during loading is expected. `active` followed by `runtime_feed_published` confirms native readiness and publication. `activation_failed` is a failure and should be reported with its reason. Unsupported game code or owned UI hooks are rejected. The mod reads Dynasty data and changes presentation only; it does not alter simulation outcomes or save structure.
+Injury reports use native remaining-week ranges and severity/status. They do not subtract elapsed weeks twice or invent an exact date. Season-ending reports apply to the injury's current season; uncertain/undiagnosed cases retain appropriate uncertainty.
 
-The MMC adapter verifies packaged runtime/content hashes before loading. User configuration and history are editable and excluded from those hashes; changing protected content requires rebuilding its package manifest.
+The CFP account (@CFBPlayoff) uses native image `dynas_stickers_CFP`. Its first three ranking posts begin at regular Week 10 when a complete native CFP Top 25 is available. AP remains primary before that point. The initial publication does not compare AP places with CFP places. Later reports cover CFP movement and contender discussion. Native playoff games and championship results drive postseason coverage; rankings alone do not establish a berth.
 
-Preseason adds AP rankings, explicit Coaches comparisons, native preseason national/conference honors, season/opening-game outlooks, official hype, player camp posts, fan reactions, top-100 recruit watches, fictional title futures, schedule gauntlets, poll/model debates with replies, and conference talent maps. Real offers still require an observed native scholarship change. No game/system ratings appear in tweets. AP remains the primary public poll until a complete native CFP Top 25 is present; a fixed release week is not assumed. First-CFP movement never compares AP places with CFP places.
+TeamBuilder fan/beat accounts use the primary logo because the alternate numeric slots displayed placeholders in the live test. Other native on-white, helmet, mascot and secondary bindings remain.
 
-The phase-transition correction reacquires replaced native filter-model allocations using exact byte gates before entering News. Failed readiness checks complete through native no-action navigation; a late dropdown failure still supplies native page data so Back is preserved. The live reader uses the front-end service's actual CareerManager/database ownership, not the invalid neighboring-object offset used by the earlier prototype.
+## History, diagnostics and limits
 
-The week picker now includes stored earlier phases from the same Dynasty, controlled team and season: Preseason appears above regular-season Week 0, followed by later observed weeks. It always selects one edition and defaults to the active week. Earlier editions keep their exact published stories; changing weeks does not regenerate them. Future phases/weeks and other seasons/Dynasties are excluded. Save filenames are not identity keys.
+Preserve `Runtime-v73/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
 
-On reload, a cached active edition can resume after the first internally verified native capture if its full normalized fact hash and content revision match exactly. New weeks, changed facts, rewinds and missing caches still use normal reconciliation and stable observations. Resuming does not rewrite history or reroll wording/likes. Initial native context validation can still briefly show the preparing status; `runtime_feed_resumed` identifies a successful cache restoration in the log.
+- MMC status: `Plugins/DynastyEnhancer-launcher.log`.
+- Runtime/UI status: `Runtime-v73/social-media.jsonl`.
+- Generator diagnostics: `Runtime-v73/runtime-generator.log`.
 
-v72 gives each newly observed scholarship offer a deterministic 20% publication chance, equally for CPU and user programs. The choice is fixed for that offer's publication week and cannot be rerolled by reopening, saving or reloading. Unpublished offers stay in the event history, and replies require a published parent. Commitment coverage is unchanged. Existing earlier-week editions remain frozen; the active edition is reconciled once when this publication policy is introduced.
+`active` and `runtime_feed_published` identify successful readiness/publication; `runtime_feed_resumed` identifies an exact cache match after reload. Unsupported native code, conflicting UI ownership, invalid catalogues and changed protected payloads are rejected. User configuration/history are editable; changing protected runtime/content files requires rebuilding the package manifest.
 
-The stored per-edition candidate catalogue now supports up to 32,768 stories and candidate references, with the existing 128 MiB file bound, identity checks and reference validation. Display caps remain 30 For You, 100 National, 60 per conference and the existing team cap after category filtering. This fixes the first full recruiting week's larger league-wide candidate pool being rejected before display selection.
-
-
-v72 adds supported skipped-week reconstruction, registered on-white/secondary avatars, updated account brands and national analysts, deterministic 33% reply eligibility, more personalized feed selection and 84 new season-launch variants. Preserved archives remain intact. The optional supplied ESPN PNG is not yet registered as a native image. See the repository coverage note for the evidence requirements and pending live checks.
-
-
-v72 also includes CanDuel Sports, separate Players and Recruits categories, native state/position recruiting ranks, requested analyst/helmet/mascot avatars, available TeamBuilder secondary logos and recruiting continuity across skipped observations. Catch-up reports avoid claiming an unavailable exact event week. Gameplay/save data remain read-only. Detailed coverage and pending live checks are recorded in `docs/account-refresh-v72.md` in the source repository.
+The mod observes Dynasty data and changes presentation only. It does not write simulation/save records or change save structure. Live postseason/year-rollover and fresh v73 cold-launch checks remain follow-up validation. See the source repository's `docs/playoff-desk-v73.md` for evidence and coverage details.

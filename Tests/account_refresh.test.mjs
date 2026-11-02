@@ -11,8 +11,8 @@ test('quiet first observations stay quiet and old gap-seeded editions can be rep
  const before=structuredClone(state),r=repairRecruitingArchive(s,state);assert.ok(r.added>0);assert.deepEqual(r.state.editions.map(e=>e.week),[2,4,5]);assert.deepEqual(r.state.editions[0],before.editions[0]);assert.deepEqual(r.state.editions[2],before.editions[2]);for(const old of before.editions[1].feed.stories)assert.deepEqual(r.state.editions[1].feed.stories.find(p=>p.id===old.id),old);assert.equal(repairRecruitingArchive(s,r.state).added,0);
  const mismatch=structuredClone(s);mismatch.offers=[{team:1,player:'r'}];assert.throws(()=>repairRecruitingArchive(mismatch,state),/does not match/);
 });
-test('Players and Recruits filter independent roots while keeping replies category agnostic',()=>{
- const stories=[{id:'r',voice:'recruit'},{id:'rr',voice:'player',replyTo:'r'},{id:'p',voice:'player'},{id:'pr',voice:'recruit',replyTo:'p'}];assert.deepEqual(filterConversations(stories,'recruit').map(p=>p.id),['r','rr']);assert.deepEqual(filterConversations(stories,'player').map(p=>p.id),['p','pr']);
+test('Merged Recruiting retains recruit roots and replies while Players stays independent',()=>{
+ const stories=[{id:'r',voice:'recruit',category:'preseason'},{id:'rr',voice:'player',replyTo:'r'},{id:'p',voice:'player'},{id:'pr',voice:'recruit',replyTo:'p'}];assert.deepEqual(filterConversations(stories,'recruiting').map(p=>p.id),['r','rr']);assert.deepEqual(filterConversations(stories,'player').map(p=>p.id),['p','pr']);
 });
 test('teammate references use given names in player voices, with full names retained by media and handles unchanged',()=>{
  const s=fixture(),event={id:'personal',category:'results',teamIds:[1],playerId:'a',scopes:['team'],priority:80,thread:'personal',facts:{family:'player.win.TeamPlayer',voice:'player',playerName:'Devin Mercer',hashtag:'#Harbor'}};
@@ -25,8 +25,8 @@ test('recruit state and position ranks are explicit and repeatable, and missing/
 test('all named national accounts use the requested exact image banks, and Akron helmets do not assume primary-logo numbering',()=>{
  const expected=[[34,1096],[62,236],[62,243],[62,228],[5,3],[62,235]];for(let i=0;i<expected.length;i++)assert.deepEqual(avatarFor('analyst',null,null,i),{imageLibrary:expected[i][0],imageValue:expected[i][1]});assert.deepEqual(avatarFor('beat',{logo:1}),{imageLibrary:61,imageValue:2});assert.deepEqual(avatarFor('fan',{logo:1},null,0),{imageLibrary:87,imageValue:1});
 });
-test('TeamBuilder fan and beat avatars require a registered alternate and its actual logo source; absent tertiary falls back to secondary',()=>{
- const t={isTeamBuilder:true,logo:600,logoVariants:{secondary:632,tertiary:633,secondaryAvailable:true,tertiaryAvailable:false}};for(const role of ['beat','fan'])for(const persona of [0,1])assert.deepEqual(avatarFor(role,t,null,persona),{imageLibrary:0,imageValue:632});t.logoVariants.tertiaryAvailable=true;assert.deepEqual(avatarFor('fan',t,null,0),{imageLibrary:0,imageValue:633});t.logoVariants.secondaryAvailable=false;t.logoVariants.tertiaryAvailable=false;assert.deepEqual(avatarFor('beat',t),{imageLibrary:0,imageValue:600});
+test('TeamBuilder accounts use the verified primary even when unrendered alternate slots have metadata',()=>{
+ const t={isTeamBuilder:true,logo:600,logoVariants:{secondary:632,tertiary:633,secondaryAvailable:true,tertiaryAvailable:false}};for(const role of ['beat','fan'])for(const persona of [0,1])assert.deepEqual(avatarFor(role,t,null,persona),{imageLibrary:0,imageValue:600});t.logoVariants.tertiaryAvailable=true;assert.deepEqual(avatarFor('fan',t,null,0),{imageLibrary:0,imageValue:600});t.logoVariants.secondaryAvailable=false;t.logoVariants.tertiaryAvailable=false;assert.deepEqual(avatarFor('beat',t),{imageLibrary:0,imageValue:600});
 });
 test('CanDuel migrates an existing model identity and presentation-only archive changes preserve IDs, likes, publication and unrelated prose',()=>{
  const s=fixture(),r=authorRegistry(),model=r.get(s,'model'),saved=structuredClone(r.entries);Object.assign(Object.values(saved)[0],{author:'FanDuel Sports',handle:'@FanDuelSports'});const m=authorRegistry(saved).get(s,'model');assert.equal(m.author,'CanDuel Sports');assert.equal(m.handle,'@CanDuelSports');

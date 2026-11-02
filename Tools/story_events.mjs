@@ -1,3 +1,5 @@
+import {injuryTimetable} from './injury_timetables.mjs';
+import {playoffEvents} from './playoff_events.mjs';
 import {advancedAnalytics} from './advanced_analytics.mjs';
 import {worldEvents,recruitSignificance} from './world_events.mjs';
 import {projectLine,rosterStrengths} from './betting_model.mjs';
@@ -49,7 +51,7 @@ export function detectEvents(s,previous=null){
     if(Object.keys(stats).length&&impact>=25)emit(`performance:${r.game}:${r.player}:${r.type}`,'player-stats',{gameId:g.id,playerName:p.name,school:teams.get(r.team)?.name,position:p.position,stats,timing:g.week===week?'current':'previous'},
       {player:p.id,team:r.team,national:impact>=75||(rank(r.team)<=25&&impact>=40),eventWeek:g.week,priority:(r.team===s.userTeamIndex?91:65)+Math.min(impact,100)/100,thread:`game:${g.id}`});
   }
-  if(inSeason)for(const t of s.teams){if(!ranked(rank(t.id)))continue;
+  if(inSeason&&phase==='RegularSeason')for(const t of s.teams){if(!ranked(rank(t.id)))continue;
     const current=rank(t.id),last=poll.comparable?t[poll.lastField]:null;
     emit(`poll:${t.id}`,'polls',{school:t.name,rank:current,pollName:poll.name,previousRank:ranked(last)?last:null,movement:!ranked(last)?'entry':last>current?'up':last<current?'down':'unchanged',...(!poll.comparable?{family:'poll.initial.beat',voice:'beat'}:{})},
       {team:t.id,priority:t.id===s.userTeamIndex?98:current<=5?83:55});
@@ -58,7 +60,7 @@ export function detectEvents(s,previous=null){
   const previousPlayers=new Map((s.midweekBaseline?.players??prior?.players??[]).map(p=>[p.id,p]));
   for(const p of s.players){if(!teams.has(p.team)||p.team===255||!p.injury||p.injury==='Uninjured')continue;
     const fresh=inSeason&&p.injuryYear===year&&p.injuryWeek===week-1&&p.injuryStage===s.season.CurrentStage;
-    emit(`injury:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:p.injury,injuryType:p.injuryType&&p.injuryType!=='Invalid_'&&p.injuryType!=='None'?p.injuryType:null,newlyInjured:fresh},
+    emit(`injury:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:p.injury,injuryType:p.injuryType&&p.injuryType!=='Invalid_'&&p.injuryType!=='None'?p.injuryType:null,timetable:injuryTimetable(p,s.season),newlyInjured:fresh},
       {player:p.id,team:p.team,priority:p.team===s.userTeamIndex?96:55,eventWeek:fresh?p.injuryWeek:null});
   }
   if(prior||s.midweekBaseline)for(const p of s.players){const old=previousPlayers.get(p.id);if(p.team!==255&&teams.has(p.team)&&p.injury==='Uninjured'&&old?.injury&&old.injury!=='Uninjured')
@@ -99,7 +101,7 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  if(inSeason&&poll.key==='cfp')for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:poll.comparable&&ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
+  for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;
     if(a.rushingRank!==null)emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollName:poll.name,pollRank:ranked(rank(t.id))?rank(t.id):null,previousPollRank:poll.comparable&&ranked(t[poll.lastField])?t[poll.lastField]:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});

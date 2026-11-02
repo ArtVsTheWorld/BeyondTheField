@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "version": "v73 national desk, injury windows and CFP",
+  "nativeSha256": "d0a5ed85ce44bed85ac0eb3bf5b1ae61f7c93978c7918e0c4f826bbf97bd080d",
+  "adapterSha256": "2a25a39b1b6813388b42dd924e728993a0cd69e43d3d5b18047da58e1b0d0dcc",
+  "zipSha256": "01a0569814b133922da37fd3795b48552221a9f90973cc013ba6c66a7d928bf1",
+  "nodeTestsPassed": 149,
+  "nativeTestsPassed": true,
+  "realCatalogueDecoderPassed": true,
+  "adapterSmokePassed": true,
+  "installedAdapterSmokePassed": true,
+  "historyBackupChecksumVerified": true,
+  "sourceSaveWrites": false,
+  "liveFeed": {
+    "week": 10,
+    "stories": 3260,
+    "forYou": 30,
+    "editions": 12
+  },
+  "presentationVersion": 3,
+  "nationalFirst100": {
+    "Jake Whitmore": 11,
+    "Marcus Bennett": 8,
+    "Tina Brooks": 7,
+    "David Ellison": 7,
+    "Chris Maddox": 8
+  },
+  "schoolBeatAnalytics": 590,
+  "cfpAccount": {
+    "name": "CFP",
+    "handle": "@CFBPlayoff",
+    "imageLibrary": 34,
+    "imageValue": 41,
+    "openingPosts": [
+      "No. 1 in the first College Football Playoff rankings: Ole Miss.",
+      "The first CFP rankings are here. No. 2: Miami.",
+      "No. 3 in the first College Football Playoff rankings: SMU."
+    ]
+  },
+  "injuryWindowEvidence": {
+    "nativeRemainingWeeksVerifiedAt": [
+      4,
+      6,
+      10
+    ],
+    "userConfirmed": "Jovesa Damuni estimated 2-3 weeks and category controls work"
+  },
+  "liveObserved": [
+    "Chris Maddox, Tina Brooks and Marcus Bennett portraits render in National Analysts",
+    "Distinct recruiting, playoff-bubble and analytical opinion wording fits native cards",
+    "Analysts category, National scope and Week 10 are displayed with scrolling and attached fan reply"
+  ],
+  "fixtureCoverage": [
+    "CFP release boundary and complete-poll requirement",
+    "CFP movement without AP/CFP comparison",
+    "Ordinary bowl, future-game and unpublished-result rejection",
+    "Next-phase playoff recap and championship result",
+    "Postseason results with a cleared rankings table",
+    "Injury remaining windows and previous-season severity guard",
+    "Merged recruiting and injury category reply dependencies",
+    "Top-60 delegation and all-five-writer same-week stability"
+  ],
+  "pendingLive": [
+    "CFP account image rendering",
+    "TeamBuilder primary fallback visual check",
+    "Actual Week 11+ CFP movement",
+    "Actual playoff/championship and year rollover",
+    "Fresh v73 MMC cold launch"
+  ]
+}

@@ -11,15 +11,15 @@ export function discoveryViews(stories,options){
 }
 export const CATEGORY_FILTERS=[
  {key:'all',label:'All Types'},
- {key:'recruiting',label:'Recruiting',categories:['recruiting','offers']},
+ {key:'recruiting',label:'Recruiting',categories:['recruiting','offers'],voices:['recruit']},
  {key:'recaps',label:'Recaps',categories:['results','team-stats','player-stats','upsets','streaks']},
  {key:'upcoming',label:'Upcoming',categories:['schedule','watch','lines','preseason']},
  {key:'rankings',label:'Rankings & Awards',categories:['polls','heisman','cfp','awards','records']},
  {key:'analyst',label:'Analysts',voices:['analyst','model']},
  {key:'beat',label:'Beat Reporters',voices:['beat']},
- {key:'official',label:'Team Accounts',voices:['official']},
+ {key:'official',label:'Official Accounts',voices:['official','cfp']},
  {key:'player',label:'Players',voices:['player']},
- {key:'recruit',label:'Recruits',voices:['recruit']},
+ {key:'injuries',label:'Injuries',categories:['injuries']},
  {key:'fan',label:'Fans',voices:['fan']}
 ];
 export function filterConversations(stories,key='all'){
