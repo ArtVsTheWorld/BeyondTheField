@@ -3,7 +3,7 @@
   "build": "DynastyEnhancer-v56-discovery.dll",
   "nativeDllSha256": "e893092ab905d7f956651009a1a711478b026aeb8ce4738c76837e71cec91888",
   "contentRevision": "voices-2",
-  "status": "live-final-input-check-pending",
+  "status": "user-verified-in-game",
   "publicationWeek": 9,
   "stories": 816,
   "replies": 51,
@@ -18,11 +18,9 @@
     "native conference/team dropdown selection",
     "bottom-right deterministic flavor likes",
     "distinct reporter/analyst/fan icon libraries",
-    "all 151 native scope decodes and bounds"
-  ],
-  "pending": [
-    "LB forward/RB backward and wraparound on final build",
-    "final LT and vertical-scroll regression"
+    "all 151 native scope decodes and bounds",
+    "LB forward / RB backward category cycling, including wraparound",
+    "LT scope selection and vertical scrolling on final build"
   ],
   "limitations": [
     "Only observed publication weeks have history; current new-voice history starts Week 9",
