@@ -60,7 +60,7 @@ uintptr_t base=0;
 HMODULE module=nullptr;
 std::filesystem::path folder;
 std::string buildId;
-std::atomic<bool> disabled{false},opened{false};
+std::atomic<bool> disabled{false},opened{false},uiReady{false};
 std::atomic<unsigned> callbacks{0};
 std::atomic<bool> preflightRunning{false},preflightReady{false},preflightAttempted{false};
 std::atomic<bool> feedValidated{false};
@@ -209,10 +209,32 @@ bool configureNewsScroll(bool enable){
     VirtualProtect(reinterpret_cast<void*>(newsScroll),current.size(),old,&unused);
     scrollOwned=enable;note({{"event",enable?"news_smooth_scroll_enabled":"news_smooth_scroll_restored"},{"dpadStepPixels",enable?164:853}});return true;
 }
+bool ensureNewsModel(){
+    std::lock_guard<std::mutex> lock(layoutMutex);
+    auto matches=[&](const social::dropdown::Patch& p,uintptr_t address,bool changed){const auto& expected=changed?p.changed:p.original;std::vector<unsigned char> found(expected.size());return address&&read(address,found.data(),found.size())&&found==expected;};
+        bool valid=newsModelBase!=0;for(const auto& p:dropdownPatches)if(p.model&&!matches(p,newsModelBase+p.offset,dropdownModelOwned))valid=false;
+        if(!valid){
+            if(dropdownModelOwned)return false;
+            uintptr_t found=0;unsigned count=0;const auto began=GetTickCount64();MEMORY_BASIC_INFORMATION m{};
+            for(uintptr_t pos=0x10000;pos<0x7fffffff0000ull;){
+                if(GetTickCount64()-began>5000){note({{"event","social_dropdown_rejected"},{"reason","Current Dynasty model lookup timed out"}});return false;}
+                if(!VirtualQuery(reinterpret_cast<void*>(pos),&m,sizeof(m)))break;
+                const auto end=reinterpret_cast<uintptr_t>(m.BaseAddress)+m.RegionSize;if(end<=pos)break;const auto access=m.Protect&0xff;
+                if(m.State==MEM_COMMIT&&m.Type==MEM_PRIVATE&&!(m.Protect&(PAGE_GUARD|PAGE_NOACCESS))&&(access==PAGE_READONLY||access==PAGE_READWRITE||access==PAGE_WRITECOPY))for(auto a=(pos+0xffff)&~uintptr_t(0xffff);a<end;a+=0x10000){
+                    char header[14]{};if(!read(a,header,sizeof(header))||(memcmp(header,"Apt Data:1:7:8",14)&&memcmp(header,"Apt Data:1:8:8",14)))continue;
+                    bool exact=true;for(const auto& p:dropdownPatches)if(p.model&&!matches(p,a+p.offset,false)){exact=false;break;}if(exact){found=a;++count;}
+                }pos=end;
+            }
+            if(count!=1){note({{"event","social_dropdown_rejected"},{"reason","Current Dynasty model is absent or ambiguous"},{"matches",count}});return false;}
+            newsModelBase=found;note({{"event","social_model_reacquired"},{"model",found}});
+        }
+    return true;
+}
 bool configureNewsDropdowns(bool enable){
 #ifndef SOCIAL_DUAL_DROPDOWN
     (void)enable;return true;
 #else
+    if(enable&&!ensureNewsModel())return false;
     std::lock_guard<std::mutex> lock(layoutMutex);
     auto matches=[&](const social::dropdown::Patch& p,uintptr_t address,bool changed){
         const auto& expected=changed?p.changed:p.original;std::vector<unsigned char> found(expected.size());
@@ -425,8 +447,8 @@ bool appendContainer(ContainerProxy& proxy){
 }
 void __fastcall containerHook(void* self,void* panel,void* out){
     Guard guard;auto name=argument(panel);
-    if(!disabled&&!preflightRunning&&name=="CM_NEWSTAB"){configureNewsDropdowns(false);configureNewsPolish(false);}
-    if(!disabled&&opened&&!preflightRunning&&name=="CM_NEWSTAB"){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
+    if(!disabled&&uiReady&&!preflightRunning&&name=="CM_NEWSTAB"){configureNewsDropdowns(false);configureNewsPolish(false);}
+    if(!disabled&&uiReady&&opened&&!preflightRunning&&name=="CM_NEWSTAB"){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
     if(!disabled&&opened&&name=="CM_NEWSSUB"){
         Alias donor{aliasVt,"CM_NEWSTAB"};ContainerProxy proxy{containerVt,out,{},true};containers(self,&donor,&proxy);
         if(!proxy.captured.empty())for(unsigned row=0;row<feedContainerCount;++row){auto coords=std::to_string(row+1);for(const auto& [key,value]:proxy.captured.begin()->second.items()){
@@ -569,25 +591,35 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){Alias alias{aliasVt,"NEWS"};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
-    if(!disabled&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
+const char* socialDestination(){return uiReady?"NEWS":"DO_NOTHING";}
+void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
+    if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
 }
 void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* params){Guard guard;bool selected=!disabled&&name&&strcmp(name,"NEWS_MENU")==0;
+    auto cancel=[&](const char* reason){note({{"event","news_navigation_cancelled"},{"reason",reason},{"destination","DO_NOTHING"}});navRequest(self,user,"DO_NOTHING",params);};
+    // The native caller has already begun a navigation transaction. Silently
+    // returning leaves it pending, so finish through its genuine inert action.
+    if(selected&&!uiReady){cancel("Dynasty UI is still preparing");return;}
 #ifdef SOCIAL_PREFLIGHT_ONLY
-    if(selected){note({{"event","news_navigation_blocked"},{"reason","Panel initialization preflight only"}});return;}
+    if(selected){cancel("Panel initialization preflight only");return;}
 #else
     if(selected){adoptFeed();note({{"event","weekly_feed_adopted"},{"key",pageFeed->key},{"posts",feedPostCount}});}
-    if(selected&&!feedValidated&&!runPreflight()){note({{"event","news_navigation_blocked"},{"reason","Native feed preflight failed"}});return;}
+    if(selected&&!feedValidated&&!runPreflight()){cancel("Native feed preflight failed");return;}
 #endif
-    if(!disabled){
-        if(!alignNewsFrame(selected)&&selected){note({{"event","news_navigation_blocked"},{"reason","Native frame layout gate failed"}});return;}
-        if(!configureNewsFlow(selected)&&selected){alignNewsFrame(false);note({{"event","news_navigation_blocked"},{"reason","Native vertical flow gate failed"}});return;}
-        if(!configureNewsScroll(selected)&&selected){configureNewsFlow(false);alignNewsFrame(false);note({{"event","news_navigation_blocked"},{"reason","Native scroll gate failed"}});return;}
-        if(!configureNewsPolish(selected)&&selected){configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);note({{"event","news_navigation_blocked"},{"reason","Native text/viewport gate failed"}});return;}
+    if(!disabled&&uiReady){
+#ifdef SOCIAL_DUAL_DROPDOWN
+        // The model is already loaded in the hub. The News screen itself loads
+        // during navigation and is checked separately when its data is requested.
+        if(selected&&!ensureNewsModel()){cancel("Dropdown model readiness failed before navigation");return;}
+#endif
+        if(!alignNewsFrame(selected)&&selected){cancel("Native frame layout gate failed");return;}
+        if(!configureNewsFlow(selected)&&selected){alignNewsFrame(false);cancel("Native vertical flow gate failed");return;}
+        if(!configureNewsScroll(selected)&&selected){configureNewsFlow(false);alignNewsFrame(false);cancel("Native scroll gate failed");return;}
+        if(!configureNewsPolish(selected)&&selected){configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);cancel("Native text/viewport gate failed");return;}
         opened=selected;note({{"event","navigation_request"},{"name",name?name:""}});
     }navRequest(self,user,selected?"NEWS":name,params);}
 bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;auto name=argument(arg);if(!disabled&&opened){note({{"event","social_panel_request_argument"},{"name",name}});if(name=="CM_NEWSSUB"){
-    if(!configureNewsDropdowns(true)){note({{"event","news_navigation_blocked"},{"reason","Native dropdown gates failed"}});return false;}
+    if(!configureNewsDropdowns(true)){note({{"event","social_dropdown_fallback"},{"reason","Dropdown resources changed during entry; supplying native page data to preserve Back navigation"}});}
 #ifdef SOCIAL_EXPERIMENTAL_FOCUS
     if(!preflightRunning&&!focusNewsPanel(true)){note({{"event","news_focus_unavailable"}});return false;}
 #endif
@@ -647,7 +679,7 @@ Binding bindings[]={
     {0xbac63a8,0xc8,0x7a19370,reinterpret_cast<void*>(filterDataHook)},
     {0xbac63a8,0xd0,0x7a2def0,reinterpret_cast<void*>(filterChangedHook)}
 };
-void stop(){disabled=true;opened=false;configureNewsPolish(false);configureNewsDropdowns(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);for(auto& b:bindings)if(b.installed)replace(reinterpret_cast<void**>(base+b.vt+b.offset),b.hook,reinterpret_cast<void*>(base+b.rva));}
+void stop(){disabled=true;opened=false;if(uiReady){configureNewsPolish(false);configureNewsDropdowns(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}for(auto& b:bindings)if(b.installed)replace(reinterpret_cast<void**>(base+b.vt+b.offset),b.hook,reinterpret_cast<void*>(base+b.rva));}
 void publishFeed(const Json& data){auto feed=social::decodeFeed(data);std::lock_guard<std::mutex> lock(feedMutex);latestFeed=std::move(feed);}
 void flush(){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(logMutex);batch.swap(messages);}if(batch.empty())return;std::ofstream out(folder/L"social-media.jsonl",std::ios::app);for(const auto& x:batch)out<<x.dump()<<'\n';}
 DWORD WINAPI worker(void*){
@@ -656,8 +688,18 @@ DWORD WINAPI worker(void*){
         dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
+        tiles=reinterpret_cast<Tiles>(base+0x7a1b4c0);containers=reinterpret_cast<Containers>(base+0x7a1af50);navInfo=reinterpret_cast<NavInfo>(base+0x7a1c8e0);navRequest=reinterpret_cast<NavRequest>(base+0x7a2cca0);
+        requestPanel=reinterpret_cast<RequestPanel>(base+0x7a2cdd0);
+        panelReady=reinterpret_cast<PanelReady>(base+0x7a27f10);
+        filterData=reinterpret_cast<FilterData>(base+0x7a19370);
+        filterChanged=reinterpret_cast<FilterChanged>(base+0x7a2def0);
+        HMODULE pinned=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&tileHook),&pinned))throw std::runtime_error("Cannot pin runtime");
+        for(auto& b:bindings){if(!replace(reinterpret_cast<void**>(base+b.vt+b.offset),reinterpret_cast<void*>(base+b.rva),b.hook))throw std::runtime_error("UI hook ownership changed during activation");b.installed=true;}
+        note({{"event","menu_hooks_active"},{"pid",GetCurrentProcessId()}});flush();
         const bool ready=social::awaitStartup([]{return disabled.load();},[]{
-            try{dynasty::live::Capture(base).status();}catch(const std::exception& error){return std::string(error.what());}
+            // UI readiness is independent of news generation. A valid native
+            // page can show its status card while the reader observes a stable
+            // active Dynasty; no save or completed capture gates navigation.
             if(!locateNewsLayout())return std::string("Waiting for the supported native Dynasty news layout");
 #ifdef SOCIAL_DUAL_DROPDOWN
             if(!newsModelBase)return std::string("Waiting for the native Dynasty filter model");
@@ -666,14 +708,8 @@ DWORD WINAPI worker(void*){
         },[](const std::string& reason){note({{"event","startup_waiting"},{"reason",reason}});flush();},[]{for(int i=0;i<15&&!disabled;++i)Sleep(200);});
         if(!ready){note({{"event","startup_cancelled"}});flush();return 0;}
         // Ownership can change while waiting at the title screen.
-        for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
-        tiles=reinterpret_cast<Tiles>(base+0x7a1b4c0);containers=reinterpret_cast<Containers>(base+0x7a1af50);navInfo=reinterpret_cast<NavInfo>(base+0x7a1c8e0);navRequest=reinterpret_cast<NavRequest>(base+0x7a2cca0);
-        requestPanel=reinterpret_cast<RequestPanel>(base+0x7a2cdd0);
-        panelReady=reinterpret_cast<PanelReady>(base+0x7a27f10);
-        filterData=reinterpret_cast<FilterData>(base+0x7a19370);
-        filterChanged=reinterpret_cast<FilterChanged>(base+0x7a2def0);
-        HMODULE pinned=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&tileHook),&pinned))throw std::runtime_error("Cannot pin runtime");
-        for(auto& b:bindings){if(!replace(reinterpret_cast<void**>(base+b.vt+b.offset),reinterpret_cast<void*>(base+b.rva),b.hook))throw std::runtime_error("UI hook ownership changed during activation");b.installed=true;}
+        for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=reinterpret_cast<uintptr_t>(b.hook))throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
+        uiReady.store(true);
         note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
         while(!disabled){flush();if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);Sleep(200);}note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
     }catch(const std::exception& e){stop();note({{"event","activation_failed"},{"error",e.what()}});flush();}

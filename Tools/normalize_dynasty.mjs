@@ -94,6 +94,12 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     if(!p||!Number.isInteger(current)||current<0||current>4)continue;
     heisman.push({player:p.key,team:await teamIndex(h.v.Team),rank:current+1,lastRank:Number.isInteger(prior)&&prior>=0&&prior<=4?prior+1:null});
   }
+  const preseasonHonors=[];
+  if(awards)for(const a of await array(awards.v.AllAmAwards)){
+    if(a.type!=='PlayerAward'||!['ALL_AM_1ST_PRE','ALL_AM_2ND_PRE','ALL_AM_1ST_PRE_CONF','ALL_AM_2ND_PRE_CONF'].includes(a.v.AwardType)||a.v.Period!=='Season'||a.v.PeriodIndex!==season.CurrentYear)continue;
+    const p=await resolve(a.v.Player),team=await teamIndex(a.v.Team),conference=await resolve(a.v.Conference);
+    if(p&&team!==null&&p.v.TeamIndex===team)preseasonHonors.push({id:a.key,player:p.key,team,conferenceId:conference?.key??null,type:a.v.AwardType,position:a.v.Position,year:a.v.PeriodIndex});
+  }
   const weeklyAwards=[];
   if(awards)for(const a of await array(awards.v.WeeklyAwards)){
     if(a.type!=='PlayerAward'||a.v.Period!=='Game')continue;
@@ -112,7 +118,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   // Verify the recruit stage and leading school against that school's board;
   // an offer or a nonzero target week on its own never establishes a commit.
   const recruitStatuses=[],recruitRefs=new Map();for(const r of await records('Recruit')){
-    const recruitPlayer=await resolve(r.v.Player);if(recruitPlayer)recruitStatuses.push({player:recruitPlayer.key,stage:r.v.RecruitStage});
+    const recruitPlayer=await resolve(r.v.Player);if(recruitPlayer)recruitStatuses.push({player:recruitPlayer.key,stage:r.v.RecruitStage,nationalRank:r.v.NationalRank>0?r.v.NationalRank:null});
     if(!['HardCommitted','SoftCommitted'].includes(r.v.RecruitStage))continue;
     const p=await resolve(r.v.Player),schools=await array(r.v.TopSchoolsList);
     if(!p||!schools.length)continue;
@@ -135,5 +141,5 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     }
   }
   return {format:2,sourceUnchanged:true,gameYear:27,...identity,leagueId:franchise.LeagueID,
-    season,userTeamIndex,teams,conferences,players,games,performances,heisman,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses};
+    season,userTeamIndex,teams,conferences,players,games,performances,heisman,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,preseasonHonors};
 }

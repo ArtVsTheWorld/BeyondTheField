@@ -2,6 +2,8 @@ import {advancedAnalytics} from './advanced_analytics.mjs';
 import {worldEvents,recruitSignificance} from './world_events.mjs';
 import {projectLine,rosterStrengths} from './betting_model.mjs';
 import {teamAnalytics} from './team_analytics.mjs';
+import {preseasonEvents} from './preseason_events.mjs';
+import {publicPoll} from './public_polls.mjs';
 // Read-only Dynasty facts. This module contains no tweet prose or account identities.
 export const weekKey=s=>`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
 const complete=g=>g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
@@ -13,7 +15,7 @@ export function detectEvents(s,previous=null){
   const inSeason=s.season.CurrentStage==='NFLSeason',teams=new Map(s.teams.map(t=>[t.id,t])),players=new Map(s.players.map(p=>[p.id,p]));
   if(!teams.has(s.userTeamIndex))throw Error('Controlled team missing from snapshot');
   const own=teams.get(s.userTeamIndex),conferenceTeams=new Set(s.teams.filter(t=>own.conferenceId&&t.conferenceId===own.conferenceId).map(t=>t.id));
-  const rank=id=>ranked(teams.get(id)?.mediaRank)?teams.get(id).mediaRank:99;
+  const poll=publicPoll(s,previous),rank=id=>ranked(poll.ranks[id])?poll.ranks[id]:99;
   const events=[],ids=new Set();
   const emit=(id,category,facts,{team=null,player=null,relatedTeams=[],national=null,eventWeek=null,priority=50,thread=null,curated=true,primaryScope=null}={})=>{
     if(ids.has(id))return;const p=players.get(player);const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
@@ -46,9 +48,10 @@ export function detectEvents(s,previous=null){
     if(Object.keys(stats).length&&impact>=25)emit(`performance:${r.game}:${r.player}:${r.type}`,'player-stats',{gameId:g.id,playerName:p.name,school:teams.get(r.team)?.name,position:p.position,stats,timing:g.week===week?'current':'previous'},
       {player:p.id,team:r.team,national:impact>=75||(rank(r.team)<=25&&impact>=40),eventWeek:g.week,priority:(r.team===s.userTeamIndex?91:65)+Math.min(impact,100)/100,thread:`game:${g.id}`});
   }
-  if(inSeason)for(const t of s.teams){if(!ranked(t.mediaRank))continue;
-    emit(`poll:${t.id}`,'polls',{school:t.name,rank:t.mediaRank,previousRank:ranked(t.mediaLastRank)?t.mediaLastRank:null,movement:!ranked(t.mediaLastRank)?'entry':t.mediaLastRank>t.mediaRank?'up':t.mediaLastRank<t.mediaRank?'down':'unchanged'},
-      {team:t.id,priority:t.id===s.userTeamIndex?98:t.mediaRank<=5?83:55});
+  if(inSeason)for(const t of s.teams){if(!ranked(rank(t.id)))continue;
+    const current=rank(t.id),last=poll.comparable?t[poll.lastField]:null;
+    emit(`poll:${t.id}`,'polls',{school:t.name,rank:current,pollName:poll.name,previousRank:ranked(last)?last:null,movement:!ranked(last)?'entry':last>current?'up':last<current?'down':'unchanged',...(!poll.comparable?{family:'poll.initial.beat',voice:'beat'}:{})},
+      {team:t.id,priority:t.id===s.userTeamIndex?98:current<=5?83:55});
   }
   const prior=previous&&previous.leagueId===s.leagueId&&previous.season.CurrentSeasonYear===s.season.CurrentSeasonYear&&previous.season.CurrentWeekType===phase&&previous.season.CurrentWeek===week-1?previous:null;
   const previousPlayers=new Map((s.midweekBaseline?.players??prior?.players??[]).map(p=>[p.id,p]));
@@ -92,10 +95,10 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  if(inSeason)for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
+  if(inSeason&&poll.key==='cfp')for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:poll.comparable&&ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;
-    if(a.rushingRank!==null)emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollRank:ranked(t.mediaRank)?t.mediaRank:null,previousPollRank:ranked(t.mediaLastRank)?t.mediaLastRank:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
+    if(a.rushingRank!==null)emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollName:poll.name,pollRank:ranked(rank(t.id))?rank(t.id):null,previousPollRank:poll.comparable&&ranked(t[poll.lastField])?t[poll.lastField]:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
     if(a.gamesPlayed>=3&&a.thirdDownRate!==null&&(a.thirdDownRate<=.30||a.thirdDownRate>=.55))emit(`analysis:third-down:${a.teamId}`,'analytics',{metric:'thirdDownConversionRate',school:a.school,sampleGames:a.gamesPlayed,conversions:a.thirdDownConversions,attempts:a.thirdDownAttempts,rate:a.thirdDownRate},{team:a.teamId,national:national||a.thirdDownRate<=.25||a.thirdDownRate>=.60,priority:82});
     if(a.gamesPlayed>=3&&a.redZoneTouchdownRate!==null&&a.redZoneTrips>=10&&(a.redZoneTouchdownRate<=.45||a.redZoneTouchdownRate>=.8))emit(`analysis:red-zone:${a.teamId}`,'analytics',{metric:'redZoneTouchdownRate',school:a.school,sampleGames:a.gamesPlayed,trips:a.redZoneTrips,touchdowns:a.redZoneTouchdowns,rate:a.redZoneTouchdownRate},{team:a.teamId,national:national||a.redZoneTouchdownRate<=.35,priority:83});
     if(a.gamesPlayed>=3&&a.turnoverMargin!==null&&Math.abs(a.turnoverMargin)>=5)emit(`analysis:turnovers:${a.teamId}`,'analytics',{metric:'turnoverMargin',school:a.school,sampleGames:a.gamesPlayed,giveaways:a.giveaways,takeaways:a.takeaways,margin:a.turnoverMargin},{team:a.teamId,national,priority:81});
@@ -103,5 +106,6 @@ export function detectEvents(s,previous=null){
   for(const m of analytics.milestones)if(m.eventWeek>=week-1)emit(`analysis:margin-superlative:${m.gameId}`,'analytics',m,{team:m.teamId,national:true,eventWeek:m.eventWeek,priority:87});
   for(const a of advancedAnalytics(s))emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
   for(const e of worldEvents(s))emit(e.id,e.category,e.facts,e.options);
+  for(const e of preseasonEvents(s,{strengths:modelStrengths}))emit(e.id,e.category,e.facts,e.options);
   return events;
 }

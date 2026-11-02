@@ -51,7 +51,7 @@ export function addConversations({s,events,stories,byId,teams,players,games,regi
    add(e,'fan.rank_up',{...teamValues(t),...f},{role:'fan',team:t,persona:1,suffix:'rank-reply',priority:e.priority,replyTo:root.id});
   }else if(e.category==='schedule'&&f.rivalry){
    const g=games.get(f.gameId),team=teams.get(e.teamIds[0]);if(g)add(e,'fan.preview.rivalry',{...teamValues(team),opponent:team?.id===g.home?f.away:f.home},{role:'fan',team,persona:1,suffix:'rivalry-reply',priority:e.priority,replyTo:root.id});
-  }else if(e.category==='analytics'&&!stories.some(p=>p.replyTo===root.id)){
+  }else if(e.category==='analytics'&&!f.preseason&&!stories.some(p=>p.replyTo===root.id)){
    const low=f.negative||f.metric==='thirdDownConversionRate'&&f.rate<=.3||f.metric==='redZoneTouchdownRate'&&f.rate<=.45||f.metric==='turnoverMargin'&&f.margin<0;
    const player=players.get(e.playerId),defense=['run-defense','pass-defense','sack-pressure','red-zone-defense','takeaways','scoring-defense'].includes(f.scenario),offense=['scoring-offense','yards-per-attempt','passing-efficiency','rushing-efficiency','offensive-balance','interception-rate','passing-td-rate','fourth-down','red-zone-field-goals'].includes(f.scenario)||['rushingYardsPerGame','thirdDownConversionRate','redZoneTouchdownRate'].includes(f.metric),staff=defense?t?.defensiveCoordinator:offense?t?.offensiveCoordinator:t?.headCoach,coach=staff??t?.headCoach;
    const family=player?low?'reply.fan.player_bad':'reply.fan.player_good':coach?low?'reply.fan.coach_bad':'reply.fan.coach_good':low?'reply.fan.analyst_low':'reply.fan.analyst_high';

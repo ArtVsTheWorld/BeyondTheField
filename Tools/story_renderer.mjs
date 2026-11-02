@@ -47,7 +47,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const win=g.homeScore===g.awayScore?null:g.homeScore>g.awayScore?g.home:g.away,opponent=p.team===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name;
   return {...teamValues(t),...f,opponent,statLine:performanceLine(f.stats),win:win===p.team,resultLine:win===null?'The game finished tied.':win===p.team?'A team win to go with it.':'The individual numbers came in a team loss.'};}
  for(const e of events){const f=e.facts,t=teams.get(e.teamIds[0]),v={...teamValues(t),...f,giveawayLabel:e.facts.giveaways===1?'giveaway':'giveaways'};
-  if(f.family){const values={...v,...f};add(e,f.family,values,{role:e.category==='analytics'?'analyst':'beat',persona:e.category==='analytics'?1:0});continue;}
+  if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:role==='analyst'?1:0});if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
   if(e.category==='results'){
    const g=games.get(f.gameId);if(!final(g))continue;
    if(f.tie){add(e,'beat.tie',v);continue;}

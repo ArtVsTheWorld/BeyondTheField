@@ -13,7 +13,7 @@ export const CATEGORY_FILTERS=[
  {key:'all',label:'All Types'},
  {key:'recruiting',label:'Recruiting',categories:['recruiting','offers']},
  {key:'recaps',label:'Recaps',categories:['results','team-stats','player-stats','upsets','streaks']},
- {key:'upcoming',label:'Upcoming',categories:['schedule','watch','lines']},
+ {key:'upcoming',label:'Upcoming',categories:['schedule','watch','lines','preseason']},
  {key:'rankings',label:'Rankings & Awards',categories:['polls','heisman','cfp','awards','records']},
  {key:'analyst',label:'Analysts',voices:['analyst','model']},
  {key:'beat',label:'Beat Reporters',voices:['beat']},

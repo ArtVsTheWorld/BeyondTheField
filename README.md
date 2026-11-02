@@ -4,11 +4,19 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## MMC loader (v64)
+## Preseason and lifecycle candidate (v67)
 
-The current prototype includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v64.dll** game runtime. Use the complete `Build/DynastyEnhancer-v64-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v64`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
+The current candidate adds 62 prewritten variants across 24 new families (339 variants total): native preseason AP and All-America/All-Conference honors, season outlooks, opening games, team hype, player camp posts, fans, top-100 recruiting watches, fictional title futures, clustered ranked-opponent gauntlets, AP/model debates with fan replies, explicit AP/Coaches comparisons, and conference talent maps. All teams, including TeamBuilder programs, use the same eligibility. See [preseason coverage and lifecycle details](docs/preseason-lifecycle.md).
 
-MMC loads the runtime once per game process. The native worker waits through the title screen/loading until it can verify an active Dynasty and its supported UI assets, then installs hooks. Configured Node.js must be available. No save path is required. Existing RuntimeHistory is retained by the development installer, keeping account identities and editions. Startup diagnostics distinguish `startup_waiting`, `active`, and `runtime_feed_published`. A fresh MMC/game launch has verified this sequence in a new preseason Dynasty. If the hub was cached before activation, switching tabs or opening another native menu and returning refreshes the button; eliminating that first refresh remains polish. See [v64 validation](docs/verified-v64.json).
+Public rankings use AP by default and CFP once a complete native CFP Top 25 is present. Coaches is an explicitly labeled alternative. Hidden team Rank is never a public poll. Historical upset ranks keep their captured pregame poll, and AP-to-CFP differences never become weekly movement.
+
+## MMC loader (v67)
+
+The package includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v67.dll** game runtime. Use the complete `Build/DynastyEnhancer-v67-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v67`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
+
+The adapter has no fixed 20-second title-screen delay. Verified menu hooks install before waiting for Dynasty assets, capturing the first hub construction. Native UI readiness is independent of news generation; a native status card can display while the first edition is prepared. Entry before asset readiness completes through the native inert action, rather than silently returning with navigation pending. On a phase transition, the filter model is reacquired using exact native byte gates rather than reusing a stale allocation. A late dropdown failure retains native page data and Back behavior. The v66 first-hub button passed, but an invalid reader ownership path and a silent navigation guard caused the preseason entry failure. v67 replaces both, expands the reserved Award[] capacity gate, and captures all 600 honors from the live preseason save read only. Native page/reload/Week-0 retesting is pending.
+
+Configured Node.js must be available. No save path is required. Existing RuntimeHistory is retained by the development installer. Startup diagnostics distinguish `menu_hooks_active`, `startup_waiting`, `active`, and `runtime_feed_published`. v64 automatic loading was verified in-game; [its validation record](docs/verified-v64.json) remains the historical baseline.
 
 Build and stage the prototype package with:
 
@@ -75,7 +83,7 @@ Windows x64, Visual Studio C++ tools, and Windows SDK are required. From the pro
 .\Source\build.ps1
 ```
 
-This builds `Build/DynastyEnhancerNative-v64.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
+This builds `Build/DynastyEnhancerNative-v67.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
 
 Node.js is required for the story generator. Copy `Config/dynasty-enhancer.example.json` to `Build/dynasty-enhancer.json` and set the Node executable path if needed. The active-Dynasty reader needs no save path, parser, or external schema. Generated snapshots, feeds, and publication history live beside the DLL under `Build/` and are not game saves.
 

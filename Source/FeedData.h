@@ -21,6 +21,7 @@ inline std::string storyLabel(const nlohmann::json& post){
     if(category=="records")return "Record Book";
     if(category=="streaks")return "Streak";
     if(category=="analytics")return "Analysis";
+    if(category=="preseason")return "Preseason";
     if(category=="results"||category=="team-stats"||category=="player-stats")return "Recap";
     if(category=="recruiting"||category=="offers")return "Recruiting";
     if(category=="schedule")return "Upcoming";
@@ -65,7 +66,7 @@ struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
 inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:4096;}
 inline constexpr std::array<const char*,10> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Team Accounts","Players & Recruits","Fans"};
-inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();
@@ -93,7 +94,7 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
     if(j.contains("scopeOptions"))for(const auto& o:j.at("scopeOptions"))catalog->scopes.push_back({o.at("key").get<std::string>(),o.at("label").get<std::string>()});
     for(const auto& w:j.at("weeks")){
         Edition e;e.key=w.at("key").get<std::string>();e.week=w.at("week").get<int>();e.season=w.at("season").get<int>();e.conference=w.value("conference",nlohmann::json()).is_string()?w.at("conference").get<std::string>():"";
-        e.label="Week "+std::to_string(e.week)+", "+std::to_string(e.season);
+        e.label=w.value("phase",std::string())=="PreSeason"?"Preseason, "+std::to_string(e.season):"Week "+std::to_string(e.week)+", "+std::to_string(e.season);
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
             FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));

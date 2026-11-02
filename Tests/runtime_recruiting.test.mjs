@@ -72,3 +72,10 @@ test('native zero-based Heisman ranks match the menu and preserve the leader and
 test('native forced-silhouette preference survives portrait normalization',async()=>{
  const input=raw('None');input.records.player.v.PLYR_PORTRAIT=146;input.records.player.v.PortraitForceSilhouette=true;const s=await readRuntime(input);assert.equal(s.players[0].portrait,146);assert.equal(s.players[0].portraitForcedSilhouette,true);
 });
+test('preseason honors resolve current native awards, conference references and roster membership only',async()=>{
+ const input=raw('None');Object.assign(input.records.season.v,{CurrentStage:'PreSeason',CurrentWeekType:'PreSeason'});input.records.player.v.TeamIndex=1;
+ input.records.awards={key:'awards',type:'Awards',capacity:1,v:{AllAmAwards:'honors'}};input.records.honors={key:'honors',type:'PlayerAward[]',capacity:1,v:{Member0:'a',Member1:'old',Member2:'weekly',Member3:'wrong-team'}};
+ const award={AwardType:'ALL_AM_1ST_PRE',Period:'Season',PeriodIndex:1,Player:'player',Team:'team'};
+ for(const [key,changes] of [['a',{}],['old',{PeriodIndex:0}],['weekly',{AwardType:'Offensive_Player_of_Week'}],['wrong-team',{Team:null}]])input.records[key]={key,type:'PlayerAward',capacity:1,v:{...award,...changes}};
+ const s=await readRuntime(input);assert.deepEqual(s.preseasonHonors.map(a=>a.id),['a']);assert.equal(s.recruitStatuses[0].nationalRank,50);
+});

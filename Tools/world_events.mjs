@@ -1,12 +1,13 @@
+import {publicPoll} from './public_polls.mjs';
 const final=g=>g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
 const ranked=n=>Number.isInteger(n)&&n>=1&&n<=25;
 export function recruitSignificance(stars,prestige,rank){return rank===1?'number-one':stars>=4&&Number.isFinite(prestige)&&prestige<=2?'program-changer':stars===5?'five-star':Number.isFinite(prestige)&&prestige>=4.5&&stars>0&&stars<=2?'questioned':'normal';}
 export function worldEvents(s){
  const week=s.season.CurrentWeek,teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),players=new Map(s.players.map(p=>[p.id,p])),events=[];
  const games=s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase===s.season.CurrentWeekType&&g.week<=week&&final(g));
- const recent=games.filter(g=>g.week>=week-1),emit=(id,category,facts,options={})=>events.push({id,category,facts,options});
+ const poll=publicPoll(s),recent=games.filter(g=>g.week>=week-1),emit=(id,category,facts,options={})=>events.push({id,category,facts,options});
  for(const g of recent){if(g.homeScore===g.awayScore)continue;const winner=g.homeScore>g.awayScore?g.home:g.away,loser=winner===g.home?g.away:g.home,w=teams.get(winner),l=teams.get(loser);if(!w||!l)continue;
-  const observed=s.pregameGames?.[g.id],rank=t=>observed?.ranks?.[t.id]??(g.week===week-1?t.mediaLastRank:t.mediaRank),wr=rank(w),lr=rank(l);
+  const observed=s.pregameGames?.[g.id],rank=t=>observed?.ranks?.[t.id]??(g.week===week-1?(poll.comparable?t[poll.lastField]:null):t[poll.field]),wr=rank(w),lr=rank(l);
   const lineUpset=observed?.favorite===loser&&observed.spread>=10,pollUpset=Number.isInteger(wr)&&Number.isInteger(lr)&&ranked(lr)&&(!ranked(wr)||wr-lr>=8);
   if(lineUpset||pollUpset){const huge=lineUpset&&observed.spread>=20||ranked(lr)&&lr<=5&&!ranked(wr);emit('upset:'+g.id,'upsets',{gameId:g.id,winner:w.name,loser:l.name,winnerRank:ranked(wr)?wr:null,loserRank:ranked(lr)?lr:null,winnerLabel:(Number.isInteger(wr)?(ranked(wr)?'#'+wr:'Unranked')+' ':'')+w.name,loserLabel:(ranked(lr)?'#'+lr+' ':'')+l.name,score:Math.max(g.homeScore,g.awayScore)+'–'+Math.min(g.homeScore,g.awayScore),huge,importance:huge?'major':'notable',family:'world.upset'},{team:winner,relatedTeams:[winner,loser],national:true,priority:huge?112:103,thread:'game:'+g.id,eventWeek:g.week});}
  }

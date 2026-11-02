@@ -1,0 +1,302 @@
+{
+  "format": 1,
+  "revision": "voices-5-preseason",
+  "families": {
+    "preseason.poll.beat": [
+      {
+        "id": "preseason.poll.beat.1",
+        "body": "{school} opens at No. {rank} in the preseason AP poll. A starting point for the season, with plenty still to prove once the games begin."
+      },
+      {
+        "id": "preseason.poll.beat.2",
+        "body": "Preseason AP: {school} is No. {rank}. That is the expectation heading into opening week. Now comes the part that counts."
+      },
+      {
+        "id": "preseason.poll.beat.3",
+        "body": "{school} starts the year ranked No. {rank} in the AP poll. The preseason conversation has a number attached to it now."
+      }
+    ],
+    "preseason.team.hype": [
+      {
+        "id": "preseason.team.hype.1",
+        "body": "A new season. Same {nickname} pride. {hashtag}"
+      },
+      {
+        "id": "preseason.team.hype.2",
+        "body": "The wait is almost over. {nickname}, let’s get to work. {hashtag}"
+      },
+      {
+        "id": "preseason.team.hype.3",
+        "body": "One team. A whole new season ahead. {nickname}. {hashtag}"
+      },
+      {
+        "id": "preseason.team.hype.4",
+        "body": "Ready to make some noise. {nickname} football is coming. {hashtag}"
+      }
+    ],
+    "preseason.fan.excited": [
+      {
+        "id": "preseason.fan.excited.1",
+        "body": "every year i tell myself i’m gonna be normal about {school} football. anyway i’m ready for kickoff"
+      },
+      {
+        "id": "preseason.fan.excited.2",
+        "body": "missed spending my entire weekend thinking about the {nickname}. we’re so back"
+      },
+      {
+        "id": "preseason.fan.excited.3",
+        "body": "new season and i’ve already talked myself into {school}. nobody try to be reasonable with me right now"
+      },
+      {
+        "id": "preseason.fan.excited.4",
+        "body": "the {nickname} haven’t played a snap and i’m already planning my Saturdays around this team"
+      }
+    ],
+    "preseason.fan.nervous": [
+      {
+        "id": "preseason.fan.nervous.1",
+        "body": "i love {school} football but please give me one season where watching feels good for my blood pressure"
+      },
+      {
+        "id": "preseason.fan.nervous.2",
+        "body": "the excitement and the fear are arriving at the exact same time. must be {nickname} season"
+      },
+      {
+        "id": "preseason.fan.nervous.3",
+        "body": "trying to keep my expectations reasonable for {school}. failing at that before we’ve even kicked off"
+      },
+      {
+        "id": "preseason.fan.nervous.4",
+        "body": "ready for {nickname} football. also terrified. pretty standard preseason for me"
+      }
+    ],
+    "preseason.player.Leader": [
+      {
+        "id": "preseason.player.Leader.1",
+        "body": "love this group. ready to put it out there together {hashtag}"
+      },
+      {
+        "id": "preseason.player.Leader.2",
+        "body": "grateful for another season with my guys. can’t wait to see y’all {hashtag}"
+      }
+    ],
+    "preseason.player.Intense": [
+      {
+        "id": "preseason.player.Intense.1",
+        "body": "counting down. ready to get after it with my guys {hashtag}"
+      },
+      {
+        "id": "preseason.player.Intense.2",
+        "body": "camp days stacking up. ready for that first one {hashtag}"
+      }
+    ],
+    "preseason.player.Entertainer": [
+      {
+        "id": "preseason.player.Entertainer.1",
+        "body": "missed this feeling. football season needs to hurry up {hashtag}"
+      },
+      {
+        "id": "preseason.player.Entertainer.2",
+        "body": "y’all ready?? because i am {hashtag}"
+      }
+    ],
+    "preseason.player.TeamPlayer": [
+      {
+        "id": "preseason.player.TeamPlayer.1",
+        "body": "another season with my brothers. wouldn’t trade it {hashtag}"
+      },
+      {
+        "id": "preseason.player.TeamPlayer.2",
+        "body": "love being around this team. ready to give y’all something to cheer for {hashtag}"
+      }
+    ],
+    "preseason.player.Unpredictable": [
+      {
+        "id": "preseason.player.Unpredictable.1",
+        "body": "season can’t get here fast enough. keep that same energy when it does {hashtag}"
+      },
+      {
+        "id": "preseason.player.Unpredictable.2",
+        "body": "been quiet for a reason. see y’all soon {hashtag}"
+      }
+    ],
+    "preseason.player.Neutral": [
+      {
+        "id": "preseason.player.Neutral.1",
+        "body": "ready to get back out there. appreciate everybody riding with us {hashtag}"
+      },
+      {
+        "id": "preseason.player.Neutral.2",
+        "body": "new season coming. thankful i get to do this {hashtag}"
+      }
+    ],
+    "preseason.player.QB": [
+      {
+        "id": "preseason.player.QB.1",
+        "body": "excited for another season with this team. appreciate all the support {hashtag}"
+      },
+      {
+        "id": "preseason.player.QB.2",
+        "body": "can’t wait to get back out there with my guys. see y’all soon {hashtag}"
+      }
+    ],
+    "preseason.opener.beat": [
+      {
+        "id": "preseason.opener.beat.1",
+        "body": "{school} opens the season against {opponent}. That is the first real checkpoint after camp, with the rest of the schedule still ahead."
+      },
+      {
+        "id": "preseason.opener.beat.2",
+        "body": "First up for {school}: {opponent}. An offseason of preparation is about to meet an actual opponent."
+      },
+      {
+        "id": "preseason.opener.beat.3",
+        "body": "{opponent} is the opener for {school}. Plenty of preseason talk; that matchup will give us something more concrete."
+      }
+    ],
+    "preseason.outlook.analyst": [
+      {
+        "id": "preseason.outlook.analyst.1",
+        "body": "{school}: {count} national preseason All-America {selectionLabel}, with {playerName} on the list. A useful place to start when looking at where the expectations come from."
+      },
+      {
+        "id": "preseason.outlook.analyst.2",
+        "body": "{count} national preseason All-America {selectionLabel} for {school}. Keep an eye on {playerName} when the season opens."
+      },
+      {
+        "id": "preseason.outlook.analyst.3",
+        "body": "{school} brings {count} national preseason All-America {selectionLabel} into the year, with {playerName} on that list. Recognition is there; the games will tell us how it translates."
+      }
+    ],
+    "preseason.honor.beat": [
+      {
+        "id": "preseason.honor.beat.1",
+        "body": "{school}’s {playerName} is a {award} selection. Recognition before the opening game, and a name to keep an eye on this season."
+      },
+      {
+        "id": "preseason.honor.beat.2",
+        "body": "{award} honors for {playerName} of {school}. A preseason nod with a full season still ahead."
+      },
+      {
+        "id": "preseason.honor.beat.3",
+        "body": "{playerName} of {school} makes the {award} team. One of the players carrying expectations into opening week."
+      }
+    ],
+    "preseason.title.model": [
+      {
+        "id": "preseason.title.model.1",
+        "body": "Model title futures: {school} {odds}. A fictional preseason price from our roster-based model, not a sportsbook line. Plenty can change once the games start."
+      },
+      {
+        "id": "preseason.title.model.2",
+        "body": "{school}: {odds} in our model’s national-title futures. These are fictional preseason estimates, with the entire season still to be played."
+      },
+      {
+        "id": "preseason.title.model.3",
+        "body": "Our fictional title board has {school} at {odds}. A preseason model estimate, not a real betting market."
+      }
+    ],
+    "preseason.recruit.watch": [
+      {
+        "id": "preseason.recruit.watch.1",
+        "body": "Recruiting name to know: {starDetail}{position} {playerName}, No. {nationalRank} nationally. One of the prospects to watch as the season approaches."
+      },
+      {
+        "id": "preseason.recruit.watch.2",
+        "body": "{playerName} is the No. {nationalRank} recruit in the country, a {starDetail}{position}. Keeping that name on the radar heading into the season."
+      },
+      {
+        "id": "preseason.recruit.watch.3",
+        "body": "Preseason recruiting watch: No. {nationalRank} {playerName}, {starDetail}{position}. A name worth following as this class takes shape."
+      }
+    ],
+    "preseason.recruit.self": [
+      {
+        "id": "preseason.recruit.self.1",
+        "body": "ready to get back on the field. a lot to look forward to this year"
+      },
+      {
+        "id": "preseason.recruit.self.2",
+        "body": "new season almost here. appreciate everybody showing love"
+      },
+      {
+        "id": "preseason.recruit.self.3",
+        "body": "football can’t get here fast enough. ready to go"
+      }
+    ],
+    "preseason.gauntlet.analyst": [
+      {
+        "id": "preseason.gauntlet.analyst.1",
+        "body": "{school} faces {count} preseason AP-ranked opponents across Weeks {startWeek}–{endWeek}: {opponents}. The rankings will change, but that stretch already stands out on the schedule."
+      },
+      {
+        "id": "preseason.gauntlet.analyst.2",
+        "body": "Circle Weeks {startWeek}–{endWeek} for {school}. {count} opponents from the preseason AP Top 25 in that window: {opponents}. A concentrated test rather than a schedule that spreads those games out."
+      }
+    ],
+    "preseason.respect.analyst": [
+      {
+        "id": "preseason.respect.analyst.1",
+        "body": "{school} is No. {rank} in the preseason AP poll, but No. {modelRank} on our fictional title-model board. The model is higher on this roster than the voters are. Worth watching once the games start."
+      },
+      {
+        "id": "preseason.respect.analyst.2",
+        "body": "One preseason disagreement: AP has {school} No. {rank}; our fictional title model puts them No. {modelRank}. That gap is a reason to watch, not a guarantee the voters got it wrong."
+      }
+    ],
+    "preseason.caution.analyst": [
+      {
+        "id": "preseason.caution.analyst.1",
+        "body": "{school} starts No. {rank} in the AP poll. Our fictional title model has them No. {modelRank}. The voters see a stronger contender than the model does; the season will settle that argument."
+      },
+      {
+        "id": "preseason.caution.analyst.2",
+        "body": "The AP voters have {school} No. {rank}, compared with No. {modelRank} on our fictional title-model board. A preseason ranking to keep in mind when judging what this team actually does."
+      }
+    ],
+    "preseason.debate.fan": [
+      {
+        "id": "preseason.debate.fan.1",
+        "body": "{analystHandle} y’all can argue about the model all day. i’m ready to watch the {nickname} actually play"
+      },
+      {
+        "id": "preseason.debate.fan.2",
+        "body": "{analystHandle} saving this for later. {school} hasn’t even kicked off yet and we’re already doing this lol"
+      },
+      {
+        "id": "preseason.debate.fan.3",
+        "body": "{analystHandle} preseason arguments are undefeated. just give me {nickname} football already"
+      }
+    ],
+    "preseason.coaches.beat": [
+      {
+        "id": "preseason.coaches.beat.1",
+        "body": "The preseason polls disagree on {school}: No. {rank} in the AP poll, No. {coachesRank} in the Coaches poll. Two different starting points for the same team."
+      },
+      {
+        "id": "preseason.coaches.beat.2",
+        "body": "{school} opens at No. {rank} with the AP and No. {coachesRank} with the Coaches poll. A real gap in how the two voting groups view this team before kickoff."
+      }
+    ],
+    "preseason.talent.analyst": [
+      {
+        "id": "preseason.talent.analyst.1",
+        "body": "{conference} preseason talent map: {leaders} {leadVerb} with {leaderCount} players on the All-Conference teams. {count} different players earned selections across the league. Those honors show where expectations are concentrated."
+      },
+      {
+        "id": "preseason.talent.analyst.2",
+        "body": "{leaders} {leadVerb} in preseason All-{conference} representation: {leaderCount} players. The conference’s first and second teams recognize {count} different players overall."
+      }
+    ],
+    "poll.initial.beat": [
+      {
+        "id": "poll.initial.beat.1",
+        "body": "CFP rankings: {school} checks in at No. {rank}. The committee’s view of the playoff picture is now the ranking to watch."
+      },
+      {
+        "id": "poll.initial.beat.2",
+        "body": "{school} is No. {rank} in the published CFP rankings. The playoff conversation has the committee’s numbers attached to it."
+      }
+    ]
+  }
+}

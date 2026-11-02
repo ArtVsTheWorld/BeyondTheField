@@ -15,7 +15,7 @@ Before broader release, validate active-Dynasty switching, an actual older-save 
 1. Voice/tone direction approved from thirty samples and subsequent revisions. Legacy prototype wording is retired.
 2. Core event conditions verified; weekly awards, verified records and 50 additional analysis scenarios are implemented; deeper depth-chart, NIL and transfer stories remain.
 3. Event detection, persistent authors, editable templates and native avatar routing are separate components.
-4. Expanded catalog reaches the initial target with 277 variants, including more player/fan perspectives and replies.
+4. Expanded catalog reaches the initial target with 339 variants, including more player/fan perspectives and replies.
 5. Two-week template cooldown preferences, stable same-week selections/admission order, account/voice caps, reply dependencies and complete curated conversation blocks are implemented. Multiweek in-game tuning remains.
 6. First pack verified live as v50 with 65 tests. The v63 build passes 95 Node tests plus native checks, and the user verified its 30/100/60 feed sizes, likes order, replies, filters and scrolling. The v64 MMC adapter adds startup waiting and package tests. Longer rollover testing and historical-edition restoration remain.
 
@@ -32,3 +32,11 @@ The analytics and fog-of-war components are planned integrations, not included i
 ## MMC prototype integration
 
 The managed adapter, native runtime package, payload/configuration checks, startup readiness wait and history migration are implemented in v64. A full MMC cold launch now automatically loads the runtime, waits through title/loading, activates in a fresh preseason Dynasty and publishes Week 0. The user verified the Social Media button after one native menu refresh. Immediate automatic refresh of a cached first hub remains startup polish. Final distribution polish, updates and integration of the other two mods remain later work.
+
+## Preseason / startup correction (v67 candidate)
+
+Preseason coverage includes actual AP/Coaches polls, native national/conference honors, outlooks, camp/hype/recruiting voices, fictional title futures, schedule gauntlets, poll-model debates with replies and conference talent maps. AP/CFP selection uses native public poll data and preserves the historical pregame basis. Local tests cover missing data, current-year awards, TeamBuilder identity, phase isolation and unsaved offers.
+
+The fixed startup delay is removed; early menu hooks capture the first hub. Phase-specific filter-model reacquisition and safe navigation fallback address the blank/stuck regular-season Week 0 page. Native and automated story tests pass; live BYU/TeamBuilder recovery and first-hub/phase transition checks are pending. Preseason archives remain phase-isolated; a cross-phase week-picker presentation remains later work.
+
+The v66 entry attempt failed before page activation. Recovery stopped the hooks, disabled automatic loading, and verified all four save hashes unchanged. v67 now follows the front-end service to the actual CareerManager/database and reads 600 live preseason honors; it completes cancelled native navigation and separates UI readiness from feed generation. Live retesting remains pending.

@@ -15,7 +15,7 @@ export function curate(stories,limit=30){
  const pool=stories.filter(p=>p.curated!==false&&p.scopes.length).sort(order),map=new Map(pool.map(p=>[p.id,p]));
  const target={national:Math.round(limit*.35),conference:Math.floor(limit*.25),team:0};target.team=limit-target.national-target.conference;
  const selected=[],used=new Set(),counts={national:0,conference:0,team:0},categories=new Map(),threads=new Map(),templates=new Map(),accounts=new Map(),voices=new Map();
- const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5};
+ const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5,'preseason':5};
  const voiceMax={beat:8,analyst:4,official:4,player:4,fan:5,recruit:3,model:1};
  const scaled=n=>Math.ceil(n*limit/20);
  function accept(post,respectTargets=false){

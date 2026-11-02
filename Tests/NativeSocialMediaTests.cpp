@@ -17,6 +17,9 @@ void __fastcall donorRows(void*,void*,void* out){
 unsigned filterForwardCalls=0;
 void __fastcall originalFilter(void*,void* out,void*,void*){++filterForwardCalls;rowText(out,0,"display","Original category");}
 unsigned changedForwardCalls=0;
+unsigned navForwardCalls=0;
+std::string navForwardName;
+void __fastcall originalNav(void*,unsigned,const char* name,void*){++navForwardCalls;navForwardName=name?name:"";}
 void __fastcall originalChanged(void*,const char*,const char*,void*){++changedForwardCalls;}
 struct FilterValue {void** vt;int key;};
 int __fastcall filterKey(FilterValue* value){return value->key;}
@@ -25,6 +28,14 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
+        {
+            using dynasty::live::Address;const Address image=0x140000000,svc=0x100000,career=0x110000,ui=0x120000,owner=0x130000,db=0x140000;
+            std::map<Address,Address> cells={{image+0xfa519b8,svc},{svc,image+0xbaa8998},{svc+0x468,career},{svc+0x470,ui},{svc+0x460,owner},{svc+0x7b1,1},{career,image+0xbce9b08},{ui,image+0xbd7a538},{career+0x20,owner},{career+0x238,db},{db,image+0xbd0d2d8}};
+            auto q=[&](Address a){return cells.at(a);};const auto bound=dynasty::live::activeSession(image,q);require(bound.career==career&&bound.database==db,"Canonical CareerManager ownership did not resolve the shared database");cells[db]=image+0xbd0d378;require(dynasty::live::activeSession(image,q).database==db,"Direct active child context was rejected");
+            for(const auto& fault:std::vector<std::pair<Address,Address>>{{svc+0x7b1,0},{svc+0x468,0},{career,0},{ui,0},{career+0x20,0},{db,0}}){const auto old=cells.at(fault.first);cells[fault.first]=fault.second;bool rejected=false;try{dynasty::live::activeSession(image,q);}catch(...){rejected=true;}require(rejected,"Inactive or foreign career ownership was accepted");cells[fault.first]=old;}
+            require(dynasty::live::supportedRecordLayout(true,1,8100,9)&&!dynasty::live::supportedRecordLayout(false,1,8100,9)&&!dynasty::live::supportedRecordLayout(true,1,16385,9),"Award-array capacity exception escaped its array-only bounds");
+        }
         {
             unsigned probes=0,pauses=0,reports=0;bool cancel=false;
             const bool ready=social::awaitStartup([&]{return cancel;},[&]{++probes;return probes<=2?std::string("Title screen"):probes==3?std::string("Dynasty assets loading"):std::string();},[&](const std::string&){++reports;},[&]{++pauses;});
@@ -184,9 +195,16 @@ int main(int argc,char** argv){
             require(memcmp(screenBytes+0x8a0,dropdownPatches[0].original.data(),726)==0,"A failed dropdown gate partially changed the screen");modelBytes[0x24ae0]^=1;
             require(configureNewsDropdowns(true)&&dropdownScreenOwned&&dropdownModelOwned&&configureNewsDropdowns(true),"Dropdown activation or idempotence failed");
             for(const auto& p:dropdownPatches)require(memcmp((p.model?modelBytes:screenBytes)+p.offset,p.changed.data(),p.changed.size())==0,"Dropdown bytes differ from the bounded candidate");
-            modelBytes[0x24ae0]^=1;require(!configureNewsDropdowns(false)&&dropdownModelOwned,"Dropdown restore must preserve foreign model changes");modelBytes[0x24ae0]^=1;
+            modelBytes[0x24ae0]^=1;require(!configureNewsDropdowns(false)&&dropdownModelOwned,"Dropdown restore must preserve foreign model changes");
+            savedNav=navRequest;navRequest=originalNav;const bool previousValidated=feedValidated;feedValidated=true;opened=false;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","A failed dropdown model gate must complete through native no-action navigation");navForwardCalls=0;feedValidated=previousValidated;navRequest=savedNav;modelBytes[0x24ae0]^=1;
             require(configureNewsDropdowns(false)&&!dropdownScreenOwned&&!dropdownModelOwned,"Dropdown restore failed");
             for(const auto& p:dropdownPatches)require(memcmp((p.model?modelBytes:screenBytes)+p.offset,p.original.data(),p.original.size())==0,"Dropdown function failed exact restoration");
+            auto* replacementModel=static_cast<unsigned char*>(VirtualAlloc(nullptr,0x30000,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));require(replacementModel!=nullptr,"Replacement model fixture allocation failed");
+            memcpy(replacementModel,"Apt Data:1:7:8",14);for(const auto& p:dropdownPatches)if(p.model)memcpy(replacementModel+p.offset,p.original.data(),p.original.size());
+            modelBytes[0x24a58]^=1;require(ensureNewsModel()&&newsModelBase==reinterpret_cast<uintptr_t>(replacementModel),"Preseason replacement model was not reacquired");
+            require(configureNewsDropdowns(true)&&configureNewsDropdowns(false),"Replaced model did not support entry and exit");
+            require(modelBytes[0x24a58]!=(dropdownPatches[6].original[0]),"Stale model allocation was overwritten");
+            VirtualFree(replacementModel,0,MEM_RELEASE);
             VirtualFree(screenBytes,0,MEM_RELEASE);VirtualFree(modelBytes,0,MEM_RELEASE);newsTemplate=0;newsModelBase=0;dropdownScreenBase=0;
         }
 #endif

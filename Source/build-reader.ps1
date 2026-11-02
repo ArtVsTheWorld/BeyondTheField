@@ -1,4 +1,4 @@
-param([string]$NativeName='DynastyEnhancer',[switch]$Preflight,[switch]$ScrollTest,[switch]$ExperimentalFocus,[switch]$ListFeed,[switch]$ReadOnlyFeed=$true,[switch]$DualDropdown=$true)
+param([string]$SourceFile='LiveCapture.cpp',[string]$OutputName='LiveCapture')
 $ErrorActionPreference='Stop'
 $analyticsRoot=Split-Path -Parent $PSScriptRoot
 $analyticsOut=Join-Path $analyticsRoot 'Build'
@@ -15,6 +15,6 @@ $analyticsCommon=@('/nologo','/O2','/MT','/W4','/WX','/EHsc','/std:c++17','/utf-
 $analyticsCommon+=('/I'+(Join-Path $analyticsSdk.FullName 'winrt'))
 Push-Location $analyticsOut
 try {
-    & $analyticsCl @analyticsCommon (Join-Path $PSScriptRoot 'LiveCapture.cpp') /Fe:LiveCapture.exe /link @analyticsLib /INCREMENTAL:NO
+    & $analyticsCl @analyticsCommon (Join-Path $PSScriptRoot $SourceFile) ('/Fe:'+$OutputName+'.exe') /link @analyticsLib /INCREMENTAL:NO
     if($LASTEXITCODE -ne 0){throw 'Live reader build failed'}
 } finally {Pop-Location}

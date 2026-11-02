@@ -43,11 +43,11 @@
     "team.poll_up": [
       {
         "id": "team.poll_up.1",
-        "body": "Moving on up.\nNo. {previousRank} -> No. {rank} for the {nickname}. {hashtag}"
+        "body": "Moving on up.\n{pollName}: No. {previousRank} -> No. {rank} for the {nickname}. {hashtag}"
       },
       {
         "id": "team.poll_up.2",
-        "body": "The {nickname} check in at No. {rank}. Up from No. {previousRank}. {hashtag}"
+        "body": "The {nickname} check in at No. {rank} in the {pollName}. Up from No. {previousRank}. {hashtag}"
       }
     ],
     "team.upcoming": [
@@ -103,29 +103,29 @@
     "beat.poll_up": [
       {
         "id": "beat.poll_up.1",
-        "body": "{school} moves from No. {previousRank} to No. {rank} in the latest poll. The {nickname} have climbed {places} {placeLabel} this week."
+        "body": "{school} moves from No. {previousRank} to No. {rank} in the latest {pollName}. The {nickname} have climbed {places} {placeLabel} this week."
       },
       {
         "id": "beat.poll_up.2",
-        "body": "No. {rank} for {school} in the latest poll, up from No. {previousRank}. A climb of {places} {placeLabel} for the {nickname}."
+        "body": "No. {rank} for {school} in the latest {pollName}, up from No. {previousRank}. A climb of {places} {placeLabel} for the {nickname}."
       }
     ],
     "beat.poll_down": [
       {
         "id": "beat.poll_down.1",
-        "body": "{school} slips from No. {previousRank} to No. {rank} in the latest poll. That is a drop of {places} {placeLabel}."
+        "body": "{school} slips from No. {previousRank} to No. {rank} in the latest {pollName}. That is a drop of {places} {placeLabel}."
       }
     ],
     "beat.poll_entry": [
       {
         "id": "beat.poll_entry.1",
-        "body": "{school} enters this week’s Top 25 at No. {rank}. A new name in the rankings."
+        "body": "{school} enters this week’s {pollName} Top 25 at No. {rank}. A new name in the rankings."
       }
     ],
     "beat.poll_same": [
       {
         "id": "beat.poll_same.1",
-        "body": "{school} holds at No. {rank} in this week’s poll."
+        "body": "{school} holds at No. {rank} in this week’s {pollName}."
       }
     ],
     "beat.injury": [

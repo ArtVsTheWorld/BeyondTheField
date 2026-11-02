@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "version": "v67 preseason recovery candidate",
+  "nativeSha256": "d63b7029064f4d4f127093a3b471b291e82c748fd631e6becf273821886f80ed",
+  "adapterSha256": "aa838ca96ed40569879398f8090cc7a187b82e402b5845564c28890cc5f6a2fd",
+  "zipSha256": "590e3c8d8e1ca83b8b22d8e37478ddb38f7c9da30790a28d1c3b455c29acad75",
+  "nodeTestsPassed": 109,
+  "nativeTestsPassed": true,
+  "actualPreseasonCatalogDecodePassed": true,
+  "adapterSmokePassed": true,
+  "preseason": {
+    "phase": "PreSeason",
+    "league": -107703141,
+    "team": 15,
+    "year": 2026,
+    "week": 0,
+    "rawRecords": 73770,
+    "nativePreseasonHonors": 600,
+    "apRankedTeams": 25,
+    "coachesRankedTeams": 25,
+    "cfpRankedTeams": 0,
+    "stories": 2382,
+    "forYou": 29
+  },
+  "liveVerified": [
+    "All four preseason/Week0 saves match SHA-256 verified backups after the v66 failure",
+    "Preseason save opens normally with Dynasty Enhancer disabled",
+    "Corrected read-only capture resolves native front-end/CareerManager/database ownership",
+    "v67 native runtime activated and published preseason news directly from the active Dynasty"
+  ],
+  "livePending": [
+    "Native preseason page and Back navigation",
+    "Preseason to regular-season Week0 transition",
+    "Main-menu exit and Dynasty reload",
+    "v67 MMC cold start without title-screen delay"
+  ],
+  "automaticLoaderEnabled": false,
+  "previousCandidate": {
+    "version": "v66",
+    "firstHubButton": "passed",
+    "entry": "failed: reader ownership invalid and early guard returned without completing native navigation",
+    "stop": "success",
+    "saveFilesChanged": false
+  }
+}
