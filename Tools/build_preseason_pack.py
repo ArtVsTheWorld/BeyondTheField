@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 families={}
-def add(key,*bodies):families[key]=[{'id':key+'.'+str(i+1),'body':body} for i,body in enumerate(bodies)]
+def add(key,*bodies):families[key]=[{'id':key+'.'+str(i+1),'body':body+('{recruitRankDetail}' if key=='preseason.recruit.watch' and i%2==0 else '')} for i,body in enumerate(bodies)]
 add('preseason.poll.beat',
     '{school} opens at No. {rank} in the preseason AP poll. A starting point for the season, with plenty still to prove once the games begin.',
     'Preseason AP: {school} is No. {rank}. That is the expectation heading into opening week. Now comes the part that counts.',

@@ -131,3 +131,8 @@ The two existing dropdowns, native viewport mask, smooth scrolling and category/
 ## Second-test expansion (v71)
 
 The current package adds supported skipped-week recovery, native on-white/secondary logos, revised account identities, a stable 33% reply gate, more personalized 30-post selection, and 84 preseason/opening variants. The native DLL is `Build/DynastyEnhancerNative-v71.dll`; the MMC package is `Build/DynastyEnhancer-v71-MMC.zip`. See [coverage and data limits](docs/test-two-expansion.md). Automated validation now includes 129 Node tests plus native and MMC adapter checks. The optional supplied ESPN PNG still needs a separate native texture import.
+
+
+## Account and recruiting continuity update (v72)
+
+v72 adds CanDuel Sports, separate Players/Recruits types, requested native analyst/helmet/mascot images, TeamBuilder secondary images, given-name teammate references and native state/position recruiting ranks. It repairs the observed skipped-week recruiting gap using explicit catch-up reporting and a retained historical observation. [Implementation, artwork IDs and test status](docs/account-refresh-v72.md). Current artifacts: `Build/DynastyEnhancerNative-v72.dll` and `Build/DynastyEnhancer-v72-MMC.zip`.

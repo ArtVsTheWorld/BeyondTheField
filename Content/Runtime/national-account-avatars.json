@@ -1,0 +1,35 @@
+{
+  "source": "Exact installed native asset metadata, no image resources redistributed",
+  "portraits": {
+    "0": {
+      "imageLibrary": 34,
+      "imageValue": 1096,
+      "assetName": "dynas_general_TeamNeed"
+    },
+    "4": {
+      "imageLibrary": 5,
+      "imageValue": 3,
+      "assetName": "nilcp_Generic_0003_C_T0133_M_2_4"
+    },
+    "3": {
+      "imageLibrary": 62,
+      "imageValue": 228,
+      "assetName": "ucp_narrative_femalereporter4"
+    },
+    "2": {
+      "imageLibrary": 62,
+      "imageValue": 243,
+      "assetName": "ucp_narrative_HSmalereporter2"
+    },
+    "5": {
+      "imageLibrary": 62,
+      "imageValue": 235,
+      "assetName": "ucp_narrative_malereporter3"
+    },
+    "1": {
+      "imageLibrary": 62,
+      "imageValue": 236,
+      "assetName": "ucp_narrative_malereporter4"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 families={}
-def add(key,*bodies):families[key]=[{'id':key+'.'+str(i+1),'body':b} for i,b in enumerate(bodies)]
+def add(key,*bodies):families[key]=[{'id':key+'.'+str(i+1),'body':b+('{recruitRankDetail}' if key in ['beat.recruit_pickup','beat.recruit_questioned'] and i%2==0 else '')} for i,b in enumerate(bodies)]
 team={
 'scoring-offense':('{school} is averaging {value} points through {games} games. That is a lot to ask the next defense to keep up with.','{games} games in, {school} is putting up {value} points a game. The scoreboard pressure is real.'),
 'scoring-defense':('{school} is allowing {value} points per game through {games} games. That number puts the rest of the team’s work in context.',),

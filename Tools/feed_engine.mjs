@@ -6,10 +6,10 @@ import {renderStories,CONTENT_REVISION} from './story_renderer.mjs';
 import {PUBLICATION_POLICY_VERSION} from './publication_policy.mjs';
 export {detectEvents,weekKey};
 export const ENGINE_VERSION=2;
-export function trackOffers(s,sameWeek=null,previous=null){
+export function trackOffers(s,sameWeek=null,previous=null,earlier=null){
   const valid=(x,w)=>x&&x.leagueId===s.leagueId&&x.season.CurrentSeasonYear===s.season.CurrentSeasonYear&&x.season.CurrentWeekType===s.season.CurrentWeekType&&x.season.CurrentWeek===w;
   const same=valid(sameWeek,s.season.CurrentWeek)?sameWeek:null;
-  const prior=valid(previous,s.season.CurrentWeek-1)?previous:null;
+  const prior=valid(previous,s.season.CurrentWeek-1)?previous:earlier&&valid(earlier,earlier.season.CurrentWeek)&&Number.isInteger(earlier.season.CurrentWeek)&&earlier.season.CurrentWeek<s.season.CurrentWeek-1?earlier:null;
   const baseline=Array.isArray(same?.offers)?same:Array.isArray(prior?.offers)?prior:null;
   const key=o=>`${o.team}:${o.player}`,current=new Set(s.offers.map(key));
   // A rewind or withdrawn offer cannot leave a fact in this week's feed that
@@ -26,5 +26,5 @@ export function buildFeed(s,previous=null,options={}){
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,publicationPolicyVersion:PUBLICATION_POLICY_VERSION,
-    scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
+    presentationVersion:2,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
 }

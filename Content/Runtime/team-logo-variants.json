@@ -9,6 +9,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 0
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 1
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 0
       }
     },
     "1": {
@@ -18,6 +26,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 1
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 2
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 1
       }
     },
@@ -29,6 +45,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 2
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 3
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 2
       }
     },
     "3": {
@@ -38,6 +62,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 3
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 4
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 3
       }
     },
@@ -49,6 +81,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 4
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 5
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 4
       }
     },
     "5": {
@@ -58,6 +98,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 5
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 6
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 5
       }
     },
@@ -69,6 +117,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 6
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 7
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 6
       }
     },
     "7": {
@@ -78,6 +134,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 7
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 8
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 7
       }
     },
@@ -89,6 +153,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 8
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 9
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 8
       }
     },
     "9": {
@@ -98,6 +170,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 9
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 10
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 9
       }
     },
@@ -109,6 +189,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 10
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 11
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 10
       }
     },
     "11": {
@@ -118,6 +206,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 11
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 12
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 11
       }
     },
@@ -129,6 +225,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 12
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 13
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 12
       }
     },
     "13": {
@@ -139,6 +243,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 13
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 14
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 13
       }
     },
     "14": {
@@ -148,6 +260,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 14
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 15
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 14
       }
     },
@@ -165,6 +285,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 15
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 16
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 15
       }
     },
     "16": {
@@ -174,6 +302,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 16
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 17
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 16
       }
     },
@@ -185,6 +321,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 17
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 18
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 17
       }
     },
     "18": {
@@ -194,6 +338,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 18
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 19
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 18
       }
     },
@@ -205,6 +357,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 19
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 20
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 19
       }
     },
     "20": {
@@ -214,6 +374,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 20
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 21
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 20
       }
     },
@@ -225,6 +393,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 21
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 22
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 21
       }
     },
     "22": {
@@ -234,6 +410,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 22
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 23
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 22
       }
     },
@@ -245,6 +429,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 23
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 24
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 23
       }
     },
     "24": {
@@ -254,6 +446,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 24
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 25
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 24
       }
     },
@@ -265,6 +465,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 25
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 26
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 25
       }
     },
     "415": {
@@ -275,6 +483,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 415
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 416
       }
     },
     "134": {
@@ -284,6 +496,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 134
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 135
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 134
       }
     },
@@ -295,6 +515,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 26
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 27
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 26
       }
     },
     "27": {
@@ -304,6 +532,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 27
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 28
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 27
       }
     },
@@ -315,6 +551,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 28
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 29
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 28
       }
     },
     "136": {
@@ -325,6 +569,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 136
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 137
       }
     },
     "137": {
@@ -335,6 +583,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 137
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 138
       }
     },
     "138": {
@@ -345,6 +597,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 138
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 139
       }
     },
     "139": {
@@ -355,6 +611,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 139
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 140
       }
     },
     "140": {
@@ -365,6 +625,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 140
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 141
       }
     },
     "29": {
@@ -374,6 +638,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 29
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 30
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 29
       }
     },
@@ -385,6 +657,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 30
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 31
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 30
       }
     },
     "31": {
@@ -394,6 +674,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 31
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 32
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 31
       }
     },
@@ -405,6 +693,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 32
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 33
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 32
       }
     },
     "33": {
@@ -414,6 +710,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 33
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 34
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 33
       }
     },
@@ -425,6 +729,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 34
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 35
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 34
       }
     },
     "35": {
@@ -434,6 +746,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 35
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 36
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 35
       }
     },
@@ -445,6 +765,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 36
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 37
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 36
       }
     },
     "37": {
@@ -454,6 +782,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 37
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 38
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 37
       }
     },
@@ -465,6 +801,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 38
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 39
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 38
       }
     },
     "39": {
@@ -474,6 +818,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 39
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 40
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 39
       }
     },
@@ -485,6 +837,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 40
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 41
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 40
       }
     },
     "41": {
@@ -494,6 +854,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 41
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 42
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 41
       }
     },
@@ -505,6 +873,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 42
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 43
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 42
       }
     },
     "43": {
@@ -514,6 +890,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 43
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 44
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 43
       }
     },
@@ -525,6 +909,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 44
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 45
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 44
       }
     },
     "45": {
@@ -534,6 +926,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 45
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 46
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 45
       }
     },
@@ -545,6 +945,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 46
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 47
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 46
       }
     },
     "47": {
@@ -554,6 +962,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 47
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 48
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 47
       }
     },
@@ -565,6 +981,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 133
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 134
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 133
       }
     },
     "48": {
@@ -574,6 +998,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 48
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 49
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 48
       }
     },
@@ -585,6 +1017,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 49
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 50
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 49
       }
     },
     "50": {
@@ -594,6 +1034,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 50
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 51
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 50
       }
     },
@@ -605,6 +1053,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 51
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 52
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 51
       }
     },
     "52": {
@@ -614,6 +1070,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 52
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 53
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 52
       }
     },
@@ -625,6 +1089,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 53
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 54
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 53
       }
     },
     "54": {
@@ -634,6 +1106,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 54
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 55
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 54
       }
     },
@@ -645,6 +1125,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 55
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 56
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 55
       }
     },
     "56": {
@@ -654,6 +1142,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 56
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 57
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 56
       }
     },
@@ -665,6 +1161,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 57
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 58
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 57
       }
     },
     "58": {
@@ -674,6 +1178,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 58
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 59
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 58
       }
     },
@@ -685,6 +1197,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 59
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 60
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 59
       }
     },
     "60": {
@@ -694,6 +1214,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 60
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 61
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 60
       }
     },
@@ -705,6 +1233,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 61
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 62
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 61
       }
     },
     "62": {
@@ -714,6 +1250,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 62
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 63
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 62
       }
     },
@@ -725,6 +1269,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 63
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 64
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 63
       }
     },
     "64": {
@@ -734,6 +1286,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 64
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 65
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 64
       }
     },
@@ -745,6 +1305,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 65
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 66
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 65
       }
     },
     "135": {
@@ -754,6 +1322,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 135
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 136
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 135
       }
     },
@@ -765,6 +1341,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 412
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 413
       }
     },
     "66": {
@@ -774,6 +1354,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 66
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 67
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 66
       }
     },
@@ -785,6 +1373,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 67
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 68
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 67
       }
     },
     "68": {
@@ -794,6 +1390,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 68
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 69
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 68
       }
     },
@@ -805,6 +1409,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 69
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 70
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 69
       }
     },
     "70": {
@@ -814,6 +1426,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 70
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 71
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 70
       }
     },
@@ -825,6 +1445,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 71
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 72
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 71
       }
     },
     "72": {
@@ -834,6 +1462,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 72
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 73
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 72
       }
     },
@@ -845,6 +1481,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 150
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 151
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 150
       }
     },
     "74": {
@@ -854,6 +1498,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 74
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 75
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 74
       }
     },
@@ -865,6 +1517,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 73
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 74
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 73
       }
     },
     "75": {
@@ -874,6 +1534,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 75
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 76
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 75
       }
     },
@@ -885,6 +1553,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 76
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 77
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 76
       }
     },
     "77": {
@@ -894,6 +1570,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 77
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 78
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 77
       }
     },
@@ -905,6 +1589,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 78
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 79
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 78
       }
     },
     "79": {
@@ -914,6 +1606,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 79
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 80
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 79
       }
     },
@@ -925,6 +1625,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 80
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 81
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 80
       }
     },
     "81": {
@@ -934,6 +1642,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 81
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 82
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 81
       }
     },
@@ -945,6 +1661,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 82
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 83
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 82
       }
     },
     "410": {
@@ -955,6 +1679,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 410
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 411
       }
     },
     "83": {
@@ -964,6 +1692,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 83
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 84
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 83
       }
     },
@@ -975,6 +1711,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 84
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 85
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 84
       }
     },
     "85": {
@@ -984,6 +1728,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 85
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 86
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 85
       }
     },
@@ -995,6 +1747,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 86
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 87
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 86
       }
     },
     "414": {
@@ -1005,6 +1765,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 414
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 415
       }
     },
     "87": {
@@ -1014,6 +1778,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 87
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 88
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 87
       }
     },
@@ -1025,6 +1797,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 411
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 412
       }
     },
     "413": {
@@ -1035,6 +1811,10 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 413
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 414
       }
     },
     "88": {
@@ -1044,6 +1824,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 88
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 89
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 88
       }
     },
@@ -1055,6 +1843,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 89
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 90
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 89
       }
     },
     "151": {
@@ -1064,6 +1860,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 151
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 152
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 151
       }
     },
@@ -1075,6 +1879,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 90
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 91
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 90
       }
     },
     "91": {
@@ -1084,6 +1896,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 91
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 92
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 91
       }
     },
@@ -1095,6 +1915,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 92
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 93
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 92
       }
     },
     "93": {
@@ -1104,6 +1932,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 93
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 94
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 93
       }
     },
@@ -1115,6 +1951,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 94
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 95
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 94
       }
     },
     "95": {
@@ -1124,6 +1968,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 95
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 96
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 95
       }
     },
@@ -1135,6 +1987,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 96
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 97
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 96
       }
     },
     "97": {
@@ -1144,6 +2004,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 97
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 98
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 97
       }
     },
@@ -1155,6 +2023,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 98
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 99
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 98
       }
     },
     "99": {
@@ -1164,6 +2040,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 99
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 100
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 99
       }
     },
@@ -1175,6 +2059,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 100
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 101
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 100
       }
     },
     "101": {
@@ -1184,6 +2076,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 101
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 102
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 101
       }
     },
@@ -1195,6 +2095,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 102
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 103
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 102
       }
     },
     "103": {
@@ -1204,6 +2112,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 103
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 104
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 103
       }
     },
@@ -1215,6 +2131,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 104
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 105
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 104
       }
     },
     "105": {
@@ -1224,6 +2148,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 105
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 106
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 105
       }
     },
@@ -1235,6 +2167,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 106
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 107
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 106
       }
     },
     "107": {
@@ -1244,6 +2184,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 107
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 108
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 107
       }
     },
@@ -1255,6 +2203,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 108
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 109
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 108
       }
     },
     "109": {
@@ -1264,6 +2220,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 109
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 110
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 109
       }
     },
@@ -1275,6 +2239,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 110
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 111
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 110
       }
     },
     "111": {
@@ -1284,6 +2256,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 111
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 112
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 111
       }
     },
@@ -1295,6 +2275,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 112
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 113
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 112
       }
     },
     "113": {
@@ -1304,6 +2292,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 113
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 114
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 113
       }
     },
@@ -1315,6 +2311,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 114
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 115
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 114
       }
     },
     "115": {
@@ -1324,6 +2328,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 115
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 116
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 115
       }
     },
@@ -1335,6 +2347,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 116
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 117
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 116
       }
     },
     "117": {
@@ -1344,6 +2364,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 117
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 118
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 117
       }
     },
@@ -1355,6 +2383,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 118
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 119
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 118
       }
     },
     "119": {
@@ -1364,6 +2400,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 119
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 120
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 119
       }
     },
@@ -1375,6 +2419,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 120
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 121
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 120
       }
     },
     "121": {
@@ -1384,6 +2436,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 121
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 122
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 121
       }
     },
@@ -1395,6 +2455,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 122
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 123
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 122
       }
     },
     "123": {
@@ -1404,6 +2472,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 123
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 124
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 123
       }
     },
@@ -1415,6 +2491,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 124
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 125
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 124
       }
     },
     "125": {
@@ -1424,6 +2508,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 125
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 126
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 125
       }
     },
@@ -1435,6 +2527,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 126
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 127
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 126
       }
     },
     "127": {
@@ -1444,6 +2544,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 127
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 128
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 127
       }
     },
@@ -1455,6 +2563,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 129
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 130
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 129
       }
     },
     "130": {
@@ -1464,6 +2580,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 130
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 131
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 130
       }
     },
@@ -1475,6 +2599,14 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 128
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 129
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 128
       }
     },
     "131": {
@@ -1484,6 +2616,14 @@
       },
       "secondary": {
         "imageLibrary": 89,
+        "imageValue": 131
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 132
+      },
+      "mascot": {
+        "imageLibrary": 87,
         "imageValue": 131
       }
     },
@@ -1495,7 +2635,81 @@
       "secondary": {
         "imageLibrary": 89,
         "imageValue": 132
+      },
+      "helmet": {
+        "imageLibrary": 61,
+        "imageValue": 133
+      },
+      "mascot": {
+        "imageLibrary": 87,
+        "imageValue": 132
       }
     }
-  }
+  },
+  "teamBuilderLogoIds": [
+    600,
+    601,
+    602,
+    603,
+    604,
+    605,
+    606,
+    607,
+    608,
+    609,
+    610,
+    611,
+    612,
+    613,
+    614,
+    615,
+    616,
+    617,
+    618,
+    619,
+    620,
+    621,
+    622,
+    623,
+    624,
+    625,
+    626,
+    627,
+    628,
+    629,
+    630,
+    631,
+    632,
+    633,
+    634,
+    635,
+    636,
+    637,
+    638,
+    639,
+    640,
+    641,
+    642,
+    643,
+    644,
+    645,
+    646,
+    647,
+    648,
+    649,
+    650,
+    651,
+    652,
+    653,
+    654,
+    655,
+    656,
+    657,
+    658,
+    659,
+    660,
+    661,
+    662,
+    663
+  ]
 }

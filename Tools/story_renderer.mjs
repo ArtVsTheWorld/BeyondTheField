@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {recruitRankDetail} from './recruit_ranks.mjs';
 import {hash,authorRegistry} from './story_authors.mjs';
 import {likesFor,replyLikesFor,ENGAGEMENT_VERSION} from './story_engagement.mjs';
 import {avatarFor} from './story_avatars.mjs';
@@ -22,7 +23,8 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const parent=replyTo?byId.get(replyTo):null;if(replyTo&&(!parent||!publishReply(s,e.id+':'+suffix,replyTo)))return null;
   if(role==='analyst')persona=values.analystPersona??(family.includes('advanced')||family.includes('analysis')||family.includes('rushing')||family.includes('third')||family.includes('red_')||family.includes('turnover')?4:family.includes('recruit')||family.includes('freshman')||family.includes('breakout')?5:family.includes('hot')||family.includes('prediction')||family.includes('darkhorse')||family.includes('upset')||family.includes('undefeated')||family.includes('favorite')||family.includes('opening_preview')?2:family.includes('bounceback')||family.includes('overreaction')||family.includes('dominant_debut')||family.includes('close_debut')||family.includes('opening_takeaway')?3:family.includes('poll')||family.includes('coach')?1:persona);
   const account=registry.get(s,role,team,player,persona),id=e.id+':'+suffix;
-  const filled={...values,...(parent?{parentHandle:parent.handle}:{})};
+  const filled={recruitRankDetail:recruitRankDetail(values,e.id),starDescription:Number.isInteger(values.stars)?values.stars+'-star ':'',...values,...(parent?{parentHandle:parent.handle}:{})};
+  if(role==='player'&&player&&typeof filled.playerName==='string'){const subject=[...players.values()].find(p=>p.name===filled.playerName&&(p.team===player.team||p.team===255&&['offers','recruiting'].includes(e.category)&&e.teamIds.includes(player.team)));if(subject&&subject.id!==player.id)filled.playerName=subject.firstName||subject.name.trim().split(/\s+/)[0];}
   const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
   const chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:sameStories.get(id),renderKey});if(!chosen)return null;
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
@@ -91,7 +93,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
    const values={...teamValues(team),...f},personality=personalities.has(p.personality)?p.personality:'Neutral',account=registry.get(s,'recruit',team,p);
    if(e.category==='offers')add(e,'recruit.offer.'+(account.faithLanguage?'faith':personality),values,{role:'recruit',team,player:p});
    else if(f.newlyObserved&&f.commitment==='HardCommitted')add(e,'recruit.commit.'+personality,values,{role:'recruit',team,player:p});
-   else if(f.newlyObserved){values.recruitRankDetail=numeric(f.nationalRecruitRank)?` He is No. ${f.nationalRecruitRank} nationally in this recruiting class.`:'';values.coachDetail=team.headCoach?.lastName?` A new addition for Coach ${team.headCoach.lastName}.`:'';add(e,'beat.commit',values,{team});}
+   else if(f.newlyObserved){values.recruitRankDetail=recruitRankDetail(f,e.id);values.coachDetail=team.headCoach?.lastName?` A new addition for Coach ${team.headCoach.lastName}.`:'';add(e,'beat.commit',values,{team});}
    if(e.category==='recruiting'&&f.newlyObserved&&f.commitment==='HardCommitted'&&(f.recruitSignificance==='questioned'||f.stars>=4||hash(e.id+'|star-detail')%2===0)){
     const starDescription=f.stars?f.stars+'-star ':'';add(e,f.recruitSignificance==='questioned'?'beat.recruit_questioned':'beat.recruit_pickup',{...values,starDescription},{role:'beat',team,suffix:'pickup',priority:e.priority-1});
    }

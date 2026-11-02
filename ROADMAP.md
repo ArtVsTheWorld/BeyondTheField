@@ -57,3 +57,8 @@ v68 cold MMC startup is observed in the launcher/native logs. Its Week 1 generat
 Supported skipped regular-season editions are recovered and labeled; the real 2-to-4 sim now includes Week 3. Earlier observed archives remain exact. Account/brand/portrait routing, reply sampling, For You relevance and new season-launch conditions are implemented. Details and remaining data limits are in [the test-two coverage note](docs/test-two-expansion.md).
 
 Remaining checks: fresh MMC cold launch of v71, a genuine new preseason-to-opening run for the new conditional content, new-logo/coin visual confirmation, season/postseason/year rollover and older-save replay. The supplied ESPN PNG needs general native texture registration; existing registered image banks are used for now. Analytics grades and ratings fog remain the two later 1.0 integrations.
+
+
+## v72 continuation
+
+The account artwork and granular writer filters are wired, with native state/position recruit ranks and gap-aware recruiting catch-up. The BYU Week 4 archive repair preserves its original stories and later observations. 137 Node tests plus native/MMC checks pass. Remaining live checks and the season-to-offseason validation sequence are in [the v72 note](docs/account-refresh-v72.md). First complete that lifecycle test, then expand recruiting systems and proceed toward the two other 1.0 components.

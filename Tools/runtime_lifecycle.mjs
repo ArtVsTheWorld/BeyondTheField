@@ -1,6 +1,7 @@
 import {projectLine,rosterStrengths} from './betting_model.mjs';
 import {buildFeed,trackOffers,weekKey} from './feed_engine.mjs';
 import {buildCatalog} from './feed_selection.mjs';
+import {refreshAccountPresentation} from './account_presentation.mjs';
 import {recoverWeek} from './recover_weeks.mjs';
 import {publicPoll} from './public_polls.mjs';
 export function scopeKey(s){return `${s.leagueId}/${s.userTeamIndex}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}`;}
@@ -15,15 +16,19 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   if(lastObserved)for(let missing=lastObserved.week+1;missing<week;++missing)if(!editions.some(e=>e.week===missing)){const r=recoverWeek(s,missing,authors);if(r){authors=r.authors;editions.push({scope,week:missing,key:r.feed.key,reconstructed:true,feed:r.feed});}}
   const same=editions.find(e=>e.week===week&&!e.reconstructed),previous=editions.find(e=>e.week===week-1&&!e.reconstructed);
   const baseline=same?.snapshot??previous?.snapshot;
-  s.newOffers=trackOffers(s,same?.snapshot,previous?.snapshot);
+  const gap=!previous&&lastObserved&&lastObserved.week<week-1;
+  const seedGap=gap&&(!same||same.snapshot.recruitingObservationVersion!==1);
+  const recruitingBaseline=seedGap?lastObserved.snapshot:baseline;
+  s.newOffers=trackOffers(s,seedGap?null:same?.snapshot,previous?.snapshot,gap?lastObserved.snapshot:null);
   const current=new Set(s.commitments.map(pair));
   const events=new Map((same?.snapshot?.commitmentEvents??[]).filter(c=>current.has(pair(c))).map(c=>[pair(c),c]));
-  if(baseline){const known=new Set(baseline.commitments.map(pair));for(const c of s.commitments)if(!known.has(pair(c)))events.set(pair(c),c);}
+  if(recruitingBaseline){const known=new Set(recruitingBaseline.commitments.map(pair));for(const c of s.commitments)if(!known.has(pair(c)))events.set(pair(c),c);}
   s.newCommitments=[...events.values()];
+  s.recruitingCatchup=same?.snapshot?.recruitingCatchup??(seedGap?{fromWeek:lastObserved.week,commitments:s.newCommitments.map(pair),offers:s.newOffers.map(pair)}:null);
   const status=new Map((s.recruitStatuses??[]).map(x=>[x.player,x.stage])),nowCommits=new Map(s.commitments.filter(c=>c.stage==='HardCommitted').map(c=>[c.player,c]));
   const changes=new Map();
   for(const c of same?.snapshot?.commitmentChanges??[]){const now=nowCommits.get(c.player);if(now&&now.team!==c.from)changes.set(c.player,{...c,to:now.team});else if(!now&&['Top10','Top5','Top3','Battle'].includes(status.get(c.player)))changes.set(c.player,{...c,to:null});}
-  for(const old of baseline?.commitments??[]){if(old.stage!=='HardCommitted')continue;const now=nowCommits.get(old.player);if(now&&now.team!==old.team)changes.set(old.player,{player:old.player,from:old.team,to:now.team});else if(!now&&['Top10','Top5','Top3','Battle'].includes(status.get(old.player)))changes.set(old.player,{player:old.player,from:old.team,to:null});}
+  for(const old of recruitingBaseline?.commitments??[]){if(old.stage!=='HardCommitted')continue;const now=nowCommits.get(old.player);if(now&&now.team!==old.team)changes.set(old.player,{player:old.player,from:old.team,to:now.team});else if(!now&&['Top10','Top5','Top3','Battle'].includes(status.get(old.player)))changes.set(old.player,{player:old.player,from:old.team,to:null});}
   s.commitmentChanges=[...changes.values()];s.recordBaseline=same?.snapshot?.recordBaselineVersion===1?same.snapshot.recordBaseline:baseline?.records??s.records??[];
   s.pregameGames={...(baseline?.pregameGames??{})};const strengths=rosterStrengths(s),poll=publicPoll(s,previous?.snapshot);
   for(const g of s.games)if(g.week===week&&g.phase===s.season.CurrentWeekType&&g.status==='Unplayed'&&!s.pregameGames[g.id]){const line=projectLine(s,g,strengths);s.pregameGames[g.id]={...(line??{}),poll:poll.key,ranks:Object.fromEntries([g.home,g.away].map(id=>[id,poll.ranks[id]??null]))};}
@@ -38,8 +43,8 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   if(midweekBaseline)s.midweekBaseline=midweekBaseline;
   const feed=buildFeed(s,previous?.snapshot??null,{authors,history:editions.filter(e=>e.week<week).map(e=>e.feed),sameWeek:same?.feed??null,onAuthors:value=>{authors=value;}});
   const snapshot={format:2,sourceKind:'runtime',leagueId:s.leagueId,season:s.season,userTeamIndex:s.userTeamIndex,sha256:s.sha256,
-    publicPoll:{key:poll.key,ranks:poll.ranks},players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,team:p.team,injury:p.injury,injuryYear:p.injuryYear,injuryWeek:p.injuryWeek,injuryType:p.injuryType})),records:s.records??[],recordBaseline:s.recordBaseline,recordBaselineVersion:1,pregameGames:s.pregameGames,commitmentChanges:s.commitmentChanges,commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,midweekBaseline};
+    publicPoll:{key:poll.key,ranks:poll.ranks},players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,team:p.team,injury:p.injury,injuryYear:p.injuryYear,injuryWeek:p.injuryWeek,injuryType:p.injuryType})),records:s.records??[],recordBaseline:s.recordBaseline,recordBaselineVersion:1,pregameGames:s.pregameGames,commitmentChanges:s.commitmentChanges,commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,recruitingObservationVersion:1,recruitingCatchup:s.recruitingCatchup,midweekBaseline};
   const entry={scope,week,key:weekKey(s),snapshot,feed};
-  const updated=[...editions.filter(e=>e.week!==week),entry].sort((a,b)=>a.week-b.week);
-  return {state:{format:1,editions:updated,authors},catalog:buildCatalog(feed,[...archives,...updated.map(e=>e.feed)])};
+  const updated=[...editions.filter(e=>e.week!==week).map(e=>({...e,feed:refreshAccountPresentation(e.feed,s)})),entry].sort((a,b)=>a.week-b.week);
+  return {state:{format:1,editions:updated,authors},catalog:buildCatalog(feed,[...archives.map(f=>refreshAccountPresentation(f,s)),...updated.map(e=>e.feed)])};
 }

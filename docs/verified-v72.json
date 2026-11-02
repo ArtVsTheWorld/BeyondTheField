@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "version": "v72 account artwork and recruiting continuity",
+  "nativeSha256": "7fbc2a0c2f69d4413a40c401835e8308c97be21bd4077f0d80d265b897a80802",
+  "adapterSha256": "d9248aa4f790eda69d7b0086a3063795bc7fed43a875633da679c2764286d12e",
+  "zipSha256": "fa1686216ad72490802295a5073d780c7d8856de53d85642451d2f7362cea6e4",
+  "nodeTestsPassed": 137,
+  "nativeTestsPassed": true,
+  "nativeLiveCatalogueValidated": true,
+  "adapterSmokePassed": true,
+  "installedAdapterSmokePassed": true,
+  "historyBackedUpAndChecksumVerified": true,
+  "sourceSaveWrites": false,
+  "gapRepair": {
+    "week": 4,
+    "added": 636,
+    "allOriginalStoriesRetained": true,
+    "editions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "liveFeed": {
+    "week": 6,
+    "stories": 3349,
+    "forYou": 30,
+    "editions": 8
+  },
+  "presentationVersion": 2,
+  "nationalAvatars": {
+    "0": {
+      "imageLibrary": 34,
+      "imageValue": 1096,
+      "assetName": "dynas_general_TeamNeed"
+    },
+    "4": {
+      "imageLibrary": 5,
+      "imageValue": 3,
+      "assetName": "nilcp_Generic_0003_C_T0133_M_2_4"
+    },
+    "3": {
+      "imageLibrary": 62,
+      "imageValue": 228,
+      "assetName": "ucp_narrative_femalereporter4"
+    },
+    "2": {
+      "imageLibrary": 62,
+      "imageValue": 243,
+      "assetName": "ucp_narrative_HSmalereporter2"
+    },
+    "5": {
+      "imageLibrary": 62,
+      "imageValue": 235,
+      "assetName": "ucp_narrative_malereporter3"
+    },
+    "1": {
+      "imageLibrary": 62,
+      "imageValue": 236,
+      "assetName": "ucp_narrative_malereporter4"
+    }
+  },
+  "liveObserved": [
+    "Week 6 feed is open and renders posts",
+    "David Ellison requested native coach portrait renders",
+    "Official Oregon on-white logo and BYU Barstool secondary logo render",
+    "Smooth vertical feed remains clipped below controls and shows likes"
+  ],
+  "pendingLive": [
+    "Week 4 catch-up selection and scrolling",
+    "Separate Players/Recruits cycling and full control regression",
+    "Other national portraits, flat helmets and mascots",
+    "East Point secondary logo on its fan/beat accounts",
+    "Fresh v72 MMC cold launch"
+  ]
+}

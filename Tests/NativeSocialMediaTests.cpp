@@ -168,7 +168,9 @@ int main(int argc,char** argv){
             for(unsigned i=0;i<151;++i){const auto key=i?"team:"+std::to_string(i):"all";catalog->scopes.push_back({key,"Scope "+std::to_string(i)});edition.views[key]={"parent","reply","recruit"};}catalog->weeks.push_back(edition);
             auto view=social::selectFeed(catalog,0,150,7);require(view->posts.size()==2&&view->posts[1].voice=="fan","Native account filter detached a reply from its parent");
             require(view->label=="Social Media - Team Accounts","Category is not visible in the native header");
-            require(social::selectFeed(catalog,0,150,9)->posts[0].stamp=="News","A reply must not appear without its parent when filtering Fans");
+            require(social::selectFeed(catalog,0,150,10)->posts[0].stamp=="News","A reply must not appear without its parent when filtering Fans");
+            require(social::selectFeed(catalog,0,150,9)->posts.size()==1&&social::selectFeed(catalog,0,150,9)->posts[0].voice=="recruit","Recruit filter did not separate recruit roots from player roots");
+            require(social::selectFeed(catalog,0,150,8)->posts[0].stamp=="News","Player filter included a recruit root");
             require(social::selectFeed(catalog,0,150,1)->posts.size()==1,"Recruiting filter included another root category");
             bool bad=false;try{social::selectFeed(catalog,0,151);}catch(...){bad=true;}require(bad,"Dynamic scope boundary was not enforced");
         }

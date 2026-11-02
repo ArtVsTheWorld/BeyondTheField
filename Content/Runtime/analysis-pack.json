@@ -397,7 +397,7 @@
     "beat.recruit_pickup": [
       {
         "id": "beat.recruit_pickup.1",
-        "body": "{school} adds {starDescription}{position} {playerName}. Another piece of the class coming into focus."
+        "body": "{school} adds {starDescription}{position} {playerName}. Another piece of the class coming into focus.{recruitRankDetail}"
       },
       {
         "id": "beat.recruit_pickup.2",
@@ -407,7 +407,7 @@
     "beat.recruit_questioned": [
       {
         "id": "beat.recruit_questioned.1",
-        "body": "{school} adds {starDescription}{position} {playerName}. This is a lower-profile pickup than this program usually targets. Fair to ask what the staff sees here."
+        "body": "{school} adds {starDescription}{position} {playerName}. This is a lower-profile pickup than this program usually targets. Fair to ask what the staff sees here.{recruitRankDetail}"
       }
     ],
     "reply.fan.recruit_number_one": [

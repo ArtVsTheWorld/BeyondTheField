@@ -63,15 +63,18 @@ export function detectEvents(s,previous=null){
   }
   if(prior||s.midweekBaseline)for(const p of s.players){const old=previousPlayers.get(p.id);if(p.team!==255&&teams.has(p.team)&&p.injury==='Uninjured'&&old?.injury&&old.injury!=='Uninjured')
     emit(`healthy:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:'Uninjured',recovered:true},{player:p.id,priority:95});}
+  const recruitRanks=new Map((s.recruitStatuses??[]).map(r=>[r.player,r]));
+  const rankFacts=p=>({stateRecruitRank:recruitRanks.get(p.id)?.stateRank??null,positionRecruitRank:recruitRanks.get(p.id)?.positionRank??null,recruitState:p.homeState??null});
+  const catchup=(kind,key)=>s.recruitingCatchup?.[kind]?.includes(key)?{observedSinceWeek:s.recruitingCatchup.fromWeek,family:kind==='offers'?'recruiting.catchup.offer':'recruiting.catchup.commit',voice:'beat'}:{};
   const oldCommits=new Set((prior?.commitments??[]).map(c=>`${c.team}:${c.player}`));
   for(const c of s.commitments){const p=players.get(c.player);if(!p)continue;
     const fresh=(s.newCommitments??[]).some(n=>n.team===c.team&&n.player===c.player)||(prior&&!oldCommits.has(`${c.team}:${c.player}`))||(inSeason&&c.week>0&&c.week===week-1);
 
-    emit(`commit:${c.team}:${c.player}`,'recruiting',{playerName:p.name,school:teams.get(c.team)?.name,position:p.position,nationalRecruitRank:c.rank>0?c.rank:null,commitment:c.stage,newlyObserved:Boolean(fresh),stars:p.starRating??null,recruitSignificance:recruitSignificance(p.starRating,teams.get(c.team)?.prestigeStars,c.rank),importance:p.starRating===5||c.rank===1||p.starRating>=4&&teams.get(c.team)?.prestigeStars<=2?'major':'normal'},
+    emit(`commit:${c.team}:${c.player}`,'recruiting',{playerName:p.name,school:teams.get(c.team)?.name,position:p.position,...rankFacts(p),...(fresh?catchup('commitments',`${c.team}:${c.player}`):{}),nationalRecruitRank:c.rank>0?c.rank:null,commitment:c.stage,newlyObserved:Boolean(fresh),stars:p.starRating??null,recruitSignificance:recruitSignificance(p.starRating,teams.get(c.team)?.prestigeStars,c.rank),importance:p.starRating===5||c.rank===1||p.starRating>=4&&teams.get(c.team)?.prestigeStars<=2?'major':'normal'},
       {team:c.team,player:p.id,national:fresh&&(p.starRating===5||c.rank>0&&c.rank<=100),curated:Boolean(fresh),thread:`commitments:${c.team}`,priority:fresh&&c.rank===1?115:fresh&&p.starRating===5?109:fresh&&p.starRating>=4&&teams.get(c.team)?.prestigeStars<=2?108:fresh?97:64});
   }
   for(const o of s.newOffers??[]){const p=players.get(o.player);if(!p||!teams.has(o.team))continue;
-    emit(`offer:${o.team}:${p.id}`,'offers',{playerName:p.name,school:teams.get(o.team).name,position:p.position,nationalRecruitRank:o.rank>0?o.rank:null},
+    emit(`offer:${o.team}:${p.id}`,'offers',{playerName:p.name,school:teams.get(o.team).name,position:p.position,...rankFacts(p),...catchup('offers',`${o.team}:${p.id}`),nationalRecruitRank:o.rank>0?o.rank:null},
       {team:o.team,player:p.id,national:o.rank>0&&o.rank<=100,thread:`offers:${o.team}`,priority:o.team===s.userTeamIndex?95:72+1/(o.rank||9999)});
   }
   for(const h of s.heisman){const p=players.get(h.player);if(inSeason&&p)emit(`heisman:${p.id}`,'heisman',{playerName:p.name,school:teams.get(h.team)?.name,rank:h.rank,previousRank:h.lastRank>0?h.lastRank:null},{team:h.team,player:p.id,priority:h.rank===1?88:74-h.rank});}

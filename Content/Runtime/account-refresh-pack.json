@@ -1,0 +1,29 @@
+{
+  "revision": "accounts-recruiting-v72",
+  "families": {
+    "recruiting.catchup.commit": [
+      {
+        "id": "recruiting.catchup.commit.1",
+        "body": "Recruiting catch-up: {playerName}, a {starDescription}{position}, is committed to {school}. This is a new addition since our Week {observedSinceWeek} report.{recruitRankDetail}"
+      },
+      {
+        "id": "recruiting.catchup.commit.2",
+        "body": "Since our Week {observedSinceWeek} check-in, {school} has added a commitment from {starDescription}{position} {playerName}.{recruitRankDetail} Catching up on the recruiting board."
+      },
+      {
+        "id": "recruiting.catchup.commit.3",
+        "body": "{school} recruiting catch-up: {starDescription}{position} {playerName} is committed.{recruitRankDetail} Added since our Week {observedSinceWeek} report."
+      }
+    ],
+    "recruiting.catchup.offer": [
+      {
+        "id": "recruiting.catchup.offer.1",
+        "body": "Recruiting catch-up: {school} has offered {position} {playerName} since our Week {observedSinceWeek} check-in.{recruitRankDetail} An offer is interest, not a commitment."
+      },
+      {
+        "id": "recruiting.catchup.offer.2",
+        "body": "{school} has offered {position} {playerName}.{recruitRankDetail} A recruiting update since our Week {observedSinceWeek} report."
+      }
+    ]
+  }
+}

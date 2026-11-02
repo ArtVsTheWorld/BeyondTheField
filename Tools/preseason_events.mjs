@@ -51,7 +51,7 @@ export function preseasonEvents(s,{strengths}={}){
  }
  const committed=new Set(s.commitments.map(c=>c.player));
  const recruits=(s.recruitStatuses??[]).filter(r=>!committed.has(r.player)&&['Top10','Top5','Top3','Battle'].includes(r.stage)&&r.nationalRank>=1&&r.nationalRank<=100).sort((a,b)=>a.nationalRank-b.nationalRank||a.player.localeCompare(b.player));
- for(const r of recruits){const p=players.get(r.player);if(!p||p.team!==255)continue;const values={playerName:p.name,position:p.position,nationalRank:r.nationalRank,recruitStars:p.starRating,starDetail:p.starRating?p.starRating+'-star ':''};
+ for(const r of recruits){const p=players.get(r.player);if(!p||p.team!==255)continue;const values={playerName:p.name,position:p.position,nationalRank:r.nationalRank,nationalRecruitRank:r.nationalRank,stateRecruitRank:r.stateRank??null,positionRecruitRank:r.positionRank??null,recruitState:p.homeState??null,recruitStars:p.starRating,starDetail:p.starRating?p.starRating+'-star ':''};
   emit('recruit-watch:'+p.id,'recruiting',{...values,family:'preseason.recruit.watch',voice:'beat'},{player:p.id,national:true,priority:r.nationalRank===1?93:81});
   if(r.nationalRank<=10)emit('recruit-self:'+p.id,'recruiting',{...values,family:'preseason.recruit.self',voice:'recruit'},{player:p.id,national:true,priority:78});
  }

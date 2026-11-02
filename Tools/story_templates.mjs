@@ -6,6 +6,8 @@ const preseason=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/preseason
 Object.assign(contentPack.families,preseason.families);contentPack.revision=preseason.revision;
 const launch=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/season-launch-pack.json',import.meta.url),'utf8'));
 Object.assign(contentPack.families,launch.families);contentPack.revision=launch.revision;
+const accounts=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/account-refresh-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,accounts.families);contentPack.revision=accounts.revision;
 const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g,ids=new Set();
 for(const variants of Object.values(contentPack.families))for(const t of variants){
  if(!t.id||ids.has(t.id)||typeof t.body!=='string'||/[\uFFFD\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(t.body))throw Error('Invalid runtime template '+t.id);ids.add(t.id);

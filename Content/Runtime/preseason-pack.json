@@ -199,7 +199,7 @@
     "preseason.recruit.watch": [
       {
         "id": "preseason.recruit.watch.1",
-        "body": "Recruiting name to know: {starDetail}{position} {playerName}, No. {nationalRank} nationally. One of the prospects to watch as the season approaches."
+        "body": "Recruiting name to know: {starDetail}{position} {playerName}, No. {nationalRank} nationally. One of the prospects to watch as the season approaches.{recruitRankDetail}"
       },
       {
         "id": "preseason.recruit.watch.2",
@@ -207,7 +207,7 @@
       },
       {
         "id": "preseason.recruit.watch.3",
-        "body": "Preseason recruiting watch: No. {nationalRank} {playerName}, {starDetail}{position}. A name worth following as this class takes shape."
+        "body": "Preseason recruiting watch: No. {nationalRank} {playerName}, {starDetail}{position}. A name worth following as this class takes shape.{recruitRankDetail}"
       }
     ],
     "preseason.recruit.self": [

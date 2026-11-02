@@ -1,11 +1,11 @@
-# Dynasty Enhancer — MMC prototype v71
+# Dynasty Enhancer — MMC prototype v72
 
 This package adds preseason coverage and startup/phase-transition corrections to the verified Social Media feature set. It is a development prototype, not Dynasty Enhancer 1.0. Player Analytics and Roster Fog have not yet been merged into it.
 
 ## Install and use
 
 1. Close MMC and the game. Copy this package's complete `Plugins` folder into the folder containing the MMC executable, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter; `Plugins/DynastyEnhancer/Runtime-v71/` contains the native game DLL, loader, generator and content.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter; `Plugins/DynastyEnhancer/Runtime-v72/` contains the native game DLL, loader, generator and content.
 3. Node.js must be installed. The runtime's `dynasty-enhancer.json` contains its executable path; update that path if Node is installed elsewhere. The exporter path should remain `Tools/export_runtime.mjs`.
 4. Open MMC and launch College Football 27 normally. Open or create an offline Dynasty immediately; there is no fixed title-screen delay. The adapter loads the runtime once per game process and installs verified menu hooks before the first hub is constructed. Native UI readiness is separate from feed generation: the page can display its status card while the first two stable observations are collected. Reopening adopts the newest edition. Before native assets are ready, entry uses the game's inert action rather than leaving a pending navigation transaction.
 
@@ -15,11 +15,11 @@ The old standalone native `DynastyEnhancer.dll` does not belong directly in MMC'
 
 ## History and diagnostics
 
-Account identities and publication history are stored in `Plugins/DynastyEnhancer/Runtime-v71/RuntimeHistory`. Keep this folder when updating. Existing development history can be copied into it while the game is closed; the installer supports checksum-verified history migration. ZIP packages intentionally contain no user history, Dynasty saves or extracted game assets.
+Account identities and publication history are stored in `Plugins/DynastyEnhancer/Runtime-v72/RuntimeHistory`. Keep this folder when updating. Existing development history can be copied into it while the game is closed; the installer supports checksum-verified history migration. ZIP packages intentionally contain no user history, Dynasty saves or extracted game assets.
 
 - MMC launch status: `Plugins/DynastyEnhancer-launcher.log`.
-- Game startup, UI hooks and feed publication: `Plugins/DynastyEnhancer/Runtime-v71/social-media.jsonl`.
-- Generator errors: `Plugins/DynastyEnhancer/Runtime-v71/runtime-generator.log`.
+- Game startup, UI hooks and feed publication: `Plugins/DynastyEnhancer/Runtime-v72/social-media.jsonl`.
+- Generator errors: `Plugins/DynastyEnhancer/Runtime-v72/runtime-generator.log`.
 
 `startup_waiting` at the title screen or during loading is expected. `active` followed by `runtime_feed_published` confirms native readiness and publication. `activation_failed` is a failure and should be reported with its reason. Unsupported game code or owned UI hooks are rejected. The mod reads Dynasty data and changes presentation only; it does not alter simulation outcomes or save structure.
 
@@ -33,9 +33,12 @@ The week picker now includes stored earlier phases from the same Dynasty, contro
 
 On reload, a cached active edition can resume after the first internally verified native capture if its full normalized fact hash and content revision match exactly. New weeks, changed facts, rewinds and missing caches still use normal reconciliation and stable observations. Resuming does not rewrite history or reroll wording/likes. Initial native context validation can still briefly show the preparing status; `runtime_feed_resumed` identifies a successful cache restoration in the log.
 
-v71 gives each newly observed scholarship offer a deterministic 20% publication chance, equally for CPU and user programs. The choice is fixed for that offer's publication week and cannot be rerolled by reopening, saving or reloading. Unpublished offers stay in the event history, and replies require a published parent. Commitment coverage is unchanged. Existing earlier-week editions remain frozen; the active edition is reconciled once when this publication policy is introduced.
+v72 gives each newly observed scholarship offer a deterministic 20% publication chance, equally for CPU and user programs. The choice is fixed for that offer's publication week and cannot be rerolled by reopening, saving or reloading. Unpublished offers stay in the event history, and replies require a published parent. Commitment coverage is unchanged. Existing earlier-week editions remain frozen; the active edition is reconciled once when this publication policy is introduced.
 
 The stored per-edition candidate catalogue now supports up to 32,768 stories and candidate references, with the existing 128 MiB file bound, identity checks and reference validation. Display caps remain 30 For You, 100 National, 60 per conference and the existing team cap after category filtering. This fixes the first full recruiting week's larger league-wide candidate pool being rejected before display selection.
 
 
-v71 adds supported skipped-week reconstruction, registered on-white/secondary avatars, updated account brands and national analysts, deterministic 33% reply eligibility, more personalized feed selection and 84 new season-launch variants. Preserved archives remain intact. The optional supplied ESPN PNG is not yet registered as a native image. See the repository coverage note for the evidence requirements and pending live checks.
+v72 adds supported skipped-week reconstruction, registered on-white/secondary avatars, updated account brands and national analysts, deterministic 33% reply eligibility, more personalized feed selection and 84 new season-launch variants. Preserved archives remain intact. The optional supplied ESPN PNG is not yet registered as a native image. See the repository coverage note for the evidence requirements and pending live checks.
+
+
+v72 also includes CanDuel Sports, separate Players and Recruits categories, native state/position recruiting ranks, requested analyst/helmet/mascot avatars, available TeamBuilder secondary logos and recruiting continuity across skipped observations. Catch-up reports avoid claiming an unavailable exact event week. Gameplay/save data remain read-only. Detailed coverage and pending live checks are recorded in `docs/account-refresh-v72.md` in the source repository.

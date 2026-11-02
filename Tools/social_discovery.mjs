@@ -18,7 +18,8 @@ export const CATEGORY_FILTERS=[
  {key:'analyst',label:'Analysts',voices:['analyst','model']},
  {key:'beat',label:'Beat Reporters',voices:['beat']},
  {key:'official',label:'Team Accounts',voices:['official']},
- {key:'player',label:'Players & Recruits',voices:['player','recruit']},
+ {key:'player',label:'Players',voices:['player']},
+ {key:'recruit',label:'Recruits',voices:['recruit']},
  {key:'fan',label:'Fans',voices:['fan']}
 ];
 export function filterConversations(stories,key='all'){

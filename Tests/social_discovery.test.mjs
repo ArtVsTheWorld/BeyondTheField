@@ -39,8 +39,8 @@ test('flavor engagement is deterministic, respects brand/rank and freezes same-w
 test('official accounts get on-white logos and Barstool gets secondary logos; uniforms require active-team membership and valid portrait',()=>{
  const t={id:1,logo:11},p={team:1,portrait:146};assert.deepEqual(avatarFor('player',t,p),{imageLibrary:1,imageValue:146,uniformTeamLogo:11});
  assert.equal(avatarFor('recruit',t,{...p,team:255}).uniformTeamLogo,undefined);
- for(const role of ['beat','analyst','fan','model'])assert.equal(avatarFor(role,t,p).imageLibrary,79);
- assert.equal(new Set(['beat','analyst','fan'].map(role=>avatarFor(role,t,p).imageValue)).size,3);
+ assert.equal(avatarFor('beat',t,p).imageLibrary,61);assert.equal(avatarFor('fan',t,p).imageLibrary,87);assert.equal(avatarFor('analyst',t,p).imageLibrary,34);assert.equal(avatarFor('model',t,p).imageLibrary,79);
+ assert.equal(new Set(['beat','analyst','fan'].map(role=>JSON.stringify(avatarFor(role,t,p)))).size,3);
  assert.deepEqual(avatarFor('official',t,p),{imageLibrary:64,imageValue:11});
  assert.equal(avatarFor('player',t,{...p,portrait:0}).uniformTeamLogo,undefined);
 });
