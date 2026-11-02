@@ -6,6 +6,7 @@
 #include <optional>
 #include <vector>
 #include <set>
+#include <array>
 #include "../Vendor/json.hpp"
 namespace social::refresh {
 using Json=nlohmann::json;
@@ -46,6 +47,8 @@ inline Json readJson(const fs::path& path){
     if(fs::file_size(path)>128ull*1024*1024)throw std::runtime_error("Weekly feed JSON exceeds size limit");
     std::ifstream in(path);if(!in)throw std::runtime_error("Cannot read weekly feed JSON");Json j;in>>j;return j;
 }
+inline int phaseIndex(const std::string& phase){const std::array<const char*,7> phases={"PreSeason","RegularSeason","BowlSeason1","BowlSeason2","BowlSeason3","NationalChampionship","OffSeason"};for(size_t i=0;i<phases.size();++i)if(phase==phases[i])return static_cast<int>(i);return -1;}
+inline bool publicationAtOrBefore(const std::string& phase,int week,const std::string& activePhase,int activeWeek){const int p=phaseIndex(phase),a=phaseIndex(activePhase);return p>=0&&a>=0&&(p<a||(p==a&&week<=activeWeek));}
 inline void validate(const Json& j,const Json& config){
     if(j.at("format")!=1||j.at("engineVersion")!=2||!j.at("sourceUnchanged").get<bool>()||j.at("leagueId")!=config.at("leagueId")||j.at("userTeamIndex")!=config.at("userTeamIndex"))throw std::runtime_error("Feed identity or version mismatch");
     if(j.at("source").get<std::string>()!=config.at("save").get<std::string>())throw std::runtime_error("Feed source differs from the watched save");
@@ -53,12 +56,13 @@ inline void validate(const Json& j,const Json& config){
     if(j.contains("scopeOptions")){const auto& options=j.at("scopeOptions");if(!options.is_array()||options.size()<2||options.size()>512)throw std::runtime_error("Invalid scope catalog");std::set<std::string> scopeIds;for(const auto& o:options){auto key=o.at("key").get<std::string>(),label=o.at("label").get<std::string>();if(key.empty()||key.size()>128||label.empty()||label.size()>128||!scopeIds.insert(key).second)throw std::runtime_error("Invalid scope identity");}if(options[0].at("key")!="all"||options[1].at("key")!="national")throw std::runtime_error("Missing default scopes");}
     std::set<std::string> keys;bool active=false;
     for(const auto& w:weeks){
-      if(w.at("leagueId")!=j.at("leagueId")||w.at("userTeamIndex")!=j.at("userTeamIndex")||w.at("season")!=j.at("season")||w.at("phase")!=j.at("phase")||w.at("week").get<int>()>j.at("week").get<int>())throw std::runtime_error("Catalog contains another Dynasty or future publication week");
+      if(w.at("leagueId")!=j.at("leagueId")||w.at("userTeamIndex")!=j.at("userTeamIndex")||w.at("season")!=j.at("season")||!publicationAtOrBefore(w.at("phase").get<std::string>(),w.at("week").get<int>(),j.at("phase").get<std::string>(),j.at("week").get<int>())||(j.value("catalogVersion",1)<2&&w.at("phase")!=j.at("phase")))throw std::runtime_error("Catalog contains another Dynasty or future publication week");
       const auto key=w.at("key").get<std::string>();if(!keys.insert(key).second)throw std::runtime_error("Duplicate publication week");if(key==j.at("activeWeekKey").get<std::string>())active=true;
       const auto& posts=w.at("stories");if(!posts.is_array()||posts.size()>4096)throw std::runtime_error("Invalid weekly story count");
       std::set<std::string> ids;
       for(const auto& p:posts){
         if(p.at("publication").at("key")!=w.at("key")||p.at("publication").at("week")!=w.at("week"))throw std::runtime_error("Story publication week mismatch");
+        if(j.value("catalogVersion",1)>=2&&(p.at("publication").at("phase")!=w.at("phase")||p.at("publication").at("season")!=w.at("season")))throw std::runtime_error("Story publication phase/season mismatch");
         if(!ids.insert(p.at("id").get<std::string>()).second)throw std::runtime_error("Duplicate feed post");
         for(const char* k:{"author","handle","body","stamp"})if(!p.at(k).is_string()||p.at(k).get_ref<const std::string&>().empty()||p.at(k).get_ref<const std::string&>().size()>512)throw std::runtime_error("Invalid feed text");
         if(p.at("imageLibrary").get<int>()<0||p.at("imageValue").get<int>()<0)throw std::runtime_error("Invalid feed avatar");

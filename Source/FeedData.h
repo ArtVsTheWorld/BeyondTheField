@@ -60,7 +60,7 @@ inline int postHeight(std::string_view body){
 inline constexpr std::array<const char*,4> scopeKeys={"all","national","conference","team"};
 inline constexpr std::array<const char*,4> scopeLabels={"For You","National","Conference","My Team"};
 struct Scope {std::string key,label;};
-struct Edition {std::string key,label,conference;int season=0,week=0;std::map<std::string,FeedPost> stories;std::map<std::string,std::vector<std::string>> views;};
+struct Edition {std::string key,label,conference,phase="RegularSeason";int season=0,week=0;std::map<std::string,FeedPost> stories;std::map<std::string,std::vector<std::string>> views;};
 struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> scopes;};
 struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;};
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
@@ -94,7 +94,8 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
     if(j.contains("scopeOptions"))for(const auto& o:j.at("scopeOptions"))catalog->scopes.push_back({o.at("key").get<std::string>(),o.at("label").get<std::string>()});
     for(const auto& w:j.at("weeks")){
         Edition e;e.key=w.at("key").get<std::string>();e.week=w.at("week").get<int>();e.season=w.at("season").get<int>();e.conference=w.value("conference",nlohmann::json()).is_string()?w.at("conference").get<std::string>():"";
-        e.label=w.value("phase",std::string())=="PreSeason"?"Preseason, "+std::to_string(e.season):"Week "+std::to_string(e.week)+", "+std::to_string(e.season);
+        e.phase=w.value("phase",std::string("RegularSeason"));
+        e.label=e.phase=="PreSeason"?"Preseason, "+std::to_string(e.season):e.phase=="RegularSeason"?"Week "+std::to_string(e.week)+", "+std::to_string(e.season):e.phase+" - Week "+std::to_string(e.week)+", "+std::to_string(e.season);
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
             FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
@@ -102,7 +103,7 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
         for(const auto& [key,view]:w.at("views").items())e.views[key]=view.get<std::vector<std::string>>();
         catalog->weeks.push_back(std::move(e));
     }
-    std::sort(catalog->weeks.begin(),catalog->weeks.end(),[](const Edition& a,const Edition& b){return a.week<b.week;});
+    std::sort(catalog->weeks.begin(),catalog->weeks.end(),[](const Edition& a,const Edition& b){return refresh::phaseIndex(a.phase)!=refresh::phaseIndex(b.phase)?refresh::phaseIndex(a.phase)<refresh::phaseIndex(b.phase):a.week<b.week;});
     const auto activeKey=j.at("activeWeekKey").get<std::string>();
     const auto active=std::find_if(catalog->weeks.begin(),catalog->weeks.end(),[&](const Edition& e){return e.key==activeKey;});
     if(active==catalog->weeks.end())throw std::runtime_error("Active publication week is missing");

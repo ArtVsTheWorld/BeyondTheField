@@ -106,6 +106,19 @@ int main(int argc,char** argv){
             validate(data,config);auto wrong=data;wrong["leagueId"]=99;bool rejected=false;try{validate(wrong,config);}catch(...){rejected=true;}require(rejected,"Another Dynasty was accepted");
             wrong=data;wrong["weeks"][0]["stories"][1]["id"]="0";rejected=false;try{validate(wrong,config);}catch(...){rejected=true;}require(rejected,"Duplicate posts were accepted");
             auto catalog=social::decodeFeed(data)->catalog;
+            {
+                Json mixed=data;mixed["catalogVersion"]=2;mixed["week"]=0;mixed["key"]="10/2027/RegularSeason/0";mixed["activeWeekKey"]=mixed["key"];
+                auto current=mixed["weeks"][0];current["week"]=0;current["key"]=mixed["key"];for(auto& p:current["stories"]){p["body"]="Regular season story";p["publication"]={{"key",current["key"]},{"week",0},{"season",2027},{"phase","RegularSeason"}};}
+                auto preseason=current;preseason["phase"]="PreSeason";preseason["key"]="10/2027/PreSeason/0";for(auto& p:preseason["stories"]){p["body"]="Frozen preseason story";p["publication"]["key"]=preseason["key"];p["publication"]["phase"]="PreSeason";}
+                mixed["weeks"]=Json::array({current,preseason});validate(mixed,config);auto selected=social::decodeFeed(mixed);
+                require(selected->catalog->weeks.size()==2&&selected->edition==1&&selected->catalog->weeks[0].phase=="PreSeason","Cross-phase picker did not order preseason before regular Week 0 and default to active");
+                require(selected->catalog->weeks[0].label=="Preseason, 2027"&&selected->catalog->weeks[1].label=="Week 0, 2027","Preseason and Week 0 labels collided");
+                require(social::selectFeed(selected->catalog,0,3)->posts[0].body=="Frozen preseason story"&&selected->posts[0].body=="Regular season story","Archive selection borrowed the active edition's stories");
+                auto invalid=mixed;invalid["weeks"][1]["phase"]="BowlSeason1";bool refused=false;try{validate(invalid,config);}catch(...){refused=true;}require(refused,"A future phase with Week 0 escaped chronology validation");
+                invalid=mixed;invalid["weeks"][1]["stories"][0]["publication"]["phase"]="RegularSeason";refused=false;try{validate(invalid,config);}catch(...){refused=true;}require(refused,"Publication phase mismatch was accepted");
+                Json runtimeIdentity{{"sourceKind","runtime"},{"leagueId",10},{"season",2027},{"phase","RegularSeason"},{"week",0}},status{{"league",10},{"season",{{"CurrentSeasonYear",2027},{"CurrentWeekType","RegularSeason"},{"CurrentWeek",0}}}};
+                dynasty::live::validateRuntimeIdentity(runtimeIdentity,status);runtimeIdentity["leagueId"]=11;refused=false;try{dynasty::live::validateRuntimeIdentity(runtimeIdentity,status);}catch(...){refused=true;}require(refused,"A cached edition from a different live Dynasty was accepted");
+            }
             auto teamView=social::selectFeed(catalog,0,3);require(teamView->scope==3&&teamView->key==data["key"],"Scope changed the selected publication week");
             bool badWeek=false;try{social::selectFeed(catalog,99,0);}catch(...){badWeek=true;}require(badWeek,"Invalid single-week selection accepted");
             auto empty=std::make_shared<social::Catalog>(*catalog);empty->weeks[0].views["conference"].clear();require(social::selectFeed(empty,0,2)->posts.size()==1,"Empty scope must provide a readable native placeholder");

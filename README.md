@@ -4,17 +4,17 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Preseason and lifecycle candidate (v67)
+## Preseason and lifecycle prototype (v68)
 
 The current candidate adds 62 prewritten variants across 24 new families (339 variants total): native preseason AP and All-America/All-Conference honors, season outlooks, opening games, team hype, player camp posts, fans, top-100 recruiting watches, fictional title futures, clustered ranked-opponent gauntlets, AP/model debates with fan replies, explicit AP/Coaches comparisons, and conference talent maps. All teams, including TeamBuilder programs, use the same eligibility. See [preseason coverage and lifecycle details](docs/preseason-lifecycle.md).
 
 Public rankings use AP by default and CFP once a complete native CFP Top 25 is present. Coaches is an explicitly labeled alternative. Hidden team Rank is never a public poll. Historical upset ranks keep their captured pregame poll, and AP-to-CFP differences never become weekly movement.
 
-## MMC loader (v67)
+## MMC loader (v68)
 
-The package includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v67.dll** game runtime. Use the complete `Build/DynastyEnhancer-v67-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v67`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
+The package includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v68.dll** game runtime. Use the complete `Build/DynastyEnhancer-v68-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v68`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
 
-The adapter has no fixed 20-second title-screen delay. Verified menu hooks install before waiting for Dynasty assets, capturing the first hub construction. Native UI readiness is independent of news generation; a native status card can display while the first edition is prepared. Entry before asset readiness completes through the native inert action, rather than silently returning with navigation pending. On a phase transition, the filter model is reacquired using exact native byte gates rather than reusing a stale allocation. A late dropdown failure retains native page data and Back behavior. The v66 first-hub button passed, but an invalid reader ownership path and a silent navigation guard caused the preseason entry failure. v67 replaces both, expands the reserved Award[] capacity gate, and captures all 600 honors from the live preseason save read only. The user verified preseason posts, the Preseason 2026 choice and normal Back navigation. Reload/Week-0 retesting is pending.
+The adapter has no fixed 20-second title-screen delay. Verified menu hooks install before waiting for Dynasty assets, capturing the first hub construction. Native UI readiness is independent of news generation; a native status card can display while the first edition is prepared. Entry before asset readiness completes through the native inert action, rather than silently returning with navigation pending. On a phase transition, the filter model is reacquired using exact native byte gates rather than reusing a stale allocation. A late dropdown failure retains native page data and Back behavior. The v66 first-hub button passed, but an invalid reader ownership path and a silent navigation guard caused the preseason entry failure. v67 replaces both, expands the reserved Award[] capacity gate, and captures all 600 honors from the live preseason save read only. The user verified preseason posts, the Preseason 2026 choice and normal Back navigation. The same-session advance to regular-season Week 0, its posts and Back navigation also passed. Same-process main-menu reload also passed. The verified v68 managed adapter is installed for the next MMC startup; a fresh v68 cold launch remains a follow-up check.
 
 Configured Node.js must be available. No save path is required. Existing RuntimeHistory is retained by the development installer. Startup diagnostics distinguish `menu_hooks_active`, `startup_waiting`, `active`, and `runtime_feed_published`. v64 automatic loading was verified in-game; [its validation record](docs/verified-v64.json) remains the historical baseline.
 
@@ -26,6 +26,14 @@ Build and stage the prototype package with:
 ```
 
 `Source/Install-Mmc.ps1` installs that staged package while MMC/game are closed, backs up the previous top-level DLL and preserves existing configuration/history. It accepts `-HistoryFrom` for the first migration from a development build. Package and adapter smoke tests do not launch or inject the game.
+
+## Publication archives and reloads (v68)
+
+RT now lists earlier observed phases in the same Dynasty/team/season: Preseason, then Week 0 and later regular-season weeks. The active edition is the default and the picker still selects one edition only. Existing preseason wording, author identities, likes and feed order are read from history, not regenerated. Future phases/weeks and other Dynasties/teams/seasons are excluded. History files remain separated by phase for event reconciliation.
+
+An unchanged edition can resume after the first verified native capture when its normalized fact hash and content revision match its stored snapshot. New or changed facts still require stable observations; a rewind follows normal reconciliation. Save filenames are not identity keys. A brief preparing card can still appear while the active native context is first validated.
+
+The before/after reload comparison found all 62 Week 0 posts and For You order identical. The real-data archive test also preserved all 2,382 preseason posts. The user verified both editions in chronological order and all controls in v68. 113 Node tests and native/package tests pass. See [v68 verification](docs/verified-v68.json).
 
 ## Feed sizing and ordering (v63)
 
@@ -83,7 +91,7 @@ Windows x64, Visual Studio C++ tools, and Windows SDK are required. From the pro
 .\Source\build.ps1
 ```
 
-This builds `Build/DynastyEnhancerNative-v67.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
+This builds `Build/DynastyEnhancerNative-v68.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
 
 Node.js is required for the story generator. Copy `Config/dynasty-enhancer.example.json` to `Build/dynasty-enhancer.json` and set the Node executable path if needed. The active-Dynasty reader needs no save path, parser, or external schema. Generated snapshots, feeds, and publication history live beside the DLL under `Build/` and are not game saves.
 

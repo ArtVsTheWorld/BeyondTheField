@@ -4,7 +4,7 @@ import {buildCatalog} from './feed_selection.mjs';
 import {publicPoll} from './public_polls.mjs';
 export function scopeKey(s){return `${s.leagueId}/${s.userTeamIndex}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}`;}
 const pair=o=>`${o.team}:${o.player}`;
-export function updateRuntime(s,state={format:1,editions:[]}){
+export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   if(s.sourceKind!=='runtime')throw Error('Expected active-Dynasty snapshot');
   if(state.format!==1||!Array.isArray(state.editions))throw Error('Invalid runtime history');
   const scope=scopeKey(s),week=s.season.CurrentWeek;
@@ -38,5 +38,5 @@ export function updateRuntime(s,state={format:1,editions:[]}){
     publicPoll:{key:poll.key,ranks:poll.ranks},players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,team:p.team,injury:p.injury,injuryYear:p.injuryYear,injuryWeek:p.injuryWeek,injuryType:p.injuryType})),records:s.records??[],recordBaseline:s.recordBaseline,recordBaselineVersion:1,pregameGames:s.pregameGames,commitmentChanges:s.commitmentChanges,commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,midweekBaseline};
   const entry={scope,week,key:weekKey(s),snapshot,feed};
   const updated=[...editions.filter(e=>e.week!==week),entry].sort((a,b)=>a.week-b.week);
-  return {state:{format:1,editions:updated,authors},catalog:buildCatalog(feed,updated.map(e=>e.feed))};
+  return {state:{format:1,editions:updated,authors},catalog:buildCatalog(feed,[...archives,...updated.map(e=>e.feed)])};
 }

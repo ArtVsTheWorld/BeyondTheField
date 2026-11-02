@@ -40,3 +40,9 @@ Preseason coverage includes actual AP/Coaches polls, native national/conference 
 The fixed startup delay is removed; early menu hooks capture the first hub. Phase-specific filter-model reacquisition and safe navigation fallback address the blank/stuck regular-season Week 0 page. Native and automated story tests pass; live BYU/TeamBuilder recovery and first-hub/phase transition checks are pending. Preseason archives remain phase-isolated; a cross-phase week-picker presentation remains later work.
 
 The v66 entry attempt failed before page activation. Recovery stopped the hooks, disabled automatic loading, and verified all four save hashes unchanged. v67 now follows the front-end service to the actual CareerManager/database and reads 600 live preseason honors; it completes cancelled native navigation and separates UI readiness from feed generation. Live retesting remains pending.
+
+The user verified v67 preseason posts and Back, then advanced in the same process to regular-season Week 0 and verified that feed and Back as well. The runtime published automatically across the phase change. The verified managed adapter is restored for the next MMC startup. Same-process main-menu reload and v67 cold launch remain the next lifecycle checks.
+
+## Archived publication phases and persistence (v68)
+
+Preseason is now selectable above regular-season Week 0, using frozen stored editions from the same Dynasty/team/year. The active edition remains the default; future phases/weeks and other identities are excluded. Matching native facts resume cached wording and likes after the first verified capture instead of regenerating an unchanged edition. Save renaming does not change identity. The user verified both editions and all controls. Source, native DLL, complete MMC package and installed adapter are preserved; v68 cold launch remains a follow-up validation case.

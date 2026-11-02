@@ -1,4 +1,4 @@
-# Preseason and lifecycle candidate v67
+# Preseason, archives and lifecycle v68
 
 ## Story evidence
 
@@ -34,11 +34,11 @@ Verified menu hooks now install before the worker waits for active Dynasty asset
 
 ## Verification and limits
 
-109 Node tests pass, including new publication/poll/model/honor/recruiting coverage. Native tests cover early selection, stale model replacement, foreign ownership rejection, safe pre-navigation failure, restoration and existing UI/controller behavior. MMC package tests validate registration, payload tampering, path bounds and editable configuration without injecting a game.
+113 Node tests pass, including new publication/poll/model/honor/recruiting coverage. Native tests cover early selection, stale model replacement, foreign ownership rejection, safe pre-navigation failure, restoration and existing UI/controller behavior. MMC package tests validate registration, payload tampering, path bounds and editable configuration without injecting a game.
 
-The four BYU/TeamBuilder preseason/Week 0 saves were backed up and SHA-256 checked before recovery work. Legacy save parsing is not the production reader and could not reliably resolve optional TeamBuilder city references. Native runtime capture remains the only feed source. The v66 first-hub appearance passed but entry failed. v67 has published the live preseason edition successfully; the user confirmed preseason posts and normal Back navigation. Reload and Week 0 recovery checks are pending.
+The four BYU/TeamBuilder preseason/Week 0 saves were backed up and SHA-256 checked before recovery work. Legacy save parsing is not the production reader and could not reliably resolve optional TeamBuilder city references. Native runtime capture remains the only feed source. The v66 first-hub appearance passed but entry failed. v67 has published the live preseason edition successfully; the user confirmed preseason posts and normal Back navigation. The same-session Week 0 advance, native posts and Back return also passed. Main-menu reload and cold-start checks remain.
 
-Publication history remains phase-isolated, so preseason and regular-season Week 0 cannot collide. The RT picker lists observed weeks only within the active phase; a combined phase-aware archive picker is later work.
+Publication history files remain phase-isolated for event reconciliation, so preseason and regular-season Week 0 cannot collide. v68 collects earlier stored phases into one chronologically ordered RT picker, always selecting a single edition and defaulting to the active week. Future phases/weeks and other Dynasty/team/year identities remain excluded.
 
 ## v66 entry failure and v67 recovery
 
@@ -48,4 +48,14 @@ A read-only probe proved the old e1eac10 object is only 0xd0 bytes (native destr
 
 The reader also encountered a native Award[] with one row and 8100 reserved words. Array-only reserved capacity now allows up to 16384 words; the actual populated array length remains capped at 4096 and total byte/record limits are unchanged. The unhooked live preseason capture contains 73770 records, 600 valid preseason honors, 25 AP ranks, 25 Coaches ranks and no CFP ranks. Both CPU and user preseason content are generated from this capture.
 
-v67 resolves unready navigation info through native DO_NOTHING and completes failed entry requests through that same inert action. It no longer promises News and silently returns. UI readiness waits only for supported assets, independently of the data reader. Preseason analytic outlooks no longer inherit generic replies claiming current-season production. Native fixtures cover actual service ownership, inactive/foreign context rejection, array-only capacity bounds and navigation completion. The user confirmed the live v67 preseason page, Preseason 2026 choice and normal Back return. Native logs show the custom dropdowns, scrolling and layout restored on exit. Phase-transition and cold-launch/reload checks remain pending.
+v67 resolves unready navigation info through native DO_NOTHING and completes failed entry requests through that same inert action. It no longer promises News and silently returns. UI readiness waits only for supported assets, independently of the data reader. Preseason analytic outlooks no longer inherit generic replies claiming current-season production. Native fixtures cover actual service ownership, inactive/foreign context rejection, array-only capacity bounds and navigation completion. The user confirmed the live v67 preseason page, Preseason 2026 choice and normal Back return. Native logs show the custom dropdowns, scrolling and layout restored on exit. The same-session phase transition to regular-season Week 0 also passed, including native posts and normal Back navigation. The managed v67 adapter is installed and validated for the next MMC startup. Main-menu reload and cold-launch checks remain pending.
+
+## v68 archived phases and matching-cache restoration
+
+The user confirmed v67 same-process main-menu reload worked after a brief preparing card and reopening. Comparing its native Week 0 feed before and after reload found all 62 IDs, bodies, authors, handles and likes unchanged, with identical For You order. A renamed manual save retained the same native LeagueID; filenames never identify feed history.
+
+The exporter now reads earlier phase-history files from the same league/team/year. Catalog v2 preserves each edition's own publication key/phase/week/season and stories. Native validation and sorting use the actual SeasonWeekType order: PreSeason, RegularSeason, BowlSeason1/2/3, NationalChampionship, OffSeason. Preseason and regular Week 0 remain distinct entries even though both carry week index zero. Restoring an earlier phase cannot expose future-phase editions. Previous editions are not rendered again through new templates.
+
+The cache-resume tool normalizes the first internally verified native capture and requires an exact stored snapshot hash, current content revision and matching league/team/season/phase/week. It returns the already published edition without event generation or history writes. A rewind, changed fact hash, old revision or missing edition falls back to normal stable-observation reconciliation. Native publication rechecks active identity after the subprocess completes. This shortens returning to an unchanged edition; initial context validation can still show a brief preparing card.
+
+113 Node tests plus native tests cover chronological phase ordering, single-edition defaults, frozen texts/likes, publication metadata mismatches, future-phase exclusion, cross-identity rejection, cache misses and real file-based archive imports. The real-data package test preserves all 2,382 preseason posts and 62 regular Week 0 posts and decodes every scope in both editions. v68 activated in-game and logged runtime_feed_resumed; the user verified Preseason above Week 0 and LT, RT, LB/RB, scrolling and Back. Its managed adapter is installed and payload-verified for the next MMC startup. Fresh v68 cold launch remains a follow-up check.

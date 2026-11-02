@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "version": "v68 archived phases and cache persistence prototype",
+  "nativeSha256": "1017932b831a368fe1be2c5dfc07f05f1bb3f091a70c705809086bcf204dc433",
+  "adapterSha256": "19c9e26a1b04b787baafe14ab1a336dffbb3bc5f2a66fd2a48e4cd874909c238",
+  "zipSha256": "71b0113596d4cfa0888fc0357cd28875dbc8d5e663eefc45dd9c2e6867237459",
+  "nodeTestsPassed": 113,
+  "nativeTestsPassed": true,
+  "adapterSmokePassed": true,
+  "installedAdapterSmokePassed": true,
+  "catalogVersion": 2,
+  "actualCatalogPhases": [
+    "PreSeason",
+    "RegularSeason"
+  ],
+  "actualCatalogScopesDecoded": true,
+  "preseasonStoriesPreserved": 2382,
+  "week0StoriesPreserved": 62,
+  "reloadComparison": {
+    "changedBodies": 0,
+    "changedAuthors": 0,
+    "changedHandles": 0,
+    "changedLikes": 0,
+    "forYouOrderChanged": false,
+    "sameNativeLeagueIdAfterManualSaveRename": true
+  },
+  "cacheResumeLive": true,
+  "liveUserConfirmed": [
+    "Preseason above Week0 in RT",
+    "Week0 remains the default active edition",
+    "Both stored editions display expected posts",
+    "LT scope dropdown, RT edition picker, LB/RB categories, scrolling and Back work"
+  ],
+  "adapterInstalledForNextMmcStartup": true,
+  "currentMmcRestartRequiredForAdapter": true,
+  "livePending": [
+    "Fresh v68 MMC/game cold launch"
+  ],
+  "limitations": [
+    "First active-context validation can still briefly show preparing news; changed facts/new editions require normal stable observations",
+    "Only previously observed editions are available; no fabricated past news"
+  ]
+}

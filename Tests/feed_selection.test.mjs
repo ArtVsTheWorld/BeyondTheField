@@ -42,3 +42,8 @@ test('archives preserve their own facts instead of borrowing the latest rankings
   const old=edition(7);old.stories[0].body='Ranked #6';const current=edition(8);current.stories[0].body='Ranked #5';
   const c=buildCatalog(current,[old]);assert.equal(c.weeks[0].stories[0].body,'Ranked #6');assert.equal(c.weeks[1].stories[0].body,'Ranked #5');
 });
+test('preseason and regular Week 0 are distinct single editions in chronological order',()=>{
+ const current=edition(0),pre=publishWeek({...edition(0),phase:'PreSeason',key:'1/2027/PreSeason/0'}),future=publishWeek({...edition(0),phase:'BowlSeason1',key:'1/2027/BowlSeason1/0'});
+ pre.stories[0].body='The original preseason story';current.stories[0].body='The regular-season story';const c=buildCatalog(current,[future,pre]);assert.equal(c.catalogVersion,2);assert.deepEqual(c.weeks.map(w=>[w.phase,w.week]),[['PreSeason',0],['RegularSeason',0]]);assert.equal(c.activeWeekKey,current.key);assert.equal(c.weeks[0].stories[0].body,'The original preseason story');assert.equal(c.weeks[1].stories[0].body,'The regular-season story');
+ assert.equal(buildCatalog(pre,[current,future]).weeks.length,1);
+});

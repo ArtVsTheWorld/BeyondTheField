@@ -1,4 +1,5 @@
 import {discoveryViews} from './social_discovery.mjs';
+import {visibleEdition,comparePublication} from './publication_timeline.mjs';
 export const SCOPES=['all','national','conference','team'];
 const order=(a,b)=>b.priority-a.priority||a.id.localeCompare(b.id);
 const byLikes=(a,b)=>Math.max(0,b.likes??0)-Math.max(0,a.likes??0)||(a.id<b.id?-1:a.id>b.id?1:0);
@@ -55,11 +56,11 @@ export function publishWeek(feed){
 export function buildCatalog(active,history=[]){
   const byWeek=new Map();
   for(const f of [...history,active]){
-    if(f.engineVersion!==2||f.leagueId!==active.leagueId||f.userTeamIndex!==active.userTeamIndex||f.season!==active.season||f.phase!==active.phase||f.week>active.week)continue;
+    if(!visibleEdition(active,f))continue;
     if(!f.publication||f.publication.key!==f.key||f.publication.week!==f.week)throw Error('Invalid publication-week archive');
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
   const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','publication'];
-  const weeks=[...byWeek.values()].sort((a,b)=>a.week-b.week).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
-  return {...active,catalogVersion:1,activeWeekKey:active.key,weeks};
+  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
+  return {...active,catalogVersion:2,activeWeekKey:active.key,weeks};
 }

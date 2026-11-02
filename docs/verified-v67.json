@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "version": "v67 preseason recovery candidate",
+  "version": "v67 preseason and Week 0 recovery prototype",
   "nativeSha256": "d63b7029064f4d4f127093a3b471b291e82c748fd631e6becf273821886f80ed",
   "adapterSha256": "aa838ca96ed40569879398f8090cc7a187b82e402b5845564c28890cc5f6a2fd",
   "zipSha256": "590e3c8d8e1ca83b8b22d8e37478ddb38f7c9da30790a28d1c3b455c29acad75",
@@ -28,14 +28,14 @@
     "Corrected read-only capture resolves native front-end/CareerManager/database ownership",
     "v67 native runtime activated and published preseason news directly from the active Dynasty",
     "User confirmed preseason posts visible, Preseason 2026 choice, and B returns normally to CFB; logs confirm native dropdown/layout/scroll restoration",
-    "Same-session preseason-to-RegularSeason Week0 advance published 62 stories without a DLL reload or save requirement; native decoder accepted all scopes"
+    "Same-session preseason-to-RegularSeason Week0 advance published 62 stories without a DLL reload or save requirement; native decoder accepted all scopes",
+    "User confirmed regular-season Week0 posts visible and B returns normally after the same-session advance",
+    "User confirmed same-process main-menu reload reached Week0; after reopening the preparing page, all 62 posts and For You ordering matched exactly"
   ],
   "livePending": [
-    "Preseason to regular-season Week0 transition",
-    "Main-menu exit and Dynasty reload",
     "v67 MMC cold start without title-screen delay"
   ],
-  "automaticLoaderEnabled": false,
+  "automaticLoaderEnabled": true,
   "previousCandidate": {
     "version": "v66",
     "firstHubButton": "passed",
@@ -51,6 +51,11 @@
     "forYou": 9,
     "nativeCatalogDecodePassed": true,
     "automaticPublicationAfterAdvance": true,
-    "nativePageAndBackPending": true
-  }
+    "nativePageAndBackPending": false,
+    "userConfirmed": true
+  },
+  "adapterInstalledForNextMmcStartup": true,
+  "currentMmcRestartRequiredForAdapter": true,
+  "installedAdapterSmokePassed": true,
+  "supersededBy": "v68"
 }
