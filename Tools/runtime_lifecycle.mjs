@@ -23,10 +23,11 @@ export function updateRuntime(s,state={format:1,editions:[]}){
   for(const [id,old] of injured){const now=currentPlayers.get(id);if(!now||(now.injury==='Uninjured'&&['injuryYear','injuryWeek','injuryType'].some(k=>old[k]!==now[k])))injured.delete(id);}
   const midweekBaseline=injured.size?{players:[...injured.values()]}:null;
   if(midweekBaseline)s.midweekBaseline=midweekBaseline;
-  const feed=buildFeed(s,previous?.snapshot??null);
+  let authors=state.authors??{};
+  const feed=buildFeed(s,previous?.snapshot??null,{authors,onAuthors:value=>{authors=value;}});
   const snapshot={format:2,sourceKind:'runtime',leagueId:s.leagueId,season:s.season,userTeamIndex:s.userTeamIndex,sha256:s.sha256,
     players:s.players.filter(p=>p.team===s.userTeamIndex),commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,midweekBaseline};
   const entry={scope,week,key:weekKey(s),snapshot,feed};
   const updated=[...editions.filter(e=>e.week!==week),entry].sort((a,b)=>a.week-b.week);
-  return {state:{format:1,editions:updated},catalog:buildCatalog(feed,updated.map(e=>e.feed))};
+  return {state:{format:1,editions:updated,authors},catalog:buildCatalog(feed,updated.map(e=>e.feed))};
 }

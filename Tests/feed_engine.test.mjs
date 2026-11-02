@@ -17,9 +17,9 @@ test('event detection retains verified prior-week results and performances witho
  const e=detectEvents(s);assert.equal(find(s,'result:last').facts.homeScore,32);assert.equal(find(s,'performance:last:p:GameOffensiveStats').facts.stats.passingYards,200);
  assert.ok(!e.some(e=>e.id.includes('future')||e.id.includes('old-year')||e.id.includes('unfinished')));assert.ok(e.every(e=>!('body' in e)&&!('author' in e)));
 });
-test('drafting starts with no publishable legacy or review tweets, while retaining event facts',()=>{
- const s=fixture(),a=buildFeed(s),b=buildFeed(structuredClone(s));assert.deepEqual(a,b);assert.equal(a.contentStatus,'drafting');assert.ok(a.events.length>0);
- assert.deepEqual(a.stories,[]);assert.deepEqual(a.posts,[]);for(const view of Object.values(a.views))assert.deepEqual(view,[]);
+test('approved pack generates deterministic stories from retained event facts',()=>{
+ const s=fixture(),a=buildFeed(s),b=buildFeed(structuredClone(s));assert.deepEqual(a,b);assert.equal(a.contentStatus,'generated');assert.ok(a.events.length>0);assert.ok(a.stories.length>0);
+ assert.ok(a.stories.every(p=>p.templateId&&p.contentRevision==='voices-1'));assert.ok(a.posts.length<=20);assert.ok(a.stories.every(p=>p.publication.week===7));
  assert.ok(a.events.every(e=>e.publication.week===7));assert.equal(new Set(a.events.map(e=>e.id)).size,a.events.length);
 });
 test('week, phase, and season boundaries reject unrelated results',()=>{

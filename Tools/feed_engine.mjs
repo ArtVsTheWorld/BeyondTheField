@@ -1,6 +1,7 @@
-// Editorial reset: fact detection remains live; no legacy or draft tweet prose is publishable.
+// Approved prewritten voices applied only to verified Dynasty event facts.
 import {publishWeek} from './feed_selection.mjs';
 import {detectEvents,weekKey} from './story_events.mjs';
+import {renderStories,CONTENT_REVISION} from './story_renderer.mjs';
 export {detectEvents,weekKey};
 export const ENGINE_VERSION=2;
 export function trackOffers(s,sameWeek=null,previous=null){
@@ -15,11 +16,13 @@ export function trackOffers(s,sameWeek=null,previous=null){
   if(baseline){const known=new Set(baseline.offers.map(key));for(const o of s.offers)if(!known.has(key(o)))events.set(key(o),o);}
   return [...events.values()];
 }
-export function buildFeed(s,previous=null){
+export function buildFeed(s,previous=null,options={}){
   const events=detectEvents(s,previous),key=weekKey(s);
+  const rendered=renderStories(s,events,{authors:options.authors??{}});
+  options.onAuthors?.(rendered.authors);
   const publication={key,season:s.season.CurrentSeasonYear,phase:s.season.CurrentWeekType,week:s.season.CurrentWeek};
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
-    conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'drafting',contentRevision:'voice-foundation-1',
-    events:events.map(e=>({...e,publication})),stories:[]});
+    conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,
+    events:events.map(e=>({...e,publication})),stories:rendered.stories});
 }

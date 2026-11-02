@@ -1,7 +1,7 @@
 import {teamAnalytics} from './team_analytics.mjs';
 // Read-only Dynasty facts. This module contains no tweet prose or account identities.
 export const weekKey=s=>`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
-const complete=g=>['HomeWon','AwayWon','Tie'].includes(g.status);
+const complete=g=>g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
 const ranked=n=>Number.isInteger(n)&&n>=1&&n<=25;
 export function detectEvents(s,previous=null){
   if(s.format!==2||s.gameYear!==27||!s.sourceUnchanged||!/^[a-f0-9]{64}$/.test(s.sha256))throw Error('Invalid Dynasty snapshot');

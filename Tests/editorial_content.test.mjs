@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 const guide=JSON.parse(await fs.readFile(new URL('../Content/Editorial/voice-guide.json',import.meta.url),'utf8'));
 const batch=JSON.parse(await fs.readFile(new URL('../Content/Editorial/review-samples.json',import.meta.url),'utf8'));
-test('editorial reset has six voices and thirty distinct, unapproved review drafts',()=>{
- assert.equal(guide.approvedForRuntime,false);assert.equal(batch.approvedForRuntime,false);assert.equal(guide.freshStart.approvedRuntimeTemplates,0);assert.equal(guide.voices.length,6);assert.equal(batch.posts.length,30);
+test('editorial reset preserves six voices and thirty samples separately from runtime templates',()=>{
+ assert.equal(guide.approvedForRuntime,false);assert.equal(batch.approvedForRuntime,false);assert.equal(guide.freshStart.atResetApprovedRuntimeTemplates,0);assert.equal(guide.voices.length,6);assert.equal(batch.posts.length,30);
  assert.equal(new Set(batch.posts.map(p=>p.id)).size,30);for(const v of guide.voices)assert.equal(batch.posts.filter(p=>p.voice===v.id).length,5);
  assert.ok(batch.posts.every(p=>p.approvedForRuntime===false&&p.trigger&&p.scope));
 });

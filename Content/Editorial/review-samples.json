@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "status": "draft-for-review",
+  "status": "approved-writing-direction",
   "approvedForRuntime": false,
   "scenarioNotice": "Fictional editorial scenarios, not reports about the active Dynasty. Most are independent alternatives; ANALYST-01 and FAN-04 form a linked debate. Example players, coaches, media, fan accounts, and most programs are fictional.",
   "posts": [
@@ -695,5 +695,6 @@
     }
   ],
   "revision": 3,
-  "authoredFlavorNotice": "Core football facts and real coach/team identities must come from Dynasty data. The requested recruiting phone call and ordinary first-person reactions are authored worldbuilding, not claims of native conversation telemetry."
+  "authoredFlavorNotice": "Core football facts and real coach/team identities must come from Dynasty data. The requested recruiting phone call and ordinary first-person reactions are authored worldbuilding, not claims of native conversation telemetry.",
+  "approvedDirectionFor": "Content/Runtime/first-pack.json"
 }

@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "status": "tested-native-missing-glyphs",
+  "date": "2026-11-01",
+  "candidate": "DynastyEnhancer-v48-emoji-probe.dll",
+  "surface": "Existing native Social Media tweet body font",
+  "method": "Three explicit diagnostic posts, inspected in the game; user selected National to display all three. No save tables or publication archives modified.",
+  "controls": {
+    "ascii": "rendered",
+    "accentedLatin": "rendered (café)",
+    "ordinaryPunctuation": "rendered (apostrophe/en dash)"
+  },
+  "testedMissing": [
+    "star, check, arrow, outlined heart, smile",
+    "football, fire, trophy, clap, raised hands, eyes",
+    "heart/sun variation selectors",
+    "skin tone modifier",
+    "US flag regional indicators",
+    "family ZWJ sequence"
+  ],
+  "observed": "Missing-glyph boxes; supplementary emoji produce multiple boxes. No usable tested emoji was observed.",
+  "decision": "Emoji output disabled in first-pack.json. ASCII -> replaces decorative arrows.",
+  "scope": "Current native tweet font and installed game/mod layout only; not a claim about every font or UI surface.",
+  "probeExporter": "Tools/export_emoji_probe.mjs",
+  "runtimePolicy": "Probe exporter is separate from export_runtime.mjs and never reads/writes publication history."
+}

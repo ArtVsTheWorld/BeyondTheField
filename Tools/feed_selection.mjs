@@ -8,15 +8,15 @@ export function curate(stories,limit=20){
   const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:p.scopes.includes('team')?'team':p.scopes.includes('conference')?'conference':'national';
   for(const p of pool)buckets[bucketFor(p)].push(p);
   const target={national:Math.round(limit*.35),conference:Math.round(limit*.25),team:0};target.team=limit-target.national-target.conference;
-  const selected=[],used=new Set(),categories=new Map(),threads=new Map();
+  const selected=[],used=new Set(),categories=new Map(),threads=new Map(),templates=new Map();
   const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1};
   const accept=p=>{
     if(used.has(p.id)||(categories.get(p.category)??0)>=(categoryMax[p.category]??2))return false;
     // Keep an event from taking over the combined feed with many near-identical
     // player box scores or commitments. Dedicated scope lists keep them all.
     const thread=p.thread??p.id;
-    if((threads.get(thread)??0)>=2)return false;
-    used.add(p.id);categories.set(p.category,(categories.get(p.category)??0)+1);threads.set(thread,(threads.get(thread)??0)+1);selected.push(p);return true;
+    if((threads.get(thread)??0)>=2||(p.templateId&&(templates.get(p.templateId)??0)>=2))return false;
+    used.add(p.id);categories.set(p.category,(categories.get(p.category)??0)+1);threads.set(thread,(threads.get(thread)??0)+1);selected.push(p);if(p.templateId)templates.set(p.templateId,(templates.get(p.templateId)??0)+1);return true;
   };
   const counts={national:0,conference:0,team:0};
   for(const scope of ['team','conference','national'])for(const p of buckets[scope]){if(counts[scope]>=target[scope])break;if(accept(p))++counts[scope];}

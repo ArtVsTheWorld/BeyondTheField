@@ -4,25 +4,21 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Editorial reset: Step 1
+## Social Media writing: first generation pack
 
-This branch starts the Social Media writing from scratch. The original three illustrative cards and all prior authored runtime tweet wording have been removed. `Tools/story_events.mjs` retains the verified event facts and conditions. `Tools/feed_engine.mjs` currently publishes zero authored stories with `contentStatus: drafting`; only system status/empty-state rows remain available to the native UI. Draft writing is not a production template pack.
+The user approved the Review 03 writing direction and requested generation. `Content/Runtime/first-pack.json` now contains 89 prewritten variants across the six account types plus the fictional model-line account. `Tools/story_renderer.mjs` applies them to verified event facts; it never calls an online text model. The original three illustrative cards and prior prototype tweet wording remain retired. Editorial samples remain separate from the executable pack.
 
-The user selected grounded college-football Twitter, all six account types, fictional media/fan accounts, personality-led player/recruit voices, secondary position influences (usually more restrained QBs), and no numerical ability values or game-system language in posts.
+The first slice covers published results, player/team performances, polls, offers and new commitments, injuries, upcoming matchups, Heisman/CFP rankings, standings, calendar items and fictional model lines. Analysts use corroborated rushing rank, weighted third-down conversions, red-zone touchdown rate, turnover margin and season-largest margins. `Content/Editorial/analyst-opportunities.json` tracks deeper calculations still to implement. Mere ranking updates without analytic evidence use reporter accounts.
 
-- `Content/Editorial/voice-guide.json`: six voice guides, writing boundaries, native personality mapping, and position guidance.
-- `Content/Editorial/review-samples.json`: thirty new independent review scenarios, five per voice, all unapproved for runtime.
-- `Tools/render_voice_review.mjs`: creates a readable local review page. Run `node Tools/render_voice_review.mjs`, then open `Build/voice-review.html` and give feedback by post ID.
+Official accounts use compact captions, native nicknames and occasional hashtags. Players normally post positive reactions; native personality leads, with secondary QB restraint. Players, recruits and fans vary punctuation and casual phrasing. Current-coach mentions require a real coach reference. Recruiting phone calls and personal reactions are authored worldbuilding around actual events. A persistent optional faith-language style is assigned independently of native personality/position, not presented as detected belief.
 
-The native `Player.Personality` field was verified read-only and added to this branch's capture/normalization path: Leader, Intense, Entertainer, TeamPlayer, and Unpredictable. The prose associations are editorial proposals, not measured psychological rules. Position is a secondary influence. Missing/sentinel personalities normalize to null. Personality labels, codes, and internal values never appear in the review posts.
+`Tools/story_authors.mjs` persists identity and collision resolution in runtime history. Recruiting-to-roster transitions and position, jersey or week changes retain the handle. Deterministic event/week choices keep existing wording stable during unrelated midweek updates. Missing slots suppress the variant. Bodies must fit 280 Unicode code points and the existing native 512-byte budget, without truncating factual values. All Posts additionally caps repeated template forms; full qualifying scope views remain available. Fan replies require their real mod-authored parent and currently appear in dedicated views, not the curated combined view.
 
-Review 03 uses short, punchy team captions; varied lengths across the other voices; and more natural player, recruit and fan phrasing. PLAYER-04 now celebrates a teammate without a box-score speech. The specific 42-point example has been removed. Analyst examples include a measured red-zone touchdown rate, with additional opportunities documented in `Content/Editorial/analyst-opportunities.json`. Emojis stay disabled pending a native font visual check. Current-coach references, natural position-free handles and personality-led voices remain. The recruiting phone call is authored worldbuilding around a verified commitment and coach identity, not native contact telemetry. Run the renderer and open `Build/voice-review-03.html` or the latest `Build/voice-review.html`.
+Native emoji testing is complete: the current tweet font showed missing-glyph boxes for every tested symbol/emoji, including football, fire, trophy, hands, flags and combined sequences. Ordinary text, accented Latin and punctuation rendered. Runtime emojis are disabled; decorative arrows use ASCII `->`. See `docs/native-font-check.json`. `Tools/export_emoji_probe.mjs` is an explicit development-only exporter with no history writes and is never the production exporter.
 
-`Tools/team_analytics.mjs` computes rushing yards per game/rank, weighted third-down percentage, red-zone touchdown rate, turnover margin, and a unique season-largest winning margin derived from actual results. It prefers current-first native season totals corroborated by published scorecard W/L/T or matching team records, with complete validated game caches as an alternative. National ranks and superlatives require full eligible-field coverage.
+The read-only Week 9 data audit reconciled 138 FBS programs and 511 published finals. Rushing, third-down and red-zone totals matched the game caches for every program; all inspected quarter-score splits plus overtime matched their finals. Cached unpublished CPU scores are excluded from public news and player performances. Every future snapshot still passes validity/coverage checks.
 
-The read-only Week 9 audit reconciled 138 FBS programs and 511 published finals. Rushing, third-down and red-zone season totals match their game caches for every eligible program; all inspected published quarter-score splits plus overtime sum to the finals. Some CPU games already contain final scores before publication. The new reader captures `HasBeenPublished`, and normalization excludes unpublished results, quarter splits and player performance from public facts. Some separate team record counters lag; published scorecards and current-season totals provide corroboration. No live DLL was replaced for this audit.
-
-The historical live v47 build and its published archives remain available at tag `prototype-active-dynasty-v47`. This isolated content worktree has not replaced the currently loaded DLL. The remaining sections describe that verified native UI/data foundation; story publication on this branch resumes only after the replacement content and renderer are implemented.
+The first-pack DLL is a development candidate on `content/voice-foundation`; generated previews are under Build. The historical live v47 source, DLL and archives remain available at tag `prototype-active-dynasty-v47`. The replacement generator starts its own observed publication history; it does not rewrite the old prototype editions or re-use their wording. Its first observed week is the active week. The candidate has compiled and passed local checks; native feed verification is pending after the user stopped Computer Use. The temporary emoji DLL was stopped successfully.
 
 ## Current component: Social Media
 
@@ -51,7 +47,7 @@ Node.js is required for the story generator. Copy `Config/dynasty-enhancer.examp
 The legacy save adapter remains as a diagnostic comparison tool: `Config/social-refresh.example.json` documents its external dependencies. It is not the candidate DLL's data source.
 
 ```powershell
-node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs Tests/team_analytics.test.mjs
+node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs Tests/team_analytics.test.mjs Tests/story_generation.test.mjs
 Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```

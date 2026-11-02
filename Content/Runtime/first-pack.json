@@ -1,0 +1,504 @@
+{
+  "format": 1,
+  "revision": "voices-1",
+  "enabled": true,
+  "emojiEnabled": false,
+  "directionApproval": "User approved Review 03 and requested generation after native emoji testing.",
+  "authoredFlavor": "Ordinary reactions, fan opinions and optional recruiting phone calls are fictional worldbuilding around verified Dynasty facts.",
+  "families": {
+    "team.win": [
+      {
+        "id": "team.win.1",
+        "body": "That’s a {nickname} WIN!\n{score} over {opponent}. {hashtag}"
+      },
+      {
+        "id": "team.win.2",
+        "body": "{nickname}: {score} over {opponent}.\nThat’s a WIN. {hashtag}"
+      }
+    ],
+    "team.narrow_win": [
+      {
+        "id": "team.narrow_win.1",
+        "body": "Hard-earned.\n{nickname}: {score} over {opponent}. {hashtag}"
+      }
+    ],
+    "team.rivalry_win": [
+      {
+        "id": "team.rivalry_win.1",
+        "body": "Bragging rights secured.\n{school} {winnerScore}, {opponent} {loserScore}. {hashtag}"
+      }
+    ],
+    "team.shutout": [
+      {
+        "id": "team.shutout.1",
+        "body": "SHUTOUT.\n{school} {winnerScore}, {opponent} 0. {hashtag}"
+      }
+    ],
+    "team.loss": [
+      {
+        "id": "team.loss.1",
+        "body": "Final: {school} {ownScore}, {opponent} {opponentScore}."
+      }
+    ],
+    "team.poll_up": [
+      {
+        "id": "team.poll_up.1",
+        "body": "Moving on up.\nNo. {previousRank} -> No. {rank} for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "team.poll_up.2",
+        "body": "The {nickname} check in at No. {rank}. Up from No. {previousRank}. {hashtag}"
+      }
+    ],
+    "team.upcoming": [
+      {
+        "id": "team.upcoming.1",
+        "body": "{nickname} vs. {opponent}.\nYou know who you’re with. {hashtag}"
+      },
+      {
+        "id": "team.upcoming.2",
+        "body": "Next up: {opponent}.\nLet’s go, {nickname}. {hashtag}"
+      }
+    ],
+    "team.performance": [
+      {
+        "id": "team.performance.1",
+        "body": "{playerName} was DIFFERENT.\n{statLine}. {hashtag}"
+      }
+    ],
+    "beat.result": [
+      {
+        "id": "beat.result.2",
+        "body": "{winner} beats {loser}, {score}. That’s the final from this matchup."
+      }
+    ],
+    "beat.result_wide": [
+      {
+        "id": "beat.result_wide.1",
+        "body": "{winner} takes it, {score} over {loser}. A {margin}-point margin gives you a pretty clear picture of this one."
+      }
+    ],
+    "beat.tie": [
+      {
+        "id": "beat.tie.1",
+        "body": "{home} {homeScore}, {away} {awayScore}. This one goes down as a tie."
+      }
+    ],
+    "beat.team_stats": [
+      {
+        "id": "beat.team_stats.1",
+        "body": "{school} finished with {passingYards} passing yards and {rushingYards} rushing yards against {opponent}. {firstDowns} first downs and {giveaways} {giveawayLabel} complete the offensive snapshot."
+      }
+    ],
+    "beat.performance": [
+      {
+        "id": "beat.performance.1",
+        "body": "{school}’s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.2",
+        "body": "{playerName} for {school}: {statLine} against {opponent}. {resultLine}"
+      }
+    ],
+    "beat.poll_up": [
+      {
+        "id": "beat.poll_up.1",
+        "body": "{school} moves from No. {previousRank} to No. {rank} in the latest poll. The {nickname} have climbed {places} {placeLabel} this week."
+      }
+    ],
+    "beat.poll_down": [
+      {
+        "id": "beat.poll_down.1",
+        "body": "{school} slips from No. {previousRank} to No. {rank} in the latest poll. That is a drop of {places} {placeLabel}."
+      }
+    ],
+    "beat.poll_entry": [
+      {
+        "id": "beat.poll_entry.1",
+        "body": "{school} enters this week’s Top 25 at No. {rank}. A new name in the rankings."
+      }
+    ],
+    "beat.poll_same": [
+      {
+        "id": "beat.poll_same.1",
+        "body": "{school} holds at No. {rank} in this week’s poll."
+      }
+    ],
+    "beat.injury": [
+      {
+        "id": "beat.injury.1",
+        "body": "{school}’s {playerName} remains on the injury list.{injuryDetail} No confirmed return date to report."
+      }
+    ],
+    "beat.recovery": [
+      {
+        "id": "beat.recovery.1",
+        "body": "{school}’s {playerName} is no longer listed as injured. That is an availability update; we still need to see him back in a game."
+      }
+    ],
+    "beat.commit": [
+      {
+        "id": "beat.commit.1",
+        "body": "{playerName}, a {position}, has committed to {school}.{recruitRankDetail}{coachDetail}"
+      }
+    ],
+    "beat.preview": [
+      {
+        "id": "beat.preview.1",
+        "body": "{awayLabel} vs. {homeLabel} is on the schedule this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.2",
+        "body": "This week’s matchup: {awayLabel} vs. {homeLabel}.{rivalryDetail}"
+      }
+    ],
+    "beat.watch": [
+      {
+        "id": "beat.watch.1",
+        "body": "{school}’s {playerName} is one to watch against {opponent}.{watchDetail}"
+      }
+    ],
+    "beat.standings": [
+      {
+        "id": "beat.standings.1",
+        "body": "{conference}: {leaders}. Those are the first three programs in the current standings."
+      }
+    ],
+    "beat.independents": [
+      {
+        "id": "beat.independents.1",
+        "body": "Among the independents: {leaders}. Overall records, with no conference title race to sort out."
+      }
+    ],
+    "beat.cfp": [
+      {
+        "id": "beat.cfp.1",
+        "body": "{school} sits at No. {rank} in the current playoff rankings. A ranking today, with more football still to play."
+      }
+    ],
+    "analyst.rushing": [
+      {
+        "id": "analyst.rushing.1",
+        "body": "{school} averages {rushingYardsPerGame} rushing yards per game through {sampleGames} games, {rankPhrase} in FBS. That gives the {nickname} a ground game worth watching."
+      },
+      {
+        "id": "analyst.rushing.2",
+        "body": "Through {sampleGames} games, {school} has {rushingYards} rushing yards. That’s {rushingYardsPerGame} per game, {rankPhrase} in FBS. Volume like that deserves a little more attention."
+      }
+    ],
+    "analyst.rushing_poll": [
+      {
+        "id": "analyst.rushing_poll.1",
+        "body": "{school} is up from No. {previousPollRank} to No. {pollRank}. The {nickname} average {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. No. {pollRank} feels about right."
+      }
+    ],
+    "analyst.third_low": [
+      {
+        "id": "analyst.third_low.1",
+        "body": "{school} is {conversions}-for-{attempts} on third down through {sampleGames} games ({percent}%). That leaves very little margin for error on early downs. It’s hard to sustain an offense without extending drives."
+      }
+    ],
+    "analyst.third_high": [
+      {
+        "id": "analyst.third_high.1",
+        "body": "{school} has converted {conversions} of {attempts} third downs through {sampleGames} games ({percent}%). A lot of chances to get this offense off the field have ended with another set of downs."
+      }
+    ],
+    "analyst.red_low": [
+      {
+        "id": "analyst.red_low.1",
+        "body": "{school} has turned {trips} red-zone trips into just {touchdowns} touchdowns through {sampleGames} games ({percent}%). Getting there isn’t the problem. Finishing with six is."
+      }
+    ],
+    "analyst.red_high": [
+      {
+        "id": "analyst.red_high.1",
+        "body": "{touchdowns} touchdowns on {trips} red-zone trips for {school}: {percent}% through {sampleGames} games. This offense is making those visits count for six."
+      }
+    ],
+    "analyst.turnover_plus": [
+      {
+        "id": "analyst.turnover_plus.1",
+        "body": "{school} is plus-{margin} in turnover margin through {sampleGames} games: {takeaways} takeaways and {giveaways} {giveawayLabel}. That’s a major cushion. If those takeaways cool off, there will be less room for mistakes elsewhere."
+      }
+    ],
+    "analyst.turnover_minus": [
+      {
+        "id": "analyst.turnover_minus.1",
+        "body": "{school} has given it away {giveaways} times and taken it back {takeaways} times through {sampleGames} games. A turnover margin of {margin} keeps handing the opponent extra opportunities."
+      }
+    ],
+    "analyst.margin": [
+      {
+        "id": "analyst.margin.1",
+        "body": "{school}’s {score} win over {opponent} is the largest winning margin by an FBS team this season: {margin} points. That’s across {comparisonGames} published games, not just this week’s scoreboard."
+      }
+    ],
+    "analyst.heisman": [
+      {
+        "id": "analyst.heisman.1",
+        "body": "{school}’s {playerName} {rankChange} in the Heisman race after {statLine} against {opponent}. Production to go with the attention. Another game like that would help his case."
+      }
+    ],
+    "beat.heisman": [
+      {
+        "id": "beat.heisman.1",
+        "body": "{school}’s {playerName} {rankChange} in the Heisman race. One name to keep an eye on as the season moves along."
+      }
+    ],
+    "recruit.offer.Leader": [
+      {
+        "id": "recruit.offer.Leader.1",
+        "body": "Thankful to receive an offer from {school}! Appreciate the staff for believing in me"
+      },
+      {
+        "id": "recruit.offer.Leader.2",
+        "body": "Thankful for an offer from {school}. Appreciate Coach {coachLastName} and the staff for believing in me"
+      }
+    ],
+    "recruit.offer.Intense": [
+      {
+        "id": "recruit.offer.Intense.1",
+        "body": "{school} offered. been waiting on that one"
+      },
+      {
+        "id": "recruit.offer.Intense.2",
+        "body": "Offer from {school}! they see it"
+      }
+    ],
+    "recruit.offer.Entertainer": [
+      {
+        "id": "recruit.offer.Entertainer.1",
+        "body": "{school} offered!! yeah this one made my day"
+      },
+      {
+        "id": "recruit.offer.Entertainer.2",
+        "body": "okay {school}!! appreciate the offer"
+      }
+    ],
+    "recruit.offer.TeamPlayer": [
+      {
+        "id": "recruit.offer.TeamPlayer.1",
+        "body": "Thankful for an offer from {school}. Appreciate everyone who helped me get here"
+      }
+    ],
+    "recruit.offer.Unpredictable": [
+      {
+        "id": "recruit.offer.Unpredictable.1",
+        "body": "{school} offered. had to read that twice"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.2",
+        "body": "new offer from {school}!! appreciate the love"
+      }
+    ],
+    "recruit.offer.Neutral": [
+      {
+        "id": "recruit.offer.Neutral.1",
+        "body": "Excited to receive an offer from {school}!"
+      }
+    ],
+    "recruit.offer.faith": [
+      {
+        "id": "recruit.offer.faith.1",
+        "body": "AGTG! Blessed to receive an offer from {school}. shoutout to everyone who kept believing in me"
+      }
+    ],
+    "recruit.commit.Leader": [
+      {
+        "id": "recruit.commit.Leader.1",
+        "body": "I’m committing to {school}! Appreciate everyone who’s been with me through this. Ready for what’s next {hashtag}"
+      }
+    ],
+    "recruit.commit.Intense": [
+      {
+        "id": "recruit.commit.Intense.1",
+        "body": "Committed to {school}. let’s do this {hashtag}"
+      }
+    ],
+    "recruit.commit.Entertainer": [
+      {
+        "id": "recruit.commit.Entertainer.1",
+        "body": "it’s {school}!! y’all stuck with me now {hashtag}"
+      }
+    ],
+    "recruit.commit.TeamPlayer": [
+      {
+        "id": "recruit.commit.TeamPlayer.1",
+        "body": "After a great phone call with Coach {coachLastName}, I’m committing to {school}!! My family has been with me through all of this. Can’t wait to get there and make y’all proud {hashtag}"
+      },
+      {
+        "id": "recruit.commit.TeamPlayer.2",
+        "body": "I’m committing to {school}!! My family has been with me through all of this. Can’t wait to make y’all proud {hashtag}"
+      }
+    ],
+    "recruit.commit.Unpredictable": [
+      {
+        "id": "recruit.commit.Unpredictable.1",
+        "body": "{school}. that’s the one. committed {hashtag}"
+      }
+    ],
+    "recruit.commit.Neutral": [
+      {
+        "id": "recruit.commit.Neutral.1",
+        "body": "Committed to {school}! Appreciate all the support {hashtag}"
+      }
+    ],
+    "player.win.Leader": [
+      {
+        "id": "player.win.Leader.1",
+        "body": "Appreciate y’all showing up for us. Love this team {hashtag}"
+      },
+      {
+        "id": "player.win.Leader.2",
+        "body": "Another W with my guys. Appreciate everybody who’s been riding with us"
+      }
+    ],
+    "player.win.Intense": [
+      {
+        "id": "player.win.Intense.1",
+        "body": "W. keep that scoreboard up a little longer {hashtag}"
+      }
+    ],
+    "player.win.Entertainer": [
+      {
+        "id": "player.win.Entertainer.1",
+        "body": "{receivingYards} and the W? i’ll take that every Saturday lol\nappreciate y’all {hashtag}"
+      },
+      {
+        "id": "player.win.Entertainer.2",
+        "body": "win with my guys. yeah today was a good day {hashtag}"
+      }
+    ],
+    "player.win.TeamPlayer": [
+      {
+        "id": "player.win.TeamPlayer.1",
+        "body": "{playerName} was eating today. love seeing my guys get theirs"
+      },
+      {
+        "id": "player.win.TeamPlayer.2",
+        "body": "love seeing my guys get theirs. team W {hashtag}"
+      }
+    ],
+    "player.win.Unpredictable": [
+      {
+        "id": "player.win.Unpredictable.1",
+        "body": "man i love this team"
+      },
+      {
+        "id": "player.win.Unpredictable.2",
+        "body": "W. phone’s staying on tonight {hashtag}"
+      }
+    ],
+    "player.win.Neutral": [
+      {
+        "id": "player.win.Neutral.1",
+        "body": "Good win with this team. Appreciate the support {hashtag}"
+      }
+    ],
+    "player.win.QB": [
+      {
+        "id": "player.win.QB.1",
+        "body": "Appreciate y’all showing up for us. Love this team"
+      },
+      {
+        "id": "player.win.QB.2",
+        "body": "Good win with my guys. Appreciate all the support {hashtag}"
+      }
+    ],
+    "player.rivalry": [
+      {
+        "id": "player.rivalry.1",
+        "body": "Rivalry W. Y’all know how much that one means\n\nKeep that scoreboard up a little longer"
+      }
+    ],
+    "fan.narrow_win": [
+      {
+        "id": "fan.narrow_win.1",
+        "body": "{playerName}, you beautiful man. A {margin}-point win and I’ve aged twelve years. The {nickname} got the W, my weekend is saved, and I am once again asking for ONE boring win before this season is over"
+      },
+      {
+        "id": "fan.narrow_win.2",
+        "body": "a {margin}-point win. i’m gonna need a minute. {hashtag}"
+      }
+    ],
+    "fan.win": [
+      {
+        "id": "fan.win.1",
+        "body": "{nickname} win and suddenly i’m a much nicer person to be around"
+      },
+      {
+        "id": "fan.win.2",
+        "body": "weekend saved. thank you {nickname}"
+      }
+    ],
+    "fan.rivalry": [
+      {
+        "id": "fan.rivalry.1",
+        "body": "{opponent} talked all that shit for {score}??\n\n{nickname} win. don’t mute me now {hashtag}"
+      }
+    ],
+    "fan.loss": [
+      {
+        "id": "fan.loss.1",
+        "body": "{nickname} lose {score} to {opponent} and i’m supposed to just go on with my day?"
+      },
+      {
+        "id": "fan.loss.2",
+        "body": "Coach {coachLastName}, at what point do we try something else. {opponent} {opponentScore}, {school} {ownScore}. my patience is hanging by a thread"
+      }
+    ],
+    "fan.picks": [
+      {
+        "id": "fan.picks.1",
+        "body": "Two picks from {playerName} and we’re doing the ‘everybody has bad games’ thing again? Coach {coachLastName}, at what point do we try something else. I love this team but my patience is hanging by a thread"
+      }
+    ],
+    "fan.performance": [
+      {
+        "id": "fan.performance.1",
+        "body": "{playerName}. {statLine}.\n\nCoach {coachLastName} i owe you an apology"
+      },
+      {
+        "id": "fan.performance.2",
+        "body": "{playerName} deserves a little more noise after that one. {statLine}. {hashtag}"
+      }
+    ],
+    "fan.poll_reply": [
+      {
+        "id": "fan.poll_reply.1",
+        "body": "‘No. {pollRank} feels about right’? {analystHandle} respectfully what games are you watching lol\n\nThe {nickname} keep winning and i’m supposed to be grateful for No. {pollRank}??"
+      }
+    ],
+    "fan.holiday": [
+      {
+        "id": "fan.holiday.1",
+        "body": "{holiday} and a week of college football. i’m not making other plans"
+      }
+    ],
+    "model.line": [
+      {
+        "id": "model.line.1",
+        "body": "Our model line for this week: {favorite} -{spread} against {opponent}. A projection, with a whole game still to settle it."
+      }
+    ],
+    "model.pickem": [
+      {
+        "id": "model.pickem.1",
+        "body": "Our model has {home} vs. {away} as a pick’em this week. Could be an interesting one."
+      }
+    ],
+    "beat.result_close": [
+      {
+        "id": "beat.result_close.1",
+        "body": "{winner} gets out with a {score} win over {loser}. A {margin}-point result does not leave much room for comfort."
+      }
+    ],
+    "beat.new_injury": [
+      {
+        "id": "beat.new_injury.1",
+        "body": "{school}’s {playerName} has been added to the injury list.{injuryDetail} No confirmed return date to report."
+      }
+    ]
+  }
+}

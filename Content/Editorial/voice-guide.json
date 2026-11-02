@@ -1,16 +1,17 @@
 {
   "format": 1,
-  "status": "draft-for-review",
+  "status": "approved-direction",
   "approvedForRuntime": false,
   "tone": "Grounded college-football Twitter, with distinct voices, occasional slang, and selective humor.",
-  "scope": "Step 1: editorial voice foundation and thirty new review scenarios. These files are not a production template pack.",
+  "scope": "Approved editorial direction. Runtime variants are in Content/Runtime/first-pack.json; these guide/review files are not loaded as templates.",
   "freshStart": {
     "legacyTweetWording": "retired",
     "originalThreeCards": "removed",
     "existingRuntimeTemplates": "removed from this branch",
-    "approvedRuntimeTemplates": 0,
+    "approvedRuntimeTemplates": 89,
     "historicalBaselineTag": "prototype-active-dynasty-v47",
-    "publishedArchives": "not rewritten"
+    "publishedArchives": "not rewritten",
+    "atResetApprovedRuntimeTemplates": 0
   },
   "writingRules": [
     "Begin from a specific football event or reaction. Avoid interchangeable motivational filler.",
@@ -31,7 +32,7 @@
     "Fan accounts are the expressive outlet: occasional melodrama, rivalry shit talk, arguments with analysts, and positive or negative commentary on named players and coaches. Keep statistical claims grounded while allowing clear opinions and emotional exaggeration.",
     "Occasional profanity is acceptable for fans. Do not spread it automatically to players, recruits, reporters, or official accounts.",
     "Generate player/recruit handles from names, initials, nicknames, underscores, occasional periods, and stable numbers. Position is never part of the handle-generation input. Persist an author handle across posts, position changes, and recruiting-to-roster transitions.",
-    "Emoji support in native game fonts is unverified. Leave emojis disabled until actual glyph rendering, baseline, and fallback behavior are checked in the native UI.",
+    "Native tweet-body emoji testing failed: tested symbols and emojis render missing-glyph boxes. Use plain-text runtime variants and ASCII -> in place of decorative arrows.",
     "Nickname grammar must fit the team. Use a neutral construction when singular/plural agreement is uncertain rather than guessing from the spelling.",
     "Players and recruits should sound like people posting on their phones, not coaches at a podium. Vary punctuation and casing; use occasional contractions or current slang only where natural to that recurring author. Fans can be much messier. Do not make every voice say the same trendy phrase."
   ],
@@ -61,7 +62,7 @@
     "positionRule": "Position is a soft editorial influence, never a personality assignment. A restrained receiver and an expressive quarterback must remain possible.",
     "unknownRule": "Use a neutral, consistent voice when the field is missing or invalid. Do not claim a personality has been detected.",
     "unpredictableRule": "The native Unpredictable category permits a wider approved range. Keep recurring author habits stable; do not reroll a different character every post.",
-    "faithLanguage": "Optional editorial style, never inferred from personality or position. The faith-language review example is not automatically eligible for a real player.",
+    "faithLanguage": "Optional, persistent authored style assigned independently of native personality or position. Review 03 faith wording was approved with the other directions. It is fictional character flavor, not detected personal belief.",
     "profiles": {
       "Leader": {
         "emphasis": [
@@ -292,7 +293,7 @@
     "sentenceLimit": null,
     "shortPosts": "Welcome, especially official team captions and player reactions. Do not pad with generic motivation or an extra thank-you sentence.",
     "overflow": "Drop optional hashtags or flavor clauses, or choose a shorter approved variant. Preserve names and factual values; never truncate a post mid-word.",
-    "nativeUI": "Use existing adaptive card heights first. Consider font-size changes only after a native visual check with the new pack.",
+    "nativeUI": "Adaptive card heights support the first English-text pack. Runtime bodies must fit both 280 Unicode code points and the native 512-byte text budget; overflow variants are omitted.",
     "softVoiceRanges": {
       "official": [
         25,
@@ -371,8 +372,15 @@
     "publication": "Native final scores may be cached before games are published. HasBeenPublished=false excludes those results and stats from public news; never leak simulated upcoming scores."
   },
   "emojiPolicy": {
-    "nativeSupport": "unverified",
+    "nativeSupport": "tested-missing-glyphs",
     "enabled": false,
-    "nextCheck": "Controlled native font visual check before any production emoji wording is enabled; plain-text variants remain available."
+    "verifiedBuild": "DynastyEnhancer-v48-emoji-probe",
+    "observed": "Native body font renders ASCII, accented Latin and ordinary punctuation; tested BMP symbols and supplementary emoji render missing-glyph boxes.",
+    "tested": [
+      "star/check/arrow/heart/smile",
+      "football/fire/trophy/clap/raised hands/eyes",
+      "variation selectors/skin tones/flag/ZWJ family"
+    ],
+    "fallback": "Plain text. Do not silently substitute boxes or strip names."
   }
 }
