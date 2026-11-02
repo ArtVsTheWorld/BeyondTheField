@@ -146,3 +146,8 @@ v73 distributes regular-season national analysis across all five named writers, 
 ## Late season, history and deeper analysis (v74)
 
 v74 adds verified conference championship invitations from Week 14, late-season title and bowl races, assigned postseason matchups, career/all-time milestone crossings, season-history comparisons and current-week rivalry/fan discussion. New advanced rates include broken tackles, contact yardage, YAC share, offensive-line sacks per snap, defensive per-game production, distance-based kicking and returns. [Conditions, evidence and live checks](docs/history-analysis-v74.md). Current native DLL/package: `Build/DynastyEnhancerNative-v74.dll` and `Build/DynastyEnhancer-v74-MMC.zip`. 167 Node tests pass; the actual sixteen-edition catalog validates in every native scope.
+
+
+## Matchups, fan voices and season endings (v75)
+
+v75 adds occasional opponent-unit/player comparisons with entering-game baselines and actual recaps; independent Barstool fan posts; clean language in new and archived prose; supported season wrapups, senior thanks/farewells and undefeated/winless reactions. Week 15 gets fresh championship-week hype instead of another Week 14 invitation. [Conditions and live checks](docs/matchup-season-v75.md). Current DLL/package: `Build/DynastyEnhancerNative-v75.dll` and `Build/DynastyEnhancer-v75-MMC.zip`. 185 Node tests and the actual seventeen-edition native catalog checks pass.

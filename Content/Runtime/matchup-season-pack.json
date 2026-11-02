@@ -1,0 +1,452 @@
+{
+  "format": 1,
+  "revision": "matchup-season-v75",
+  "families": {
+    "late.title-week": [
+      {
+        "id": "S75-late-title-week-1",
+        "body": "Championship week. {nickname} vs. {opponent} for the {conference} trophy. {hashtag}"
+      },
+      {
+        "id": "S75-late-title-week-2",
+        "body": "One game. The {conference} title on the line. {nickname} vs. {opponent} this week. {hashtag}"
+      }
+    ],
+    "late.title-week-fan": [
+      {
+        "id": "S75-late-title-week-fan-1",
+        "body": "It's actually championship week. {school} vs {opponent}, {conference} trophy on the line. I am going to be completely normal about this. Obviously"
+      },
+      {
+        "id": "S75-late-title-week-fan-2",
+        "body": "No more scenarios. No more scoreboard watching. {school} and {opponent} for the {conference} title THIS WEEK. Let's do this"
+      }
+    ],
+    "matchup.passing-preview": [
+      {
+        "id": "S75-matchup-passing-preview-1",
+        "body": "{school}'s passing attack has averaged {attack} yards across {games} games entering this matchup. {opponent} has allowed {defense} per game across {opponentGames}. A useful clash of production and resistance this week."
+      },
+      {
+        "id": "S75-matchup-passing-preview-2",
+        "body": "Passing-game check: {school} brings {attack} yards per game into {opponent}, whose defense has allowed {defense}. Samples: {games} games for the offense, {opponentGames} for the defense. Worth watching how those trends meet."
+      }
+    ],
+    "matchup.rushing-preview": [
+      {
+        "id": "S75-matchup-rushing-preview-1",
+        "body": "{school} is averaging {attack} rushing yards entering the game; {opponent} has allowed {defense} per game. That's {games} games of offense against {opponentGames} of run defense. The ground game deserves a place in this preview."
+      },
+      {
+        "id": "S75-matchup-rushing-preview-2",
+        "body": "On the ground, {school} has produced {attack} yards per game. {opponent} has conceded {defense}. Different opponents shaped those averages, but this week's matchup puts the two units in the same frame."
+      }
+    ],
+    "matchup.protection-preview": [
+      {
+        "id": "S75-matchup-protection-preview-1",
+        "body": "Protection watch for {school}: {attack} sacks allowed per game entering this week. {opponent}'s defense has averaged {defense} sacks. {games} offensive games, {opponentGames} defensive games behind those numbers."
+      },
+      {
+        "id": "S75-matchup-protection-preview-2",
+        "body": "{school}'s protection and {opponent}'s pass rush meet this week: {attack} sacks allowed per game versus {defense} sacks recorded. Workload isn't identical, but it puts a useful question on the matchup."
+      }
+    ],
+    "matchup.passing-recap": [
+      {
+        "id": "S75-matchup-passing-recap-1",
+        "body": "{school} entered averaging {attack} passing yards; {opponent} had allowed {defense} per game. The actual matchup produced {actual} passing yards for {school}. A look at what happened when those season trends met."
+      },
+      {
+        "id": "S75-matchup-passing-recap-2",
+        "body": "The passing matchup in numbers: {school}, {attack} yards per game coming in; {opponent}, {defense} allowed. {school} finished this game with {actual}. The entering averages now have a head-to-head result beside them."
+      }
+    ],
+    "matchup.rushing-recap": [
+      {
+        "id": "S75-matchup-rushing-recap-1",
+        "body": "{school} brought a {attack}-yard rushing average into a defense allowing {defense}. Against {opponent}, the actual total was {actual}. The ground-game comparison tells part of this result."
+      },
+      {
+        "id": "S75-matchup-rushing-recap-2",
+        "body": "Entering the matchup: {school} averaged {attack} rushing yards and {opponent} allowed {defense}. In the game itself, {school} ran for {actual}. That's the head-to-head answer to the pregame numbers."
+      }
+    ],
+    "matchup.protection-recap": [
+      {
+        "id": "S75-matchup-protection-recap-1",
+        "body": "{school} entered allowing {attack} sacks per game against a {opponent} defense averaging {defense}. In this matchup, {school} allowed {actual}. Protection was one measurable part of how the units met."
+      },
+      {
+        "id": "S75-matchup-protection-recap-2",
+        "body": "A protection recap: {school} allowed {actual} sacks against {opponent}. The entering averages were {attack} allowed by {school} and {defense} recorded by {opponent}. Those baselines exclude this game."
+      }
+    ],
+    "matchup.receiver-secondary-preview": [
+      {
+        "id": "S75-matchup-receiver-secondary-preview-1",
+        "body": "{school}'s {receiver} brings {catches} catches and {yards} yards into a {opponent} secondary featuring {defender} ({breakups} passes defended, {interceptions} INT). Two productive names on opposite units, rather than a promised one-on-one assignment."
+      },
+      {
+        "id": "S75-matchup-receiver-secondary-preview-2",
+        "body": "Receiver/secondary watch: {receiver}, {school} ({catches} catches, {yards} yards), against a {opponent} group featuring {defender} ({breakups} PBU, {interceptions} INT). The coverage may vary; the production on both sides is worth following."
+      }
+    ],
+    "matchup.receiver-secondary-recap": [
+      {
+        "id": "S75-matchup-receiver-secondary-recap-1",
+        "body": "Across the receiving/secondary matchup, {school}'s {receiver} finished with {actualCatches} catches for {actualYards} yards. On the other side, {opponent}'s {defender} recorded {actualBreakups} PBU and {actualInts} INT. No individual coverage assignment implied."
+      },
+      {
+        "id": "S75-matchup-receiver-secondary-recap-2",
+        "body": "Two lines from opposing units: {receiver} had {actualCatches} catches for {actualYards} yards for {school}; {defender} had {actualBreakups} passes defended and {actualInts} INT for {opponent}. Different jobs, same matchup."
+      }
+    ],
+    "matchup.passing-preview-rates": [
+      {
+        "id": "S75-matchup-passing-preview-rates-1",
+        "body": "{school} enters averaging {attack} passing yards per game and {attackRate} per pass attempt. {opponent} has allowed {defense} per game, {defenseRate} per pass attempt. Volume and efficiency point to the same matchup from different angles."
+      },
+      {
+        "id": "S75-matchup-passing-preview-rates-2",
+        "body": "{school} vs. {opponent}, passing efficiency: {attackRate} yards per pass attempt produced against {defenseRate} allowed. The per-game baselines are {attack} and {defense}. A useful unit comparison before kickoff."
+      }
+    ],
+    "matchup.passing-recap-rates": [
+      {
+        "id": "S75-matchup-passing-recap-rates-1",
+        "body": "{school} entered at {attackRate} yards per pass attempt; {opponent} had allowed {defenseRate}. Against that defense, {school} finished with {actual} passing yards at {actualRate} per pass attempt. The entering averages exclude this game."
+      },
+      {
+        "id": "S75-matchup-passing-recap-rates-2",
+        "body": "The passing matchup resolved at {actualRate} yards per pass attempt for {school} against {opponent}. Entering baselines: {school} produced {attackRate}, {opponent} allowed {defenseRate}. {actual} yards in the actual game."
+      }
+    ],
+    "matchup.rushing-preview-rates": [
+      {
+        "id": "S75-matchup-rushing-preview-rates-1",
+        "body": "{school} enters averaging {attack} rushing yards per game and {attackRate} per carry. {opponent} has allowed {defense} per game, {defenseRate} per carry. Volume and efficiency point to the same matchup from different angles."
+      },
+      {
+        "id": "S75-matchup-rushing-preview-rates-2",
+        "body": "{school} vs. {opponent}, rushing efficiency: {attackRate} yards per carry produced against {defenseRate} allowed. The per-game baselines are {attack} and {defense}. A useful unit comparison before kickoff."
+      }
+    ],
+    "matchup.rushing-recap-rates": [
+      {
+        "id": "S75-matchup-rushing-recap-rates-1",
+        "body": "{school} entered at {attackRate} yards per carry; {opponent} had allowed {defenseRate}. Against that defense, {school} finished with {actual} rushing yards at {actualRate} per carry. The entering averages exclude this game."
+      },
+      {
+        "id": "S75-matchup-rushing-recap-rates-2",
+        "body": "The rushing matchup resolved at {actualRate} yards per carry for {school} against {opponent}. Entering baselines: {school} produced {attackRate}, {opponent} allowed {defenseRate}. {actual} yards in the actual game."
+      }
+    ],
+    "fanclub.win": [
+      {
+        "id": "S75-fanclub-win-1",
+        "body": "{school} {score} over {opponent}. Me opening the group chat like I personally called every play. Good work, everybody"
+      },
+      {
+        "id": "S75-fanclub-win-2",
+        "body": "Final: {school} {score} over {opponent}. A win for the team and a terrible development for everyone who has to hear from us this week"
+      }
+    ],
+    "fanclub.rivalry-win": [
+      {
+        "id": "S75-fanclub-rivalry-win-1",
+        "body": "{school} {score} over {opponent}. Rivalry receipts department is OPEN. Please form an orderly line"
+      },
+      {
+        "id": "S75-fanclub-rivalry-win-2",
+        "body": "{opponent} week has concluded with a {score} {school} win. We would like to thank their fans for supplying the offseason content"
+      }
+    ],
+    "fanclub.loss": [
+      {
+        "id": "S75-fanclub-loss-1",
+        "body": "{school} falls {score} to {opponent}. Supporting the team and pretending that was fun are two different things. See you next game"
+      },
+      {
+        "id": "S75-fanclub-loss-2",
+        "body": "{score} against {opponent}. {school} fans will be staring at the ceiling for a bit. Still our team. Still some things that need fixing"
+      }
+    ],
+    "fanclub.bad-loss": [
+      {
+        "id": "S75-fanclub-bad-loss-1",
+        "body": "{school} {score} against {opponent}. The memes are not going to cover this one. We need a much better football answer next time"
+      },
+      {
+        "id": "S75-fanclub-bad-loss-2",
+        "body": "A {score} loss to {opponent}. We can make jokes on here, but {school} has real work to do after that one"
+      }
+    ],
+    "fanclub.tie": [
+      {
+        "id": "S75-fanclub-tie-1",
+        "body": "{school} and {opponent}: {score}. Group chat doesn't even know which reaction picture to use."
+      }
+    ],
+    "fanclub.rivalry-week": [
+      {
+        "id": "S75-fanclub-rivalry-week-1",
+        "body": "{opponent} week. {school} fans, please hydrate before spending the next several days being impossible in the replies"
+      },
+      {
+        "id": "S75-fanclub-rivalry-week-2",
+        "body": "Our official position on {opponent} week: {school} by enough that we can start being annoying early"
+      }
+    ],
+    "ending.team.normal": [
+      {
+        "id": "S75-ending-team-normal-1",
+        "body": "{record}. Thank you for being with the {nickname} all season. Your support made every home and road game matter. {hashtag}"
+      },
+      {
+        "id": "S75-ending-team-normal-2",
+        "body": "The {nickname} season ends at {record}. To everyone who showed up and stayed with us: thank you. {hashtag}"
+      }
+    ],
+    "ending.team.rough": [
+      {
+        "id": "S75-ending-team-rough-1",
+        "body": "Final season record: {record}. Thank you for standing with the {nickname}. Your support means everything. {hashtag}"
+      },
+      {
+        "id": "S75-ending-team-rough-2",
+        "body": "Our season closes at {record}. Thank you to every fan who supported the {nickname} through it. {hashtag}"
+      }
+    ],
+    "ending.team.winless": [
+      {
+        "id": "S75-ending-team-winless-1",
+        "body": "{record}. A difficult season comes to a close. Thank you to the fans who stood with the {nickname}. {hashtag}"
+      },
+      {
+        "id": "S75-ending-team-winless-2",
+        "body": "The season ends without a win. Thank you to every fan who kept supporting the {nickname} through a {record} year. {hashtag}"
+      }
+    ],
+    "ending.team.perfect": [
+      {
+        "id": "S75-ending-team-perfect-1",
+        "body": "{record}. An undefeated season, start to finish. Thank you for every moment, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "S75-ending-team-perfect-2",
+        "body": "Every game. Every time. {record}. Thank you for being part of an undefeated {nickname} season. {hashtag}"
+      }
+    ],
+    "ending.barstool.normal": [
+      {
+        "id": "S75-ending-barstool-normal-1",
+        "body": "{school} finishes {record}. Now what am I supposed to organize my entire weekend around? Thanks for the season, everybody"
+      },
+      {
+        "id": "S75-ending-barstool-normal-2",
+        "body": "{record}, and that's the season for {school}. Already miss it. Please respect our privacy while we become recruiting experts overnight"
+      }
+    ],
+    "ending.barstool.rough": [
+      {
+        "id": "S75-ending-barstool-rough-1",
+        "body": "{school} ends {record}. The offseason group chat is going to have some questions. Love this team. Would also enjoy watching more wins next year"
+      },
+      {
+        "id": "S75-ending-barstool-rough-2",
+        "body": "Season over at {record}. {school} fans have earned a short break from finding creative ways to explain the football. Better days, please"
+      }
+    ],
+    "ending.barstool.winless": [
+      {
+        "id": "S75-ending-barstool-winless-1",
+        "body": "{school} finished {record}. Zero wins. There is no reaction picture that fixes that. Fans kept showing up; the football needs to give them something back"
+      },
+      {
+        "id": "S75-ending-barstool-winless-2",
+        "body": "{record}. {school} fans deserve actual answers this offseason, not another hype video. Still our school. That was a brutal year"
+      }
+    ],
+    "ending.barstool.perfect": [
+      {
+        "id": "S75-ending-barstool-perfect-1",
+        "body": "{school} finished {record}. UNDEFEATED. We are warning everyone now: the posting is going to be unbearable for an extended period"
+      },
+      {
+        "id": "S75-ending-barstool-perfect-2",
+        "body": "The whole season. Not one loss. {school}, {record}. Saving the standings, framing the schedule, becoming a problem in every group chat"
+      }
+    ],
+    "ending.afterdark.normal": [
+      {
+        "id": "S75-ending-afterdark-normal-1",
+        "body": "{school}'s season is over at {record} and I'm already sad. Spent half the fall yelling at the screen. Would sign up for every second again"
+      },
+      {
+        "id": "S75-ending-afterdark-normal-2",
+        "body": "No more {school} football until next season. {record} and somehow it still went way too fast. Saturdays are about to feel empty"
+      }
+    ],
+    "ending.afterdark.rough": [
+      {
+        "id": "S75-ending-afterdark-rough-1",
+        "body": "{record}. I love {school}, but that season took years off my life. Don't sell me slogans all offseason. Show me something different next fall"
+      },
+      {
+        "id": "S75-ending-afterdark-rough-2",
+        "body": "{school} finishes {record}. Sad it's over, furious at how much of it went, somehow already hopeful about next year. This team has a ridiculous hold on me"
+      }
+    ],
+    "ending.afterdark.winless": [
+      {
+        "id": "S75-ending-afterdark-winless-1",
+        "body": "ZERO WINS. {school} went {record} and I'm supposed to just move on? The fans gave this program more than it gave us this season. Somebody needs to answer for it"
+      },
+      {
+        "id": "S75-ending-afterdark-winless-2",
+        "body": "{record}. Every single week I talked myself into {school} getting one. Not even ONE. I'm still a fan. I'm also absolutely sick of this"
+      }
+    ],
+    "ending.afterdark.perfect": [
+      {
+        "id": "S75-ending-afterdark-perfect-1",
+        "body": "{school} went {record}. Nobody beat us. Nobody. I'm going to bring this season up in conversations that have nothing to do with football"
+      },
+      {
+        "id": "S75-ending-afterdark-perfect-2",
+        "body": "I watched every game. Yelled through every close moment. {school} finished {record} and I genuinely don't know what to do with all this joy. Perfect season"
+      }
+    ],
+    "ending.beat.normal": [
+      {
+        "id": "S75-ending-beat-normal-1",
+        "body": "{school}'s season is complete at {record}. The focus moves from weekly preparation to roster retention, recruiting and deciding what carries into next fall."
+      },
+      {
+        "id": "S75-ending-beat-normal-2",
+        "body": "The final line for {school}: {record}. Now the season can be evaluated as a whole, with the offseason roster still to take shape."
+      }
+    ],
+    "ending.beat.rough": [
+      {
+        "id": "S75-ending-beat-rough-1",
+        "body": "{school} ends {record}, with more losses than wins. An offseason evaluation has to address the football that produced that record, not just the expectations that preceded it."
+      },
+      {
+        "id": "S75-ending-beat-rough-2",
+        "body": "A {record} finish leaves {school} with plenty to examine. Staff decisions, player development and the next recruiting class will shape the response; none of those answers is automatic."
+      }
+    ],
+    "ending.beat.winless": [
+      {
+        "id": "S75-ending-beat-winless-1",
+        "body": "{school} finishes {record} without a win. That is a full-season failure to turn any game into a victory. The offseason questions reach well beyond one position or one Saturday."
+      },
+      {
+        "id": "S75-ending-beat-winless-2",
+        "body": "No wins for {school}: {record}. Any offseason optimism needs to account for how far the results have to move. There is no positive spin for the record itself."
+      }
+    ],
+    "ending.beat.perfect": [
+      {
+        "id": "S75-ending-beat-perfect-1",
+        "body": "{school} has completed the full season undefeated at {record}. No remaining game to protect the record, no hypothetical finish: this team's perfect season is complete."
+      },
+      {
+        "id": "S75-ending-beat-perfect-2",
+        "body": "An undefeated final record for {school}: {record}. Getting through the entire schedule without a loss is the defining fact of this season review."
+      }
+    ],
+    "ending.player.senior": [
+      {
+        "id": "S75-ending-player-senior-1",
+        "body": "{school}, thank you for everything this senior season. {record} is the final record but I'll remember the people, the locker room and everybody who kept showing up for us. Much love"
+      },
+      {
+        "id": "S75-ending-player-senior-2",
+        "body": "Last game of my senior season is done. Appreciate my teammates and every {school} fan who rode with us. {record}. A lot of memories in this jersey"
+      }
+    ],
+    "ending.player.senior-perfect": [
+      {
+        "id": "S75-ending-player-senior-perfect-1",
+        "body": "My senior season. {record}. UNDEFEATED. Thank you {school}, my brothers in that locker room, everybody who supported us. Couldn't ask for a better way to remember this team"
+      },
+      {
+        "id": "S75-ending-player-senior-perfect-2",
+        "body": "{record} in my senior year. Nobody beat us. {school}, thank you for everything. Going to carry this team and this season with me forever"
+      }
+    ],
+    "ending.player.thanks": [
+      {
+        "id": "S75-ending-player-thanks-1",
+        "body": "Season's done at {record}. Appreciate everyone who supported us at {school}, home and away. Going to miss being out there with the guys"
+      },
+      {
+        "id": "S75-ending-player-thanks-2",
+        "body": "Thank you {school}. Every game, every trip, everybody who showed love. {record} and a whole lot of memories with this team"
+      }
+    ],
+    "ending.player.perfect": [
+      {
+        "id": "S75-ending-player-perfect-1",
+        "body": "{record}. Whole season undefeated. Love this team and everybody who rode with {school}. Going to remember this forever"
+      },
+      {
+        "id": "S75-ending-player-perfect-2",
+        "body": "Nobody beat us all year. {record}. Thank you {school}, my teammates, the fans, all of y'all. What a season"
+      }
+    ],
+    "ending.comparison": [
+      {
+        "id": "S75-ending-comparison-1",
+        "body": "{school}'s final record is {record}, after a {priorWins}-{priorLosses} finish in {previousYear}. That earlier season was played in the {previousConference}. A concrete year-over-year reference for the offseason discussion."
+      },
+      {
+        "id": "S75-ending-comparison-2",
+        "body": "Season comparison for {school}: {record} now, {priorWins}-{priorLosses} in {previousYear} as a {previousConference} program. The final records are in; the next roster is still being built."
+      }
+    ],
+    "ending.recruiting": [
+      {
+        "id": "S75-ending-recruiting-1",
+        "body": "With {school}'s season finished at {record}, its recruiting class currently sits No. {classRank} nationally. That's a live class ranking, not a final signing-day finish."
+      },
+      {
+        "id": "S75-ending-recruiting-2",
+        "body": "Next up for {school}: the offseason. The team finished {record}; its current recruiting class is No. {classRank}. That recruiting picture can still change."
+      }
+    ],
+    "ending.coach-pressure": [
+      {
+        "id": "S75-ending-coach-pressure-1",
+        "body": "{school} closes at {record}, and head coach {coachName} enters the offseason under job-security pressure. That is a situation to follow, not an announced coaching change."
+      },
+      {
+        "id": "S75-ending-coach-pressure-2",
+        "body": "The {record} finish puts {school}'s coaching situation in focus, with {coachName} under pressure. No firing or replacement has been announced here."
+      }
+    ],
+    "ending.fan-accountability": [
+      {
+        "id": "S75-ending-fan-accountability-1",
+        "body": "{school} finished {record}. I want to hear what {coachName} is actually changing. Not a motivational speech. What is going to look different on the field?"
+      },
+      {
+        "id": "S75-ending-fan-accountability-2",
+        "body": "{record}. {coachName} needs to give {school} fans a reason to expect better football next year. I will support this team forever. I do not have to pretend that was good"
+      }
+    ],
+    "ending.fan-qb": [
+      {
+        "id": "S75-ending-fan-qb-1",
+        "body": "{school} ends {record}. {playerName} finished with {touchdowns} passing TD and {interceptions} picks. That quarterback conversation isn't going away because the season is over"
+      },
+      {
+        "id": "S75-ending-fan-qb-2",
+        "body": "Love {school}. Can't ignore {playerName}'s {touchdowns} passing TD and {interceptions} interceptions in a {record} year. The offseason QB discussion needs to be honest"
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import {phaseIndex} from './publication_timeline.mjs';
 import {nationalCoverage} from './national_editorial.mjs';
 // Advanced rates use the player's recorded games, never the team's games or
 // invented targets/pass-block snaps. Every numerator/denominator is checked
@@ -14,7 +15,7 @@ export function verifiedPlayerStats(s,p,kind,index=null){
  if(seasons.length!==1)return null;
  const st=seasons[0].stats,n=st.GAMESPLAYED;
  if(!Number.isInteger(n)||n<1)return null;
- const games=index?.games??new Map(s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase===s.season.CurrentWeekType&&g.week<=s.season.CurrentWeek&&final(g)).map(g=>[g.id,g]));
+ const games=index?.games??new Map(s.games.filter(g=>g.year===s.season.CurrentYear&&(phaseIndex(g.phase)>=0&&phaseIndex(g.phase)<phaseIndex(s.season.CurrentWeekType)||g.phase===s.season.CurrentWeekType&&g.week<=s.season.CurrentWeek)&&final(g)).map(g=>[g.id,g]));
  const rows=(index?(index.players.get(p.id)??[]):s.performances).filter(r=>r.player===p.id&&r.team===p.team&&games.has(r.game)&&[games.get(r.game).home,games.get(r.game).away].includes(p.team)&&family(r.type)===kind);
  if(rows.length!==n||new Set(rows.map(r=>r.game)).size!==n)return null;
  const memo=new Map();
@@ -24,7 +25,7 @@ export function verifiedPlayerStats(s,p,kind,index=null){
 export function deepAnalyticsEvents(s,{bounded=true}={}){
  if(s.reconstructed||s.season.CurrentStage!=='NFLSeason')return [];
  const teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),events=[],covered=nationalCoverage(s);
- const index={players:new Map(),games:new Map(s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase===s.season.CurrentWeekType&&g.week<=s.season.CurrentWeek&&final(g)).map(g=>[g.id,g]))};
+ const index={players:new Map(),games:new Map(s.games.filter(g=>g.year===s.season.CurrentYear&&(phaseIndex(g.phase)>=0&&phaseIndex(g.phase)<phaseIndex(s.season.CurrentWeekType)||g.phase===s.season.CurrentWeekType&&g.week<=s.season.CurrentWeek)&&final(g)).map(g=>[g.id,g]))};
  for(const r of s.performances){const list=index.players.get(r.player)??[];list.push(r);index.players.set(r.player,list);}
  for(const p of s.players){const t=teams.get(p.team);if(!t)continue;
   const candidates=[];

@@ -305,6 +305,7 @@ int main(int argc,char** argv){
         require(!alignNewsFrame(true)&&!layoutOwned,"Foreign bytecode must be rejected");
         VirtualFree(layoutFixture,0,MEM_RELEASE);newsLayout=0;newsTemplate=0;newsHandle=0;
         for(const auto* category:{"history","championship","bowls"}){social::FeedPost p{"a","@a","body","News"};p.category=category;require(social::matchesType(p,4),"History/title/bowl stories must appear in Rankings & Awards");}
+        {social::FeedPost p{"a","@a","body","News"};p.category="season-end";require(social::matchesType(p,2),"Season reviews must appear in Recaps");p.category="matchup-recap";require(social::matchesType(p,2),"Matchup recaps must appear in Recaps");p.category="matchup-preview";require(social::matchesType(p,3),"Matchup previews must appear in Upcoming");}
         auto status=social::statusFeed();
         require(status->posts.size()==1&&status->key=="runtime-waiting","Startup must expose only a system status row");
         require(status->posts[0].author=="Dynasty Enhancer"&&status->posts[0].stamp=="Status","Startup fallback must not masquerade as a social account");

@@ -1,0 +1,19 @@
+{
+  "build": "v75",
+  "nodeTests": 185,
+  "nativeTests": true,
+  "realCatalogEditionsValidated": 17,
+  "mmcPayloadAndTamperChecks": true,
+  "installed": true,
+  "livePublishedWeeks": [
+    15,
+    16,
+    17
+  ],
+  "inPageControls": "not claimed",
+  "sourceCheckpoint": "matchups, fan voices, clean language and season endings",
+  "sha256": {
+    "DynastyEnhancerNative-v75.dll": "041cd9b3d0653164e7fe5cf9a5f038a87657a8fbf522673d3cbd0c9af0a12a40",
+    "DynastyEnhancer-v75-MMC.zip": "31d516e7c96b52c34ce471894661fefa4f13d0c5664848a305212667c50fd7af"
+  }
+}

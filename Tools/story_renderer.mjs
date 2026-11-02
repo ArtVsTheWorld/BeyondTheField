@@ -1,3 +1,4 @@
+import {cleanLanguage} from './clean_language.mjs';
 import {editorialAssignment,nationalCoverage} from './national_editorial.mjs';
 import {createHash} from 'node:crypto';
 import {recruitRankDetail} from './recruit_ranks.mjs';
@@ -8,7 +9,7 @@ import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
 import {addConversations} from './story_conversations.mjs';
 import {publishOffer,publishReply} from './publication_policy.mjs';
 export const CONTENT_REVISION=pack.revision;
-export const stampFor=category=>({'results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset',history:'Milestone',championship:'Title Race',bowls:'Bowl Watch',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
+export const stampFor=category=>({'results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset','matchup-recap':'Matchup Recap','matchup-preview':'Matchup','season-end':'Season Review',history:'Milestone',championship:'Title Race',bowls:'Bowl Watch',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
 const personalities=new Set(['Leader','Intense','Entertainer','TeamPlayer','Unpredictable']);
 const final=g=>g&&g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
 const ranked=n=>Number.isInteger(n)&&n>0&&n<=25;
@@ -29,8 +30,9 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
   const oldStory=sameStories.get(id),baseOld=oldStory?.rawBody?{...oldStory,body:oldStory.rawBody}:oldStory;
   let chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:baseOld,renderKey});if(!chosen)return null;
-  let voiceTemplateId=null;const rawBody=chosen.body;
+  let voiceTemplateId=null;const rawBody=cleanLanguage(chosen.body);
   if(role==='analyst'&&[2,3,5].includes(persona)&&!family.startsWith('playoff.')){const negative=values.negative===true||values.metric==='turnoverMargin'&&values.margin<0||values.metric==='thirdDownConversionRate'&&values.rate<=.3||values.metric==='redZoneTouchdownRate'&&values.rate<=.45||/third_low|red_low|turnover_minus/.test(family);const voiceFamily='desk.'+({2:'marcus',3:'tina',5:'chris'})[persona]+(negative?'.negative':'.positive');const voiced=chooseTemplate(voiceFamily,{...filled,analysisText:rawBody},edition+'|'+id,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:oldStory?.voiceTemplateId?{...oldStory,templateId:oldStory.voiceTemplateId}:null,renderKey});if(voiced){voiceTemplateId=voiced.templateId;chosen={...chosen,body:voiced.body};}}
+  chosen={...chosen,body:cleanLanguage(chosen.body)};
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
   if(reaction&&!important&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
   if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
@@ -55,7 +57,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const win=g.homeScore===g.awayScore?null:g.homeScore>g.awayScore?g.home:g.away,opponent=t.id===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name;
   return {...teamValues(t),...f,opponent,statLine:performanceLine(f.stats),win:win===t.id,resultLine:win===null?'The game finished tied.':win===t.id?'A team win to go with it.':'The individual numbers came in a team loss.'};}
  for(const e of events){if(e.category==='offers'&&!publishOffer(s,e))continue;const f=e.facts,t=teams.get(e.teamIds[0]),v={...teamValues(t),...f,giveawayLabel:e.facts.giveaways===1?'giveaway':'giveaways'};
-  if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};if(f.tagPlayerId){const tagged=players.get(f.tagPlayerId);if(tagged)values.tagHandle=registry.get(s,'player',teams.get(tagged.team),tagged).handle;}const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:role==='analyst'?1:0});if(parent&&Number.isInteger(f.rivalReplyTeam)){const other=teams.get(f.rivalReplyTeam);if(other)add(e,'late.fan-reply',{...values,school:other.name,opponent:t?.name},{role:'fan',team:other,suffix:'rival-reply',replyTo:parent.id,priority:e.priority-1});}if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
+  if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};if(f.tagPlayerId){const tagged=players.get(f.tagPlayerId);if(tagged)values.tagHandle=registry.get(s,'player',teams.get(tagged.team),tagged).handle;}const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:f.persona??(role==='analyst'?1:0),important:f.seasonEnding===true});if(parent&&Number.isInteger(f.rivalReplyTeam)){const other=teams.get(f.rivalReplyTeam);if(other)add(e,'late.fan-reply',{...values,school:other.name,opponent:t?.name},{role:'fan',team:other,suffix:'rival-reply',replyTo:parent.id,priority:e.priority-1});}if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
   if(e.category==='results'){
    const g=games.get(f.gameId);if(!final(g))continue;
    if(f.tie){add(e,'beat.tie',v);continue;}

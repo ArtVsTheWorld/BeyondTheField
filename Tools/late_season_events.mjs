@@ -25,10 +25,10 @@ export function lateSeasonEvents(s){
  if(regular&&week>=14&&Number.isInteger(championshipWeek)&&week<=championshipWeek)for(const g of actualTitles){
   const h=teams.get(g.home),a=teams.get(g.away),c=conferences.get(h.conferenceId);
   if(g.status==='Unplayed')for(const [t,opponent] of [[h,a],[a,h]]){
-   add('title-invite:'+g.id+':'+t.id,'title-invite','official',t,{conference:c.name,opponent:opponent.name,championshipWeek,importance:'major'},{relatedTeams:[opponent.id],national:true,priority:112,thread:'game:'+g.id,category:'championship'});
-   add('title-fan:'+g.id+':'+t.id,'title-fan','fan',t,{conference:c.name,opponent:opponent.name,rivalReplyTeam:opponent.id},{relatedTeams:[opponent.id],priority:98,thread:'game:'+g.id,category:'championship'});
+   add((week===14?'title-invite:':'title-week:')+g.id+':'+t.id,week===14?'title-invite':'title-week','official',t,{conference:c.name,opponent:opponent.name,championshipWeek,importance:'major'},{relatedTeams:[opponent.id],national:true,priority:112,thread:'game:'+g.id,category:'championship'});
+   add('title-fan:'+g.id+':'+t.id,week===14?'title-fan':'title-week-fan','fan',t,{conference:c.name,opponent:opponent.name,rivalReplyTeam:opponent.id},{relatedTeams:[opponent.id],priority:98,thread:'game:'+g.id,category:'championship'});
    const lastWin=lastHistoricalEvent(t,year,'conferenceWin');
-   if(lastWin!==null&&lastWin<year-1)add('title-history:'+t.id,'title-history','beat',t,{conference:c.name,lastYear:lastWin,opponent:opponent.name},{priority:95,category:'history'});
+   if(week===14&&lastWin!==null&&lastWin<year-1)add('title-history:'+t.id,'title-history','beat',t,{conference:c.name,lastYear:lastWin,opponent:opponent.name},{priority:95,category:'history'});
   }
   else if(final(g)&&[week-1,week].includes(g.week)){
    const winner=teams.get(g.homeScore>g.awayScore?g.home:g.away),loser=winner.id===h.id?a:h;

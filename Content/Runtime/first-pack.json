@@ -485,7 +485,7 @@
       },
       {
         "id": "fan.win.3",
-        "body": "{nickname} win. i am officially available to talk shit again"
+        "body": "{nickname} win. i am officially available to talk trash again"
       },
       {
         "id": "fan.win.4",
@@ -495,7 +495,7 @@
     "fan.rivalry": [
       {
         "id": "fan.rivalry.1",
-        "body": "{opponent} talked all that shit for {score}??\n\n{nickname} win. don’t mute me now {hashtag}"
+        "body": "{opponent} talked all that trash for {score}??\n\n{nickname} win. don’t mute me now {hashtag}"
       }
     ],
     "fan.loss": [

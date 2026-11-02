@@ -1,3 +1,6 @@
+import {matchupEvents} from './matchup_events.mjs';
+import {seasonEndingEvents} from './season_ending_events.mjs';
+import {fanAccountEvents} from './fan_events.mjs';
 import {historyMilestoneEvents} from './history_milestones.mjs';
 import {lateSeasonEvents} from './late_season_events.mjs';
 import {deepAnalyticsEvents} from './deep_analytics.mjs';
@@ -104,7 +107,7 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s)])emit(e.id,e.category,e.facts,e.options);
+  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

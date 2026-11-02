@@ -75,3 +75,12 @@ All five national writers now receive regular-season coverage; outside-top-60 me
 - Implemented: native all-time team totals/career player and head-coach milestones, edition-stable baselines, cross-phase continuity, rollback suppression; historical season records and conference finish comparisons; complete-history gates for since-year claims.
 - Implemented: 22 additional advanced player/rate scenarios, rotating team caps, published-game corroboration, derived returner/OL stats, dual-production games; more current-week rivalry and cross-fan dialogue.
 - Validation: 167 Node tests and actual 16-edition native catalog checks. Live title-game/postseason counter updates, coach milestones, year reset and fresh v74 MMC launch remain progression checks.
+
+
+## v75 matchups / season endings checkpoint
+
+- Implemented: occasional matchup/recap comparisons across opposing units, per-attempt efficiency and receiver/secondary production without invented coverage assignments.
+- Implemented: clean generated/archived prose, more independent Barstool fan roots and distinct After Dark emotional season reactions.
+- Implemented: verified end-of-season publication ledger, team/player/senior/fan/media wrapups, native class/job-security fields, staff/QB accountability, appropriate perfect/winless tone and conservative pending bowls. Exact bowl-selection week is still under user testing.
+- Fixed: Week 15 title-week hype replaces duplicated Week 14 invitations.
+- Validation: 185 Node tests, native tests and all dynamic scopes across 17 real editions. Live v75 activation requires a clean session after the long-running game's guarded standalone lookup failed; postseason transitions and native class/job-security comparisons remain live checks.
