@@ -1,0 +1,28 @@
+{
+  "format": 1,
+  "build": "DynastyEnhancer-v51-conversations.dll",
+  "nativeDllSha256": "5b1cbf4f4c55636a3b53781dee541518413e7d2b5ab0e756fe6c28d40236eb61",
+  "contentRevision": "voices-2",
+  "status": "user-verified-in-game",
+  "templates": 180,
+  "publicationWeek": 9,
+  "stories": 225,
+  "replies": 41,
+  "portraitAvatars": 37,
+  "curatedPosts": 20,
+  "testsPassed": 73,
+  "verified": [
+    "recruit and roster-player face portraits",
+    "parent/reply grouping and native Reply label",
+    "fitting text",
+    "vertical controller scrolling",
+    "LT scope dropdown"
+  ],
+  "history": "New-pack history began Week 9. Older prototype editions are preserved in the original build directory, and future new-pack editions accumulate on advance.",
+  "notYetLiveVerified": [
+    "multiweek template cooldown rotation",
+    "older-edition import",
+    "new pack with a fresh real midweek recruiting action"
+  ],
+  "sourceIsReadOnly": true
+}

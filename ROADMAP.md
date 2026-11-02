@@ -17,7 +17,7 @@ Before broader release, validate active-Dynasty switching, an actual older-save 
 3. Event detection, persistent authors, editable templates and native avatar routing are separate components.
 4. Expanded catalog reaches the initial target with 180 variants, including more player/fan perspectives and replies.
 5. Two-week template cooldown preferences, stable same-week selections/admission order, account/voice caps, reply dependencies and complete curated conversation blocks are implemented. Multiweek in-game tuning remains.
-6. First pack verified live as v50 with 65 tests. The conversation/portrait candidate adds coverage and awaits its native visual check and longer rollover testing.
+6. First pack verified live as v50 with 65 tests. The v51 conversation/portrait build passes 73 Node tests, native checks and the user’s in-game portrait/reply/controller check. Longer rollover testing and historical-edition restoration remain.
 
 Publication week remains the single week filter. Dedicated scopes retain qualifying stories; All Posts selects up to twenty with soft 35/25/40 scope targets and no filler to hit quotas.
 
