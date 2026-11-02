@@ -58,3 +58,13 @@ test('cached unpublished scores and quarter splits never enter the public snapsh
  const s=await readRuntime(input),g=s.games[0];assert.equal(g.status,'Unplayed');assert.equal(g.homeScore,0);assert.equal(g.awayScore,0);assert.equal(g.homeQuarterScores,null);
  const e=updateRuntime(s).catalog.events;assert.ok(!e.some(e=>e.category==='results'));assert.ok(e.some(e=>e.category==='schedule'));
 });
+
+test('native zero-based Heisman ranks match the menu and preserve the leader and unknown prior rank',async()=>{
+ const input=raw('None');input.records.player.v.TeamIndex=1;
+ input.records.awards={key:'awards',type:'Awards',capacity:1,v:{HeismanRanking:'heisman-array'}};
+ input.records['heisman-array']={key:'heisman-array',type:'HeismanAwardRanking[]',capacity:1,v:{}};
+ for(const [i,[current,last]] of [[0,0],[1,2],[2,1],[3,-1],[-1,0],[undefined,0]].entries()){
+  const key='h'+i;input.records[key]={key,type:'HeismanAwardRanking',capacity:1,v:{Player:'player',Team:'team',CurrentRank:current,LastWeekRank:last}};input.records['heisman-array'].v['Member'+i]=key;
+ }
+ const snapshot=await readRuntime(input);assert.deepEqual(snapshot.heisman.map(h=>[h.rank,h.lastRank]),[[1,1],[2,3],[3,2],[4,null]]);
+});

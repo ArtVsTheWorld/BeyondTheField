@@ -83,8 +83,11 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   const heisman=[];
   const awards=(await records('Awards'))[0];
   if(awards)for(const h of await array(awards.v.HeismanRanking)){
-    const p=await resolve(h.v.Player);if(!p||h.v.CurrentRank<1||h.v.CurrentRank>5)continue;
-    heisman.push({player:p.key,team:await teamIndex(h.v.Team),rank:h.v.CurrentRank,lastRank:h.v.LastWeekRank});
+    // Native Heisman ranks are zero-based; -1 means no prior place.
+    // Verified against the native Heisman panel: internal places 0/1 display as No. 1/2.
+    const p=await resolve(h.v.Player),current=h.v.CurrentRank,prior=h.v.LastWeekRank;
+    if(!p||!Number.isInteger(current)||current<0||current>4)continue;
+    heisman.push({player:p.key,team:await teamIndex(h.v.Team),rank:current+1,lastRank:Number.isInteger(prior)&&prior>=0&&prior<=4?prior+1:null});
   }
   // CommittedPlayers is empty in this build, even after a hard commitment.
   // Verify the recruit stage and leading school against that school's board;
