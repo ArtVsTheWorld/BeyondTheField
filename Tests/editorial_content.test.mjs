@@ -30,7 +30,7 @@ test('analyst examples include metric evidence and correct sample arithmetic',()
  for(const p of batch.posts.filter(p=>p.voice==='analyst'))assert.ok(p.analyticEvidence?.metric,p.id);
  const a=batch.posts.find(p=>p.id==='ANALYST-01');assert.equal(Number((a.analyticEvidence.rushingYards/a.analyticEvidence.gamesPlayed).toFixed(1)),a.exampleValues.rushingYardsPerGame);
  const t=batch.posts.find(p=>p.id==='ANALYST-02');assert.equal(Number((100*t.analyticEvidence.conversions/t.analyticEvidence.attempts).toFixed(1)),t.exampleValues.thirdDownPercent);
- const m=batch.posts.find(p=>p.id==='ANALYST-03');assert.equal(m.analyticEvidence.winnerScore-m.analyticEvidence.loserScore,m.exampleValues.margin);
+ const m=batch.posts.find(p=>p.id==='ANALYST-03');assert.equal(100*m.analyticEvidence.touchdowns/m.analyticEvidence.trips,m.exampleValues.redZonePercent);
  const v=batch.posts.find(p=>p.id==='ANALYST-04');assert.equal(v.analyticEvidence.takeaways-v.analyticEvidence.giveaways,v.exampleValues.margin);
  for(const p of batch.posts.filter(p=>p.voice==='analyst'&&p.body.includes('{playerName}')))assert.ok(p.body.includes('{school}')||p.body.includes('{hashtag}')||p.body.includes('{nickname}'),p.id);
 });

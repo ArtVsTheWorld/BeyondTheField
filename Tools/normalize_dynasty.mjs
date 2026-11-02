@@ -6,6 +6,8 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   for(const {v:u} of await records('FranchiseUser')){if(u.IsRetired)continue;const team=await resolve(u.Team)??await resolve(u.UserEntity);
     if(team&&(userTeamIndex===null||u.AdminLevel==='Owner'))userTeamIndex=team.v.TeamIndex;}
   if(userTeamIndex===null)throw Error('No controlled Dynasty team');
+  const finalStatuses=['HomeWon','AwayWon','Tie'];
+  const publicStatus=g=>g.HasBeenPublished===false&&finalStatuses.includes(g.GameStatus)?'Unplayed':g.GameStatus;
   const cleanText=v=>typeof v==='string'&&v.trim()?v.trim():null;
   const tag=v=>{const s=cleanText(v)?.replace(/^#+/,'');return s&&/^[\p{L}\p{N}_]+$/u.test(s)?'#'+s:null;};
   const teamRefs=new Map(),teams=[],rawTeams=[];
@@ -56,11 +58,12 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   for(const {key,v:g,capacity} of await records('SeasonGame')){
     if(capacity<=1||g.IsPractice||g.SeasonYear!==season.CurrentYear)continue;
     const home=await teamIndex(g.HomeTeam),away=await teamIndex(g.AwayTeam);if(home==null||away==null)continue;
-    const game={id:key,year:g.SeasonYear,week:g.SeasonWeek,phase:g.SeasonWeekType,status:g.GameStatus,
-      home,away,homeName:await teamName(g.HomeTeam),awayName:await teamName(g.AwayTeam),homeScore:g.HomeScore,awayScore:g.AwayScore,month:g.GameDateMonth,day:g.GameDateDay,
+    const game={id:key,year:g.SeasonYear,week:g.SeasonWeek,phase:g.SeasonWeekType,status:publicStatus(g),published:typeof g.HasBeenPublished==='boolean'?g.HasBeenPublished:null,
+      home,away,homeName:await teamName(g.HomeTeam),awayName:await teamName(g.AwayTeam),homeScore:publicStatus(g)==='Unplayed'?0:g.HomeScore,awayScore:publicStatus(g)==='Unplayed'?0:g.AwayScore,
+      homeQuarterScores:g.HasBeenPublished===false?null:[g.HomeScoreQuarter1,g.HomeScoreQuarter2,g.HomeScoreQuarter3,g.HomeScoreQuarter4],awayQuarterScores:g.HasBeenPublished===false?null:[g.AwayScoreQuarter1,g.AwayScoreQuarter2,g.AwayScoreQuarter3,g.AwayScoreQuarter4],homeOvertimePoints:g.HasBeenPublished===false?null:g.HomeScoreOT,awayOvertimePoints:g.HasBeenPublished===false?null:g.AwayScoreOT,month:g.GameDateMonth,day:g.GameDateDay,
       weekday:g.DayOfWeek,time:g.TimeOfDay,spotlight:g.GameOfTheWeekScore,
       thanksgiving:g.ThanksgivingFlag,christmas:g.ChristmasFlag,newYears:g.NewYearsFlag};
-    if(g.SeasonWeek<=season.CurrentWeek&&g.SeasonWeekType===season.CurrentWeekType&&['HomeWon','AwayWon','Tie'].includes(g.GameStatus)){
+    if(g.SeasonWeek<=season.CurrentWeek&&g.SeasonWeekType===season.CurrentWeekType&&g.HasBeenPublished!==false&&finalStatuses.includes(g.GameStatus)){
       game.homeStats=(await resolve(g.HomeTeamStatCache))?.v??null;game.awayStats=(await resolve(g.AwayTeamStatCache))?.v??null;
     }
     games.push(game);gameRefs.set(key,game);

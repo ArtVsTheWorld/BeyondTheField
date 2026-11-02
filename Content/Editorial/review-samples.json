@@ -9,7 +9,7 @@
       "voice": "official",
       "author": "USC Football",
       "handle": "@TrojansFootball",
-      "body": "Hard-earned. {nickname} leave with a {score} win over {opponent}. Every one of those points mattered, and so did the support from everyone who showed up for us. Enjoy this one. {hashtag}",
+      "body": "Hard-earned. {nickname} win {score} over {opponent}. {hashtag}",
       "exampleValues": {
         "nickname": "Trojans",
         "score": "36–31",
@@ -22,37 +22,37 @@
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Hard-earned. Trojans leave with a 36–31 win over Red Mesa. Every one of those points mattered, and so did the support from everyone who showed up for us. Enjoy this one. #FightOn",
-      "characterCount": 178,
-      "wordCount": 32
+      "previewText": "Hard-earned. Trojans win 36–31 over Red Mesa. #FightOn",
+      "characterCount": 54,
+      "wordCount": 8
     },
     {
       "id": "TEAM-02",
       "voice": "official",
       "author": "Harbor State Football",
       "handle": "@HarborFootball",
-      "body": "{nickname} {winnerScore}. {opponent} 0.\n\nA shutout and a win to bring home. Proud of the effort from this group, and grateful to everyone who spent their Saturday with us.",
+      "body": "SHUTOUT.\n{nickname} {winnerScore}, {opponent} 0.",
       "exampleValues": {
         "nickname": "Captains",
         "winnerScore": 24,
         "opponent": "North Valley"
       },
-      "trigger": "Verified win with opponent score zero.",
+      "trigger": "Verified completed shutout win. No implication about where the game was played.",
       "scope": "My Team",
       "nativePersonality": null,
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Captains 24. North Valley 0.\n\nA shutout and a win to bring home. Proud of the effort from this group, and grateful to everyone who spent their Saturday with us.",
-      "characterCount": 160,
-      "wordCount": 30
+      "previewText": "SHUTOUT.\nCaptains 24, North Valley 0.",
+      "characterCount": 37,
+      "wordCount": 6
     },
     {
       "id": "TEAM-03",
       "voice": "official",
       "author": "Harbor State Football",
       "handle": "@HarborFootball",
-      "body": "Up from No. {previousRank} to No. {rank} for the {nickname}. We appreciate the recognition, but there is a lot of football left to play. Thank you for continuing to show up for this team.",
+      "body": "Moving on up.\nNo. {previousRank} → No. {rank} for the {nickname}.",
       "exampleValues": {
         "previousRank": 12,
         "rank": 8,
@@ -64,41 +64,40 @@
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Up from No. 12 to No. 8 for the Captains. We appreciate the recognition, but there is a lot of football left to play. Thank you for continuing to show up for this team.",
-      "characterCount": 168,
-      "wordCount": 34
+      "previewText": "Moving on up.\nNo. 12 → No. 8 for the Captains.",
+      "characterCount": 46,
+      "wordCount": 11
     },
     {
       "id": "TEAM-04",
       "voice": "official",
       "author": "Harbor State Football",
       "handle": "@HarborFootball",
-      "body": "{opponent} is coming to town, and we want to hear you from the first snap. Make your plans for Saturday, bring somebody with you, and help make it a home game the {nickname} can feel.",
+      "body": "Back in our house.\n{nickname} vs. {opponent}. Saturday.",
       "exampleValues": {
         "opponent": "North Valley",
         "nickname": "Captains"
       },
-      "trigger": "Verified upcoming home game on Saturday; opponent known.",
+      "trigger": "Verified upcoming Saturday home game; opponent known; not a neutral-site game.",
       "scope": "My Team",
       "nativePersonality": null,
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "North Valley is coming to town, and we want to hear you from the first snap. Make your plans for Saturday, bring somebody with you, and help make it a home game the Captains can feel.",
-      "characterCount": 183,
-      "wordCount": 36
+      "previewText": "Back in our house.\nCaptains vs. North Valley. Saturday.",
+      "characterCount": 55,
+      "wordCount": 9
     },
     {
       "id": "TEAM-05",
       "voice": "official",
       "author": "Harbor State Football",
       "handle": "@HarborFootball",
-      "body": "{playerName} finished with {rushingYards} rushing yards and {rushingTouchdowns} touchdowns for the {nickname}. A big afternoon on the ground and a team win to go with it. Give him some love. {hashtag}",
+      "body": "{playerName} was DIFFERENT.\n{rushingYards} rushing yards. {rushingTouchdowns} TDs. {hashtag}",
       "exampleValues": {
         "playerName": "Darius Vann",
         "rushingYards": 114,
         "rushingTouchdowns": 2,
-        "nickname": "Captains",
         "hashtag": "#AllAboard"
       },
       "trigger": "Verified player rushing performance; at least two rushing touchdowns.",
@@ -107,9 +106,9 @@
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Darius Vann finished with 114 rushing yards and 2 touchdowns for the Captains. A big afternoon on the ground and a team win to go with it. Give him some love. #AllAboard",
-      "characterCount": 169,
-      "wordCount": 32
+      "previewText": "Darius Vann was DIFFERENT.\n114 rushing yards. 2 TDs. #AllAboard",
+      "characterCount": 63,
+      "wordCount": 10
     },
     {
       "id": "BEAT-01",
@@ -256,7 +255,7 @@
         "gamesPlayed": 7,
         "nationalRank": 3,
         "nationalRankTied": false,
-        "coverageRequired": "all eligible FBS programs with complete played-game rushing caches"
+        "coverageRequired": "all eligible FBS programs, using corroborated current-season totals or complete published-game caches"
       },
       "wordCount": 37
     },
@@ -294,29 +293,29 @@
       "voice": "analyst",
       "author": "Saturday Perspective",
       "handle": "@SaturdayViewCFB",
-      "body": "{school}’s {score} win over {opponent} makes it the first FBS team this season to win by at least {margin} points. That is a level of separation nobody else in the field has reached yet. It will be interesting to see what carries over next week.",
+      "body": "{school} has turned {redZoneTrips} red-zone trips into just {redZoneTouchdowns} touchdowns through {gamesPlayed} games ({redZonePercent}%). Getting there isn’t the problem. Finishing with six is.",
       "exampleValues": {
         "school": "Georgia State",
-        "score": "49–7",
-        "opponent": "Red Mesa",
-        "margin": 42
+        "redZoneTrips": 25,
+        "redZoneTouchdowns": 9,
+        "gamesPlayed": 4,
+        "redZonePercent": 36
       },
-      "trigger": "Complete current-season FBS result coverage and an unambiguous first qualifying 42-plus-point win. If several teams qualify in the earliest week and completion order is unknown, suppress a unique first claim.",
+      "trigger": "Complete, corroborated current-season offensive red-zone trips and touchdowns; nonzero denominator and at least three completed games. Field goals are not touchdowns.",
       "scope": "National",
       "nativePersonality": null,
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Georgia State’s 49–7 win over Red Mesa makes it the first FBS team this season to win by at least 42 points. That is a level of separation nobody else in the field has reached yet. It will be interesting to see what carries over next week.",
-      "characterCount": 239,
+      "previewText": "Georgia State has turned 25 red-zone trips into just 9 touchdowns through 4 games (36%). Getting there isn’t the problem. Finishing with six is.",
+      "characterCount": 144,
       "analyticEvidence": {
-        "metric": "firstFbsWinByAtLeast",
-        "threshold": 42,
-        "winnerScore": 49,
-        "loserScore": 7,
-        "orderingRequired": "one unique qualifying winner in the earliest fully covered week"
+        "metric": "redZoneTouchdownRate",
+        "trips": 25,
+        "touchdowns": 9,
+        "gamesPlayed": 4
       },
-      "wordCount": 47
+      "wordCount": 24
     },
     {
       "id": "ANALYST-04",
@@ -385,7 +384,7 @@
       "voice": "recruit",
       "author": "Evan Mercer",
       "handle": "@evanmercer7",
-      "body": "Thankful to receive an offer from {school}. I appreciate Coach {coachLastName} and the staff for believing in me. This is another opportunity I do not take for granted. Thank you to everyone helping me along the way.",
+      "body": "Thankful to receive an offer from {school}! Appreciate Coach {coachLastName} and the staff for believing in me",
       "exampleValues": {
         "school": "Harbor State",
         "coachLastName": "Ellison"
@@ -396,16 +395,16 @@
       "position": "QB",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Thankful to receive an offer from Harbor State. I appreciate Coach Ellison and the staff for believing in me. This is another opportunity I do not take for granted. Thank you to everyone helping me along the way.",
-      "characterCount": 212,
-      "wordCount": 38
+      "previewText": "Thankful to receive an offer from Harbor State! Appreciate Coach Ellison and the staff for believing in me",
+      "characterCount": 106,
+      "wordCount": 18
     },
     {
       "id": "RECRUIT-02",
       "voice": "recruit",
       "author": "Noah Redd",
       "handle": "@Noah.Redd",
-      "body": "{school} offered!! That is a pretty good reason to smile today. Appreciate the opportunity and everybody who has been supporting me. This recruiting process keeps getting more exciting.",
+      "body": "{school} offered!! yeah this one made my day",
       "exampleValues": {
         "school": "Harbor State"
       },
@@ -415,16 +414,16 @@
       "position": "WR",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Harbor State offered!! That is a pretty good reason to smile today. Appreciate the opportunity and everybody who has been supporting me. This recruiting process keeps getting more exciting.",
-      "characterCount": 189,
-      "wordCount": 29
+      "previewText": "Harbor State offered!! yeah this one made my day",
+      "characterCount": 48,
+      "wordCount": 9
     },
     {
       "id": "RECRUIT-03",
       "voice": "recruit",
       "author": "Caleb Moss",
       "handle": "@Caleb.Moss7",
-      "body": "After a great phone call with Coach {coachLastName}, I’m committing to {school}. Excited to be part of what they’re building. Thank you to my family and everyone who has supported me getting here. {hashtag}",
+      "body": "After a great phone call with Coach {coachLastName}, I’m committing to {school}!! My family has been with me through all of this. Can’t wait to get there and make y’all proud {hashtag}",
       "exampleValues": {
         "coachLastName": "Ellison",
         "school": "Harbor State",
@@ -438,42 +437,42 @@
         "Core commitment and coach association must be true. The conversation is authored worldbuilding; no promises or quoted coach statements are invented."
       ],
       "approvedForRuntime": false,
-      "previewText": "After a great phone call with Coach Ellison, I’m committing to Harbor State. Excited to be part of what they’re building. Thank you to my family and everyone who has supported me getting here. #AllAboard",
+      "previewText": "After a great phone call with Coach Ellison, I’m committing to Harbor State!! My family has been with me through all of this. Can’t wait to get there and make y’all proud #AllAboard",
       "authoredFlavor": [
         "recruiting phone call"
       ],
-      "characterCount": 203,
-      "wordCount": 35
+      "characterCount": 181,
+      "wordCount": 33
     },
     {
       "id": "RECRUIT-04",
       "voice": "recruit",
       "author": "Jalen Avery",
       "handle": "@jalen_avery2",
-      "body": "An offer from {school}. I appreciate the opportunity and everybody who helped me get here. It means a lot, but it does not change what comes next. Keep competing and keep putting good football out there.",
+      "body": "{school} offered. been waiting on that one",
       "exampleValues": {
         "school": "Harbor State"
       },
-      "trigger": "Newly observed scholarship offer. Competitive personal reaction without an invented commitment or contact event.",
+      "trigger": "Newly observed scholarship offer. Anticipation is authored personal flavor, not evidence of a favorite or commitment.",
       "scope": "My Team",
       "nativePersonality": "Intense",
       "position": "CB",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "An offer from Harbor State. I appreciate the opportunity and everybody who helped me get here. It means a lot, but it does not change what comes next. Keep competing and keep putting good football out there.",
-      "characterCount": 207,
-      "wordCount": 37
+      "previewText": "Harbor State offered. been waiting on that one",
+      "characterCount": 46,
+      "wordCount": 8
     },
     {
       "id": "RECRUIT-05",
       "voice": "recruit",
       "author": "Darius Vann",
       "handle": "@dvann22",
-      "body": "All glory to God. Grateful for an offer from {school} and the chance to keep chasing this. Thank you to my family, my coaches, and everybody who has been there for me. I appreciate you more than you know.",
+      "body": "AGTG! Blessed to receive an offer from {school}. shoutout to everyone who kept believing in me",
       "exampleValues": {
         "school": "Harbor State"
       },
-      "trigger": "Newly observed offer plus an explicitly approved persistent faith-language preference.",
+      "trigger": "Newly observed offer with optional authored faith-language style; never inferred from position or personality.",
       "scope": "My Team",
       "nativePersonality": "Unpredictable",
       "position": "HB",
@@ -481,18 +480,17 @@
         "Optional faith-language example. Personality and position do not establish this preference; it has no automatic runtime eligibility."
       ],
       "approvedForRuntime": false,
-      "previewText": "All glory to God. Grateful for an offer from Harbor State and the chance to keep chasing this. Thank you to my family, my coaches, and everybody who has been there for me. I appreciate you more than you know.",
-      "characterCount": 208,
-      "wordCount": 40
+      "previewText": "AGTG! Blessed to receive an offer from Harbor State. shoutout to everyone who kept believing in me",
+      "characterCount": 98,
+      "wordCount": 17
     },
     {
       "id": "PLAYER-01",
       "voice": "player",
       "author": "Evan Mercer",
       "handle": "@evanmercer7",
-      "body": "Appreciate everybody who showed up for us today. Nothing better than sharing a win with this team and our fans. Enjoy the rest of your weekend, {nickname}. We’ll see you for {opponent}.",
+      "body": "Appreciate y’all showing up for us. Love this team\n\n{opponent} next, see you there",
       "exampleValues": {
-        "nickname": "Captains",
         "opponent": "North Valley"
       },
       "trigger": "Verified team win and upcoming home opponent. Positive fan appreciation; no public self-blame or assumed captain status.",
@@ -501,16 +499,16 @@
       "position": "QB",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Appreciate everybody who showed up for us today. Nothing better than sharing a win with this team and our fans. Enjoy the rest of your weekend, Captains. We’ll see you for North Valley.",
-      "characterCount": 185,
-      "wordCount": 33
+      "previewText": "Appreciate y’all showing up for us. Love this team\n\nNorth Valley next, see you there",
+      "characterCount": 84,
+      "wordCount": 15
     },
     {
       "id": "PLAYER-02",
       "voice": "player",
       "author": "Trey Coleman",
       "handle": "@TreyColeman",
-      "body": "Rivalry win. This one is for our fans and everybody who knows what this game means. Appreciate the energy you brought for us. Proud to be part of this team, and glad we get to celebrate this one together.",
+      "body": "Rivalry W. Y’all know how much that one means\n\nKeep that scoreboard up a little longer",
       "exampleValues": {},
       "trigger": "Verified rivalry win. Competitive but media-aware quarterback voice; positive post, no default public admission of fault.",
       "scope": "My Team",
@@ -520,16 +518,16 @@
         "Intense QB expresses investment and pride without turning a loss into a public apology."
       ],
       "approvedForRuntime": false,
-      "previewText": "Rivalry win. This one is for our fans and everybody who knows what this game means. Appreciate the energy you brought for us. Proud to be part of this team, and glad we get to celebrate this one together.",
-      "characterCount": 204,
-      "wordCount": 39
+      "previewText": "Rivalry W. Y’all know how much that one means\n\nKeep that scoreboard up a little longer",
+      "characterCount": 86,
+      "wordCount": 16
     },
     {
       "id": "PLAYER-03",
       "voice": "player",
       "author": "Noah Redd",
       "handle": "@Noah.Redd",
-      "body": "{receivingYards} and a W. That is a pretty good Saturday right there. Love this team, love the support, and appreciate everybody who was loud for us today. Y’all made that one fun. {hashtag}",
+      "body": "{receivingYards} and the W? i’ll take that every Saturday lol\nappreciate y’all {hashtag}",
       "exampleValues": {
         "receivingYards": 126,
         "hashtag": "#AllAboard"
@@ -540,37 +538,35 @@
       "position": "WR",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "126 and a W. That is a pretty good Saturday right there. Love this team, love the support, and appreciate everybody who was loud for us today. Y’all made that one fun. #AllAboard",
-      "characterCount": 178,
-      "wordCount": 33
+      "previewText": "126 and the W? i’ll take that every Saturday lol\nappreciate y’all #AllAboard",
+      "characterCount": 76,
+      "wordCount": 13
     },
     {
       "id": "PLAYER-04",
       "voice": "player",
       "author": "Caleb Moss",
       "handle": "@Caleb.Moss7",
-      "body": "Love seeing the backs eat. {playerName} went for {rushingYards}, the team finished with {teamRushingYards}, and we got the win. That is the kind of afternoon the whole group can enjoy. Appreciate everybody who showed up for us.",
+      "body": "{playerName} was eating today. love seeing my guys get theirs",
       "exampleValues": {
-        "playerName": "Darius Vann",
-        "rushingYards": 114,
-        "teamRushingYards": 235
+        "playerName": "Darius Vann"
       },
-      "trigger": "Verified team win and rushing totals, with author an offensive lineman. Team pride does not assert that the author started or played.",
+      "trigger": "Verified team win and notable rushing performance by the named teammate; author is a lineman. Does not assert that the author played or started.",
       "scope": "My Team",
       "nativePersonality": "TeamPlayer",
       "position": "LT",
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Love seeing the backs eat. Darius Vann went for 114, the team finished with 235, and we got the win. That is the kind of afternoon the whole group can enjoy. Appreciate everybody who showed up for us.",
-      "characterCount": 200,
-      "wordCount": 38
+      "previewText": "Darius Vann was eating today. love seeing my guys get theirs",
+      "characterCount": 60,
+      "wordCount": 11
     },
     {
       "id": "PLAYER-05",
       "voice": "player",
       "author": "Darius Vann",
       "handle": "@dvann22",
-      "body": "Good to be back. Missed this more than I can explain. Thank you to everybody who checked in and kept showing love while I was out. Getting to share another win with this team made the wait worth it.",
+      "body": "man i missed this. getting back out there with my guys meant everything\n\nthank y’all for checking on me while i was out",
       "exampleValues": {},
       "trigger": "Prior injury followed by recovery, later verified participation, and a team win. Personal thanks are authored flavor; no inferred medical timetable.",
       "scope": "My Team",
@@ -580,16 +576,16 @@
         "Unpredictable does not mean constantly loud or chaotic. This is a restrained example within a wider stable voice range."
       ],
       "approvedForRuntime": false,
-      "previewText": "Good to be back. Missed this more than I can explain. Thank you to everybody who checked in and kept showing love while I was out. Getting to share another win with this team made the wait worth it.",
-      "characterCount": 198,
-      "wordCount": 39
+      "previewText": "man i missed this. getting back out there with my guys meant everything\n\nthank y’all for checking on me while i was out",
+      "characterCount": 119,
+      "wordCount": 23
     },
     {
       "id": "FAN-01",
       "voice": "fan",
       "author": "Harbor After Dark",
       "handle": "@HarborAfterDark",
-      "body": "{playerName}, you beautiful man. A {margin}-point win and I have aged about twelve years watching it. The {nickname} got the result, my weekend is saved, and I would appreciate one normal, boring win before this season is over.",
+      "body": "{playerName}, you beautiful man. A {margin}-point win and I’ve aged twelve years. The {nickname} got the W, my weekend is saved, and I am once again asking for ONE boring win before this season is over",
       "exampleValues": {
         "playerName": "Darius Vann",
         "margin": 5,
@@ -601,16 +597,16 @@
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Darius Vann, you beautiful man. A 5-point win and I have aged about twelve years watching it. The Captains got the result, my weekend is saved, and I would appreciate one normal, boring win before this season is over.",
-      "characterCount": 217,
-      "wordCount": 39
+      "previewText": "Darius Vann, you beautiful man. A 5-point win and I’ve aged twelve years. The Captains got the W, my weekend is saved, and I am once again asking for ONE boring win before this season is over",
+      "characterCount": 191,
+      "wordCount": 37
     },
     {
       "id": "FAN-02",
       "voice": "fan",
       "author": "Harbor Replies",
       "handle": "@HarborReplies",
-      "body": "{rival} talked all that shit and still has to look at {score} on the scoreboard. Save the explanations. The {nickname} won, and I am going to be absolutely unbearable about it until next Saturday. {hashtag}",
+      "body": "{rival} talked all that shit for {score}??\n\n{nickname} win. don’t mute me now {hashtag}",
       "exampleValues": {
         "rival": "Red Mesa",
         "score": "36–31",
@@ -625,16 +621,16 @@
         "Occasional stronger profanity belongs to fans, not a default player or official-team voice."
       ],
       "approvedForRuntime": false,
-      "previewText": "Red Mesa talked all that shit and still has to look at 36–31 on the scoreboard. Save the explanations. The Captains won, and I am going to be absolutely unbearable about it until next Saturday. #AllAboard",
-      "characterCount": 204,
-      "wordCount": 36
+      "previewText": "Red Mesa talked all that shit for 36–31??\n\nCaptains win. don’t mute me now #AllAboard",
+      "characterCount": 85,
+      "wordCount": 15
     },
     {
       "id": "FAN-03",
       "voice": "fan",
       "author": "Harbor After Dark",
       "handle": "@HarborAfterDark",
-      "body": "Two interceptions from {playerName}, and we are supposed to pretend that was fine? Coach {coachLastName} has some hard decisions to make. I love this team, but I am not spending another Saturday calling the same problems bad luck.",
+      "body": "Two picks from {playerName} and we’re doing the “everybody has bad games” thing again? Coach {coachLastName}, at what point do we try something else. I love this team but my patience is hanging by a thread",
       "exampleValues": {
         "playerName": "Evan Mercer",
         "coachLastName": "Ellison"
@@ -645,16 +641,16 @@
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Two interceptions from Evan Mercer, and we are supposed to pretend that was fine? Coach Ellison has some hard decisions to make. I love this team, but I am not spending another Saturday calling the same problems bad luck.",
-      "characterCount": 221,
-      "wordCount": 39
+      "previewText": "Two picks from Evan Mercer and we’re doing the “everybody has bad games” thing again? Coach Ellison, at what point do we try something else. I love this team but my patience is hanging by a thread",
+      "characterCount": 196,
+      "wordCount": 37
     },
     {
       "id": "FAN-04",
       "voice": "fan",
       "author": "Harbor Replies",
       "handle": "@HarborReplies",
-      "body": "“No. {rank} feels about right”? {analystHandle}, respectfully, what games are you watching? The {nickname} win and somehow the conversation is still about why we should be satisfied. I am absolutely not satisfied.",
+      "body": "“No. {rank} feels about right”? {analystHandle} respectfully what games are you watching lol\n\nThe {nickname} keep winning and I’m supposed to be grateful for eighth??",
       "exampleValues": {
         "rank": 8,
         "analystHandle": "@SaturdayViewCFB",
@@ -668,37 +664,36 @@
         "Fan disagreement targets the analyst interpretation, not the correctness of the measured rushing statistic."
       ],
       "approvedForRuntime": false,
-      "previewText": "“No. 8 feels about right”? @SaturdayViewCFB, respectfully, what games are you watching? The Captains win and somehow the conversation is still about why we should be satisfied. I am absolutely not satisfied.",
+      "previewText": "“No. 8 feels about right”? @SaturdayViewCFB respectfully what games are you watching lol\n\nThe Captains keep winning and I’m supposed to be grateful for eighth??",
       "conversationId": "poll-debate-1",
       "replyToReviewId": "ANALYST-01",
       "requiresVisibleParent": true,
-      "characterCount": 207,
-      "wordCount": 32
+      "characterCount": 160,
+      "wordCount": 25
     },
     {
       "id": "FAN-05",
       "voice": "fan",
       "author": "Harbor After Dark",
       "handle": "@HarborAfterDark",
-      "body": "{playerName} with {rushingYards} yards and {rushingTouchdowns} scores. Coach {coachLastName}, keep finding ways to get that man involved. I am not pretending to be sensible about this: I want the whole {nickname} crowd talking about him all week.",
+      "body": "{playerName}. {rushingYards} yards. {rushingTouchdowns} scores.\n\nCoach {coachLastName} i owe you an apology",
       "exampleValues": {
         "playerName": "Darius Vann",
         "rushingYards": 114,
         "rushingTouchdowns": 2,
-        "coachLastName": "Ellison",
-        "nickname": "Captains"
+        "coachLastName": "Ellison"
       },
-      "trigger": "Verified positive rushing performance and current head coach. Enthusiastic player praise and coaching opinion; no future play-call claim.",
+      "trigger": "Verified positive rushing performance and current head coach. Comedic fan reversal, not a literal claim about a previous statement.",
       "scope": "My Team",
       "nativePersonality": null,
       "position": null,
       "notes": [],
       "approvedForRuntime": false,
-      "previewText": "Darius Vann with 114 yards and 2 scores. Coach Ellison, keep finding ways to get that man involved. I am not pretending to be sensible about this: I want the whole Captains crowd talking about him all week.",
-      "characterCount": 206,
-      "wordCount": 38
+      "previewText": "Darius Vann. 114 yards. 2 scores.\n\nCoach Ellison i owe you an apology",
+      "characterCount": 69,
+      "wordCount": 13
     }
   ],
-  "revision": 2,
+  "revision": 3,
   "authoredFlavorNotice": "Core football facts and real coach/team identities must come from Dynasty data. The requested recruiting phone call and ordinary first-person reactions are authored worldbuilding, not claims of native conversation telemetry."
 }

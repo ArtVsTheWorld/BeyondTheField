@@ -1,0 +1,186 @@
+{
+  "format": 1,
+  "revision": 3,
+  "purpose": "Implementation opportunities for the new analyst pack; not a promise that every selector is implemented or approved.",
+  "readOnlyAudit": {
+    "season": 2027,
+    "publicationWeek": 9,
+    "eligibleFbsTeams": 138,
+    "publishedFinals": 511,
+    "rushingThirdDownRedZoneSeasonCacheMismatches": 0,
+    "quarterScoreSumMismatchGames": 0,
+    "publicationFinding": "Final scores can be cached before publication. Unpublished games are excluded from public result and performance facts.",
+    "scope": "One inspected native runtime snapshot; every future capture still requires coverage and validity checks."
+  },
+  "statusLegend": {
+    "calculated": "Implemented structured measure; authored runtime wording remains disabled.",
+    "partly-calculated": "Some measures implemented; listed extensions need work.",
+    "captured-validated": "Fields captured and reconciled; selector still to implement.",
+    "derivable": "Available captured facts support a planned calculation; selector still to implement.",
+    "partly-derivable": "Some facts exist; specific joins/semantics need validation.",
+    "structured-facts": "Existing event data supports the family; new editorial selection may still be needed.",
+    "schema-discovered": "Local schema confirms fields; capture, semantics and calculation are not yet validated for this use.",
+    "existing-fictional-model": "Fictional generated data, never native or real sportsbook data."
+  },
+  "opportunities": [
+    {
+      "family": "Rushing volume versus efficiency",
+      "status": "calculated",
+      "evidence": "Rushing yards/game and full-field rank are available. Add yards/carry and attempts/game to separate workload from efficiency.",
+      "calculation": "OFFRUSHYARDS / games; OFFRUSHYARDS / RUSHATTEMPTS",
+      "whyInteresting": "A top rushing total may come from volume, not unusually productive carries.",
+      "remaining": "Yards/carry extension still needs projected counter reconciliation; never call it success rate."
+    },
+    {
+      "family": "Third-down conversion context",
+      "status": "calculated",
+      "evidence": "Weighted season conversion rate with actual sample and attempts.",
+      "calculation": "sum(THIRDDOWNCONV) / sum(THIRDDOWNS)",
+      "whyInteresting": "An impressive record can hide repeated difficulty extending drives.",
+      "remaining": "Zero attempts is unavailable; do not average individual game percentages or infer distance-to-go."
+    },
+    {
+      "family": "Red-zone touchdown finishing",
+      "status": "calculated",
+      "evidence": "Trips and touchdowns reconcile across game caches and season totals for all 138 teams in the inspected capture.",
+      "calculation": "OFFREDZONETDS / OFFREDZONES",
+      "whyInteresting": "A productive offense may repeatedly settle for less than six.",
+      "remaining": "Do not call all non-TD trips field goals. Project and validate OFFREDZONEFGS separately for that breakdown."
+    },
+    {
+      "family": "Turnover dependence",
+      "status": "calculated",
+      "evidence": "Takeaways, giveaways and net margin retain games played.",
+      "calculation": "TAKEAWAYS - GIVEAWAYS; margin / games",
+      "whyInteresting": "A team can be winning with a cushion that may not persist.",
+      "remaining": "Describe future implications conditionally; raw turnover margin is not a luck estimate."
+    },
+    {
+      "family": "Heisman movement plus actual production",
+      "status": "structured-facts",
+      "evidence": "Observed ranking movement can join player production from the correct published game.",
+      "calculation": "current/previous rank + same-player game stats",
+      "whyInteresting": "Explain why a candidate is interesting rather than just listing names.",
+      "remaining": "School context required; no claim about the reason voters changed their minds."
+    },
+    {
+      "family": "Fourth-quarter scoring swings",
+      "status": "captured-validated",
+      "evidence": "Quarter scores plus overtime sum to final scores in all 511 inspected published finals.",
+      "calculation": "Q4 points for - Q4 points against; cumulative Q1–Q3 lead",
+      "whyInteresting": "Find teams repeatedly finishing strongly, or losing after leading through three.",
+      "remaining": "Compute selectors and tests next. Quarter-end scores cannot reveal the largest in-game deficit or when a lead changed."
+    },
+    {
+      "family": "Halftime deficits erased",
+      "status": "captured-validated",
+      "evidence": "Published quarter-score splits can establish halftime and final score state.",
+      "calculation": "sum(Q1,Q2) differential < 0 and final differential > 0",
+      "whyInteresting": "Give a comeback story an actual measured basis.",
+      "remaining": "Not implemented as a selector yet. Distinguish halftime deficit from biggest deficit; separate overtime wins."
+    },
+    {
+      "family": "Close-game record versus overall margin",
+      "status": "derivable",
+      "evidence": "Published final scores and current-season result coverage corroborated for all 138 teams.",
+      "calculation": "record in games decided by <= 8; mean final point differential",
+      "whyInteresting": "Reveal a contender living on narrow wins or a losing team staying competitive.",
+      "remaining": "An eight-point boundary is an editorial one-possession convention, not an arbitrary milestone. Do not imply play-by-play win probability."
+    },
+    {
+      "family": "Season-largest results and unusual streaks",
+      "status": "partly-calculated",
+      "evidence": "Unique largest winning margin is computed from full current-season results with tie suppression.",
+      "calculation": "max(abs(homeScore-awayScore)); consecutive published result sequences",
+      "whyInteresting": "Identify a real outlier without baking in a fixed example such as 42 points.",
+      "remaining": "Current-season claims only. Cross-season streaks need validated historical continuity and ordering."
+    },
+    {
+      "family": "Rolling form versus season baseline",
+      "status": "derivable",
+      "evidence": "Published game-level team stats are already accessible.",
+      "calculation": "last 3 completed games versus all earlier completed games",
+      "whyInteresting": "A team can be improving or declining beneath an unchanged season average.",
+      "remaining": "Require complete samples, label windows, and avoid automatic tactical or opponent-adjustment claims."
+    },
+    {
+      "family": "Offense versus defense matchup",
+      "status": "schema-discovered",
+      "evidence": "TeamStats contains passing/rushing yards allowed, sacks and offensive attempts.",
+      "calculation": "own rush yards/carry versus opponent rush yards allowed/carry",
+      "whyInteresting": "Preview an actual strength against a weakness.",
+      "remaining": "Extend projection and reconcile denominator semantics first; no EPA, pressure rate or success rate from box scores."
+    },
+    {
+      "family": "Protection and disruptive defenses",
+      "status": "schema-discovered",
+      "evidence": "TeamStats includes SACKS and SACKSALLOWED; player defensive game stats already exist.",
+      "calculation": "sacks allowed/game; defensive sacks/game",
+      "whyInteresting": "Highlight a meaningful pressure-point matchup or a multi-game change.",
+      "remaining": "Validate aggregation and half-sack semantics. Sacks are not total pressures."
+    },
+    {
+      "family": "Penalty and possession patterns",
+      "status": "schema-discovered",
+      "evidence": "TeamStats includes PENALTIES, PENALTYYARDS and POSSESSIONTIME.",
+      "calculation": "penalties/game, penalty yards/game, time share",
+      "whyInteresting": "A useful under-the-radar team tendency beyond yards and rankings.",
+      "remaining": "Verify possession units and cache semantics. Do not infer discipline or coaching cause as a measured fact."
+    },
+    {
+      "family": "Production concentration and young contributors",
+      "status": "schema-discovered",
+      "evidence": "Player SeasonStats/CareerStats and SchoolYear are present; recent game production is already captured.",
+      "calculation": "player share of team receiving/rushing yards; class-year share",
+      "whyInteresting": "Reveal a breakout contributor or an offense leaning heavily on one player.",
+      "remaining": "Extend full season player-stat mapping and reconcile team totals; distinguish receiving yards from all-purpose yards."
+    },
+    {
+      "family": "Opponent quality, venue and schedule context",
+      "status": "partly-derivable",
+      "evidence": "Published results identify opponents; schema has stadium and schedule venue context.",
+      "calculation": "opponent records excluding head-to-head; home/road splits",
+      "whyInteresting": "Compare records with the schedule actually faced.",
+      "remaining": "Neutral-site semantics and generic FCS identity must be resolved before venue/schedule-strength claims. Current opponent rank is not kickoff rank."
+    },
+    {
+      "family": "Weekly awards and genuine records",
+      "status": "schema-discovered",
+      "evidence": "Awards exposes WeeklyAwards and AnnualAwards; league history exposes award and stat-record records.",
+      "calculation": "award holder changes; verified historical record comparison",
+      "whyInteresting": "Surface accomplishments the user might miss elsewhere.",
+      "remaining": "Resolve award enums, player references and historical scope. Never label a season best a school record without actual history."
+    },
+    {
+      "family": "Recruiting class shape and needs",
+      "status": "structured-facts",
+      "evidence": "Actual offers/commitments, positions, national ranks and coach identity are captured. Native class ranks are schema-visible.",
+      "calculation": "new commitments by position; verified class-rank movement",
+      "whyInteresting": "Explain what a commitment means for the class, beyond repeating the announcement.",
+      "remaining": "Persist prior class snapshots and validate class ranking fields. Do not expose hidden influence or imply promises."
+    },
+    {
+      "family": "Injuries, returns and roster availability",
+      "status": "structured-facts",
+      "evidence": "Injury changes and later published-game participation are available.",
+      "calculation": "injury state transition + verified subsequent performance",
+      "whyInteresting": "Follow a real return or a meaningful absence in weekly context.",
+      "remaining": "A cleared flag alone is not evidence of participation; no invented medical timeline or diagnosis."
+    },
+    {
+      "family": "Fictional line versus football result",
+      "status": "existing-fictional-model",
+      "evidence": "Existing model-generated lines can be labeled and persisted as fictional Dynasty content.",
+      "calculation": "published result versus archived pregame line",
+      "whyInteresting": "Let fans and analysts revisit an actual prior in-world expectation.",
+      "remaining": "Never reconstruct a supposedly pregame line from the final result. No claim of a real sportsbook source."
+    }
+  ],
+  "excludedClaims": [
+    "Numerical player ability values or hidden transfer probability as public news",
+    "EPA, success rate, pressure rate or play-level explanations inferred from final box scores",
+    "National or historical superlatives from partial coverage",
+    "Unpublished cached results",
+    "Unverified emoji glyph support"
+  ]
+}

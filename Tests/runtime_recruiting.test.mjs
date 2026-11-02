@@ -51,3 +51,10 @@ test('current-first season arrays preserve null slots and do not use CurrentYear
  assert.equal((await readRuntime(input)).teams[0].seasonStats.stats.WINS,3);
  input.records['season-array'].v.Member0=null;assert.equal((await readRuntime(input)).teams[0].seasonStats,null);
 });
+
+test('cached unpublished scores and quarter splits never enter the public snapshot',async()=>{
+ const input=raw('None');input.records.team2={key:'team2',type:'Team',capacity:143,v:{TeamIndex:2,DisplayName:'Opponent',HomeWin:0,RoadWin:0,HomeLoss:0,RoadLoss:0}};
+ input.records.match={key:'match',type:'SeasonGame',capacity:1000,v:{SeasonYear:1,SeasonWeek:8,SeasonWeekType:'RegularSeason',GameStatus:'HomeWon',HasBeenPublished:false,HomeTeam:'team',AwayTeam:'team2',HomeScore:99,AwayScore:3,HomeScoreQuarter1:40}};
+ const s=await readRuntime(input),g=s.games[0];assert.equal(g.status,'Unplayed');assert.equal(g.homeScore,0);assert.equal(g.awayScore,0);assert.equal(g.homeQuarterScores,null);
+ const e=updateRuntime(s).catalog.events;assert.ok(!e.some(e=>e.category==='results'));assert.ok(e.some(e=>e.category==='schedule'));
+});

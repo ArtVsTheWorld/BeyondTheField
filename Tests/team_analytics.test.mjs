@@ -24,16 +24,15 @@ test('ties use competition ranks computed before display rounding',()=>{
  const s=fixture();for(const g of s.games)g.awayStats.OFFRUSHYARDS=g.homeStats.OFFRUSHYARDS;const a=teamAnalytics(s);assert.ok(a.teams.every(t=>t.rushingRank===1&&t.rushingRankTied));
  s.games[2].awayStats.OFFRUSHYARDS+=1;const b=teamAnalytics(s);assert.equal(b.teams.find(t=>t.teamId===2).rushingRank,1);assert.equal(b.teams.find(t=>t.teamId===1).rushingRank,2);
 });
-test('unique first-margin claims require complete history and unambiguous earliest-week evidence',()=>{
- const s=fixture();const a=teamAnalytics(s);assert.equal(a.milestones.length,1);assert.equal(a.milestones[0].gameId,'a');assert.equal(a.milestones[0].threshold,42);
- s.games[1].week=1;s.games[1].awayScore=60;s.games[1].homeScore=0;assert.equal(teamAnalytics(s).milestones.length,0);
+test('season margin superlative uses actual results rather than a fixed threshold',()=>{
+ const s=fixture();s.games[0].homeScore=44;const a=teamAnalytics(s);assert.equal(a.milestones.length,1);assert.equal(a.milestones[0].gameId,'a');assert.equal(a.milestones[0].kind,'season_largest_winning_margin');assert.equal(a.milestones[0].margin,37);assert.equal(a.milestones[0].threshold,undefined);
+ s.games[1].awayScore=47;s.games[1].homeScore=10;assert.equal(teamAnalytics(s).milestones.length,0);
 });
-test('a prior large win suppresses a later first, and future/other-year/unplayed games never count',()=>{
- const s=fixture();s.games.push({...s.games[0],id:'future',week:5,homeScore:99},{...s.games[0],id:'old',year:0,homeScore:99},{...s.games[0],id:'pending',week:4,status:'Unplayed',homeScore:99});
- const a=teamAnalytics(s);assert.equal(a.teams.find(t=>t.teamId===1).gamesPlayed,3);assert.equal(a.milestones.length,1);assert.equal(a.milestones[0].gameId,'a');
+test('future, other-year, unpublished, and unfinished games do not become season superlatives',()=>{
+ const s=fixture();s.games.push({...s.games[0],id:'future',week:5,homeScore:99},{...s.games[0],id:'old',year:0,homeScore:99},{...s.games[0],id:'hidden',week:4,published:false,homeScore:99});
+ const a=teamAnalytics(s);assert.equal(a.teams.find(t=>t.teamId===1).gamesPlayed,3);assert.equal(a.milestones[0].gameId,'a');
  s.games.push({...s.games[0],id:'unknown-past',week:0,status:'Unplayed'});assert.equal(teamAnalytics(s).milestones.length,0);
 });
-
 test('current-first official season counters can corroborate metrics independently of stale game rows',()=>{
  const s=fixture();s.games.push({...s.games[0],id:'stale',week:0});
  s.teams[0].seasonStats={season:2027,slot:0,stats:{WINS:2,LOSSES:1,TIES:0,OFFRUSHYARDS:600,THIRDDOWNCONV:2,THIRDDOWNS:10,GIVEAWAYS:2,TAKEAWAYS:7}};
@@ -42,4 +41,19 @@ test('current-first official season counters can corroborate metrics independent
 });
 test('uncorroborated per-game totals are suppressed rather than becoming season claims',()=>{
  const s=fixture();s.teams[0].wins=4;const a=teamAnalytics(s),r=a.teams.find(t=>t.teamId===1);assert.equal(r.metricRecordMatches,false);assert.equal(r.thirdDownRate,null);assert.equal(r.rushingYardsPerGame,null);assert.equal(r.turnoverMargin,null);
+});
+
+test('published results corroborate current-season stats when a separate record table lags',()=>{
+ const s=fixture();s.season.CurrentSeasonYear=2027;for(const g of s.games)g.published=true;
+ s.teams[0].wins=1;s.teams[0].seasonStats={season:2027,slot:0,stats:{WINS:2,LOSSES:1,TIES:0,OFFRUSHYARDS:600,THIRDDOWNCONV:2,THIRDDOWNS:10,GIVEAWAYS:2,TAKEAWAYS:7,OFFREDZONES:25,OFFREDZONETDS:9}};
+ const a=teamAnalytics(s),r=a.teams.find(t=>t.teamId===1);assert.equal(r.resultCountMatchesRecord,false);assert.equal(r.resultCorroborated,true);assert.equal(r.redZoneTouchdownRate,.36);assert.equal(r.rushingRank,1);
+});
+test('red-zone rates require valid trips and exclude field goals from touchdown rate',()=>{
+ const s=fixture();for(const g of s.games){g.homeStats.OFFREDZONES=5;g.homeStats.OFFREDZONETDS=2;g.homeStats.OFFREDZONEFGS=1;}
+ assert.equal(teamAnalytics(s).teams.find(t=>t.teamId===1).redZoneTouchdownRate,.4);s.games[1].homeStats.OFFREDZONETDS=6;assert.equal(teamAnalytics(s).teams.find(t=>t.teamId===1).redZoneTouchdownRate,null);
+});
+
+test('matching game count alone does not corroborate a conflicting win-loss record',()=>{
+ const s=fixture();s.teams[0].wins=1;s.teams[0].losses=2;
+ const a=teamAnalytics(s),r=a.teams.find(t=>t.teamId===1);assert.equal(r.resultCountMatchesRecord,true);assert.equal(r.resultRecordMatches,false);assert.equal(r.resultCorroborated,false);assert.equal(r.rushingYardsPerGame,null);assert.equal(a.coverage.recordCoverageComplete,false);
 });

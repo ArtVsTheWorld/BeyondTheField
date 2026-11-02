@@ -20,7 +20,7 @@
     "Occasional slang, lowercase, or repeated punctuation can distinguish an author. Do not apply them to everyone.",
     "Humor belongs mostly to fans and entertainer personalities. A serious injury is not a joke trigger.",
     "Avoid invented accusations, personal abuse, and alleged insider sourcing. Rivalry banter should concern football.",
-    "Write fuller posts when the voice and event support them. A typical draft can use 160–260 characters, with 280 as the English-text budget. Shorter posts remain useful; there is no two-sentence rule and no need to pad every post.",
+    "Vary length by author and event. Official team posts are usually short, punchy captions with enough opponent/score/player context to work without a graphic. Analysts and reporters can explain more. No global minimum, no two-sentence rule, and no padding to reach a target; 280 English-text characters is the maximum.",
     "Use team nicknames naturally, especially in school accounts and fan reactions. Use verified team hashtags occasionally, usually one, rather than appending tags to every post.",
     "Give school context whenever an analyst names a player: a school-name possessive, a clear nickname-plus-position construction, or an unambiguous school hashtag.",
     "Reference current coaches occasionally by name, resolved from the Dynasty team coach reference. Do not substitute a real-world coach name that may be wrong in this save.",
@@ -31,8 +31,9 @@
     "Fan accounts are the expressive outlet: occasional melodrama, rivalry shit talk, arguments with analysts, and positive or negative commentary on named players and coaches. Keep statistical claims grounded while allowing clear opinions and emotional exaggeration.",
     "Occasional profanity is acceptable for fans. Do not spread it automatically to players, recruits, reporters, or official accounts.",
     "Generate player/recruit handles from names, initials, nicknames, underscores, occasional periods, and stable numbers. Position is never part of the handle-generation input. Persist an author handle across posts, position changes, and recruiting-to-roster transitions.",
-    "Emojis remain a separate native-font check; fuller wording and occasional hashtags do not depend on emoji support.",
-    "Nickname grammar must fit the team. Use a neutral construction when singular/plural agreement is uncertain rather than guessing from the spelling."
+    "Emoji support in native game fonts is unverified. Leave emojis disabled until actual glyph rendering, baseline, and fallback behavior are checked in the native UI.",
+    "Nickname grammar must fit the team. Use a neutral construction when singular/plural agreement is uncertain rather than guessing from the spelling.",
+    "Players and recruits should sound like people posting on their phones, not coaches at a podium. Vary punctuation and casing; use occasional contractions or current slang only where natural to that recurring author. Fans can be much messier. Do not make every voice say the same trendy phrase."
   ],
   "personalityPolicy": {
     "nativeField": "Player.Personality",
@@ -105,7 +106,8 @@
         ],
         "avoid": [
           "identical gratitude in every post",
-          "assuming playing time or a starting role"
+          "assuming playing time or a starting role",
+          "sounding like a coach explaining the box score"
         ]
       },
       "Unpredictable": {
@@ -167,16 +169,16 @@
       "label": "Official team",
       "purpose": "Celebrate and inform with the program voice.",
       "style": [
-        "concise",
-        "confident",
-        "polished",
-        "selective enthusiasm",
-        "natural use of the program nickname and occasional school hashtag"
+        "short and punchy",
+        "caption energy with actual football context",
+        "selective capitals or line breaks",
+        "native nickname and occasional school hashtag"
       ],
       "avoid": [
         "reporter speculation",
         "insider recruiting claims",
-        "disparaging players"
+        "disparaging players",
+        "turning every result into a paragraph of appreciation"
       ],
       "identity": "School-specific display name and a clearly fictional school account handle; native team logo."
     },
@@ -224,12 +226,13 @@
         "brief",
         "age-appropriate",
         "personality-led",
-        "vary confidence and gratitude"
+        "vary confidence and gratitude",
+        "natural phone-post punctuation, occasional casual language"
       ],
       "avoid": [
         "making every recruit religious",
-        "invented visits or conversations",
-        "implied enrollment"
+        "implied enrollment",
+        "treating authored phone-call flavor as native contact telemetry"
       ],
       "identity": "Recruit name, stable generated handle, native portrait where supported or team-logo fallback."
     },
@@ -241,14 +244,17 @@
         "personality-led",
         "media-aware",
         "positive updates and appreciation",
-        "occasional restrained post-win rivalry talk"
+        "occasional restrained post-win rivalry talk",
+        "natural casing and punctuation; occasional slang"
       ],
       "avoid": [
         "assuming starter status",
         "announcing a medical return solely from an injury flag",
         "game-system language",
         "default loss posts",
-        "public self-blame as routine leadership"
+        "public self-blame as routine leadership",
+        "coach-speak",
+        "turning every celebration into a stat recap"
       ],
       "identity": "Player name and stable generated handle; use supported native imagery."
     },
@@ -262,7 +268,8 @@
         "sharp rivalry banter",
         "disagreement with analysts",
         "specific player and coach praise or criticism",
-        "occasional profanity"
+        "occasional profanity",
+        "uneven punctuation and occasional slang, not constant catchphrases"
       ],
       "avoid": [
         "invented off-field allegations",
@@ -279,17 +286,40 @@
     "Most cases are independent alternatives; the marked analyst/fan pair demonstrates a connected conversation.",
     "All thirty drafts are new. No draft is enabled in the game."
   ],
-  "revision": 2,
+  "revision": 3,
   "lengthPolicy": {
-    "typicalEnglishCharacters": [
-      160,
-      260
-    ],
     "maximumEnglishCharacters": 280,
     "sentenceLimit": null,
-    "shortPosts": "Allowed when authentic to the voice; no forced filler.",
+    "shortPosts": "Welcome, especially official team captions and player reactions. Do not pad with generic motivation or an extra thank-you sentence.",
     "overflow": "Drop optional hashtags or flavor clauses, or choose a shorter approved variant. Preserve names and factual values; never truncate a post mid-word.",
-    "nativeUI": "Use existing adaptive card heights first. Consider font-size changes only after a native visual check with the new pack."
+    "nativeUI": "Use existing adaptive card heights first. Consider font-size changes only after a native visual check with the new pack.",
+    "softVoiceRanges": {
+      "official": [
+        25,
+        110
+      ],
+      "beat": [
+        100,
+        260
+      ],
+      "analyst": [
+        120,
+        280
+      ],
+      "recruit": [
+        35,
+        220
+      ],
+      "player": [
+        30,
+        200
+      ],
+      "fan": [
+        35,
+        260
+      ]
+    },
+    "rangeMeaning": "Editorial guidance, not eligibility limits or target quotas. Short and long exceptions are allowed within 280 characters when the event earns them."
   },
   "teamIdentityPolicy": {
     "nicknameField": "Team.NickName",
@@ -323,19 +353,26 @@
   "analystAnalyticsPolicy": {
     "standard": "Lead with a calculated football insight, then a supported interpretation. Merely repeating a ranking or asking a generic question is not enough.",
     "initialMeasures": [
-      "season rushing yards per game and its FBS rank",
-      "third-down conversions / attempts with percentage and sample size",
-      "unique first 42-plus-point win with complete result history",
+      "rushing yards per game and corroborated FBS rank",
+      "weighted third-down conversion rate with sample size",
+      "red-zone touchdown rate, separated from field goals",
       "season turnover margin",
-      "Heisman movement joined to recent player production"
+      "Heisman movement joined to recent player production",
+      "season-wide largest winning margin, only with complete result coverage; not a fixed-point trigger"
     ],
-    "rushingRank": "Use validated current-season yards per game, not raw total yards. Prefer the native current-first season totals and corroborate their W/L/T against the current team record. A complete matching game-cache history is an alternative. State ties accurately and require full eligible-field metric coverage for a national rank.",
+    "rushingRank": "Use current-season yards per game, not raw total yards. Validate current-first season totals against published scorecard W/L/T or a matching live record. Complete corroborated game caches are an alternative. State ties accurately and require full eligible-field metric coverage for a national rank.",
     "thirdDownRate": "Sum conversions and attempts across completed games, then divide. Show sample games. Zero attempts is unavailable, not 0%. Use at least three games for broad performance criticism.",
-    "seasonFirst": "Require complete current-season results and unambiguous earliest evidence. If multiple teams qualify in the first week and completion order is unavailable, do not pick a first winner by record order.",
     "coverage": "Missing games, caches, invalid counters, unresolved membership, or incomplete history suppress the affected claim. Never silently turn partial data into a national ranking.",
     "interpretation": "Opinion may evaluate sustainability or implications, but do not claim a stat caused a poll/voting change or manufacture tactical details that were not measured.",
     "playerContext": "Every named analyst player must have clear school context, and production must be linked to that player and the correct game.",
     "sampleData": "The review examples contain fictional values with explicit metric evidence. They are not claims about the active save.",
-    "dataReadiness": "Nickname, hashtag, current-coach, and jersey fields were verified through read-only capture. Current-first season totals and game caches can disagree with other record tables for some teams; affected metrics and national rankings remain suppressed until corroborated. Season-first result claims additionally require complete, consistent result history."
+    "dataReadiness": "Read-only capture verifies nickname, hashtag, coach, personality, publication, quarter-score and red-zone fields. Published scorecard W/L/T and native current-season totals reconcile the eligible 138-team field in the inspected snapshot. Some separate team-record counters lag; corroboration uses published results. Future snapshots still pass coverage checks; audit details are in analyst-opportunities.json.",
+    "superlatives": "Derive comparisons from actual distributions, not a hardcoded example threshold. A unique season-largest claim needs full result coverage; ties suppress a unique leader. Historical records need actual historical evidence, not one observed season.",
+    "publication": "Native final scores may be cached before games are published. HasBeenPublished=false excludes those results and stats from public news; never leak simulated upcoming scores."
+  },
+  "emojiPolicy": {
+    "nativeSupport": "unverified",
+    "enabled": false,
+    "nextCheck": "Controlled native font visual check before any production emoji wording is enabled; plain-text variants remain available."
   }
 }
