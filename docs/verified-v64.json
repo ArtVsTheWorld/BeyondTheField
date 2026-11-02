@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "version": "v64 MMC prototype",
+  "nativeSha256": "4eeff86e8feb92d21e90cd15cfc0faf5f3dacc8a816b115451ac67e4cd31332b",
+  "adapterSha256": "b20aa66446c7746a0c4b5611af844a01e7a2f196f1d2f675b17b77bff500829f",
+  "zipSha256": "34a7bd3e41d0aec828256a9ebf394753f2f962c5b8248b655b6ef40e23e08689",
+  "nodeTestsPassed": 95,
+  "nativeTestsPassed": true,
+  "adapterSmokePassed": true,
+  "packagedGeneratorSmoke": {
+    "stories": 2600,
+    "curatedPosts": 30,
+    "fixture": "Read-only established Week 9 snapshot with preserved history"
+  },
+  "liveVerified": [
+    "MMC adapter registered and launch watcher started",
+    "MMC automatically loaded native runtime on a fresh game process; no manual injection",
+    "Native worker waited through title/loading states and activated after Dynasty/UI readiness",
+    "A new preseason Dynasty was read and its Week 0 edition published without a save requirement",
+    "User confirmed Social Media button appeared after opening Heisman Watch and returning",
+    "Existing v63 RuntimeHistory copied and checksum-verified before launch"
+  ],
+  "preseason": {
+    "week": 0,
+    "phase": "PreSeason",
+    "stories": 0
+  },
+  "limitations": [
+    "A cached hub can need one menu/tab refresh after delayed startup activation; automatic immediate hub refresh remains a polish item",
+    "Preseason currently has no qualifying stories in the tested fresh Dynasty; broader preseason content remains outside this loader task",
+    "Player Analytics and Roster Fog are not yet integrated; this is not 1.0"
+  ],
+  "runtimeDataIncludedInZip": false
+}

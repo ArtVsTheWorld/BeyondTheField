@@ -4,6 +4,21 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## MMC loader (v64)
+
+The current prototype includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v64.dll** game runtime. Use the complete `Build/DynastyEnhancer-v64-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v64`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
+
+MMC loads the runtime once per game process. The native worker waits through the title screen/loading until it can verify an active Dynasty and its supported UI assets, then installs hooks. Configured Node.js must be available. No save path is required. Existing RuntimeHistory is retained by the development installer, keeping account identities and editions. Startup diagnostics distinguish `startup_waiting`, `active`, and `runtime_feed_published`. A fresh MMC/game launch has verified this sequence in a new preseason Dynasty. If the hub was cached before activation, switching tabs or opening another native menu and returning refreshes the button; eliminating that first refresh remains polish. See [v64 validation](docs/verified-v64.json).
+
+Build and stage the prototype package with:
+
+```powershell
+.\Source\build.ps1
+.\Source\Package.ps1 -MmcRoot 'C:/path/to/MMC'
+```
+
+`Source/Install-Mmc.ps1` installs that staged package while MMC/game are closed, backs up the previous top-level DLL and preserves existing configuration/history. It accepts `-HistoryFrom` for the first migration from a development build. Package and adapter smoke tests do not launch or inject the game.
+
 ## Feed sizing and ordering (v63)
 
 For You shows up to 30 posts, National up to 100, and each native conference up to 60. Individual team feeds keep their existing capacity. The dedicated caps apply after the LB/RB category filter, so each category can draw from its full qualifying pool. Replies count toward the displayed limits.
@@ -60,7 +75,7 @@ Windows x64, Visual Studio C++ tools, and Windows SDK are required. From the pro
 .\Source\build.ps1
 ```
 
-This builds `Build/DynastyEnhancer.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
+This builds `Build/DynastyEnhancerNative-v64.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
 
 Node.js is required for the story generator. Copy `Config/dynasty-enhancer.example.json` to `Build/dynasty-enhancer.json` and set the Node executable path if needed. The active-Dynasty reader needs no save path, parser, or external schema. Generated snapshots, feeds, and publication history live beside the DLL under `Build/` and are not game saves.
 
@@ -72,7 +87,7 @@ Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```
 
-For development, load with `Build/LoadDynastyEnhancer.exe <PID> <absolute-DLL-path>`. Stop with the same arguments plus `--stop`, after returning from Social Media to the CFB hub. The stop guard refuses replacement while the Social Media page is open. Use a fresh DLL filename for another candidate in the same process; stopped modules remain pinned. This repository does not install an automatic loader.
+For development, load with `Build/LoadDynastyEnhancer.exe <PID> <absolute-DLL-path>`. Stop with the same arguments plus `--stop`, after returning from Social Media to the CFB hub. The stop guard refuses replacement while the Social Media page is open. Use a fresh DLL filename for another candidate in the same process; stopped modules remain pinned. Manual loading is for development; the v64 MMC package provides the automatic loader.
 
 ## Roadmap and provenance
 

@@ -25,6 +25,13 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        {
+            unsigned probes=0,pauses=0,reports=0;bool cancel=false;
+            const bool ready=social::awaitStartup([&]{return cancel;},[&]{++probes;return probes<=2?std::string("Title screen"):probes==3?std::string("Dynasty assets loading"):std::string();},[&](const std::string&){++reports;},[&]{++pauses;});
+            require(ready&&probes==4&&pauses==3&&reports==2,"Cold startup did not wait through title/loading states or deduplicate status");
+            probes=0;cancel=false;const bool stopped=social::awaitStartup([&]{return cancel;},[&]{++probes;return std::string("Loading");},[](const std::string&){},[&]{cancel=true;});
+            require(!stopped&&probes==1,"Startup cancellation still allowed UI activation");
+        }
         require(social::compactCount(999)=="999"&&social::compactCount(1000)=="1K"&&social::compactCount(1950000)=="2M"&&social::compactCount(999950)=="1M","Engagement K/M formatting boundaries changed");
         require(social::storyLabel(Json{{"category","recruiting"}})=="Recruiting","Recruiting category label changed");
         require(social::storyLabel(Json{{"category","recruiting"},{"replyTo","real-parent"}})=="Reply","Native reply label is missing");

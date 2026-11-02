@@ -24,6 +24,7 @@
 #include "NewsPolish.h"
 #include "NewsDiscovery.h"
 #include "RuntimeFeed.h"
+#include "Startup.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
@@ -655,10 +656,17 @@ DWORD WINAPI worker(void*){
         dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
-        if(!locateNewsLayout())throw std::runtime_error("Native NewsStory layout is absent, ambiguous, or unsupported");
+        const bool ready=social::awaitStartup([]{return disabled.load();},[]{
+            try{dynasty::live::Capture(base).status();}catch(const std::exception& error){return std::string(error.what());}
+            if(!locateNewsLayout())return std::string("Waiting for the supported native Dynasty news layout");
 #ifdef SOCIAL_DUAL_DROPDOWN
-        if(!newsModelBase)throw std::runtime_error("Native Dynasty filter model is absent or ambiguous");
+            if(!newsModelBase)return std::string("Waiting for the native Dynasty filter model");
 #endif
+            return std::string();
+        },[](const std::string& reason){note({{"event","startup_waiting"},{"reason",reason}});flush();},[]{for(int i=0;i<15&&!disabled;++i)Sleep(200);});
+        if(!ready){note({{"event","startup_cancelled"}});flush();return 0;}
+        // Ownership can change while waiting at the title screen.
+        for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
         tiles=reinterpret_cast<Tiles>(base+0x7a1b4c0);containers=reinterpret_cast<Containers>(base+0x7a1af50);navInfo=reinterpret_cast<NavInfo>(base+0x7a1c8e0);navRequest=reinterpret_cast<NavRequest>(base+0x7a2cca0);
         requestPanel=reinterpret_cast<RequestPanel>(base+0x7a2cdd0);
         panelReady=reinterpret_cast<PanelReady>(base+0x7a27f10);
