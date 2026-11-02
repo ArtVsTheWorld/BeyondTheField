@@ -33,11 +33,16 @@
   ],
   "adapterInstalledForNextMmcStartup": true,
   "currentMmcRestartRequiredForAdapter": true,
-  "livePending": [
-    "Fresh v68 MMC/game cold launch"
-  ],
+  "livePending": [],
   "limitations": [
     "First active-context validation can still briefly show preparing news; changed facts/new editions require normal stable observations",
     "Only previously observed editions are available; no fabricated past news"
-  ]
+  ],
+  "coldMmcLaunchObserved": {
+    "gamePid": 16048,
+    "mmcPid": 8488,
+    "nativeLoadLogged": true
+  },
+  "laterWeek1Failure": "Generator created 9029 stories; native 4096-story catalogue bound rejected the edition",
+  "supersededBy": "v69"
 }

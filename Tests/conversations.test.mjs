@@ -39,6 +39,6 @@ test('high-priority midweek recruiting does not evict existing conversations to 
  const s=fixture(),fact=(id,metric,extra)=>({id,category:'analytics',facts:{school:'Harbor State',metric,sampleGames:4,...extra},teamIds:[1],scopes:['team'],priority:80,thread:id,curated:true});
  const events=[fact('third','thirdDownConversionRate',{conversions:8,attempts:36,rate:8/36}),fact('red','redZoneTouchdownRate',{trips:25,touchdowns:9,rate:9/25}),fact('turnover','turnoverMargin',{takeaways:1,giveaways:8,margin:-7})];
  const a=renderStories(s,events);assert.equal(a.stories.filter(p=>p.replyTo).length,3);
- const offer={id:'new-offer',category:'offers',facts:{school:'Harbor State',playerName:'Evan Mercer'},teamIds:[1],playerId:'recruit',scopes:['team'],priority:100,thread:'offer',curated:true};
- const b=renderStories(s,[...events,offer],{authors:a.authors,sameWeek:{stories:a.stories,dialogueEventOrder:a.dialogueEventOrder}});for(const old of a.stories)assert.equal(b.stories.find(p=>p.id===old.id)?.body,old.body,old.id);assert.ok(b.stories.some(p=>p.id==='new-offer:main'));
+ const offer={id:'new-offer-0',category:'offers',facts:{school:'Harbor State',playerName:'Evan Mercer'},teamIds:[1],playerId:'recruit',scopes:['team'],priority:100,thread:'offer',curated:true};
+ const b=renderStories(s,[...events,offer],{authors:a.authors,sameWeek:{stories:a.stories,dialogueEventOrder:a.dialogueEventOrder}});for(const old of a.stories)assert.equal(b.stories.find(p=>p.id===old.id)?.body,old.body,old.id);assert.ok(b.stories.some(p=>p.id==='new-offer-0:main'));
 });

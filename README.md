@@ -4,15 +4,15 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Preseason and lifecycle prototype (v68)
+## Preseason and lifecycle prototype (v69)
 
 The current candidate adds 62 prewritten variants across 24 new families (339 variants total): native preseason AP and All-America/All-Conference honors, season outlooks, opening games, team hype, player camp posts, fans, top-100 recruiting watches, fictional title futures, clustered ranked-opponent gauntlets, AP/model debates with fan replies, explicit AP/Coaches comparisons, and conference talent maps. All teams, including TeamBuilder programs, use the same eligibility. See [preseason coverage and lifecycle details](docs/preseason-lifecycle.md).
 
 Public rankings use AP by default and CFP once a complete native CFP Top 25 is present. Coaches is an explicitly labeled alternative. Hidden team Rank is never a public poll. Historical upset ranks keep their captured pregame poll, and AP-to-CFP differences never become weekly movement.
 
-## MMC loader (v68)
+## MMC loader (v69)
 
-The package includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v68.dll** game runtime. Use the complete `Build/DynastyEnhancer-v68-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v68`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
+The package includes a managed **DynastyEnhancer.dll** adapter for MMC and a separate **DynastyEnhancerNative-v69.dll** game runtime. Use the complete `Build/DynastyEnhancer-v69-MMC.zip` package. The adapter belongs directly in MMC's `Plugins` folder; its native runtime, generator and content belong under `Plugins/DynastyEnhancer/Runtime-v69`. A raw native DLL placed directly in Plugins is not an MMC plugin. See [the package guide](Source/PackageREADME.md).
 
 The adapter has no fixed 20-second title-screen delay. Verified menu hooks install before waiting for Dynasty assets, capturing the first hub construction. Native UI readiness is independent of news generation; a native status card can display while the first edition is prepared. Entry before asset readiness completes through the native inert action, rather than silently returning with navigation pending. On a phase transition, the filter model is reacquired using exact native byte gates rather than reusing a stale allocation. A late dropdown failure retains native page data and Back behavior. The v66 first-hub button passed, but an invalid reader ownership path and a silent navigation guard caused the preseason entry failure. v67 replaces both, expands the reserved Award[] capacity gate, and captures all 600 honors from the live preseason save read only. The user verified preseason posts, the Preseason 2026 choice and normal Back navigation. The same-session advance to regular-season Week 0, its posts and Back navigation also passed. Same-process main-menu reload also passed. The verified v68 managed adapter is installed for the next MMC startup; a fresh v68 cold launch remains a follow-up check.
 
@@ -26,6 +26,14 @@ Build and stage the prototype package with:
 ```
 
 `Source/Install-Mmc.ps1` installs that staged package while MMC/game are closed, backs up the previous top-level DLL and preserves existing configuration/history. It accepts `-HistoryFrom` for the first migration from a development build. Package and adapter smoke tests do not launch or inject the game.
+
+## Week 1 publication and offer frequency (v69)
+
+The first full recruiting week produced 9,029 stories from legitimate CPU/user events, exceeding the old native catalogue validator's 4,096-story limit. v69 raises the validated stored candidate budget to 32,768 per edition/reference pool, retaining the 128 MiB file bound and identity/text/reference checks. Display limits stay 30 For You, 100 National, 60 per conference and the existing team cap after category filtering. A native regression covers 9,300 candidates and rejection beyond the new bound.
+
+Each newly observed scholarship offer now has a deterministic 20% publication chance for both CPU and user programs. Its choice is fixed by Dynasty/year/publication phase/week/offer ID, independent of save filename, user-team selection and unrelated midweek changes. Offers remain observed even if no post is admitted; replies require a published parent. Commitments are unaffected. The separate publication-policy version reconciles the active old offer feed once without changing template revisions or rewriting earlier editions.
+
+The real Week 1 replay selected 857 of 4,089 offer events (20.96%), yielding 2,413 total posts and 30 For You. Preseason and Week 0 archives remained byte-equivalent in the displayed catalogue. Both the original 9,029-story catalogue and the revised catalogue pass native decoding for every scope. 116 Node tests and native/package checks pass. In-game publication verification is pending.
 
 ## Publication archives and reloads (v68)
 
@@ -91,7 +99,7 @@ Windows x64, Visual Studio C++ tools, and Windows SDK are required. From the pro
 .\Source\build.ps1
 ```
 
-This builds `Build/DynastyEnhancerNative-v68.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
+This builds `Build/DynastyEnhancerNative-v69.dll`, `Build/LoadDynastyEnhancer.exe`, `Build/LiveCapture.exe`, and runs the native tests. Both native dropdowns and the read-only feed are enabled by default. Generated native UI patch headers are included; no extracted game assets are required to compile. Native bindings are build-specific and reject unsupported code/asset layouts.
 
 Node.js is required for the story generator. Copy `Config/dynasty-enhancer.example.json` to `Build/dynasty-enhancer.json` and set the Node executable path if needed. The active-Dynasty reader needs no save path, parser, or external schema. Generated snapshots, feeds, and publication history live beside the DLL under `Build/` and are not game saves.
 

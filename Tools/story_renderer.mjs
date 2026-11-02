@@ -4,6 +4,7 @@ import {likesFor,replyLikesFor,ENGAGEMENT_VERSION} from './story_engagement.mjs'
 import {avatarFor} from './story_avatars.mjs';
 import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
 import {addConversations} from './story_conversations.mjs';
+import {publishOffer} from './publication_policy.mjs';
 export const CONTENT_REVISION=pack.revision;
 export const stampFor=category=>({'results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
 const personalities=new Set(['Leader','Intense','Entertainer','TeamPlayer','Unpredictable']);
@@ -46,7 +47,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
  function perfContext(e){const f=e.facts,g=games.get(f.gameId),p=players.get(e.playerId);if(!p||!final(g))return null;const t=teams.get(p.team);if(!t)return null;
   const win=g.homeScore===g.awayScore?null:g.homeScore>g.awayScore?g.home:g.away,opponent=p.team===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name;
   return {...teamValues(t),...f,opponent,statLine:performanceLine(f.stats),win:win===p.team,resultLine:win===null?'The game finished tied.':win===p.team?'A team win to go with it.':'The individual numbers came in a team loss.'};}
- for(const e of events){const f=e.facts,t=teams.get(e.teamIds[0]),v={...teamValues(t),...f,giveawayLabel:e.facts.giveaways===1?'giveaway':'giveaways'};
+ for(const e of events){if(e.category==='offers'&&!publishOffer(s,e))continue;const f=e.facts,t=teams.get(e.teamIds[0]),v={...teamValues(t),...f,giveawayLabel:e.facts.giveaways===1?'giveaway':'giveaways'};
   if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:role==='analyst'?1:0});if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
   if(e.category==='results'){
    const g=games.get(f.gameId);if(!final(g))continue;

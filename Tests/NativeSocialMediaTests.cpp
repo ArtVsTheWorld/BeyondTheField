@@ -107,6 +107,13 @@ int main(int argc,char** argv){
             wrong=data;wrong["weeks"][0]["stories"][1]["id"]="0";rejected=false;try{validate(wrong,config);}catch(...){rejected=true;}require(rejected,"Duplicate posts were accepted");
             auto catalog=social::decodeFeed(data)->catalog;
             {
+                Json large=data;auto& largeEdition=large["weeks"][0];largeEdition["stories"]=Json::array();largeEdition["views"]=Json::object();for(const char* scope:{"all","national","conference","team"})largeEdition["views"][scope]=Json::array();
+                for(unsigned n=0;n<9300;++n){const auto id="offer-"+std::to_string(n);largeEdition["stories"].push_back({{"id",id},{"author","Recruit"},{"handle","@Recruit"},{"body","Verified scholarship announcement"},{"stamp","Recruiting"},{"category","offers"},{"voice","recruit"},{"likes",n},{"imageLibrary",79},{"imageValue",598},{"publication",{{"key",large["key"]},{"week",7}}}});for(const char* scope:{"national","conference","team"})largeEdition["views"][scope].push_back(id);if(n<30)largeEdition["views"]["all"].push_back(id);}
+                validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==4096,"Large candidate catalog changed the 30/100/60/team display caps");
+                auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==100&&recruiting->posts[0].likes==9299,"Large recruiting category lost popularity ordering or its National cap");
+                auto excessive=large;excessive["weeks"][0]["stories"].get_ref<Json::array_t&>().resize(32769,largeEdition["stories"][0]);bool bounded=false;try{validate(excessive,config);}catch(const std::exception& e){bounded=std::string(e.what()).find("exceeds catalogue limit")!=std::string::npos;}require(bounded,"Unbounded weekly catalog was accepted");
+            }
+            {
                 Json mixed=data;mixed["catalogVersion"]=2;mixed["week"]=0;mixed["key"]="10/2027/RegularSeason/0";mixed["activeWeekKey"]=mixed["key"];
                 auto current=mixed["weeks"][0];current["week"]=0;current["key"]=mixed["key"];for(auto& p:current["stories"]){p["body"]="Regular season story";p["publication"]={{"key",current["key"]},{"week",0},{"season",2027},{"phase","RegularSeason"}};}
                 auto preseason=current;preseason["phase"]="PreSeason";preseason["key"]="10/2027/PreSeason/0";for(auto& p:preseason["stories"]){p["body"]="Frozen preseason story";p["publication"]["key"]=preseason["key"];p["publication"]["phase"]="PreSeason";}

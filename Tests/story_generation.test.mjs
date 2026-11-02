@@ -43,7 +43,7 @@ test('generated English posts fit native byte and character budgets with no emoj
  const f=buildFeed(fixture());for(const p of f.stories){assert.ok([...p.body].length<=280,p.id);assert.ok(Buffer.byteLength(p.body)<=512,p.id);assert.ok(!/[\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(p.body),p.id);assert.ok(!/undefined|NaN|\b(?:OVR|overall|ratings?)\b/i.test(p.body),p.id);assert.ok(!/\{[A-Za-z]/.test(p.body));}
 });
 test('midweek unsaved recruiting renders once, persists identity, and does not reroll existing stories',()=>{
- const s=fixture(),a=updateRuntime(structuredClone(s));s.offers=[{team:1,player:'r',rank:20}];const b=updateRuntime(structuredClone(s),a.state),c=updateRuntime(structuredClone(s),b.state);assert.equal(b.catalog.stories.filter(p=>p.eventId==='offer:1:r'&&!p.replyTo).length,1);assert.deepEqual(b.catalog,c.catalog);
+ const s=fixture();s.players[2].id='r0';const a=updateRuntime(structuredClone(s));s.offers=[{team:1,player:'r0',rank:20}];const b=updateRuntime(structuredClone(s),a.state),c=updateRuntime(structuredClone(s),b.state);assert.equal(b.catalog.stories.filter(p=>p.eventId==='offer:1:r0'&&!p.replyTo).length,1);assert.deepEqual(b.catalog,c.catalog);
  for(const p of a.catalog.stories)assert.equal(b.catalog.stories.find(x=>x.id===p.id)?.body,p.body,p.id);
 });
 test('analyst replies quote a real parent, retain school context, and stay out of All Posts without a parent',()=>{

@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "version": "v69 Week1 capacity and 20-percent scholarship publication",
+  "nativeSha256": "56d64d71091f2f9bf814535fc89f1a9066675f417131061f12fac872a1786115",
+  "adapterSha256": "6a0499d95b050903ac68d0e544e69b7839a0510be3d603566925d5ecc021d470",
+  "zipSha256": "e6687be84fa5b7d711e3cbb8091bbd8cb7b0922cbefc4eac1e20e471f7cb4773",
+  "nodeTestsPassed": 116,
+  "nativeTestsPassed": true,
+  "adapterSmokePassed": true,
+  "catalogueLimitPerEdition": 32768,
+  "fileLimitMiB": 128,
+  "nativeRegressionCandidates": 9300,
+  "nativeOverLimitRejectionTested": true,
+  "oldWeek1Catalogue": {
+    "stories": 9029,
+    "nativeDecoderPassed": true
+  },
+  "newWeek1Catalogue": {
+    "stories": 2413,
+    "forYou": 30,
+    "observedOfferEvents": 4089,
+    "publishedOfferParents": 857,
+    "offerPercentage": 20.95866960136953,
+    "nativeDecoderPassed": true,
+    "cacheMatchesGeneratedEdition": true,
+    "priorEditionsUnchanged": true
+  },
+  "publicationPolicyVersion": 1,
+  "cpuUserSameChance": true,
+  "livePending": [
+    "v69 native Week1 page, archives and controls"
+  ],
+  "adapterInstalledForNextMmcStartup": false
+}

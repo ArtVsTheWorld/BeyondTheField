@@ -46,3 +46,7 @@ The user verified v67 preseason posts and Back, then advanced in the same proces
 ## Archived publication phases and persistence (v68)
 
 Preseason is now selectable above regular-season Week 0, using frozen stored editions from the same Dynasty/team/year. The active edition remains the default; future phases/weeks and other identities are excluded. Matching native facts resume cached wording and likes after the first verified capture instead of regenerating an unchanged edition. Save renaming does not change identity. The user verified both editions and all controls. Source, native DLL, complete MMC package and installed adapter are preserved; v68 cold launch remains a follow-up validation case.
+
+## Week 1 catalogue recovery and scholarship frequency (v69)
+
+v68 cold MMC startup is observed in the launcher/native logs. Its Week 1 generator produced 9,029 stories, but native validation still limited a complete edition to 4,096. v69 raises the stored candidate bound to 32,768 while keeping all visible scope/category caps unchanged. Scholarship posts now use a stable 20% chance per newly observed offer; CPU/user eligibility is identical and commitments remain fully eligible. Real-data replay selects 857 of 4,089 offers and preserves earlier editions. 116 Node tests, large-catalogue native regressions and real-data catalogue decoding pass; live v69 confirmation is pending.

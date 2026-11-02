@@ -27,7 +27,7 @@ test('outside-conference unranked results and previews exist without entering pe
  assert.equal(f.posts.length,0);assert.ok(f.views['conference:actual-a'].length);
 });
 test('pipeline and same-state recruiting are relevant without falsely tagging the user team',()=>{
- const s=snapshot();s.players=[{id:'p',name:'Evan Mercer',team:255,homePipeline:'EastTexas',personality:'Leader',position:'QB'}];s.newOffers=[{player:'p',team:2,rank:500}];
+ const s=snapshot();s.players=[{id:'p2',name:'Evan Mercer',team:255,homePipeline:'EastTexas',personality:'Leader',position:'QB'}];s.newOffers=[{player:'p2',team:2,rank:500}];
  const f=buildFeed(s),post=f.stories.find(p=>p.category==='offers');assert.ok(post.scopes.includes('relevant'));assert.ok(!post.teamIds.includes(1));assert.ok(f.posts.includes(post));assert.deepEqual(f.views['team:1'],[]);
 });
 test('flavor engagement is deterministic, respects brand/rank and freezes same-week likes',()=>{
