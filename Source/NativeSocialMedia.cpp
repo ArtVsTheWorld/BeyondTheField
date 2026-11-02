@@ -553,7 +553,8 @@ SocialFilter socialFilter(const std::string& kind){
 bool changingSelection=false;
 void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,void* value){
     Guard guard;const auto p=nativeString(panel),k=nativeString(kind);
-    if(!disabled&&opened&&pageFeed->catalog&&(p.empty()||p=="CM_NEWSSUB"||p=="CM_NEWSTAB")){
+    if(!disabled&&opened&&(p.empty()||p=="CM_NEWSSUB"||p=="CM_NEWSTAB")){
+        if(!pageFeed->catalog){note({{"event","social_filter_waiting"},{"kind",k}});return;}
         // Native FilterGeneric dispatches lowercase news_category, whereas the
         // panel definition and our LT action use uppercase identifiers. Never
         // send our synthetic panel to the stock manager's null panel lookup.

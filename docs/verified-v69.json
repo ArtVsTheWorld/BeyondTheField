@@ -1,9 +1,9 @@
 {
   "format": 1,
   "version": "v69 Week1 capacity and 20-percent scholarship publication",
-  "nativeSha256": "56d64d71091f2f9bf814535fc89f1a9066675f417131061f12fac872a1786115",
-  "adapterSha256": "6a0499d95b050903ac68d0e544e69b7839a0510be3d603566925d5ecc021d470",
-  "zipSha256": "e6687be84fa5b7d711e3cbb8091bbd8cb7b0922cbefc4eac1e20e471f7cb4773",
+  "nativeSha256": "5e3a8e738ee33c54155af5f09ef63bbb378bd2d92c84b7247c2dd499eec85172",
+  "adapterSha256": "e9319a6c212af8d41b165cc7bdbe8d1a9e7a61a105f82aaaf00dedfa5b6bd56a",
+  "zipSha256": "4cea5d73e1d375447a35aac27cb8a2ec685db3022e80e02a42cc0ed7252491cc",
   "nodeTestsPassed": 116,
   "nativeTestsPassed": true,
   "adapterSmokePassed": true,
@@ -30,5 +30,10 @@
   "livePending": [
     "v69 native Week1 page, archives and controls"
   ],
-  "adapterInstalledForNextMmcStartup": false
+  "adapterInstalledForNextMmcStartup": false,
+  "preparingFilterGuardTested": true,
+  "deploymentPending": [
+    "Return to CFB hub for native stop guard",
+    "Close MMC to release its managed adapter DLL"
+  ]
 }
