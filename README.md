@@ -4,6 +4,14 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## World news expansion (v62)
+
+The latest build adds 24 advanced team-analysis scenarios and 26 player-analysis scenarios, native national/conference weekly awards, upset and streak stories, observed school/conference/FBS records, and fan reactions involving actual players and staff. Recruiting coverage adds native stars, prestige-sensitive reactions, flips/decommitments, and guaranteed major reactions to newly observed five-stars or the national No. 1. Rivalry recruiting steals, unbeaten collisions and upset bounce-back previews are included. CPU and user programs share eligibility; For You remains a personalized 20-post selection.
+
+The two content packs now provide 277 prewritten variants across 170 families. See [the coverage table](docs/world-news-coverage.md) for all 50 additional analysis scenarios, native data requirements, observation limits, engagement and the fictional spread model. Likes cap at 5K for ordinary standalone posts and 10K for major news; replies receive 1–20% of the parent’s likes. Views are removed. The native heart probes did not render, so the footer uses “likes.” Analysts use the native newspaper icon. Player jersey portraits, native dropdowns and smooth vertical scrolling remain.
+
+The reader also supports the active child-table context exposed after an in-session Dynasty reload. It still reads runtime memory, never a save-file fallback. New native capture fields cover current player season totals, weekly awards, record books, prestige, coordinators and venue identity. The read-only model-line approach references Ace’s Toolkit Smart Force Win and Balla’s starter/depth calculations; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ## Social Media writing: first generation pack
 
 The user approved the Review 03 writing direction and requested generation. `Content/Runtime/first-pack.json` now contains 180 prewritten variants across the six account types plus the fictional model-line account. `Tools/story_renderer.mjs` applies them to verified event facts; it never calls an online text model. The original three illustrative cards and prior prototype tweet wording remain retired. Editorial samples remain separate from the executable pack.
@@ -53,7 +61,7 @@ Node.js is required for the story generator. Copy `Config/dynasty-enhancer.examp
 The legacy save adapter remains as a diagnostic comparison tool: `Config/social-refresh.example.json` documents its external dependencies. It is not the candidate DLL's data source.
 
 ```powershell
-node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs Tests/team_analytics.test.mjs Tests/story_generation.test.mjs Tests/conversations.test.mjs
+node --test Tests/*.test.mjs
 Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```
@@ -70,6 +78,6 @@ Third-party JSON code retains its MIT license; see [Vendor/json.LICENSE.txt](Ven
 
 The scope list is native Dynasty data, not a fixed conference/team list. The inspected DGA2027 Week 9 catalog contains 11 conference groups and 138 individually indexed programs. The native shared-index generic FCS placeholders are not offered as separate team identities. Historic editions retain their own published stories; a newly introduced scope can be empty in an older edition that never recorded that scope.
 
-Only official team accounts use school logos. Beat reporters use the native microphone icon, analysts use StatsIcon, and fans use the social icon. Valid player/recruit portraits remain native. Active player jerseys use the same PlayerPortraits + TeamJerseys library pairing as the roster compositor; recruits retain neutral shirts. Counts are fictional engagement, seeded by publication/story identity and scaled by verified native brand-exposure grade, poll rank, voice, and national relevance. An existing same-week count is preserved across refreshes. Counts do not change simulation data or expose player ability. Coverage volume is not yet scaled by audience.
+Only official team accounts use school logos. Beat reporters use the native microphone icon, analysts now use the newspaper icon, and fans use the social icon. Valid player/recruit portraits remain native. Active player jerseys use the same PlayerPortraits + TeamJerseys library pairing as the roster compositor; recruits retain neutral shirts. Counts are fictional engagement, seeded by publication/story identity and scaled by verified native brand-exposure grade, poll rank, voice, and national relevance. An existing same-week count is preserved across refreshes. Counts do not change simulation data or expose player ability. Coverage volume is not yet scaled by audience.
 
-The two existing dropdowns, native viewport mask, smooth scrolling and category/index metadata remain. Cards have a reserved engagement footer so long bodies do not overlap likes. The file-size guard is 64 MiB for multiweek catalogs, with separate 48-edition, 4,096-story and 512-scope bounds.
+The two existing dropdowns, native viewport mask, smooth scrolling and category/index metadata remain. Cards have a reserved engagement footer so long bodies do not overlap likes. The file-size guard is 128 MiB for multiweek catalogs, with separate 48-edition, 4,096-story and 512-scope bounds.

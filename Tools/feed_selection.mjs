@@ -31,7 +31,7 @@ export function curate(stories,limit=20){
   for(const item of bundle){const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();used.add(item.id);selected.push(item);++counts[scope];categories.set(category,c.get(category));threads.set(thread,t.get(thread));if(item.templateId)templates.set(item.templateId,forms.get(item.templateId));if(account)accounts.set(account,a.get(account));if(item.voice)voices.set(item.voice,v.get(item.voice));}return true;
  }
  // Keep the actual user result before reserving room for personality/reactions.
- for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
+ for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&!pool.some(x=>x.category==='upsets'&&x.thread===p.thread)&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
  for(const voice of ['player','fan','recruit'])for(const p of voice==='recruit'?[...pool].sort((a,b)=>Number(b.scopes.includes('team')||b.scopes.includes('relevant'))-Number(a.scopes.includes('team')||a.scopes.includes('relevant'))||order(a,b)):pool){if((voices.get(voice)??0)>=(voice==='recruit'?1:2))break;if(p.voice===voice)accept(p,true);}
  for(const scope of ['team','conference','national'])for(const p of pool){if(counts[scope]>=target[scope])break;if(bucketFor(p)===scope)accept(p,true);}
  for(const p of pool){if(selected.length>=limit)break;accept(p);}
@@ -60,6 +60,7 @@ export function buildCatalog(active,history=[]){
     if(!f.publication||f.publication.key!==f.key||f.publication.week!==f.week)throw Error('Invalid publication-week archive');
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
-  const weeks=[...byWeek.values()].sort((a,b)=>a.week-b.week);
+  const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','publication'];
+  const weeks=[...byWeek.values()].sort((a,b)=>a.week-b.week).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
   return {...active,catalogVersion:1,activeWeekKey:active.key,weeks};
 }

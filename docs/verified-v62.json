@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "build": "DynastyEnhancer-v62-worldnews.dll",
+  "nativeDllSha256": "c0254f49ca9d05e1acfb2d3ae2b04f9cfd1746510641fa9e6f50c42c94069d60",
+  "contentRevision": "voices-4-analysis",
+  "status": "verified-in-game",
+  "testsPassed": 94,
+  "nativeCatalogScopesValidated": 151,
+  "publicationWeek": 9,
+  "stories": 2600,
+  "replies": 475,
+  "curatedPosts": 20,
+  "teamAnalysisScenarios": 24,
+  "playerAnalysisScenarios": 26,
+  "templateFamilies": 170,
+  "templateVariants": 277,
+  "verified": [
+    "Read-only active-Dynasty capture and Week 9 publication after an in-session save reload",
+    "Native National/Analysts feed renders verified player leaders with newspaper account icons",
+    "User verified player jersey portraits, views removed and reduced reply likes on v60",
+    "User verified likes label, both dropdowns, LB/RB categories and scrolling on v61",
+    "Final v62 right-aligned likes label visually verified at card right edge",
+    "All current bodies fit 280 code points and 512 UTF-8 bytes, with no replacement characters",
+    "Every generated reply has a real parent and 1–20 percent of that parent’s likes, rounded down",
+    "All 151 dynamic native scopes decode within bounds"
+  ],
+  "limitations": [
+    "Records and recruiting departures require an observation baseline; rare record/flip/collision branches have fixture coverage, not live events claimed in this Dynasty",
+    "Only observed publication weeks are archived; current new-voice history begins Week 9",
+    "The native heart probes did not render; plain likes label retained at user request",
+    "Postseason advanced analytics, NIL/depth/transfer stories and the planned analytics/fog integrations remain future work",
+    "Shared-index generic FCS placeholders are excluded from separately identified team scopes"
+  ]
+}

@@ -10,7 +10,7 @@ Bindings are specific to the inspected game executable. This is a development DL
 
 ## Publication and midweek news
 
-The shared normalizer consumes either the native record adapter or the diagnostic save adapter. `runtime_lifecycle.mjs` stores history by league, controlled team, season, and phase. Its weekly editions use the publication week, include prior-week recaps and current-week developments, and retain deterministic story IDs. All Posts remains curated; dedicated scopes retain their full qualifying stories.
+The shared normalizer consumes either the native record adapter or the diagnostic save adapter. `runtime_lifecycle.mjs` stores history by league, controlled team, season, and phase. Its weekly editions use the publication week, include prior-week recaps and current-week developments, and retain deterministic story IDs. For You remains curated; dedicated scopes retain their full qualifying stories.
 
 Offers and commitments use observed differences. Native scholarship status `New` means a current-week offer and is included alongside carried status `Offered`; moving from `New` to `Offered` does not create a second event. The first live offer test exposed that filtering only `Offered` omitted all three new user offers; the adapter and regression coverage now include both states. Initial offers seed a baseline quietly; midweek discoveries become current-week stories and survive repeated observations without duplicates. Existing commitment-week evidence is retained. Injury status updates and midweek recoveries use observed injury episodes and the game's injury metadata. Completed current-week games replace their upcoming previews and use current-week wording for player performances.
 
@@ -30,4 +30,12 @@ Active-Dynasty switching, an actual older-save restore/replay, offseason phase t
 
 ## Remaining limits
 
-The observer uses stable state rather than a native completion-event hook. Its nominal three-second sampling and second-capture requirement introduce a short update delay. A save restore with identical observable facts is indistinguishable from the same timeline; changes are reconciled from the facts that remain present. Broader voices, depth-chart/NIL/transfer stories, awards, postseason phase archives, and the 1.0 analytics/fog integrations remain future work.
+The observer uses stable state rather than a native completion-event hook. Its nominal three-second sampling and second-capture requirement introduce a short update delay. A save restore with identical observable facts is indistinguishable from the same timeline; changes are reconciled from the facts that remain present. Depth-chart/NIL/transfer stories, postseason phase archives, and the 1.0 analytics/fog integrations remain future work. The world-news expansion now implements broader analysis, native weekly awards and observed record/recruiting changes; see [world-news-coverage.md](world-news-coverage.md).
+
+## World-news reader expansion
+
+The current capture includes player season-stat references, all published current-season player game-stat records, weekly awards, school/conference/FBS record tables, native prestige and coordinator references. Season stats must match the active year and team. Native sack totals reconcile whole sacks plus half sacks; raw whole-sack counters alone can differ from game sums.
+
+A same-session Dynasty reload exposed the shared database at the career pointer rather than its active child. The reader now resolves the unique supported child with that exact parent relationship, caches the validated child and rechecks it at capture completion. Its first lookup has separate scan/time bounds; regular captures retain their original bounds. In-game Week 9 publication succeeded through this path after a reload. This does not silently accept an unsupported context or switch to a save reader.
+
+The inspected Week 9 expansion capture has 150,462 raw records, 6,631 players with current-season stats, 45,740 published player game-stat rows, 216 native weekly-award entries across observed weeks and 2,682 native record entries. Current-week generated news remains filtered to the appropriate published events. Rare record/flip/collision conditions are covered with fixtures and need real events for live confirmation.

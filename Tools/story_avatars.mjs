@@ -4,5 +4,5 @@ export function avatarFor(role,team,player){
  const personal=['player','recruit'].includes(role),id=player?.portrait;
  if(personal&&!player?.portraitForcedSilhouette&&Number.isInteger(id)&&id>0&&bank.ranges.some(([lo,hi])=>id>=lo&&id<=hi))return {imageLibrary:bank.libraryId,imageValue:id,...(role==='player'&&Number.isInteger(player.team)&&player.team!==255&&player.team===team?.id&&Number.isInteger(team.logo)?{uniformTeamLogo:team.logo}:{})};
  if(Number.isInteger(team?.logo)&&team.logo>=0&&role==='official')return {imageLibrary:0,imageValue:team.logo};
- return {imageLibrary:79,imageValue:({beat:939,analyst:502,model:569,fan:203,player:974,recruit:974})[role]??598};
+ return {imageLibrary:79,imageValue:({beat:939,analyst:598,model:569,fan:203,player:974,recruit:974})[role]??598};
 }

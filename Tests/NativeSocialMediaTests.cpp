@@ -25,6 +25,7 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        require(social::compactCount(999)=="999"&&social::compactCount(1000)=="1K"&&social::compactCount(1950000)=="2M"&&social::compactCount(999950)=="1M","Engagement K/M formatting boundaries changed");
         require(social::storyLabel(Json{{"category","recruiting"}})=="Recruiting","Recruiting category label changed");
         require(social::storyLabel(Json{{"category","recruiting"},{"replyTo","real-parent"}})=="Reply","Native reply label is missing");
         {

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {scopeCatalog,discoveryViews,filterConversations} from '../Tools/social_discovery.mjs';
 import {conversationOrder,curate} from '../Tools/feed_selection.mjs';
-import {brandAudience,likesFor} from '../Tools/story_engagement.mjs';
+import {brandAudience,likesFor,ENGAGEMENT_VERSION} from '../Tools/story_engagement.mjs';
 import {avatarFor} from '../Tools/story_avatars.mjs';
 import {buildFeed} from '../Tools/feed_engine.mjs';
 const snapshot=()=>({format:2,gameYear:27,sourceUnchanged:true,sha256:'a'.repeat(64),leagueId:1,userTeamIndex:1,source:'runtime',season:{CurrentYear:1,CurrentSeasonYear:2027,CurrentWeek:9,CurrentWeekType:'RegularSeason',CurrentStage:'NFLSeason'},
@@ -34,7 +34,7 @@ test('flavor engagement is deterministic, respects brand/rank and freezes same-w
  const s=snapshot(),e={scopes:['national']},high={brandExposure:'Aplus',mediaRank:1},low={brandExposure:'F',mediaRank:99};
  assert.ok(brandAudience(high).brand>brandAudience(low).brand);
  const a=likesFor(s,'story','official',high,e);assert.equal(likesFor(s,'story','official',high,e),a);assert.ok(a>likesFor(s,'story','official',low,e));
- assert.equal(likesFor(s,'story','official',low,e,{likes:a}),a);assert.ok(a>likesFor(s,'story','fan',high,e));
+ assert.equal(likesFor(s,'story','official',low,e,{likes:a,engagementVersion:ENGAGEMENT_VERSION}),a);assert.ok(a>likesFor(s,'story','fan',high,e));
 });
 test('only official accounts get team logos; uniforms require active-team membership and valid portrait',()=>{
  const t={id:1,logo:11},p={team:1,portrait:146};assert.deepEqual(avatarFor('player',t,p),{imageLibrary:1,imageValue:146,uniformTeamLogo:11});

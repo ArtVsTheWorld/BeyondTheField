@@ -9,9 +9,17 @@
 #include "FeedRefresh.h"
 namespace social {
 struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;int likes=-1,uniformTeamLogo=-1;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
+inline std::string compactCount(int value){
+    if(value<1000)return std::to_string(value);
+    const int unit=value>=999950?1000000:1000;const auto tenths=(static_cast<long long>(value)*10+unit/2)/unit;
+    auto out=std::to_string(tenths/10);if(tenths%10)out+="."+std::to_string(tenths%10);return out+(unit==1000000?"M":"K");
+}
 inline std::string storyLabel(const nlohmann::json& post){
     if(post.contains("replyTo"))return "Reply";
     const auto category=post.value("category",std::string());
+    if(category=="upsets")return "Upset";
+    if(category=="records")return "Record Book";
+    if(category=="streaks")return "Streak";
     if(category=="analytics")return "Analysis";
     if(category=="results"||category=="team-stats"||category=="player-stats")return "Recap";
     if(category=="recruiting"||category=="offers")return "Recruiting";
@@ -56,7 +64,7 @@ struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> sc
 struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;};
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
 inline constexpr std::array<const char*,10> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Team Accounts","Players & Recruits","Fans"};
-inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();

@@ -43,7 +43,7 @@ inline std::wstring quote(const std::wstring& input){
     out.append(slashes*2,L'\\');return out+L"\"";
 }
 inline Json readJson(const fs::path& path){
-    if(fs::file_size(path)>64ull*1024*1024)throw std::runtime_error("Weekly feed JSON exceeds size limit");
+    if(fs::file_size(path)>128ull*1024*1024)throw std::runtime_error("Weekly feed JSON exceeds size limit");
     std::ifstream in(path);if(!in)throw std::runtime_error("Cannot read weekly feed JSON");Json j;in>>j;return j;
 }
 inline void validate(const Json& j,const Json& config){

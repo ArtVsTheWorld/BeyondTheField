@@ -13,6 +13,8 @@ def setprop(child,propidx,value):a.child(child);a.idx(propidx);a.num(value);a.op
 a.child(60);a.idx(164);a.reg(1);a.raw(bytes([0xac,2,90,160]));a.num(14);a.op(0x0b);a.op(0x4f)
 a.child(60);a.idx(165);a.reg(1);a.raw(bytes([0xac,2,90,159]));a.num(32);a.op(0x0b);a.op(0x4f)
 a.idx(55);a.glob(43,44,56);a.idx(54);a.num(22);a.num(2);a.op(0x43);a.num(1);a.child(60);a.call(92)
+# Native heart assets did not render; use a plain likes label.
+a.child(65);a.idx(38);a.op(0x74);a.op(0x4f)
 # Reuse the two native CustomSingleGeneric layers already owned by the tile.
 # This is the same head + TeamJerseys image pairing used by PortraitWithJersey.
 a.reg(1);a.raw(bytes([0xac,3,90,30,140]));a.jump('done',0xb8)

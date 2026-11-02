@@ -8,6 +8,7 @@
 #include <string>
 #include <stdexcept>
 #include <chrono>
+#include <atomic>
 #include "../Vendor/json.hpp"
 // Runtime observation only: no native calls, setters, handles, or reference-count writes.
 namespace dynasty::live {
@@ -40,19 +41,23 @@ inline std::set<std::string> wanted(const std::string& name){
     if(name=="Franchise")return {"LeagueID"};
     if(name=="FranchiseServer_CareerFlow")return {"IsStageAdvancing","IsStageActive"};
     if(name=="FranchiseUser")return {"Team","UserEntity","IsRetired","AdminLevel"};
-    if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","NickName","NickNameAlt","Hashtag1","Hashtag2","HeadCoach","TeamSeasonStats","TEAM_LOGO","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","HomeTie","RoadTie","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard","ProgramPointsBrandExposureGrade","BrandExposureProgramPoints","City","SchoolPipelineInfluenceList"};
+    if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","NickName","NickNameAlt","Hashtag1","Hashtag2","HeadCoach","TeamSeasonStats","TEAM_LOGO","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","HomeTie","RoadTie","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard","ProgramPointsBrandExposureGrade","BrandExposureProgramPoints","City","SchoolPipelineInfluenceList","Stadium","AltStadium","OffensiveCoordinator","DefensiveCoordinator","PrestigeDisplay","TeamPrestige","SeasonWinLossStreak","GameStatRecords","SeasonStatRecords"};
     if(name=="Coach")return {"FirstName","LastName","TeamIndex"};
-    if(name=="Conference")return {"Name","TeamSlots","Divisions","ConferenceEnum"};
-    if(name=="Player")return {"FirstName","LastName","Position","Personality","JerseyNum","TeamIndex","PLYR_PORTRAIT","PortraitForceSilhouette","IsNIL","OverallRating","Age","SchoolYear","InjuryStatus","InjuryType","LatestInjuryWeek","LatestInjuryYear","LatestInjuryStage","MinInjuryDuration","MaxInjuryDuration","AbsoluteTransferChance","CurrentNILCompensation","ProspectStarRating","GameStats","HomePipeline","PLYR_HOME_STATE"};
-    if(name=="SeasonGame")return {"IsPractice","SeasonYear","SeasonWeek","SeasonWeekType","GameStatus","HasBeenPublished","HomeTeam","AwayTeam","HomeScore","AwayScore","HomeScoreQuarter1","HomeScoreQuarter2","HomeScoreQuarter3","HomeScoreQuarter4","HomeScoreOT","AwayScoreQuarter1","AwayScoreQuarter2","AwayScoreQuarter3","AwayScoreQuarter4","AwayScoreOT","GameDateMonth","GameDateDay","DayOfWeek","TimeOfDay","GameOfTheWeekScore","ThanksgivingFlag","ChristmasFlag","NewYearsFlag","HomeTeamStatCache","AwayTeamStatCache"};
-    if(name=="Awards")return {"HeismanRanking"};
+    if(name=="Conference")return {"Name","TeamSlots","Divisions","ConferenceEnum","GameStatRecords","SeasonStatRecords"};
+    if(name=="Player")return {"FirstName","LastName","Position","Personality","JerseyNum","TeamIndex","PLYR_PORTRAIT","PortraitForceSilhouette","IsNIL","OverallRating","Age","SchoolYear","InjuryStatus","InjuryType","LatestInjuryWeek","LatestInjuryYear","LatestInjuryStage","MinInjuryDuration","MaxInjuryDuration","AbsoluteTransferChance","CurrentNILCompensation","ProspectStarRating","GameStats","HomePipeline","PLYR_HOME_STATE","SeasonStats"};
+    if(name=="SeasonGame")return {"IsPractice","SeasonYear","SeasonWeek","SeasonWeekType","GameStatus","HasBeenPublished","HomeTeam","AwayTeam","HomeScore","AwayScore","HomeScoreQuarter1","HomeScoreQuarter2","HomeScoreQuarter3","HomeScoreQuarter4","HomeScoreOT","AwayScoreQuarter1","AwayScoreQuarter2","AwayScoreQuarter3","AwayScoreQuarter4","AwayScoreOT","GameDateMonth","GameDateDay","DayOfWeek","TimeOfDay","GameOfTheWeekScore","ThanksgivingFlag","ChristmasFlag","NewYearsFlag","HomeTeamStatCache","AwayTeamStatCache","Stadium"};
+    if(name=="Awards")return {"HeismanRanking","WeeklyAwards"};
     if(name=="Recruit")return {"RecruitStage","Player","TopSchoolsList","NationalRank"};
+    if(name=="League")return {"PlayerGameStatRecords","PlayerSeasonStatRecords"};
+    if(name=="PlayerAward")return {"AwardType","Period","PeriodIndex","Player","Team","Conference"};
+    if(name=="PlayerStatRecords"||name=="PlayerStatRecord")return {};
+    if(name=="TeamStats"||name=="SeasonStats"||name=="SeasonOffensiveStats"||name=="SeasonDefensiveStats"||name=="SeasonOLineStats"||name=="SeasonOffensiveKPReturnStats"||name=="SeasonDefensiveKPReturnStats"||name=="SeasonKickingStats"||name=="GameOffensiveStats"||name=="GameDefensiveStats"||name=="GameKickingStats")return {};
     // Referenced arrays and support records: primitive/ref fields only, never scripts.
     if(name.size()>=2&&name.substr(name.size()-2)=="[]")return {};
     return {"State","Pipeline","InfluenceLevel","InfluenceValue","TeamIndex","Player","Team","CurrentRank","LastWeekRank","Teams","TeamId","TeamInfluence","Recruits","Recruit","ScholarshipStatus","CommittedWeekNumber","SeasonGame","OpposingTeam","OFFPASSYARDS","OFFRUSHYARDS","FIRSTDOWNS","GIVEAWAYS","TAKEAWAYS","THIRDDOWNCONV","THIRDDOWNS","WINS","LOSSES","TIES","OFFREDZONES","OFFREDZONETDS","OFFREDZONEFGS","PASSATTEMPTS","PASSCOMPLETED","PASSYARDS","PASSTDS","PASSINTS","RUSHATTEMPTS","RUSHYARDS","RUSHTDS","RECEIVECATCHES","RECEIVEYARDS","RECEIVETDS","DLINESACKS","DLINEHALFSACK","DSECINTS","DEFTACKLES"};
 }
 class Capture {
-    Memory memory;Address image=0,root=0,context=0;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;
+    Memory memory;Address image=0,root=0,context=0,sessionContext=0;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;
     std::vector<std::pair<Address,uint32_t>> pending;std::set<std::pair<Address,uint32_t>> scheduled;Json records=Json::object();size_t recordCount=0;
     Address parent(Address ctx){return memory.at<Address>(ctx+0x1a8);}
     void inventory(Address begin,Address end){if(end<begin||(end-begin)%8||end-begin>0x100000)throw std::runtime_error("Invalid active table catalog");auto bytes=memory.read(begin,end-begin);for(size_t i=0;i<bytes.size();i+=8){const auto p=value<Address>(bytes,i);if(p&&(memory.at<Address>(p)==image+0xbd0df38||memory.at<Address>(p)==image+0xbd0ebe0)&&memory.at<Address>(p+8))ids.emplace(memory.at<uint32_t>(p+0x2c),p);}}
@@ -100,7 +105,37 @@ class Capture {
     }
     void open(){
         root=memory.at<Address>(image+0xe1eac10);if(!root||memory.at<Address>(root)!=image+0xb04bcd0)throw std::runtime_error("No supported active career session");
-        context=memory.at<Address>(root+0x290);if(!context||memory.at<Address>(context)!=image+0xbd0d378)throw std::runtime_error("Active Dynasty tables unavailable");
+        sessionContext=memory.at<Address>(root+0x290);context=sessionContext;
+        if(!context)throw std::runtime_error("Active Dynasty tables unavailable");
+        if(memory.at<Address>(context)!=image+0xbd0d378){
+            // Reloaded careers expose the shared database here. Locate only a
+            // supported child of that exact database, never an unrelated save.
+            if(memory.at<Address>(context)!=image+0xbd0d2d8)throw std::runtime_error("Unsupported career database context");
+            static std::atomic<Address> cached{0};
+            auto belongs=[&](Address candidate){try{return candidate&&memory.at<Address>(candidate)==image+0xbd0d378&&parent(candidate)==sessionContext;}catch(...){return false;}};
+            context=cached.load();
+            if(!belongs(context)){
+                Address found=0;unsigned count=0;size_t scanned=0;const auto began=GetTickCount64();
+                MEMORY_BASIC_INFORMATION region{};std::vector<unsigned char> buffer(0x100000+7);
+                for(Address pos=0x10000;pos<0x7fffffff0000ull;){
+                    if(GetTickCount64()-began>12000||scanned>6ull*1024*1024*1024)throw std::runtime_error("Career child-context lookup exceeds bounds");
+                    if(!VirtualQueryEx(memory.process,reinterpret_cast<void*>(pos),&region,sizeof(region)))break;
+                    const auto end=reinterpret_cast<Address>(region.BaseAddress)+region.RegionSize;if(end<=pos)break;
+                    const auto access=region.Protect&0xff;
+                    if(region.State==MEM_COMMIT&&region.Type==MEM_PRIVATE&&region.RegionSize<=16*1024*1024&&!(region.Protect&(PAGE_GUARD|PAGE_NOACCESS))&&(access==PAGE_READONLY||access==PAGE_READWRITE||access==PAGE_WRITECOPY)){
+                        for(auto a=pos;a<end;a+=0x100000){
+                            if(GetTickCount64()-began>12000)throw std::runtime_error("Career child-context lookup timed out");
+                            SIZE_T got=0,n=static_cast<SIZE_T>((std::min)(Address(buffer.size()),end-a));
+                            if(!ReadProcessMemory(memory.process,reinterpret_cast<void*>(a),buffer.data(),n,&got)||got!=n)continue;scanned+=n;
+                            for(size_t offset=0;offset+8<=got&&offset<0x100000;offset+=8){Address vt=0;memcpy(&vt,buffer.data()+offset,8);if(vt!=image+0xbd0d378)continue;
+                                memory.deadline=GetTickCount64()+8000;if(belongs(a+offset)){found=a+offset;++count;}}
+                        }
+                    }pos=end;
+                }
+                if(count!=1)throw std::runtime_error("Active career child context is absent or ambiguous");context=found;cached.store(found);
+            }
+            memory.deadline=GetTickCount64()+8000;
+        }
         inventory(memory.at<Address>(context+0x1c0),memory.at<Address>(context+0x1c8));auto p=parent(context);for(auto offset:{0x200,0x268})inventory(memory.at<Address>(p+offset),memory.at<Address>(p+offset+8));
     }
 public:
@@ -119,10 +154,10 @@ public:
     }
     Json run(){
         const auto before=status();
-        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="Recruit")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
+        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
         for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size())!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
-        if(memory.at<Address>(image+0xe1eac10)!=root||memory.at<Address>(root+0x290)!=context)throw std::runtime_error("Active Dynasty changed during capture");
+        if(memory.at<Address>(image+0xe1eac10)!=root||memory.at<Address>(root+0x290)!=sessionContext||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");
         return Json{{"format",1},{"sourceKind","runtime"},{"status",before},{"context",context},{"records",std::move(records)}};
     }
 };

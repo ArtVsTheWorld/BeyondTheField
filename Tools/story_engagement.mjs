@@ -8,10 +8,18 @@ export function brandAudience(team){
  const poll=Number.isInteger(rank)&&rank>=1&&rank<=25?(26-rank)/25:0;
  return {brand,poll};
 }
+export const ENGAGEMENT_VERSION=3;
 export function likesFor(s,id,voice,team,event,previous){
- if(Number.isSafeInteger(previous?.likes)&&previous.likes>=0)return previous.likes;
- const {brand,poll}=brandAudience(team),seed=hash(`${s.leagueId}|${s.season.CurrentSeasonYear}|${s.season.CurrentWeekType}|${s.season.CurrentWeek}|${id}|likes`);
- const reach={official:1.5,analyst:1.25,beat:.7,model:.45,player:1,recruit:.4,fan:.12}[voice]??.5;
- const importance=event.scopes.includes('national')?1.6:1;
- return Math.max(1,Math.round((30+brand**2*18000+poll*9000)*reach*importance*(.35+(seed%10000)/10000*1.3)));
+ if(previous?.engagementVersion===ENGAGEMENT_VERSION&&Number.isSafeInteger(previous?.likes)&&previous.likes>=0)return previous.likes;
+ const {brand,poll}=brandAudience(team),seed=hash(`${s.leagueId}|${s.season.CurrentSeasonYear}|${s.season.CurrentWeekType}|${s.season.CurrentWeek}|${id}|likes-v2`);
+ const reach={official:1,analyst:.9,beat:.65,model:.5,player:.8,recruit:.65,fan:.24}[voice]??.5;
+ const major=event.facts?.importance==='major'||event.facts?.huge||event.category==='records'&&event.scopes.includes('national')||event.facts?.stars===5;
+ const audience=Math.max(major?3600:0,80+brand*2700+poll*1800);
+ return Math.max(1,Math.min(major?10000:5000,Math.round(audience*reach*(.45+(seed%10000)/10000*.7)*(major?2.8:1))));
+}
+export function replyLikesFor(s,id,parentLikes,previous){
+ const low=Math.floor(parentLikes*.01),high=Math.floor(parentLikes*.2);
+ if(previous?.engagementVersion===ENGAGEMENT_VERSION&&Number.isSafeInteger(previous.likes)&&previous.likes>=low&&previous.likes<=high)return previous.likes;
+ const seed=hash(`${s.leagueId}|${s.season.CurrentSeasonYear}|${s.season.CurrentWeekType}|${s.season.CurrentWeek}|${id}|reply-likes`);
+ return Math.floor(parentLikes*(1+seed%20)/100);
 }

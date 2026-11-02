@@ -1,0 +1,544 @@
+{
+  "format": 1,
+  "revision": "voices-4-analysis",
+  "families": {
+    "analysis.team.scoring-offense": [
+      {
+        "id": "analysis.team.scoring-offense.1",
+        "body": "{school} is averaging {value} points through {games} games. That is a lot to ask the next defense to keep up with."
+      },
+      {
+        "id": "analysis.team.scoring-offense.2",
+        "body": "{games} games in, {school} is putting up {value} points a game. The scoreboard pressure is real."
+      }
+    ],
+    "analysis.team.scoring-defense": [
+      {
+        "id": "analysis.team.scoring-defense.1",
+        "body": "{school} is allowing {value} points per game through {games} games. That number puts the rest of the team’s work in context."
+      }
+    ],
+    "analysis.team.scoring-margin": [
+      {
+        "id": "analysis.team.scoring-margin.1",
+        "body": "{school} has an average scoring margin of {value} through {games} games. The record is one part of the story; that gap is another."
+      }
+    ],
+    "analysis.team.yards-per-attempt": [
+      {
+        "id": "analysis.team.yards-per-attempt.1",
+        "body": "{school}: {value} yards per recorded pass/rush attempt across {attempts} attempts. A useful efficiency check alongside the raw yardage."
+      }
+    ],
+    "analysis.team.passing-efficiency": [
+      {
+        "id": "analysis.team.passing-efficiency.1",
+        "body": "{school} is getting {value} yards per pass attempt on {attempts} throws. That says more about the passing game than yardage alone."
+      }
+    ],
+    "analysis.team.rushing-efficiency": [
+      {
+        "id": "analysis.team.rushing-efficiency.1",
+        "body": "{school} is averaging {value} yards per carry across {attempts} carries. Volume and efficiency are different questions. This is the efficiency part."
+      }
+    ],
+    "analysis.team.offensive-balance": [
+      {
+        "id": "analysis.team.offensive-balance.1",
+        "body": "{value}% of {school}’s recorded pass/rush attempts have been {approach}. The offensive identity is pretty clear through {games} games."
+      }
+    ],
+    "analysis.team.interception-rate": [
+      {
+        "id": "analysis.team.interception-rate.1",
+        "body": "{school} has thrown {interceptions} interceptions on {attempts} attempts: a {value}% interception rate. That is a meaningful part of the passing-game picture."
+      }
+    ],
+    "analysis.team.passing-td-rate": [
+      {
+        "id": "analysis.team.passing-td-rate.1",
+        "body": "{school} has {touchdowns} passing TD on {attempts} attempts. That is a touchdown on {value}% of throws through {games} games."
+      }
+    ],
+    "analysis.team.fourth-down": [
+      {
+        "id": "analysis.team.fourth-down.1",
+        "body": "{school} is {conversions}-for-{attempts} on fourth down ({value}%). Small samples can swing, but those are real possessions extended or given up."
+      }
+    ],
+    "analysis.team.run-defense": [
+      {
+        "id": "analysis.team.run-defense.1",
+        "body": "{school} is allowing {value} rushing yards per game through {games} games. Start there when sizing up its next matchup."
+      }
+    ],
+    "analysis.team.pass-defense": [
+      {
+        "id": "analysis.team.pass-defense.1",
+        "body": "{school} has allowed {value} passing yards per game through {games} games. That is the yardage picture; it does not tell us how often opponents choose to throw."
+      }
+    ],
+    "analysis.team.takeaways": [
+      {
+        "id": "analysis.team.takeaways.1",
+        "body": "{takeaways} takeaways in {games} games for {school}, an average of {value}. Opposing offenses have had very little room for careless possessions."
+      }
+    ],
+    "analysis.team.sack-pressure": [
+      {
+        "id": "analysis.team.sack-pressure.1",
+        "body": "{school} has {sacks} sacks through {games} games, or {value} a game. That is tangible disruption, even without a full pressure chart."
+      }
+    ],
+    "analysis.team.red-zone-field-goals": [
+      {
+        "id": "analysis.team.red-zone-field-goals.1",
+        "body": "{school} has {fieldGoals} field goals among {scoringTrips} red-zone TD/FG scoring trips. That is {value}% ending in three rather than six."
+      }
+    ],
+    "analysis.team.penalty-discipline": [
+      {
+        "id": "analysis.team.penalty-discipline.1",
+        "body": "{school} is averaging {value} penalty yards through {games} games. Hidden yardage still shows up in the final accounting."
+      }
+    ],
+    "analysis.team.second-half": [
+      {
+        "id": "analysis.team.second-half.1",
+        "body": "{school} has a {value} average second-half scoring margin through {games} games, excluding overtime. The halftime score has not been the whole story."
+      }
+    ],
+    "analysis.team.halftime-comebacks": [
+      {
+        "id": "analysis.team.halftime-comebacks.1",
+        "body": "{school} has won {count} games after trailing at halftime this season. Worth remembering the next time the first half gets ugly."
+      }
+    ],
+    "analysis.team.fourth-quarter-losses": [
+      {
+        "id": "analysis.team.fourth-quarter-losses.1",
+        "body": "{school} has lost {count} games it led after three quarters. Finishing is becoming a fair question for this staff."
+      }
+    ],
+    "analysis.team.home-road-split": [
+      {
+        "id": "analysis.team.home-road-split.1",
+        "body": "{school}’s average scoring margin: {homeMargin} at home ({homeGames} games), {roadMargin} away ({roadGames}). That is a noticeable venue split."
+      }
+    ],
+    "analysis.team.close-games": [
+      {
+        "id": "analysis.team.close-games.1",
+        "body": "{school} has already played {count} games decided by seven or fewer: {wins} wins and {losses} losses. This season has left very little room to coast."
+      }
+    ],
+    "analysis.team.opponent-records": [
+      {
+        "id": "analysis.team.opponent-records.1",
+        "body": "{school}’s opponents have a combined {wins}–{losses} record excluding their games against {school}. Some useful context beyond the headline record."
+      }
+    ],
+    "analysis.team.offense-defense-contrast": [
+      {
+        "id": "analysis.team.offense-defense-contrast.1",
+        "body": "{school} is scoring {pointsFor} points a game and allowing {pointsAgainst}. The offense is producing, but the defense is leaving a lot on its plate."
+      }
+    ],
+    "analysis.team.red-zone-defense": [
+      {
+        "id": "analysis.team.red-zone-defense.1",
+        "body": "{school} has allowed {touchdowns} TD on {trips} opponent red-zone trips ({value}%). Getting inside the 20 and finishing the drive are different things."
+      }
+    ],
+    "analysis.player.passing-yards-leader": [
+      {
+        "id": "analysis.player.passing-yards-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.passing-td-leader": [
+      {
+        "id": "analysis.player.passing-td-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.rushing-yards-leader": [
+      {
+        "id": "analysis.player.rushing-yards-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.receiving-yards-leader": [
+      {
+        "id": "analysis.player.receiving-yards-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.sacks-leader": [
+      {
+        "id": "analysis.player.sacks-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.sacks-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.interceptions-leader": [
+      {
+        "id": "analysis.player.interceptions-leader.1",
+        "body": "{school}’s {playerName} {lead} {field} with {value} {metricLabel}. That is a name to know before the next kickoff."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.2",
+        "body": "{value} {metricLabel} for {playerName} of {school}. He {lead} {field} right now."
+      }
+    ],
+    "analysis.player.completion-rate": [
+      {
+        "id": "analysis.player.completion-rate.1",
+        "body": "{school} QB {playerName} is completing {value}% of passes on {attempts} attempts. Enough throws now to take that rate seriously."
+      }
+    ],
+    "analysis.player.passing-yards-per-attempt": [
+      {
+        "id": "analysis.player.passing-yards-per-attempt.1",
+        "body": "{school}’s {playerName}: {value} yards per pass attempt across {attempts} throws. A better lens on efficiency than simply counting passing yards."
+      }
+    ],
+    "analysis.player.td-int-ratio": [
+      {
+        "id": "analysis.player.td-int-ratio.1",
+        "body": "{playerName} has {touchdowns} passing TD against {interceptions} interceptions for {school}. Those two numbers deserve to be read together."
+      }
+    ],
+    "analysis.player.rushing-yards-per-carry": [
+      {
+        "id": "analysis.player.rushing-yards-per-carry.1",
+        "body": "{school}’s {playerName} has {yards} rushing yards on {carries} carries, {value} per attempt. That is the workload and the efficiency in one line."
+      }
+    ],
+    "analysis.player.yards-per-catch": [
+      {
+        "id": "analysis.player.yards-per-catch.1",
+        "body": "{playerName} of {school} is averaging {value} yards per catch on {catches} receptions. Those catches are moving the ball a long way."
+      }
+    ],
+    "analysis.player.yards-after-catch": [
+      {
+        "id": "analysis.player.yards-after-catch.1",
+        "body": "{school}’s {playerName} averages {value} yards after the catch across {catches} receptions. The work is continuing after the ball arrives."
+      }
+    ],
+    "analysis.player.receiving-td-rate": [
+      {
+        "id": "analysis.player.receiving-td-rate.1",
+        "body": "{touchdowns} of {playerName}’s {catches} catches for {school} have gone for TD ({value}%). A real finishing threat in this passing game."
+      }
+    ],
+    "analysis.player.scrimmage-yards": [
+      {
+        "id": "analysis.player.scrimmage-yards.1",
+        "body": "{school}’s {playerName} is averaging {value} yards from scrimmage through {games} games: {yards} combined rushing and receiving yards."
+      }
+    ],
+    "analysis.player.dual-threat": [
+      {
+        "id": "analysis.player.dual-threat.1",
+        "body": "{playerName} of {school} is averaging {passing} passing yards and {rushing} rushing yards a game. Defenses have two different jobs when he is out there."
+      }
+    ],
+    "analysis.player.carry-share": [
+      {
+        "id": "analysis.player.carry-share.1",
+        "body": "{playerName} has taken {value}% of {school}’s team carries, {carries} in total. That is a substantial share of the rushing workload."
+      }
+    ],
+    "analysis.player.catch-share": [
+      {
+        "id": "analysis.player.catch-share.1",
+        "body": "{playerName} accounts for {value}% of {school}’s completed passes with {catches} catches. That is a central role in the passing offense."
+      }
+    ],
+    "analysis.player.touchdown-share": [
+      {
+        "id": "analysis.player.touchdown-share.1",
+        "body": "{school}’s {playerName} has scored {touchdowns} rushing/receiving TD, {value}% of the team’s passing-plus-rushing TD total. A big piece of the scoring offense."
+      }
+    ],
+    "analysis.player.tackles": [
+      {
+        "id": "analysis.player.tackles.1",
+        "body": "{playerName} has {tackles} tackles for {school}, averaging {value} through {games} games. That includes solo and assisted tackles."
+      }
+    ],
+    "analysis.player.tackles-for-loss": [
+      {
+        "id": "analysis.player.tackles-for-loss.1",
+        "body": "{school}’s {playerName} has {value} tackles for loss. Plays behind the line add up, even when they do not make the biggest highlight."
+      }
+    ],
+    "analysis.player.forced-fumbles": [
+      {
+        "id": "analysis.player.forced-fumbles.1",
+        "body": "{playerName} of {school} has forced {value} fumbles. Creating the loose ball is his contribution; recovering it is a separate question."
+      }
+    ],
+    "analysis.player.pass-breakups": [
+      {
+        "id": "analysis.player.pass-breakups.1",
+        "body": "{school}’s {playerName} has {value} pass breakups. Interceptions get the attention, but those incompletions matter too."
+      }
+    ],
+    "analysis.player.field-goals": [
+      {
+        "id": "analysis.player.field-goals.1",
+        "body": "{playerName} is {made}-for-{attempts} on field goals for {school} ({value}%). That is a dependable return so far this season."
+      }
+    ],
+    "analysis.player.long-field-goals": [
+      {
+        "id": "analysis.player.long-field-goals.1",
+        "body": "{school} kicker {playerName} is {made}-for-{attempts} from 50 yards or more. That is a useful range of options for the staff."
+      }
+    ],
+    "analysis.player.net-punting": [
+      {
+        "id": "analysis.player.net-punting.1",
+        "body": "{playerName} of {school} is averaging {value} net yards on {punts} punts. Field position work that can disappear in a quick box-score glance."
+      }
+    ],
+    "analysis.player.freshman-production": [
+      {
+        "id": "analysis.player.freshman-production.1",
+        "body": "Freshman {playerName} already has {production} for {school}. An early contribution worth a little more attention."
+      }
+    ],
+    "world.upset": [
+      {
+        "id": "world.upset.1",
+        "body": "{winnerLabel} beats {loserLabel}, {score}. That is a result that will get attention well beyond this matchup."
+      },
+      {
+        "id": "world.upset.2",
+        "body": "Final: {winnerLabel} {score} over {loserLabel}. A major change to the expected script."
+      }
+    ],
+    "world.streak": [
+      {
+        "id": "world.streak.1",
+        "body": "{school} has won {count} straight. This is turning into a sustained run, not just one good Saturday."
+      }
+    ],
+    "world.award": [
+      {
+        "id": "world.award.1",
+        "body": "{school}’s {playerName} is the {award} for Week {awardWeek}. Recognition for an actual week of production."
+      }
+    ],
+    "world.record_broken": [
+      {
+        "id": "world.record_broken.1",
+        "body": "{playerName} of {school} broke the {recordScope} {period} record for {metric}: {value}. A new line in the record book."
+      }
+    ],
+    "world.record_holder": [
+      {
+        "id": "world.record_holder.1",
+        "body": "The {recordScope} record book now lists {school}’s {playerName} at {value} {metric} for a {period}. A performance with a place in the program’s history."
+      }
+    ],
+    "world.flip": [
+      {
+        "id": "world.flip.1",
+        "body": "{playerName} has flipped his commitment from {oldSchool} to {newSchool}. A verified change on the recruiting board."
+      }
+    ],
+    "world.rivalry_flip": [
+      {
+        "id": "world.rivalry_flip.1",
+        "body": "{playerName} has flipped from {oldSchool} to rival {newSchool}. That recruiting change comes with an extra layer of bragging rights."
+      }
+    ],
+    "world.decommit": [
+      {
+        "id": "world.decommit.1",
+        "body": "{playerName} is no longer committed to {oldSchool}. His recruitment has reopened."
+      }
+    ],
+    "world.undefeated": [
+      {
+        "id": "world.undefeated.1",
+        "body": "{away} ({awayWins}–0) visits {home} ({homeWins}–0) this week. Two unbeaten records, one matchup. Something has to give."
+      }
+    ],
+    "world.bounceback": [
+      {
+        "id": "world.bounceback.1",
+        "body": "{school} faces {opponent} after last week’s upset loss. The next response will get plenty of attention."
+      }
+    ],
+    "beat.recruit_pickup": [
+      {
+        "id": "beat.recruit_pickup.1",
+        "body": "{school} adds {starDescription}{position} {playerName}. Another piece of the class coming into focus."
+      },
+      {
+        "id": "beat.recruit_pickup.2",
+        "body": "{starDescription}{position} {playerName} is headed to {school}. A new commitment for this recruiting class."
+      }
+    ],
+    "beat.recruit_questioned": [
+      {
+        "id": "beat.recruit_questioned.1",
+        "body": "{school} adds {starDescription}{position} {playerName}. This is a lower-profile pickup than this program usually targets. Fair to ask what the staff sees here."
+      }
+    ],
+    "reply.fan.recruit_number_one": [
+      {
+        "id": "reply.fan.recruit_number_one.1",
+        "body": "{parentHandle} THE NUMBER ONE RECRUIT IN THE COUNTRY. {nickname} actually got him. somebody tell me to calm down"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.2",
+        "body": "{parentHandle} {playerName} is No. 1 nationally and he picked US. yeah i’m not being normal about this"
+      }
+    ],
+    "reply.fan.recruit_program_changer": [
+      {
+        "id": "reply.fan.recruit_program_changer.1",
+        "body": "{parentHandle} a {stars}-star picked {school}??? this is the kind of signing we used to just watch other teams make"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.2",
+        "body": "{parentHandle} {stars}-star {playerName} to the {nickname}. this is massive for us. absolutely massive"
+      }
+    ],
+    "reply.fan.recruit_five_star": [
+      {
+        "id": "reply.fan.recruit_five_star.1",
+        "body": "{parentHandle} FIVE STAR {playerName}. {nickname} keep adding serious talent"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.2",
+        "body": "{parentHandle} a 5-star is always worth celebrating. welcome to the {nickname}, {playerName}"
+      }
+    ],
+    "reply.fan.recruit_questioned": [
+      {
+        "id": "reply.fan.recruit_questioned.1",
+        "body": "{parentHandle} a {stars}-star signing for {school}? i hope this staff sees something the rest of us don’t"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.2",
+        "body": "{parentHandle} not writing {playerName} off, but this is a strange pickup for a program recruiting at our level"
+      }
+    ],
+    "reply.fan.flip": [
+      {
+        "id": "reply.fan.flip.1",
+        "body": "{parentHandle} {playerName} really flipped from {oldSchool} to {newSchool}. man that’s annoying"
+      },
+      {
+        "id": "reply.fan.flip.2",
+        "body": "{parentHandle} cool cool cool. all that recruiting just for {newSchool} to get {playerName}. i’m sick"
+      }
+    ],
+    "reply.fan.decommit": [
+      {
+        "id": "reply.fan.decommit.1",
+        "body": "{parentHandle} losing {playerName} from this class hurts. staff has some work to do"
+      },
+      {
+        "id": "reply.fan.decommit.2",
+        "body": "{parentHandle} {playerName} reopened it? yeah i don’t love that at all"
+      }
+    ],
+    "reply.fan.coach_good": [
+      {
+        "id": "reply.fan.coach_good.1",
+        "body": "{parentHandle} give {coachName} some credit. {school} is getting real production here"
+      },
+      {
+        "id": "reply.fan.coach_good.2",
+        "body": "{parentHandle} {coachName} deserves flowers for this. keep it going"
+      }
+    ],
+    "reply.fan.coach_bad": [
+      {
+        "id": "reply.fan.coach_bad.1",
+        "body": "{parentHandle} {coachName} has to answer for this at some point. these numbers are rough"
+      },
+      {
+        "id": "reply.fan.coach_bad.2",
+        "body": "{parentHandle} how much longer are we pretending this part of {school} is fine? looking at you, {coachName}"
+      }
+    ],
+    "reply.fan.player_good": [
+      {
+        "id": "reply.fan.player_good.1",
+        "body": "{parentHandle} {playerName} deserves way more attention for what he’s doing at {school}"
+      },
+      {
+        "id": "reply.fan.player_good.2",
+        "body": "{parentHandle} been trying to tell people about {playerName}. let him work"
+      }
+    ],
+    "reply.fan.player_bad": [
+      {
+        "id": "reply.fan.player_bad.1",
+        "body": "{parentHandle} i want {playerName} to turn it around but we can’t act like this is working"
+      },
+      {
+        "id": "reply.fan.player_bad.2",
+        "body": "{parentHandle} those {playerName} numbers for {school} are not it. something has to improve"
+      }
+    ],
+    "reply.fan.upset": [
+      {
+        "id": "reply.fan.upset.1",
+        "body": "{parentHandle} {winner} just did THAT to {loser}. this sport is ridiculous"
+      },
+      {
+        "id": "reply.fan.upset.2",
+        "body": "{parentHandle} {winner} over {loser}. if you need me i’ll be acting completely unreasonable about this"
+      }
+    ],
+    "reply.fan.award": [
+      {
+        "id": "reply.fan.award.1",
+        "body": "{parentHandle} {playerName} earned that. {nickname} getting some recognition"
+      },
+      {
+        "id": "reply.fan.award.2",
+        "body": "{parentHandle} say {playerName}’s name a little louder. well deserved"
+      }
+    ],
+    "reply.player.award": [
+      {
+        "id": "reply.player.award.1",
+        "body": "{parentHandle} appreciate the love. couldn’t do it without my guys"
+      },
+      {
+        "id": "reply.player.award.2",
+        "body": "{parentHandle} thankful for this one. love this team"
+      }
+    ]
+  }
+}

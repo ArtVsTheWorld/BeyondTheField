@@ -1,3 +1,6 @@
+import {advancedAnalytics} from './advanced_analytics.mjs';
+import {worldEvents,recruitSignificance} from './world_events.mjs';
+import {projectLine,rosterStrengths} from './betting_model.mjs';
 import {teamAnalytics} from './team_analytics.mjs';
 // Read-only Dynasty facts. This module contains no tweet prose or account identities.
 export const weekKey=s=>`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
@@ -43,7 +46,7 @@ export function detectEvents(s,previous=null){
     if(Object.keys(stats).length&&impact>=25)emit(`performance:${r.game}:${r.player}:${r.type}`,'player-stats',{gameId:g.id,playerName:p.name,school:teams.get(r.team)?.name,position:p.position,stats,timing:g.week===week?'current':'previous'},
       {player:p.id,team:r.team,national:impact>=75||(rank(r.team)<=25&&impact>=40),eventWeek:g.week,priority:(r.team===s.userTeamIndex?91:65)+Math.min(impact,100)/100,thread:`game:${g.id}`});
   }
-  if(inSeason)for(const t of s.teams){if(!ranked(t.mediaRank)||t.mediaLastRank===t.mediaRank&&t.id!==s.userTeamIndex&&t.mediaRank!==1)continue;
+  if(inSeason)for(const t of s.teams){if(!ranked(t.mediaRank))continue;
     emit(`poll:${t.id}`,'polls',{school:t.name,rank:t.mediaRank,previousRank:ranked(t.mediaLastRank)?t.mediaLastRank:null,movement:!ranked(t.mediaLastRank)?'entry':t.mediaLastRank>t.mediaRank?'up':t.mediaLastRank<t.mediaRank?'down':'unchanged'},
       {team:t.id,priority:t.id===s.userTeamIndex?98:t.mediaRank<=5?83:55});
   }
@@ -54,32 +57,31 @@ export function detectEvents(s,previous=null){
     emit(`injury:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:p.injury,injuryType:p.injuryType&&p.injuryType!=='Invalid_'&&p.injuryType!=='None'?p.injuryType:null,newlyInjured:fresh},
       {player:p.id,team:p.team,priority:p.team===s.userTeamIndex?96:55,eventWeek:fresh?p.injuryWeek:null});
   }
-  if(prior||s.midweekBaseline)for(const p of s.players){const old=previousPlayers.get(p.id);if(p.team===s.userTeamIndex&&p.injury==='Uninjured'&&old?.injury&&old.injury!=='Uninjured')
-    emit(`healthy:${p.id}`,'injuries',{playerName:p.name,school:own.name,status:'Uninjured',recovered:true},{player:p.id,priority:95});}
+  if(prior||s.midweekBaseline)for(const p of s.players){const old=previousPlayers.get(p.id);if(p.team!==255&&teams.has(p.team)&&p.injury==='Uninjured'&&old?.injury&&old.injury!=='Uninjured')
+    emit(`healthy:${p.id}`,'injuries',{playerName:p.name,school:teams.get(p.team).name,status:'Uninjured',recovered:true},{player:p.id,priority:95});}
   const oldCommits=new Set((prior?.commitments??[]).map(c=>`${c.team}:${c.player}`));
   for(const c of s.commitments){const p=players.get(c.player);if(!p)continue;
     const fresh=(s.newCommitments??[]).some(n=>n.team===c.team&&n.player===c.player)||(prior&&!oldCommits.has(`${c.team}:${c.player}`))||(inSeason&&c.week>0&&c.week===week-1);
-    if(!fresh&&c.team!==s.userTeamIndex)continue;
-    emit(`commit:${c.team}:${c.player}`,'recruiting',{playerName:p.name,school:teams.get(c.team)?.name,position:p.position,nationalRecruitRank:c.rank>0?c.rank:null,commitment:c.stage,newlyObserved:Boolean(fresh)},
-      {team:c.team,player:p.id,national:fresh&&c.rank>0&&c.rank<=100,curated:Boolean(fresh),thread:`commitments:${c.team}`,priority:c.team===s.userTeamIndex&&fresh?97:fresh?79+1/(c.rank||9999):64});
+
+    emit(`commit:${c.team}:${c.player}`,'recruiting',{playerName:p.name,school:teams.get(c.team)?.name,position:p.position,nationalRecruitRank:c.rank>0?c.rank:null,commitment:c.stage,newlyObserved:Boolean(fresh),stars:p.starRating??null,recruitSignificance:recruitSignificance(p.starRating,teams.get(c.team)?.prestigeStars,c.rank),importance:p.starRating===5||c.rank===1||p.starRating>=4&&teams.get(c.team)?.prestigeStars<=2?'major':'normal'},
+      {team:c.team,player:p.id,national:fresh&&(p.starRating===5||c.rank>0&&c.rank<=100),curated:Boolean(fresh),thread:`commitments:${c.team}`,priority:fresh&&c.rank===1?115:fresh&&p.starRating===5?109:fresh&&p.starRating>=4&&teams.get(c.team)?.prestigeStars<=2?108:fresh?97:64});
   }
   for(const o of s.newOffers??[]){const p=players.get(o.player);if(!p||!teams.has(o.team))continue;
     emit(`offer:${o.team}:${p.id}`,'offers',{playerName:p.name,school:teams.get(o.team).name,position:p.position,nationalRecruitRank:o.rank>0?o.rank:null},
       {team:o.team,player:p.id,national:o.rank>0&&o.rank<=100,thread:`offers:${o.team}`,priority:o.team===s.userTeamIndex?95:72+1/(o.rank||9999)});
   }
   for(const h of s.heisman){const p=players.get(h.player);if(inSeason&&p)emit(`heisman:${p.id}`,'heisman',{playerName:p.name,school:teams.get(h.team)?.name,rank:h.rank,previousRank:h.lastRank>0?h.lastRank:null},{team:h.team,player:p.id,priority:h.rank===1?88:74-h.rank});}
+  const modelStrengths=rosterStrengths(s);
   for(const g of upcoming){const user=[g.home,g.away].includes(s.userTeamIndex),national=rank(g.home)<=25||rank(g.away)<=25;
     emit(`preview:${g.id}`,'schedule',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeRank:ranked(rank(g.home))?rank(g.home):null,awayRank:ranked(rank(g.away))?rank(g.away):null,month:g.month,day:g.day,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home))},
-      {team:user?s.userTeamIndex:g.home,relatedTeams:[g.home,g.away],national,eventWeek:g.week,priority:user?93:national?85:78,thread:`game:${g.id}`});
+      {team:g.home,relatedTeams:[g.home,g.away],national,eventWeek:g.week,priority:user?93:national?85:78,thread:`game:${g.id}`});
     // Candidate selection uses observed performance or Heisman contention, not hidden ability values.
     const candidates=s.players.filter(p=>[g.home,g.away].includes(p.team)&&p.injury==='Uninjured'&&((form.get(p.id)??0)>0||s.heisman.some(h=>h.player===p.id)));
     candidates.sort((a,b)=>(form.get(b.id)??0)-(form.get(a.id)??0)||a.id.localeCompare(b.id));const p=candidates[0];
-    if(p&&user)emit(`watch:${g.id}:${p.id}`,'watch',{gameId:g.id,playerName:p.name,school:teams.get(p.team)?.name,position:p.position,opponent:teams.get(p.team===g.home?g.away:g.home)?.name,basis:(form.get(p.id)??0)>0?'recentPerformance':'heisman'},
+    if(p)emit(`watch:${g.id}:${p.id}`,'watch',{gameId:g.id,playerName:p.name,school:teams.get(p.team)?.name,position:p.position,opponent:teams.get(p.team===g.home?g.away:g.home)?.name,basis:(form.get(p.id)??0)>0?'recentPerformance':'heisman'},
       {team:p.team,player:p.id,priority:86,thread:`game:${g.id}`});
-    if(user){const strength=id=>{const ps=s.players.filter(p=>p.team===id&&p.injury==='Uninjured'&&Number.isFinite(p.overall)).sort((a,b)=>b.overall-a.overall).slice(0,22);return ps.length?ps.reduce((n,p)=>n+p.overall,0)/ps.length:null;};
-      const hs=strength(g.home),as=strength(g.away);if(hs!==null&&as!==null){const spread=Math.round(((hs-as)*0.6+2.5)*2)/2;
-        emit(`line:${g.id}`,'lines',{gameId:g.id,favorite:spread===0?null:teams.get(spread>0?g.home:g.away)?.name,opponent:teams.get(spread>0?g.away:g.home)?.name,spread:Math.abs(spread),pickem:spread===0,simulated:true},{team:s.userTeamIndex,relatedTeams:[g.home,g.away],priority:70,thread:`game:${g.id}`});}
-    }
+    const line=projectLine(s,g,modelStrengths);if(line)emit(`line:${g.id}`,'lines',{gameId:g.id,favorite:line.favorite===null?null:teams.get(line.favorite)?.name,opponent:line.favorite===null?null:teams.get(line.favorite===g.home?g.away:g.home)?.name,spread:line.spread,pickem:line.favorite===null,simulated:true},{team:g.home,relatedTeams:[g.home,g.away],national,priority:70,thread:`game:${g.id}`});
+
   }
   if(inSeason){for(const [flag,name] of [['thanksgiving','Thanksgiving'],['christmas','Christmas'],['newYears','New Year']])if(upcoming.some(g=>g[flag]))emit(`holiday:${flag}`,'holiday',{holiday:name},{priority:82});
     if(upcoming.some(g=>g.month===10&&g.day===31))emit('holiday:halloween','holiday',{holiday:'Halloween'},{priority:82});
@@ -93,11 +95,13 @@ export function detectEvents(s,previous=null){
   if(inSeason)for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;
-    if(a.rushingRank!==null&&(a.rushingRank<=10||a.teamId===s.userTeamIndex))emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollRank:ranked(t.mediaRank)?t.mediaRank:null,previousPollRank:ranked(t.mediaLastRank)?t.mediaLastRank:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
+    if(a.rushingRank!==null)emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollRank:ranked(t.mediaRank)?t.mediaRank:null,previousPollRank:ranked(t.mediaLastRank)?t.mediaLastRank:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
     if(a.gamesPlayed>=3&&a.thirdDownRate!==null&&(a.thirdDownRate<=.30||a.thirdDownRate>=.55))emit(`analysis:third-down:${a.teamId}`,'analytics',{metric:'thirdDownConversionRate',school:a.school,sampleGames:a.gamesPlayed,conversions:a.thirdDownConversions,attempts:a.thirdDownAttempts,rate:a.thirdDownRate},{team:a.teamId,national:national||a.thirdDownRate<=.25||a.thirdDownRate>=.60,priority:82});
     if(a.gamesPlayed>=3&&a.redZoneTouchdownRate!==null&&a.redZoneTrips>=10&&(a.redZoneTouchdownRate<=.45||a.redZoneTouchdownRate>=.8))emit(`analysis:red-zone:${a.teamId}`,'analytics',{metric:'redZoneTouchdownRate',school:a.school,sampleGames:a.gamesPlayed,trips:a.redZoneTrips,touchdowns:a.redZoneTouchdowns,rate:a.redZoneTouchdownRate},{team:a.teamId,national:national||a.redZoneTouchdownRate<=.35,priority:83});
     if(a.gamesPlayed>=3&&a.turnoverMargin!==null&&Math.abs(a.turnoverMargin)>=5)emit(`analysis:turnovers:${a.teamId}`,'analytics',{metric:'turnoverMargin',school:a.school,sampleGames:a.gamesPlayed,giveaways:a.giveaways,takeaways:a.takeaways,margin:a.turnoverMargin},{team:a.teamId,national,priority:81});
   }
   for(const m of analytics.milestones)if(m.eventWeek>=week-1)emit(`analysis:margin-superlative:${m.gameId}`,'analytics',m,{team:m.teamId,national:true,eventWeek:m.eventWeek,priority:87});
+  for(const a of advancedAnalytics(s))emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
+  for(const e of worldEvents(s))emit(e.id,e.category,e.facts,e.options);
   return events;
 }
