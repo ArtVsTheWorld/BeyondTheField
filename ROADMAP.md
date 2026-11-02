@@ -67,3 +67,11 @@ The account artwork and granular writer filters are wired, with native state/pos
 ## v73 CFP / national desk checkpoint
 
 All five national writers now receive regular-season coverage; outside-top-60 metrics pass to beats. Native injury estimates and the merged Recruiting/new Injuries categories are implemented and live-tested for estimates/controls. CFP coverage begins at the verified Week 10 release with complete native rankings; native playoff fixtures cover later movement, bowl discrimination, round transitions and title results. The next live checkpoints remain actual Week 11+ movement, playoff rounds/championship, offseason/year reset and a cold launch. Then continue recruiting depth/content tuning and the two later 1.0 integrations.
+
+
+## v74 history / late-season checkpoint
+
+- Implemented: exact configured championship-week schedule matching with Week 14 invitation publication; standings discussion without invented tiebreakers; six-win bowl thresholds versus actual assigned invites; late CFP matchup stakes.
+- Implemented: native all-time team totals/career player and head-coach milestones, edition-stable baselines, cross-phase continuity, rollback suppression; historical season records and conference finish comparisons; complete-history gates for since-year claims.
+- Implemented: 22 additional advanced player/rate scenarios, rotating team caps, published-game corroboration, derived returner/OL stats, dual-production games; more current-week rivalry and cross-fan dialogue.
+- Validation: 167 Node tests and actual 16-edition native catalog checks. Live title-game/postseason counter updates, coach milestones, year reset and fresh v74 MMC launch remain progression checks.

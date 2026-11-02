@@ -13,7 +13,7 @@ export async function readHistory(file){
 export async function loadArchives(folder,s){
  const seasonFolder=path.join(folder,'RuntimeHistory',String(s.leagueId),String(s.userTeamIndex),String(s.season.CurrentSeasonYear)),archives=[];
  for(const phase of PUBLICATION_PHASES){if(phaseIndex(phase)>=phaseIndex(s.season.CurrentWeekType))continue;
-  const state=await readHistory(path.join(seasonFolder,phase,'history.json'));if(state)archives.push(...state.editions.map(e=>e.feed));
+  const state=await readHistory(path.join(seasonFolder,phase,'history.json'));if(state)archives.push(...state.editions.map(e=>({...e.feed,milestoneObservation:e.snapshot?.milestoneTotals})));
  }
  return archives;
 }

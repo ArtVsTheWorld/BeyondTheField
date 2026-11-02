@@ -15,11 +15,15 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     teamRefs.set(key,v.TeamIndex);if(capacity<=1)continue;
     const coachRecord=await resolve(v.HeadCoach),coach=coachRecord?.type==='Coach'&&coachRecord.v.TeamIndex===v.TeamIndex?coachRecord:null;
     const coachFirst=cleanText(coach?.v.FirstName),coachLast=cleanText(coach?.v.LastName),coachName=[coachFirst,coachLast].filter(Boolean).join(' ');
+    const historical=await resolve(v.TeamHistoricalData);
+    const seasonHistory=(await array(v.TeamSeriesHistory)).filter(r=>r.type==='TeamHistoricSeriesYear'&&Number.isInteger(r.v.Year)&&r.v.Year<=season.CurrentSeasonYear).map(r=>({...r.v})).sort((a,b)=>a.Year-b.Year);
+    const historicalStats=historical?.type==='TeamHistoricalData'?Object.fromEntries(Object.entries(historical.v).filter(([,n])=>Number.isInteger(n)&&n>=0)):null;
     const seasonSlots=arraySlots?await arraySlots(v.TeamSeasonStats):[];
     const currentStats=seasonSlots[0];
     const seasonStats=currentStats?.type==='TeamStats'?{season:season.CurrentSeasonYear,slot:0,stats:currentStats.v}:null;
     const coachFacts=c=>({seasonsWithTeam:Number.isInteger(c?.SeasonsWithTeam)?c.SeasonsWithTeam:null,yearsCoaching:Number.isInteger(c?.YearsCoaching)?c.YearsCoaching:null,style:c?.DominantArchetype??null});
-    const headCoach=coachName?{id:coach.key,name:coachName,firstName:coachFirst,lastName:coachLast,...coachFacts(coach.v)}:null;
+    const coachCareer=coach?await resolve(coach.v.CareerStats):null,coachSeason=coach?await resolve(coach.v.SeasonStats):null;
+    const headCoach=coachName?{id:coach.key,name:coachName,firstName:coachFirst,lastName:coachLast,...coachFacts(coach.v),careerStats:coachCareer?.type==='CareerCoachStats'?coachCareer.v:null,seasonStats:coachSeason?.type==='SeasonCoachStats'?coachSeason.v:null}:null;
     const builder=await resolve(v.TeamBuilderData);
     const stadium=await resolve(v.Stadium),depth=await resolve(v.DepthChart),depthChart={};
     if(depth?.type==='DepthChart')for(const [position,ref] of Object.entries(depth.v))if(typeof ref==='string')depthChart[position]=(await array(ref)).filter(p=>p.type==='Player'&&p.v.TeamIndex===v.TeamIndex).map(p=>p.key);
@@ -30,7 +34,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     const city=await resolve(v.City);
     const pipelines=(await array(v.SchoolPipelineInfluenceList)).filter(x=>x.v.InfluenceLevel!=='None'&&x.v.InfluenceValue>0).map(x=>x.v.Pipeline).filter(Boolean);
     const staff=async ref=>{const c=await resolve(ref);return c?.type==='Coach'&&c.v.TeamIndex===v.TeamIndex?{id:c.key,name:[cleanText(c.v.FirstName),cleanText(c.v.LastName)].filter(Boolean).join(' '),lastName:cleanText(c.v.LastName),...coachFacts(c.v)}:null;};
-    teams.push({id:v.TeamIndex,isTeamBuilder:v.IsTeamBuilder===true,playoffRound:v.PlayoffRoundReached??null,logoVariants:{secondaryAvailable:builder?.type==='TeamBuilderData'&&Boolean(cleanText(builder.v.SecondaryLogoURL)),tertiaryAvailable:builder?.type==='TeamBuilderData'&&Boolean(cleanText(builder.v.TertiaryLogoURL)),secondary:v.TEAM_ALT_LOGO??null,tertiary:v.TEAM_LOGO_SMALL_ALT??null,secondaryAsset:cleanText(v.TEAM_ALT_LOGO_ASSETNAME),tertiaryAsset:cleanText(v.TEAM_LOGO_SMALL_ALT_ASSETNAME)},stadium:cleanText(stadium?.v.Name)||cleanText(stadium?.v.STADIUM_DISPLAYNAME),depthChart,previousSeason,prestigeStars:Number.isFinite(v.TeamPrestige)&&v.TeamPrestige>0?v.TeamPrestige/2:null,offensiveCoordinator:await staff(v.OffensiveCoordinator),defensiveCoordinator:await staff(v.DefensiveCoordinator),recordKey:key,brandExposure:v.ProgramPointsBrandExposureGrade??null,brandExposurePoints:v.BrandExposureProgramPoints??null,homeState:city?.v.State??null,pipelines,seasonStats,nickname:cleanText(v.NickName),nicknameAlt:cleanText(v.NickNameAlt),hashtags:[...new Set([tag(v.Hashtag1),tag(v.Hashtag2)].filter(Boolean))],headCoach,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
+    teams.push({historicalStats,seasonHistory,id:v.TeamIndex,isTeamBuilder:v.IsTeamBuilder===true,playoffRound:v.PlayoffRoundReached??null,logoVariants:{secondaryAvailable:builder?.type==='TeamBuilderData'&&Boolean(cleanText(builder.v.SecondaryLogoURL)),tertiaryAvailable:builder?.type==='TeamBuilderData'&&Boolean(cleanText(builder.v.TertiaryLogoURL)),secondary:v.TEAM_ALT_LOGO??null,tertiary:v.TEAM_LOGO_SMALL_ALT??null,secondaryAsset:cleanText(v.TEAM_ALT_LOGO_ASSETNAME),tertiaryAsset:cleanText(v.TEAM_LOGO_SMALL_ALT_ASSETNAME)},stadium:cleanText(stadium?.v.Name)||cleanText(stadium?.v.STADIUM_DISPLAYNAME),depthChart,previousSeason,prestigeStars:Number.isFinite(v.TeamPrestige)&&v.TeamPrestige>0?v.TeamPrestige/2:null,offensiveCoordinator:await staff(v.OffensiveCoordinator),defensiveCoordinator:await staff(v.DefensiveCoordinator),recordKey:key,brandExposure:v.ProgramPointsBrandExposureGrade??null,brandExposurePoints:v.BrandExposureProgramPoints??null,homeState:city?.v.State??null,pipelines,seasonStats,nickname:cleanText(v.NickName),nicknameAlt:cleanText(v.NickNameAlt),hashtags:[...new Set([tag(v.Hashtag1),tag(v.Hashtag2)].filter(Boolean))],headCoach,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
       mediaRank:v.MediaPoll_CurrentRank,mediaLastRank:v.MediaPoll_LastWeeksRank,
       coachesRank:v.CoachesPoll_CurrentRank,coachesLastRank:v.CoachesPoll_LastWeeksRank,
       cfpRank:v.CFPPoll_CurrentRank,cfpLastRank:v.CFPPoll_LastWeeksRank,
@@ -47,7 +51,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     for(const t of await array(c.TeamSlots))if(t.type==='Team')members.add(t.v.TeamIndex);
     for(const d of await array(c.Divisions))for(const t of await array(d.v.Teams))if(t.type==='Team')members.add(t.v.TeamIndex);
     if(!members.size)continue;
-    const conference={id:key,name:c.Name||c.ConferenceEnum,independent:c.ConferenceEnum==='Independents',teams:[...members]};
+    const conference={id:key,name:c.Name||c.ConferenceEnum,independent:c.ConferenceEnum==='Independents',championshipType:c.ChampionshipGameType??null,championshipName:cleanText(c.ConfChampGameName),teams:[...members]};
     conferences.push(conference);
     for(const team of teams)if(members.has(team.id)){
       if(team.conferenceId&&team.conferenceId!==key)throw Error('Team belongs to conflicting conference records');
@@ -62,8 +66,9 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
       homePipeline:p.HomePipeline??null,homeState:p.PLYR_HOME_STATE??null,jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,portraitForcedSilhouette:p.PortraitForceSilhouette===true,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,redshirt:p.RedshirtStatus??null,yearsWithTeam:Number.isInteger(p.PLYR_CONSECYEARSWITHTEAM)?p.PLYR_CONSECYEARSWITHTEAM:null,
       injury:p.InjuryStatus,injuryType:p.InjuryType,injurySeverity:p.InjurySeverity??null,totalInjuryDuration:p.TotalInjuryDuration??null,seasonEndingInjuryWeek:p.CurrentYearSeasonEndingInjuryWeek??null,injuryWeek:p.LatestInjuryWeek,injuryYear:p.LatestInjuryYear,
       injuryStage:p.LatestInjuryStage,minInjury:p.MinInjuryDuration,maxInjury:p.MaxInjuryDuration,
-      transferRisk:p.AbsoluteTransferChance,nil:p.CurrentNILCompensation,stars:p.ProspectStarRating,starRating:({ONE_STAR:1,TWO_STAR:2,THREE_STAR:3,FOUR_STAR:4,FIVE_STAR:5})[p.ProspectStarRating]??null,seasonStats:[],previousSeasonStats:[]};
-    for(const st of await array(p.SeasonStats)){if(st.v.SEAS_YEAR===season.CurrentYear&&st.v.YEARBYYEARTEAMINDEX===p.TeamIndex)player.seasonStats.push({type:st.type,stats:st.v});if(season.CurrentYear>0&&st.v.SEAS_YEAR===season.CurrentYear-1)player.previousSeasonStats.push({type:st.type,stats:st.v});}
+      transferRisk:p.AbsoluteTransferChance,nil:p.CurrentNILCompensation,stars:p.ProspectStarRating,starRating:({ONE_STAR:1,TWO_STAR:2,THREE_STAR:3,FOUR_STAR:4,FIVE_STAR:5})[p.ProspectStarRating]??null,seasonStats:[],previousSeasonStats:[],allSeasonStats:[]};
+    const career=await resolve(p.CareerStats);player.careerStats=career&&/^Career.*Stats$/.test(career.type)?{type:career.type,stats:career.v}:null;
+    for(const st of await array(p.SeasonStats)){if(Number.isInteger(st.v.SEAS_YEAR)&&st.v.SEAS_YEAR>=0&&st.v.SEAS_YEAR<=season.CurrentYear)player.allSeasonStats.push({type:st.type,stats:st.v});if(st.v.SEAS_YEAR===season.CurrentYear&&st.v.YEARBYYEARTEAMINDEX===p.TeamIndex)player.seasonStats.push({type:st.type,stats:st.v});if(season.CurrentYear>0&&st.v.SEAS_YEAR===season.CurrentYear-1)player.previousSeasonStats.push({type:st.type,stats:st.v});}
     players.push(player);playerRefs.set(key,player);rawPlayers.push({key,v:p});
   }
   const games=[],gameRefs=new Map();

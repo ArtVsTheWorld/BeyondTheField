@@ -10,6 +10,8 @@ const accounts=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/account-re
 Object.assign(contentPack.families,accounts.families);contentPack.revision=accounts.revision;
 const playoff=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/playoff-desk-pack.json',import.meta.url),'utf8'));
 Object.assign(contentPack.families,playoff.families);contentPack.revision=playoff.revision;
+const historyPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/history-analysis-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,historyPack.families);contentPack.revision=historyPack.revision;
 const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g,ids=new Set();
 for(const variants of Object.values(contentPack.families))for(const t of variants){
  if(!t.id||ids.has(t.id)||typeof t.body!=='string'||/[\uFFFD\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(t.body))throw Error('Invalid runtime template '+t.id);ids.add(t.id);

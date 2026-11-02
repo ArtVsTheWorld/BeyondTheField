@@ -141,3 +141,8 @@ v72 adds CanDuel Sports, separate Players/Recruits types, requested native analy
 ## National desk, injury windows and CFP (v73)
 
 v73 distributes regular-season national analysis across all five named writers, focuses it on the current poll's top 60 and retains smaller-program metrics with school beats. It adds native injury return estimates and an Injuries category, merges Recruiting/Recruits, restores TeamBuilder primary logos, and adds CFP (@CFBPlayoff) ranking/playoff coverage from Week 10. [Evidence, conditions and remaining live checks](docs/playoff-desk-v73.md). Current DLL/package are `Build/DynastyEnhancerNative-v73.dll` and `Build/DynastyEnhancer-v73-MMC.zip`. 149 Node tests plus native/MMC checks pass; the user verified the live injury estimate and category controls.
+
+
+## Late season, history and deeper analysis (v74)
+
+v74 adds verified conference championship invitations from Week 14, late-season title and bowl races, assigned postseason matchups, career/all-time milestone crossings, season-history comparisons and current-week rivalry/fan discussion. New advanced rates include broken tackles, contact yardage, YAC share, offensive-line sacks per snap, defensive per-game production, distance-based kicking and returns. [Conditions, evidence and live checks](docs/history-analysis-v74.md). Current native DLL/package: `Build/DynastyEnhancerNative-v74.dll` and `Build/DynastyEnhancer-v74-MMC.zip`. 167 Node tests pass; the actual sixteen-edition catalog validates in every native scope.

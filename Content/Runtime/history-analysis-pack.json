@@ -1,0 +1,496 @@
+{
+  "format": 1,
+  "revision": "history-analysis-v74",
+  "families": {
+    "deep.broken-tackles": [
+      {
+        "id": "H74-deep-broken-tackles-1",
+        "body": "{school}'s {playerName}: {broken} broken tackles on {attempts} carries. That's {rate} broken tackles per 100 carries. Tackles made at the first opportunity matter against this runner."
+      },
+      {
+        "id": "H74-deep-broken-tackles-2",
+        "body": "The first defender hasn't been the whole story for {school}'s {playerName}: {broken} broken tackles across {attempts} carries, or {rate} per 100 carries this season."
+      }
+    ],
+    "deep.after-contact": [
+      {
+        "id": "H74-deep-after-contact-1",
+        "body": "{playerName} has gained {yards} yards after first contact for {school}, averaging {rate} per carry across {attempts} attempts. Getting to him and getting him down are different jobs."
+      },
+      {
+        "id": "H74-deep-after-contact-2",
+        "body": "{school}'s {playerName} is producing {rate} yards after first contact per carry. {yards} of those yards on {attempts} rushes. That's a useful bit of context beyond the rushing total."
+      }
+    ],
+    "deep.yac-share": [
+      {
+        "id": "H74-deep-yac-share-1",
+        "body": "{yac} of {playerName}'s {yards} receiving yards for {school} have come after the catch. That's {rate}% of his yardage. The catch is only the start of the assignment for the defense."
+      },
+      {
+        "id": "H74-deep-yac-share-2",
+        "body": "A closer look at {school}'s {playerName}: {yards} receiving yards, {yac} after the catch. {rate}% of the total has come with the ball already in his hands."
+      }
+    ],
+    "deep.drops": [
+      {
+        "id": "H74-deep-drops-1",
+        "body": "{school}'s {playerName} has {catches} catches and {drops} recorded drops. Drops account for {rate}% of those catch-or-drop opportunities. That isn't a target-based drop rate, but it does put the missed chances in context."
+      },
+      {
+        "id": "H74-deep-drops-2",
+        "body": "{drops} drops alongside {catches} receptions for {school}'s {playerName}. That's {rate}% of recorded catches plus drops. A few more finished plays would change the look of that stat line."
+      }
+    ],
+    "deep.receiving-back": [
+      {
+        "id": "H74-deep-receiving-back-1",
+        "body": "{school} is getting more than carries from {playerName}: {rushing} rushing yards, plus {receiving} receiving yards on {catches} catches. The backfield production doesn't stop when they throw it."
+      },
+      {
+        "id": "H74-deep-receiving-back-2",
+        "body": "{playerName}'s workload for {school} travels across the playbook: {rushing} yards on the ground and {receiving} through the air. {catches} catches make him more than a handoff-only concern."
+      }
+    ],
+    "deep.tackles-game": [
+      {
+        "id": "H74-deep-tackles-game-1",
+        "body": "{school}'s {playerName} has {total} tackles in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-tackles-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} tackles per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.sacks-game": [
+      {
+        "id": "H74-deep-sacks-game-1",
+        "body": "{school}'s {playerName} has {total} sacks in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-sacks-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} sacks per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.tfl-game": [
+      {
+        "id": "H74-deep-tfl-game-1",
+        "body": "{school}'s {playerName} has {total} tackles for loss in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-tfl-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} tackles for loss per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.ints-game": [
+      {
+        "id": "H74-deep-ints-game-1",
+        "body": "{school}'s {playerName} has {total} interceptions in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-ints-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} interceptions per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.pbu-game": [
+      {
+        "id": "H74-deep-pbu-game-1",
+        "body": "{school}'s {playerName} has {total} passes defended in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-pbu-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} passes defended per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.forced-game": [
+      {
+        "id": "H74-deep-forced-game-1",
+        "body": "{school}'s {playerName} has {total} forced fumbles in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-forced-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} forced fumbles per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.recoveries-game": [
+      {
+        "id": "H74-deep-recoveries-game-1",
+        "body": "{school}'s {playerName} has {total} fumble recoveries in {games} appearances: {rate} per game. That's his own games-played sample, including the quieter afternoons."
+      },
+      {
+        "id": "H74-deep-recoveries-game-2",
+        "body": "The per-game view of {playerName}'s season at {school}: {rate} fumble recoveries per appearance, with {total} across {games} games. Useful context alongside the raw total."
+      }
+    ],
+    "deep.line-sacks": [
+      {
+        "id": "H74-deep-line-sacks-1",
+        "body": "{school}'s {playerName} has allowed {sacks} sacks across {snaps} offensive snaps: {rate} per 100 snaps. These are all offensive snaps, not just pass-blocking plays."
+      },
+      {
+        "id": "H74-deep-line-sacks-2",
+        "body": "{sacks} sacks allowed in {snaps} offensive snaps for {school}'s {playerName}. That works out to {rate} per 100 snaps. A workload-adjusted look, with run plays included in the denominator."
+      }
+    ],
+    "deep.pancakes": [
+      {
+        "id": "H74-deep-pancakes-1",
+        "body": "{playerName} has {total} pancake blocks in {games} games for {school}, averaging {rate} per appearance. The box score has something for the offensive line, too."
+      },
+      {
+        "id": "H74-deep-pancakes-2",
+        "body": "{school}'s {playerName}: {total} pancakes, {games} appearances, {rate} per game. Not every productive afternoon comes with a touchdown attached."
+      }
+    ],
+    "deep.long-kicks": [
+      {
+        "id": "H74-deep-long-kicks-1",
+        "body": "{school}'s {playerName} is {made}-for-{attempts} from 50-plus yards this season ({rate}%). Distance matters when you're judging the kicking numbers."
+      },
+      {
+        "id": "H74-deep-long-kicks-2",
+        "body": "From 50-plus yards, {playerName} has made {made} of {attempts} field-goal attempts for {school}. {rate}% from that band, rather than lumping every kick together."
+      }
+    ],
+    "deep.mid-kicks": [
+      {
+        "id": "H74-deep-mid-kicks-1",
+        "body": "{school}'s {playerName} is {made}-for-{attempts} from 40-49 yards this season ({rate}%). Distance matters when you're judging the kicking numbers."
+      },
+      {
+        "id": "H74-deep-mid-kicks-2",
+        "body": "From 40-49 yards, {playerName} has made {made} of {attempts} field-goal attempts for {school}. {rate}% from that band, rather than lumping every kick together."
+      }
+    ],
+    "deep.touchbacks": [
+      {
+        "id": "H74-deep-touchbacks-1",
+        "body": "{school}'s {playerName} has {total} touchbacks on {attempts} kickoffs, a {rate}% touchback rate. One part of the field-position story that rarely gets its own headline."
+      },
+      {
+        "id": "H74-deep-touchbacks-2",
+        "body": "{total} of {playerName}'s {attempts} kickoffs for {school} have been touchbacks ({rate}%). A little special-teams context beyond the scoring column."
+      }
+    ],
+    "deep.punt-placement": [
+      {
+        "id": "H74-deep-punt-placement-1",
+        "body": "{playerName} has put {total} of {attempts} punts inside the 20 for {school}: {rate}%. Just {touchbacks} have been touchbacks. Placement belongs next to distance in this discussion."
+      },
+      {
+        "id": "H74-deep-punt-placement-2",
+        "body": "{school}'s punting picture: {playerName}, {attempts} punts, {total} inside the 20 ({rate}%), {touchbacks} touchbacks. There's more to the job than the longest kick."
+      }
+    ],
+    "deep.kick-return": [
+      {
+        "id": "H74-deep-kick-return-1",
+        "body": "{school}'s {playerName} is averaging {rate} yards per kick return: {yards} yards on {attempts} returns, with {touchdowns} TD. Field position is part of his production, too."
+      },
+      {
+        "id": "H74-deep-kick-return-2",
+        "body": "Don't skip the return column for {school}'s {playerName}: {attempts} kick returns, {yards} yards, {touchdowns} TD. That's {rate} yards each time he brings one back."
+      }
+    ],
+    "deep.punt-return": [
+      {
+        "id": "H74-deep-punt-return-1",
+        "body": "{school}'s {playerName} is averaging {rate} yards per punt return: {yards} yards on {attempts} returns, with {touchdowns} TD. Field position is part of his production, too."
+      },
+      {
+        "id": "H74-deep-punt-return-2",
+        "body": "Don't skip the return column for {school}'s {playerName}: {attempts} punt returns, {yards} yards, {touchdowns} TD. That's {rate} yards each time he brings one back."
+      }
+    ],
+    "deep.dual-qb-game": [
+      {
+        "id": "H74-deep-dual-qb-game-1",
+        "body": "{playerName} made {opponent} defend both sides of his game: {passing} passing yards and {rushing} rushing yards for {school}. A passing line alone doesn't describe that afternoon."
+      },
+      {
+        "id": "H74-deep-dual-qb-game-2",
+        "body": "{school}'s {playerName} against {opponent}: {passing} through the air, {rushing} on the ground. That second number matters when you're deciding how to defend the first."
+      }
+    ],
+    "deep.dual-back-game": [
+      {
+        "id": "H74-deep-dual-back-game-1",
+        "body": "{rushing} rushing yards and {receiving} receiving yards for {school}'s {playerName} against {opponent}. Productive on handoffs, productive when they threw him the ball."
+      },
+      {
+        "id": "H74-deep-dual-back-game-2",
+        "body": "{playerName} gave {school} a two-way backfield contribution against {opponent}: {rushing} on the ground, {receiving} receiving. The rushing total only tells part of it."
+      }
+    ],
+    "late.conference-race": [
+      {
+        "id": "H74-late-conference-race-1",
+        "body": "The {conference} race is getting tight on time. Current leaders: {leaders}. Those are the standings, not a championship invitation; the remaining games and tiebreakers still matter."
+      },
+      {
+        "id": "H74-late-conference-race-2",
+        "body": "Late-season {conference} check: {leaders} lead the standings. Plenty to argue about, but no need to turn a standings position into a berth before the matchup is assigned."
+      }
+    ],
+    "late.contender": [
+      {
+        "id": "H74-late-contender-1",
+        "body": "{school} is No. {place} in the {conference} standings at {wins}-{losses} in league play. The title-race discussion is becoming a weekly part of the beat now."
+      },
+      {
+        "id": "H74-late-contender-2",
+        "body": "Keep the conference column in view for {school}: {wins}-{losses}, No. {place} in the {conference} standings. These last league results carry a lot of weight."
+      }
+    ],
+    "late.title-invite": [
+      {
+        "id": "H74-late-title-invite-1",
+        "body": "Championship date set. {nickname} vs. {opponent} for the {conference} title in Week {championshipWeek}. {hashtag}"
+      },
+      {
+        "id": "H74-late-title-invite-2",
+        "body": "Next stop: the {conference} championship game. {nickname} will face {opponent} in Week {championshipWeek}. {hashtag}"
+      }
+    ],
+    "late.title-history": [
+      {
+        "id": "H74-late-title-history-1",
+        "body": "{school} will face {opponent} for the {conference} championship. The program's last conference title came in {lastYear}. That's some history sitting behind this matchup."
+      },
+      {
+        "id": "H74-late-title-history-2",
+        "body": "A conference title has been missing from {school}'s trophy case since {lastYear}. {opponent} is the opponent in this year's {conference} championship game."
+      }
+    ],
+    "late.title-result": [
+      {
+        "id": "H74-late-title-result-1",
+        "body": "{school} takes the {conference} championship, beating {opponent} {score}. The conference race is settled; the postseason conversation gets its next chapter."
+      },
+      {
+        "id": "H74-late-title-result-2",
+        "body": "Conference champions: {school}. A {score} win over {opponent} finishes the {conference} title race on the field."
+      }
+    ],
+    "late.title-fan": [
+      {
+        "id": "H74-late-title-fan-1",
+        "body": "{school} and {opponent} for the {conference} title. I've already decided I'm going to be unbearable if we win this"
+      },
+      {
+        "id": "H74-late-title-fan-2",
+        "body": "A whole {conference} championship on the line and {opponent} fans are still talking. {school}, we have the chance to make this very funny"
+      }
+    ],
+    "late.bowl-one-away": [
+      {
+        "id": "H74-late-bowl-one-away-1",
+        "body": "{school} is {wins}-{losses}, one win from the six-win bowl threshold with {remaining} regular-season games left. Reaching six and receiving a bowl invitation are separate steps."
+      },
+      {
+        "id": "H74-late-bowl-one-away-2",
+        "body": "The next win would get {school} to six. At {wins}-{losses} with {remaining} games remaining, the bowl conversation has a very clear near-term target."
+      }
+    ],
+    "late.bowl-position": [
+      {
+        "id": "H74-late-bowl-position-1",
+        "body": "{school} sits at {wins}-{losses}, past the six-win threshold. Now the bowl discussion turns toward where they could land. No assigned matchup yet."
+      },
+      {
+        "id": "H74-late-bowl-position-2",
+        "body": "At {wins}-{losses}, {school} has the six-win mark covered. Bowl destination is the next question, with the actual invitation still to come."
+      }
+    ],
+    "late.bowl-no-room": [
+      {
+        "id": "H74-late-bowl-no-room-1",
+        "body": "{school} is {wins}-{losses} with {remaining} regular-season games left. It needs all {needed} to reach six wins. There's no spare result left in that chase."
+      },
+      {
+        "id": "H74-late-bowl-no-room-2",
+        "body": "The route to six wins for {school} is down to winning out: {needed} needed, {remaining} games remaining. Their current record is {wins}-{losses}."
+      }
+    ],
+    "late.bowl-invite": [
+      {
+        "id": "H74-late-bowl-invite-1",
+        "body": "Bowl plans are set. {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "H74-late-bowl-invite-2",
+        "body": "Postseason destination: {venue}. {nickname} will face {opponent}. {hashtag}"
+      }
+    ],
+    "late.playoff-berth": [
+      {
+        "id": "H74-late-playoff-berth-1",
+        "body": "{school} is in the College Football Playoff field, with an assigned opening-round matchup against {opponent}.{historyDetail}"
+      },
+      {
+        "id": "H74-late-playoff-berth-2",
+        "body": "Playoff matchup confirmed: {school} vs. {opponent} in {venue}.{historyDetail}"
+      }
+    ],
+    "late.cfp-stakes": [
+      {
+        "id": "H74-late-cfp-stakes-1",
+        "body": "CFP No. {rank} {school} is {wins}-{losses} with {opponent} up this week. This late in the year, the playoff argument and the next result are tied together. The ranking is a position to defend, not an invitation."
+      },
+      {
+        "id": "H74-late-cfp-stakes-2",
+        "body": "{school}'s next playoff talking point will be written against {opponent}. They're {wins}-{losses} and No. {rank} in the CFP rankings. Very little room left for the resume to change before the field is set."
+      }
+    ],
+    "late.title-appearance-history": [
+      {
+        "id": "H74-late-title-appearance-history-1",
+        "body": "{school} is back in the national championship game for the first time since {lastYear}. {opponent} stands between this team and the title."
+      },
+      {
+        "id": "H74-late-title-appearance-history-2",
+        "body": "The last time {school} reached the national championship game was {lastYear}. Now the program returns to that stage against {opponent}."
+      }
+    ],
+    "late.turnaround": [
+      {
+        "id": "H74-late-turnaround-1",
+        "body": "{school} finished {previousYear} at {priorWins}-{priorLosses} in the {previousConference}. This season it's already {wins}-{losses}. That's a different kind of November conversation."
+      },
+      {
+        "id": "H74-late-turnaround-2",
+        "body": "A year-over-year check on {school}: {priorWins}-{priorLosses} last season, {wins}-{losses} now. The win total is already well beyond the previous finish."
+      }
+    ],
+    "late.regression": [
+      {
+        "id": "H74-late-regression-1",
+        "body": "{school} went {priorWins}-{priorLosses} in {previousYear}. It's {wins}-{losses} this season, with more losses already on the board. The change in direction is hard to ignore."
+      },
+      {
+        "id": "H74-late-regression-2",
+        "body": "Last season: {priorWins}-{priorLosses}. This season: {wins}-{losses}. {school}'s {previousYear} finish in the {previousConference} is a difficult comparison right now."
+      }
+    ],
+    "late.conference-change": [
+      {
+        "id": "H74-late-conference-change-1",
+        "body": "{school} finished No. {priorPlace} in the {conference} at {priorWins}-{priorLosses} in {previousYear}. This year it's No. {place} at {wins}-{losses}. That is a substantial change in the conference picture."
+      },
+      {
+        "id": "H74-late-conference-change-2",
+        "body": "A conference comparison for {school}: No. {priorPlace}, {priorWins}-{priorLosses} in {previousYear}; No. {place}, {wins}-{losses} now. Same {conference}, very different place in the standings."
+      }
+    ],
+    "late.rivalry-team": [
+      {
+        "id": "H74-late-rivalry-team-1",
+        "body": "{opponent} week. You know what this one means. {nickname}, let's go. {hashtag}"
+      },
+      {
+        "id": "H74-late-rivalry-team-2",
+        "body": "This week: {nickname} vs. {opponent}. A game that needs no extra introduction. {hashtag}"
+      }
+    ],
+    "late.rivalry-fan": [
+      {
+        "id": "H74-late-rivalry-fan-1",
+        "body": "{opponent} week and suddenly everybody has a strong opinion. Good. Been waiting all year for {school} to settle this one on the field"
+      },
+      {
+        "id": "H74-late-rivalry-fan-2",
+        "body": "Already seeing {opponent} fans talk like the game is over. It's literally game week. {school}, please make these people log off"
+      }
+    ],
+    "late.rivalry-stakes": [
+      {
+        "id": "H74-late-rivalry-stakes-1",
+        "body": "Rivalry week for {school}: {opponent} is up next, with a {wins}-{losses} {conference} record in the background. This one reaches beyond the conference column."
+      },
+      {
+        "id": "H74-late-rivalry-stakes-2",
+        "body": "{school} enters the {opponent} rivalry game {wins}-{losses} in {conference} play. Standings matter. So does hearing about this result for the next year."
+      }
+    ],
+    "late.conference-beef": [
+      {
+        "id": "H74-late-conference-beef-1",
+        "body": "{opponent} fans acting like they own the {conference}. {school} is sitting right here at {wins}-{losses} in league play. Might want to leave some space in that victory speech"
+      },
+      {
+        "id": "H74-late-conference-beef-2",
+        "body": "Every {conference} thread somehow turns into {opponent} fans explaining why nobody else counts. {school} is {wins}-{losses} in the league. We can read the standings too"
+      }
+    ],
+    "late.fan-reply": [
+      {
+        "id": "H74-late-fan-reply-1",
+        "body": "{parentHandle} {school} fans aren't taking confidence lessons from {opponent}. Let's let the football do some talking"
+      },
+      {
+        "id": "H74-late-fan-reply-2",
+        "body": "{parentHandle} screenshotting this for later. {school} fans have heard plenty from {opponent} this week already"
+      }
+    ],
+    "history.team-counter": [
+      {
+        "id": "H74-history-team-counter-1",
+        "body": "{school} has recorded its {ordinal} {achievement} in program history. This season now has another place in the school's record book."
+      },
+      {
+        "id": "H74-history-team-counter-2",
+        "body": "{school} adds another chapter: its {ordinal} {achievement} in program history. A milestone beyond this week's result."
+      }
+    ],
+    "history.team-wins": [
+      {
+        "id": "H74-history-team-wins-1",
+        "body": "{school} has reached {threshold} all-time wins. The program's running total is now {total}. A round number with a lot of seasons behind it."
+      },
+      {
+        "id": "H74-history-team-wins-2",
+        "body": "Another program milestone for {school}: at the {threshold}-win mark all-time, now at {total} victories."
+      }
+    ],
+    "history.win-percentage": [
+      {
+        "id": "H74-history-win-percentage-1",
+        "body": "{school}'s all-time winning percentage has moved {direction} {boundary}. Its record is {wins}-{losses}-{ties}, counting ties as half a win. A small shift this week with a long history behind it."
+      },
+      {
+        "id": "H74-history-win-percentage-2",
+        "body": "An all-time threshold for {school}: its winning percentage is now {direction} {boundary}, on a {wins}-{losses}-{ties} program record. Ties count as half a win in that calculation."
+      }
+    ],
+    "history.player-career": [
+      {
+        "id": "H74-history-player-career-1",
+        "body": "{school}'s {playerName} has reached {threshold} career {metric}. His career total is now {total}. This week's production has a longer-term marker attached."
+      },
+      {
+        "id": "H74-history-player-career-2",
+        "body": "Career milestone for {playerName} at {school}: at least {threshold} {metric}, now at {total}. More than a one-week stat line."
+      }
+    ],
+    "history.coach-wins": [
+      {
+        "id": "H74-history-coach-wins-1",
+        "body": "{coachName} has reached {threshold} career wins, with his total now at {total}. The {school} head coach adds another milestone to his record."
+      },
+      {
+        "id": "H74-history-coach-wins-2",
+        "body": "{school} coach {coachName} has reached the {threshold}-win mark for his career. {total} victories now, across his head-coaching record."
+      }
+    ],
+    "history.coach-counter": [
+      {
+        "id": "H74-history-coach-counter-1",
+        "body": "{school} head coach {coachName} has recorded his {ordinal} career {achievement}. Another addition to the coaching resume."
+      },
+      {
+        "id": "H74-history-coach-counter-2",
+        "body": "A career milestone for {coachName}: his {ordinal} {achievement}. The {school} head coach adds another line to his postseason record."
+      }
+    ]
+  }
+}

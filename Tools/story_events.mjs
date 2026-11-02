@@ -1,3 +1,6 @@
+import {historyMilestoneEvents} from './history_milestones.mjs';
+import {lateSeasonEvents} from './late_season_events.mjs';
+import {deepAnalyticsEvents} from './deep_analytics.mjs';
 import {injuryTimetable} from './injury_timetables.mjs';
 import {playoffEvents} from './playoff_events.mjs';
 import {advancedAnalytics} from './advanced_analytics.mjs';
@@ -25,7 +28,7 @@ export function detectEvents(s,previous=null){
     if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
     if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');// Every program retains its dedicated news, even outside the personalized feed.
     if(['recruiting','offers'].includes(category)&&p&&(s.recruitInterests?.includes(p.id)||(p.homePipeline&&own.pipelines?.includes(p.homePipeline))||(p.homeState&&p.homeState===own.homeState)))scopes.push('relevant');
-    ids.add(id);const teamContext=teamIds.map(id=>teams.get(id)).filter(Boolean).map(t=>({teamId:t.id,school:t.name,nickname:t.nickname??null,nicknameAlt:t.nicknameAlt??null,hashtags:t.hashtags??[],headCoach:t.headCoach??null}));
+    ids.add(id);const teamContext=teamIds.map(id=>teams.get(id)).filter(Boolean).map(t=>({teamId:t.id,school:t.name,nickname:t.nickname??null,nicknameAlt:t.nicknameAlt??null,hashtags:t.hashtags??[],headCoach:t.headCoach?Object.fromEntries(['id','name','firstName','lastName','style','seasonsWithTeam'].filter(k=>t.headCoach[k]!==undefined).map(k=>[k,t.headCoach[k]])):null}));
     events.push({id,category,facts,teamIds,teamContext,playerId:player,personality:p?.personality??null,position:p?.position??null,scopes,eventWeek,priority,thread:thread??id,curated,primaryScope});
   };
   const eligible=s.games.filter(g=>g.year===year&&g.phase===phase);
@@ -101,6 +104,7 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
+  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

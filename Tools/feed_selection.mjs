@@ -37,6 +37,9 @@ export function curate(stories,limit=30){
  }
  // Keep the actual user result before reserving room for personality/reactions.
  for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&!pool.some(x=>x.category==='upsets'&&x.thread===p.thread)&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
+ // Preserve a confirmed user-team postseason announcement before its fan
+ // reactions consume the conversation's variety slots.
+ for(const p of pool.filter(p=>!p.replyTo&&['championship','bowls','cfp'].includes(p.category)&&['official','cfp'].includes(p.voice)&&p.priority>=100&&p.scopes.includes('team')))accept(p,true);
  for(const voice of ['player','fan','recruit'])for(const p of voice==='recruit'?[...pool].sort((a,b)=>Number(b.scopes.includes('team')||b.scopes.includes('relevant'))-Number(a.scopes.includes('team')||a.scopes.includes('relevant'))||order(a,b)):pool){if((voices.get(voice)??0)>=(voice==='recruit'?1:2))break;if(p.voice===voice)accept(p,true);}
  for(const scope of ['team','conference','national'])for(const p of pool){if(counts[scope]>=target[scope])break;if(bucketFor(p)===scope)accept(p,true);}
  // Try the personalized quota with softer variety rules before borrowing national slots.

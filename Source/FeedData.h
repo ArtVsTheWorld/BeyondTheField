@@ -18,6 +18,9 @@ inline std::string storyLabel(const nlohmann::json& post){
     if(post.contains("replyTo"))return "Reply";
     const auto category=post.value("category",std::string());
     if(category=="upsets")return "Upset";
+    if(category=="history")return "Milestone";
+    if(category=="championship")return "Title Race";
+    if(category=="bowls")return "Bowl Watch";
     if(category=="records")return "Record Book";
     if(category=="streaks")return "Streak";
     if(category=="analytics")return "Analysis";
@@ -66,7 +69,7 @@ struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
 inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:4096;}
 inline constexpr std::array<const char*,11> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Official Accounts","Players","Injuries","Fans"};
-inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";default:return false;}}
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records"||p.category=="history"||p.category=="championship"||p.category=="bowls";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();

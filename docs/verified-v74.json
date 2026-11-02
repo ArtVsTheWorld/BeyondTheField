@@ -1,0 +1,57 @@
+{
+  "build": "v74",
+  "contentRevision": "history-analysis-v74",
+  "nodeTests": {
+    "passed": 167,
+    "failed": 0
+  },
+  "nativeChecks": {
+    "unitTests": true,
+    "realCatalogWeeks": 16,
+    "everyDynamicScope": true
+  },
+  "mmcChecks": {
+    "registration": true,
+    "tamperRejection": true,
+    "installedAdapter": true
+  },
+  "runtime": {
+    "active": true,
+    "gamePid": 16048,
+    "league": -107703141,
+    "team": 15,
+    "calendarYear": 2026,
+    "week": 14,
+    "stories": 4886,
+    "forYou": 30,
+    "publicationSaveRequired": false
+  },
+  "content": {
+    "addedFamilies": 49,
+    "addedVariants": 98,
+    "totalFamilies": 306,
+    "totalVariants": 580,
+    "advancedScenariosAdded": 22
+  },
+  "history": {
+    "checksumVerifiedFiles": 3,
+    "olderStoriesUnchanged": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v74.dll": "2f81c0150bcab7097c1183c7f3abfc0567fd7917e18e767afa85d65cdd95bb82",
+    "DynastyEnhancer-v74-MMC.zip": "279d1c1a1deaf5a5ec5eb3101f6021ec6bf99ec0a4b12160bf40105b3437d66b",
+    "DynastyEnhancer.dll": "f672afb4bc9f0b1eb34d3e873038bc288ed2a327f6b91f936d59171d04ebe477"
+  },
+  "liveUserCheck": "pending: new analysis/category navigation, scrolling and Back",
+  "remaining": [
+    "Actual postseason counter-update timing and invites",
+    "Live player/head-coach milestone crossings",
+    "Year rollover",
+    "Fresh v74 MMC cold launch"
+  ],
+  "liveVisualCheck": {
+    "week14Header": true,
+    "byuHoustonInvitation": true,
+    "nativeCardsAndLikesFit": true
+  }
+}
