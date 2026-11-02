@@ -26,10 +26,11 @@ export async function readDynasty(input, schemaPath, parserPath) {
   async function records(name){const result=[];for(const t of file.tables.filter(t=>t.name===name&&!t.header.isArray)){
     await load(t);for(const r of t.records)if(!r.isEmpty)result.push({key:`${t.header.tableId}:${r.index}`,v:vals(r),capacity:t.header.recordCapacity});
   }return result;}
-  async function array(ref){const a=await resolve(ref);if(!a)return [];const result=[];
+  async function arraySlots(ref){const a=await resolve(ref);if(!a)return [];const result=[];
     if(!a.type.endsWith('[]'))throw Error('Expected Dynasty array');
-    for(const v of Object.values(a.v))if(typeof v==='string'&&/^[01]{32}$/.test(v)&&v.includes('1'))result.push(await resolve(v));return result;}
-  const snapshot=await normalizeDynasty({records,resolve,array},{source:input,sha256:before});
+    for(const v of Object.values(a.v))if(typeof v==='string'&&/^[01]{32}$/.test(v))result.push(await resolve(v));return result;}
+  async function array(ref){return (await arraySlots(ref)).filter(Boolean);}
+  const snapshot=await normalizeDynasty({records,resolve,array,arraySlots},{source:input,sha256:before});
   if(hash(await fs.readFile(input))!==before)throw Error('Dynasty save changed during reading; retry');
   return snapshot;
 }

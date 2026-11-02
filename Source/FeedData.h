@@ -11,6 +11,7 @@ namespace social {
 struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;};
 inline std::string storyLabel(const nlohmann::json& post){
     const auto category=post.value("category",std::string());
+    if(category=="analytics")return "Analysis";
     if(category=="results"||category=="team-stats"||category=="player-stats")return "Recap";
     if(category=="recruiting"||category=="offers")return "Recruiting";
     if(category=="schedule")return "Upcoming";

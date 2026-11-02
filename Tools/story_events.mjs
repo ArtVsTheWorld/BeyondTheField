@@ -1,3 +1,4 @@
+import {teamAnalytics} from './team_analytics.mjs';
 // Read-only Dynasty facts. This module contains no tweet prose or account identities.
 export const weekKey=s=>`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
 const complete=g=>['HomeWon','AwayWon','Tie'].includes(g.status);
@@ -15,7 +16,8 @@ export function detectEvents(s,previous=null){
     if(ids.has(id))return;const p=players.get(player);const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
     if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
     if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');if(!scopes.length)return;
-    ids.add(id);events.push({id,category,facts,teamIds,playerId:player,personality:p?.personality??null,position:p?.position??null,scopes,eventWeek,priority,thread:thread??id,curated,primaryScope});
+    ids.add(id);const teamContext=teamIds.map(id=>teams.get(id)).filter(Boolean).map(t=>({teamId:t.id,school:t.name,nickname:t.nickname??null,nicknameAlt:t.nicknameAlt??null,hashtags:t.hashtags??[],headCoach:t.headCoach??null}));
+    events.push({id,category,facts,teamIds,teamContext,playerId:player,personality:p?.personality??null,position:p?.position??null,scopes,eventWeek,priority,thread:thread??id,curated,primaryScope});
   };
   const eligible=s.games.filter(g=>g.year===year&&g.phase===phase);
   const recent=inSeason?eligible.filter(g=>[week-1,week].includes(g.week)&&complete(g)):[];
@@ -23,7 +25,7 @@ export function detectEvents(s,previous=null){
   for(const g of recent){
     const user=[g.home,g.away].includes(s.userTeamIndex),margin=Math.abs(g.homeScore-g.awayScore),tie=g.homeScore===g.awayScore;
     const winner=tie?null:g.homeScore>g.awayScore?g.home:g.away,loser=tie?null:winner===g.home?g.away:g.home;
-    emit(`result:${g.id}`,'results',{gameId:g.id,home:teams.get(g.home)?.name,away:teams.get(g.away)?.name,homeScore:g.homeScore,awayScore:g.awayScore,winner:teams.get(winner)?.name??null,loser:teams.get(loser)?.name??null,margin,tie,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home)),timing:g.week===week?'current':'previous'},
+    emit(`result:${g.id}`,'results',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeScore:g.homeScore,awayScore:g.awayScore,winner:tie?null:winner===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,loser:tie?null:loser===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,margin,tie,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home)),timing:g.week===week?'current':'previous'},
       {team:winner,relatedTeams:[g.home,g.away],national:rank(g.home)<=25||rank(g.away)<=25,eventWeek:g.week,priority:user?100:60,thread:`game:${g.id}`});
     if(user)for(const [id,st] of [[g.home,g.homeStats],[g.away,g.awayStats]])if(id===s.userTeamIndex&&st&&['OFFPASSYARDS','OFFRUSHYARDS','FIRSTDOWNS','GIVEAWAYS'].every(k=>Number.isFinite(st[k])))
       emit(`teamstats:${g.id}:${id}`,'team-stats',{gameId:g.id,school:teams.get(id).name,passingYards:st.OFFPASSYARDS,rushingYards:st.OFFRUSHYARDS,firstDowns:st.FIRSTDOWNS,giveaways:st.GIVEAWAYS},{team:id,eventWeek:g.week,priority:94,thread:`game:${g.id}`});
@@ -66,7 +68,7 @@ export function detectEvents(s,previous=null){
   }
   for(const h of s.heisman){const p=players.get(h.player);if(inSeason&&p)emit(`heisman:${p.id}`,'heisman',{playerName:p.name,school:teams.get(h.team)?.name,rank:h.rank,previousRank:h.lastRank>0?h.lastRank:null},{team:h.team,player:p.id,priority:h.rank===1?88:74-h.rank});}
   for(const g of upcoming){const user=[g.home,g.away].includes(s.userTeamIndex),national=rank(g.home)<=25||rank(g.away)<=25;
-    emit(`preview:${g.id}`,'schedule',{gameId:g.id,home:teams.get(g.home)?.name,away:teams.get(g.away)?.name,homeRank:ranked(rank(g.home))?rank(g.home):null,awayRank:ranked(rank(g.away))?rank(g.away):null,month:g.month,day:g.day,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home))},
+    emit(`preview:${g.id}`,'schedule',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeRank:ranked(rank(g.home))?rank(g.home):null,awayRank:ranked(rank(g.away))?rank(g.away):null,month:g.month,day:g.day,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home))},
       {team:user?s.userTeamIndex:g.home,relatedTeams:[g.home,g.away],national,eventWeek:g.week,priority:user?93:national?85:78,thread:`game:${g.id}`});
     // Candidate selection uses observed performance or Heisman contention, not hidden ability values.
     const candidates=s.players.filter(p=>[g.home,g.away].includes(p.team)&&p.injury==='Uninjured'&&((form.get(p.id)??0)>0||s.heisman.some(h=>h.player===p.id)));
@@ -87,5 +89,12 @@ export function detectEvents(s,previous=null){
       {relatedTeams:[...conferenceTeams],national:false,priority:84,primaryScope:'conference'});
   }
   if(inSeason)for(const t of s.teams.filter(t=>ranked(t.cfpRank)).sort((a,b)=>a.cfpRank-b.cfpRank).slice(0,5))emit(`cfp:${t.id}`,'cfp',{school:t.name,rank:t.cfpRank,previousRank:ranked(t.cfpLastRank)?t.cfpLastRank:null},{team:t.id,national:true,priority:t.id===s.userTeamIndex?96:87});
+  const analytics=teamAnalytics(s);
+  for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;
+    if(a.rushingRank!==null&&(a.rushingRank<=10||a.teamId===s.userTeamIndex))emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollRank:ranked(t.mediaRank)?t.mediaRank:null,previousPollRank:ranked(t.mediaLastRank)?t.mediaLastRank:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
+    if(a.gamesPlayed>=3&&a.thirdDownRate!==null&&(a.thirdDownRate<=.30||a.thirdDownRate>=.55))emit(`analysis:third-down:${a.teamId}`,'analytics',{metric:'thirdDownConversionRate',school:a.school,sampleGames:a.gamesPlayed,conversions:a.thirdDownConversions,attempts:a.thirdDownAttempts,rate:a.thirdDownRate},{team:a.teamId,national:national||a.thirdDownRate<=.25||a.thirdDownRate>=.60,priority:82});
+    if(a.gamesPlayed>=3&&a.turnoverMargin!==null&&Math.abs(a.turnoverMargin)>=5)emit(`analysis:turnovers:${a.teamId}`,'analytics',{metric:'turnoverMargin',school:a.school,sampleGames:a.gamesPlayed,giveaways:a.giveaways,takeaways:a.takeaways,margin:a.turnoverMargin},{team:a.teamId,national,priority:81});
+  }
+  for(const m of analytics.milestones)if(m.eventWeek>=week-1)emit(`analysis:margin-first:${m.gameId}`,'analytics',m,{team:m.teamId,national:true,eventWeek:m.eventWeek,priority:87});
   return events;
 }

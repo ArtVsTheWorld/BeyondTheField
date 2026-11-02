@@ -33,3 +33,21 @@ test('native personality reaches structured events and missing/sentinel values f
  assert.equal(updateRuntime(s,initial.state).catalog.events.find(e=>e.category==='offers').personality,'Leader');
  for(const value of [undefined,'Invalid_','NPCAvailableCount_']){const input=raw('New');input.records.player.v.Personality=value;assert.equal((await readRuntime(input)).players[0].personality,null);}
 });
+
+test('team identity and current coach references resolve from live records without inventing contact events',async()=>{
+ const input=raw('New');Object.assign(input.records.team.v,{NickName:'Fixture Falcons',NickNameAlt:'Falcons',Hashtag1:' #FlyFixture ',Hashtag2:'FlyFixture',HeadCoach:'coach'});
+ input.records.coach={key:'coach',type:'Coach',capacity:1,v:{FirstName:'Casey',LastName:'Dunn',TeamIndex:1}};
+ input.records.player.v.TeamIndex=1;input.records.player.v.JerseyNum=0;
+ const s=await readRuntime(input),t=s.teams[0];assert.equal(t.nickname,'Fixture Falcons');assert.deepEqual(t.hashtags,['#FlyFixture']);assert.equal(t.headCoach.name,'Casey Dunn');assert.equal(s.players[0].jerseyNumber,0);
+ const baseline=updateRuntime(await readRuntime(raw('None'))),event=updateRuntime(s,baseline.state).catalog.events.find(e=>e.category==='offers');assert.equal(event.teamContext[0].headCoach.name,'Casey Dunn');assert.equal(event.facts.phoneCall,undefined);
+ input.records.coach.v.TeamIndex=2;input.records.team.v.Hashtag1='bad tag';input.records.team.v.Hashtag2='';input.records.team.v.NickName='';const sparse=await readRuntime(input);assert.equal(sparse.teams[0].headCoach,null);assert.equal(sparse.teams[0].nickname,null);assert.deepEqual(sparse.teams[0].hashtags,[]);
+});
+
+test('current-first season arrays preserve null slots and do not use CurrentYear as a slot index',async()=>{
+ const input=raw('New');input.records.season.v.CurrentYear=1;input.records.team.v.TeamSeasonStats='season-array';
+ input.records['season-array']={key:'season-array',type:'TeamStats[]',capacity:1,v:{Member0:'current',Member1:'old'}};
+ input.records.current={key:'current',type:'TeamStats',capacity:1,v:{WINS:3,LOSSES:0,TIES:0,OFFRUSHYARDS:500}};
+ input.records.old={key:'old',type:'TeamStats',capacity:1,v:{WINS:12,LOSSES:1,TIES:0,OFFRUSHYARDS:3000}};
+ assert.equal((await readRuntime(input)).teams[0].seasonStats.stats.WINS,3);
+ input.records['season-array'].v.Member0=null;assert.equal((await readRuntime(input)).teams[0].seasonStats,null);
+});

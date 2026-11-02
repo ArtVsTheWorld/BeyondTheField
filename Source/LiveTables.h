@@ -40,15 +40,16 @@ inline std::set<std::string> wanted(const std::string& name){
     if(name=="Franchise")return {"LeagueID"};
     if(name=="FranchiseServer_CareerFlow")return {"IsStageAdvancing","IsStageActive"};
     if(name=="FranchiseUser")return {"Team","UserEntity","IsRetired","AdminLevel"};
-    if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","TEAM_LOGO","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard"};
+    if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","NickName","NickNameAlt","Hashtag1","Hashtag2","HeadCoach","TeamSeasonStats","TEAM_LOGO","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","HomeTie","RoadTie","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard"};
+    if(name=="Coach")return {"FirstName","LastName","TeamIndex"};
     if(name=="Conference")return {"Name","TeamSlots","Divisions","ConferenceEnum"};
-    if(name=="Player")return {"FirstName","LastName","Position","Personality","TeamIndex","PLYR_PORTRAIT","IsNIL","OverallRating","Age","SchoolYear","InjuryStatus","InjuryType","LatestInjuryWeek","LatestInjuryYear","LatestInjuryStage","MinInjuryDuration","MaxInjuryDuration","AbsoluteTransferChance","CurrentNILCompensation","ProspectStarRating","GameStats"};
+    if(name=="Player")return {"FirstName","LastName","Position","Personality","JerseyNum","TeamIndex","PLYR_PORTRAIT","IsNIL","OverallRating","Age","SchoolYear","InjuryStatus","InjuryType","LatestInjuryWeek","LatestInjuryYear","LatestInjuryStage","MinInjuryDuration","MaxInjuryDuration","AbsoluteTransferChance","CurrentNILCompensation","ProspectStarRating","GameStats"};
     if(name=="SeasonGame")return {"IsPractice","SeasonYear","SeasonWeek","SeasonWeekType","GameStatus","HomeTeam","AwayTeam","HomeScore","AwayScore","GameDateMonth","GameDateDay","DayOfWeek","TimeOfDay","GameOfTheWeekScore","ThanksgivingFlag","ChristmasFlag","NewYearsFlag","HomeTeamStatCache","AwayTeamStatCache"};
     if(name=="Awards")return {"HeismanRanking"};
     if(name=="Recruit")return {"RecruitStage","Player","TopSchoolsList","NationalRank"};
     // Referenced arrays and support records: primitive/ref fields only, never scripts.
     if(name.size()>=2&&name.substr(name.size()-2)=="[]")return {};
-    return {"TeamIndex","Player","Team","CurrentRank","LastWeekRank","Teams","TeamId","TeamInfluence","Recruits","Recruit","ScholarshipStatus","CommittedWeekNumber","SeasonGame","OpposingTeam","OFFPASSYARDS","OFFRUSHYARDS","FIRSTDOWNS","GIVEAWAYS","PASSATTEMPTS","PASSCOMPLETED","PASSYARDS","PASSTDS","PASSINTS","RUSHATTEMPTS","RUSHYARDS","RUSHTDS","RECEIVECATCHES","RECEIVEYARDS","RECEIVETDS","DLINESACKS","DLINEHALFSACK","DSECINTS","DEFTACKLES"};
+    return {"TeamIndex","Player","Team","CurrentRank","LastWeekRank","Teams","TeamId","TeamInfluence","Recruits","Recruit","ScholarshipStatus","CommittedWeekNumber","SeasonGame","OpposingTeam","OFFPASSYARDS","OFFRUSHYARDS","FIRSTDOWNS","GIVEAWAYS","TAKEAWAYS","THIRDDOWNCONV","THIRDDOWNS","WINS","LOSSES","TIES","PASSATTEMPTS","PASSCOMPLETED","PASSYARDS","PASSTDS","PASSINTS","RUSHATTEMPTS","RUSHYARDS","RUSHTDS","RECEIVECATCHES","RECEIVEYARDS","RECEIVETDS","DLINESACKS","DLINEHALFSACK","DSECINTS","DEFTACKLES"};
 }
 class Capture {
     Memory memory;Address image=0,root=0,context=0;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;

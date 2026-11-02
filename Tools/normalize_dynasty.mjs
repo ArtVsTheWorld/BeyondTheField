@@ -1,23 +1,32 @@
 // Shared story facts from either a read-only save adapter or a native runtime snapshot.
-export async function normalizeDynasty({records,resolve,array},identity) {
+export async function normalizeDynasty({records,resolve,array,arraySlots},identity) {
   const season=(await records('SeasonInfo'))[0]?.v,franchise=(await records('Franchise'))[0]?.v;
   if(!season||!franchise)throw Error('Missing Dynasty identity');
   let userTeamIndex=null;
   for(const {v:u} of await records('FranchiseUser')){if(u.IsRetired)continue;const team=await resolve(u.Team)??await resolve(u.UserEntity);
     if(team&&(userTeamIndex===null||u.AdminLevel==='Owner'))userTeamIndex=team.v.TeamIndex;}
   if(userTeamIndex===null)throw Error('No controlled Dynasty team');
+  const cleanText=v=>typeof v==='string'&&v.trim()?v.trim():null;
+  const tag=v=>{const s=cleanText(v)?.replace(/^#+/,'');return s&&/^[\p{L}\p{N}_]+$/u.test(s)?'#'+s:null;};
   const teamRefs=new Map(),teams=[],rawTeams=[];
   for(const {key,v,capacity} of await records('Team')){
     teamRefs.set(key,v.TeamIndex);if(capacity<=1)continue;
-    teams.push({id:v.TeamIndex,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
+    const coachRecord=await resolve(v.HeadCoach),coach=coachRecord?.type==='Coach'&&coachRecord.v.TeamIndex===v.TeamIndex?coachRecord:null;
+    const coachFirst=cleanText(coach?.v.FirstName),coachLast=cleanText(coach?.v.LastName),coachName=[coachFirst,coachLast].filter(Boolean).join(' ');
+    const seasonSlots=arraySlots?await arraySlots(v.TeamSeasonStats):[];
+    const currentStats=seasonSlots[0];
+    const seasonStats=currentStats?.type==='TeamStats'?{season:season.CurrentSeasonYear,slot:0,stats:currentStats.v}:null;
+    const headCoach=coachName?{id:coach.key,name:coachName,firstName:coachFirst,lastName:coachLast}:null;
+    teams.push({id:v.TeamIndex,seasonStats,nickname:cleanText(v.NickName),nicknameAlt:cleanText(v.NickNameAlt),hashtags:[...new Set([tag(v.Hashtag1),tag(v.Hashtag2)].filter(Boolean))],headCoach,name:v.DisplayName||v.LongName||v.ShortName,logo:v.TEAM_LOGO,
       mediaRank:v.MediaPoll_CurrentRank,mediaLastRank:v.MediaPoll_LastWeeksRank,
       coachesRank:v.CoachesPoll_CurrentRank,coachesLastRank:v.CoachesPoll_LastWeeksRank,
       cfpRank:v.CFPPoll_CurrentRank,cfpLastRank:v.CFPPoll_LastWeeksRank,
       conferenceRank:v.CurSeasonConfStanding,conferenceLastRank:v.LastWeekConferenceStanding,
       conferenceWins:v.ConfWin,conferenceLosses:v.ConfLoss,conferenceTies:v.ConfTie,
-      wins:v.HomeWin+v.RoadWin,losses:v.HomeLoss+v.RoadLoss});rawTeams.push(v);
+      wins:v.HomeWin+v.RoadWin,losses:v.HomeLoss+v.RoadLoss,ties:(v.HomeTie??0)+(v.RoadTie??0)});rawTeams.push(v);
   }
   const teamIndex=async ref=>{const t=await resolve(ref);return t?teamRefs.get(t.key)??t.v.TeamIndex:null;};
+  const teamName=async ref=>{const t=await resolve(ref);return t?.v.DisplayName||t?.v.LongName||t?.v.ShortName||null;};
   const conferences=[];
   for(const {key,v:c} of await records('Conference')){
     if(!c.Name&&!c.TeamSlots?.includes('1'))continue;
@@ -37,7 +46,7 @@ export async function normalizeDynasty({records,resolve,array},identity) {
   const players=[],playerRefs=new Map(),rawPlayers=[];
   for(const {key,v:p} of await records('Player')){
     const player={id:key,name:`${p.FirstName} ${p.LastName}`,position:p.Position,personality:['Leader','Intense','Entertainer','TeamPlayer','Unpredictable'].includes(p.Personality)?p.Personality:null,team:p.TeamIndex,
-      portrait:p.PLYR_PORTRAIT,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,
+      jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,
       injury:p.InjuryStatus,injuryType:p.InjuryType,injuryWeek:p.LatestInjuryWeek,injuryYear:p.LatestInjuryYear,
       injuryStage:p.LatestInjuryStage,minInjury:p.MinInjuryDuration,maxInjury:p.MaxInjuryDuration,
       transferRisk:p.AbsoluteTransferChance,nil:p.CurrentNILCompensation,stars:p.ProspectStarRating};
@@ -48,10 +57,10 @@ export async function normalizeDynasty({records,resolve,array},identity) {
     if(capacity<=1||g.IsPractice||g.SeasonYear!==season.CurrentYear)continue;
     const home=await teamIndex(g.HomeTeam),away=await teamIndex(g.AwayTeam);if(home==null||away==null)continue;
     const game={id:key,year:g.SeasonYear,week:g.SeasonWeek,phase:g.SeasonWeekType,status:g.GameStatus,
-      home,away,homeScore:g.HomeScore,awayScore:g.AwayScore,month:g.GameDateMonth,day:g.GameDateDay,
+      home,away,homeName:await teamName(g.HomeTeam),awayName:await teamName(g.AwayTeam),homeScore:g.HomeScore,awayScore:g.AwayScore,month:g.GameDateMonth,day:g.GameDateDay,
       weekday:g.DayOfWeek,time:g.TimeOfDay,spotlight:g.GameOfTheWeekScore,
       thanksgiving:g.ThanksgivingFlag,christmas:g.ChristmasFlag,newYears:g.NewYearsFlag};
-    if([season.CurrentWeek-1,season.CurrentWeek].includes(g.SeasonWeek)&&g.SeasonWeekType===season.CurrentWeekType&&['HomeWon','AwayWon','Tie'].includes(g.GameStatus)){
+    if(g.SeasonWeek<=season.CurrentWeek&&g.SeasonWeekType===season.CurrentWeekType&&['HomeWon','AwayWon','Tie'].includes(g.GameStatus)){
       game.homeStats=(await resolve(g.HomeTeamStatCache))?.v??null;game.awayStats=(await resolve(g.AwayTeamStatCache))?.v??null;
     }
     games.push(game);gameRefs.set(key,game);
