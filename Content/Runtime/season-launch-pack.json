@@ -1,0 +1,415 @@
+{
+  "revision": "season-launch-v71",
+  "families": {
+    "launch.rebuild": [
+      {
+        "id": "launch.rebuild.1",
+        "body": "After a {wins}–{losses} season, {school} has to earn the benefit of the doubt again. The first step is putting a more competitive team on the field every Saturday."
+      },
+      {
+        "id": "launch.rebuild.2",
+        "body": "{school} went {wins}–{losses} last year. Nobody around this program needs a reminder. This season is about giving people a reason to believe things are moving forward."
+      }
+    ],
+    "launch.return": [
+      {
+        "id": "launch.return.1",
+        "body": "{school} is coming off a {wins}–{losses} season. That is the backdrop for this camp: what carries over, and where does the next step come from?"
+      },
+      {
+        "id": "launch.return.2",
+        "body": "Last year: {wins}–{losses} for {school}. A new schedule brings a new set of questions. Last season gives us context; it does not give this team any wins."
+      }
+    ],
+    "launch.champion": [
+      {
+        "id": "launch.champion.1",
+        "body": "The national champions are back. A new season for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "launch.champion.2",
+        "body": "A championship to defend. A season to attack. {nickname} football. {hashtag}"
+      }
+    ],
+    "launch.playoff_return": [
+      {
+        "id": "launch.playoff_return.1",
+        "body": "{school} reached the {finish} last season after going {wins}–{losses}. That gives this year a clear measuring stick. Getting back is an expectation; getting further is the challenge."
+      },
+      {
+        "id": "launch.playoff_return.2",
+        "body": "The last {school} season ended in the {finish}. This is a program that knows the playoff standard now. The interesting part is whether it can meet it again."
+      }
+    ],
+    "launch.conference_defense": [
+      {
+        "id": "launch.conference_defense.1",
+        "body": "Conference champions. Ready to write the next chapter. {hashtag}"
+      },
+      {
+        "id": "launch.conference_defense.2",
+        "body": "The {nickname} begin a new season as defending conference champions. {hashtag}"
+      }
+    ],
+    "launch.bowl_return": [
+      {
+        "id": "launch.bowl_return.1",
+        "body": "{school} follows a {wins}–{losses} season and {bowlResult}. The program has something concrete to build on as the new season approaches."
+      },
+      {
+        "id": "launch.bowl_return.2",
+        "body": "Last season brought {bowlResult} for {school}. Camp now turns the attention to what this group can add to that foundation."
+      }
+    ],
+    "launch.new_coach": [
+      {
+        "id": "launch.new_coach.1",
+        "body": "First season for {coach} at {school}. There is no record here to fall back on yet. The opener will be the first real look at what this staff wants its team to be."
+      },
+      {
+        "id": "launch.new_coach.2",
+        "body": "A new voice at {school}: {coach} begins his first season in charge. The expectations are familiar. The way this team goes about meeting them may look different."
+      }
+    ],
+    "launch.veteran_coach": [
+      {
+        "id": "launch.veteran_coach.1",
+        "body": "Year {seasonNumber} for {coach} at {school}. There is continuity at the top. Now the question is what this particular roster can do with it."
+      },
+      {
+        "id": "launch.veteran_coach.2",
+        "body": "{coach} enters season {seasonNumber} at {school}. The program knows his approach. This camp is about finding the players who will carry it onto the field."
+      }
+    ],
+    "launch.recruiter": [
+      {
+        "id": "launch.recruiter.1",
+        "body": "{coach} has a recruiting-first background at {school}. That can shape a program over several classes. This season, the conversation turns to how much of that work shows up on Saturdays."
+      },
+      {
+        "id": "launch.recruiter.2",
+        "body": "The recruiting work is a central part of {coach}’s approach at {school}. Building relationships gets players in the door; developing the roster is what comes next."
+      }
+    ],
+    "launch.developer": [
+      {
+        "id": "launch.developer.1",
+        "body": "Player development is a central part of {coach}’s approach at {school}. Camp is where that reputation meets the next group trying to earn a role."
+      },
+      {
+        "id": "launch.developer.2",
+        "body": "At {school}, {coach}’s background puts the emphasis on developing talent. The useful camp question: who looks ready to turn that work into a larger role?"
+      }
+    ],
+    "launch.coordinator": [
+      {
+        "id": "launch.coordinator.1",
+        "body": "{coordinator} brings a scheme-focused background to the {school} {side}. The opener will tell us more about how that approach fits this year’s personnel."
+      },
+      {
+        "id": "launch.coordinator.2",
+        "body": "Watching the {school} {side} this camp with {coordinator} in charge. His background leans toward scheme and matchups; the personnel will determine what that looks like on Saturdays."
+      }
+    ],
+    "launch.battle": [
+      {
+        "id": "launch.battle.1",
+        "body": "A {position} pairing to watch at {school}: {first} and {second}. They are close enough in our preseason evaluation that the order should not be treated as settled."
+      },
+      {
+        "id": "launch.battle.2",
+        "body": "{school} has a close {position} competition on paper between {first} and {second}. Both are near the top of the current depth chart. Camp gives them a chance to separate."
+      }
+    ],
+    "launch.freshman": [
+      {
+        "id": "launch.freshman.1",
+        "body": "True freshman {position} {playerName} is one to know at {school}. Our preseason evaluation puts him among the more promising newcomers on this roster. Now he has to earn his snaps."
+      },
+      {
+        "id": "launch.freshman.2",
+        "body": "{school} newcomer to keep an eye on: {playerName}, a true freshman {position}. The early evaluation is encouraging. How quickly he can handle a college role is the next question."
+      }
+    ],
+    "launch.breakout": [
+      {
+        "id": "launch.breakout.1",
+        "body": "Breakout watch at {school}: {classLabel} {position} {playerName}. There is enough talent here to make him interesting before the numbers arrive. A candidate, not a coronation."
+      },
+      {
+        "id": "launch.breakout.2",
+        "body": "{playerName} is a name worth knowing at {school}. The {classLabel} {position} stands out in our preseason evaluation. I want to see how much responsibility he earns early."
+      }
+    ],
+    "launch.senior": [
+      {
+        "id": "launch.senior.1",
+        "body": "One more season with my guys. Going to appreciate every bit of this {hashtag}"
+      },
+      {
+        "id": "launch.senior.2",
+        "body": "Last ride with this team. Thankful for everybody who has been part of it. {hashtag}"
+      },
+      {
+        "id": "launch.senior.3",
+        "body": "Senior season. Same love for this place. Let’s make some memories {hashtag}"
+      }
+    ],
+    "launch.nil": [
+      {
+        "id": "launch.nil.1",
+        "body": "Appreciate the people supporting me on and off the field. Blessed to have these opportunities {hashtag}"
+      },
+      {
+        "id": "launch.nil.2",
+        "body": "Grateful for the support around me. Football gave me a platform and I don’t take that lightly. {hashtag}"
+      },
+      {
+        "id": "launch.nil.3",
+        "body": "A lot to be thankful for on and off the field. Appreciate everyone in my corner {hashtag}"
+      }
+    ],
+    "launch.spotlight": [
+      {
+        "id": "launch.spotlight.1",
+        "body": "Preseason All-American recognition for {position} {playerName}. Ready for what’s next. {hashtag}"
+      },
+      {
+        "id": "launch.spotlight.2",
+        "body": "{playerName}. Preseason All-American. {nickname}. {hashtag}"
+      }
+    ],
+    "launch.heisman": [
+      {
+        "id": "launch.heisman.1",
+        "body": "An early Heisman name to file away: {school} {position} {playerName}. He has the talent to enter that conversation. The production still has to follow."
+      },
+      {
+        "id": "launch.heisman.2",
+        "body": "{school}’s {playerName} belongs on a preseason Heisman watch list. That is a projection, not a ranking. A strong start is how the {position} turns the idea into a real campaign."
+      }
+    ],
+    "launch.darkhorse": [
+      {
+        "id": "launch.darkhorse.1",
+        "body": "My unranked team to watch: {school}. Our preseason evaluation likes the roster more than the AP poll does. I’m interested in the gap. Let’s see if the games close it."
+      },
+      {
+        "id": "launch.darkhorse.2",
+        "body": "{school} starts outside the AP Top 25, but I like the roster enough to keep an eye on them. Plenty of teams want the dark-horse label. This one has a case."
+      }
+    ],
+    "launch.schedule_opportunity": [
+      {
+        "id": "launch.schedule_opportunity.1",
+        "body": "None of {school}’s scheduled regular-season opponents appears in the preseason AP Top 25. That is an opening on paper. It is also a snapshot: unranked does not mean harmless."
+      },
+      {
+        "id": "launch.schedule_opportunity.2",
+        "body": "The preseason AP poll puts no ranked opponents on {school}’s regular-season schedule. There is room to build momentum here. The rankings will move long before this schedule is finished."
+      }
+    ],
+    "launch.transfer": [
+      {
+        "id": "launch.transfer.1",
+        "body": "{school} has an experienced addition in {position} {playerName}, who recorded production at {formerSchool} last season. That is a different starting point from asking a newcomer to learn college football from scratch."
+      },
+      {
+        "id": "launch.transfer.2",
+        "body": "Offseason roster note for {school}: {playerName} brings last season’s experience from {formerSchool}. The {position} has already produced at the college level. The fit here is the next part to watch."
+      }
+    ],
+    "launch.kickoff": [
+      {
+        "id": "launch.kickoff.1",
+        "body": "Football season is here. Let’s go, {nickname}. {hashtag}"
+      },
+      {
+        "id": "launch.kickoff.2",
+        "body": "A new season starts now. {nickname}, we’re ready. {hashtag}"
+      },
+      {
+        "id": "launch.kickoff.3",
+        "body": "The wait is over. {nickname} football is back. {hashtag}"
+      }
+    ],
+    "launch.opening_preview": [
+      {
+        "id": "launch.opening_preview.1",
+        "body": "Opening-week look at {school} against {opponent}. The first game gives us something camp cannot: a full-speed test against a team with a different plan. Plenty to learn from this one."
+      },
+      {
+        "id": "launch.opening_preview.2",
+        "body": "{school} gets {opponent} to open the season. Early games are useful precisely because so much is unsettled. I’m watching how quickly each side finds something it can repeat."
+      }
+    ],
+    "launch.venue": [
+      {
+        "id": "launch.venue.1",
+        "body": "Opening week at {stadium}. Our house. {nickname} football. {hashtag}"
+      },
+      {
+        "id": "launch.venue.2",
+        "body": "Back at {stadium}. The {nickname} are ready for opening week. {hashtag}"
+      }
+    ],
+    "launch.coach_debut": [
+      {
+        "id": "launch.coach_debut.1",
+        "body": "The {coach} era at {school} opens against {opponent}. First games rarely answer everything, but this one starts the public evaluation of a new staff."
+      },
+      {
+        "id": "launch.coach_debut.2",
+        "body": "{school} begins its first season under {coach} against {opponent}. The first look at a new head coach’s team always comes with a longer list of questions."
+      }
+    ],
+    "launch.countdown": [
+      {
+        "id": "launch.countdown.1",
+        "body": "Our opener: Week {openerWeek}, against {opponent}. The {nickname} are getting closer. {hashtag}"
+      },
+      {
+        "id": "launch.countdown.2",
+        "body": "Season opener on deck: {opponent}, Week {openerWeek}. {hashtag}"
+      }
+    ],
+    "launch.depth": [
+      {
+        "id": "launch.depth.1",
+        "body": "{classLabel} {playerName} is listed first at QB on {school}’s current depth chart. That is the order heading into the opener against {opponent}; it is not a guarantee about every snap."
+      },
+      {
+        "id": "launch.depth.2",
+        "body": "A first-depth-chart note at {school}: {playerName} is at the top of the QB list. The {classLabel} is in line for the opening assignment against {opponent}."
+      }
+    ],
+    "launch.player_opening": [
+      {
+        "id": "launch.player_opening.1",
+        "body": "Football is back. Ready to go with my brothers {hashtag}"
+      },
+      {
+        "id": "launch.player_opening.2",
+        "body": "Been waiting on this. Appreciate everybody rocking with us. {hashtag}"
+      },
+      {
+        "id": "launch.player_opening.3",
+        "body": "Season time!! Love this team. Let’s go {hashtag}"
+      },
+      {
+        "id": "launch.player_opening.4",
+        "body": "Ready for Saturdays again. See y’all soon {hashtag}"
+      }
+    ],
+    "launch.player_opening_qb": [
+      {
+        "id": "launch.player_opening_qb.1",
+        "body": "Excited to get this season started with my guys. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "launch.player_opening_qb.2",
+        "body": "A lot of work went into this offseason. Ready to get back out there together {hashtag}"
+      },
+      {
+        "id": "launch.player_opening_qb.3",
+        "body": "Season is here. Grateful for another opportunity with this team. {hashtag}"
+      }
+    ],
+    "launch.favorite": [
+      {
+        "id": "launch.favorite.1",
+        "body": "My preseason lean in the {conference}: {school}. Our roster-based model puts them at the front of this league. It is a forecast, and the conference schedule gets the final say."
+      },
+      {
+        "id": "launch.favorite.2",
+        "body": "Picking {school} in the {conference} before we see a snap. The roster gives them a real case. I’m not pretending the gap is a trophy."
+      }
+    ],
+    "launch.recruit_watch": [
+      {
+        "id": "launch.recruit_watch.1",
+        "body": "Definitely watching {school} this opening week. Want to see how they get after it"
+      },
+      {
+        "id": "launch.recruit_watch.2",
+        "body": "College football back and {school} is on my screen this week. Ready to watch"
+      },
+      {
+        "id": "launch.recruit_watch.3",
+        "body": "Gonna be locked in on {school} this week. Football season finally here"
+      }
+    ],
+    "launch.recruit_tag": [
+      {
+        "id": "launch.recruit_tag.1",
+        "body": "{tagHandle} good luck this season!! gonna be watching {school}"
+      },
+      {
+        "id": "launch.recruit_tag.2",
+        "body": "{tagHandle} go do your thing this year. Got {school} on my watch list"
+      },
+      {
+        "id": "launch.recruit_tag.3",
+        "body": "Ready to watch {school}. {tagHandle} have a year!!"
+      }
+    ],
+    "launch.high_school": [
+      {
+        "id": "launch.high_school.1",
+        "body": "High school season coming. Ready to get back out there with my guys"
+      },
+      {
+        "id": "launch.high_school.2",
+        "body": "Last offseason felt long. Ready to play some football again"
+      },
+      {
+        "id": "launch.high_school.3",
+        "body": "Time to go make some memories with my team. Season coming fast"
+      }
+    ],
+    "launch.visit": [
+      {
+        "id": "launch.visit.1",
+        "body": "Heading to {school} for a visit this opening week. Excited to get around the team"
+      },
+      {
+        "id": "launch.visit.2",
+        "body": "Visit coming up at {school}. Can’t wait to see it for myself"
+      },
+      {
+        "id": "launch.visit.3",
+        "body": "Gonna be at {school} this week. Appreciate the invite!!"
+      }
+    ],
+    "launch.dominant_debut": [
+      {
+        "id": "launch.dominant_debut.1",
+        "body": "{school} opens with a {score} win over {opponent}. That is how you take care of an opener. It is still one game. Both things can be true."
+      },
+      {
+        "id": "launch.dominant_debut.2",
+        "body": "The first {school} result is a {margin}-point win over {opponent}. Time for the internet to skip directly to December. Good start; let’s get a second data point."
+      }
+    ],
+    "launch.close_debut": [
+      {
+        "id": "launch.close_debut.1",
+        "body": "{school} survives {opponent}, {score}. Opening week has already supplied enough stress for a month. A close win counts; it also leaves plenty to examine."
+      },
+      {
+        "id": "launch.close_debut.2",
+        "body": "Final: {school} {score} over {opponent}. A one-score opener is a useful reminder that preseason certainty has a very short shelf life."
+      }
+    ],
+    "launch.opening_takeaway": [
+      {
+        "id": "launch.opening_takeaway.1",
+        "body": "{school} starts with a {score} win over {opponent}. We have actual football to discuss now. I’m resisting the urge to turn one result into an entire season, barely."
+      },
+      {
+        "id": "launch.opening_takeaway.2",
+        "body": "Opening-week result: {school} over {opponent}, {score}. Encouraging start. Also exactly one game, which is apparently enough for everyone to have a playoff bracket ready."
+      }
+    ]
+  }
+}

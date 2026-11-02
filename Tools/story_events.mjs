@@ -2,6 +2,7 @@ import {advancedAnalytics} from './advanced_analytics.mjs';
 import {worldEvents,recruitSignificance} from './world_events.mjs';
 import {projectLine,rosterStrengths} from './betting_model.mjs';
 import {teamAnalytics} from './team_analytics.mjs';
+import {seasonLaunchEvents} from './season_launch_events.mjs';
 import {preseasonEvents} from './preseason_events.mjs';
 import {publicPoll} from './public_polls.mjs';
 // Read-only Dynasty facts. This module contains no tweet prose or account identities.
@@ -107,5 +108,6 @@ export function detectEvents(s,previous=null){
   for(const a of advancedAnalytics(s))emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
   for(const e of worldEvents(s))emit(e.id,e.category,e.facts,e.options);
   for(const e of preseasonEvents(s,{strengths:modelStrengths}))emit(e.id,e.category,e.facts,e.options);
+  for(const e of seasonLaunchEvents(s))emit(e.id,e.category,e.facts,e.options);
   return events;
 }

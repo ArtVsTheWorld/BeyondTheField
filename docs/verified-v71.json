@@ -1,0 +1,83 @@
+{
+  "format": 1,
+  "version": "v71 second-test expansion and supported skipped-week recovery",
+  "nativeSha256": "a133f47ab49a2906fe7d3e23ea5082a9b0256f9b2f785bfe077e8d1276119079",
+  "adapterSha256": "34aeb75b004ec80e4efbad291ba5ad67a3d2833cac30e3b49b8b1590f8acd171",
+  "zipSha256": "c71fd2b8008aed34adda8bf78c080d46ff4029fcd7cd525d04e768dc662586ac",
+  "nodeTestsPassed": 129,
+  "nativeTestsPassed": true,
+  "realCatalogDecoderPassed": true,
+  "adapterSmokePassed": true,
+  "installedAdapterSmokePassed": true,
+  "publicationPolicyVersion": 2,
+  "families": 231,
+  "variants": 423,
+  "newFamilies": 37,
+  "newVariants": 84,
+  "liveDynasty": {
+    "gamePid": 16048,
+    "leagueId": -107703141,
+    "team": 15,
+    "week": 4,
+    "stories": 2515,
+    "forYou": 30,
+    "saveRequired": false
+  },
+  "editions": [
+    {
+      "phase": "PreSeason",
+      "week": 0,
+      "stories": 2382,
+      "recovered": false
+    },
+    {
+      "phase": "RegularSeason",
+      "week": 0,
+      "stories": 62,
+      "recovered": false
+    },
+    {
+      "phase": "RegularSeason",
+      "week": 1,
+      "stories": 2413,
+      "recovered": false
+    },
+    {
+      "phase": "RegularSeason",
+      "week": 2,
+      "stories": 2710,
+      "recovered": false
+    },
+    {
+      "phase": "RegularSeason",
+      "week": 3,
+      "stories": 520,
+      "recovered": true
+    },
+    {
+      "phase": "RegularSeason",
+      "week": 4,
+      "stories": 2515,
+      "recovered": false
+    }
+  ],
+  "earlierObservedEditionsUnchanged": true,
+  "liveObserved": [
+    "Native Week 3 recovered label",
+    "National recovered recaps and valid score separators",
+    "Scrolled to recovered post 49/94 with feed clipping below controls",
+    "More diverse beat author names and native microphone icons"
+  ],
+  "livePending": [
+    "Official on-white logos and Barstool secondary logos",
+    "FanDuel coin icon",
+    "Final controller regression",
+    "New genuine preseason/opening content run",
+    "Fresh v71 MMC cold launch"
+  ],
+  "optionalPending": [
+    "User ESPN PNG native texture registration"
+  ],
+  "historyBackupChecksumsVerified": true,
+  "allCatalogueStoriesFreeOfReplacementGlyphs": true
+}

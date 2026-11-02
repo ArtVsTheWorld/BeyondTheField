@@ -1,3 +1,4 @@
+import {publishReply} from '../Tools/publication_policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildFeed} from '../Tools/feed_engine.mjs';
@@ -48,7 +49,7 @@ test('midweek unsaved recruiting renders once, persists identity, and does not r
 });
 test('analyst replies quote a real parent, retain school context, and stay out of All Posts without a parent',()=>{
  const s=fixture(),e=event('analytics',{metric:'rushingYardsPerGame',school:'Harbor State',sampleGames:7,rushingYards:1643,rushingYardsPerGame:1643/7,nationalRank:3,nationalRankTied:false,pollRank:8,previousPollRank:12},{scopes:['team','national']});
- const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.ok(reply);assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8 feels about right'));assert.equal(reply.curated,true);
+ const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.equal(Boolean(reply),publishReply(s,'reply',parent.id));if(reply)assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8 feels about right'));if(reply)assert.equal(reply.curated,true);
 });
 
 test('all five supported analyst measures resolve their actual denominators and polarity',()=>{

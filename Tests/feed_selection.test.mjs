@@ -8,10 +8,10 @@ test('every view ranks parent threads by likes, keeps replies adjacent and break
  assert.deepEqual(curate(pool).map(p=>p.id),['high','reply','middle','tie','low']);
  assert.deepEqual(scopeViews(pool).national,['high','tie']);
 });
-test('curated mix hits 35/25/40 when strong distinct candidates are available',()=>{
-  const pool=['national','conference','team'].flatMap(scope=>Array.from({length:15},(_,i)=>story(scope+i,scope,100-i)));
+test('curated mix favors the user team at 55/20/25 when strong distinct candidates are available',()=>{
+  const pool=['national','conference','team'].flatMap(scope=>Array.from({length:20},(_,i)=>story(scope+i,scope,100-i)));
   const selected=curate(pool);assert.equal(selected.length,30);
-  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:11,conference:7,team:12});
+  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:8,conference:6,team:16});
 });
 test('sparse scope redistributes available slots without filler or duplicate stories',()=>{
   const pool=Array.from({length:35},(_,i)=>story('n'+i,'national'));pool.push(story('t','team'));
@@ -46,4 +46,10 @@ test('preseason and regular Week 0 are distinct single editions in chronological
  const current=edition(0),pre=publishWeek({...edition(0),phase:'PreSeason',key:'1/2027/PreSeason/0'}),future=publishWeek({...edition(0),phase:'BowlSeason1',key:'1/2027/BowlSeason1/0'});
  pre.stories[0].body='The original preseason story';current.stories[0].body='The regular-season story';const c=buildCatalog(current,[future,pre]);assert.equal(c.catalogVersion,2);assert.deepEqual(c.weeks.map(w=>[w.phase,w.week]),[['PreSeason',0],['RegularSeason',0]]);assert.equal(c.activeWeekKey,current.key);assert.equal(c.weeks[0].stories[0].body,'The original preseason story');assert.equal(c.weeks[1].stories[0].body,'The regular-season story');
  assert.equal(buildCatalog(pre,[current,future]).weeks.length,1);
+});
+
+test('For You fills a final slot by relaxing soft variety caps, while preserving offer and account limits',()=>{
+ const pool=Array.from({length:80},(_,i)=>({...story('p'+i,'team',100-i,'analytics'),handle:'@account'+Math.floor(i/3),voice:'analyst',templateId:'shared'}));
+ const selected=curate(pool);assert.equal(selected.length,30);assert.equal(new Set(selected.map(p=>p.id)).size,30);
+ for(const handle of new Set(selected.map(p=>p.handle)))assert.ok(selected.filter(p=>p.handle===handle).length<=3);
 });

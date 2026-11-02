@@ -31,7 +31,12 @@ player={
  'Neutral':('ready to get back out there. appreciate everybody riding with us {hashtag}','new season coming. thankful i get to do this {hashtag}'),
  'QB':('excited for another season with this team. appreciate all the support {hashtag}','can’t wait to get back out there with my guys. see y’all soon {hashtag}')
 }
-for voice,bodies in player.items():add('preseason.player.'+voice,*bodies)
+for voice,bodies in player.items():
+    mixed=[]
+    for i,body in enumerate(bodies):
+        if i%2==0:body=body[0].upper()+body[1:]
+        mixed.append(body)
+    add('preseason.player.'+voice,*mixed)
 add('preseason.opener.beat',
     '{school} opens the season against {opponent}. That is the first real checkpoint after camp, with the rest of the schedule still ahead.',
     'First up for {school}: {opponent}. An offseason of preparation is about to meet an actual opponent.',

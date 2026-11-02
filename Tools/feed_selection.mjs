@@ -13,13 +13,14 @@ export function conversationOrder(stories){
  for(const p of roots.sort(byLikes))visit(p);return result;
 }
 export function curate(stories,limit=30){
- const pool=stories.filter(p=>p.curated!==false&&p.scopes.length).sort(order),map=new Map(pool.map(p=>[p.id,p]));
- const target={national:Math.round(limit*.35),conference:Math.floor(limit*.25),team:0};target.team=limit-target.national-target.conference;
+ const relevance=(a,b)=>Number(b.scopes.includes('team'))-Number(a.scopes.includes('team'))||order(a,b);
+ const pool=stories.filter(p=>p.curated!==false&&p.scopes.length).sort(relevance),map=new Map(pool.map(p=>[p.id,p]));
+ const target={national:Math.round(limit*.25),conference:Math.floor(limit*.20),team:0};target.team=limit-target.national-target.conference;
  const selected=[],used=new Set(),counts={national:0,conference:0,team:0},categories=new Map(),threads=new Map(),templates=new Map(),accounts=new Map(),voices=new Map();
  const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5,'preseason':5};
  const voiceMax={beat:8,analyst:4,official:4,player:4,fan:5,recruit:3,model:1};
  const scaled=n=>Math.ceil(n*limit/20);
- function accept(post,respectTargets=false){
+ function accept(post,respectTargets=false,relaxed=false){
   const bundle=[],seen=new Set();let p=post;
   while(p&&!used.has(p.id)){if(seen.has(p.id)||p.curated===false)return false;seen.add(p.id);bundle.unshift(p);if(!p.replyTo)break;p=map.get(p.replyTo);if(!p)return false;}
   if(!bundle.length||selected.length+bundle.length>limit)return false;
@@ -27,7 +28,8 @@ export function curate(stories,limit=30){
   for(const item of bundle){
    const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();
    const accountMax=['player','fan'].includes(item.voice)?2:3;
-   if((c.get(category)??0)>=(category==='offers'?1:scaled(categoryMax[category]??2))||(t.get(thread)??0)>=2||item.templateId&&(forms.get(item.templateId)??0)>=2||account&&(a.get(account)??0)>=accountMax||item.voice&&(v.get(item.voice)??0)>=scaled(voiceMax[item.voice]??20))return false;
+   if(category==='offers'&&(c.get(category)??0)>=1||account&&(a.get(account)??0)>=accountMax||relaxed&&(t.get(thread)??0)>=3)return false;
+   if(!relaxed&&((c.get(category)??0)>=scaled(categoryMax[category]??2)||(t.get(thread)??0)>=2||item.templateId&&(forms.get(item.templateId)??0)>=2||item.voice&&(v.get(item.voice)??0)>=scaled(voiceMax[item.voice]??20)))return false;
    c.set(category,(c.get(category)??0)+1);t.set(thread,(t.get(thread)??0)+1);if(item.templateId)forms.set(item.templateId,(forms.get(item.templateId)??0)+1);if(account)a.set(account,(a.get(account)??0)+1);if(item.voice)v.set(item.voice,(v.get(item.voice)??0)+1);++byScope[scope];
   }
   if(respectTargets&&Object.keys(target).some(k=>byScope[k]>target[k]))return false;
@@ -37,7 +39,10 @@ export function curate(stories,limit=30){
  for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&!pool.some(x=>x.category==='upsets'&&x.thread===p.thread)&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
  for(const voice of ['player','fan','recruit'])for(const p of voice==='recruit'?[...pool].sort((a,b)=>Number(b.scopes.includes('team')||b.scopes.includes('relevant'))-Number(a.scopes.includes('team')||a.scopes.includes('relevant'))||order(a,b)):pool){if((voices.get(voice)??0)>=(voice==='recruit'?1:2))break;if(p.voice===voice)accept(p,true);}
  for(const scope of ['team','conference','national'])for(const p of pool){if(counts[scope]>=target[scope])break;if(bucketFor(p)===scope)accept(p,true);}
+ // Try the personalized quota with softer variety rules before borrowing national slots.
+ for(const p of pool){if(counts.team>=target.team)break;if(bucketFor(p)==='team')accept(p,true,true);}
  for(const p of pool){if(selected.length>=limit)break;accept(p);}
+ for(const p of pool){if(selected.length>=limit)break;accept(p,false,true);}
  // Editorial selection retains relevance/variety; presentation ranks threads by likes.
  return conversationOrder(selected);
 }
@@ -61,6 +66,6 @@ export function buildCatalog(active,history=[]){
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
   const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','publication'];
-  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
+  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
   return {...active,catalogVersion:2,activeWeekKey:active.key,weeks};
 }

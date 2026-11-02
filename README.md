@@ -126,3 +126,8 @@ The scope list is native Dynasty data, not a fixed conference/team list. The ins
 Only official team accounts use school logos. Beat reporters use the native microphone icon, analysts now use the newspaper icon, and fans use the social icon. Valid player/recruit portraits remain native. Active player jerseys use the same PlayerPortraits + TeamJerseys library pairing as the roster compositor; recruits retain neutral shirts. Counts are fictional engagement, seeded by publication/story identity and scaled by verified native brand-exposure grade, poll rank, voice, and national relevance. An existing same-week count is preserved across refreshes. Counts do not change simulation data or expose player ability. Coverage volume is not yet scaled by audience.
 
 The two existing dropdowns, native viewport mask, smooth scrolling and category/index metadata remain. Cards have a reserved engagement footer so long bodies do not overlap likes. The file-size guard is 128 MiB for multiweek catalogs, with separate 48-edition, 4,096-story and 512-scope bounds.
+
+
+## Second-test expansion (v71)
+
+The current package adds supported skipped-week recovery, native on-white/secondary logos, revised account identities, a stable 33% reply gate, more personalized 30-post selection, and 84 preseason/opening variants. The native DLL is `Build/DynastyEnhancerNative-v71.dll`; the MMC package is `Build/DynastyEnhancer-v71-MMC.zip`. See [coverage and data limits](docs/test-two-expansion.md). Automated validation now includes 129 Node tests plus native and MMC adapter checks. The optional supplied ESPN PNG still needs a separate native texture import.

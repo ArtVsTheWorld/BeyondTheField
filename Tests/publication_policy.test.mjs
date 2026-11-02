@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {publishOffer,currentPublicationPolicy} from '../Tools/publication_policy.mjs';
+import {publishOffer,publishReply,currentPublicationPolicy} from '../Tools/publication_policy.mjs';
 import {buildFeed} from '../Tools/feed_engine.mjs';
 import {updateRuntime} from '../Tools/runtime_lifecycle.mjs';
 import {resumeEdition} from '../Tools/runtime_archive.mjs';
@@ -16,6 +16,13 @@ test('unpublished offers remain observed events but have no standalone or orphan
  const repeated=buildFeed(s);assert.deepEqual(repeated.stories,f.stories);
 });
 test('the publication-policy change invalidates legacy offer caches without rerolling other active-week wording',()=>{
- const s=fixture();Object.assign(s.teams[0],{mediaRank:8,mediaLastRank:10});const a=updateRuntime(structuredClone(s)),legacy=structuredClone(a.state);assert.ok(a.catalog.stories.length);delete legacy.editions[0].feed.publicationPolicyVersion;assert.ok(resumeEdition(s,legacy));legacy.editions[0].feed.events.push({category:'offers'});assert.equal(resumeEdition(s,legacy),null);assert.equal(currentPublicationPolicy(legacy.editions[0].feed),false);
+ const s=fixture();Object.assign(s.teams[0],{mediaRank:8,mediaLastRank:10});const a=updateRuntime(structuredClone(s)),legacy=structuredClone(a.state);assert.ok(a.catalog.stories.length);delete legacy.editions[0].feed.publicationPolicyVersion;assert.equal(resumeEdition(s,legacy),null);legacy.editions[0].feed.events.push({category:'offers'});assert.equal(resumeEdition(s,legacy),null);assert.equal(currentPublicationPolicy(legacy.editions[0].feed),false);
  s.players=[{id:'prospect',name:'Jay Moss',team:255,position:'WR',personality:'Neutral'}];s.offers=[{player:'prospect',team:1}];s.commitments=[{player:'prospect',team:1,rank:1,stage:'HardCommitted',week:1}];const b=updateRuntime(s,legacy);assert.ok(b.catalog.stories.some(p=>p.category==='recruiting'));for(const p of a.catalog.stories.filter(p=>!p.replyTo)){const next=b.catalog.stories.find(q=>q.id===p.id);assert.equal(next?.body,p.body);assert.equal(next?.likes,p.likes);}
+});
+
+test('one stable 33 percent reply gate applies to each parent thread, independent of reply count, save name and user team',()=>{
+ const s=fixture(),parents=Array.from({length:10000},(_,i)=>'parent'+i),published=parents.filter(p=>publishReply(s,'reply',p));
+ assert.ok(published.length>3100&&published.length<3500,published.length);
+ for(const p of parents)assert.equal(publishReply(s,'another reply',p),publishReply(s,'reply',p));
+ s.source='renamed';s.userTeamIndex=2;assert.deepEqual(parents.filter(p=>publishReply(s,'reply',p)),published);
 });

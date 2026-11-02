@@ -285,7 +285,7 @@
     "recruit.offer.Leader": [
       {
         "id": "recruit.offer.Leader.1",
-        "body": "Thankful to receive an offer from {school}! Appreciate the staff for believing in me"
+        "body": "Thankful to receive an offer from {school}! Appreciate the staff for believing in me."
       },
       {
         "id": "recruit.offer.Leader.2",
@@ -295,7 +295,7 @@
     "recruit.offer.Intense": [
       {
         "id": "recruit.offer.Intense.1",
-        "body": "{school} offered. been waiting on that one"
+        "body": "{school} offered. been waiting on that one."
       },
       {
         "id": "recruit.offer.Intense.2",
@@ -305,7 +305,7 @@
     "recruit.offer.Entertainer": [
       {
         "id": "recruit.offer.Entertainer.1",
-        "body": "{school} offered!! yeah this one made my day"
+        "body": "{school} offered!! yeah this one made my day."
       },
       {
         "id": "recruit.offer.Entertainer.2",
@@ -315,13 +315,13 @@
     "recruit.offer.TeamPlayer": [
       {
         "id": "recruit.offer.TeamPlayer.1",
-        "body": "Thankful for an offer from {school}. Appreciate everyone who helped me get here"
+        "body": "Thankful for an offer from {school}. Appreciate everyone who helped me get here."
       }
     ],
     "recruit.offer.Unpredictable": [
       {
         "id": "recruit.offer.Unpredictable.1",
-        "body": "{school} offered. had to read that twice"
+        "body": "{school} offered. had to read that twice."
       },
       {
         "id": "recruit.offer.Unpredictable.2",
@@ -337,7 +337,7 @@
     "recruit.offer.faith": [
       {
         "id": "recruit.offer.faith.1",
-        "body": "AGTG! Blessed to receive an offer from {school}. shoutout to everyone who kept believing in me"
+        "body": "AGTG! Blessed to receive an offer from {school}. shoutout to everyone who kept believing in me."
       }
     ],
     "recruit.commit.Leader": [
@@ -355,7 +355,7 @@
     "recruit.commit.Entertainer": [
       {
         "id": "recruit.commit.Entertainer.1",
-        "body": "it’s {school}!! y’all stuck with me now {hashtag}"
+        "body": "It’s {school}!! y’all stuck with me now {hashtag}"
       }
     ],
     "recruit.commit.TeamPlayer": [
@@ -415,7 +415,7 @@
       },
       {
         "id": "player.win.Entertainer.3",
-        "body": "good win. the mentions can be open tonight lol"
+        "body": "Good win. the mentions can be open tonight lol."
       },
       {
         "id": "player.win.Entertainer.4",
@@ -425,7 +425,7 @@
     "player.win.TeamPlayer": [
       {
         "id": "player.win.TeamPlayer.1",
-        "body": "{playerName} was eating today. love seeing my guys get theirs"
+        "body": "{playerName} was eating today. love seeing my guys get theirs."
       },
       {
         "id": "player.win.TeamPlayer.2",
@@ -435,7 +435,7 @@
     "player.win.Unpredictable": [
       {
         "id": "player.win.Unpredictable.1",
-        "body": "man i love this team"
+        "body": "Man I love this team."
       },
       {
         "id": "player.win.Unpredictable.2",
@@ -451,7 +451,7 @@
     "player.win.QB": [
       {
         "id": "player.win.QB.1",
-        "body": "Appreciate y’all showing up for us. Love this team"
+        "body": "Appreciate y’all showing up for us. Love this team."
       },
       {
         "id": "player.win.QB.2",
@@ -461,7 +461,7 @@
     "player.rivalry": [
       {
         "id": "player.rivalry.1",
-        "body": "Rivalry W. Y’all know how much that one means\n\nKeep that scoreboard up a little longer"
+        "body": "Rivalry W. Y’all know how much that one means\n\nKeep that scoreboard up a little longer."
       }
     ],
     "fan.narrow_win": [
@@ -571,7 +571,7 @@
     "reply.player.commit.Leader": [
       {
         "id": "reply.player.commit.Leader.1",
-        "body": "{parentHandle} welcome to the {nickname}! glad you’re joining us"
+        "body": "{parentHandle} welcome to the {nickname}! glad you’re joining us."
       },
       {
         "id": "reply.player.commit.Leader.2",
@@ -593,7 +593,7 @@
       },
       {
         "id": "reply.player.commit.Intense.3",
-        "body": "{parentHandle} yeah we needed this one"
+        "body": "{parentHandle} yeah we needed this one."
       }
     ],
     "reply.player.commit.Entertainer": [
@@ -607,13 +607,13 @@
       },
       {
         "id": "reply.player.commit.Entertainer.3",
-        "body": "{parentHandle} had to come say welcome. good choice lol"
+        "body": "{parentHandle} had to come say welcome. good choice lol."
       }
     ],
     "reply.player.commit.TeamPlayer": [
       {
         "id": "reply.player.commit.TeamPlayer.1",
-        "body": "{parentHandle} happy for you and your people. welcome aboard"
+        "body": "{parentHandle} happy for you and your people. welcome aboard."
       },
       {
         "id": "reply.player.commit.TeamPlayer.2",
@@ -627,7 +627,7 @@
     "reply.player.commit.Unpredictable": [
       {
         "id": "reply.player.commit.Unpredictable.1",
-        "body": "{parentHandle} oh we got one"
+        "body": "{parentHandle} oh we got one."
       },
       {
         "id": "reply.player.commit.Unpredictable.2",
@@ -635,7 +635,7 @@
       },
       {
         "id": "reply.player.commit.Unpredictable.3",
-        "body": "{parentHandle} this just made my day"
+        "body": "{parentHandle} this just made my day."
       }
     ],
     "reply.player.commit.Neutral": [
@@ -751,7 +751,7 @@
     "reply.player.teammate": [
       {
         "id": "reply.player.teammate.1",
-        "body": "{parentHandle} was fun watching you get yours"
+        "body": "{parentHandle} was fun watching you get yours."
       },
       {
         "id": "reply.player.teammate.2",
@@ -759,7 +759,7 @@
       },
       {
         "id": "reply.player.teammate.3",
-        "body": "{parentHandle} love seeing the work show up"
+        "body": "{parentHandle} love seeing the work show up."
       },
       {
         "id": "reply.player.teammate.4",
@@ -793,7 +793,7 @@
     "player.performance.Entertainer": [
       {
         "id": "player.performance.Entertainer.1",
-        "body": "{statLine} and the W? yeah i’m keeping that one"
+        "body": "{statLine} and the W? yeah I’m keeping that one."
       },
       {
         "id": "player.performance.Entertainer.2",
@@ -803,7 +803,7 @@
     "player.performance.TeamPlayer": [
       {
         "id": "player.performance.TeamPlayer.1",
-        "body": "couldn’t do any of this without my guys. appreciate y’all"
+        "body": "Couldn’t do any of this without my guys. appreciate y’all."
       },
       {
         "id": "player.performance.TeamPlayer.2",
@@ -813,7 +813,7 @@
     "player.performance.Unpredictable": [
       {
         "id": "player.performance.Unpredictable.1",
-        "body": "might read the mentions tonight. good win"
+        "body": "Might read the mentions tonight. good win."
       },
       {
         "id": "player.performance.Unpredictable.2",
@@ -823,7 +823,7 @@
     "player.performance.Neutral": [
       {
         "id": "player.performance.Neutral.1",
-        "body": "Good win with this team. Appreciate all the support"
+        "body": "Good win with this team. Appreciate all the support."
       }
     ],
     "player.performance.QB": [
@@ -837,7 +837,7 @@
       },
       {
         "id": "player.performance.QB.3",
-        "body": "Appreciate all the support. glad we got this one"
+        "body": "Appreciate all the support. glad we got this one."
       }
     ],
     "fan.rank_up": [

@@ -1,3 +1,4 @@
+import {publishReply} from '../Tools/publication_policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {preseasonEvents,titleFutures} from '../Tools/preseason_events.mjs';
@@ -35,5 +36,5 @@ test('preseason outlooks do not inherit in-season production or coach-performanc
  const s=fixture();s.teams[0].headCoach={name:'Casey Dunn',lastName:'Dunn'};const f=buildFeed(s),previews=new Set(f.stories.filter(p=>p.category==='analytics'&&p.eventId.startsWith('preseason:')&&!p.eventId.includes('poll-debate')).map(p=>p.id));assert.ok(!f.stories.some(p=>p.replyTo&&previews.has(p.replyTo)));
 });
 test('poll-model disagreements are explicit fictional opinions with attached fan replies; Coaches comparisons are labeled',()=>{
- const s=fixture();s.teams[0].mediaRank=20;s.teams[0].coachesRank=4;const f=buildFeed(s),p=f.stories.find(p=>p.eventId==='preseason:poll-debate:1');assert.ok(p&&p.body.includes('fictional'));assert.ok(f.stories.some(r=>r.replyTo===p.id));assert.ok(f.stories.some(p=>p.eventId==='preseason:poll-comparison:1'&&p.body.includes('Coaches poll')&&p.body.includes('AP')));
+ const s=fixture();s.teams[0].mediaRank=20;s.teams[0].coachesRank=4;const f=buildFeed(s),p=f.stories.find(p=>p.eventId==='preseason:poll-debate:1');assert.ok(p&&p.body.includes('fictional'));assert.equal(f.stories.some(r=>r.replyTo===p.id),publishReply(s,'reply',p.id));assert.ok(f.stories.some(p=>p.eventId==='preseason:poll-comparison:1'&&p.body.includes('Coaches poll')&&p.body.includes('AP')));
 });

@@ -13,13 +13,13 @@ Before broader release, validate active-Dynasty switching, an actual older-save 
 ## Six-stage Social Media content plan
 
 1. Voice/tone direction approved from thirty samples and subsequent revisions. Legacy prototype wording is retired.
-2. Core event conditions verified; weekly awards, verified records and 50 additional analysis scenarios are implemented; deeper depth-chart, NIL and transfer stories remain.
+2. Core event conditions verified; weekly awards, verified records and 50 additional analysis scenarios are implemented; native depth-chart, NIL support and evidence-backed transfer stories are now included.
 3. Event detection, persistent authors, editable templates and native avatar routing are separate components.
-4. Expanded catalog reaches the initial target with 339 variants, including more player/fan perspectives and replies.
+4. Expanded catalog reaches the initial target with 423 variants, including more player/fan perspectives and replies.
 5. Two-week template cooldown preferences, stable same-week selections/admission order, account/voice caps, reply dependencies and complete curated conversation blocks are implemented. Multiweek in-game tuning remains.
 6. First pack verified live as v50 with 65 tests. The v63 build passes 95 Node tests plus native checks, and the user verified its 30/100/60 feed sizes, likes order, replies, filters and scrolling. The v64 MMC adapter adds startup waiting and package tests. Longer rollover testing and historical-edition restoration remain.
 
-Publication week remains the single week filter. For You selects up to 30 with soft 35/25/40 scope targets and no filler to hit quotas. National displays up to 100 and each native conference up to 60 after category filtering. Views sort parent threads by likes, with replies attached. The underlying dedicated story catalog remains complete.
+Publication week remains the single week filter. For You selects up to 30 with soft 55/20/25 personalized/conference/national scope targets and no filler to hit quotas. National displays up to 100 and each native conference up to 60 after category filtering. Views sort parent threads by likes, with replies attached. The underlying dedicated story catalog remains complete.
 
 ## Planned 1.0 integration
 
@@ -50,3 +50,10 @@ Preseason is now selectable above regular-season Week 0, using frozen stored edi
 ## Week 1 catalogue recovery and scholarship frequency (v69)
 
 v68 cold MMC startup is observed in the launcher/native logs. Its Week 1 generator produced 9,029 stories, but native validation still limited a complete edition to 4,096. v69 raises the stored candidate bound to 32,768 while keeping all visible scope/category caps unchanged. Scholarship posts now use a stable 20% chance per newly observed offer; CPU/user eligibility is identical and commitments remain fully eligible. Real-data replay selects 857 of 4,089 offers and preserves earlier editions. 116 Node tests, large-catalogue native regressions and real-data catalogue decoding pass; v69 published Week 1 in-game and the user verified its feed, earlier editions, scrolling and Back. The installed managed adapter passes payload checks; fresh v69 cold-launch verification remains a follow-up.
+
+
+## v71 second-test expansion
+
+Supported skipped regular-season editions are recovered and labeled; the real 2-to-4 sim now includes Week 3. Earlier observed archives remain exact. Account/brand/portrait routing, reply sampling, For You relevance and new season-launch conditions are implemented. Details and remaining data limits are in [the test-two coverage note](docs/test-two-expansion.md).
+
+Remaining checks: fresh MMC cold launch of v71, a genuine new preseason-to-opening run for the new conditional content, new-logo/coin visual confirmation, season/postseason/year rollover and older-save replay. The supplied ESPN PNG needs general native texture registration; existing registered image banks are used for now. Analytics grades and ratings fog remain the two later 1.0 integrations.

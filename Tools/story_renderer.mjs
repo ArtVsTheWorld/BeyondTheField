@@ -4,7 +4,7 @@ import {likesFor,replyLikesFor,ENGAGEMENT_VERSION} from './story_engagement.mjs'
 import {avatarFor} from './story_avatars.mjs';
 import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
 import {addConversations} from './story_conversations.mjs';
-import {publishOffer} from './publication_policy.mjs';
+import {publishOffer,publishReply} from './publication_policy.mjs';
 export const CONTENT_REVISION=pack.revision;
 export const stampFor=category=>({'results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
 const personalities=new Set(['Leader','Intense','Entertainer','TeamPlayer','Unpredictable']);
@@ -19,7 +19,8 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
  const teamValues=t=>({school:t?.name,nickname:t?.nickname??t?.name,coachLastName:t?.headCoach?.lastName??null,hashtag:t?.hashtags?.[0]??''});
  function add(e,family,values,{role='beat',team=teams.get(e.teamIds[0]),player=null,suffix='main',priority=e.priority,curated=e.curated,replyTo=null,persona=0,important=false}={}){
   if(!team&&['official','fan'].includes(role)||['player','recruit'].includes(role)&&!player)return null;
-  const parent=replyTo?byId.get(replyTo):null;if(replyTo&&!parent)return null;
+  const parent=replyTo?byId.get(replyTo):null;if(replyTo&&(!parent||!publishReply(s,e.id+':'+suffix,replyTo)))return null;
+  if(role==='analyst')persona=values.analystPersona??(family.includes('advanced')||family.includes('analysis')||family.includes('rushing')||family.includes('third')||family.includes('red_')||family.includes('turnover')?4:family.includes('recruit')||family.includes('freshman')||family.includes('breakout')?5:family.includes('hot')||family.includes('prediction')||family.includes('darkhorse')||family.includes('upset')||family.includes('undefeated')||family.includes('favorite')||family.includes('opening_preview')?2:family.includes('bounceback')||family.includes('overreaction')||family.includes('dominant_debut')||family.includes('close_debut')||family.includes('opening_takeaway')?3:family.includes('poll')||family.includes('coach')?1:persona);
   const account=registry.get(s,role,team,player,persona),id=e.id+':'+suffix;
   const filled={...values,...(parent?{parentHandle:parent.handle}:{})};
   const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
@@ -27,7 +28,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
   if(reaction&&!important&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
   if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
-  const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player),likes:likesFor(s,id,role,team,e,sameStories.get(id)),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
+  const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player,persona),likes:likesFor(s,id,role,team,e,sameStories.get(id)),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
   if(parent)p.likes=replyLikesFor(s,id,parent.likes,sameStories.get(id));p.engagementVersion=ENGAGEMENT_VERSION;
   if(parent){p.replyTo=parent.id;replyCounts.set(parent.id,(replyCounts.get(parent.id)??0)+1);}
   if(reaction){reactionAccounts.set(accountKey,(reactionAccounts.get(accountKey)??0)+1);if(topic)reactionTopics.set(topic,(reactionTopics.get(topic)??0)+1);}
@@ -44,14 +45,15 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   // Keep the strongest two lines; a shorter factual form is tried if names are long.
   return parts.slice(0,2).join(', ');
  }
- function perfContext(e){const f=e.facts,g=games.get(f.gameId),p=players.get(e.playerId);if(!p||!final(g))return null;const t=teams.get(p.team);if(!t)return null;
-  const win=g.homeScore===g.awayScore?null:g.homeScore>g.awayScore?g.home:g.away,opponent=p.team===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name;
-  return {...teamValues(t),...f,opponent,statLine:performanceLine(f.stats),win:win===p.team,resultLine:win===null?'The game finished tied.':win===p.team?'A team win to go with it.':'The individual numbers came in a team loss.'};}
+ function perfContext(e){const f=e.facts,g=games.get(f.gameId),p=players.get(e.playerId);if(!p||!final(g))return null;const t=teams.get(e.teamIds[0]);if(!t)return null;
+  const win=g.homeScore===g.awayScore?null:g.homeScore>g.awayScore?g.home:g.away,opponent=t.id===g.home?g.awayName??teams.get(g.away)?.name:g.homeName??teams.get(g.home)?.name;
+  return {...teamValues(t),...f,opponent,statLine:performanceLine(f.stats),win:win===t.id,resultLine:win===null?'The game finished tied.':win===t.id?'A team win to go with it.':'The individual numbers came in a team loss.'};}
  for(const e of events){if(e.category==='offers'&&!publishOffer(s,e))continue;const f=e.facts,t=teams.get(e.teamIds[0]),v={...teamValues(t),...f,giveawayLabel:e.facts.giveaways===1?'giveaway':'giveaways'};
-  if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:role==='analyst'?1:0});if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
+  if(f.family){const role=f.voice??(e.category==='analytics'?'analyst':'beat'),p=players.get(e.playerId),values={...v,...f,...(p&&t?{playerHandle:registry.get(s,'player',t,p).handle}:{})};if(f.tagPlayerId){const tagged=players.get(f.tagPlayerId);if(tagged)values.tagHandle=registry.get(s,'player',teams.get(tagged.team),tagged).handle;}const parent=add(e,f.family,values,{role,player:['player','recruit'].includes(role)?p:null,persona:role==='analyst'?1:0});if(parent&&f.debate&&t)add(e,'preseason.debate.fan',{...values,analystHandle:parent.handle},{role:'fan',team:t,suffix:'reply',replyTo:parent.id,priority:e.priority-1});continue;}
   if(e.category==='results'){
    const g=games.get(f.gameId);if(!final(g))continue;
    if(f.tie){add(e,'beat.tie',v);continue;}
+   if(s.reconstructed){Object.assign(v,{score:Math.max(g.homeScore,g.awayScore)+'\u2013'+Math.min(g.homeScore,g.awayScore)});add(e,f.margin>=21?'beat.result_wide':f.margin<=7?'beat.result_close':'beat.result',v);continue;}
    const winningId=g.homeScore>g.awayScore?g.home:g.away,winningTeam=teams.get(winningId);
    Object.assign(v,teamValues(winningTeam),{score:Math.max(g.homeScore,g.awayScore)+'–'+Math.min(g.homeScore,g.awayScore),winnerScore:Math.max(g.homeScore,g.awayScore),loserScore:Math.min(g.homeScore,g.awayScore),opponent:f.loser});
    if(winningTeam){const family=v.loserScore===0?'team.shutout':f.rivalry?'team.rivalry_win':f.margin<=7?'team.narrow_win':'team.win';add(e,family,v,{role:'official',team:winningTeam});}
@@ -123,7 +125,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
    }
   }
  }
- const dialogueEventOrder=addConversations({s,events,stories,byId,teams,players,games,registry,add,teamValues,perfContext,edition,schedule:sameWeek?.dialogueEventOrder??[]});
+ const dialogueEventOrder=s.reconstructed?[]:addConversations({s,events,stories,byId,teams,players,games,registry,add,teamValues,perfContext,edition,schedule:sameWeek?.dialogueEventOrder??[]});
  // Dependent replies only exist alongside the actual generated parent.
  return {stories:stories.filter(p=>!p.replyTo||byId.has(p.replyTo)),authors:registry.entries,dialogueEventOrder};
 }

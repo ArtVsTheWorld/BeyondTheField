@@ -1,6 +1,7 @@
 import {projectLine,rosterStrengths} from './betting_model.mjs';
 import {buildFeed,trackOffers,weekKey} from './feed_engine.mjs';
 import {buildCatalog} from './feed_selection.mjs';
+import {recoverWeek} from './recover_weeks.mjs';
 import {publicPoll} from './public_polls.mjs';
 export function scopeKey(s){return `${s.leagueId}/${s.userTeamIndex}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}`;}
 const pair=o=>`${o.team}:${o.player}`;
@@ -9,7 +10,10 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   if(state.format!==1||!Array.isArray(state.editions))throw Error('Invalid runtime history');
   const scope=scopeKey(s),week=s.season.CurrentWeek;
   const editions=state.editions.filter(e=>e.scope===scope&&e.week<=week);
-  const same=editions.find(e=>e.week===week),previous=editions.find(e=>e.week===week-1);
+  let authors=state.authors??{};
+  const lastObserved=editions.filter(e=>!e.reconstructed&&e.snapshot&&e.week<week).sort((a,b)=>b.week-a.week)[0];
+  if(lastObserved)for(let missing=lastObserved.week+1;missing<week;++missing)if(!editions.some(e=>e.week===missing)){const r=recoverWeek(s,missing,authors);if(r){authors=r.authors;editions.push({scope,week:missing,key:r.feed.key,reconstructed:true,feed:r.feed});}}
+  const same=editions.find(e=>e.week===week&&!e.reconstructed),previous=editions.find(e=>e.week===week-1&&!e.reconstructed);
   const baseline=same?.snapshot??previous?.snapshot;
   s.newOffers=trackOffers(s,same?.snapshot,previous?.snapshot);
   const current=new Set(s.commitments.map(pair));
@@ -32,7 +36,6 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   for(const [id,old] of injured){const now=currentPlayers.get(id);if(!now||(now.injury==='Uninjured'&&['injuryYear','injuryWeek','injuryType'].some(k=>old[k]!==now[k])))injured.delete(id);}
   const midweekBaseline=injured.size?{players:[...injured.values()]}:null;
   if(midweekBaseline)s.midweekBaseline=midweekBaseline;
-  let authors=state.authors??{};
   const feed=buildFeed(s,previous?.snapshot??null,{authors,history:editions.filter(e=>e.week<week).map(e=>e.feed),sameWeek:same?.feed??null,onAuthors:value=>{authors=value;}});
   const snapshot={format:2,sourceKind:'runtime',leagueId:s.leagueId,season:s.season,userTeamIndex:s.userTeamIndex,sha256:s.sha256,
     publicPoll:{key:poll.key,ranks:poll.ranks},players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,team:p.team,injury:p.injury,injuryYear:p.injuryYear,injuryWeek:p.injuryWeek,injuryType:p.injuryType})),records:s.records??[],recordBaseline:s.recordBaseline,recordBaselineVersion:1,pregameGames:s.pregameGames,commitmentChanges:s.commitmentChanges,commitments:s.commitments,offers:s.offers,offerEvents:s.newOffers,commitmentEvents:s.newCommitments,midweekBaseline};

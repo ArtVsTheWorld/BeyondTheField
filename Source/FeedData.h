@@ -96,6 +96,7 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
         Edition e;e.key=w.at("key").get<std::string>();e.week=w.at("week").get<int>();e.season=w.at("season").get<int>();e.conference=w.value("conference",nlohmann::json()).is_string()?w.at("conference").get<std::string>():"";
         e.phase=w.value("phase",std::string("RegularSeason"));
         e.label=e.phase=="PreSeason"?"Preseason, "+std::to_string(e.season):e.phase=="RegularSeason"?"Week "+std::to_string(e.week)+", "+std::to_string(e.season):e.phase+" - Week "+std::to_string(e.week)+", "+std::to_string(e.season);
+        if(w.value("reconstructed",false))e.label+=" (recovered)";
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
             FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));

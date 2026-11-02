@@ -1,0 +1,1501 @@
+{
+  "source": "Installed CFB27 ImageLibraryRefTable metadata; exact canonical asset-name join",
+  "logos": {
+    "0": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 0
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 0
+      }
+    },
+    "1": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 1
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 1
+      }
+    },
+    "2": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 2
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 2
+      }
+    },
+    "3": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 3
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 3
+      }
+    },
+    "4": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 4
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 4
+      }
+    },
+    "5": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 5
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 5
+      }
+    },
+    "6": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 6
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 6
+      }
+    },
+    "7": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 7
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 7
+      }
+    },
+    "8": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 8
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 8
+      }
+    },
+    "9": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 9
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 9
+      }
+    },
+    "10": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 10
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 10
+      }
+    },
+    "11": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 11
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 11
+      }
+    },
+    "12": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 12
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 12
+      }
+    },
+    "13": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 13
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 13
+      }
+    },
+    "14": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 14
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 14
+      }
+    },
+    "799": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 799
+      }
+    },
+    "15": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 15
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 15
+      }
+    },
+    "16": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 16
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 16
+      }
+    },
+    "17": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 17
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 17
+      }
+    },
+    "18": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 18
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 18
+      }
+    },
+    "19": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 19
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 19
+      }
+    },
+    "20": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 20
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 20
+      }
+    },
+    "21": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 21
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 21
+      }
+    },
+    "22": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 22
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 22
+      }
+    },
+    "23": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 23
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 23
+      }
+    },
+    "24": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 24
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 24
+      }
+    },
+    "25": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 25
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 25
+      }
+    },
+    "415": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 415
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 415
+      }
+    },
+    "134": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 134
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 134
+      }
+    },
+    "26": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 26
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 26
+      }
+    },
+    "27": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 27
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 27
+      }
+    },
+    "28": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 28
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 28
+      }
+    },
+    "136": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 136
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 136
+      }
+    },
+    "137": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 137
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 137
+      }
+    },
+    "138": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 138
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 138
+      }
+    },
+    "139": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 139
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 139
+      }
+    },
+    "140": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 140
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 140
+      }
+    },
+    "29": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 29
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 29
+      }
+    },
+    "30": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 30
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 30
+      }
+    },
+    "31": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 31
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 31
+      }
+    },
+    "32": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 32
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 32
+      }
+    },
+    "33": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 33
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 33
+      }
+    },
+    "34": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 34
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 34
+      }
+    },
+    "35": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 35
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 35
+      }
+    },
+    "36": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 36
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 36
+      }
+    },
+    "37": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 37
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 37
+      }
+    },
+    "38": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 38
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 38
+      }
+    },
+    "39": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 39
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 39
+      }
+    },
+    "40": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 40
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 40
+      }
+    },
+    "41": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 41
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 41
+      }
+    },
+    "42": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 42
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 42
+      }
+    },
+    "43": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 43
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 43
+      }
+    },
+    "44": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 44
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 44
+      }
+    },
+    "45": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 45
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 45
+      }
+    },
+    "46": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 46
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 46
+      }
+    },
+    "47": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 47
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 47
+      }
+    },
+    "133": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 133
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 133
+      }
+    },
+    "48": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 48
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 48
+      }
+    },
+    "49": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 49
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 49
+      }
+    },
+    "50": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 50
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 50
+      }
+    },
+    "51": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 51
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 51
+      }
+    },
+    "52": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 52
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 52
+      }
+    },
+    "53": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 53
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 53
+      }
+    },
+    "54": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 54
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 54
+      }
+    },
+    "55": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 55
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 55
+      }
+    },
+    "56": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 56
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 56
+      }
+    },
+    "57": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 57
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 57
+      }
+    },
+    "58": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 58
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 58
+      }
+    },
+    "59": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 59
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 59
+      }
+    },
+    "60": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 60
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 60
+      }
+    },
+    "61": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 61
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 61
+      }
+    },
+    "62": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 62
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 62
+      }
+    },
+    "63": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 63
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 63
+      }
+    },
+    "64": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 64
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 64
+      }
+    },
+    "65": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 65
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 65
+      }
+    },
+    "135": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 135
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 135
+      }
+    },
+    "412": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 412
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 412
+      }
+    },
+    "66": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 66
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 66
+      }
+    },
+    "67": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 67
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 67
+      }
+    },
+    "68": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 68
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 68
+      }
+    },
+    "69": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 69
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 69
+      }
+    },
+    "70": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 70
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 70
+      }
+    },
+    "71": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 71
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 71
+      }
+    },
+    "72": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 72
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 72
+      }
+    },
+    "150": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 150
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 150
+      }
+    },
+    "74": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 74
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 74
+      }
+    },
+    "73": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 73
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 73
+      }
+    },
+    "75": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 75
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 75
+      }
+    },
+    "76": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 76
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 76
+      }
+    },
+    "77": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 77
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 77
+      }
+    },
+    "78": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 78
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 78
+      }
+    },
+    "79": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 79
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 79
+      }
+    },
+    "80": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 80
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 80
+      }
+    },
+    "81": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 81
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 81
+      }
+    },
+    "82": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 82
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 82
+      }
+    },
+    "410": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 410
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 410
+      }
+    },
+    "83": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 83
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 83
+      }
+    },
+    "84": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 84
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 84
+      }
+    },
+    "85": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 85
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 85
+      }
+    },
+    "86": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 86
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 86
+      }
+    },
+    "414": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 414
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 414
+      }
+    },
+    "87": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 87
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 87
+      }
+    },
+    "411": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 411
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 411
+      }
+    },
+    "413": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 413
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 413
+      }
+    },
+    "88": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 88
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 88
+      }
+    },
+    "89": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 89
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 89
+      }
+    },
+    "151": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 151
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 151
+      }
+    },
+    "90": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 90
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 90
+      }
+    },
+    "91": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 91
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 91
+      }
+    },
+    "92": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 92
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 92
+      }
+    },
+    "93": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 93
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 93
+      }
+    },
+    "94": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 94
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 94
+      }
+    },
+    "95": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 95
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 95
+      }
+    },
+    "96": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 96
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 96
+      }
+    },
+    "97": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 97
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 97
+      }
+    },
+    "98": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 98
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 98
+      }
+    },
+    "99": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 99
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 99
+      }
+    },
+    "100": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 100
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 100
+      }
+    },
+    "101": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 101
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 101
+      }
+    },
+    "102": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 102
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 102
+      }
+    },
+    "103": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 103
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 103
+      }
+    },
+    "104": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 104
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 104
+      }
+    },
+    "105": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 105
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 105
+      }
+    },
+    "106": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 106
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 106
+      }
+    },
+    "107": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 107
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 107
+      }
+    },
+    "108": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 108
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 108
+      }
+    },
+    "109": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 109
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 109
+      }
+    },
+    "110": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 110
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 110
+      }
+    },
+    "111": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 111
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 111
+      }
+    },
+    "112": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 112
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 112
+      }
+    },
+    "113": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 113
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 113
+      }
+    },
+    "114": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 114
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 114
+      }
+    },
+    "115": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 115
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 115
+      }
+    },
+    "116": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 116
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 116
+      }
+    },
+    "117": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 117
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 117
+      }
+    },
+    "118": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 118
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 118
+      }
+    },
+    "119": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 119
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 119
+      }
+    },
+    "120": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 120
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 120
+      }
+    },
+    "121": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 121
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 121
+      }
+    },
+    "122": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 122
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 122
+      }
+    },
+    "123": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 123
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 123
+      }
+    },
+    "124": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 124
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 124
+      }
+    },
+    "125": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 125
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 125
+      }
+    },
+    "126": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 126
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 126
+      }
+    },
+    "127": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 127
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 127
+      }
+    },
+    "129": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 129
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 129
+      }
+    },
+    "130": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 130
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 130
+      }
+    },
+    "128": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 128
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 128
+      }
+    },
+    "131": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 131
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 131
+      }
+    },
+    "132": {
+      "onwhite": {
+        "imageLibrary": 64,
+        "imageValue": 132
+      },
+      "secondary": {
+        "imageLibrary": 89,
+        "imageValue": 132
+      }
+    }
+  }
+}
