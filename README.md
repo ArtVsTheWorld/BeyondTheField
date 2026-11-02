@@ -16,6 +16,10 @@ The user selected grounded college-football Twitter, all six account types, fict
 
 The native `Player.Personality` field was verified read-only and added to this branch's capture/normalization path: Leader, Intense, Entertainer, TeamPlayer, and Unpredictable. The prose associations are editorial proposals, not measured psychological rules. Position is a secondary influence. Missing/sentinel personalities normalize to null. Personality labels, codes, and internal values never appear in the review posts.
 
+Review 02 incorporates the user's fuller-post direction (typical 160–260 English characters, hard maximum 280), native nicknames/hashtags and current-coach references, natural position-free player/recruit handles, positive media-aware player posts, and more dramatic opinionated fan posts. The fictional recruiting phone-call reference is authored flavor around a verified commitment and coach identity; it is not native interaction telemetry. Analyst examples now require useful computed context, with metric evidence and explicit data-coverage gates. Run the review renderer and open `Build/voice-review-02.html` or the latest `Build/voice-review.html`.
+
+`Tools/team_analytics.mjs` computes rushing yards per game/rank, weighted third-down percentage, turnover margin, and conservative unique first-margin milestones. It prefers current-first native season totals checked against team records, with corroborated game caches as an alternative. Incomplete or inconsistent national coverage suppresses rankings and unique first claims. Native game rows may include entries that do not reconcile with other counters; this branch does not publish guesses from them.
+
 The historical live v47 build and its published archives remain available at tag `prototype-active-dynasty-v47`. This isolated content worktree has not replaced the currently loaded DLL. The remaining sections describe that verified native UI/data foundation; story publication on this branch resumes only after the replacement content and renderer are implemented.
 
 ## Current component: Social Media
@@ -45,7 +49,7 @@ Node.js is required for the story generator. Copy `Config/dynasty-enhancer.examp
 The legacy save adapter remains as a diagnostic comparison tool: `Config/social-refresh.example.json` documents its external dependencies. It is not the candidate DLL's data source.
 
 ```powershell
-node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs
+node --test Tests/feed_engine.test.mjs Tests/feed_selection.test.mjs Tests/runtime_lifecycle.test.mjs Tests/runtime_recruiting.test.mjs Tests/editorial_content.test.mjs Tests/team_analytics.test.mjs
 Build/LiveCapture.exe <PID> Build/runtime-raw.json
 node Tools/export_runtime.mjs Build/runtime-raw.json Build/runtime-feed.json
 ```

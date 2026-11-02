@@ -20,3 +20,21 @@ test('player/recruit drafts carry verified enum names and secondary native posit
  for(const p of batch.posts.filter(p=>['recruit','player'].includes(p.voice))){assert.ok(personalities.has(p.nativePersonality),p.id);assert.ok(positions.has(p.position),p.id);}
  assert.equal(batch.posts.find(p=>p.id==='PLAYER-02').nativePersonality,'Intense');assert.equal(batch.posts.find(p=>p.id==='PLAYER-02').position,'QB');
 });
+
+test('revised voices preserve stable natural handles and remove routine public self-blame',()=>{
+ const seen=new Map();for(const p of batch.posts.filter(p=>['player','recruit'].includes(p.voice))){assert.ok(!/(QB|WR|RB|OL|CB)$/i.test(p.handle),p.id);if(seen.has(p.author))assert.equal(p.handle,seen.get(p.author),p.id);seen.set(p.author,p.handle);}
+ for(const p of batch.posts.filter(p=>p.voice==='player'))assert.ok(!/got to be better|for me to clean up|my fault|I let|I cost/i.test(p.previewText),p.id);
+ assert.equal(batch.posts.find(p=>p.id==='RECRUIT-03').authoredFlavor[0],'recruiting phone call');
+});
+test('analyst examples include metric evidence and correct sample arithmetic',()=>{
+ for(const p of batch.posts.filter(p=>p.voice==='analyst'))assert.ok(p.analyticEvidence?.metric,p.id);
+ const a=batch.posts.find(p=>p.id==='ANALYST-01');assert.equal(Number((a.analyticEvidence.rushingYards/a.analyticEvidence.gamesPlayed).toFixed(1)),a.exampleValues.rushingYardsPerGame);
+ const t=batch.posts.find(p=>p.id==='ANALYST-02');assert.equal(Number((100*t.analyticEvidence.conversions/t.analyticEvidence.attempts).toFixed(1)),t.exampleValues.thirdDownPercent);
+ const m=batch.posts.find(p=>p.id==='ANALYST-03');assert.equal(m.analyticEvidence.winnerScore-m.analyticEvidence.loserScore,m.exampleValues.margin);
+ const v=batch.posts.find(p=>p.id==='ANALYST-04');assert.equal(v.analyticEvidence.takeaways-v.analyticEvidence.giveaways,v.exampleValues.margin);
+ for(const p of batch.posts.filter(p=>p.voice==='analyst'&&p.body.includes('{playerName}')))assert.ok(p.body.includes('{school}')||p.body.includes('{hashtag}')||p.body.includes('{nickname}'),p.id);
+});
+test('fan disagreement points to a genuine review opinion rather than an invented analyst quote',()=>{
+ const reply=batch.posts.find(p=>p.replyToReviewId),parent=batch.posts.find(p=>p.id===reply.replyToReviewId);assert.ok(parent);assert.equal(reply.conversationId,parent.conversationId);
+ const quote=reply.previewText.match(/“([^”]+)”/)[1];assert.ok(parent.previewText.includes(quote));assert.equal(reply.requiresVisibleParent,true);
+});
