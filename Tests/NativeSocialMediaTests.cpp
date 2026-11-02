@@ -132,6 +132,19 @@ int main(int argc,char** argv){
             require(social::selectFeed(catalog,0,150,1)->posts.size()==1,"Recruiting filter included another root category");
             bool bad=false;try{social::selectFeed(catalog,0,151);}catch(...){bad=true;}require(bad,"Dynamic scope boundary was not enforced");
         }
+        {
+            auto catalog=std::make_shared<social::Catalog>();social::Edition e;e.key="limits";
+            catalog->scopes={{"all","For You"},{"national","National"},{"conference:c","Conference"},{"team:1","Team"}};
+            std::vector<std::string> ids;
+            for(int i=0;i<140;++i)for(int type=0;type<2;++type){const auto id=std::to_string(type)+":"+std::to_string(i);social::FeedPost p{id,"@account",id,"News"};p.likes=(type?500:1000)-i;p.category=type?"analytics":"results";p.voice=type?"analyst":"official";e.stories.emplace(id,p);ids.push_back(id);}
+            social::FeedPost reply{"attached","@fan","reply","Reply"};reply.replyTo="0:0";reply.likes=200;reply.voice="fan";e.stories.emplace("reply",reply);ids.insert(ids.begin(),"reply");
+            for(const auto& scope:catalog->scopes)e.views[scope.key]=ids;catalog->weeks.push_back(e);
+            auto national=social::selectFeed(catalog,0,1);require(national->posts.size()==100,"National cap failed");
+            require(national->posts[0].author=="0:0"&&national->posts[1].author=="attached"&&national->posts[2].author=="0:1","Likes ordering split a conversation or followed incoming order");
+            require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==281,"Team feed was unexpectedly truncated");
+            auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==100&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
+            require(social::selectFeed(catalog,0,2,5)->posts.size()==60,"Filtered conference cap failed");
+        }
         require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");
         unsigned changed=0;
         {
@@ -243,7 +256,7 @@ int main(int argc,char** argv){
         require(status->posts.size()==1&&status->key=="runtime-waiting","Startup must expose only a system status row");
         require(status->posts[0].author=="Dynasty Enhancer"&&status->posts[0].stamp=="Status","Startup fallback must not masquerade as a social account");
         // An unsupported process must refuse activation before installing slots.
-        if(argc==3){auto config=social::refresh::readJson(argv[1]),data=social::refresh::readJson(argv[2]);social::refresh::validate(data,config);auto decoded=social::decodeFeed(data);require(decoded->catalog&&decoded->posts.size()<=20,"Actual catalog did not decode as a curated single-week feed");for(size_t week=0;week<decoded->catalog->weeks.size();++week)for(unsigned scope=0;scope<social::scopesFor(*decoded->catalog).size();++scope){auto view=social::selectFeed(decoded->catalog,week,scope);require(!view->posts.empty(),"Actual scope has no renderable native row");}std::cout<<"Actual catalog validated: "<<decoded->catalog->weeks.size()<<" publication weeks; every dynamic scope validated.\n";}
+        if(argc==3){auto config=social::refresh::readJson(argv[1]),data=social::refresh::readJson(argv[2]);social::refresh::validate(data,config);auto decoded=social::decodeFeed(data);require(decoded->catalog&&decoded->posts.size()<=30,"Actual catalog did not decode as a curated single-week feed");for(size_t week=0;week<decoded->catalog->weeks.size();++week)for(unsigned scope=0;scope<social::scopesFor(*decoded->catalog).size();++scope){auto view=social::selectFeed(decoded->catalog,week,scope);require(!view->posts.empty(),"Actual scope has no renderable native row");}std::cout<<"Actual catalog validated: "<<decoded->catalog->weeks.size()<<" publication weeks; every dynamic scope validated.\n";}
         std::cout<<"Passed: filtered CFB identity/order and typed ABI, missing-donor preservation, system-status fallback, "<<feedPostCount<<" posts in "<<feedContainerCount<<" feed containers, coordinate boundaries, scoped native category, exact layout correction/restoration and foreign ownership rejection.\n";
     }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
     return 0;

@@ -19,7 +19,7 @@ test('event detection retains verified prior-week results and performances witho
 });
 test('approved pack generates deterministic stories from retained event facts',()=>{
  const s=fixture(),a=buildFeed(s),b=buildFeed(structuredClone(s));assert.deepEqual(a,b);assert.equal(a.contentStatus,'generated');assert.ok(a.events.length>0);assert.ok(a.stories.length>0);
- assert.ok(a.stories.every(p=>p.templateId&&p.contentRevision===a.contentRevision));assert.ok(a.posts.length<=20);assert.ok(a.stories.every(p=>p.publication.week===7));
+ assert.ok(a.stories.every(p=>p.templateId&&p.contentRevision===a.contentRevision));assert.ok(a.posts.length<=30);assert.ok(a.stories.every(p=>p.publication.week===7));
  assert.ok(a.events.every(e=>e.publication.week===7));assert.equal(new Set(a.events.map(e=>e.id)).size,a.events.length);
 });
 test('week, phase, and season boundaries reject unrelated results',()=>{

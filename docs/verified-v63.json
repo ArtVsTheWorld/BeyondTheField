@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "build": "DynastyEnhancer-v63-feedlimits.dll",
+  "nativeDllSha256": "52f6bdbea8ddf68759f371b4e445dc3fcecd944b1dbcb1a837455b923bb8bd46",
+  "testsPassed": 95,
+  "nativeTestsPassed": true,
+  "actualScopeDecodes": 151,
+  "publicationWeek": 9,
+  "curatedPosts": 30,
+  "displayLimits": {
+    "forYou": 30,
+    "national": 100,
+    "conference": 60,
+    "team": 4096
+  },
+  "repliesCountTowardLimit": true,
+  "dedicatedCategoryFilterBeforeLimit": true,
+  "ordering": "Parent likes descending, replies beneath parent; stable ID ties",
+  "forYouRootLikes": [
+    7432,
+    5375,
+    5000,
+    4502,
+    4499,
+    3202,
+    2995,
+    2741,
+    2596,
+    2078,
+    1804,
+    1766,
+    1471,
+    939,
+    929,
+    832,
+    762,
+    531,
+    438,
+    423,
+    292,
+    213
+  ],
+  "status": "native-validated-and-active",
+  "liveObserved": [
+    "For You shows 30 posts and scrolls to post 30",
+    "National All Types reports 100 posts in native selection callback",
+    "Recruiting category switching retains its full qualifying scope pool"
+  ],
+  "nativeFixtureChecks": [
+    "National 100, conference 60, For You 30; individual team pool unchanged",
+    "Limits apply after category selection",
+    "Likes descending on root threads, attached replies stay below parent even when lower-liked",
+    "Equal-like story IDs yield deterministic order"
+  ]
+}

@@ -17,9 +17,9 @@ test('cooldowns prefer another phrase for the same author across weeks and freez
  const frozen={...b,renderKey:'same',contentRevision:contentPack.revision};const c=chooseTemplate('fan.win',values,'changed-seed',{handle:'@fan',week:8,history,sameStory:frozen,renderKey:'same'});assert.equal(c.body,b.body);assert.equal(c.templateId,b.templateId);
  const all={week:7,stories:contentPack.families['fan.win'].map(t=>({templateId:t.id,handle:'@fan'}))};assert.equal(chooseTemplate('fan.win',values,'seed',{handle:'@fan',week:8,history:[all]}).cooldownFallback,true);
 });
-test('curated replies retain their real parent, stay together, and count toward the 20-post limit',()=>{
+test('curated replies retain their real parent, stay together, and count toward the 30-post limit',()=>{
  const parent=root('parent',{priority:20,thread:'conversation'}),reply=root('reply',{replyTo:'parent',voice:'fan',priority:100,thread:'conversation'}),pool=[parent,reply,...Array.from({length:30},(_,i)=>root('n'+i,{scopes:['national'],category:'misc'+i,voice:['beat','official','analyst','player','fan','recruit'][i%6]}))];
- const list=curate(pool);assert.equal(list.length,20);assert.ok(list.some(p=>p.id==='reply'));assert.equal(list.findIndex(p=>p.id==='reply'),list.findIndex(p=>p.id==='parent')+1);
+ const list=curate(pool);assert.equal(list.length,30);assert.ok(list.some(p=>p.id==='reply'));assert.equal(list.findIndex(p=>p.id==='reply'),list.findIndex(p=>p.id==='parent')+1);
  const hidden=root('hidden',{curated:false});assert.ok(!curate([hidden,{...reply,replyTo:'hidden'}]).length);
 });
 test('orphan and cyclic replies cannot appear in any scope, while roots retain full dedicated coverage',()=>{

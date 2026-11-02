@@ -1,15 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {curate,scopeViews,publishWeek,buildCatalog} from '../Tools/feed_selection.mjs';
+import {curate,scopeViews,publishWeek,buildCatalog,conversationOrder} from '../Tools/feed_selection.mjs';
 const story=(id,scope,priority=80,category=id)=>({id,scopes:[scope],priority,category,thread:id,curated:true});
+test('every view ranks parent threads by likes, keeps replies adjacent and breaks equal-like ties by ID',()=>{
+ const pool=[{...story('low','team',999),likes:20},{...story('high','national',1),likes:900},{...story('middle','conference'),likes:300},{...story('reply','team'),likes:15,replyTo:'high'},{...story('tie','national'),likes:300}];
+ assert.deepEqual(conversationOrder(pool).map(p=>p.id),['high','reply','middle','tie','low']);
+ assert.deepEqual(curate(pool).map(p=>p.id),['high','reply','middle','tie','low']);
+ assert.deepEqual(scopeViews(pool).national,['high','tie']);
+});
 test('curated mix hits 35/25/40 when strong distinct candidates are available',()=>{
   const pool=['national','conference','team'].flatMap(scope=>Array.from({length:15},(_,i)=>story(scope+i,scope,100-i)));
-  const selected=curate(pool);assert.equal(selected.length,20);
-  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:7,conference:5,team:8});
+  const selected=curate(pool);assert.equal(selected.length,30);
+  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:11,conference:7,team:12});
 });
 test('sparse scope redistributes available slots without filler or duplicate stories',()=>{
-  const pool=Array.from({length:25},(_,i)=>story('n'+i,'national'));pool.push(story('t','team'));
-  const f=curate(pool);assert.equal(f.length,20);assert.equal(f.filter(p=>p.scopes[0]==='team').length,1);assert.equal(new Set(f.map(p=>p.id)).size,20);
+  const pool=Array.from({length:35},(_,i)=>story('n'+i,'national'));pool.push(story('t','team'));
+  const f=curate(pool);assert.equal(f.length,30);assert.equal(f.filter(p=>p.scopes[0]==='team').length,1);assert.equal(new Set(f.map(p=>p.id)).size,30);
 });
 test('dedicated views retain all qualifying stories and permit overlap',()=>{
   const pool=Array.from({length:40},(_,i)=>story('n'+i,'national',80,'player-stats'));pool.push({...story('both','team',100),scopes:['team','national','conference']});

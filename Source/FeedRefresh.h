@@ -64,7 +64,7 @@ inline void validate(const Json& j,const Json& config){
         if(p.at("imageLibrary").get<int>()<0||p.at("imageValue").get<int>()<0)throw std::runtime_error("Invalid feed avatar");
       }
       if(!w.at("views").is_object()||w.at("views").size()>516)throw std::runtime_error("Invalid scope views");
-      for(const auto& [scope,view]:w.at("views").items()){if(!view.is_array()||view.size()>(scope=="all"?20u:4096u))throw std::runtime_error("Invalid scope view size");
+      for(const auto& [scope,view]:w.at("views").items()){if(!view.is_array()||view.size()>(scope=="all"?30u:4096u))throw std::runtime_error("Invalid scope view size");
         std::set<std::string> seen;for(const auto& id:view){const auto v=id.get<std::string>();if(!ids.count(v)||!seen.insert(v).second)throw std::runtime_error("Invalid or duplicate scope story reference");}
       }
     }

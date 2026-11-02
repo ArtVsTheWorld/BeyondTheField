@@ -63,6 +63,7 @@ struct Edition {std::string key,label,conference;int season=0,week=0;std::map<st
 struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> scopes;};
 struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;};
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
+inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:4096;}
 inline constexpr std::array<const char*,10> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Team Accounts","Players & Recruits","Fans"};
 inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official";case 8:return p.voice=="player"||p.voice=="recruit";case 9:return p.voice=="fan";default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
@@ -75,8 +76,15 @@ inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> cat
     if(!catalog||week>=catalog->weeks.size()||scope>=scopesFor(*catalog).size()||type>=typeLabels.size())throw std::runtime_error("Invalid single-week feed selection");
     const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->type=type;f->key=e.key;
     f->label="Social Media";if(type)f->label+=" - "+std::string(typeLabels[type]);
-    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);std::set<std::string> accepted;
-    if(view!=e.views.end())for(const auto& id:view->second){const auto& post=e.stories.at(id);if(post.replyTo.empty()?matchesType(post,type):accepted.count(post.replyTo)>0){accepted.insert(id);f->posts.push_back(post);}}
+    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);const auto limit=scopeLimit(option.key);
+    if(view!=e.views.end()){
+        std::set<std::string> members(view->second.begin(),view->second.end()),visited;std::vector<std::string> roots;std::map<std::string,std::vector<std::string>> children;
+        for(const auto& id:members){const auto& p=e.stories.at(id);if(p.replyTo.empty()){if(matchesType(p,type))roots.push_back(id);}else if(members.count(p.replyTo))children[p.replyTo].push_back(id);}
+        auto popular=[&](const std::string& a,const std::string& b){const int al=(std::max)(0,e.stories.at(a).likes),bl=(std::max)(0,e.stories.at(b).likes);return al!=bl?al>bl:a<b;};
+        std::sort(roots.begin(),roots.end(),popular);for(auto& [id,list]:children){(void)id;std::sort(list.begin(),list.end(),popular);}
+        std::function<void(const std::string&)> append=[&](const std::string& id){if(f->posts.size()>=limit||!visited.insert(id).second)return;f->posts.push_back(e.stories.at(id));auto it=children.find(id);if(it!=children.end())for(const auto& child:it->second)append(child);};
+        for(const auto& id:roots){if(f->posts.size()>=limit)break;append(id);}
+    }
     if(f->posts.empty())f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","No "+option.label+" stories were published in this weekly edition.","News",79,598});
     return f;
 }

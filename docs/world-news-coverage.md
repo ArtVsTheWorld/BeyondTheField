@@ -1,6 +1,6 @@
 # World news expansion
 
-This expands the native Social Media feed with 24 additional team-analysis scenarios and 26 player-analysis scenarios. They supplement the existing rushing rank, third-down conversion, red-zone TD rate, turnover margin and season-margin stories. CPU and user programs use the same event eligibility; For You personalizes selection, not the underlying facts.
+This expands the native Social Media feed with 24 additional team-analysis scenarios and 26 player-analysis scenarios. They supplement the existing rushing rank, third-down conversion, red-zone TD rate, turnover margin and season-margin stories. CPU and user programs use the same event eligibility; For You personalizes selection, not the underlying facts. The v63 presentation limits are 30 posts for For You, 100 for National and 60 per native conference, including replies. Dedicated caps apply after category filtering. Every displayed view sorts parent threads by likes while keeping replies beneath their own parent; team feeds keep their existing capacity.
 
 ## Team analysis: 24 scenarios
 
