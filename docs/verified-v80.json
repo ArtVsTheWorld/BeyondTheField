@@ -39,8 +39,7 @@
     "dataWrites": false
   },
   "liveChecksRemaining": [
-    "v80 title and finished-team feed, filters, scrolling and Back",
-    "Clean launch CFP bracket before Social Media",
+    "Clean launch CFP bracket with Dynasty Enhancer disabled",
     "Advance through the title result and offseason transition"
   ],
   "mmc": {
@@ -69,5 +68,13 @@
     "editions": 22,
     "posts": 30,
     "contentRevision": "intentional-news-cycles-v80"
+  },
+  "userConfirmed": {
+    "championshipNews": true,
+    "finishedTeamOffseasonFocus": true,
+    "scopeAndWeekDropdowns": true,
+    "categoryBumpers": true,
+    "scrolling": true,
+    "backNavigation": true
   }
 }
