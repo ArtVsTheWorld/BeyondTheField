@@ -10,7 +10,14 @@ export function offseasonStage(s){
  const label=s.offseasonStageLabel??'';
  if(/training results/i.test(label))return 'training';
  if(/encourage|realign|custom conference/i.test(label))return 'encourage';
- // Verified CFB calendar: second signing day 6, training 7, final roster/alignment 8.
+ // Native stage codes are authoritative; the visible recruiting-week label
+ // and the native CurrentWeek counter are not the same calendar.
+ const code=s.season.CurrentOffseasonStage;
+ if(code===8)return 'training';
+ if(code===9)return 'encourage';
+ if(Number.isInteger(code)&&code>=1&&code<=7)return 'before-training';
+ if(/signing day|recruiting|players leaving|season recap/i.test(label))return 'before-training';
+ // Legacy snapshots without native stage metadata retain their old calendar.
  return s.season.CurrentWeek===7?'training':s.season.CurrentWeek===8?'encourage':s.season.CurrentWeek<=6?'before-training':null;
 }
 function observePlayers(s,attributes=false){
@@ -61,15 +68,15 @@ export function observeOffseason(s,saved=null,{history=[]}={}){
  if(ledger.version!==1||ledger.leagueId!==s.leagueId||ledger.userTeamIndex!==s.userTeamIndex||!ledger.cycles||typeof ledger.cycles!=='object')throw Error('Offseason ledger identity/version mismatch');
  for(const y of Object.keys(ledger.cycles))if(Number(y)>year||Number(y)<year-2)delete ledger.cycles[y];
  if(s.reconstructed)return {ledger,facts:[]};
- if(!stage){delete ledger.cycles[year];} // Rewinding before this year's offseason prunes its future facts.
+ if(!stage&&s.season.CurrentWeekType!=='OffSeason'){delete ledger.cycles[year];} // A genuine earlier phase prunes future facts; an unknown offseason stage preserves evidence.
  if(stage){
   const c=ledger.cycles[year]??={knownExits:[],training:{},departures:{},beforeRoster:null,beforeConferences:[],conferenceBaselineTrusted:false,last:null};
   const rewind=c.last&&s.season.CurrentWeek<c.last.week;
-  if(rewind){c.last=null;c.knownExits=[];if(s.season.CurrentWeek<8){c.departures={};c.beforeRoster=null;}if(s.season.CurrentWeek<7)c.training={};}
+  if(rewind){c.last=null;c.knownExits=[];if(stage!=='encourage'){c.departures={};c.beforeRoster=null;}if(stage==='before-training')c.training={};}
   const exits=[...(s.draftResults??[]).map(d=>{const p=s.players.find(p=>p.id===d.player);return p&&key(p);}),...history.filter(f=>f.season===year&&(f.phase!=='OffSeason'||f.week<=s.season.CurrentWeek)).flatMap(f=>(f.events??[]).filter(e=>e.category==='draft'&&e.playerId&&e.facts.playerName).map(e=>e.playerId+'|'+e.facts.playerName.trim().toLowerCase()))].filter(Boolean);
   c.knownExits=[...new Set([...c.knownExits,...exits])];
-  if(stage==='before-training'){c.baseline={week:s.season.CurrentWeek,players:observePlayers(s,true)};c.training={};c.departures={};c.beforeRoster=null;c.beforeConferences=conferences(s);c.conferenceBaselineTrusted=true;c.conferenceBaselineLate=false;}
-  if(stage==='training'){c.training=trainingChanges(c.baseline,s,c.baseline?.week===6?'training-period':'offseason-period');c.beforeRoster=observePlayers(s);c.beforeConferences=conferences(s);c.conferenceBaselineTrusted=true;c.conferenceBaselineLate=false;}
+  if(stage==='before-training'){c.baseline={week:s.season.CurrentWeek,stageCode:s.season.CurrentOffseasonStage??null,players:observePlayers(s,true)};c.training={};c.departures={};c.beforeRoster=null;c.beforeConferences=conferences(s);c.conferenceBaselineTrusted=true;c.conferenceBaselineLate=false;}
+  if(stage==='training'){c.training=trainingChanges(c.baseline,s,c.baseline?.stageCode===7||c.baseline?.stageCode==null&&c.baseline?.week===6?'training-period':'offseason-period');c.beforeRoster=observePlayers(s);c.beforeConferences=conferences(s);c.conferenceBaselineTrusted=true;c.conferenceBaselineLate=false;}
   if(stage==='encourage'){
    if(!c.beforeConferences.length){c.beforeConferences=conferences(s);c.conferenceBaselineTrusted=true;c.conferenceBaselineLate=true;}
    if(!c.beforeRoster)c.beforeRoster=c.last?.players??observePlayers(s);

@@ -4,6 +4,10 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Native offseason-stage correction (v90)
+
+The current package is `Build/DynastyEnhancer-v90-MMC.zip`. The ULM milestone test found that final realignment/Encourage Transfers can have native week counter 9. v90 uses the native offseason stage IDs (7 signing, 8 training, 9 final roster/alignment) instead of assuming a fixed final week counter. Unknown offseason stages retain evidence. See [ULM verification and recovery](docs/offseason-stages-v90.md).
+
 ## Offseason carryover (v89)
 
 The current package is `Build/DynastyEnhancer-v89-MMC.zip`. The background reader now runs independently of News UI readiness, including Training Results and Encourage Transfers while the Team tab is absent. A persistent, league/team-specific offseason ledger carries verified development, roster departures and conference changes into the next preseason. Save filenames and season-folder changes do not break that ledger. Private attribute comparisons become football descriptions; numerical ratings never appear in these posts. Missing observations do not become invented stories. See [capture rules, calendar and verification](docs/offseason-carryover-v89.md).

@@ -2,6 +2,8 @@
 
 ## Current priorities after v89
 
+The next ULM milestone test exposed and corrected a final-stage counter mismatch in v90. Native stage IDs now drive offseason tracking. Signing/training/final-stage milestone copies recovered this cycle's evidence; live departures/realignment and next-preseason publication remain the immediate checks. See [v90 details](docs/offseason-stages-v90.md).
+
 v89's preseason feed and controller regression are user-verified. Training Results, Encourage Transfers and realignment capture are implemented, with 308 passing tests and a copied-data year transition. The full hidden-stage sequence still needs live progression validation.
 
 1. Validate final signing day → Training Results → Encourage Transfers/realignment → next preseason on a backed-up test branch. Check actual development/departure/movement facts, reload persistence, duplicate suppression and no numerical ratings in prose.

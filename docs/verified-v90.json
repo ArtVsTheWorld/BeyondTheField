@@ -1,0 +1,53 @@
+{
+  "build": "v90",
+  "installed": true,
+  "nodeTests": {
+    "pass": 312,
+    "fail": 0,
+    "carryover": 29
+  },
+  "nativeBuild": true,
+  "nativeUnitChecks": true,
+  "mmcPayloadChecks": true,
+  "saveBackups": {
+    "count": 29,
+    "checksumVerified": true
+  },
+  "historyMigration": {
+    "files": 19,
+    "checksumVerified": true
+  },
+  "actualMilestones": {
+    "signing": {
+      "week": 6,
+      "stage": 7
+    },
+    "training": {
+      "week": 7,
+      "stage": 8
+    },
+    "final": {
+      "week": 9,
+      "stage": 9
+    },
+    "rosterBaseline": 6344,
+    "qualifyingDevelopment": 2078,
+    "ulmQualifyingDevelopment": 11,
+    "playerIdentityMatches": 16257,
+    "conferenceMembershipTeams": 138
+  },
+  "recovery": "Read-only milestone copies; active runtime remains the production source",
+  "liveChecksRemaining": [
+    "Fresh MMC launch resumes live ULM capture",
+    "Identifiable encouraged-transfer and conference changes",
+    "Next-preseason carryover and reload persistence",
+    "Future unassisted full-cycle capture"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v90.dll": "ac6cd5db81507a901592cddc1c6a11f78da3429de901ffb65b77212b42df6f50",
+    "DynastyEnhancer.dll": "dd1ce7c09ebd5acbb790de71d3bda0391be47a599357f6b3e17d00d5d136a411",
+    "DynastyEnhancer-v90-MMC.zip": "c50b75848fe68a7f35bd373a1b86d5fa22fa4a45f0e19d7e40d1c9cb92d1abaa"
+  },
+  "actualCatalogEditions": 31,
+  "initialHotReload": "Existing child-context search limit reached; clean launch requested"
+}

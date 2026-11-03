@@ -21,6 +21,18 @@ function trained(){const s=fixture(),a=observeOffseason(s);s.season.CurrentWeek=
 test('verified calendar recognizes hidden stages without requiring a menu',()=>{
  const s=fixture();assert.equal(offseasonStage(s),'before-training');s.season.CurrentWeek=7;assert.equal(offseasonStage(s),'training');s.season.CurrentWeek=8;assert.equal(offseasonStage(s),'encourage');s.season.CurrentWeek=99;s.offseasonStageLabel='Training Results';assert.equal(offseasonStage(s),'training');preseason(s);assert.equal(offseasonStage(s),null);
 });
+test('native stage IDs handle a final offseason counter of nine without deleting the captured cycle',()=>{
+ const s=fixture();s.season.CurrentOffseasonStage=7;let a=observeOffseason(s);s.season.CurrentWeek=7;s.season.CurrentOffseasonStage=8;grow(s);a=observeOffseason(s,a.ledger);s.season.CurrentWeek=9;s.season.CurrentOffseasonStage=9;s.offseasonStageLabel='Offseason | Offseason';a=observeOffseason(s,a.ledger);assert.equal(a.ledger.cycles[2026].last.stage,'encourage');assert.equal(a.ledger.cycles[2026].baseline.stageCode,7);assert.equal(Object.keys(a.ledger.cycles[2026].training).length,2);const b=observeOffseason(preseason(s),a.ledger);assert.equal(b.facts.filter(f=>f.kind==='training').length,2);assert.ok(b.facts.every(f=>f.evidence==='training-period'));
+});
+test('native signing, training and final-stage identities take precedence over variable week counters',()=>{
+ const s=fixture();for(const week of [6,7,8,9,10]){s.season.CurrentWeek=week;for(const [code,expected] of [[7,'before-training'],[8,'training'],[9,'encourage']]){s.season.CurrentOffseasonStage=code;assert.equal(offseasonStage(s),expected);}}
+});
+test('an unknown offseason stage retains existing evidence rather than treating it as a rewind',()=>{
+ const {s,ledger}=trained();s.season.CurrentWeek=12;s.season.CurrentOffseasonStage=99;const a=observeOffseason(s,ledger);assert.deepEqual(a.ledger,ledger);assert.ok(observeOffseason(preseason(s),a.ledger).facts.some(f=>f.kind==='training'));
+});
+test('native-stage rollback clears future training and departures regardless of counter offset',()=>{
+ const s=fixture();s.season.CurrentOffseasonStage=7;let a=observeOffseason(s);s.season.CurrentWeek=8;s.season.CurrentOffseasonStage=8;grow(s);a=observeOffseason(s,a.ledger);s.season.CurrentWeek=9;s.season.CurrentOffseasonStage=9;s.players[2].team=255;a=observeOffseason(s,a.ledger);s.season.CurrentWeek=7;s.season.CurrentOffseasonStage=7;s.players=fixture().players;a=observeOffseason(s,a.ledger);assert.equal(Object.keys(a.ledger.cycles[2026].training).length,0);assert.equal(Object.keys(a.ledger.cycles[2026].departures).length,0);
+});
 test('full cycle publishes captured development, roster review and realignment in next preseason only',()=>{
  const {s,ledger}=trained();s.season.CurrentWeek=8;let a=observeOffseason(s,ledger);assert.equal(a.facts.length,0);s.players[2].team=255;s.teams[0].conferenceId='c2';s.teams[0].conferenceCode='C2';s.teams[0].conferenceName='League 2';a=observeOffseason(s,a.ledger);assert.equal(a.facts.length,0);
  const b=observeOffseason(preseason(s),a.ledger);assert.equal(b.facts.filter(f=>f.kind==='training').length,2);assert.equal(b.facts.filter(f=>f.kind==='departure').length,1);assert.equal(b.facts.filter(f=>f.kind==='realignment').length,1);assert.ok(b.facts.every(f=>f.sourceYear===2026&&f.targetYear===2027));assert.equal(b.facts.find(f=>f.kind==='departure').evidence,'observed-encourage');
