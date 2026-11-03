@@ -3,9 +3,22 @@
   "remainingKnownRisk": "CFM class recreation on Continue requires further hardening before reload test",
   "installedFilesModified": false,
   "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DynastyEnhancerHubPrototype-p04.zip",
-  "liveResult": null,
+  "liveResult": {
+    "pid": 18364,
+    "coldFirstHub": "Tab missing until stock-menu roundtrip",
+    "rootSelection": "LB/RB reaches custom root and returns to stock tabs",
+    "directTweets": true,
+    "scopeDropdown": "National selected and posts visible",
+    "gameResponsive": true,
+    "visualProblems": [
+      "Feed positioned too low",
+      "Team-only depth-chart preview retained",
+      "Shared header switched from hub tabs to standalone title"
+    ],
+    "userConfirmedPreviewClearsOnStats": true
+  },
   "basedOn": "p03",
-  "status": "Offline checks passed; live root-focus correction pending",
+  "status": "Live root selection/direct rendering passed; host presentation failed",
   "change": "Explicit true isFocusable and isInteractive fields on outer root, checked after native encoding",
   "requiresCleanRestart": true,
   "prototype": "p04",

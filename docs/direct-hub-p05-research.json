@@ -1,0 +1,66 @@
+{
+  "nextPrototype": "p05",
+  "status": "Verified research; not implemented or loaded",
+  "runningPrototype": "p04",
+  "pid": 18364,
+  "branch": "prototype/direct-hub-feed",
+  "header": {
+    "cause": "News ART _ShowHeader calls shared SetState(STATE_TITLE)",
+    "headerBytes": 48,
+    "plan": "Per-view GetHeader facade: no-op SetState/SetTitle/Show/Hide; GetValidDisplayString returns empty; mHideHeaderOnTransitionOut=false",
+    "flagsNoSuper": 41,
+    "creation": "Inline DefineFunction2 inside owned News.Init; live parameter record is {uint64 register,const char* name}, e.g context6/view4/flow5"
+  },
+  "preview": {
+    "ownership": "Dedicated MainHub preview subscreen at layer 10",
+    "guards": [
+      "Callback.func == scope._HideAllScreens",
+      "scope instanceof art_screen.panel.career.HubPanelSwitcher",
+      "bound listener iteration"
+    ],
+    "plan": "Save holder._visible on child focus, set false; restore saved value on Unfocus and Shutdown",
+    "avoid": "TriggerPanelsHide alone: cached same-tab early return can leave stock preview hidden",
+    "holder": "scope.GetScreenInfo().GetHolderMovie()",
+    "service": "logic_cfm.service.HubInfoPanelsService.Get(context)",
+    "instanceChain": "mHidePanelHandler.mListeners[i].Callback.scope"
+  },
+  "geometry": {
+    "defaults": [
+      -40,
+      150
+    ],
+    "localConversion": "outer.mcMount._parent.globalToLocal(targetPoint)",
+    "outerReady": "Parent BasePanel assigns PanelData.mMovie before widget.SetData",
+    "childOriginY": "tabBottom+16-138",
+    "reapply": "On actual child Focus and UI timer if needed, after parent layout settles",
+    "tabBottom": "p={x:0,y:realHeader.mcTabs.GetHeight()}; realHeader.mcTabs.localToGlobal(p)",
+    "outer": "initParams.Panel.mMovie",
+    "realHeader": "Capture view.GetHeader() before facade",
+    "setter": "outer.SetScreenMountPosition(X,Y), changes only outer.mcMount local coordinates"
+  },
+  "reload": {
+    "lengthAccessor": {
+      "verifiedExecutorReturn": "0x7c07a92",
+      "vtable": "0xbc42fe8",
+      "slot": "0xb0",
+      "rva": "0x7c34e40"
+    },
+    "plan": "Capture AS UI thread in RequestMenuPanels before forwarding; lazily clone gated Init/Shutdown definition during size accessor before body fetch; cache by definition+relocated header/pool generation; retain pages until exit",
+    "requestMethod": {
+      "menuReadySynchronous": true,
+      "vtable": "0xbac63a8",
+      "rva": "0x7a2b860",
+      "verifiedASReturn": "0x7af02b4",
+      "slot": "0x70",
+      "abi": "void(self,nativeArrayValue)"
+    },
+    "remaining": "ART/template/dropdown resource reacquisition separately required",
+    "risk": "CFM unload can recreate original News classes; current owners are one-shot"
+  },
+  "evidence": [
+    "Evidence/DirectHub/request-menu-runtime-18364.json",
+    "Evidence/DirectHub/script-function-runtime.json",
+    "Evidence/DirectHub/panel-adapter-binding-map.md"
+  ],
+  "installedFilesModified": false
+}
