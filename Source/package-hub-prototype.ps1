@@ -1,4 +1,4 @@
-param([string]$NativeName='DynastyEnhancerHubPrototype-p02',[string]$BaselineRuntime='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6/Plugins/DynastyEnhancer/Runtime-v96')
+param([string]$NativeName='DynastyEnhancerHubPrototype-p03',[string]$BaselineRuntime='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6/Plugins/DynastyEnhancer/Runtime-v96')
 $ErrorActionPreference='Stop'
 if($NativeName -notmatch '^DynastyEnhancerHubPrototype-p[0-9]+$'){throw 'Experimental module name required'}
 $hubProject=Split-Path -Parent $PSScriptRoot
@@ -13,7 +13,7 @@ Copy-Item -LiteralPath (Join-Path $hubProject 'THIRD_PARTY_NOTICES.md') -Destina
 Copy-Item -LiteralPath (Join-Path $hubProject 'LICENSES') -Destination (Join-Path $hubStage 'LICENSES') -Recurse
 Copy-Item -LiteralPath (Join-Path $hubProject 'Vendor/json.LICENSE.txt') -Destination (Join-Path $hubStage 'LICENSES/nlohmann-json-MIT.txt')
 $hubPayload=Get-ChildItem -LiteralPath $hubStage -Recurse -File | ForEach-Object {@{file=$_.FullName.Substring($hubStage.Length+1);sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash}}
-@{experimental=$true;native=$NativeName;directHub=$true;installedMmcModified=$false;privateHistoryIncludedInZip=$false;files=@($hubPayload)} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $hubStage 'prototype-manifest.json') -Encoding utf8NoBOM
+@{experimental=$true;native=$NativeName;directHub=$true;unload='Clean game restart required after native ScriptFunction definitions are installed';installedMmcModified=$false;privateHistoryIncludedInZip=$false;files=@($hubPayload)} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $hubStage 'prototype-manifest.json') -Encoding utf8NoBOM
 $hubZip=Join-Path $hubBuild ($NativeName+'.zip')
 # Package code before copying any private history or runtime captures.
 Compress-Archive -Path (Join-Path $hubStage '*') -DestinationPath $hubZip -Force

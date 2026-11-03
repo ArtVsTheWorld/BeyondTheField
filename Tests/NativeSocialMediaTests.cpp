@@ -45,9 +45,14 @@ int main(int argc,char** argv){
             const auto previousContainers=containers;containers=donorRows;Collector prefetched{vt,{}};containerHook(nullptr,&team,&prefetched);
             require(embeddedActive&&opened,"Stock panel prefetch must not revoke active child ownership");containers=previousContainers;
             panelFocusChangedHook(owner.data(),&team);require(!embeddedActive&&!opened,"Leaving the native tab must release embedded ownership");panelFocusChanged=previous;
-            const auto originalReady=panelReady;auto* priorDescriptor=embeddedDescriptor;panelReady=completedRoot;embeddedDescriptor=owner.data();embeddedRootPending=true;embeddedActive=true;opened=true;
-            panelReadyHook(nullptr,social::embedded::donorId,nullptr);require(!embeddedRootPending&&completedPanel==social::embedded::panelId&&completedData==owner.data(),"A rejected donor must complete the custom panel with retained recovery data");
-            panelReady=originalReady;embeddedDescriptor=priorDescriptor;embeddedActive=false;opened=false;
+            const auto originalReady=panelReady;auto* priorDescriptor=embeddedDescriptor;panelReady=completedRoot;embeddedDescriptor=owner.data();hubScriptOwned=true;
+            require(requestPanelHook(nullptr,&social,nullptr)&&completedPanel==social::embedded::panelId&&completedData==owner.data(),"Root requests must publish their own cached descriptor without a donor callback");
+            hubScriptOwned=false;panelReady=originalReady;embeddedDescriptor=priorDescriptor;embeddedActive=false;opened=false;
+            auto changed=filterChanged;filterChanged=originalChanged;changedForwardCalls=0;embeddedChildren=1;
+            filterChangedHook(nullptr,feedEntry.panel,"stock_filter",nullptr);require(changedForwardCalls==1,"An attached hidden child swallowed a stock filter");
+            filterChangedHook(nullptr,socialChildId(),"SOCIAL_TYPE",nullptr);require(changedForwardCalls==1,"Hidden child type input escaped to the stock handler");
+            embeddedChildren=0;filterChanged=changed;changedForwardCalls=0;
+            hubScriptPinned=true;stop();require(!disabled&&requestStop()==ERROR_NOT_SUPPORTED,"Fatal-stop path must retain pinned lifecycle handlers");hubScriptPinned=false;
         }
         for(const auto& binding:bindings)if(!hubFeed)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
         {
@@ -63,7 +68,7 @@ int main(int argc,char** argv){
             require(appendContainer(p,teamEntry)&&original.rows.size()==4&&original.rows[0]["tileCoords"]=="12"&&original.rows[1]["tileCoords"]=="3"&&original.rows[2]["tileCoords"]=="5"&&original.rows[3]["tileCoords"]=="11"&&original.rows[0]["Opacity"]==0.5f,"Prominent shortcut must precede stock settings/retirement without changing their identities");
         }
         uiReady=true;waitingFeed();require(!feedReady()&&!adoptReadyFeed()&&std::string(socialDestination())=="DO_NOTHING","Navigation metadata must remain inert until the edition is ready");{auto saved=navRequest;navRequest=originalNav;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(navForwardName=="DO_NOTHING"&&!opened,"A ready UI must still block a preparing edition at click time");navRequest=saved;navForwardCalls=0;}uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;{auto ready=std::make_shared<social::Feed>();ready->catalog=std::make_shared<social::Catalog>();latestFeed=ready;}require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
-        {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,"CM_NEWSSUB",kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
+        {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,socialChildId(),kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
         {
             using dynasty::live::Address;const Address image=0x140000000,svc=0x100000,career=0x110000,ui=0x120000,owner=0x130000,db=0x140000;
             std::map<Address,Address> cells={{image+0xfa519b8,svc},{svc,image+0xbaa8998},{svc+0x468,career},{svc+0x470,ui},{svc+0x460,owner},{svc+0x7b1,1},{career,image+0xbce9b08},{ui,image+0xbd7a538},{career+0x20,owner},{career+0x238,db},{db,image+0xbd0d2d8}};
@@ -103,7 +108,8 @@ int main(int argc,char** argv){
             require(hubEntry("cm_team")== (hubFeed?nullptr:&teamEntry)&&!hubEntry("DynastyCentral")&&!hubEntry("CM_NEWSTAB")&&!hubEntry("CM_LEAGUE"),"Social shortcut must be restricted to Team");
             {const auto savedRequest=requestPanel;requestPanel=originalRequest;expectedRequestSelf=&out;expectedRequestParams=&proxy;requestCalls=0;
              require(requestSocialPanel(&out,&proxy)&&requestCalls==1&&lastDonorPanel=="DynastyCentral","Category refresh must request the persistent panel and preserve its native self/params");
-             requestResult=false;require(!requestSocialPanel(&out,&proxy)&&requestCalls==2,"A failed native refresh must not report success");requestResult=true;requestPanel=savedRequest;}
+             if constexpr(hubFeed){require(embeddedSeedPending&&embeddedChildPending,"Pending donor initialization was not retained");require(requestSocialPanel(&out,&proxy)&&requestCalls==1,"A pending donor must not be requested repeatedly");embeddedSeedPending=false;embeddedSeedRetryAt=0;requestResult=false;require(requestSocialPanel(&out,&proxy)&&requestCalls==2&&!embeddedSeedPending&&embeddedChildPending,"A failed bootstrap must leave a retryable child instead of abandoning navigation");embeddedChildPending=false;embeddedSeedRetryAt=0;}
+             else{requestResult=false;require(!requestSocialPanel(&out,&proxy)&&requestCalls==2,"A failed native refresh must not report success");}requestResult=true;requestPanel=savedRequest;}
             Collector central{vt,{}};ContainerProxy cp{containerVt,&central,{}};
             containerString(&cp,2,"tileCoords","2");containerString(&cp,9,"tileCoords","5");containerString(&cp,9,"panelId","DynastyCentral");containerBool(&cp,9,"AllowFocus",true);containerInt(&cp,9,"Priority",0);containerFloat(&cp,9,"Opacity",0.5f);
             require(appendContainer(cp,centralEntry)&&central.rows.size()==3,"Sparse Dynasty Central rows lost the User Settings donor");
@@ -117,12 +123,12 @@ int main(int argc,char** argv){
         for(const auto& invalid:{"","0","01","-1","1x","999999999999999999999"})require(postNumber(invalid)==0,"Invalid coordinate accepted");
         require(postNumber(std::to_string(feedPostCount+1))==0,"Out-of-range post accepted");
         containers=donorRows;opened=true;
-        Collector feed{vt,{}};Alias panel{aliasVt,"CM_NEWSSUB"};containerHook(nullptr,&panel,&feed);
+        Collector feed{vt,{}};Alias panel{aliasVt,socialChildId()};containerHook(nullptr,&panel,&feed);
         require(lastDonorPanel=="DynastyCentral","Offseason feed still depends on the hidden CFB panel");
         require(feed.rows.size()==feedContainerCount,"Feed count differs from native containers");
         for(unsigned row=0;row<feedContainerCount;++row){
             require(feed.rows.at(row).at("tileCoords")==std::to_string(row+1),"Feed coordinate sequence changed");
-            require(feed.rows.at(row).at("panelId")=="CM_NEWSSUB","Feed leaked donor panel identity");
+            require(feed.rows.at(row).at("panelId")==socialChildId(),"Feed leaked donor panel identity");
             require(feed.rows.at(row).at("UseTileDimensions")==true,"Feed must size from post widgets");
         }
         if constexpr(listFeed)require(feed.rows.at(0).at("linkage")=="art_control.group.PanelListContainer","List feed must use the native list control");
@@ -132,11 +138,11 @@ int main(int argc,char** argv){
         require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="For You"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");
         require(filterForwardCalls==0,"Custom category queried unrelated native filters");
         Alias unsetPanel{aliasVt,""};Collector stockNewsCategory{vt,{}};filterDataHook(nullptr,&stockNewsCategory,&unsetPanel,&kind);
-        require(stockNewsCategory.rows.at(0).at("display")=="For You","Stock News unset panel ID lost the category");
+        require(stockNewsCategory.rows.at(0).at("display")== (hubFeed?"Original category":"For You"),"Embedded mode must not capture an unset stock panel ID");
         Alias otherPanel{aliasVt,"OTHER_PANEL"};Collector otherCategory{vt,{}};filterDataHook(nullptr,&otherCategory,&otherPanel,&kind);
-        require(filterForwardCalls==1&&otherCategory.rows.at(0).at("display")=="Original category","Other panel category was replaced");
+        require(filterForwardCalls==(hubFeed?2u:1u)&&otherCategory.rows.at(0).at("display")=="Original category","Other panel category was replaced");
         opened=false;Collector ordinary{vt,{}};filterDataHook(nullptr,&ordinary,&panel,&kind);
-        require(filterForwardCalls==2&&ordinary.rows.at(0).at("display")=="Original category","Unrelated category behavior changed");
+        require(filterForwardCalls==(hubFeed?3u:2u)&&ordinary.rows.at(0).at("display")=="Original category","Unrelated category behavior changed");
         {
             using namespace social::refresh;
             Watch watch;Stamp a{100,200,300,1},b=a;b.modified=201;
@@ -184,7 +190,7 @@ int main(int argc,char** argv){
             require(feedPostCount==5&&postNumber("5")==5&&postNumber("6")==0,"Dynamic feed count is not applied on entry");
             opened=true;Collector dynamic{vt,{}};containerHook(nullptr,&panel,&dynamic);require(dynamic.rows.size()==(listFeed?1u:5u),"Dynamic feed omitted native containers");
 #ifdef SOCIAL_DUAL_DROPDOWN
-            Collector scopes{vt,{}};filterDataHook(nullptr,&scopes,const_cast<char*>("CM_NEWSSUB"),const_cast<char*>("filter_one"));
+            Collector scopes{vt,{}};filterDataHook(nullptr,&scopes,const_cast<char*>(socialChildId()),const_cast<char*>("filter_one"));
             require(scopes.rows.size()==4&&scopes.rows.at(0).at("display")=="For You"&&scopes.rows.at(3).at("display")=="My Team","Raw native LT scope binding did not return four independent choices");
             require(scopes.rows.at(0).at("isDefault")==true,"Scope dropdown lost its selected default");
             require(socialFilter("filter_one")==SocialFilter::scopeDropdown,"Native LT selection must select rather than cycle scopes");
@@ -194,15 +200,15 @@ int main(int argc,char** argv){
             require(socialFilter("SOCIAL_SCOPE")==SocialFilter::scope,"LT scope callback is not recognized");
             // Replay the crashing callback spelling. Bad values are rejected
             // here rather than forwarded to the stock synthetic-panel lookup.
-            filterChangedHook(nullptr,"CM_NEWSSUB","news_category",nullptr);
+            filterChangedHook(nullptr,socialChildId(),"news_category",nullptr);
             require(changedForwardCalls==0,"Lowercase week callback escaped into the stock panel lookup");
             void* valueVt[]={nullptr,nullptr,nullptr,reinterpret_cast<void*>(filterKey)};
             FilterValue value{valueVt,1};const auto oldBase=base;base=reinterpret_cast<uintptr_t>(filterKey);
-            const auto beforeSelection=pageFeed;filterChangedHook(nullptr,"CM_NEWSSUB","news_category",&value);
+            const auto beforeSelection=pageFeed;filterChangedHook(nullptr,socialChildId(),"news_category",&value);
             require(pageFeed==beforeSelection&&changedForwardCalls==0,"Existing week callback must preserve selection without native refresh");
-            value.key=99;filterChangedHook(nullptr,"CM_NEWSSUB","news_category",&value);
+            value.key=99;filterChangedHook(nullptr,socialChildId(),"news_category",&value);
             require(pageFeed==beforeSelection&&changedForwardCalls==0,"Invalid week must not reach the stock lookup");base=oldBase;
-            filterChangedHook(nullptr,"CM_NEWSSUB","unknown_filter",nullptr);
+            filterChangedHook(nullptr,socialChildId(),"unknown_filter",nullptr);
             require(changedForwardCalls==0,"Unknown custom filter escaped into the stock panel lookup");
             filterChangedHook(nullptr,"OTHER_PANEL","news_category",nullptr);
             require(changedForwardCalls==1,"Another native panel's filter callback was intercepted");
@@ -243,6 +249,17 @@ int main(int argc,char** argv){
             auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"national","National"}};social::Edition e;e.key="draft";
             for(int pick=224;pick>=1;--pick){auto id=std::to_string(pick);social::FeedPost p{"NFL Draft","@NFLDraft","Selection","Draft"};p.category="draft";p.voice="nflDraft";p.transaction=true;p.draftPick=pick;p.draftRound=(pick-1)/32+1;e.stories.emplace(id,p);e.views["national"].push_back(id);}
             c->weeks.push_back(e);auto f=social::selectFeed(c,0,1,11);require(f->posts.size()==224,"Draft Transactions must expose the whole board");int seen=0;for(const auto& post:f->posts)require(post.draftPick==++seen,"Full draft view lost pick order");require(seen==224,"Full draft view lost a pick");require(social::selectFeed(c,0,1)->posts.size()==100,"The ordinary National cap must stay at 100");require(social::matchesType(f->posts.front(),7),"NFL Draft must also count as an official account");
+        }
+        {
+            const auto oldLatest=latestFeed,oldPage=pageFeed,oldPublication=embeddedPublication;
+            auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"national","National"},{"team:63","ULM"}};
+            social::Edition edition;edition.key="previous";social::FeedPost post{"Analyst","@Analyst","Verified update","Analytics"};post.voice="analyst";post.category="analytics";edition.stories.emplace("story",post);for(const auto& scope:c->scopes)edition.views[scope.key]={"story"};c->weeks.push_back(edition);edition.key="active";c->weeks.push_back(edition);c->active=1;
+            embeddedPublication=social::selectFeed(c,1,0);pageFeed=social::selectFeed(c,0,2,5);latestFeed=social::selectFeed(c,1,0);
+            require(adoptEmbeddedPublication()&&pageFeed->key=="previous"&&pageFeed->scope==2&&pageFeed->type==5,"Midweek publication lost the selected archived edition or filters");
+            require(!adoptEmbeddedPublication(),"An unchanged publication repeatedly refreshed the grid");
+            auto next=std::make_shared<social::Catalog>(*c);edition.key="next";next->weeks.push_back(edition);next->active=2;latestFeed=social::selectFeed(next,2,0);
+            require(adoptEmbeddedPublication()&&pageFeed->key=="next"&&pageFeed->scope==2&&pageFeed->type==5,"New-week publication did not advance the direct feed");
+            latestFeed=oldLatest;pageFeed=oldPage;embeddedPublication=oldPublication;feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;
         }
         {social::FeedPost p{"reporter","@reporter","terms","Signing"};p.voice="beat";p.category="signings";require(social::matchesType(p,11)&&social::matchesType(p,1),"Reported signatures must appear in Transactions and Recruiting");p.category="coaching";p.voice="fan";require(!social::matchesType(p,11),"Speculative fan roots must not become transaction reports");p.voice="analyst";require(social::matchesType(p,11),"Coaching reports must appear in Transactions");}
         require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");
@@ -312,10 +329,10 @@ int main(int argc,char** argv){
             require(memory!=nullptr,"Flow fixture allocation failed");newsGrid=reinterpret_cast<uintptr_t>(memory);newsVerticalInput=newsGrid+4096;
             memcpy(memory,social::newsGridOriginal.data(),social::newsGridOriginal.size());memcpy(memory+4096,social::newsVerticalInputOriginal.data(),social::newsVerticalInputOriginal.size());
             require(configureNewsFlow(true)&&flowOwned&&configureNewsFlow(true),"Vertical flow activation or idempotence failed");
-            require(memcmp(memory,social::newsGridVertical.data(),61)==0&&memcmp(memory+4096,social::newsVerticalInputEnabled.data(),7)==0,"Vertical flow bytes differ from expected native instructions");
+            require(memcmp(memory,(hubFeed?social::newsGridOriginal:social::newsGridVertical).data(),61)==0&&memcmp(memory+4096,(hubFeed?social::newsVerticalInputOriginal:social::newsVerticalInputEnabled).data(),7)==0,"Vertical flow must preserve shared defaults in embedded mode");
             unsigned delta=0;for(size_t n=0;n<61;++n)if(social::newsGridOriginal[n]!=memory[n]){++delta;require(n==0x17||n==0x22,"Flow changed a non-direction operand");}
             for(size_t n=0;n<7;++n)if(social::newsVerticalInputOriginal[n]!=memory[4096+n]){++delta;require(n==4||n==5,"Flow changed the native setter contract");}
-            require(delta==4,"Vertical flow must change exactly four bytes");
+            require(delta==(hubFeed?0u:4u),"Embedded flow must leave shared constructors and setters unchanged");
             memory[0]^=1;require(!configureNewsFlow(false)&&flowOwned&&memory[0]!=social::newsGridVertical[0],"Flow must preserve foreign changes");memory[0]^=1;
             require(configureNewsFlow(false)&&!flowOwned&&memcmp(memory,social::newsGridOriginal.data(),61)==0&&memcmp(memory+4096,social::newsVerticalInputOriginal.data(),7)==0,"Flow did not fully restore on exit");
             memory[4096]^=1;require(!configureNewsFlow(true)&&!flowOwned&&memcmp(memory,social::newsGridOriginal.data(),61)==0,"Flow activation wrote partially with a mismatched input gate");

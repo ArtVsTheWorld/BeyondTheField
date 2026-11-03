@@ -2,6 +2,8 @@
 #include "../Source/HubTab.h"
 #include "../Source/HubFeedModel.h"
 #include "../Source/NewsScopeInput.h"
+#include "../Source/HubScriptDefinition.h"
+#include "../Source/HubNewsTemplate.h"
 #include <array>
 #include <cstring>
 #include <iostream>
@@ -42,6 +44,31 @@ int main(){
         put(168,start+288);put(576,uintptr_t(1));require(!social::hubtab::references(start,image,read)); // Foreign value
     }
     {
+        using namespace social::embedded::lifecycle;
+        const auto emitted=social::embedded::lifecycle::programs();
+        for(const auto& p:emitted){
+            std::array<unsigned char,definitionHeader> header{};
+            auto put=[&](size_t at,auto value){memcpy(header.data()+at,&value,sizeof(value));};
+            put(0,uintptr_t(0x300000));put(8,p.argc);put(12,static_cast<unsigned short>(p.registers));put(14,static_cast<unsigned short>(p.flags));put(16,uintptr_t(0x310000));put(24,static_cast<unsigned>(p.original.size()));put(32,unsigned(41));put(40,uintptr_t(0x320000));
+            const auto before=header;const auto owned=clone(p,header);require(owned&&owned->size()==definitionHeader+p.body.size()&&header==before);
+            require(std::equal(p.body.begin(),p.body.end(),owned->begin()+definitionHeader));
+            for(size_t i=0;i<definitionHeader;++i)if(i<24||i>=28)require(owned->at(i)==header[i]);
+            require(field<unsigned>(owned->data(),24)==p.body.size());put(8,p.argc+1);require(!clone(p,header));
+        }
+        std::array<unsigned char,0x60> object{};const auto owner=reinterpret_cast<uintptr_t>(object.data()),image=uintptr_t(0x140000000),definition=uintptr_t(0x400000);
+        auto put=[&](size_t at,uintptr_t value){memcpy(object.data()+at,&value,8);};put(0,image+functionVtable);object[11]=0x46;put(definitionField,definition);
+        auto read=[&](uintptr_t at,void* out,size_t size){if(at!=owner||size!=object.size())return false;memcpy(out,object.data(),size);return true;};
+        require(ownerMatches(owner,image,definition,read));put(definitionField,definition+8);require(!ownerMatches(owner,image,definition,read));put(definitionField,definition);object[11]=0x45;require(!ownerMatches(owner,image,definition,read));
+    }
+    {
+        auto patches=social::dropdown::patches();const auto before=patches.front().changed;social::embedded::scopeTemplateFlow(patches);const auto& after=patches.front().changed;
+        for(size_t i=0;i<after.size();++i)if(!(i>=0xcd&&i<0xcd+41)&&i!=0x118)require(after[i]==before[i]);
+        require(after[0x118]==0x73);size_t at=0xcd;std::vector<std::pair<std::string,int>> fields;
+        while(at<0xcd+41&&after[at]==0xb9){require(after[at++]==0xb9&&after[at++]==5);std::string key;if(after[at]==0xa1){++at;at=(at+7)&~size_t(7);uintptr_t pointer=0;memcpy(&pointer,after.data()+at,8);at+=8;key=reinterpret_cast<const char*>(pointer);}else{require(after[at++]==0xa2&&after[at++]==60);key="BlockSize";}require(after[at++]==0xb5);const int value=after[at++];require(after[at++]==0x4f);fields.emplace_back(key,value);}
+        while(at<0xcd+41){require(after[at++]==0x76&&after[at++]==0x17);}
+        require(fields==std::vector<std::pair<std::string,int>>{{"FillDirection",2},{"ExpandDirection",8},{"BlockSize",80}});
+    }
+    {
         using J=nlohmann::json;
         std::vector<J> rows={J{{"id","CM_ACTIONHOME"},{"linkage",social::embedded::linkage},{"priority",0}},J{{"id","cm_team"},{"priority",4},{"isVisible",false}},J{{"id","CM_LEAGUE"},{"priority",5}},J{{"id","DynastyCentral"},{"priority",6}}};
         auto plan=social::embedded::plan(rows);require(plan&&plan->donor==0&&plan->position==2&&plan->priority==4.5);
@@ -54,4 +81,5 @@ int main(){
     std::cout<<"Passed: 17-byte native insertion/existing-key writes fit a 24-byte result; adjacent stack canaries preserved.\n";
     std::cout<<"Passed: year-round placement without Team, duplicate/foreign donor rejection, registered News screen key and bumper-bubbling scroll.\n";
     std::cout<<"Passed: descriptor traversal preserves native arrays/objects by reference and rejects cycles, duplicate keys and foreign values.\n";
+    std::cout<<"Passed: owned script definitions preserve relocated headers and reject foreign owners/metadata.\n";
 }

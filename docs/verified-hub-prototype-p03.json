@@ -1,0 +1,53 @@
+{
+  "prototype": "p03",
+  "status": "Offline checks passed; controlled live entry pending",
+  "branch": "prototype/direct-hub-feed",
+  "root": "CM_DYNASTY_SOCIAL",
+  "child": "CM_DYNASTY_SOCIAL_FEED",
+  "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DirectHub-DynastyEnhancerHubPrototype-p03-efcb2a61aab64f11a19fa6c56141f049\\DynastyEnhancerHubPrototype-p03.dll",
+  "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DynastyEnhancerHubPrototype-p03.zip",
+  "nativeSha256": "b1d674c609067ea3c4b1d6e03de8213569969b8b5c909f9e66cc4fe6d1cbf7a1",
+  "zipSha256": "ec591c614372e9119a6e5f6e0192e6491118274cafdde34157ea63753c2d5905",
+  "installedFilesUnchanged": true,
+  "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Backups\\DirectHub-p03-20261103-130704",
+  "saveBackups": 37,
+  "historyFiles": 22,
+  "sourceHashes": {
+    "Source/NativeSocialMedia.cpp": "fb35f696b9b17f287ff193e7eda9aac020cb057c559bf2ebad57d712f46feec0",
+    "Source/HubNewsTemplate.h": "3c6b606ea3ec99e0dac55981cf59a845b577196d1baf87cf5f8f798e64717cd0",
+    "Source/NewsScopeInput.h": "834fa3a9909d45485c88966e86b79c91601da7301c649504f72d32817d246754",
+    "Source/HubScriptDefinition.h": "22412e19231b0f49f3d0a1ca501da90511727ba158788dfe581e5d86c547cf5d",
+    "Tools/build_hub_lifecycle.py": "70de8d02b18ca2f5dce17bc8a8ddd8d8e31750042487e56d8b59be018cf62d73",
+    "Source/HubNewsLifecycle.h": "63f3355a32ebe917afb7a1be2bd35583a1adfd8de6f3f0cc4e136614e19c48ad"
+  },
+  "offline": {
+    "nativeRoutingInputLayoutChecks": true,
+    "previousContentSuite": 348,
+    "nativeBuild": true,
+    "ownedDefinitionAndMapAbiChecks": true,
+    "generatorChanges": false,
+    "actualCatalogAllScopes": true,
+    "lifecycleInterpreterCases": 6
+  },
+  "architecture": {
+    "fatalError": "Retain lifecycle handlers after pinned definition publication",
+    "dataRoute": "Direct root publication; one genuine central bootstrap, then owned child descriptors",
+    "focus": "Verified native PanelFocusChanged vtable +0x98",
+    "grid": "News instance layout parameters; shared grid constructor and vertical-input setter untouched",
+    "input": "LT scope / RT week / R3 categories / LB-RB hub tabs / vertical native pixel panning",
+    "unload": "Clean game restart; pinned definitions/strings retained until process exit",
+    "installThread": "Genuine MenuReady/root-request UI callbacks only",
+    "publicationRefresh": "Context-owned native interval, only when focused; unchanged publications do not rebind",
+    "definitionHeaderBytes": 48,
+    "definitionOwner": "Native ScriptFunction +0x58"
+  },
+  "liveNotYetVerified": [
+    "Direct rendering and geometry",
+    "LT/RT and R3 controls",
+    "Hub LB/RB and Back",
+    "Idle publication refresh",
+    "Same-session Dynasty reload",
+    "Cold first entry and year-round presence"
+  ],
+  "visualCaution": "News layout uses native zero outer padding; first-card/header position requires live inspection"
+}

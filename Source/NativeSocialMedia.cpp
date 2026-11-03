@@ -27,6 +27,8 @@
 #include "Startup.h"
 #include "NativeMapValue.h"
 #include "HubFeedModel.h"
+#include "HubScriptDefinition.h"
+#include "HubNewsTemplate.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_HUB_FEED
@@ -34,8 +36,11 @@ constexpr bool hubFeed=true;
 #else
 constexpr bool hubFeed=false;
 #endif
-bool embeddedActive=false,embeddedRootPending=false,embeddedBorrowing=false;
-void* embeddedDescriptor=nullptr;
+bool embeddedActive=false,embeddedChildPending=false,embeddedSeedPending=false,embeddedSeeded=false;
+uint64_t embeddedSeedRetryAt=0;
+std::atomic<unsigned> embeddedChildren{0};
+void* embeddedDescriptor=nullptr;void* embeddedChildDescriptor=nullptr;
+const char* socialChildId(){return hubFeed?social::embedded::childId:"CM_NEWSSUB";}
 
 #ifdef SOCIAL_SCROLL_TEST
 unsigned feedPostCount=12;
@@ -75,6 +80,7 @@ HMODULE module=nullptr;
 std::filesystem::path folder;
 std::string buildId;
 std::atomic<bool> disabled{false},opened{false},uiReady{false};
+bool socialDataActive(){return opened.load()||(hubFeed&&embeddedChildren.load()!=0);}
 std::atomic<unsigned> callbacks{0};
 std::atomic<bool> preflightRunning{false},preflightReady{false},preflightAttempted{false};
 std::atomic<bool> feedValidated{false};
@@ -103,7 +109,7 @@ const auto scopedScroll=hubFeed?social::embeddedNewsScroll():social::scopedNewsS
 #else
 const auto scopedScroll=hubFeed?social::embeddedNewsScroll():social::scopedNewsScroll();
 #endif
-auto dropdownPatches=social::dropdown::patches();
+auto dropdownPatches=[](){auto patches=social::dropdown::patches();if constexpr(hubFeed)social::embedded::scopeTemplateFlow(patches);return patches;}();
 uintptr_t newsModelBase=0,dropdownScreenBase=0;
 bool dropdownModelOwned=false,dropdownScreenOwned=false;
 bool configureNewsDropdowns(bool enable);
@@ -111,6 +117,55 @@ uintptr_t newsBodyStyle=0,newsViewport=0;
 bool polishOwned=false;bool discoveryOwned=false;auto discoveryPatches=social::discoveryui::patches();
 const auto maskedViewport=social::polish::viewportMasked();
 bool configureNewsPolish(bool enable);
+struct HubScriptOwner {uintptr_t address=0;size_t program=0;};
+struct HubOwnedDefinition {uintptr_t original=0,owned=0;};
+const auto hubPrograms=social::embedded::lifecycle::programs();
+std::mutex hubScriptMutex;
+std::vector<HubScriptOwner> hubScriptOwners;
+std::vector<HubOwnedDefinition> hubOwnedDefinitions;
+std::atomic<bool> hubScriptCandidatesReady{false},hubScriptOwned{false},hubScriptPinned{false};
+bool hubScriptGates(){
+    struct Gate {uintptr_t slot,rva;std::vector<unsigned char> prefix;};
+    const Gate gates[]={
+        {0xa8,0x7c34e10,{0x48,0x8b,0x41,0x58,0x48,0x83,0xc0,0x30,0xc3}},
+        {0xb0,0x7c34e40,{0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3}},
+        {0xb8,0x7c34eb0,{0x48,0x8b,0x41,0x58,0xc5,0xf8,0x10,0x40,0x20,0xc5,0xf8,0x11,0x02,0x48,0x8b,0xc2,0xc3}},
+        {0xc0,0x7c34dd0,{0x48,0x8b,0x41,0x58,0x48,0x63,0xca,0x48,0x03,0xc9,0x48,0x8b,0x40,0x10,0x48,0x8b,0x44,0xc8,0x08,0xc3}}
+    };
+    for(const auto& g:gates){uintptr_t fn=0;std::array<unsigned char,32> bytes{};if(!read(base+social::embedded::lifecycle::functionVtable+g.slot,&fn,8)||fn!=base+g.rva||!read(fn,bytes.data(),g.prefix.size())||!std::equal(g.prefix.begin(),g.prefix.end(),bytes.begin()))return false;}return true;
+}
+bool discoverHubScriptOwners(){
+    if(hubScriptCandidatesReady)return true;
+    using namespace social::embedded::lifecycle;
+    if(!newsModelBase||!hubScriptGates())return false;
+    std::vector<uintptr_t> definitions;uintptr_t firstPool=0;
+    for(const auto& program:hubPrograms){std::array<unsigned char,definitionHeader> header{};std::vector<unsigned char> body(program.original.size());const auto definition=newsModelBase+program.definition;if(!read(definition,header.data(),header.size())||!headerMatches(program,header)||!read(definition+definitionHeader,body.data(),body.size())||body!=program.original)return false;definitions.push_back(definition);if(!firstPool)firstPool=field<uintptr_t>(header.data(),40);}
+    uintptr_t firstString=0;MEMORY_BASIC_INFORMATION arena{};if(!read(firstPool,&firstString,8)||!VirtualQuery(reinterpret_cast<void*>(firstString),&arena,sizeof(arena)))return false;
+    const auto start=reinterpret_cast<uintptr_t>(arena.AllocationBase),end=start+256*1024*1024ull,deadline=GetTickCount64()+8000;
+    std::vector<unsigned char> block(1024*1024);std::vector<HubScriptOwner> found;
+    for(uintptr_t address=start;address<end;){
+        if(disabled||GetTickCount64()>deadline)return false;MEMORY_BASIC_INFORMATION region{};if(!VirtualQuery(reinterpret_cast<void*>(address),&region,sizeof(region)))return false;
+        const auto high=(std::min)(end,reinterpret_cast<uintptr_t>(region.BaseAddress)+region.RegionSize);if(high<=address)return false;const auto access=region.Protect&0xff;
+        if(region.State==MEM_COMMIT&&region.Type==MEM_PRIVATE&&!(region.Protect&(PAGE_GUARD|PAGE_NOACCESS))&&(access==PAGE_READWRITE||access==PAGE_WRITECOPY||access==PAGE_EXECUTE_READWRITE||access==PAGE_EXECUTE_WRITECOPY)){
+            for(auto cursor=address;cursor<high;){const auto count=static_cast<size_t>((std::min)(uintptr_t(block.size()),high-cursor));SIZE_T got=0;if(ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<void*>(cursor),block.data(),count,&got)&&got==count)for(size_t at=0;at+8<=count;at+=8){const auto value=field<uintptr_t>(block.data(),at);const auto match=std::find(definitions.begin(),definitions.end(),value);if(match==definitions.end()||cursor+at<definitionField)continue;const auto owner=cursor+at-definitionField;if(ownerMatches(owner,base,value,read)){if(found.size()>=64)return false;found.push_back({owner,static_cast<size_t>(match-definitions.begin())});}}cursor+=count;if(GetTickCount64()>deadline)return false;}
+        }address=high;
+    }
+    for(size_t i=0;i<definitions.size();++i)if(std::none_of(found.begin(),found.end(),[&](const auto& o){return o.program==i;}))return false;
+    std::lock_guard<std::mutex> lock(hubScriptMutex);hubScriptOwners=std::move(found);hubScriptCandidatesReady=true;note({{"event","embedded_script_owners_ready"},{"owners",hubScriptOwners.size()},{"model",newsModelBase}});return true;
+}
+bool installHubScriptDefinitions(){
+    if(hubScriptOwned)return true;if(!hubScriptCandidatesReady||!hubScriptGates())return false;
+    using namespace social::embedded::lifecycle;std::lock_guard<std::mutex> lock(hubScriptMutex);
+    for(const auto& owner:hubScriptOwners)if(!ownerMatches(owner.address,base,newsModelBase+hubPrograms.at(owner.program).definition,read))return false;
+    // Called only by the genuine UI MenuReady/root-request callbacks. Both
+    // native body/length accessors must observe the same definition.
+    std::vector<HubOwnedDefinition> definitions;
+    for(const auto& program:hubPrograms){std::array<unsigned char,definitionHeader> header{};const auto original=newsModelBase+program.definition;if(!read(original,header.data(),header.size()))return false;auto bytes=clone(program,header);if(!bytes)return false;auto memory=VirtualAlloc(nullptr,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);if(!memory)return false;memcpy(memory,bytes->data(),bytes->size());definitions.push_back({original,reinterpret_cast<uintptr_t>(memory)});}
+    hubScriptPinned=true;size_t installed=0;for(const auto& owner:hubScriptOwners){const auto& d=definitions.at(owner.program);if(!replace(reinterpret_cast<void**>(owner.address+definitionField),reinterpret_cast<void*>(d.original),reinterpret_cast<void*>(d.owned))){for(size_t i=0;i<installed;++i){const auto& prior=hubScriptOwners[i];const auto& before=definitions.at(prior.program);replace(reinterpret_cast<void**>(prior.address+definitionField),reinterpret_cast<void*>(before.owned),reinterpret_cast<void*>(before.original));}return false;}++installed;}
+    // The game's ScriptFunction clone copies definition pointers. These pages
+    // and DLL-backed literal strings therefore remain pinned until process exit.
+    hubOwnedDefinitions=std::move(definitions);hubScriptOwned=true;note({{"event","embedded_script_definitions_installed"},{"owners",installed},{"initBytes",hubPrograms.front().body.size()},{"unload","clean process restart required"}});return true;
+}
 bool locateNewsLayout(){
     // Installed APT streams have 64-KiB aligned native allocations. Check the
     // header and entire function, never accept a partial bytecode signature.
@@ -194,6 +249,7 @@ bool configureNewsPolish(bool enable){
 bool configureNewsFlow(bool enable){
     std::lock_guard<std::mutex> lock(layoutMutex);
     std::array<unsigned char,61> grid{};std::array<unsigned char,7> input{};
+    if constexpr(hubFeed){if(!newsGrid||!newsVerticalInput||!read(newsGrid,grid.data(),grid.size())||grid!=social::newsGridOriginal||!read(newsVerticalInput,input.data(),input.size())||input!=social::newsVerticalInputOriginal)return false;flowOwned=enable;return true;}
     const auto& expectedGrid=flowOwned?social::newsGridVertical:social::newsGridOriginal;
     const auto& expectedInput=flowOwned?social::newsVerticalInputEnabled:social::newsVerticalInputOriginal;
     if(!newsGrid||!newsVerticalInput||!read(newsGrid,grid.data(),grid.size())||grid!=expectedGrid||!read(newsVerticalInput,input.data(),input.size())||input!=expectedInput){note({{"event","news_flow_rejected"},{"enable",enable}});return false;}
@@ -475,7 +531,17 @@ constexpr HubEntry cfbEntry{"CM_NEWSTAB","7","12"},centralEntry{"DynastyCentral"
 constexpr HubEntry feedEntry=centralEntry;
 std::map<std::string,bool> admittedHubEntries; // Owned by UI callbacks only.
 const HubEntry* hubEntry(std::string_view panel){if(!hubFeed&&panel==teamEntry.panel)return &teamEntry;return nullptr;}
-bool requestSocialPanel(void* self,void* params){Alias donor{aliasVt,feedEntry.panel};const bool previous=embeddedBorrowing;if(hubFeed&&embeddedActive)embeddedBorrowing=true;const bool result=requestPanel(self,&donor,params);embeddedBorrowing=previous;return result;}
+bool emitEmbeddedChild(void* self){
+    if(!embeddedChildDescriptor||!embeddedChildren)return false;
+    auto refs=social::hubtab::references(reinterpret_cast<uintptr_t>(embeddedChildDescriptor),base,read);void* descriptor=refs?makeObject():nullptr;if(!descriptor)return false;
+    for(const auto& [key,value]:*refs)objectValue(descriptor,key.c_str(),reinterpret_cast<void*>(value));
+    tileText(descriptor,"id",socialChildId());const auto title=pageFeed->label+" | RS: Type";tileText(descriptor,"name",title.c_str());tileInt(descriptor,"numRows",static_cast<int>(feedContainerCount));tileInt(descriptor,"numColumns",1);tileText(descriptor,"FilterTypeA","NEWS_CATEGORY");tileText(descriptor,"PositionOffset","0,0");
+    embeddedChildPending=false;panelReady(self,socialChildId(),descriptor);releaseValue(descriptor);note({{"event","social_panel_ready"},{"route","owned child descriptor"}});return true;
+}
+bool requestSocialPanel(void* self,void* params){
+    if(hubFeed){embeddedChildPending=true;if(embeddedSeeded&&emitEmbeddedChild(self))return true;if(embeddedSeedPending||GetTickCount64()<embeddedSeedRetryAt)return true;embeddedSeedRetryAt=GetTickCount64()+1000;embeddedSeedPending=true;Alias donor{aliasVt,feedEntry.panel};const bool result=requestPanel(self,&donor,params);if(!result)embeddedSeedPending=false;return true;}
+    Alias donor{aliasVt,feedEntry.panel};return requestPanel(self,&donor,params);
+}
 void forwardContainerFields(void* out,unsigned row,const Json& fields,const char* coordinate=nullptr){
     for(const auto& [name,value]:fields.items()){
         if(value.is_boolean())rowSet(out,row,name.c_str(),value.get<bool>(),3);
@@ -511,14 +577,14 @@ void __fastcall containerHook(void* self,void* panel,void* out){
     const auto entry=hubEntry(name);
     if(!disabled&&uiReady&&!preflightRunning&&entry){configureNewsDropdowns(false);configureNewsPolish(false);}
     if(!disabled&&uiReady&&opened&&!preflightRunning&&entry){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
-    if(!disabled&&opened&&name=="CM_NEWSSUB"){
+    if(!disabled&&socialDataActive()&&name==socialChildId()){
         Alias donor{aliasVt,feedEntry.panel};ContainerProxy proxy{containerVt,out,{},true};containers(self,&donor,&proxy);
         const auto source=std::find_if(proxy.captured.begin(),proxy.captured.end(),[](const auto& row){return row.second.value("tileCoords",std::string())==feedEntry.donor;});
         if(source!=proxy.captured.end())for(unsigned row=0;row<feedContainerCount;++row){auto coords=std::to_string(row+1);for(const auto& [key,value]:source->second.items()){
             if(value.is_boolean())rowSet(out,row,key.c_str(),key=="useTileDimensions"||key=="UseTileDimensions"?true:key=="UseFrame"?false:value.get<bool>(),3);
             else if(value.is_number_integer())rowSet(out,row,key.c_str(),value.get<int>(),4);
             else if(value.is_number_float())rowSet(out,row,key.c_str(),value.get<float>(),5);
-            else if(value.is_string())rowText(out,row,key.c_str(),key=="tileCoords"?coords.c_str():key=="panelId"?"CM_NEWSSUB":value.get_ref<const std::string&>().c_str());
+            else if(value.is_string())rowText(out,row,key.c_str(),key=="tileCoords"?coords.c_str():key=="panelId"?socialChildId():value.get_ref<const std::string&>().c_str());
         }
             if constexpr(listFeed){rowText(out,row,"linkage","art_control.group.PanelListContainer");rowSet(out,row,"Width",1200,4);rowSet(out,row,"Height",600,4);rowSet(out,row,"ScrollByMount",false,3);rowSet(out,row,"UseScrollArrows",false,3);rowSet(out,row,"ShowScroller",true,3);rowSet(out,row,"WrapList",false,3);}
         }note({{"event","social_feed_containers"},{"donor",proxy.captured},{"listFeed",listFeed}});return;
@@ -549,16 +615,18 @@ void appendArray(void* array,void* value){
 }
 void __fastcall panelFocusChangedHook(void* self,void* name){
     Guard guard;const auto requested=argument(name);
+    bool gained=false;
     if(!disabled&&hubFeed){
         const bool selected=requested==social::embedded::panelId;
-        if(embeddedActive&&!selected){embeddedActive=false;opened=false;configureNewsDropdowns(false);configureNewsPolish(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
-        if(selected){embeddedActive=true;opened=true;adoptFeed();}
+        if(embeddedActive&&!selected){embeddedActive=false;opened=false;configureNewsScroll(false);configureNewsFlow(false);}
+        if(selected){gained=!embeddedActive;embeddedActive=true;opened=true;configureNewsFlow(true);configureNewsScroll(true);}
     }
     panelFocusChanged(self,name);
+    if(gained&&embeddedChildren){void* params=makeObject();requestSocialPanel(self,params);releaseValue(params);}
     if(!disabled&&hubFeed){char actual[64]{};if(read(reinterpret_cast<uintptr_t>(self)+0x428,actual,64)){actual[63]=0;note({{"event","embedded_focus_changed"},{"requested",requested},{"actual",actual},{"embedded",embeddedActive}});}}
 }
 void __fastcall menuReadyHook(void* self,void* data){
-    Guard guard;if(disabled||!data){menuReady(self,data);return;}
+    Guard guard;if(disabled||!data||(hubFeed&&!installHubScriptDefinitions())){menuReady(self,data);return;}
     unsigned kind=0;uintptr_t span[2]{};std::vector<void*> objects;std::vector<Json> rows;
     if(!read(reinterpret_cast<uintptr_t>(data)+16,&kind,4)||kind!=4||!read(reinterpret_cast<uintptr_t>(data)+24,span,16)||span[1]<span[0]||(span[1]-span[0])%8||span[1]-span[0]>512){menuReady(self,data);return;}
     for(auto ptr=span[0];ptr<span[1];ptr+=8){void* object=nullptr;if(!read(ptr,&object,8)){menuReady(self,data);return;}auto fields=social::hubtab::fields(reinterpret_cast<uintptr_t>(object),base,read);if(!fields){menuReady(self,data);return;}objects.push_back(object);rows.push_back(*fields);}
@@ -578,7 +646,7 @@ void __fastcall menuReadyHook(void* self,void* data){
 void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
     Guard guard;const auto p=argument(panel),c=argument(coords);void* result=nullptr;
     if constexpr(listFeed){
-        if(!disabled&&opened&&p=="CM_NEWSSUB"&&c=="1"&&out){
+        if(!disabled&&socialDataActive()&&p==socialChildId()&&c=="1"&&out){
             void* array=makeArray();if(!array){*out=nullptr;return out;}
             for(unsigned number=1;number<=feedPostCount;++number){
                 Alias donorPanel{aliasVt,feedEntry.panel},donorCoords{aliasVt,feedEntry.donor};void* donor=nullptr;tiles(self,&donor,&donorPanel,&donorCoords);
@@ -589,7 +657,7 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
             *out=array;return out;
         }
     }
-    if(!listFeed&&!disabled&&opened&&p=="CM_NEWSSUB"&&postNumber(c)){
+    if(!listFeed&&!disabled&&socialDataActive()&&p==socialChildId()&&postNumber(c)){
         Alias donorPanel{aliasVt,feedEntry.panel},donorCoords{aliasVt,feedEntry.donor};result=tiles(self,out,&donorPanel,&donorCoords);
         uintptr_t span[2]{};if(out&&*out&&read(reinterpret_cast<uintptr_t>(*out)+0x18,span,16)&&span[1]-span[0]==8){void* tile=nullptr;if(read(span[0],&tile,8)&&tile){
             populatePost(tile,postNumber(c));
@@ -606,7 +674,7 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
             }
         }
     }else result=tiles(self,out,panel,coords);
-    if(!disabled&&p=="CM_NEWSSUB")note({{"event","news_tiles"},{"container",c}});
+    if(!disabled&&p==socialChildId())note({{"event","news_tiles"},{"container",c}});
     return result;
 }
 // The native category binding reads indexed display/key/isDefault/icon fields.
@@ -617,7 +685,7 @@ void __fastcall filterDataHook(void* self,void* out,void* panel,void* kind){
     const auto panelName=filterArgument(panel),filterKind=filterArgument(kind);
     // Stock News passes an unset panel ID to its category binding. The active
     // Social Media scope also ends when either native hub is requested.
-    if(!disabled&&opened&&(panelName=="CM_NEWSSUB"||panelName.empty())){
+    if(!disabled&&socialDataActive()&&(panelName==socialChildId()||(!hubFeed&&panelName.empty()))){
         if(pageFeed->catalog){
 #ifdef SOCIAL_DUAL_DROPDOWN
             if(_stricmp(filterKind.c_str(),"filter_one")==0){
@@ -644,9 +712,31 @@ SocialFilter socialFilter(const std::string& kind){
     return SocialFilter::unknown;
 }
 bool changingSelection=false;
+std::shared_ptr<const social::Feed> embeddedPublication;
+bool adoptEmbeddedPublication(){
+    std::shared_ptr<const social::Feed> incoming;{std::lock_guard<std::mutex> lock(feedMutex);incoming=latestFeed;}
+    if(!incoming||incoming==embeddedPublication)return false;
+    std::shared_ptr<const social::Feed> selected=incoming;
+    if(incoming->catalog&&pageFeed->catalog){
+        auto catalog=incoming->catalog;size_t week=catalog->active;unsigned scope=0;
+        if(catalog->weeks.at(catalog->active).key==pageFeed->catalog->weeks.at(pageFeed->catalog->active).key){
+            const auto old=std::find_if(catalog->weeks.begin(),catalog->weeks.end(),[](const auto& edition){return edition.key==pageFeed->key;});if(old!=catalog->weeks.end())week=static_cast<size_t>(old-catalog->weeks.begin());
+        }
+        const auto key=social::scopesFor(*pageFeed->catalog).at(pageFeed->scope).key;const auto scopes=social::scopesFor(*catalog);const auto found=std::find_if(scopes.begin(),scopes.end(),[&](const auto& item){return item.key==key;});if(found!=scopes.end())scope=static_cast<unsigned>(found-scopes.begin());
+        selected=social::selectFeed(catalog,week,scope,pageFeed->type);
+    }
+    {std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(pageFeed));pageFeed=std::move(selected);}
+    embeddedPublication=std::move(incoming);feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;return true;
+}
 void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,void* value){
     Guard guard;const auto p=nativeString(panel),k=nativeString(kind);
-    if(!disabled&&opened&&(p.empty()||p=="CM_NEWSSUB"||p==cfbEntry.panel||p==feedEntry.panel)){
+    if(hubFeed&&p==social::embedded::childId&&(k=="SOCIAL_CHILD_ATTACH"||k=="SOCIAL_CHILD_DETACH"||k=="SOCIAL_SYNC")){
+        if(disabled)return;
+        if(k=="SOCIAL_CHILD_ATTACH"){if(embeddedChildren.fetch_add(1)==0){adoptFeed();std::lock_guard<std::mutex> lock(feedMutex);embeddedPublication=latestFeed;}note({{"event","embedded_child_attached"},{"children",embeddedChildren.load()}});return;}
+        if(k=="SOCIAL_CHILD_DETACH"){if(embeddedChildren&&embeddedChildren.fetch_sub(1)==1){opened=false;embeddedActive=false;embeddedChildPending=false;embeddedSeedPending=false;embeddedSeeded=false;releaseValue(embeddedChildDescriptor);embeddedChildDescriptor=nullptr;embeddedPublication.reset();configureNewsDropdowns(false);configureNewsPolish(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}note({{"event","embedded_child_detached"},{"children",embeddedChildren.load()}});return;}
+        if(embeddedActive&&embeddedChildren&&!changingSelection&&(adoptEmbeddedPublication()||(embeddedChildPending&&!embeddedSeedPending))){changingSelection=true;void* params=makeObject();const auto result=requestSocialPanel(self,params);releaseValue(params);changingSelection=false;note({{"event","embedded_publication_refreshed"},{"key",pageFeed->key},{"posts",feedPostCount},{"requested",result}});}return;
+    }
+    if(!disabled&&socialDataActive()&&(hubFeed?(embeddedActive&&p==socialChildId()):(p.empty()||p==socialChildId()||p==cfbEntry.panel||p==feedEntry.panel))){
         if(!pageFeed->catalog){note({{"event","social_filter_waiting"},{"kind",k}});return;}
         // Native FilterGeneric dispatches lowercase news_category, whereas the
         // panel definition and our LT action use uppercase identifiers. Never
@@ -673,6 +763,7 @@ void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,
         }catch(const std::exception& e){changingSelection=false;note({{"event","social_selection_failed"},{"error",e.what()}});}
         return;
     }
+    if(hubFeed&&p==social::embedded::childId)return;
     filterChanged(self,panel,kind,value);
 }
 // Typed forwarding preserves the native navigation collector contract while
@@ -704,6 +795,7 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
     // one genuine native navigation transaction and the verified ABI gates.
 #endif
     if(!disabled&&uiReady){
+        if(hubFeed&&embeddedChildren&&!selected){opened=false;embeddedActive=false;configureNewsScroll(false);configureNewsFlow(false);navRequest(self,user,name,params);return;}
 #ifdef SOCIAL_DUAL_DROPDOWN
         // The model is already loaded in the hub. The News screen itself loads
         // during navigation and is checked separately when its data is requested.
@@ -717,12 +809,10 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
         opened=selected;note({{"event","navigation_request"},{"name",name?name:""},{"prepareMs",GetTickCount64()-began}});
     }navRequest(self,user,selected?"NEWS":name,params);}
 bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;auto name=argument(arg);if(hubFeed&&!disabled&&name==social::embedded::panelId){
-    if(!embeddedDescriptor)return requestPanel(self,arg,params);
-    embeddedRootPending=true;if(embeddedActive)adoptFeed();
-    Alias donor{aliasVt,social::embedded::donorId};const bool result=requestPanel(self,&donor,params);
-    if(!result){embeddedRootPending=false;panelReady(self,social::embedded::panelId,embeddedDescriptor);return true;}return result;
-}if(!disabled&&opened){note({{"event","social_panel_request_argument"},{"name",name}});if(name=="CM_NEWSSUB"){const auto dropdownBegan=GetTickCount64();
-    if(hubFeed&&embeddedActive&&uiReady){ensureNewsModel();alignNewsFrame(true);configureNewsFlow(true);configureNewsScroll(true);configureNewsPolish(true);}
+    if(!embeddedDescriptor||!installHubScriptDefinitions())return requestPanel(self,arg,params);
+    panelReady(self,social::embedded::panelId,embeddedDescriptor);note({{"event","embedded_root_ready"},{"route","cached root descriptor"}});return true;
+}if(!disabled&&socialDataActive()){note({{"event","social_panel_request_argument"},{"name",name}});if(name==socialChildId()){const auto dropdownBegan=GetTickCount64();
+    if(hubFeed&&uiReady){ensureNewsModel();alignNewsFrame(true);if(embeddedActive){configureNewsFlow(true);configureNewsScroll(true);}configureNewsPolish(true);}
     if(!configureNewsDropdowns(true)){note({{"event","social_dropdown_fallback"},{"reason","Dropdown resources changed during entry; supplying native page data to preserve Back navigation"}});}
 #ifdef SOCIAL_EXPERIMENTAL_FOCUS
     if(!preflightRunning&&!focusNewsPanel(true)){note({{"event","news_focus_unavailable"}});return false;}
@@ -730,20 +820,16 @@ bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;
     bool result=requestSocialPanel(self,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
 void __fastcall panelReadyHook(void* self,const char* name,void* data){
     Guard guard;
-    if(hubFeed&&!disabled&&embeddedRootPending&&name&&strcmp(name,social::embedded::donorId)==0){
-        embeddedRootPending=false;auto refs=social::hubtab::references(reinterpret_cast<uintptr_t>(data),base,read);void* descriptor=refs?makeObject():nullptr;
-        if(!descriptor||!refs){releaseValue(descriptor);note({{"event","embedded_root_recovered"}});panelReady(self,social::embedded::panelId,embeddedDescriptor);return;}
-        for(const auto& [key,value]:*refs)objectValue(descriptor,key.c_str(),reinterpret_cast<void*>(value));
-        tileText(descriptor,"id",social::embedded::panelId);tileText(descriptor,"name","Social Media");tileText(descriptor,"linkage",social::embedded::linkage);tileText(descriptor,"screenId",social::embedded::screenKey);
-        tileBool(descriptor,"isVisible",true);tileBool(descriptor,"Visible",true);
-        if(auto saved=social::hubtab::references(reinterpret_cast<uintptr_t>(embeddedDescriptor),base,read))for(const char* key:{"priority","Priority"}){const auto it=saved->find(key);if(it!=saved->end())objectValue(descriptor,key,reinterpret_cast<void*>(it->second));}
-        note({{"event","embedded_root_ready"}});panelReady(self,social::embedded::panelId,descriptor);releaseValue(descriptor);return;
+    if(hubFeed&&!disabled&&embeddedSeedPending&&name&&strcmp(name,feedEntry.panel)==0){
+        embeddedSeedPending=false;embeddedSeeded=false;releaseValue(embeddedChildDescriptor);embeddedChildDescriptor=nullptr;
+        if(data&&social::hubtab::references(reinterpret_cast<uintptr_t>(data),base,read)){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));embeddedChildDescriptor=data;embeddedSeeded=true;}
+        panelReady(self,name,data);if(embeddedChildPending&&embeddedChildren)emitEmbeddedChild(self);return;
     }
     if(preflightRunning){unsigned kind=0;bool valid=name&&strcmp(name,feedEntry.panel)==0&&data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5;preflightReady=valid;if(valid&&!preflightPanelData){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));preflightPanelData=data;}note({{"event","preflight_panel_ready"},{"name",name?name:""},{"kind",kind},{"valid",valid}});return;}
-    if(!disabled&&opened&&name&&strcmp(name,feedEntry.panel)==0){
+    if(!hubFeed&&!disabled&&opened&&name&&strcmp(name,feedEntry.panel)==0){
         unsigned kind=0;
-        if(data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5){tileText(data,"id","CM_NEWSSUB");const auto title=pageFeed->label+(embeddedActive?" | RS: Type":"");tileText(data,"name",title.c_str());tileInt(data,"numRows",static_cast<int>(feedContainerCount));tileInt(data,"numColumns",1);tileText(data,"FilterTypeA","NEWS_CATEGORY");tileText(data,"PositionOffset","0,0");}
-        note({{"event","social_panel_ready"}});panelReady(self,"CM_NEWSSUB",data);return;
+        if(data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5){tileText(data,"id",socialChildId());const auto title=pageFeed->label+(hubFeed?" | RS: Type":"");tileText(data,"name",title.c_str());tileInt(data,"numRows",static_cast<int>(feedContainerCount));tileInt(data,"numColumns",1);tileText(data,"FilterTypeA","NEWS_CATEGORY");tileText(data,"PositionOffset","0,0");}
+        note({{"event","social_panel_ready"}});panelReady(self,socialChildId(),data);return;
     }
     panelReady(self,name,data);
 }
@@ -796,7 +882,7 @@ Binding bindings[]={
     {0xbac63a8,0xc8,0x7a19370,reinterpret_cast<void*>(filterDataHook)},
     {0xbac63a8,0xd0,0x7a2def0,reinterpret_cast<void*>(filterChangedHook)}
 };
-void stop(){disabled=true;opened=false;if(uiReady){configureNewsPolish(false);configureNewsDropdowns(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}for(auto& b:bindings)if(b.installed)replace(reinterpret_cast<void**>(base+b.vt+b.offset),b.hook,reinterpret_cast<void*>(base+b.rva));}
+void stop(){if(hubFeed&&hubScriptPinned){note({{"event","embedded_stop_requires_restart"},{"reason","Pinned script definitions retain lifecycle callbacks"}});return;}disabled=true;opened=false;if(uiReady){configureNewsPolish(false);configureNewsDropdowns(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}for(auto& b:bindings)if(b.installed)replace(reinterpret_cast<void**>(base+b.vt+b.offset),b.hook,reinterpret_cast<void*>(base+b.rva));}
 void publishFeed(const Json& data){auto feed=social::decodeFeed(data);std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(latestFeed));latestFeed=std::move(feed);}
 void flush(){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(logMutex);batch.swap(messages);}if(batch.empty())return;std::ofstream out(folder/L"social-media.jsonl",std::ios::app);for(const auto& x:batch)out<<x.dump()<<'\n';}
 DWORD WINAPI worker(void*){
@@ -829,6 +915,7 @@ DWORD WINAPI worker(void*){
 #ifdef SOCIAL_DUAL_DROPDOWN
                 else if(!newsModelBase)reason="Waiting for the native Dynasty filter model";
 #endif
+                else if(hubFeed&&!discoverHubScriptOwners())reason="Waiting for the native embedded News function owners";
                 if(reason.empty()){
                     for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=reinterpret_cast<uintptr_t>(b.hook))throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
                     uiReady.store(true);note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
@@ -842,7 +929,8 @@ DWORD WINAPI worker(void*){
 }
 // Scope switching executes inside native APT input. Exit the page first so a
 // development stop cannot replace that bytecode underneath an active input call.
-extern "C" __declspec(dllexport) DWORD WINAPI WeeklyEventsStop(void*){if(opened)return ERROR_BUSY;stop();return 0;}
-extern "C" __declspec(dllexport) DWORD WINAPI DynastyEnhancerStop(void*){if(opened)return ERROR_BUSY;stop();return 0;}
-extern "C" __declspec(dllexport) DWORD WINAPI SocialMediaStop(void*){if(opened)return ERROR_BUSY;stop();return 0;}
+DWORD requestStop(){if(hubFeed&&hubScriptPinned)return ERROR_NOT_SUPPORTED;if(opened)return ERROR_BUSY;stop();return 0;}
+extern "C" __declspec(dllexport) DWORD WINAPI WeeklyEventsStop(void*){return requestStop();}
+extern "C" __declspec(dllexport) DWORD WINAPI DynastyEnhancerStop(void*){return requestStop();}
+extern "C" __declspec(dllexport) DWORD WINAPI SocialMediaStop(void*){return requestStop();}
 BOOL WINAPI DllMain(HMODULE self,DWORD why,void*){if(why==DLL_PROCESS_ATTACH){module=self;DisableThreadLibraryCalls(self);HANDLE thread=CreateThread(nullptr,0,worker,nullptr,0,nullptr);if(thread)CloseHandle(thread);}return TRUE;}

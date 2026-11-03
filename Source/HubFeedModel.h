@@ -3,6 +3,7 @@
 #include <string_view>
 namespace social::embedded {
 inline constexpr char panelId[]="CM_DYNASTY_SOCIAL";
+inline constexpr char childId[]="CM_DYNASTY_SOCIAL_FEED";
 inline constexpr char donorId[]="CM_ACTIONHOME";
 inline constexpr char screenKey[]="screen_news";
 inline constexpr char linkage[]="panelmenu.component.subscreenpanel.SubScreenPanel";

@@ -12,6 +12,7 @@ inline constexpr char scopeAdaptersName[]="Adapters";
 inline constexpr char scopeGetAdapterName[]="GetPanelMenuAdapter";
 inline constexpr char scopeSetFilterName[]="SetFilterChanged";
 inline constexpr char embeddedTypeKey[]="CODE_R3";
+inline constexpr char embeddedScopePanel[]="CM_DYNASTY_SOCIAL_FEED";
 inline auto embeddedNewsScroll(){
     auto b=newsScrollSmooth;size_t pos=0x2f4;
     auto byte=[&](unsigned char v){b.at(pos++)=v;};
@@ -25,7 +26,7 @@ inline auto embeddedNewsScroll(){
     branch(0xc8,0x3ec);branch(0xd8,0x3ec);branch(0x100,0x2f4);
     byte(0xb9);byte(0);byte(0xad);byte(3);byte(19);byte(20);byte(21);literal(embeddedTypeKey);byte(0x4e);byte(0x66);
     const auto conditional=pos;jump(0x9d,0);jump(0x99,0x3ec);const auto callback=pos;
-    byte(0x59);literal(scopeFilterName);literal(scopePanelName);byte(0xb5);byte(3);
+    byte(0x59);literal(scopeFilterName);literal(embeddedScopePanel);byte(0xb5);byte(3);
     byte(0x59);literal(scopeRootName);byte(0x1c);literal(scopeAdaptersName);byte(0x4e);
     literal(scopeGetAdapterName);byte(0x52);literal(scopeSetFilterName);byte(0x52);byte(0x17);byte(0x73);byte(0x3e);
     if(pos>0x395)throw std::runtime_error("Embedded type input exceeds its reserved span");
