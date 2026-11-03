@@ -95,9 +95,20 @@
       "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Signing2027-auto-20261103T141118Z"
     },
     "remaining": [
-      "Training Results capture",
       "Encouraged transfers and realignment",
       "Next preseason publication and reload"
-    ]
+    ],
+    "trainingResults": {
+      "year": 2027,
+      "stage": 8,
+      "week": 7,
+      "source": "automatic runtime; no save recovery",
+      "signingBaselineUnchanged": true,
+      "allRecordedGainsMatchNativeData": true,
+      "qualifyingLeaguePlayers": 2634,
+      "qualifyingUlmPlayers": 15,
+      "rosterSnapshot": 7002,
+      "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Training2027-auto-20261103T141422Z"
+    }
   }
 }
