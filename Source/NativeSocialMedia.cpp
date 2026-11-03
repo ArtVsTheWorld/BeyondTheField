@@ -25,6 +25,7 @@
 #include "NewsDiscovery.h"
 #include "RuntimeFeed.h"
 #include "Startup.h"
+#include "NativeMapValue.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
@@ -434,8 +435,9 @@ void* makeObject(){void* result=nullptr;auto manager=reinterpret_cast<void*(__fa
 void objectValue(void* target,const char* name,void* value){
     // The captured native string/int setters both acquire a map node through
     // this helper, retain the replacement, release node+0x10, then assign it.
-    void* iterator[2]{};reinterpret_cast<void*(__fastcall*)(void*,void*,const char*)>(base+0x8aed560)(target,iterator,name);
-    auto slot=reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(iterator[0])+0x10);
+    const auto result=social::native::findOrInsert(reinterpret_cast<social::native::Lookup>(base+0x8aed560),target,name);
+    if(!result.node){note({{"event","native_map_lookup_rejected"},{"key",name}});return;}
+    auto slot=reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(result.node)+0x10);
     if(value)InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(value)+0x14));
     releaseValue(*slot);*slot=value;
 }

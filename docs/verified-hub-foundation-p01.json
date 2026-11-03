@@ -1,0 +1,36 @@
+{
+  "goal": "Direct native Social Media hub feed",
+  "milestone": 1,
+  "branch": "prototype/direct-hub-feed",
+  "base": "8cb8b3e",
+  "status": "offline ABI foundation passed; full hub implementation incomplete",
+  "nodeTests": 348,
+  "nativeRegressionChecks": true,
+  "mapAbiCanaryTests": true,
+  "installedV96Unchanged": true,
+  "liveInjection": false,
+  "finding": {
+    "lookupRva": "0x8aed560",
+    "calleeRva": "0x8aeba90",
+    "writeIteratorRva": "0x8aebbd1",
+    "writeInsertedFlagRva": "0x8aebbd6",
+    "existingKeyFlagRva": "0x8aebc13",
+    "oldOutputBytes": 16,
+    "requiredWrittenBytes": 17,
+    "newPaddedOutputBytes": 24,
+    "limits": "Proven undersized output is consistent with v85 corruption; not a proof that it is the only defect."
+  },
+  "embeddingRoute": {
+    "donor": "Actions",
+    "linkage": "panelmenu.component.subscreenpanel.SubScreenPanel",
+    "observedScreenId": "../node_fe/careeractions/CoreNode",
+    "next": "Resolve News child screen path and parameter/input contract; clone original native descriptor values without reconstructing every scalar."
+  },
+  "requirements": [
+    "Direct year-round tab, no Open Feed button",
+    "Scope/week dropdowns, alternate categories preserving LB/RB tab navigation",
+    "Vertical scrolling and safe entry/exit/reload",
+    "Separate package, preserve v96/saves/history"
+  ],
+  "verificationScope": "Offline native ABI foundation only. Direct hub rendering, controls, year-round lifecycle and reload are not verified."
+}
