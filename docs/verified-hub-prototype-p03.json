@@ -1,6 +1,6 @@
 {
   "prototype": "p03",
-  "status": "Offline checks passed; controlled live entry pending",
+  "status": "Live child mount passed; root focus failed (tab skipped)",
   "branch": "prototype/direct-hub-feed",
   "root": "CM_DYNASTY_SOCIAL",
   "child": "CM_DYNASTY_SOCIAL_FEED",
@@ -49,5 +49,18 @@
     "Same-session Dynasty reload",
     "Cold first entry and year-round presence"
   ],
-  "visualCaution": "News layout uses native zero outer padding; first-card/header position requires live inspection"
+  "visualCaution": "News layout uses native zero outer padding; first-card/header position requires live inspection",
+  "liveResult": {
+    "pid": 27496,
+    "gameAlive": true,
+    "scriptDefinitionsInstalled": true,
+    "childAttached": true,
+    "childDescriptorPublished": true,
+    "bothFilterProvidersSupplied": true,
+    "feedContainersSupplied": true,
+    "hubNavigation": "LB/RB skips custom root; stock tabs work",
+    "mouse": "Label selects, previous tab buttons remain",
+    "diagnosis": "Root PanelData defaults isFocusable/isInteractive false. Custom root did not explicitly supply those flags.",
+    "next": "p04 explicitly enables both outer root flags; child AllowFocus remains false"
+  }
 }

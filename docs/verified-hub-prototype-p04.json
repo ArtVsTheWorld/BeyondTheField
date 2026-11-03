@@ -1,0 +1,13 @@
+{
+  "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DirectHub-DynastyEnhancerHubPrototype-p04-ed5a47d632954b258c9069eccc027b20\\DynastyEnhancerHubPrototype-p04.dll",
+  "remainingKnownRisk": "CFM class recreation on Continue requires further hardening before reload test",
+  "installedFilesModified": false,
+  "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DynastyEnhancerHubPrototype-p04.zip",
+  "liveResult": null,
+  "basedOn": "p03",
+  "status": "Offline checks passed; live root-focus correction pending",
+  "change": "Explicit true isFocusable and isInteractive fields on outer root, checked after native encoding",
+  "requiresCleanRestart": true,
+  "prototype": "p04",
+  "nativeSha256": "086b9f7bd8a4be2592b54fe64dfa0427e0c1c92138dc95a5507608612c97107a"
+}
