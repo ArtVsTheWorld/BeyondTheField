@@ -8,7 +8,7 @@
 #include <string_view>
 #include "FeedRefresh.h"
 namespace social {
-struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;bool transaction=false;int likes=-1,uniformTeamLogo=-1;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
+struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;bool transaction=false;int likes=-1,uniformTeamLogo=-1,draftPick=-1,draftRound=0;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
 inline std::string compactCount(int value){
     if(value<1000)return std::to_string(value);
     const int unit=value>=999950?1000000:1000;const auto tenths=(static_cast<long long>(value)*10+unit/2)/unit;
@@ -17,6 +17,7 @@ inline std::string compactCount(int value){
 inline std::string storyLabel(const nlohmann::json& post){
     if(post.contains("replyTo"))return "Reply";
     const auto category=post.value("category",std::string());
+    if(category=="draft")return post.contains("draftRound")?"Round "+std::to_string(post.at("draftRound").get<int>())+" - Pick "+std::to_string(post.at("draftPick").get<int>()):"Draft";
     if(category=="offseason")return "Offseason";
     if(category=="upsets")return "Upset";
     if(category=="conference-talk")return "Conference Talk";
@@ -78,7 +79,7 @@ struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
 inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:20;}
 inline constexpr std::array<const char*,12> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Official Accounts","Players","Injuries","Fans","Transactions"};
-inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.category=="signings"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks"||p.category=="matchup-recap"||p.category=="season-end";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason"||p.category=="matchup-preview"||p.category=="offseason";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records"||p.category=="history"||p.category=="championship"||p.category=="bowls";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";case 11:return p.transaction||(p.category=="coaching"||p.category=="nil"||p.category=="transactions"||p.category=="transfer"||p.category=="signings")&&(p.voice=="analyst"||p.voice=="beat");default:return false;}}
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.category=="signings"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks"||p.category=="matchup-recap"||p.category=="season-end";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason"||p.category=="matchup-preview"||p.category=="offseason";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records"||p.category=="history"||p.category=="championship"||p.category=="bowls";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp"||p.voice=="nflDraft";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";case 11:return p.transaction||(p.category=="coaching"||p.category=="nil"||p.category=="transactions"||p.category=="transfer"||p.category=="signings")&&(p.voice=="analyst"||p.voice=="beat");default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();
@@ -89,10 +90,14 @@ inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> cat
     if(!catalog||week>=catalog->weeks.size()||scope>=scopesFor(*catalog).size()||type>=typeLabels.size())throw std::runtime_error("Invalid single-week feed selection");
     const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->type=type;f->key=e.key;
     f->label="Social Media";if(type)f->label+=" - "+std::string(typeLabels[type]);
-    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);const auto limit=scopeLimit(option.key);
+    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);auto limit=scopeLimit(option.key);
     if(view!=e.views.end()){
         std::set<std::string> members(view->second.begin(),view->second.end()),visited;std::vector<std::string> roots;std::map<std::string,std::vector<std::string>> children;
         for(const auto& id:view->second){const auto& p=e.stories.at(id);if(p.replyTo.empty()){if(matchesType(p,type))roots.push_back(id);}else if(members.count(p.replyTo))children[p.replyTo].push_back(id);}
+        if(type==11){
+            const bool draft=std::any_of(roots.begin(),roots.end(),[&](const auto& id){return e.stories.at(id).draftPick>0;});
+            if(draft){std::stable_sort(roots.begin(),roots.end(),[&](const auto& a,const auto& b){const auto x=e.stories.at(a).draftPick,y=e.stories.at(b).draftPick;return x>0&&y>0?x<y:x>0&&y<=0;});if(option.key=="national")limit=512;}
+        }
         // The exporter already supplies editorial conversation order.
         std::function<void(const std::string&)> append=[&](const std::string& id){if(f->posts.size()>=limit||!visited.insert(id).second)return;f->posts.push_back(e.stories.at(id));auto it=children.find(id);if(it!=children.end())for(const auto& child:it->second)append(child);};
         for(const auto& id:roots){if(f->posts.size()>=limit)break;append(id);}
@@ -110,7 +115,7 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
         if(w.value("reconstructed",false))e.label+=" (recovered)";
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
-            FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);post.transaction=p.value("transaction",false);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
+            FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);post.transaction=p.value("transaction",false);post.draftPick=p.value("draftPick",-1);post.draftRound=p.value("draftRound",0);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
         }
         for(const auto& [key,view]:w.at("views").items())e.views[key]=view.get<std::vector<std::string>>();
         catalog->weeks.push_back(std::move(e));

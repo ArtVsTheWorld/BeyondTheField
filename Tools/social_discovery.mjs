@@ -17,7 +17,7 @@ export const CATEGORY_FILTERS=[
  {key:'rankings',label:'Rankings & Awards',categories:['polls','heisman','cfp','awards','records','history','championship','bowls']},
  {key:'analyst',label:'Analysts',voices:['analyst','model']},
  {key:'beat',label:'Beat Reporters',voices:['beat']},
- {key:'official',label:'Official Accounts',voices:['official','cfp']},
+ {key:'official',label:'Official Accounts',voices:['official','cfp','nflDraft']},
  {key:'player',label:'Players',voices:['player']},
  {key:'injuries',label:'Injuries',categories:['injuries']},
  {key:'fan',label:'Fans',voices:['fan']},
@@ -27,5 +27,9 @@ export function filterConversations(stories,key='all'){
  const f=CATEGORY_FILTERS.find(x=>x.key===key);if(!f)throw Error('Unknown category filter');
  const accepted=new Set(),result=[];
  for(const p of stories){if(p.replyTo?accepted.has(p.replyTo):key==='all'||(key==='transactions'?(p.transaction||f.categories.includes(p.category)&&['analyst','beat'].includes(p.voice)):f.categories?.includes(p.category)||f.voices?.includes(p.voice))){accepted.add(p.id);result.push(p);}}
+ if(key==='transactions'&&result.some(p=>p.draftPick>0)){
+  const blocks=[],byId=new Map();for(const p of result){if(p.replyTo&&byId.has(p.replyTo)){const block=byId.get(p.replyTo);block.push(p);byId.set(p.id,block);}else{const block=[p];blocks.push(block);byId.set(p.id,block);}}
+  blocks.sort((a,b)=>a[0].draftPick>0&&b[0].draftPick>0?a[0].draftPick-b[0].draftPick:a[0].draftPick>0?-1:b[0].draftPick>0?1:0);return blocks.flat();
+ }
  return result;
 }

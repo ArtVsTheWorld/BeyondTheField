@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "revision": "portal-draft-v84",
+  "families": {
+    "draft.top-ten": [
+      {
+        "id": "draft.top-ten.v84.1",
+        "body": "With pick No. {draftPick}, the {nflTeam} select {school}’s {playerName}. A top-10 selection and a new chapter on football’s biggest professional stage."
+      },
+      {
+        "id": "draft.top-ten.v84.2",
+        "body": "TOP 10: {school}’s {playerName} goes No. {draftPick} overall to the {nflTeam}. Round {draftRound}, pick {roundPick}."
+      }
+    ],
+    "draft.pick": [
+      {
+        "id": "draft.pick.v84.1",
+        "body": "Round {draftRound}, pick {roundPick} — No. {draftPick} overall. The {nflTeam} select {playerName} from {school}."
+      },
+      {
+        "id": "draft.pick.v84.2",
+        "body": "The {nflTeam} are on the board with {school}’s {playerName}. Round {draftRound}, pick {roundPick}; No. {draftPick} overall."
+      }
+    ],
+    "draft.irrelevant": [
+      {
+        "id": "draft.irrelevant.v84.1",
+        "body": "MR. IRRELEVANT: {school}’s {playerName} goes to the {nflTeam} with the final selection, No. {draftPick}. Last pick. A real opportunity. That closes this year’s draft."
+      }
+    ],
+    "portal.entrant": [
+      {
+        "id": "portal.entrant.v84.1",
+        "body": "{playerName} is in the transfer portal{originDetail}. One of the names worth tracking as offseason recruiting opens. A portal entry is a starting point, not a new-school announcement."
+      },
+      {
+        "id": "portal.entrant.v84.2",
+        "body": "Portal-opening watch: {playerName} has entered{originDetail}. The next question is fit and opportunity. No commitment to report."
+      }
+    ],
+    "portal.interest": [
+      {
+        "id": "portal.interest.v84.1",
+        "body": "Portal watch: {playerName} currently lists {schools} among his leading schools. That is the recruiting picture right now, not a commitment."
+      },
+      {
+        "id": "portal.interest.v84.2",
+        "body": "The current schools to track for transfer {playerName}: {schools}. This recruitment is still open."
+      }
+    ],
+    "portal.announcement": [
+      {
+        "id": "portal.announcement.v84.1",
+        "body": "Grateful for everybody who supported me{originDetail}. I’m in the portal and looking forward to finding the right fit for this next chapter."
+      },
+      {
+        "id": "portal.announcement.v84.2",
+        "body": "New chapter ahead. Thankful for the people who have been with me. My recruitment is open and I’m ready to find my next home."
+      }
+    ],
+    "portal.unsigned": [
+      {
+        "id": "portal.unsigned.v84.1",
+        "body": "{starDetail}{playerName} remains uncommitted as offseason recruiting opens. No. {nationalRecruitRank} nationally, with another signing day still ahead. One of the best remaining high school names to track."
+      },
+      {
+        "id": "portal.unsigned.v84.2",
+        "body": "Still on the board: {starDetail}{playerName}, No. {nationalRecruitRank} nationally. The transfer portal will get headlines this week; this high school recruitment still matters."
+      }
+    ],
+    "portal.unsigned-schools": [
+      {
+        "id": "portal.unsigned-schools.v84.1",
+        "body": "{playerName} is still uncommitted. His current leading schools include {schools}. There is time left before the next signing day, and this one is worth following."
+      }
+    ],
+    "portal.unsigned-local": [
+      {
+        "id": "portal.unsigned-local.v84.1",
+        "body": "{starDetail}{playerName} is still uncommitted. No. {nationalRecruitRank} nationally, with offseason recruiting now open and another signing day ahead. A remaining option to track on the high school board."
+      }
+    ]
+  }
+}

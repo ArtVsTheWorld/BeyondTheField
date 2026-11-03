@@ -51,8 +51,8 @@ template<class Read>SessionBinding activeSession(Address image,Read q){
     return b;
 }
 inline std::set<std::string> wanted(const std::string& name){
-    if(name=="SeasonInfo")return {"CurrentWeek","CurrentSeasonYear","CurrentYear","CurrentWeekType","CurrentStage","RegularSeasonWeekConferenceChampionship","IsAnnualAwardPeriodActive","IsSigningPeriodActive","IsStaffHiringCreateOfferPeriodActive","IsStaffHiringEvaluateOfferPeriodActive"};
-    if(name=="Franchise")return {"LeagueID"};
+    if(name=="SeasonInfo")return {"CurrentWeek","CurrentSeasonYear","CurrentYear","CurrentWeekType","CurrentStage","RegularSeasonWeekConferenceChampionship","IsAnnualAwardPeriodActive","IsSigningPeriodActive","IsDraftRecapPeriodActive","IsTransferPortalNewlyAvailable","IsTransferSignPeriodActive","IsStaffHiringCreateOfferPeriodActive","IsStaffHiringEvaluateOfferPeriodActive"};
+    if(name=="Franchise")return {"LeagueID","Transfers"};
     if(name=="FranchiseServer_CareerFlow")return {"IsStageAdvancing","IsStageActive"};
     if(name=="FranchiseUser")return {"Team","UserEntity","IsRetired","AdminLevel"};
     if(name=="Team")return {"TeamIndex","DisplayName","LongName","ShortName","NickName","NickNameAlt","Hashtag1","Hashtag2","HeadCoach","TeamSeasonStats","TeamHistoricalData","TeamSeriesHistory","CurrentOffensiveScheme","CurrentDefensiveScheme","ProgramPointsConferencePrestigeGrade","TopClassRank","TopClassConferenceRank","PlayoffStatus","IsTeamBuilder","DepthChart","TEAM_PREVSEASWINS","TEAM_PREVSEASLOSSES","LastSeasonPlayoffRoundReached","PlayoffRoundReached","LastSeasonTransfersSigned","TEAM_LOGO","TEAM_ALT_LOGO","TEAM_LOGO_SMALL_ALT","TEAM_LOGO_ASSETNAME","TEAM_ALT_LOGO_ASSETNAME","TEAM_LOGO_SMALL_ALT_ASSETNAME","TeamBuilderData","MediaPoll_CurrentRank","MediaPoll_LastWeeksRank","CoachesPoll_CurrentRank","CoachesPoll_LastWeeksRank","CFPPoll_CurrentRank","CFPPoll_LastWeeksRank","CurSeasonConfStanding","LastWeekConferenceStanding","ConfWin","ConfLoss","ConfTie","HomeWin","RoadWin","HomeLoss","RoadLoss","HomeTie","RoadTie","Rival1TeamRef","Rival2TeamRef","Rival3TeamRef","RecruitingBoard","ProgramPointsBrandExposureGrade","BrandExposureProgramPoints","City","SchoolPipelineInfluenceList","Stadium","AltStadium","OffensiveCoordinator","DefensiveCoordinator","PrestigeDisplay","TeamPrestige","SeasonWinLossStreak","GameStatRecords","SeasonStatRecords"};
@@ -73,7 +73,9 @@ inline std::set<std::string> wanted(const std::string& name){
     if(name=="Recruit")return {"RecruitStage","Class","Player","TopSchoolsList","NationalRank","PositionRank","StateRank"};
     if(name=="League")return {"PlayerGameStatRecords","PlayerSeasonStatRecords"};
     if(name=="PlayerAward")return {"AwardType","Period","PeriodIndex","Player","Team","Conference"};
-    if(name=="PlayerStatRecords"||name=="PlayerStatRecord")return {};
+    if(name=="PlayersLeavingEval")return {"DraftClass","EarlyNFLPlayers","TransferRequests","PlayersRetiringNextWeek","PlayersLeavingForm","SeasonInfo"};
+    if(name=="PlayersLeavingEndOfSeason")return {"EarlyDraft","TransferCandidates"};
+    if(name=="LeavingPlayer"||name=="DraftPlayer"||name=="DraftPick"||name=="PlayerStatRecords"||name=="PlayerStatRecord")return {};
     if(name=="TeamHistoricalData")return {"Wins","Losses","Ties","BowlsMade","BowlsWon","CFPSMade","CFPSWon","ConferenceChampionshipsMade","ConferenceChampionshipsWon","NationalChampionshipsMade","NationalChampionshipsWon","HeismanWinners","TeamSeriesHistory"};
     if(name=="TeamHistoricSeriesYear")return {"Year","CoachName","ConferenceName","ConferenceWins","ConferenceLosses","ConferenceTies","FinalConferenceStanding","FinalMediaRank","IsConfRankTied","Wins","Losses","Ties","NationalBowlGameResult","NationalBowlPresentationId","FirstRoundCFPBowlGameResult","FirstRoundCFPBowlPresentationId","QuarterFinalsBowlGameResult","QuarterFinalsBowlPresentationId","SemiFinalsBowlGameResult","SemiFinalsBowlPresentationId","ConfChampionshipConferenceEnum"};
     if(name.rfind("Career",0)==0&&name.size()>=5&&name.substr(name.size()-5)=="Stats")return {};
@@ -179,6 +181,17 @@ class Capture {
     }
 public:
     explicit Capture(Address base,HANDLE process=GetCurrentProcess()):image(base){memory.process=process;}
+    Json inspectSchemas(){
+        const auto identity=status();Json result={{"status",identity},{"tables",Json::array()}};std::set<Address> described;
+        for(const auto& [id,a]:ids){const auto descriptor=memory.at<Address>(a+8);if(!described.insert(descriptor).second)continue;
+            Json item={{"id",id},{"name",memory.text(memory.at<Address>(descriptor+0x18))},{"fields",Json::array()}};
+            auto begin=memory.at<Address>(descriptor+0x40),end=memory.at<Address>(descriptor+0x48);
+            if(end<begin||(end-begin)%0x58||end-begin>0x40000)throw std::runtime_error("Invalid inspection schema");
+            for(auto p=begin;p<end;p+=0x58)item["fields"].push_back({{"name",memory.sso(p)},{"kind",memory.at<uint32_t>(p+0x40)}});
+            result["tables"].push_back(std::move(item));
+        }
+        if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session))throw std::runtime_error("Dynasty changed during schema inspection");return result;
+    }
     Json status(){
         try{open();}catch(const std::exception& e){throw std::runtime_error(std::string("Career open: ")+e.what());}Json result={{"context",context}};bool season=false,flow=false,league=false;
         for(const auto& [id,a]:ids){std::string name;try{name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));
@@ -194,7 +207,7 @@ public:
     }
     Json run(){
         const auto before=status();
-        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
+        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
         for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size())!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
         if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session)||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");

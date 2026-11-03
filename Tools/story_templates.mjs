@@ -24,6 +24,8 @@ const cyclePack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/cycle-pac
 Object.assign(contentPack.families,cyclePack.families);contentPack.revision=cyclePack.revision;
 const reviewPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/season-review-pack.json',import.meta.url),'utf8'));
 Object.assign(contentPack.families,reviewPack.families);contentPack.revision=reviewPack.revision;
+const portalPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/portal-draft-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,portalPack.families);contentPack.revision=portalPack.revision;
 const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g,ids=new Set();
 for(const variants of Object.values(contentPack.families))for(const t of variants){
  if(!t.id||ids.has(t.id)||typeof t.body!=='string'||/[\uFFFD\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(t.body))throw Error('Invalid runtime template '+t.id);ids.add(t.id);

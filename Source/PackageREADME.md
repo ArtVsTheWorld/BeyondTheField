@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v83
+# Dynasty Enhancer - MMC prototype v84
 
-Native Social Media inside the offline Dynasty hub. Open it from Dynasty Central year-round or CFB when that tab is available. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
+Native Social Media inside the offline Dynasty hub. Its dedicated tab contains Open Feed year-round; Dynasty Central/CFB shortcuts provide a fallback for an unsupported native tab layout. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v83/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v83/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v84/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v84/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,16 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - For You shows up to 30 posts, National 100 and a conference 60. Editorial priority and variety order parent threads; likes are flavor and replies remain attached. Missing real candidates are not replaced with sample tweets.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v83 changes
+## v84 changes
+
+- Dedicated Social Media hub tab after Team, with one Open Feed button. Original tab descriptors stay intact; unsupported layouts retain existing shortcuts.
+- Opening-week portal news uses actual transfer-list membership, verified former schools and current recruiting interest. Remaining high-school prospect stories exclude committed/signed recruits.
+- NFL Draft (@NFLDraft), using the native draft icon, announces all 224 real draft-class players in their native rounds. Pick order and NFL teams are simulated consistently, with all 32 clubs represented in each round. Projections/placeholder NFL scaffolding are excluded.
+- National → Transactions preserves the complete draft in pick order, exceeding the ordinary National 100-post cap for this category only. Other feed caps and normal 5–20-per-team coverage remain; official draft selections are exempt from that weekly flavor budget.
+- Portal/unsigned recruiting leads For You rather than flooding it with draft picks. Existing archived editions remain.
+- 273 Node tests, native layout/decoder checks and the real 25-edition archive pass. Live controller confirmation is tracked separately.
+
+## Previous v83 changes
 
 - LB/RB and both dropdowns redraw the offseason page through the persistent Dynasty Central source.
 - Initial entry, filter refresh and diagnostic preflight use one panel-request helper, eliminating the remaining CFB-only refresh.

@@ -1,4 +1,4 @@
-param([string]$NativeName='DynastyEnhancerNative-v83',[switch]$Preflight,[switch]$ScrollTest,[switch]$ExperimentalFocus,[switch]$ListFeed,[switch]$ReadOnlyFeed=$true,[switch]$DualDropdown=$true)
+param([string]$NativeName='DynastyEnhancerNative-v84',[switch]$Preflight,[switch]$ScrollTest,[switch]$ExperimentalFocus,[switch]$ListFeed,[switch]$ReadOnlyFeed=$true,[switch]$DualDropdown=$true)
 $ErrorActionPreference='Stop'
 $analyticsRoot=Split-Path -Parent $PSScriptRoot
 $analyticsOut=Join-Path $analyticsRoot 'Build'

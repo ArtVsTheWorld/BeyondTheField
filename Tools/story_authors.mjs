@@ -8,7 +8,7 @@ export function authorRegistry(saved={}){
  const entries=structuredClone(saved),handles=new Map(Object.entries(entries).map(([k,v])=>[v.handle.toLowerCase(),k]));
  return {entries,get(s,role,team,player,persona=0){
   const person=['player','recruit'].includes(role),family=person?'person':role;
-  const key=`${s.leagueId}:${family}:${person?player.id:['analyst','model','cfp'].includes(role)?'national':team?.id??'national'}${!person&&persona?':'+persona:''}`;
+  const key=`${s.leagueId}:${family}:${person?player.id:['analyst','model','cfp','nflDraft'].includes(role)?'national':team?.id??'national'}${!person&&persona?':'+persona:''}`;
   const displayName=person?player.name+(role==='recruit'&&player.position?' | '+player.position:''):null;
   if(entries[key]&&(person||entries[key].identityVersion===2)){if(role==='model'){const old=entries[key].handle.toLowerCase();entries[key].author='CanDuel Sports';entries[key].handle='@CanDuelSports';handles.delete(old);handles.set('@canduelsports',key);}if(person)entries[key].author=displayName;return entries[key];}
   if(entries[key])handles.delete(entries[key].handle.toLowerCase());
@@ -18,6 +18,7 @@ export function authorRegistry(saved={}){
   }else if(role==='official'){author=school+' Football';base=slug+'Football';}
   else if(role==='beat'){const first=firstNames[seed%firstNames.length],last=surnames[Math.floor(seed/firstNames.length)%surnames.length];author=first+' '+last;base=first+last+'On'+slug.slice(0,9);}
   else if(role==='fan'){author=persona?'Barstool '+school:school+' After Dark';base=persona?'Barstool'+slug:slug+'AfterDark';}
+  else if(role==='nflDraft'){author='NFL Draft';base='NFLDraft';}
   else if(role==='cfp'){author='CFP';base='CFBPlayoff';}
   else if(role==='model'){author='CanDuel Sports';base='CanDuelSports';}
   else{[author,base]=analysts[persona%analysts.length];}

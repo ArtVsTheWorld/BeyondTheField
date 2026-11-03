@@ -68,7 +68,7 @@ export function scopeViews(stories){
  const visible=conversationOrder(stories),all=curate(visible);
  const national=visible.filter(p=>p.scopes.includes('national')),focusTier=Math.max(0,...national.map(p=>p.focusTier??0)),focus=national.filter(p=>p.focusTier===focusTier&&focusTier>0);
  let selectedNational=national;
- if(focus.length>=8){const chosen=new Set(focus.map(p=>p.id)),other=new Set(),cap=Math.floor(focus.length/2);for(const p of conversationOrder(national.filter(p=>p.focusTier!==focusTier))){if(other.size>=cap)break;if(p.replyTo&&!other.has(p.replyTo))continue;other.add(p.id);}selectedNational=national.filter(p=>chosen.has(p.id)||other.has(p.id));}
+ if(focus.length>=8){const chosen=new Set(focus.map(p=>p.id)),other=new Set(),cap=Math.floor(focus.length/2);for(const p of conversationOrder(national.filter(p=>p.focusTier!==focusTier))){if(other.size>=cap)break;if(p.replyTo&&!other.has(p.replyTo))continue;other.add(p.id);}selectedNational=national.filter(p=>chosen.has(p.id)||other.has(p.id)||p.voice==='nflDraft'&&p.draftPick>0);}
  return {all:all.map(p=>p.id),national:conversationOrder(selectedNational).map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
 }
 
@@ -86,7 +86,7 @@ export function buildCatalog(active,history=[]){
     if(!f.publication||f.publication.key!==f.key||f.publication.week!==f.week)throw Error('Invalid publication-week archive');
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
-  const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','transaction','publication'];
+  const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','transaction','draftPick','draftRound','publication'];
   const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
   return {...active,catalogVersion:2,activeWeekKey:active.key,weeks};
 }

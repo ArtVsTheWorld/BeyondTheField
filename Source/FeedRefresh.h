@@ -62,12 +62,13 @@ inline void validate(const Json& j,const Json& config){
       if(w.at("leagueId")!=j.at("leagueId")||w.at("userTeamIndex")!=j.at("userTeamIndex")||w.at("season")!=j.at("season")||!publicationAtOrBefore(w.at("phase").get<std::string>(),w.at("week").get<int>(),j.at("phase").get<std::string>(),j.at("week").get<int>())||(j.value("catalogVersion",1)<2&&w.at("phase")!=j.at("phase")))throw std::runtime_error("Catalog contains another Dynasty or future publication week");
       const auto key=w.at("key").get<std::string>();if(!keys.insert(key).second)throw std::runtime_error("Duplicate publication week");if(key==j.at("activeWeekKey").get<std::string>())active=true;
       const auto& posts=w.at("stories");if(!posts.is_array())throw std::runtime_error("Weekly stories must be an array");if(posts.size()>maximumEditionStories)throw std::runtime_error("Weekly story count "+std::to_string(posts.size())+" exceeds catalogue limit "+std::to_string(maximumEditionStories));
-      std::set<std::string> ids;
+      std::set<std::string> ids;std::set<int> draftPicks;
       for(const auto& p:posts){
         if(p.at("publication").at("key")!=w.at("key")||p.at("publication").at("week")!=w.at("week"))throw std::runtime_error("Story publication week mismatch");
         if(j.value("catalogVersion",1)>=2&&(p.at("publication").at("phase")!=w.at("phase")||p.at("publication").at("season")!=w.at("season")))throw std::runtime_error("Story publication phase/season mismatch");
         if(!ids.insert(p.at("id").get<std::string>()).second)throw std::runtime_error("Duplicate feed post");
         for(const char* k:{"author","handle","body","stamp"})if(!p.at(k).is_string()||p.at(k).get_ref<const std::string&>().empty()||p.at(k).get_ref<const std::string&>().size()>512)throw std::runtime_error("Invalid feed text");
+        if(p.contains("draftPick")){const auto pick=p.at("draftPick").get<int>(),round=p.at("draftRound").get<int>();if(p.value("category",std::string())!="draft"||p.value("voice",std::string())!="nflDraft"||!p.value("transaction",false)||pick<1||pick>224||round!=((pick-1)/32+1)||!draftPicks.insert(pick).second)throw std::runtime_error("Invalid or duplicate draft assignment");}
         if(p.at("imageLibrary").get<int>()<0||p.at("imageValue").get<int>()<0)throw std::runtime_error("Invalid feed avatar");
       }
       if(!w.at("views").is_object()||w.at("views").size()>516)throw std::runtime_error("Invalid scope views");

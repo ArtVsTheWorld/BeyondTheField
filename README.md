@@ -4,7 +4,13 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Offseason filter refresh (v83)
+## Dedicated hub tab, portal and draft (v84)
+
+The current package is `Build/DynastyEnhancer-v84-MMC.zip`. A year-round **Social Media** hub tab after Team contains **Open Feed**, with the existing native feed and controls. Dynasty Central/CFB shortcuts remain a fallback if the native tab layout cannot be verified.
+
+Offseason Recruiting Week 1 prioritizes confirmed portal entrants and leading unsigned high-school prospects. The official **NFL Draft (@NFLDraft)** account announces all 224 native draft-class players in their actual rounds. Exact picks and NFL destinations are stable simulated worldbuilding, not native draft results. **National → Transactions** presents the complete board in pick order, with top-ten and final-pick coverage. See [v84 implementation and verification](docs/portal-draft-v84.md).
+
+## Previous offseason filter refresh (v83)
 
 The current package is `Build/DynastyEnhancer-v83-MMC.zip`. LB/RB category changes and both dropdown selections now redraw through the persistent Dynasty Central source. v82 accepted the selections but still used a CFB-only redraw path, leaving the visible page stale during the offseason. Entry and all filter refreshes now share one native panel request. See [v83 verification](docs/offseason-filters-v83.md).
 

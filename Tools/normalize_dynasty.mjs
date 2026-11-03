@@ -184,6 +184,11 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     for(const o of await array(h.OutstandingStaffPersonOffersList))if(o.type==='StaffPersonContractOffer')offers.set(o.key,o);
     for(const o of offers.values()){const team=await teamIndex(o.v.Team),coach=await coachIdentity(o.v.StaffPerson);if(coach&&team!==null&&team!==255)coachOffers.push({id:o.key,team,coach,role:o.v.ContractPosition,status:o.v.Status,index:o.v.OfferIndex,length:o.v.Length??null});}
   }
+  const draftResults=[];
+  for(const {v:e} of await records('PlayersLeavingEval'))for(const d of await array(e.DraftClass)){
+    const p=await resolve(d.v.Player);if(d.type==='LeavingPlayer'&&p&&Number.isInteger(d.v.ProjectRound)&&d.v.ProjectRound>=1&&d.v.ProjectRound<=7&&d.v.LeaveType==='EarlyNFL_'+d.v.ProjectRound)draftResults.push({player:p.key,round:d.v.ProjectRound});
+  }
+  const portalEntrants=[];for(const r of await array(franchise.Transfers)){if(r.type!=='Recruit'||!r.v.Class?.startsWith('Transfer_'))continue;const p=await resolve(r.v.Player);if(p)portalEntrants.push(p.key);}
   return {format:2,sourceUnchanged:true,gameYear:27,...identity,leagueId:franchise.LeagueID,
-    season,userTeamIndex,teams,conferences,players,games,playoffBracket,postseasonAssignments,performances,heisman,annualAwards,allAmericanHonors,coachingOpenings,coachOffers,signings,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,recruitVisits,preseasonHonors};
+    season,userTeamIndex,teams,conferences,players,games,playoffBracket,postseasonAssignments,performances,heisman,annualAwards,allAmericanHonors,coachingOpenings,coachOffers,draftResults,portalEntrants,signings,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,recruitVisits,preseasonHonors};
 }

@@ -35,6 +35,19 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        {
+            using social::hubtab::plan;
+            std::vector<Json> rows={{{"id","cm_team"},{"priority",5}},{{"id","CM_LEAGUE"},{"priority",4}},{{"id","DynastyCentral"},{"priority",1},{"screenId","PANEL_MENU"},{"numRows",13}}};const auto saved=rows;
+            const auto custom=plan(rows);require(custom&&custom->at("id")==social::hubtab::id&&custom->at("name")=="Social Media"&&custom->at("priority")==4.5&&custom->at("screenId")=="PANEL_MENU"&&custom->at("numRows")==1,"Dedicated tab must sit between Team and Stats and preserve the native screen type");require(rows==saved,"Dedicated tab planning mutated stock descriptors");
+            rows.push_back(*custom);require(!plan(rows),"Dedicated tab must not be duplicated");rows=saved;rows.erase(rows.begin());require(!plan(rows),"Missing anchors must preserve the original hub");rows=saved;rows[1]["priority"]=5;require(!plan(rows),"Ambiguous tab ordering must not be guessed");
+            const uintptr_t image=0x140000000;std::array<unsigned char,64> map{},text{},number{};std::array<unsigned char,32> nodeA{},nodeB{};std::array<unsigned char,16> keyA{},keyB{},value{};std::array<uintptr_t,1> buckets{};
+            auto put=[](auto& b,size_t off,const auto& v){memcpy(b.data()+off,&v,sizeof(v));};
+            memcpy(keyA.data(),"id",2);keyA[15]=13;memcpy(keyB.data(),"priority",8);keyB[15]=7;memcpy(value.data(),"cm_team",7);value[15]=8;
+            put(map,0,image+0x1000);put(map,16,5u);put(map,32,reinterpret_cast<uintptr_t>(buckets.data()));put(map,40,1u);buckets[0]=reinterpret_cast<uintptr_t>(nodeA.data());
+            put(nodeA,8,reinterpret_cast<uintptr_t>(keyA.data()));put(nodeA,16,reinterpret_cast<uintptr_t>(text.data()));put(nodeA,24,reinterpret_cast<uintptr_t>(nodeB.data()));put(nodeB,8,reinterpret_cast<uintptr_t>(keyB.data()));put(nodeB,16,reinterpret_cast<uintptr_t>(number.data()));
+            put(text,0,image+0x2000);put(text,16,3u);put(text,32,reinterpret_cast<uintptr_t>(value.data()));put(number,0,image+0x3000);put(number,16,2u);put(number,24,5.5);
+            auto parsed=social::hubtab::fields(reinterpret_cast<uintptr_t>(map.data()),image,read);require(parsed&&parsed->at("id")=="cm_team"&&parsed->at("priority")==5.5,"Native tab reader must follow hash collisions and indirect SSO values");put(nodeB,24,reinterpret_cast<uintptr_t>(nodeA.data()));require(!social::hubtab::fields(reinterpret_cast<uintptr_t>(map.data()),image,read),"Cyclic tab-map nodes must be rejected");
+        }
         uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
         {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,"CM_NEWSSUB",kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
         {
@@ -211,6 +224,11 @@ int main(int argc,char** argv){
             require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==20,"Team feed card budget failed");
             auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==100&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
             require(social::selectFeed(catalog,0,2,5)->posts.size()==60,"Filtered conference cap failed");
+        }
+        {
+            auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"national","National"}};social::Edition e;e.key="draft";
+            for(int pick=224;pick>=1;--pick){auto id=std::to_string(pick);social::FeedPost p{"NFL Draft","@NFLDraft","Selection","Draft"};p.category="draft";p.voice="nflDraft";p.transaction=true;p.draftPick=pick;p.draftRound=(pick-1)/32+1;e.stories.emplace(id,p);e.views["national"].push_back(id);}
+            c->weeks.push_back(e);auto f=social::selectFeed(c,0,1,11);require(f->posts.size()==224&&f->posts.front().draftPick==1&&f->posts.back().draftPick==224,"National Transactions must show all picks in round/pick order");require(social::selectFeed(c,0,1)->posts.size()==100,"The ordinary National cap must stay at 100");require(social::matchesType(f->posts.front(),7),"NFL Draft must also count as an official account");
         }
         {social::FeedPost p{"reporter","@reporter","terms","Signing"};p.voice="beat";p.category="signings";require(social::matchesType(p,11)&&social::matchesType(p,1),"Reported signatures must appear in Transactions and Recruiting");p.category="coaching";p.voice="fan";require(!social::matchesType(p,11),"Speculative fan roots must not become transaction reports");p.voice="analyst";require(social::matchesType(p,11),"Coaching reports must appear in Transactions");}
         require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");

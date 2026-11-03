@@ -1,0 +1,54 @@
+{
+  "build": "v84",
+  "installed": true,
+  "contentRevision": "portal-draft-v84",
+  "nodeTests": {
+    "pass": 273,
+    "fail": 0
+  },
+  "native": {
+    "boundedHubDescriptorReader": true,
+    "draftNationalTransactions224": true,
+    "catalogEditions": 25,
+    "unitChecks": true,
+    "allDynamicScopes": true
+  },
+  "preview": {
+    "nativeDraftPlayers": 224,
+    "forYou": 30,
+    "portalPosts": 78,
+    "portalEntrants": 2339,
+    "draftDestinationAndPick": "simulated; native players and rounds",
+    "draftPosts": 224,
+    "unsignedStories": 32,
+    "stories": 1000
+  },
+  "mmc": {
+    "installedVerification": true,
+    "payloadTamperChecks": true,
+    "registration": true,
+    "nativeLoadedPid": 28496
+  },
+  "liveChecksRemaining": [
+    "Dedicated tab placement and Open Feed",
+    "Portal-focused For You",
+    "National Transactions draft order, all 224 picks and icon",
+    "LT/RT, LB/RB, scrolling and Back"
+  ],
+  "sha256": {
+    "DynastyEnhancer-v84-MMC.zip": "f156342f5f9cf254fe8ac02449fa4c631777851a60f525a25ae8397ef4ca362c",
+    "DynastyEnhancerNative-v84.dll": "65fcdb3b74cf33527531f1f3ccba980fd988b277f2f45a8a0ad651cfcdf01259",
+    "DynastyEnhancer.dll": "4ca7394074a85216cfdf7d4f8decf2fa65766e3ff6616e6683d508266bdff4cc"
+  },
+  "backups": {
+    "checksumVerified": true,
+    "saveFiles": 8,
+    "historyFiles": 10
+  },
+  "livePublication": {
+    "stage": "OffSeason",
+    "stories": 1000,
+    "week": 2,
+    "saveRequired": false
+  }
+}
