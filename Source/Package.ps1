@@ -1,13 +1,13 @@
-param([string]$NativeName='DynastyEnhancerNative-v87',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[string]$Node='C:/Program Files/nodejs/node.exe')
+param([string]$NativeName='DynastyEnhancerNative-v88',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[string]$Node='C:/Program Files/nodejs/node.exe')
 $ErrorActionPreference='Stop'
 $packageRoot=Split-Path -Parent $PSScriptRoot
 $packageBuild=Join-Path $packageRoot 'Build'
-$packageStage=Join-Path $packageBuild ('Package-v87-'+[guid]::NewGuid().ToString('N'))
+$packageStage=Join-Path $packageBuild ('Package-v88-'+[guid]::NewGuid().ToString('N'))
 $packagePlugins=Join-Path $packageStage 'Plugins'
-$packageRuntime=Join-Path $packagePlugins 'DynastyEnhancer/Runtime-v87'
+$packageRuntime=Join-Path $packagePlugins 'DynastyEnhancer/Runtime-v88'
 if(-not (Test-Path -LiteralPath $Node -PathType Leaf)){throw 'Node.js executable is unavailable'}
 New-Item -ItemType Directory -Path $packageRuntime,(Join-Path $packageRuntime 'Tools'),(Join-Path $packageRuntime 'Content/Runtime') -Force | Out-Null
-Copy-Item -LiteralPath (Join-Path $packageBuild ($NativeName+'.dll')) -Destination (Join-Path $packageRuntime 'DynastyEnhancerNative-v87.dll')
+Copy-Item -LiteralPath (Join-Path $packageBuild ($NativeName+'.dll')) -Destination (Join-Path $packageRuntime 'DynastyEnhancerNative-v88.dll')
 Copy-Item -LiteralPath (Join-Path $packageBuild 'LoadDynastyEnhancer.exe') -Destination $packageRuntime
 Get-ChildItem -LiteralPath (Join-Path $packageRoot 'Tools') -Filter '*.mjs' -File | Copy-Item -Destination (Join-Path $packageRuntime 'Tools')
 Get-ChildItem -LiteralPath (Join-Path $packageRoot 'Content/Runtime') -Filter '*.json' -File | Copy-Item -Destination (Join-Path $packageRuntime 'Content/Runtime')
@@ -28,7 +28,7 @@ if($LASTEXITCODE -ne 0){throw 'MMC adapter compilation failed'}
 Copy-Item -LiteralPath (Join-Path $packagePlugins 'DynastyEnhancer.dll') -Destination (Join-Path $packageBuild 'DynastyEnhancer.dll') -Force
 & $packageCsc /nologo /target:exe /platform:x64 /optimize+ ('/out:'+(Join-Path $packageBuild 'AdapterSmoke.exe')) (Join-Path $packageRoot 'Tests/AdapterSmoke.cs')
 if($LASTEXITCODE -ne 0){throw 'MMC adapter smoke-test compilation failed'}
-$packageZip=Join-Path $packageBuild 'DynastyEnhancer-v87-MMC.zip'
+$packageZip=Join-Path $packageBuild 'DynastyEnhancer-v88-MMC.zip'
 Compress-Archive -Path (Join-Path $packageStage '*') -DestinationPath $packageZip -Force
 @{stage=$packageStage;zip=$packageZip;runtime=$packageRuntime} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $packageBuild 'mmc-package.json') -Encoding utf8NoBOM
 Write-Output "Staged package: $packageStage"

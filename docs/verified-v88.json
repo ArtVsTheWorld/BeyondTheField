@@ -1,0 +1,49 @@
+{
+  "build": "v88",
+  "installed": true,
+  "contentRevision": "offseason-discourse-v87",
+  "categoryViews": "complete vertical feed; no pagination",
+  "lt": "scope only",
+  "nodeTests": {
+    "unchangedContentFrom": "v87",
+    "pass": 283,
+    "fail": 0
+  },
+  "native": {
+    "catalogEditions": 27,
+    "unitChecks": true,
+    "stockHubCallbackUnhooked": true,
+    "completeDraftView": 224,
+    "fullConversationView": 76,
+    "defaultScopeLimitsPreserved": true,
+    "allDynamicScopes": true,
+    "teamDraftPicksGuaranteed": true,
+    "largeRecruitingView": 9300
+  },
+  "mmc": {
+    "nativeLoadedPid": 31864,
+    "payloadTamperChecks": true,
+    "registration": true,
+    "installedVerification": true
+  },
+  "backups": {
+    "historyMigrationVerified": true,
+    "saveFiles": 8,
+    "checksumVerified": true,
+    "historyFiles": 10
+  },
+  "actualData": {
+    "nationalRecruiting": 139,
+    "expandedForYouRecruiting": 205,
+    "draftEditionPicks": 224
+  },
+  "liveChecksRemaining": [
+    "Full National Recruiting list renders and scrolls",
+    "LT scopes, RT editions, LB/RB categories and Back"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v88.dll": "03b3c6ce3eca217a7aa53dcf40185bdcb624ff8757a45346219e71bed67db59d",
+    "DynastyEnhancer.dll": "0953d4969bb4ea5f8c5862d25d545194d73262756be2c0d853baa0664d7590c2",
+    "DynastyEnhancer-v88-MMC.zip": "06096928de7e78f8ac6f7695b2c6679010e1e13533813368f807a4e1f5ade51c"
+  }
+}

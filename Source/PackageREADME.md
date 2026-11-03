@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v87
+# Dynasty Enhancer - MMC prototype v88
 
 Native Social Media inside the offline Dynasty hub. Open **Team → Social Media**, or its CFB shortcut when available. The dedicated-tab experiment remains inactive after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v87/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v87/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v88/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v88/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -16,10 +16,17 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - LT selects For You, National, a native conference or a native team.
 - RT selects one publication edition, with the active week selected initially and older editions listed first.
 - LB/RB cycle topic/account categories in both directions. Recruiting includes recruit-written posts; Players remains separate. Injuries is a dedicated category. Official Accounts includes CFP.
-- Default pages show up to 30 For You, 100 National, 60 conference and 20 team posts. Filtered categories show 30 per page. LT offers Next Page/Previous Page immediately after the active scope when more posts qualify. Page boundaries keep conversations together; the header shows the page and post numbers use the full filtered total. Likes remain flavor.
+- All Types shows up to 30 For You, 100 National, 60 conference and 20 team posts, with team draft announcements retained beyond the ordinary team limit. LB/RB category views show every qualifying published story in one vertical feed. LT selects scope only; RT still selects one publication edition. Replies remain attached and likes remain flavor.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v87 changes
+## v88 changes
+
+- Removes the attempted LT pagination: the native game caches the list on first entry, so v87's conditional page rows were missing after a later category change. LT remains purely a scope selector.
+- Category views scroll through the complete matching story pool, without a 30-post page limit or pagination header. All Types remains curated/capped, with a team draft exception so every selection is visible.
+- Full-list checks preserve replies, original editorial order and all 224 draft picks in ascending order. Actual current candidates: National Recruiting 139, expanded For You Recruiting 205; render/scroll performance still needs a controller check.
+- Existing Team shortcut, recruit eligibility/context, analyst/fan discourse and save/history preservation remain.
+
+## Previous v87 changes
 
 - Social Media moves to the top of Team using its existing Roster donor and an unused coordinate. Stock Team entries keep their identities and order. Missing donors/occupied coordinates preserve the stock menu. Dynasty Central is unchanged. No hub-tab-list hook is installed.
 - Team/conference first-round leadership, top-ten discussion, fan draft reactions and subjective NFL-haul opinions use the verified/persisted draft class. Actual players/rounds remain native; NFL destinations/picks remain simulated. Select the draft publication edition for all official picks; later recruiting weeks can discuss that recorded class without republishing every selection.

@@ -76,7 +76,7 @@ inline constexpr std::array<const char*,4> scopeLabels={"For You","National","Co
 struct Scope {std::string key,label;};
 struct Edition {std::string key,label,conference,phase="RegularSeason";int season=0,week=0;std::map<std::string,FeedPost> stories;std::map<std::string,std::vector<std::string>> views;};
 struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> scopes;};
-struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;size_t page=0,pages=1,total=0,offset=0;};
+struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;size_t total=0;};
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
 inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:20;}
 inline constexpr std::array<const char*,12> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Official Accounts","Players","Injuries","Fans","Transactions"};
@@ -87,11 +87,11 @@ inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     for(unsigned n=0;n<count;++n)f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","Preparing news for the active Dynasty. Return to the hub briefly, then reopen Social Media.","Status",79,598});
     return f;
 }
-inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> catalog,size_t week,unsigned scope,unsigned type=0,size_t page=0){
+inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> catalog,size_t week,unsigned scope,unsigned type=0){
     if(!catalog||week>=catalog->weeks.size()||scope>=scopesFor(*catalog).size()||type>=typeLabels.size())throw std::runtime_error("Invalid single-week feed selection");
     const auto& e=catalog->weeks.at(week);auto f=std::make_shared<Feed>();f->catalog=catalog;f->edition=week;f->scope=scope;f->type=type;f->key=e.key;
     f->label="Social Media";if(type)f->label+=" - "+std::string(typeLabels[type]);
-    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key=="all"?(type&&e.views.count("all:expanded")?"all:expanded":!type&&e.views.count("all:default")?"all:default":"all"):option.key);auto limit=type?30:scopeLimit(option.key);
+    const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key=="all"?(type&&e.views.count("all:expanded")?"all:expanded":!type&&e.views.count("all:default")?"all:default":"all"):option.key);auto limit=type?refresh::maximumEditionStories:scopeLimit(option.key);
     if(view!=e.views.end()){
         std::set<std::string> members(view->second.begin(),view->second.end()),visited;std::vector<std::string> roots;std::map<std::string,std::vector<std::string>> children;
         for(const auto& id:view->second){const auto& p=e.stories.at(id);if(p.replyTo.empty()){if(matchesType(p,type))roots.push_back(id);}else if(members.count(p.replyTo))children[p.replyTo].push_back(id);}
@@ -99,19 +99,13 @@ inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> cat
             const bool draft=std::any_of(roots.begin(),roots.end(),[&](const auto& id){return e.stories.at(id).draftPick>0;});
             if(draft){std::stable_sort(roots.begin(),roots.end(),[&](const auto& a,const auto& b){const auto x=e.stories.at(a).draftPick,y=e.stories.at(b).draftPick;return x>0&&y>0?x<y:x>0&&y<=0;});}
         }
-        // Build whole conversation blocks first. Page boundaries never strand
-        // a reply or erase later factual announcements from a dedicated view.
-        std::vector<std::vector<FeedPost>> pages(1);
-        for(const auto& root:roots){std::vector<FeedPost> block;
-            std::function<void(const std::string&)> visit=[&](const std::string& id){if(!visited.insert(id).second)return;block.push_back(e.stories.at(id));for(const auto& child:children[id])visit(child);};visit(root);
-            if(!pages.back().empty()&&pages.back().size()+block.size()>limit)pages.emplace_back();
-            pages.back().insert(pages.back().end(),block.begin(),block.end());f->total+=block.size();
-        }
-        f->pages=pages.size();f->page=(std::min)(page,pages.size()-1);
-        for(size_t i=0;i<f->page;++i)f->offset+=pages[i].size();f->posts=std::move(pages[f->page]);
+        // Category views expose the whole qualified edition. Default views
+        // retain their editorial limits; team draft selections are guaranteed.
+        std::function<void(const std::string&,bool)> append=[&](const std::string& id,bool required){if((f->posts.size()>=limit&&!required)||!visited.insert(id).second)return;f->posts.push_back(e.stories.at(id));for(const auto& child:children[id])append(child,required);};
+        for(const auto& id:roots){const bool required=!type&&option.key.rfind("team",0)==0&&e.stories.at(id).draftPick>0;append(id,required);}
+        f->total=f->posts.size();
 
     }
-    if(f->pages>1)f->label+=" | "+std::to_string(f->page+1)+"/"+std::to_string(f->pages)+" (LT: Pages)";
     if(f->posts.empty())f->posts.push_back({"Dynasty Enhancer","@DynastyEnhancer","No "+option.label+" stories were published in this weekly edition.","News",79,598});
     return f;
 }

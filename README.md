@@ -4,7 +4,11 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Offseason discourse and paged browsing (v87)
+## Complete category scrolling (v88)
+
+The current package is `Build/DynastyEnhancer-v88-MMC.zip`. LT remains a scope dropdown. LB/RB category views now show every qualifying published story in one vertical feed, with replies attached and no page controls. All Types keeps the ordinary For You 30/National 100/conference 60/team 20 limits; team draft announcements remain visible beyond the ordinary team limit. The Team shortcut and v87 content are retained. See [v88 verification](docs/category-scrolling-v88.md).
+
+## Previous offseason discourse and paged browsing attempt (v87)
 
 The current package is `Build/DynastyEnhancer-v87-MMC.zip`. Social Media is the first shortcut in **Team**, using a verified native Roster donor; Dynasty Central returns to its stock settings entries. The dedicated-tab experiment remains inactive. Existing CFB access stays available during the season.
 
