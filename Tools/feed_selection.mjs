@@ -32,6 +32,7 @@ export function curate(stories,limit=30){
  const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5,'preseason':5};
  const voiceMax={beat:8,analyst:4,official:4,player:4,fan:5,recruit:3,model:1};
  const scaled=n=>Math.ceil(n*limit/20);
+ const focusTier=Math.max(0,...pool.map(p=>p.focusTier??0)),focusTarget=focusTier?Math.ceil(limit*(focusTier===3?.65:.55)):0;
  function accept(post,respectTargets=false,relaxed=false){
   const bundle=[],seen=new Set();let p=post;
   while(p&&!used.has(p.id)){if(seen.has(p.id)||p.curated===false)return false;seen.add(p.id);bundle.unshift(p);if(!p.replyTo)break;p=map.get(p.replyTo);if(!p)return false;}
@@ -39,14 +40,16 @@ export function curate(stories,limit=30){
   const c=new Map(categories),t=new Map(threads),v=new Map(voices),a=new Map(accounts),forms=new Map(templates),byScope={...counts};
   for(const item of bundle){
    const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();
-   const accountMax=['player','fan'].includes(item.voice)?2:3;
-   if(category==='offers'&&(c.get(category)??0)>=1||account&&(a.get(account)??0)>=accountMax||relaxed&&(t.get(thread)??0)>=3)return false;
-   if(!relaxed&&((c.get(category)??0)>=scaled(categoryMax[category]??2)||(t.get(thread)??0)>=2||item.templateId&&(forms.get(item.templateId)??0)>=2||item.voice&&(v.get(item.voice)??0)>=scaled(voiceMax[item.voice]??20)))return false;
+   const focused=(item.focusTier??0)===focusTier&&focusTier>0,accountMax=['player','fan'].includes(item.voice)?2:3;
+   if(category==='offers'&&(c.get(category)??0)>=1||account&&(a.get(account)??0)>=accountMax||relaxed&&!focused&&(t.get(thread)??0)>=3)return false;
+   if(!relaxed&&((c.get(category)??0)>=(focused?focusTarget:scaled(categoryMax[category]??2))||(t.get(thread)??0)>=(focused?focusTarget:2)||item.templateId&&(forms.get(item.templateId)??0)>=2||item.voice&&(v.get(item.voice)??0)>=(focused?Math.max(6,scaled(voiceMax[item.voice]??20)):scaled(voiceMax[item.voice]??20))))return false;
    c.set(category,(c.get(category)??0)+1);t.set(thread,(t.get(thread)??0)+1);if(item.templateId)forms.set(item.templateId,(forms.get(item.templateId)??0)+1);if(account)a.set(account,(a.get(account)??0)+1);if(item.voice)v.set(item.voice,(v.get(item.voice)??0)+1);++byScope[scope];
   }
   if(respectTargets&&Object.keys(target).some(k=>byScope[k]>target[k]))return false;
   for(const item of bundle){const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();used.add(item.id);selected.push(item);++counts[scope];categories.set(category,c.get(category));threads.set(thread,t.get(thread));if(item.templateId)templates.set(item.templateId,forms.get(item.templateId));if(account)accounts.set(account,a.get(account));if(item.voice)voices.set(item.voice,v.get(item.voice));}return true;
  }
+ // Reserve the shared live postseason event before local offseason quotas.
+ if(focusTier)for(const p of editorialRoots(pool.filter(p=>!p.replyTo&&p.focusTier===focusTier))){if(selected.filter(p=>p.focusTier===focusTier).length>=focusTarget)break;accept(p,false);}
  // Keep the actual user result before reserving room for personality/reactions.
  for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&!pool.some(x=>x.category==='upsets'&&x.thread===p.thread)&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
  // Preserve a confirmed user-team postseason announcement before its fan
@@ -63,7 +66,10 @@ export function curate(stories,limit=30){
 }
 export function scopeViews(stories){
  const visible=conversationOrder(stories),all=curate(visible);
- return {all:all.map(p=>p.id),national:conversationOrder(visible.filter(p=>p.scopes.includes('national'))).map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
+ const national=visible.filter(p=>p.scopes.includes('national')),focusTier=Math.max(0,...national.map(p=>p.focusTier??0)),focus=national.filter(p=>p.focusTier===focusTier&&focusTier>0);
+ let selectedNational=national;
+ if(focus.length>=8){const chosen=new Set(focus.map(p=>p.id)),other=new Set(),cap=Math.floor(focus.length/2);for(const p of conversationOrder(national.filter(p=>p.focusTier!==focusTier))){if(other.size>=cap)break;if(p.replyTo&&!other.has(p.replyTo))continue;other.add(p.id);}selectedNational=national.filter(p=>chosen.has(p.id)||other.has(p.id));}
+ return {all:all.map(p=>p.id),national:conversationOrder(selectedNational).map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
 }
 
 export function publishWeek(feed){

@@ -1,0 +1,600 @@
+{
+  "format": 1,
+  "revision": "intentional-news-cycles-v80",
+  "families": {
+    "narrative.game": [
+      {
+        "id": "narrative.game.v80.1",
+        "body": "{winner} beats {loser}, {score}. {turningPoint} {detail}"
+      },
+      {
+        "id": "narrative.game.v80.2",
+        "body": "{winner} {score} over {loser}: {turningPoint}"
+      },
+      {
+        "id": "narrative.game.v80.3",
+        "body": "How {winner} got past {loser}, {score}: {turningPoint}"
+      }
+    ],
+    "ending.expectation-review": [
+      {
+        "id": "ending.expectation-review.v80.1",
+        "body": "{school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.v80.2",
+        "body": "Season review for {school}: {record}. {expectationNote}"
+      }
+    ],
+    "cycle.outlook": [
+      {
+        "id": "cycle.outlook.v80.1",
+        "body": "The {school} schedule is finished at {record}. {expectationNote} The conversation now moves to roster retention, the recruiting class and next season."
+      },
+      {
+        "id": "cycle.outlook.v80.2",
+        "body": "{school}: {record}, with the season complete. {expectationNote} Recruiting and roster decisions are the next part of this story."
+      }
+    ],
+    "cycle.staff-plan": [
+      {
+        "id": "cycle.staff-plan.v80.1",
+        "body": "{school} is into the roster-building part of the calendar. For head coach {coachName}, retaining the core and finishing the incoming class are the next tests."
+      },
+      {
+        "id": "cycle.staff-plan.v80.2",
+        "body": "The next {school} chapter is a roster question for {coachName}: who stays, who signs and which needs remain after those decisions."
+      }
+    ],
+    "cycle.injury-recovery": [
+      {
+        "id": "cycle.injury-recovery.v80.1",
+        "body": "Offseason health update at {school}: {playerName} is no longer listed as injured. The team’s playing schedule is already finished."
+      }
+    ],
+    "cycle.injury-rehab": [
+      {
+        "id": "cycle.injury-rehab.v80.1",
+        "body": "{school} offseason injury update: {playerName} is listed as injured. The next issue is recovery and preparation, with the team’s season on the field finished."
+      }
+    ],
+    "cycle.team-reset": [
+      {
+        "id": "cycle.team-reset.v80.1",
+        "body": "Thank you for riding with the {nickname} this season. The work on the next chapter is already underway."
+      },
+      {
+        "id": "cycle.team-reset.v80.2",
+        "body": "Our season on the field is finished. Our program keeps moving. Thank you, {nickname} fans, for showing up for us."
+      }
+    ],
+    "cycle.fan-standards": [
+      {
+        "id": "cycle.fan-standards.v80.1",
+        "body": "{record} and now we wait through a whole offseason. {expectationNote} Need a real plan for this roster, not another slogan"
+      },
+      {
+        "id": "cycle.fan-standards.v80.2",
+        "body": "{school} fans deserve an offseason with some answers. {record} was not the goal. Get the roster right and give us a reason to believe again"
+      }
+    ],
+    "cycle.fan-future": [
+      {
+        "id": "cycle.fan-future.v80.1",
+        "body": "already checking the {school} recruiting class like it is going to make the offseason shorter. See everybody next season"
+      },
+      {
+        "id": "cycle.fan-future.v80.2",
+        "body": "{school} football being over for the year is a terrible development for my weekends. Give me recruiting news. Give me something"
+      }
+    ],
+    "cycle.player-reset": [
+      {
+        "id": "cycle.player-reset.v80.1",
+        "body": "appreciate everybody who showed up for us this year. Already looking forward to being back with this group"
+      },
+      {
+        "id": "cycle.player-reset.v80.2",
+        "body": "Season went fast. grateful for my teammates and everybody who supported us. Got a lot to look forward to"
+      }
+    ],
+    "cycle.portal-needs": [
+      {
+        "id": "cycle.portal-needs.v80.1",
+        "body": "{school} has {count} {seniorLabel} at {position}. How that group is replenished belongs on the offseason watch list; the portal is one route to monitor."
+      },
+      {
+        "id": "cycle.portal-needs.v80.2",
+        "body": "Roster planning at {school}: {count} {seniorLabel} at {position}. Returning eligibility still matters, but that is a group worth watching in recruiting and the portal."
+      }
+    ],
+    "cycle.portal-plan": [
+      {
+        "id": "cycle.portal-plan.v80.1",
+        "body": "{school} is into roster-planning season. Retaining its own players comes first; the portal conversation should follow actual needs, not a wish list of every available name."
+      },
+      {
+        "id": "cycle.portal-plan.v80.2",
+        "body": "The next {school} story is who stays, who arrives and where the roster needs help. Portal fits matter more than collecting recognizable names."
+      }
+    ],
+    "cycle.signed-spotlight": [
+      {
+        "id": "cycle.signed-spotlight.v80.1",
+        "body": "{tagHandle} is part of our signed class. Excited for the future with the {nickname}."
+      },
+      {
+        "id": "cycle.signed-spotlight.v80.2",
+        "body": "The next chapter includes {tagHandle}. Proud to have you in our signed class, {playerName}."
+      }
+    ],
+    "cycle.recruit-fit": [
+      {
+        "id": "cycle.recruit-fit.v80.1",
+        "body": "{starDetail}{playerName} is already signed with {school}. With the season finished, that incoming {position} is part of the program’s next chapter."
+      },
+      {
+        "id": "cycle.recruit-fit.v80.2",
+        "body": "Looking ahead at {school}: signed {starDetail}{playerName} adds to the incoming group at {position}. Recruiting is now central to the offseason conversation."
+      }
+    ],
+    "cycle.class-build": [
+      {
+        "id": "cycle.class-build.v80.1",
+        "body": "{school} is off the game schedule and back to roster building. Its current recruiting class sits No. {classRank}. That is a live ranking, not a final signing-day finish."
+      },
+      {
+        "id": "cycle.class-build.v80.2",
+        "body": "Offseason watch at {school}: the current class is No. {classRank}. How the staff finishes that group matters more now that the games are done."
+      }
+    ],
+    "cycle.portal-target": [
+      {
+        "id": "cycle.portal-target.v80.1",
+        "body": "{school} is among the recorded top three schools for transfer prospect {playerName}. A potential portal fit to monitor, not a commitment."
+      },
+      {
+        "id": "cycle.portal-target.v80.2",
+        "body": "One verified portal name connected to {school}: {playerName}, whose current top three includes the program. The recruitment is still open."
+      }
+    ],
+    "cycle.team-welcome": [
+      {
+        "id": "cycle.team-welcome.v80.1",
+        "body": "Welcome to the squad, {tagHandle}! {playerName} is officially signed with the {nickname}."
+      },
+      {
+        "id": "cycle.team-welcome.v80.2",
+        "body": "Signed and part of the family. Welcome, {tagHandle}. Excited to have {playerName} joining the {nickname}."
+      }
+    ],
+    "cycle.fan-loss-standard": [
+      {
+        "id": "cycle.fan-loss-standard.v80.1",
+        "body": "{school} loses to {opponent}, {score}. {expectationNote} We can talk about next steps without pretending this is the standard."
+      },
+      {
+        "id": "cycle.fan-loss-standard.v80.2",
+        "body": "{opponentScore}–{ownScore} against {opponent}. {school} should be aiming higher than this. {expectationNote}"
+      }
+    ],
+    "cycle.program-bar": [
+      {
+        "id": "cycle.program-bar.v80.1",
+        "body": "The preseason standard at {school}: {standard} The roster and schedule will decide whether the program gets there."
+      },
+      {
+        "id": "cycle.program-bar.v80.2",
+        "body": "Setting expectations for {school}: {standard} That is the frame for the season, before the first result changes the mood."
+      }
+    ],
+    "cycle.context-turnaround": [
+      {
+        "id": "cycle.context-turnaround.v80.1",
+        "body": "{school} is {wins}–{losses}, after {priorWins}–{priorLosses} last season. The year-over-year improvement is real. {expectationNote}"
+      }
+    ],
+    "cycle.context-regression": [
+      {
+        "id": "cycle.context-regression.v80.1",
+        "body": "{school}: {wins}–{losses}, compared with {priorWins}–{priorLosses} last season. {expectationNote}"
+      }
+    ],
+    "buzz.title-stage": [
+      {
+        "id": "buzz.title-stage.v80.1",
+        "body": "One game left. {home} vs. {away} for the national championship. No next round, no second chance. This is the biggest stage of the season."
+      },
+      {
+        "id": "buzz.title-stage.v80.2",
+        "body": "The national championship is here: {home} against {away}. Everything this season has led to this matchup."
+      }
+    ],
+    "buzz.stage": [
+      {
+        "id": "buzz.stage.v80.1",
+        "body": "{home} vs. {away} in the {eventLabel}. A trophy or the next playoff round is on the line."
+      },
+      {
+        "id": "buzz.stage.v80.2",
+        "body": "The stage this week: {home}, {away}, the {eventLabel}. This is what the season has been building toward."
+      }
+    ],
+    "buzz.pick-1": [
+      {
+        "id": "buzz.pick-1.v80.1",
+        "body": "{eventLabel}: my pick is {pick}. {lineContext} {shapeContext} This is still a game that has to be won on the field."
+      },
+      {
+        "id": "buzz.pick-1.v80.2",
+        "body": "{pick} is my lean against {opponent}. {lineContext} The {eventLabel} deserves a prediction with some context behind it."
+      }
+    ],
+    "buzz.pick-2": [
+      {
+        "id": "buzz.pick-2.v80.1",
+        "body": "Putting a name on it: {pick}. {shapeContext} {lineContext} Save the post if you want. This is the {eventLabel}; taking a position is part of the fun."
+      },
+      {
+        "id": "buzz.pick-2.v80.2",
+        "body": "My {eventLabel} pick is {pick}. {shapeContext} {lineContext} I am not picking a tie in the argument."
+      }
+    ],
+    "buzz.pick-3": [
+      {
+        "id": "buzz.pick-3.v80.1",
+        "body": "leaning {pick} for the {eventLabel}. {shapeContext} {lineContext} The replies to this one should be very normal"
+      },
+      {
+        "id": "buzz.pick-3.v80.2",
+        "body": "{pick} is my pick. {lineContext} {shapeContext} Very excited for everyone to respond calmly to a {eventLabel} prediction."
+      }
+    ],
+    "buzz.pick-4": [
+      {
+        "id": "buzz.pick-4.v80.1",
+        "body": "My {eventLabel} lean: {pick}. {lineContext} {shapeContext} The matchup matters more than assuming every postseason game is evenly balanced."
+      },
+      {
+        "id": "buzz.pick-4.v80.2",
+        "body": "{lineContext} {shapeContext} I lean {pick} in the {eventLabel}; an occasion this big still needs an honest matchup assessment."
+      }
+    ],
+    "buzz.pick-5": [
+      {
+        "id": "buzz.pick-5.v80.1",
+        "body": "{pick} is my {eventLabel} choice. {shapeContext} {lineContext} This is the stage where individual matchups get everybody’s attention."
+      },
+      {
+        "id": "buzz.pick-5.v80.2",
+        "body": "For the {eventLabel}, I lean {pick}. {lineContext} {shapeContext} Big-stage expectations do not make the matchup automatically even."
+      }
+    ],
+    "buzz.team-pregame": [
+      {
+        "id": "buzz.team-pregame.v80.1",
+        "body": "{nickname}. {opponent}. The {eventLabel}. One more stage to own."
+      },
+      {
+        "id": "buzz.team-pregame.v80.2",
+        "body": "Everything for this moment. The {nickname} take on {opponent} in the {eventLabel}."
+      }
+    ],
+    "buzz.fan-pregame": [
+      {
+        "id": "buzz.fan-pregame.v80.1",
+        "body": "{school} in the {eventLabel}. I have been staring at this matchup with {opponent} all week. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.v80.2",
+        "body": "if anybody needs me during {school}–{opponent} in the {eventLabel}, no you do not. This one has my whole attention"
+      }
+    ],
+    "buzz.player-pregame-QB": [
+      {
+        "id": "buzz.player-pregame-QB.v80.1",
+        "body": "The {eventLabel} against {opponent}. Proud to be here with this group. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.v80.2",
+        "body": "Grateful for this opportunity with my teammates. {opponent} is next in the {eventLabel}."
+      }
+    ],
+    "buzz.watcher-player-QB": [
+      {
+        "id": "buzz.watcher-player-QB.v80.1",
+        "body": "Tuning in for {home} vs. {away} in the {eventLabel}. Respect what both groups did to get here."
+      },
+      {
+        "id": "buzz.watcher-player-QB.v80.2",
+        "body": "Looking forward to watching {home} against {away} in the {eventLabel}."
+      }
+    ],
+    "buzz.player-pregame-Leader": [
+      {
+        "id": "buzz.player-pregame-Leader.v80.1",
+        "body": "The {eventLabel}. {opponent}. Proud to share this stage with this team. Let us hear you."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.v80.2",
+        "body": "Love this group. Appreciate everybody riding with us into the {eventLabel} against {opponent}."
+      }
+    ],
+    "buzz.watcher-player-Leader": [
+      {
+        "id": "buzz.watcher-player-Leader.v80.1",
+        "body": "Tuning in for {home} vs. {away} in the {eventLabel}. Respect what both groups did to get here."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.v80.2",
+        "body": "Looking forward to watching {home} against {away} in the {eventLabel}."
+      }
+    ],
+    "buzz.player-pregame-TeamPlayer": [
+      {
+        "id": "buzz.player-pregame-TeamPlayer.v80.1",
+        "body": "Would not trade this group for anything. {opponent} in the {eventLabel}. Let’s do this together."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.v80.2",
+        "body": "Me and my teammates on this stage. {eventLabel} against {opponent}. That means everything."
+      }
+    ],
+    "buzz.watcher-player-TeamPlayer": [
+      {
+        "id": "buzz.watcher-player-TeamPlayer.v80.1",
+        "body": "Tuning in for {home} vs. {away} in the {eventLabel}. Respect what both groups did to get here."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.v80.2",
+        "body": "My team’s games are done but {home} vs {away} in the {eventLabel}? gotta watch that one"
+      }
+    ],
+    "buzz.player-pregame-Entertainer": [
+      {
+        "id": "buzz.player-pregame-Entertainer.v80.1",
+        "body": "{eventLabel} with the guys. {opponent} next. yeah I’m ready for this one"
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.v80.2",
+        "body": "Big stage. {opponent}. {eventLabel}. We here now, let’s have some fun"
+      }
+    ],
+    "buzz.watcher-player-Entertainer": [
+      {
+        "id": "buzz.watcher-player-Entertainer.v80.1",
+        "body": "{home} vs {away} for the {eventLabel}. yeah I’m watching that"
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.v80.2",
+        "body": "My team’s games are done but {home} vs {away} in the {eventLabel}? gotta watch that one"
+      }
+    ],
+    "buzz.player-pregame-Intense": [
+      {
+        "id": "buzz.player-pregame-Intense.v80.1",
+        "body": "{opponent}. {eventLabel}. Locked in with my brothers."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.v80.2",
+        "body": "Been waiting for this stage. {opponent} in the {eventLabel}. Let’s go"
+      }
+    ],
+    "buzz.watcher-player-Intense": [
+      {
+        "id": "buzz.watcher-player-Intense.v80.1",
+        "body": "{home} vs {away} for the {eventLabel}. yeah I’m watching that"
+      },
+      {
+        "id": "buzz.watcher-player-Intense.v80.2",
+        "body": "My team’s games are done but {home} vs {away} in the {eventLabel}? gotta watch that one"
+      }
+    ],
+    "buzz.player-pregame-Unpredictable": [
+      {
+        "id": "buzz.player-pregame-Unpredictable.v80.1",
+        "body": "{eventLabel} and {opponent} on the other side. Hope y’all are watching this one"
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.v80.2",
+        "body": "Yeah this {eventLabel} is personal to our whole group. {opponent} next. Let’s get it"
+      }
+    ],
+    "buzz.watcher-player-Unpredictable": [
+      {
+        "id": "buzz.watcher-player-Unpredictable.v80.1",
+        "body": "{home} vs {away} for the {eventLabel}. yeah I’m watching that"
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.v80.2",
+        "body": "My team’s games are done but {home} vs {away} in the {eventLabel}? gotta watch that one"
+      }
+    ],
+    "buzz.player-pregame-Neutral": [
+      {
+        "id": "buzz.player-pregame-Neutral.v80.1",
+        "body": "Appreciate the support. {opponent} in the {eventLabel}. Ready to go with this team."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.v80.2",
+        "body": "The {eventLabel} with my teammates. {opponent} is next. Looking forward to this one."
+      }
+    ],
+    "buzz.watcher-player-Neutral": [
+      {
+        "id": "buzz.watcher-player-Neutral.v80.1",
+        "body": "{home} vs {away} for the {eventLabel}. yeah I’m watching that"
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.v80.2",
+        "body": "Looking forward to watching {home} against {away} in the {eventLabel}."
+      }
+    ],
+    "buzz.matchup": [
+      {
+        "id": "buzz.matchup.v80.1",
+        "body": "{eventLabel} matchup: {school} scores {ppg} PPG with {ypg} yards a game and {ypp} per play. {opponent} allows {ppga} PPG, {ypga} yards and {yppa} per play. That is the test, not just the names on the helmets."
+      },
+      {
+        "id": "buzz.matchup.v80.2",
+        "body": "{school}: {ppg} PPG, {ypp} offensive yards per play. Against {opponent}: {ppga} PPG allowed, {yppa} yards per play allowed. The {eventLabel} puts those units against each other."
+      }
+    ],
+    "buzz.star": [
+      {
+        "id": "buzz.star.v80.1",
+        "body": "{playerName} for {school} in the {eventLabel}: {line} this season."
+      },
+      {
+        "id": "buzz.star.v80.2",
+        "body": "{school}’s {playerName} on this stage. Season totals: {line}. The {eventLabel} is the next test."
+      }
+    ],
+    "buzz.record": [
+      {
+        "id": "buzz.record.v80.1",
+        "body": "{school} brings a verified {record} record into the {eventLabel} against {opponent}. The full season gets one more defining test."
+      },
+      {
+        "id": "buzz.record.v80.2",
+        "body": "{record} got {school} here. {opponent} stands between this program and its next postseason goal in the {eventLabel}."
+      }
+    ],
+    "buzz.watcher-fan": [
+      {
+        "id": "buzz.watcher-fan.v80.1",
+        "body": "{school}’s season is done, so I’m borrowing {pick} for the {eventLabel}. Would never do this for a rival. For one game, let’s go"
+      },
+      {
+        "id": "buzz.watcher-fan.v80.2",
+        "body": "No {school} game left. I have {pick} in the {eventLabel}. Temporary fan agreement. Absolutely no long-term commitment"
+      }
+    ],
+    "buzz.pick-reply": [
+      {
+        "id": "buzz.pick-reply.v80.1",
+        "body": "{parentHandle} {school} fans have a different prediction. Let them play it before you start writing the ending"
+      },
+      {
+        "id": "buzz.pick-reply.v80.2",
+        "body": "{parentHandle} fair enough. {school} gets to answer that pick on the field. That’s the part I’m waiting for"
+      }
+    ],
+    "buzz.final": [
+      {
+        "id": "buzz.final.v80.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The biggest game on this stage has its answer."
+      },
+      {
+        "id": "buzz.final.v80.2",
+        "body": "Final in the {eventLabel}: {winner} {score} over {loser}. This finish belongs in the season’s defining moments."
+      }
+    ],
+    "buzz.team-champion": [
+      {
+        "id": "buzz.team-champion.v80.1",
+        "body": "{winner}. {eventLabel} winners. Final: {score} over {loser}. Thank you for every step of this run."
+      },
+      {
+        "id": "buzz.team-champion.v80.2",
+        "body": "This one is for our people. {winner} wins the {eventLabel}, {score} over {loser}."
+      }
+    ],
+    "buzz.team-final-loss": [
+      {
+        "id": "buzz.team-final-loss.v80.1",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you to our players, staff and fans for this run."
+      },
+      {
+        "id": "buzz.team-final-loss.v80.2",
+        "body": "Our run ends in the {eventLabel}. Final: {winner} {score} over {school}. Thank you for standing with us."
+      }
+    ],
+    "buzz.fan-champion": [
+      {
+        "id": "buzz.fan-champion.v80.1",
+        "body": "{school} just won the {eventLabel}. {score}. I have no useful words left. Remember this group forever"
+      },
+      {
+        "id": "buzz.fan-champion.v80.2",
+        "body": "{winner} {score} over {loser}. The {eventLabel} belongs to us. I will be making this everybody’s problem for a while"
+      }
+    ],
+    "buzz.fan-final-loss": [
+      {
+        "id": "buzz.fan-final-loss.v80.1",
+        "body": "{score} in the {eventLabel}. That hurts. Still proud of the {school} run. Getting this close makes it harder, not easier"
+      },
+      {
+        "id": "buzz.fan-final-loss.v80.2",
+        "body": "Going to need some time after that {eventLabel}. {school} gave us a real run. Respect the players even when the ending hurts"
+      }
+    ],
+    "buzz.player-champion": [
+      {
+        "id": "buzz.player-champion.v80.1",
+        "body": "{eventLabel} winners. With my brothers. Appreciate everybody who believed in us"
+      },
+      {
+        "id": "buzz.player-champion.v80.2",
+        "body": "Man. {eventLabel} winners. Love this team. Thank you for riding with us all the way"
+      }
+    ],
+    "buzz.player-final-loss": [
+      {
+        "id": "buzz.player-final-loss.v80.1",
+        "body": "grateful for this group and everybody who was with us through the run. The support meant a lot"
+      },
+      {
+        "id": "buzz.player-final-loss.v80.2",
+        "body": "Appreciate our fans and my teammates. Will always remember getting to this stage with this group"
+      }
+    ],
+    "buzz.final-analysis-0": [
+      {
+        "id": "buzz.final-analysis-0.v80.1",
+        "body": "{winner} wins the {eventLabel}, {score}. That is the defining result of this stage, beyond any prediction made coming in."
+      }
+    ],
+    "buzz.final-analysis-1": [
+      {
+        "id": "buzz.final-analysis-1.v80.1",
+        "body": "{score} for {winner} over {loser}. The {eventLabel} is settled. A season of positioning and argument reaches a real result."
+      }
+    ],
+    "buzz.final-analysis-2": [
+      {
+        "id": "buzz.final-analysis-2.v80.1",
+        "body": "{winner}, {score}. The {eventLabel} answer is on the scoreboard. Predictions are something to own after the game too."
+      }
+    ],
+    "buzz.final-analysis-3": [
+      {
+        "id": "buzz.final-analysis-3.v80.1",
+        "body": "{winner} wins the {eventLabel}, {score}. Some of us have old posts to revisit. The scoreboard is not accepting an appeal."
+      }
+    ],
+    "buzz.final-analysis-4": [
+      {
+        "id": "buzz.final-analysis-4.v80.1",
+        "body": "{winner} over {loser}, {score} in the {eventLabel}. The result is clear; the box score and scoring pattern explain how it happened."
+      }
+    ],
+    "buzz.final-analysis-5": [
+      {
+        "id": "buzz.final-analysis-5.v80.1",
+        "body": "{winner} wins the {eventLabel}, {score}. This group has made the defining statement on the biggest available stage."
+      }
+    ],
+    "buzz.outside-final": [
+      {
+        "id": "buzz.outside-final.v80.1",
+        "body": "Not a {school} game, but respect to {winner}. {score} in the {eventLabel}. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.v80.2",
+        "body": "{school} football has been done for a while. Still watched {winner} finish the {eventLabel}, {score}. Respect a run like that"
+      }
+    ]
+  }
+}

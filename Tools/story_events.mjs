@@ -1,3 +1,8 @@
+import {newsCycle} from './season_context.mjs';
+import {phaseIndex} from './publication_timeline.mjs';
+import {applyNewsCycle,offseasonEvents} from './news_cycles.mjs';
+import {postseasonBuzz} from './postseason_buzz.mjs';
+import {gameStory} from './box_score_stories.mjs';
 import {transactionEvents} from './transaction_events.mjs';
 import {contextualAnalytics} from './context_analytics.mjs';
 import {conferenceDiscourse} from './conference_context.mjs';
@@ -30,7 +35,7 @@ export function detectEvents(s,previous=null){
   if(!teams.has(s.userTeamIndex))throw Error('Controlled team missing from snapshot');
   const own=teams.get(s.userTeamIndex),conferenceTeams=new Set(s.teams.filter(t=>own.conferenceId&&t.conferenceId===own.conferenceId).map(t=>t.id));
   const poll=publicPoll(s,previous),rank=id=>ranked(poll.ranks[id])?poll.ranks[id]:99;
-  const events=[],ids=new Set();
+  const liveAnalysis=!['postseason','offseason'].includes(newsCycle(s).key),events=[],ids=new Set();
   const emit=(id,category,facts,{team=null,player=null,relatedTeams=[],national=null,eventWeek=null,priority=50,thread=null,curated=true,primaryScope=null}={})=>{
     if(ids.has(id))return;const p=players.get(player);const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
     if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
@@ -40,14 +45,15 @@ export function detectEvents(s,previous=null){
     events.push({id,category,facts,teamIds,teamContext,playerId:player,personality:p?.personality??null,position:p?.position??null,scopes,eventWeek,priority,thread:thread??id,curated,primaryScope});
   };
   const eligible=s.games.filter(g=>g.year===year&&g.phase===phase);
-  const recent=inSeason?eligible.filter(g=>[week-1,week].includes(g.week)&&complete(g)):[];
+  const recent=inSeason?s.games.filter(g=>g.year===year&&phaseIndex(g.phase)>=0&&phaseIndex(g.phase)<=phaseIndex(phase)&&[week-1,week].includes(g.week)&&complete(g)):[];
   const upcoming=inSeason?eligible.filter(g=>g.week===week&&!complete(g)):[];
   for(const g of recent){
+    const narrative=gameStory(s,g);
     const user=[g.home,g.away].includes(s.userTeamIndex),margin=Math.abs(g.homeScore-g.awayScore),tie=g.homeScore===g.awayScore;
     const winner=tie?null:g.homeScore>g.awayScore?g.home:g.away,loser=tie?null:winner===g.home?g.away:g.home;
-    emit(`result:${g.id}`,'results',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeScore:g.homeScore,awayScore:g.awayScore,winner:tie?null:winner===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,loser:tie?null:loser===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,margin,tie,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home)),timing:g.week===week?'current':'previous'},
+    emit(`result:${g.id}`,'results',{gameId:g.id,home:g.homeName??teams.get(g.home)?.name,away:g.awayName??teams.get(g.away)?.name,homeScore:g.homeScore,awayScore:g.awayScore,winner:tie?null:winner===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,loser:tie?null:loser===g.home?g.homeName??teams.get(g.home)?.name:g.awayName??teams.get(g.away)?.name,margin,tie,gameStory:narrative,rivalry:Boolean(teams.get(g.home)?.rivals?.includes(g.away)||teams.get(g.away)?.rivals?.includes(g.home)),timing:g.week===week?'current':'previous'},
       {team:winner,relatedTeams:[g.home,g.away],national:rank(g.home)<=25||rank(g.away)<=25,eventWeek:g.week,priority:user?100:60,thread:`game:${g.id}`});
-    for(const [id,st] of [[g.home,g.homeStats],[g.away,g.awayStats]])if(teams.has(id)&&id!==255&&st&&['OFFPASSYARDS','OFFRUSHYARDS','FIRSTDOWNS','GIVEAWAYS'].every(k=>Number.isFinite(st[k])))
+    if(!narrative)for(const [id,st] of [[g.home,g.homeStats],[g.away,g.awayStats]])if(teams.has(id)&&id!==255&&st&&['OFFPASSYARDS','OFFRUSHYARDS','FIRSTDOWNS','GIVEAWAYS'].every(k=>Number.isFinite(st[k])))
       emit(`teamstats:${g.id}:${id}`,'team-stats',{gameId:g.id,school:teams.get(id).name,passingYards:st.OFFPASSYARDS,rushingYards:st.OFFRUSHYARDS,firstDowns:st.FIRSTDOWNS,giveaways:st.GIVEAWAYS},{team:id,eventWeek:g.week,priority:94,thread:`game:${g.id}`});
   }
   const games=new Map(recent.map(g=>[g.id,g])),form=new Map();
@@ -112,9 +118,9 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...contextualAnalytics(s),...conferenceDiscourse(s),...transactionEvents(s)])emit(e.id,e.category,e.facts,e.options);
+  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
-  const analytics=teamAnalytics(s);
+  const analytics=liveAnalysis?teamAnalytics(s):{teams:[],milestones:[]};
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;
     if(a.rushingRank!==null)emit(`analysis:rushing:${a.teamId}`,'analytics',{metric:'rushingYardsPerGame',school:a.school,sampleGames:a.gamesPlayed,rushingYards:a.rushingYards,rushingYardsPerGame:a.rushingYardsPerGame,nationalRank:a.rushingRank,nationalRankTied:a.rushingRankTied,nationalPopulation:analytics.coverage.populationSize,pollName:poll.name,pollRank:postseasonTiming(s).standings&&ranked(rank(t.id))?rank(t.id):null,previousPollRank:postseasonTiming(s).standings&&poll.comparable&&ranked(t[poll.lastField])?t[poll.lastField]:null},{team:a.teamId,national:national||a.rushingRank<=10,priority:85});
     if(a.gamesPlayed>=3&&a.thirdDownRate!==null&&(a.thirdDownRate<=.30||a.thirdDownRate>=.55))emit(`analysis:third-down:${a.teamId}`,'analytics',{metric:'thirdDownConversionRate',school:a.school,sampleGames:a.gamesPlayed,conversions:a.thirdDownConversions,attempts:a.thirdDownAttempts,rate:a.thirdDownRate},{team:a.teamId,national:national||a.thirdDownRate<=.25||a.thirdDownRate>=.60,priority:82});
@@ -122,9 +128,9 @@ export function detectEvents(s,previous=null){
     if(a.gamesPlayed>=3&&a.turnoverMargin!==null&&Math.abs(a.turnoverMargin)>=5)emit(`analysis:turnovers:${a.teamId}`,'analytics',{metric:'turnoverMargin',school:a.school,sampleGames:a.gamesPlayed,giveaways:a.giveaways,takeaways:a.takeaways,margin:a.turnoverMargin},{team:a.teamId,national,priority:81});
   }
   for(const m of analytics.milestones)if(m.eventWeek>=week-1)emit(`analysis:margin-superlative:${m.gameId}`,'analytics',m,{team:m.teamId,national:true,eventWeek:m.eventWeek,priority:87});
-  for(const a of advancedAnalytics(s))emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
+  for(const a of liveAnalysis?advancedAnalytics(s):[])emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
   for(const e of worldEvents(s))emit(e.id,e.category,e.facts,e.options);
   for(const e of preseasonEvents(s,{strengths:modelStrengths}))emit(e.id,e.category,e.facts,e.options);
   for(const e of seasonLaunchEvents(s))emit(e.id,e.category,e.facts,e.options);
-  return events;
+  return applyNewsCycle(s,events);
 }

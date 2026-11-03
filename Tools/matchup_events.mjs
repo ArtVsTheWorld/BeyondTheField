@@ -1,3 +1,4 @@
+import {verifiedSeasonRecord} from './season_context.mjs';
 import {hash} from './story_authors.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
 import {nationalCoverage} from './national_editorial.mjs';
@@ -18,7 +19,7 @@ export function matchupEvents(s,{force=false}={}){
   // being recapped must never inflate its own pregame average.
   const baseline=t=>{
    const all=played.filter(x=>x.home===t.id||x.away===t.id),prior=all.filter(x=>before(x,g));
-   if(prior.length<3||all.length!==t.wins+t.losses+(t.ties??0)||all.filter(x=>(x.home===t.id?x.homeScore:x.awayScore)>(x.home===t.id?x.awayScore:x.homeScore)).length!==t.wins)return null;
+   const verified=verifiedSeasonRecord(s,t);if(prior.length<3||!verified||verified.played.length!==all.length)return null;
    const caches=prior.map(x=>({own:x.home===t.id?x.homeStats:x.awayStats,other:x.home===t.id?x.awayStats:x.homeStats}));
    const read=(field,opponent=false)=>caches.every(c=>finite((opponent?c.other:c.own)?.[field]))?caches.reduce((n,c)=>n+(opponent?c.other:c.own)[field],0):null;
    return {n:prior.length,read,prior};

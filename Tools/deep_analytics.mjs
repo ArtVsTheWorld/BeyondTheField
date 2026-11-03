@@ -19,7 +19,7 @@ export function verifiedPlayerStats(s,p,kind,index=null){
  const rows=(index?(index.players.get(p.id)??[]):s.performances).filter(r=>r.player===p.id&&r.team===p.team&&games.has(r.game)&&[games.get(r.game).home,games.get(r.game).away].includes(p.team)&&family(r.type)===kind);
  if(rows.length!==n||new Set(rows.map(r=>r.game)).size!==n)return null;
  const memo=new Map();
- const read=key=>{if(!memo.has(key)){const values=rows.map(r=>r.stats[key]);memo.set(key,nonnegative(st[key])&&values.every(nonnegative)&&values.reduce((a,b)=>a+b,0)===st[key]?st[key]:null);}return memo.get(key);};
+ const read=key=>{if(!memo.has(key)){const values=rows.map(r=>r.stats[key]),valid=['RUSHYARDS','PASSYARDS','RECEIVEYARDS'].includes(key)?Number.isFinite:nonnegative;memo.set(key,valid(st[key])&&values.every(valid)&&values.reduce((a,b)=>a+b,0)===st[key]?st[key]:null);}return memo.get(key);};
  return {n,read,rows};
 }
 export function deepAnalyticsEvents(s,{bounded=true}={}){

@@ -147,7 +147,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   // Verify the recruit stage and leading school against that school's board;
   // an offer or a nonzero target week on its own never establishes a commit.
   const recruitStatuses=[],recruitRefs=new Map();for(const r of await records('Recruit')){
-    const recruitPlayer=await resolve(r.v.Player);if(recruitPlayer)recruitStatuses.push({player:recruitPlayer.key,stage:r.v.RecruitStage,nationalRank:r.v.NationalRank>0?r.v.NationalRank:null,positionRank:r.v.PositionRank>0?r.v.PositionRank:null,stateRank:r.v.StateRank>0?r.v.StateRank:null,topSchools:(await array(r.v.TopSchoolsList)).slice(0,3).map(x=>x.v.TeamId).filter(id=>teams.some(t=>t.id===id&&id!==255))});
+    const recruitPlayer=await resolve(r.v.Player);if(recruitPlayer)recruitStatuses.push({player:recruitPlayer.key,recruitClass:r.v.Class??null,stage:r.v.RecruitStage,nationalRank:r.v.NationalRank>0?r.v.NationalRank:null,positionRank:r.v.PositionRank>0?r.v.PositionRank:null,stateRank:r.v.StateRank>0?r.v.StateRank:null,topSchools:(await array(r.v.TopSchoolsList)).slice(0,3).map(x=>x.v.TeamId).filter(id=>teams.some(t=>t.id===id&&id!==255))});
     if(!['HardCommitted','SoftCommitted','Signed'].includes(r.v.RecruitStage))continue;
     const p=await resolve(r.v.Player),schools=await array(r.v.TopSchoolsList);
     if(!p||!schools.length)continue;

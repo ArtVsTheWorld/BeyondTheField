@@ -636,6 +636,7 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
         // during navigation and is checked separately when its data is requested.
         if(selected&&!ensureNewsModel()){cancel("Dropdown model readiness failed before navigation");return;}
 #endif
+        if(!selected&&(dropdownScreenOwned||dropdownModelOwned)){const bool restored=configureNewsDropdowns(false);note({{"event","social_stock_handoff"},{"destination",name?name:""},{"dropdownsRestored",restored}});}
         if(!alignNewsFrame(selected)&&selected){cancel("Native frame layout gate failed");return;}
         if(!configureNewsFlow(selected)&&selected){alignNewsFrame(false);cancel("Native vertical flow gate failed");return;}
         if(!configureNewsScroll(selected)&&selected){configureNewsFlow(false);alignNewsFrame(false);cancel("Native scroll gate failed");return;}

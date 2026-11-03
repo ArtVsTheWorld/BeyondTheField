@@ -1,3 +1,4 @@
+import {verifiedSeasonRecord,programExpectations} from './season_context.mjs';
 import {postseasonTiming} from './postseason_timing.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
 import {hash} from './story_authors.mjs';
@@ -12,20 +13,19 @@ export function seasonEndings(s){
  for(const t of s.teams.filter(t=>t.id!==255)){
   const games=s.games.filter(g=>g.year===s.season.CurrentYear&&(g.home===t.id||g.away===t.id));
   if(games.some(g=>['Unplayed','HomeScheduled','AwayScheduled'].includes(g.status))||(s.postseasonAssignments??s.playoffBracket??[]).some(g=>g.year===s.season.CurrentYear&&(g.home===t.id||g.away===t.id)&&!final(g)))continue;
-  const played=games.filter(g=>notFuture(s,g)&&final(g));
-  if(played.length<8||!Number.isInteger(t.wins)||!Number.isInteger(t.losses))continue;
+  const record=verifiedSeasonRecord(s,t);if(!record||record.played.length<8)continue;
+  const {played,wins,losses,ties}=record,team={...t,wins,losses,ties};
   const own=g=>g.home===t.id?g.homeScore:g.awayScore,other=g=>g.home===t.id?g.awayScore:g.homeScore;
-  if(played.length!==t.wins+t.losses+(t.ties??0)||played.filter(g=>own(g)>other(g)).length!==t.wins||played.filter(g=>own(g)<other(g)).length!==t.losses)continue;
   const last=[...played].sort((a,b)=>phaseIndex(b.phase)-phaseIndex(a.phase)||b.week-a.week||a.id.localeCompare(b.id))[0];
   const playoff=last.isPlayoff===true||last.phase==='NationalChampionship',bowl=last.phase.startsWith('BowlSeason')&&Boolean(last.bowlName),lost=own(last)<other(last);
   const postseasonFinished=last.phase==='NationalChampionship'||playoff&&lost||bowl&&!playoff;
   // A missing bowl assignment during title week cannot finish an eligible
   // season. Keep five-win teams pending as well until postseason scheduling.
   const seasonClosed=phaseIndex(s.season.CurrentWeekType)>=phaseIndex('NationalChampionship');
-  const noPostseason=last.phase==='RegularSeason'&&(t.wins<5||postseasonTiming(s).locked||seasonClosed);
+  const noPostseason=last.phase==='RegularSeason'&&(wins<5||postseasonTiming(s).locked||seasonClosed);
   if(!postseasonFinished&&!noPostseason)continue;
   if(!postseasonFinished&&last.week===champWeek&&!postseasonTiming(s).locked)continue;
-  ended.set(t.id,{team:t,last,played,winless:t.wins===0,undefeated:(postseasonFinished||seasonClosed)&&t.wins>0&&t.losses===0&&(t.ties??0)===0,pointsFor:played.reduce((n,g)=>n+own(g),0),pointsAgainst:played.reduce((n,g)=>n+other(g),0)});
+  ended.set(t.id,{team,last,played,winless:wins===0,undefeated:(postseasonFinished||seasonClosed)&&wins>0&&losses===0&&ties===0,pointsFor:played.reduce((n,g)=>n+own(g),0),pointsAgainst:played.reduce((n,g)=>n+other(g),0)});
  }
  return ended;
 }
@@ -44,13 +44,13 @@ export function seasonEndingEvents(s){
  for(const r of s.performances){const a=index.players.get(r.player)??[];a.push(r);index.players.set(r.player,a);}
  for(const [id,end] of seasonEndings(s)){
   if(s.seasonEndPublications?.[id]&&s.seasonEndPublications[id]!==edition(s))continue;
-  const t=end.team,negative=end.winless||t.losses>t.wins,mood=end.winless?'winless':end.undefeated?'perfect':negative?'rough':'normal',record=`${t.wins}\u2013${t.losses}`+((t.ties??0)>0?'\u2013'+t.ties:'');
+  const t=end.team,expectation=programExpectations(s,t),negative=end.winless||(expectation.known?expectation.verdict==='negative':t.losses>t.wins),mood=end.winless?'winless':end.undefeated?'perfect':negative?'rough':'normal',record=`${t.wins}\u2013${t.losses}`+((t.ties??0)>0?'\u2013'+t.ties:'');
   const values={seasonEnding:true,school:t.name,record,wins:t.wins,losses:t.losses,importance:end.undefeated?'major':'normal'};
   const add=(key,family,voice,facts={},options={})=>events.push({id:`season-end:${id}:${key}`,category:'season-end',facts:{...values,family:'ending.'+family,voice,...facts},options:{team:id,national:end.undefeated,priority:end.undefeated?112:end.winless?105:95,thread:'season-end:'+id,...options}});
   add('team','team.'+mood,'official');
   add('barstool','barstool.'+mood,'fan',{persona:1},{priority:98});
   add('afterdark','afterdark.'+mood,'fan',{persona:0},{priority:97});
-  add('review','beat.'+mood,'analyst',{negative},{national:true,priority:99});
+  add('review',expectation.known&&!end.winless&&!end.undefeated?'expectation-review':'beat.'+mood,'analyst',{negative,verdict:expectation.verdict,expectationNote:expectation.note},{national:true,priority:99});
   const roster=s.players.filter(p=>p.team===id&&p.injury!=='CareerEnding').sort((a,b)=>a.id.localeCompare(b.id)),seniors=roster.filter(p=>p.classYear==='Senior'&&p.redshirt!=='Current');
   const senior=seniors.length?seniors[hash(s.leagueId+'|farewell|'+id)%seniors.length]:null,p=senior??roster[hash(s.leagueId+'|thanks|'+id)%Math.max(1,roster.length)];
   if(p)add('player',senior?end.undefeated?'player.senior-perfect':'player.senior':end.undefeated?'player.perfect':'player.thanks','player',{playerName:p.name},{player:p.id,national:false});

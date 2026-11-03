@@ -4,11 +4,15 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Transactions and editorial feeds (v79)
+## Intentional news cycles (v80)
 
-The current package is `Build/DynastyEnhancer-v79-MMC.zip`, with the MMC adapter and versioned native runtime. Transactions joins the LB/RB filters, supported signings/contract changes receive reported coverage, and all player references include positions. A shared brand/poll-based weekly allowance targets 5–20 posts per program across every voice. Likes can reach 20K for major events and no longer determine placement. Editorial ordering rotates topics and accounts while keeping replies attached.
+The current package is `Build/DynastyEnhancer-v80-MMC.zip`, with the MMC adapter and versioned native runtime. Preseason, opening weeks, midseason, late-season races, postseason and offseason each have explicit editorial rules. Finished teams pivot to their next roster and recruiting class; the national feed emphasizes the actual championship and playoff fixtures. Expectations use native program prestige, including custom teams.
 
-The UI payload omits duplicated historical event data, normal hover/entry stops requesting synthetic diagnostic panels, and large retired catalogs are released on the worker. See [v78 implementation and verification](docs/transactions-editorial-v79.md).
+Quarter-score recaps describe verified comebacks, second-half swings and defensive finishes. National championship coverage includes five analyst voices, predictions, matchup evidence, team/player reactions and non-rival fans choosing a contender. Likes remain flavor; shared weekly budgets remain 5–20 posts per team. See [v80 implementation and verification](docs/news-cycles-v80.md).
+
+## Previous transactions and editorial feeds (v79)
+
+Transactions joins the LB/RB filters, supported signings/contract changes receive reported coverage, and player references include positions. Likes can reach 20K for major events. Editorial ordering rotates topics and accounts while keeping replies attached. Normal hover/entry avoids synthetic diagnostic panels; retired catalogs are released on the worker. See [v79 implementation and verification](docs/transactions-editorial-v79.md).
 
 ## Previous context and postseason recovery (v77)
 

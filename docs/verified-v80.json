@@ -1,0 +1,73 @@
+{
+  "build": "v80",
+  "installed": true,
+  "contentRevision": "intentional-news-cycles-v80",
+  "newFamilies": 63,
+  "newVariants": 117,
+  "nodeTests": {
+    "pass": 251,
+    "fail": 0
+  },
+  "native": {
+    "unitChecks": true,
+    "stockCfpHandoff": true,
+    "catalogEditions": 22,
+    "allDynamicScopes": true,
+    "catalogBytes": 35659722
+  },
+  "preview": {
+    "league": -107703141,
+    "phase": "NationalChampionship",
+    "week": 20,
+    "stories": 1213,
+    "forYou": 30,
+    "forYouFocused": 18,
+    "national": 28,
+    "nationalFocused": 19,
+    "minimumTeamPosts": 5,
+    "maximumTeamPosts": 20,
+    "programs": 138
+  },
+  "bracket": {
+    "stillLoadingWithHooksStopped": true,
+    "nativeSlots": 11,
+    "finalTeams": [
+      "Miami",
+      "BYU"
+    ],
+    "causeResolved": false,
+    "dataWrites": false
+  },
+  "liveChecksRemaining": [
+    "v80 title and finished-team feed, filters, scrolling and Back",
+    "Clean launch CFP bracket before Social Media",
+    "Advance through the title result and offseason transition"
+  ],
+  "mmc": {
+    "registration": true,
+    "payloadTamperChecks": true,
+    "installedVerification": true,
+    "hotLoadedPid": 21468,
+    "menuHooksActive": true
+  },
+  "backups": {
+    "saveFiles": 8,
+    "historyFiles": 8,
+    "checksumVerified": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v80.dll": "15b58d36dd7fe8a3e642a77e680928aa1b8e985670fe2f6773858247e4cf9ded",
+    "DynastyEnhancer.dll": "4852812e7cca2f78ac806b62adef3ad1ec8dfb414b7fcc5891995327b1a2698d",
+    "DynastyEnhancer-v80-MMC.zip": "4f099b567f4628b371d5db33da2a9699eccf1cf99b63936b2ca09da6c5666602"
+  },
+  "livePublication": {
+    "league": -107703141,
+    "team": 15,
+    "week": 20,
+    "stories": 1213,
+    "saveRequired": false,
+    "editions": 22,
+    "posts": 30,
+    "contentRevision": "intentional-news-cycles-v80"
+  }
+}
