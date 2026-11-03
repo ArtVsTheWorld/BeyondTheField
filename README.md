@@ -6,7 +6,7 @@ This is a development prototype, not the planned 1.0 release.
 
 ## Stable hub recovery (v86)
 
-The current package is `Build/DynastyEnhancer-v86-MMC.zip`. The dedicated hub-tab experiment in v84/v85 is withdrawn after a blank hub and then a confirmed crash during BYU loading. v86 restores the exact v83 native UI implementation and code gates; it does not hook or replace MenuPanelsReady. Use **Dynasty Central → Social Media** year-round, or the CFB shortcut when available. Portal/unsigned recruiting coverage, all 224 draft announcements, native draft icon and Transactions pick order remain. See [v86 crash recovery](docs/hub-crash-v86.md). The dedicated tab remains unfinished.
+The current package is `Build/DynastyEnhancer-v86-MMC.zip`. The dedicated hub-tab experiment in v84/v85 is withdrawn after a blank hub and then a confirmed crash during BYU loading. v86 restores the exact v83 native UI implementation and code gates; it does not hook or replace MenuPanelsReady. Use **Dynasty Central → Social Media** year-round, or the CFB shortcut when available. Portal/unsigned recruiting coverage, all 224 draft announcements, native draft icon and Transactions pick order remain. The user confirmed clean BYU loading, feed entry, filters, scrolling and Back in v86. See [v86 crash recovery](docs/hub-crash-v86.md). The dedicated tab remains unfinished.
 
 ## Previous hub layout recovery attempt (v85)
 

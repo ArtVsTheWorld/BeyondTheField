@@ -28,14 +28,21 @@
     "historyFiles": 10,
     "currentSavesMatchPreV85": true
   },
-  "liveChecksRemaining": [
-    "Clean BYU load",
-    "Dynasty Central Social Media entry",
-    "LT/RT, LB/RB, scrolling and Back"
-  ],
+  "liveChecksRemaining": [],
   "sha256": {
     "DynastyEnhancer.dll": "ce853a59ef9318f7a3e85170beffc36fc93ab55cd5b46bce50f6ab22c1e7150a",
     "DynastyEnhancerNative-v86.dll": "b63675ec1550b170350c318bd9a7648f67ef4bb94364ec44579faa1c4fad7915",
     "DynastyEnhancer-v86-MMC.zip": "76fc2f311237b417ff1accde33715b0b49f4150e1363e99753e0418dbcdaded6"
-  }
+  },
+  "userConfirmed": {
+    "feedVisible": true,
+    "dynastyCentralEntry": true,
+    "dropdowns": true,
+    "scrolling": true,
+    "cleanByuLoad": true,
+    "lbRb": true,
+    "date": "2026-11-03",
+    "back": true
+  },
+  "status": "working recovery build; dedicated tab unfinished"
 }
