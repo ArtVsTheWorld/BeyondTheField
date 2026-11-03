@@ -1,0 +1,43 @@
+{
+  "build": "v83",
+  "installed": true,
+  "contentRevision": "season-review-v81",
+  "nodeTests": {
+    "pass": 263,
+    "fail": 0
+  },
+  "native": {
+    "sharedPersistentPanelRequest": true,
+    "preservesNativeArgumentsAndResult": true,
+    "unitChecks": true,
+    "catalogEditions": 24,
+    "allDynamicScopes": true
+  },
+  "liveChecksRemaining": [
+    "LB Recruiting, RB All Types, RB backward wrap",
+    "LT scope and RT archived edition redraw correctly",
+    "Scrolling and Back"
+  ],
+  "mmc": {
+    "registration": true,
+    "payloadTamperChecks": true,
+    "installedVerification": true,
+    "nativeLoadedPid": 21468
+  },
+  "backups": {
+    "saveFiles": 8,
+    "historyFiles": 10,
+    "checksumVerified": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v83.dll": "be81ee650ed9296df97a2ff7dd08c88b3fe97dbb0ad70d16513b9c74cf2082e5",
+    "DynastyEnhancer.dll": "ba6b0303c64a93b0150469cbf2db43ff88ad6cc079145f9c4ae829c0f4532955",
+    "DynastyEnhancer-v83-MMC.zip": "c4ae216945a733ebb43872f89b487ffa9d1a3feb4312714760300bdee170560b"
+  },
+  "hotSessionReader": {
+    "uiHooksActivated": true,
+    "feedPublished": false,
+    "reason": "Career child-context lookup exceeds bounds",
+    "cleanRestartRequested": true
+  }
+}

@@ -10,6 +10,11 @@ void __fastcall f(Collector* c,unsigned r,const char* k,float v){c->rows[r][k]=v
 void __fastcall s(Collector* c,unsigned r,const char* k,const char* v){c->rows[r][k]=v;}
 void* vt[]={nullptr,nullptr,nullptr,reinterpret_cast<void*>(b),reinterpret_cast<void*>(i),reinterpret_cast<void*>(f),reinterpret_cast<void*>(s)};
 std::string lastDonorPanel;
+void* expectedRequestSelf=nullptr;
+void* expectedRequestParams=nullptr;
+unsigned requestCalls=0;
+bool requestResult=true;
+bool __fastcall originalRequest(void* self,void* panel,void* params){lastDonorPanel=argument(panel);++requestCalls;return requestResult&&self==expectedRequestSelf&&params==expectedRequestParams;}
 void __fastcall donorRows(void*,void* panel,void* out){
     lastDonorPanel=argument(panel);
     rowText(out,0,"panelId",lastDonorPanel.c_str());rowText(out,0,"tileCoords","5");
@@ -69,6 +74,9 @@ int main(int argc,char** argv){
         Collector absent{vt,{}};ContainerProxy noDonor{containerVt,&absent,{}};containerString(&noDonor,0,"tileCoords","1");require(!appendContainer(noDonor)&&absent.rows.size()==1,"Missing donor must preserve the original menu");
         {
             require(hubEntry("DynastyCentral")==&centralEntry&&hubEntry("CM_NEWSTAB")==&cfbEntry&&!hubEntry("CM_LEAGUE"),"Persistent shortcut must be scoped to the two verified hubs");
+            {const auto savedRequest=requestPanel;requestPanel=originalRequest;expectedRequestSelf=&out;expectedRequestParams=&proxy;requestCalls=0;
+             require(requestSocialPanel(&out,&proxy)&&requestCalls==1&&lastDonorPanel=="DynastyCentral","Category refresh must request the persistent panel and preserve its native self/params");
+             requestResult=false;require(!requestSocialPanel(&out,&proxy)&&requestCalls==2,"A failed native refresh must not report success");requestResult=true;requestPanel=savedRequest;}
             Collector central{vt,{}};ContainerProxy cp{containerVt,&central,{}};
             containerString(&cp,2,"tileCoords","2");containerString(&cp,9,"tileCoords","5");containerString(&cp,9,"panelId","DynastyCentral");containerBool(&cp,9,"AllowFocus",true);containerInt(&cp,9,"Priority",0);containerFloat(&cp,9,"Opacity",0.5f);
             require(appendContainer(cp,centralEntry)&&central.rows.size()==3,"Sparse Dynasty Central rows lost the User Settings donor");

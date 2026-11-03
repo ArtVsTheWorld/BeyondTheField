@@ -4,7 +4,11 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Year-round Social Media access (v82)
+## Offseason filter refresh (v83)
+
+The current package is `Build/DynastyEnhancer-v83-MMC.zip`. LB/RB category changes and both dropdown selections now redraw through the persistent Dynasty Central source. v82 accepted the selections but still used a CFB-only redraw path, leaving the visible page stale during the offseason. Entry and all filter refreshes now share one native panel request. See [v83 verification](docs/offseason-filters-v83.md).
+
+## Previous year-round Social Media access (v82)
 
 The current package is `Build/DynastyEnhancer-v82-MMC.zip`. Social Media now has a permanent shortcut in **Dynasty Central**, alongside its existing CFB shortcut. The page no longer borrows CFB/Heisman records, which the native game removes during Players Leaving and the rest of the offseason. See [v82 access and verification](docs/year-round-access-v82.md).
 

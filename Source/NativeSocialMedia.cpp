@@ -457,6 +457,7 @@ constexpr HubEntry cfbEntry{"CM_NEWSTAB","7","12"},centralEntry{"DynastyCentral"
 constexpr HubEntry feedEntry=centralEntry;
 std::map<std::string,bool> admittedHubEntries; // Owned by UI callbacks only.
 const HubEntry* hubEntry(std::string_view panel){if(panel==cfbEntry.panel)return &cfbEntry;if(panel==centralEntry.panel)return &centralEntry;return nullptr;}
+bool requestSocialPanel(void* self,void* params){Alias donor{aliasVt,feedEntry.panel};return requestPanel(self,&donor,params);}
 bool appendContainer(ContainerProxy& proxy,const HubEntry& entry=cfbEntry){
     if(proxy.captured.empty())return false;
     for(const auto& [row,fields]:proxy.captured){(void)row;if(fields.value("tileCoords",std::string())==entry.coordinate){note({{"event","social_hub_coordinate_occupied"},{"panel",entry.panel},{"coordinate",entry.coordinate}});return false;}}
@@ -554,7 +555,7 @@ void __fastcall filterDataHook(void* self,void* out,void* panel,void* kind){
     Guard guard;
     const auto panelName=filterArgument(panel),filterKind=filterArgument(kind);
     // Stock News passes an unset panel ID to its category binding. The active
-    // Social Media scope also ends when native CFB containers are requested.
+    // Social Media scope also ends when either native hub is requested.
     if(!disabled&&opened&&(panelName=="CM_NEWSSUB"||panelName.empty())){
         if(pageFeed->catalog){
 #ifdef SOCIAL_DUAL_DROPDOWN
@@ -584,7 +585,7 @@ SocialFilter socialFilter(const std::string& kind){
 bool changingSelection=false;
 void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,void* value){
     Guard guard;const auto p=nativeString(panel),k=nativeString(kind);
-    if(!disabled&&opened&&(p.empty()||p=="CM_NEWSSUB"||p=="CM_NEWSTAB")){
+    if(!disabled&&opened&&(p.empty()||p=="CM_NEWSSUB"||p==cfbEntry.panel||p==feedEntry.panel)){
         if(!pageFeed->catalog){note({{"event","social_filter_waiting"},{"kind",k}});return;}
         // Native FilterGeneric dispatches lowercase news_category, whereas the
         // panel definition and our LT action use uppercase identifiers. Never
@@ -606,7 +607,7 @@ void __fastcall filterChangedHook(void* self,const char* panel,const char* kind,
             if(week==pageFeed->edition&&scope==pageFeed->scope&&type==pageFeed->type)return;
             pageFeed=social::selectFeed(pageFeed->catalog,week,scope,type);feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;
             note({{"event","social_selection_changed"},{"week",pageFeed->key},{"scope",social::scopesFor(*pageFeed->catalog)[scope].key},{"type",social::typeLabels[type]},{"posts",feedPostCount}});
-            changingSelection=true;void* params=makeObject();Alias donor{aliasVt,"CM_NEWSTAB"};const bool requested=requestPanel(self,&donor,params);releaseValue(params);changingSelection=false;
+            changingSelection=true;void* params=makeObject();const bool requested=requestSocialPanel(self,params);releaseValue(params);changingSelection=false;
             note({{"event","social_selection_refresh"},{"requested",requested}});
         }catch(const std::exception& e){changingSelection=false;note({{"event","social_selection_failed"},{"error",e.what()}});}
         return;
@@ -659,7 +660,7 @@ bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;
 #ifdef SOCIAL_EXPERIMENTAL_FOCUS
     if(!preflightRunning&&!focusNewsPanel(true)){note({{"event","news_focus_unavailable"}});return false;}
 #endif
-    Alias donor{aliasVt,feedEntry.panel};bool result=requestPanel(self,&donor,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
+    bool result=requestSocialPanel(self,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
 void __fastcall panelReadyHook(void* self,const char* name,void* data){
     Guard guard;
     if(preflightRunning){unsigned kind=0;bool valid=name&&strcmp(name,feedEntry.panel)==0&&data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5;preflightReady=valid;if(valid&&!preflightPanelData){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));preflightPanelData=data;}note({{"event","preflight_panel_ready"},{"name",name?name:""},{"kind",kind},{"valid",valid}});return;}
@@ -687,7 +688,7 @@ bool runPreflight(){
         auto manager=reinterpret_cast<void*(__fastcall*)()>(base+0x3f0a1d0)();
         reinterpret_cast<void*(__fastcall*)(void*,void**)>(base+0x8aec980)(manager,&params);
         if(!params)throw std::runtime_error("Native parameter object is unavailable");
-        Alias donor{aliasVt,feedEntry.panel};requested=requestPanel(adapter,&donor,params);
+        requested=requestSocialPanel(adapter,params);
         releaseValue(params);params=nullptr;
         opened=true;CheckCollector output{checkVt,{}};Alias socialPanel{aliasVt,"CM_NEWSSUB"};containerHook(adapter,&socialPanel,&output);
         if(output.rows.size()!=feedContainerCount)throw std::runtime_error("Feed container count does not match the selected content");
@@ -699,7 +700,7 @@ bool runPreflight(){
         feedValidated=passed;
         note({{"event","native_feed_preflight"},{"passed",passed},{"requestSucceeded",requested},{"readyNotification",preflightReady.load()},{"containers",output.rows},{"tiles",tilesChecked},{"thread",GetCurrentThreadId()},{"screenEntered",false}});
 #ifndef SOCIAL_PREFLIGHT_ONLY
-        if(passed&&preflightPanelData){panelReady(adapter,"CM_NEWSTAB",preflightPanelData);note({{"event","hub_refresh_published"}});}
+        if(passed&&preflightPanelData){panelReady(adapter,feedEntry.panel,preflightPanelData);note({{"event","hub_refresh_published"}});}
 #endif
         releaseValue(preflightPanelData);preflightPanelData=nullptr;return passed;
     }catch(const std::exception& e){releaseValue(params);releaseValue(preflightPanelData);preflightPanelData=nullptr;opened=false;preflightRunning=false;feedValidated=false;note({{"event","native_feed_preflight"},{"passed",false},{"error",e.what()},{"tiles",tilesChecked},{"screenEntered",false}});return false;}
