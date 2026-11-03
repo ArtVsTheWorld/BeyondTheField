@@ -1,5 +1,5 @@
 {
-  "revision": "editorial-variety-v95",
+  "revision": "editorial-variety-v96",
   "families": {
     "recruit.offer.Leader": [
       {
@@ -1043,6 +1043,16 @@
       {
         "id": "deep.broken-tackles.v94.3",
         "body": "Contact numbers for {school}'s {playerName}: {broken} broken tackles on {attempts} carries."
+      }
+    ],
+    "transactions.position-change": [
+      {
+        "id": "position-change.v96.1",
+        "body": "{school} is moving {playerName} from {oldPosition} to {newPosition} during offseason position changes. A new role to follow heading into training."
+      },
+      {
+        "id": "position-change.v96.2",
+        "body": "Position change at {school}: {playerName}, previously at {oldPosition}, is now listed at {newPosition}. Training will be the next step in that transition."
       }
     ]
   }

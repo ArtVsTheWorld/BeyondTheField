@@ -43,6 +43,8 @@ std::shared_ptr<const social::Feed> latestFeed=social::statusFeed(feedPostCount)
 std::deque<std::shared_ptr<const social::Feed>> retiredFeeds;
 void collectRetiredFeeds(){std::deque<std::shared_ptr<const social::Feed>> retired;{std::lock_guard<std::mutex> lock(feedMutex);retired.swap(retiredFeeds);}}
 void adoptFeed(){std::lock_guard<std::mutex> lock(feedMutex);if(pageFeed!=latestFeed){retiredFeeds.push_back(std::move(pageFeed));pageFeed=latestFeed;}feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;}
+bool feedReady(){std::lock_guard<std::mutex> lock(feedMutex);return latestFeed&&latestFeed->catalog!=nullptr;}
+bool adoptReadyFeed(){std::lock_guard<std::mutex> lock(feedMutex);if(!latestFeed||!latestFeed->catalog)return false;if(pageFeed!=latestFeed){retiredFeeds.push_back(std::move(pageFeed));pageFeed=latestFeed;}feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;return true;}
 void publishFeed(const Json&);
 void waitingFeed(){auto feed=social::statusFeed();std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(latestFeed));latestFeed=std::move(feed);}
 
@@ -456,7 +458,7 @@ constexpr HubEntry cfbEntry{"CM_NEWSTAB","7","12"},centralEntry{"DynastyCentral"
 // Heisman records are filtered out entirely during Players Leaving and later.
 constexpr HubEntry feedEntry=centralEntry;
 std::map<std::string,bool> admittedHubEntries; // Owned by UI callbacks only.
-const HubEntry* hubEntry(std::string_view panel){if(panel==cfbEntry.panel)return &cfbEntry;if(panel==teamEntry.panel)return &teamEntry;return nullptr;}
+const HubEntry* hubEntry(std::string_view panel){if(panel==teamEntry.panel)return &teamEntry;return nullptr;}
 bool requestSocialPanel(void* self,void* params){Alias donor{aliasVt,feedEntry.panel};return requestPanel(self,&donor,params);}
 void forwardContainerFields(void* out,unsigned row,const Json& fields,const char* coordinate=nullptr){
     for(const auto& [name,value]:fields.items()){
@@ -519,7 +521,7 @@ void populatePost(void* tile,unsigned number){
             tileText(tile,"linkage","art_control.paneltile.NewsStoryTile");tileText(tile,"display",author.c_str());tileInt(tile,"Width",1200);tileInt(tile,"Height",social::postHeight(post.body)+32);tileBool(tile,"isFocusable",true);tileBool(tile,"isInteractive",true);tileBool(tile,"ForceContainer",listFeed);
             void* extra=makeObject();tileText(extra,"SubText",post.body.c_str());auto stamp=post.stamp+" | "+std::to_string(number)+"/"+std::to_string(pageFeed->total?pageFeed->total:feedPostCount);tileText(extra,"DateText",stamp.c_str());auto likes=post.likes>=0?social::compactCount(post.likes)+" likes":std::string();tileText(extra,"TertiaryText",likes.c_str());tileBool(extra,"UseJersey",post.uniformTeamLogo>=0);tileInt(extra,"UniformTeamLogo",post.uniformTeamLogo);tileInt(extra,"AltImageLibrary",92);tileInt(extra,"AltImageValue",post.uniformTeamLogo>=0?post.uniformTeamLogo+1:0);tileText(extra,"AltImageRenderType","SwappableImage");tileInt(extra,"ImageLibrary",post.imageLibrary);tileInt(extra,"ImageValue",post.imageValue);tileText(extra,"ImageRenderType","SwappableImage");tileInt(extra,"VisualStyle",2);tileBool(extra,"UseFrame",false);tileBool(extra,"AllowFocus",selectablePosts);tileBool(extra,"ShowDisableOverlay",false);tileInt(extra,"DisableButtonAlpha",0);tileInt(extra,"FillFocusAlpha",100);tileInt(extra,"FillUnFocusAlpha",100);tileInt(extra,"FillUnfocusAlpha",100);tileBool(extra,"StrokeEnabled",false);tileBool(extra,"SendAsData",true);tileBool(extra,"ImmediateUpdate",true);tileInt(tile,"VisualStyle",2);
             objectValue(tile,"ExtraInfo",extra);releaseValue(extra);
-            note({{"event","weekly_post_tile"},{"post",c},{"author",author}});
+            // Per-card logging is intentionally omitted from this hot UI callback.
 }
 void* makeArray(){void* value=nullptr;auto manager=reinterpret_cast<void*(__fastcall*)()>(base+0x3f0a1d0)();reinterpret_cast<void*(__fastcall*)(void*,void**)>(base+0x8ae99d0)(manager,&value);return value;}
 void appendArray(void* array,void* value){
@@ -555,7 +557,7 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
         if(out&&*out&&read(reinterpret_cast<uintptr_t>(*out)+0x10,&kind,4)&&kind==4&&read(reinterpret_cast<uintptr_t>(*out)+0x18,span,16)&&span[1]>=span[0]&&span[1]-span[0]<=128){
             for(uintptr_t a=span[0];a<span[1];a+=8){void* tile=nullptr;if(!read(a,&tile,8)||!tile)continue;
                 tileText(tile,"Coordinates",c.c_str());
-                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1","See what everyone is saying around college football");tileText(tile,"NavigationId","NEWS_MENU");note({{"event","social_button_added"},{"panel",entry->panel}});
+                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1",feedReady()?"See what everyone is saying around college football":"Preparing weekly news - please wait");tileText(tile,"NavigationId","NEWS_MENU");note({{"event","social_button_added"},{"panel",entry->panel}});
             }
         }
     }else result=tiles(self,out,panel,coords);
@@ -648,11 +650,11 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
     auto cancel=[&](const char* reason){note({{"event","news_navigation_cancelled"},{"reason",reason},{"destination","DO_NOTHING"}});navRequest(self,user,"DO_NOTHING",params);};
     // The native caller has already begun a navigation transaction. Silently
     // returning leaves it pending, so finish through its genuine inert action.
-    if(selected&&!uiReady){cancel("Dynasty UI is still preparing");return;}
+    if(selected&&(!uiReady||!adoptReadyFeed())){cancel("Weekly news is still preparing");return;}
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(selected){cancel("Panel initialization preflight only");return;}
 #else
-    if(selected){adoptFeed();note({{"event","weekly_feed_adopted"},{"key",pageFeed->key},{"posts",feedPostCount}});}
+    if(selected){note({{"event","weekly_feed_adopted"},{"key",pageFeed->key},{"posts",feedPostCount}});}
     // Synthetic panel requests are a diagnostic mode only; normal entry uses
     // one genuine native navigation transaction and the verified ABI gates.
 #endif

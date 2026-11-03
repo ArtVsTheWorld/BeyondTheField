@@ -53,3 +53,7 @@ test('For You fills a final slot by relaxing soft variety caps, while preserving
  const selected=curate(pool);assert.equal(selected.length,30);assert.equal(new Set(selected.map(p=>p.id)).size,30);
  for(const handle of new Set(selected.map(p=>p.handle)))assert.ok(selected.filter(p=>p.handle===handle).length<=3);
 });
+
+test('publication picker labels hide internal phase names and respect native offseason stages',async()=>{
+ const {publicationLabel}=await import('../Tools/publication_timeline.mjs');for(const [phase,expected] of [['BowlSeason1','Bowl Week 1'],['BowlSeason2','Bowl Week 2'],['BowlSeason3','Bowl Week 3'],['NationalChampionship','National Championship']])assert.equal(publicationLabel({phase,week:18,season:2028}),expected+', 2028');assert.equal(publicationLabel({phase:'OffSeason',week:9,offseasonStage:9,season:2028}),'Encourage Transfers / Conference Realignment, 2028');assert.ok(publicationLabel({phase:'OffSeason',week:6,offseasonStage:7,season:2028}).includes('Position Changes'));
+});

@@ -4,9 +4,13 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Hub readiness and offseason context (v96)
+
+The current package is `Build/DynastyEnhancer-v96-MMC.zip`. Team is the single shortcut, and click-time readiness gating keeps an early click on the hub until a validated edition exists. The week picker uses readable season-stage labels. Year-zero historical alignment inference is suppressed, MW/MWC are equivalent, and second signing day tracks observed roster position changes in Transactions. Per-card UI logging is removed and capture/generation timings are recorded. A direct feed hub tab remains an unverified UI prototype; late-postseason performance still needs measurement. See [v96 checks and limits](docs/verified-v96.json).
+
 ## Content review (v95)
 
-The current package is `Build/DynastyEnhancer-v95-MMC.zip`. Three stages address factual context/freshness, For You relevance and duplicate conversations, then targeted voice and analysis variety. The pack includes 211 revised/new variants across 45 families; the complete runtime has 1,127 variants across 538 families. The frozen ULM review corpus is preserved. The three-stage content build passed the live ULM feed/controller check. v95 additionally routes unaffiliated preseason prospect watches to Chris Maddox and Tina Brooks, replacing the generic national beat fallback. See [v95 verification](docs/verified-v95.json) and [v94 review evidence](docs/verified-v94.json), with the earlier stage evidence in [v92](docs/verified-v92.json) and [v93](docs/verified-v93.json).
+The preceding content package is `Build/DynastyEnhancer-v95-MMC.zip`. Three stages address factual context/freshness, For You relevance and duplicate conversations, then targeted voice and analysis variety. The pack includes 211 revised/new variants across 45 families; the complete runtime has 1,127 variants across 538 families. The frozen ULM review corpus is preserved. The three-stage content build passed the live ULM feed/controller check. v95 additionally routes unaffiliated preseason prospect watches to Chris Maddox and Tina Brooks, replacing the generic national beat fallback. See [v95 verification](docs/verified-v95.json) and [v94 review evidence](docs/verified-v94.json), with the earlier stage evidence in [v92](docs/verified-v92.json) and [v93](docs/verified-v93.json).
 
 The v94 live feed, carryover stories and controller check passed before the small v95 author-routing correction. Later entries below describe the development history; they do not supersede the current candidate.
 

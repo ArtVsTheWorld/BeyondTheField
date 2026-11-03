@@ -1,9 +1,10 @@
+import {publicPosition} from './player_references.mjs';
 import {seasonReviewWeek} from './season_context.mjs';
 import {money,NIL_DOLLARS_PER_POINT} from './football_context.mjs';
 import {postseasonTiming} from './postseason_timing.mjs';
 export function transactionObservation(s){
  return {version:1,year:s.season.CurrentSeasonYear,
-  players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,team:p.team,nil:p.nil})),
+  players:s.players.filter(p=>p.team!==255).map(p=>({id:p.id,name:p.name,presentationId:p.presentationId,position:p.position,team:p.team,nil:p.nil})),
   coaches:s.teams.filter(t=>t.id!==255).flatMap(t=>['headCoach','offensiveCoordinator','defensiveCoordinator'].flatMap(role=>t[role]?.id?[{id:t[role].id,team:t.id,role,...t[role].contract}]:[])),
   signings:(s.signings??[]).map(c=>({player:c.player,team:c.team}))};
 }
@@ -18,6 +19,10 @@ export function transactionEvents(s){
  for(const c of s.delayedNILChanges??[]){
   const p=s.players.find(p=>p.id===c.id);if(!p||!teams.has(c.team)||!Number.isFinite(c.before)||!Number.isFinite(c.after)||c.before<0||c.after<0||c.before===c.after)continue;
   add('nil-review:'+c.id,'nil-review',c.team,{playerName:p.name,position:p.position,previous:money(c.before*NIL_DOLLARS_PER_POINT),current:money(c.after*NIL_DOLLARS_PER_POINT),change:c.after>c.before?'increased':'decreased',difference:money(Math.abs(c.after-c.before)*NIL_DOLLARS_PER_POINT)},{category:'nil',player:p.id,thread:'nil-review:'+p.id});
+ }
+ if(valid&&s.season.CurrentStage==='OffSeason'&&(s.season.CurrentOffseasonStage===7||s.season.CurrentOffseasonStage==null&&s.season.CurrentWeek===6))for(const p of s.players){
+  const old=oldPlayers.get(p.id);if(!old||old.team!==p.team||old.name!==p.name||!old.position||!p.position||publicPosition(old.position)===publicPosition(p.position)||old.presentationId&&p.presentationId&&old.presentationId!==p.presentationId||!teams.has(p.team))continue;
+  add('position:'+p.id,'position-change',p.team,{playerName:p.name,position:p.position,oldPosition:publicPosition(old.position),newPosition:publicPosition(p.position)},{player:p.id,priority:100});
  }
  const selection=postseasonTiming(s);
  if(valid||selection.locked&&s.season.CurrentWeekType==='BowlSeason1')for(const c of s.signings??[]){

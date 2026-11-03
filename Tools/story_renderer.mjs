@@ -35,7 +35,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const filled={recruitRankDetail:recruitRankDetail(values,e.id),starDescription:Number.isInteger(values.stars)?values.stars+'-star ':'',...values,...(values.position?{position:publicPosition(values.position)}:{}),...(parent?{parentHandle:parent.handle}:{})};
   if(role==='player'&&player&&typeof filled.playerName==='string'){const subject=[...players.values()].find(p=>p.name===filled.playerName&&(p.team===player.team||p.team===255&&['offers','recruiting'].includes(e.category)&&e.teamIds.includes(player.team)));if(subject&&subject.id!==player.id)filled.playerName=publicPosition(subject.position)+' '+(subject.firstName||subject.name.trim().split(/\s+/)[0]);}
   const transformBody=body=>{
-   body=qualify(body,{playerId:e.playerId,teamIds:e.teamIds});
+   if(family!=='transactions.position-change')body=qualify(body,{playerId:e.playerId,teamIds:e.teamIds});
    if(filled.prospectType&&filled.playerName&&!['player','recruit'].includes(role)){
     const p=players.get(e.playerId),ref=p&&publicPosition(p.position)+' '+p.name;
     if(ref&&body.includes(ref)&&!body.includes(filled.prospectType+ref))body=body.replace(ref,filled.prospectType+ref);
@@ -59,6 +59,7 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   // Captured roster/alignment reports must remain browsable even when
   // preseason training reactions fill a small program's flavor allowance.
   if(!parent&&['departure','realignment','alignment-history','rename'].includes(e.facts.carryoverKind)&&['beat','analyst'].includes(role))p.coverageExempt=true;
+  if(family==='transactions.position-change')p.coverageExempt=true;
   if(role==='nflDraft'){p.transaction=true;p.draftPick=values.draftPick;p.draftRound=values.draftRound;}
   if(['analyst','beat'].includes(role)&&(e.category==='coaching'||e.category==='transactions'||e.category==='nil'||family==='transactions.signed'))p.transaction=true;
   if(parent)p.likes=replyLikesFor(s,id,parent.likes,sameStories.get(id));p.engagementVersion=ENGAGEMENT_VERSION;

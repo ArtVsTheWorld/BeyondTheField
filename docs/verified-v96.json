@@ -1,0 +1,67 @@
+{
+  "build": "v96",
+  "nodeTests": 348,
+  "nativeChecks": true,
+  "mmcChecks": true,
+  "installed": true,
+  "installation": {
+    "historyFiles": 22,
+    "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\HubReadiness-v96-20261103-154230",
+    "runtime": "C:\\Apps\\CFB 27\\MMC\\MMC_ModManager_v1.1.0.6\\Plugins\\DynastyEnhancer\\Runtime-v96",
+    "saveBackups": 37,
+    "adapter": "C:\\Apps\\CFB 27\\MMC\\MMC_ModManager_v1.1.0.6\\Plugins\\DynastyEnhancer.dll",
+    "historyPreserved": true
+  },
+  "changes": [
+    "Team-only shortcut; CFB insertion removed",
+    "Click-time atomic feed readiness gate, with inert native navigation until ready",
+    "Readable publication picker labels, including archived editions",
+    "Year-zero history-only alignment suppression and MW/MWC identity equivalence",
+    "Observed identity-checked position changes during second signing day, in Transactions",
+    "Legacy position baselines seed quietly without resetting NIL history",
+    "Per-card UI logging removed; capture/generation timing added"
+  ],
+  "verifiedOffline": {
+    "actualCopiedPreseasonStories": 1239,
+    "forYou": 30,
+    "carryoverPreserved": true
+  },
+  "live": {
+    "publication": "verified",
+    "controllerCheck": "pending",
+    "stories": 1239,
+    "forYou": 30,
+    "matchesTestedStories": true
+  },
+  "directHubFeed": {
+    "implemented": false,
+    "reason": "Earlier dedicated-tab experiments produced a blank hub and a load crash; the verified native hub descriptor/layout contract remains unresolved.",
+    "fallback": "Single Team shortcut with readiness gating"
+  },
+  "performance": {
+    "provenPostseasonSpeedup": false,
+    "changes": "Removes per-card logging; reduces accepted-feed polling delay from 8 to 5 seconds; adds captureMs and generationMs observations.",
+    "pending": "Measure the late-playoff/title/recap session before tuning more aggressively.",
+    "currentPreseason": {
+      "firstCaptureMs": 6953,
+      "subsequentCaptureMs": 594,
+      "generationMs": 2031
+    },
+    "historicalPanelSetup": {
+      "v80WorstMs": 4031,
+      "v81WorstMs": 4032,
+      "conclusion": "Page setup also contributes latency; these historical timings do not isolate native rendering from dropdown rediscovery."
+    }
+  },
+  "limits": [
+    "First installation cannot reconstruct unobserved position changes.",
+    "The year-zero rule suppresses historical inference, not verified subsequent conference movement.",
+    "Live ready-entry, Team-only menu and picker regression check is pending."
+  ],
+  "artifacts": {
+    "zip": "Build/DynastyEnhancer-v96-MMC.zip",
+    "zipSha256": "5eb6f1d72e7995c1f45ebc0f5f60c8d0b887af6789fdbcbb433078a1c16c9d1a",
+    "native": "Build/DynastyEnhancerNative-v96.dll",
+    "nativeSha256": "2a5dd5940d6bef3a976a251892cfee687c43398a935178c48e0bb1edca115098"
+  }
+}

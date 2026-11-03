@@ -117,3 +117,11 @@ test('cross-year file path is independent of manual-save names and year, and JSO
   const {s,ledger}=trained(),file=offseasonLedgerFile(folder,s);s.source='another-manual-save';preseason(s);assert.equal(offseasonLedgerFile(folder,s),file);assert.notEqual(offseasonLedgerFile(folder,{...s,userTeamIndex:2}),file);assert.equal(await readOffseasonLedger(file),null);await fs.mkdir(path.dirname(file),{recursive:true});await atomicJson(file,ledger);assert.deepEqual(await readOffseasonLedger(file),ledger);assert.equal((await fs.readdir(path.dirname(file))).length,1);
  }finally{await fs.rm(folder,{recursive:true,force:true});}
 });
+
+test('startup history changes stay quiet; MW/MWC aliases stay quiet in later years too',()=>{
+ const s=fixture();Object.assign(s.season,{CurrentStage:'PreSeason',CurrentWeekType:'PreSeason',CurrentWeek:0});s.teams[0].conferenceName='MW';s.teams[0].seasonHistory=[{Year:2025,ConferenceName:'MWC'}];s.teams[1].seasonHistory=[{Year:2025,ConferenceName:'Different historical league'}];assert.equal(observeOffseason(s).facts.length,0);
+ s.season.CurrentYear=1;s.season.CurrentSeasonYear=2027;s.teams[0].seasonHistory=[{Year:2026,ConferenceName:'MWC'}];s.teams[1].seasonHistory=[{Year:2026,ConferenceName:'Different historical league'}];const f=observeOffseason(s).facts;assert.equal(f.length,1);assert.equal(f[0].team,2);
+});
+test('observed Mountain West alias rename is suppressed while genuine conference rebranding survives',()=>{
+ const s=fixture();s.teams[0].conferenceName='MWC';const a=observeOffseason(s);s.teams[0].conferenceName='MW';assert.ok(!observeOffseason(preseason(s),a.ledger).facts.some(f=>f.team===1||f.kind==='rename'));
+});

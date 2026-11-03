@@ -24,7 +24,7 @@ public:
     std::optional<Json> tick(const std::function<bool()>& cancelled,const std::function<void(Json)>& report,const std::function<void()>& invalidate){
         auto now=GetTickCount64();if(now<pollAt||cancelled())return {};pollAt=now+3000;
         try{
-            auto raw=Capture(base).run();const auto ctx=raw.at("context").get<Address>();
+            const auto captureBegan=GetTickCount64();auto raw=Capture(base).run();const auto captureMs=GetTickCount64()-captureBegan;const auto ctx=raw.at("context").get<Address>();
             auto status=raw.at("status").dump();if(ctx!=lastContext||status!=lastStatus){lastStatus=status;lastContext=ctx;haveObserved=false;haveAccepted=false;invalidate();report({{"event","active_dynasty_context"},{"context",ctx}});}
             auto payload=raw.at("records").dump();auto hash=fingerprint(payload);
             auto accept=[&](Json feed,const char* event)->std::optional<Json>{
@@ -34,8 +34,8 @@ public:
                 social::refresh::writeAtomic(folder/L"runtime-feed.json.tmp",folder/L"runtime-feed.json",feed);
                 report({{"event",event},{"league",feed.at("leagueId")},{"team",feed.at("userTeamIndex")},{"week",feed.at("week")},{"stories",feed.at("stories").size()},{"saveRequired",false}});return feed;
             };
-            if(haveAccepted&&hash==accepted){lastError.clear();failures=0;pollAt=GetTickCount64()+8000;return {};}
-            if(!haveObserved||hash!=observed){const bool mayResume=!haveObserved&&!haveAccepted;observed=hash;haveObserved=true;report({{"event","runtime_change_observed"},{"records",raw.at("records").size()}});
+            if(haveAccepted&&hash==accepted){lastError.clear();failures=0;pollAt=GetTickCount64()+5000;return {};}
+            if(!haveObserved||hash!=observed){const bool mayResume=!haveObserved&&!haveAccepted;observed=hash;haveObserved=true;report({{"event","runtime_change_observed"},{"records",raw.at("records").size()},{"captureMs",captureMs}});
                 if(mayResume&&!cancelled()){
                     const auto input=folder/L"runtime-raw.json",output=folder/L"runtime-resume.json";social::refresh::writeAtomic(folder/L"runtime-raw.json.tmp",input,raw);
                     social::refresh::Settings settings{{},node,resumer,input};const auto code=social::refresh::exportSave(settings,output,folder/L"runtime-generator.log",cancelled);
@@ -47,7 +47,9 @@ public:
             const auto input=folder/L"runtime-raw.json",output=folder/L"runtime-export.json";
             social::refresh::writeAtomic(folder/L"runtime-raw.json.tmp",input,raw);
             social::refresh::Settings settings{{},node,exporter,input};
+            const auto generationBegan=GetTickCount64();
             if(social::refresh::exportSave(settings,output,folder/L"runtime-generator.log",cancelled))throw std::runtime_error("Runtime generator failed; see runtime-generator.log");
+            report({{"event","runtime_generation_timing"},{"captureMs",captureMs},{"generationMs",GetTickCount64()-generationBegan}});
             return accept(social::refresh::readJson(output),"runtime_feed_published");
         }catch(const std::exception& e){haveObserved=false;if(++failures>=2){haveAccepted=false;invalidate();}if(lastError!=e.what()){lastError=e.what();report({{"event","runtime_waiting"},{"reason",lastError}});}return {};}
     }

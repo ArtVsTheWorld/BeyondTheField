@@ -1,5 +1,9 @@
 # Dynasty Enhancer roadmap
 
+## Hub readiness and offseason context — v96
+
+Implemented Team-only entry with click-time ready-feed gating, readable picker labels, year-zero alignment inference suppression, MW/MWC equivalence, and second-signing-day position-change reports. The package passes 348 Node tests plus native and MMC checks. Direct hub-feed rendering remains a separate prototype: v84/v85 failed with a blank hub/load crash, so its descriptor/layout contract must be established before another live candidate. Postseason latency is still pending live measurement; capture/generation timing and reduced UI logging are in place. See [v96 verification](docs/verified-v96.json).
+
 ## Content review stages 1–3 — v95 installed
 
 All three content-review stages are implemented: factual context and change-based freshness; curated relevance and canonical portal conversation cleanup; expanded personal voices and useful season/matchup/Heisman analysis. Offline checks include 343 Node tests, native regression checks, a 31-edition frozen published-pool replay, and regeneration of the actual 2028 ULM preseason capture with carryover facts intact. The published-pool replay cannot recover candidates that the original generator never archived, so it is not evidence of complete historical regeneration or guaranteed local-story counts. The original corpus remains available for comparison. v94 passed the user's live feed and full controller check. v95 adds the national prospect author-routing correction. Next steps are release lifecycle/performance checks and the grades/fog integrations.

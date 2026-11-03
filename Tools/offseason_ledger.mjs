@@ -46,8 +46,9 @@ function departures(c,s,evidence){
   result[key(old)]={...old,player:old.id,kind:'departure',evidence:previous?.evidence??(midweek?'observed-encourage':evidence),destination:same(old,p)&&validTeam(s,p.team)?p.team:null,portal:s.portalEntrants?.includes(old.id)===true||previous?.portal===true};
  }return result;
 }
+export const conferenceIdentity=name=>{const n=name.trim().toLowerCase().replace(/[^a-z0-9]/g,'');return ['mw','mwc','mountainwest','mountainwestconference'].includes(n)?'mountainwest':n;};
 function conferenceChanges(c,s,sourceYear){
- const now=conferences(s),events=[],renames=new Set(),covered=new Set(),equal=(a,b)=>a.trim().toLowerCase()===b.trim().toLowerCase();
+ const now=conferences(s),events=[],renames=new Set(),covered=new Set(),equal=(a,b)=>conferenceIdentity(a)===conferenceIdentity(b);
  if(c?.conferenceBaselineTrusted){
   for(const old of c.beforeConferences){const n=now.find(n=>n.team===old.team);if(!n||old.school&&old.school!==n.school||equal(old.name,n.name))continue;covered.add(old.team);
    const sameLeague=old.code&&n.code?old.code===n.code:old.id&&n.id&&old.id===n.id;
@@ -55,7 +56,7 @@ function conferenceChanges(c,s,sourceYear){
    events.push({kind:'realignment',team:old.team,oldConference:old.name,newConference:n.name});
   }
  }
- if(!c?.conferenceBaselineTrusted||c.conferenceBaselineLate)for(const t of s.teams){
+ if(s.season.CurrentYear>0&&(!c?.conferenceBaselineTrusted||c.conferenceBaselineLate))for(const t of s.teams){
   if(covered.has(t.id))continue;
   const rows=(t.seasonHistory??[]).filter(r=>r.Year===sourceYear&&r.ConferenceName);
   if(rows.length===1&&t.conferenceName&&!equal(rows[0].ConferenceName,t.conferenceName))events.push({kind:'alignment-history',team:t.id,oldConference:rows[0].ConferenceName,newConference:t.conferenceName});

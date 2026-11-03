@@ -54,6 +54,9 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   if(midweekBaseline)s.midweekBaseline=midweekBaseline;
   const priorTransactions=previous?.snapshot?.transactionObservation??lastObserved?.snapshot?.transactionObservation??[...archives].reverse().find(f=>f.transactionObservation?.version===1&&f.transactionObservation.year===s.season.CurrentSeasonYear)?.transactionObservation;
   s.transactionBaseline=same?.snapshot?.transactionBaseline??priorTransactions??transactionObservation(s);
+  // Upgrade old NIL baselines with a quiet, identity-checked position baseline.
+  const positionSeed=new Map((same?.snapshot?.transactionObservation?.players??transactionObservation(s).players).map(p=>[p.id,p]));
+  s.transactionBaseline={...s.transactionBaseline,players:s.transactionBaseline.players.map(p=>{const v=positionSeed.get(p.id);return p.position||!v||v.team!==p.team?p:{...p,name:v.name,position:v.position,presentationId:v.presentationId};})};
   const offseason=s.season.CurrentStage==='OffSeason'&&s.season.CurrentWeekType==='OffSeason';
   s.delayedNILChanges=offseason&&week===1?(same?.snapshot?.delayedNILChanges??blueprintNILChanges(previous?.snapshot?.transactionBaseline,previous?.snapshot?.transactionObservation)):[];
   const originFeeds=[...archives,...editions.map(e=>e.feed)];

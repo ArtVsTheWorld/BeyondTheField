@@ -1,5 +1,5 @@
 import {discoveryViews} from './social_discovery.mjs';
-import {visibleEdition,comparePublication} from './publication_timeline.mjs';
+import {visibleEdition,comparePublication,publicationLabel} from './publication_timeline.mjs';
 import {bodyKey,deduplicateConversations} from './conversation_topics.mjs';
 export const SCOPES=['all','national','conference','team'];
 const order=(a,b)=>b.priority-a.priority||a.id.localeCompare(b.id);
@@ -93,6 +93,6 @@ export function buildCatalog(active,history=[]){
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
   const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','transaction','draftPick','draftRound','publication'];
-  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
+  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({publicationLabel:publicationLabel(f),...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
   return {...active,catalogVersion:2,activeWeekKey:active.key,weeks};
 }
