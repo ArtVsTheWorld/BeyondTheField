@@ -4,6 +4,10 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Preserve factual carryover reports (v91)
+
+The current package is `Build/DynastyEnhancer-v91-MMC.zip`. The live ULM preseason test preserved the captured departures and alignment changes, but training reactions consumed the small program's flavor allowance before the two departure reports reached the published pool. v91 retains factual media reports of captured departures/alignment outside that allowance, as existing recruiting/signing reports already do. Training and reaction posts keep their ordinary limits. See [v91 verification](docs/carryover-publication-v91.md).
+
 ## Native offseason-stage correction (v90)
 
 The current package is `Build/DynastyEnhancer-v90-MMC.zip`. The ULM milestone test found that final realignment/Encourage Transfers can have native week counter 9. v90 uses the native offseason stage IDs (7 signing, 8 training, 9 final roster/alignment) instead of assuming a fixed final week counter. Unknown offseason stages retain evidence. See [ULM verification and recovery](docs/offseason-stages-v90.md).

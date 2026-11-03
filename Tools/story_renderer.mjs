@@ -52,6 +52,9 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   if(e.category==='heisman')p.heismanContextVersion=1;
   if(e.category==='draft-discourse'&&role==='analyst')p.transaction=true;
   if(!parent&&(e.id.startsWith('commit:')||e.category==='signings')&&(['beat','analyst'].includes(role))){p.coverageExempt=true;}
+  // Captured roster/alignment reports must remain browsable even when
+  // preseason training reactions fill a small program's flavor allowance.
+  if(!parent&&['departure','realignment','alignment-history','rename'].includes(e.facts.carryoverKind)&&['beat','analyst'].includes(role))p.coverageExempt=true;
   if(role==='nflDraft'){p.transaction=true;p.draftPick=values.draftPick;p.draftRound=values.draftRound;}
   if(['analyst','beat'].includes(role)&&(e.category==='coaching'||e.category==='transactions'||e.category==='nil'||family==='transactions.signed'))p.transaction=true;
   if(parent)p.likes=replyLikesFor(s,id,parent.likes,sameStories.get(id));p.engagementVersion=ENGAGEMENT_VERSION;

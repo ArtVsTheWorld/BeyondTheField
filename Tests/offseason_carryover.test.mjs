@@ -40,6 +40,10 @@ test('full cycle publishes captured development, roster review and realignment i
 test('ledger reload and repeated preseason observation preserve facts and publication wording',()=>{
  const {s,ledger}=trained();preseason(s);const a=observeOffseason(s,JSON.parse(JSON.stringify(ledger))),b=observeOffseason(s,a.ledger);assert.deepEqual(b,a);s.offseasonCarry=a.facts;const x=updateRuntime(structuredClone(s)),y=updateRuntime(structuredClone(s),x.state);assert.deepEqual(x.catalog,y.catalog);assert.ok(x.catalog.stories.some(p=>p.templateId.startsWith('carry.training')));assert.ok(x.catalog.stories.filter(p=>p.templateId.startsWith('carry.')).every(p=>!/[{}]|Rating|OVR|overall/i.test(p.body)&&p.body.length<=280));
 });
+test('captured roster and alignment reports survive a small school training-flavor budget',()=>{
+ const {s,ledger}=trained();s.teams.forEach(t=>{t.brandExposure='F';t.mediaRank=137;});s.season.CurrentWeek=8;let a=observeOffseason(s,ledger);s.players[2].team=255;s.players[3].team=255;a=observeOffseason(s,a.ledger);s.teams[1].conferenceCode='C1';s.teams[1].conferenceId='c1';s.teams[1].conferenceName='League 1';preseason(s);s.offseasonCarry=observeOffseason(s,a.ledger).facts;const f=updateRuntime(s).catalog;
+ const reports=f.stories.filter(p=>p.coverageExempt&&p.id.startsWith('carry:'));assert.equal(reports.filter(p=>p.templateId.startsWith('carry.departure')).length,2);assert.equal(reports.filter(p=>p.templateId.startsWith('carry.move')).length,1);for(const p of reports)assert.ok(f.views['team:'+p.teamIds[0]].includes(p.id));
+});
 test('observer does not mutate native snapshot or prior ledger',()=>{
  const {s,ledger}=trained(),before=structuredClone({s,ledger});observeOffseason(preseason(structuredClone(s)),ledger);assert.deepEqual({s,ledger},before);
 });

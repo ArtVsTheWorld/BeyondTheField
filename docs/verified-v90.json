@@ -92,5 +92,13 @@
     ],
     "nextPreseasonProjection": true,
     "livePreseasonPublicationPending": true
+  },
+  "preseasonRollover": {
+    "ledgerRetained": true,
+    "trainingPublished": true,
+    "conferenceMovesPublished": true,
+    "departuresGenerated": true,
+    "departuresPublished": false,
+    "publicationFix": "v91 factual-report flavor-budget exception"
   }
 }

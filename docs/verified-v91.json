@@ -1,0 +1,54 @@
+{
+  "build": "v91",
+  "installed": true,
+  "nodeTests": {
+    "pass": 313,
+    "fail": 0
+  },
+  "nativeBuild": true,
+  "nativeUnitChecks": true,
+  "actualCatalogScopesValidated": true,
+  "mmcPayloadChecks": true,
+  "backup": {
+    "saveFiles": 29,
+    "historyFiles": 20,
+    "checksumsVerified": true
+  },
+  "actualReplay": {
+    "phase": "PreSeason",
+    "season": 2027,
+    "stories": 1231,
+    "curatedPosts": 30,
+    "departuresPublished": [
+      "Bryson Kimbrough",
+      "Trevor Tyson"
+    ],
+    "trainingPublished": [
+      "Dalen Huston",
+      "Marcellus Jackson"
+    ],
+    "conferenceMovesPublished": [
+      "UNLV: MW to Pac-12",
+      "Charlotte: American to Independent"
+    ],
+    "kimbroughDestination": "Utah",
+    "tysonDestination": null
+  },
+  "liveChecksRemaining": [
+    "Controller check after v91 load",
+    "Same-preseason Dynasty reload preserves stories",
+    "Future unassisted full-cycle capture"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v91.dll": "fef7e6f01bbb47967b2741f51e29f1ffde9e294b96d25a9f1ea06686df8988c7",
+    "DynastyEnhancer.dll": "fdf3908b1cbe2826d583833d7714dff9c69c870cb4ee253cfb4920b37b20e544",
+    "DynastyEnhancer-v91-MMC.zip": "b88d5e5c44d6db01b47480f3ffd00ad25c790d829e75cbcfb3786b97cd5f4eb4"
+  },
+  "livePublication": {
+    "pid": 32348,
+    "season": 2027,
+    "phase": "PreSeason",
+    "stories": 1231,
+    "allSixTargetsPublished": true
+  }
+}

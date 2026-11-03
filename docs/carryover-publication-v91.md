@@ -1,0 +1,7 @@
+# Preserve factual carryover reports — v91
+
+The live ULM year rollover preserved the complete ledger and generated the expected training, departure and alignment events in preseason 2027. UNLV and Charlotte alignment reports and ULM development reports published. The weekly flavor allowance, however, filled with training/player reactions before the two ULM departure reports. Their facts existed but neither story remained in the published pool.
+
+v91 exempts factual beat/analyst carryover reports for departures and conference alignment from the flavor allowance, consistent with the existing factual recruiting/signing exception. Training reports, official hype and replies retain their normal budgets. For You remains curated; complete category views retain qualifying published reports. The native UI and template wording are unchanged.
+
+313 Node tests pass, including a small-school fixture with simultaneous development, departures and alignment news. A replay of the actual native preseason snapshot publishes both departures and both conference moves, with ULM training stories retained. Kimbrough is now verifiably on Utah's roster, while Tyson has no confirmed destination. The two departure reports appear in the ULM team view and curated For You in this snapshot. The candidate pool grows from 1,229 to 1,231 posts, and all 30 For You slots remain filled. A native decode validates the resulting catalog/scopes. Live replacement and reload persistence are recorded separately in verification metadata.

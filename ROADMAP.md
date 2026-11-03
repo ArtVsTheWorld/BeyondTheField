@@ -2,6 +2,8 @@
 
 ## Current priorities after v89
 
+The live ULM preseason rollover retained all captured facts, but v90's small-team flavor limit suppressed the departure stories. v91 exempts factual departure/alignment media reports, and the actual replay now publishes both departures, both realignments and ULM training reports. Live v91 publication and same-preseason reload persistence are the next checks; a future fully automatic cycle still needs validation without milestone recovery. See [v91 details](docs/carryover-publication-v91.md).
+
 The next ULM milestone test exposed and corrected a final-stage counter mismatch in v90. Native stage IDs now drive offseason tracking. Signing/training/final-stage milestone copies recovered this cycle's evidence; live departures/realignment and next-preseason publication remain the immediate checks. See [v90 details](docs/offseason-stages-v90.md).
 
 v89's preseason feed and controller regression are user-verified. Training Results, Encourage Transfers and realignment capture are implemented, with 308 passing tests and a copied-data year transition. The full hidden-stage sequence still needs live progression validation.
