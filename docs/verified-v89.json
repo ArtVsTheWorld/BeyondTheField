@@ -46,12 +46,14 @@
     "gameDataModified": false
   },
   "liveChecksRemaining": [
-    "Controller regression after v89 load",
     "Next-cycle signing day to Training Results to Encourage Transfers to next preseason"
   ],
   "sha256": {
     "DynastyEnhancerNative-v89.dll": "3ae3e1eea458546eb846344cc91b8d3517a3095a548d113735328d74c619fcfd",
     "DynastyEnhancer.dll": "d38374a52f392b63a8fb26591ab9a42cb88aab4accda9d6f6b49f20af7d5cf41",
     "DynastyEnhancer-v89-MMC.zip": "d3776cbad8d4ebb1477d07ed4c06f559f06c2c10407646b5f2b893e4b225e992"
+  },
+  "liveChecks": {
+    "preseasonFeedAndControls": "user confirmed"
   }
 }

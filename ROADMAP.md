@@ -1,5 +1,18 @@
 # Dynasty Enhancer roadmap
 
+## Current priorities after v89
+
+v89's preseason feed and controller regression are user-verified. Training Results, Encourage Transfers and realignment capture are implemented, with 308 passing tests and a copied-data year transition. The full hidden-stage sequence still needs live progression validation.
+
+1. Validate final signing day → Training Results → Encourage Transfers/realignment → next preseason on a backed-up test branch. Check actual development/departure/movement facts, reload persistence, duplicate suppression and no numerical ratings in prose.
+2. Finish release lifecycle checks: fresh MMC launch, switching active Dynasties, older-save restore/replay, repeated year changes and long-session capture reliability.
+3. Measure native page performance with the complete category lists, large archives and TeamBuilder/custom-conference data. Tune capture and rendering only where measurements show a problem.
+4. Review a multiweek sample for repetition, factual context, news-cycle balance and For You relevance. Current ordering is editorial, with likes as flavor; category views retain all qualifying published stories. Default All Types limits remain For You 30/National 100/conference 60/team 20, with the existing draft exception.
+5. Integrate the player analytics grades component, then the ratings fog-of-war component; validate both against Social Media and native game menus.
+6. Finish release packaging, upgrade/history preservation, documentation and compatibility checks before 1.0.
+
+The dedicated hub tab and arbitrary custom-image registration remain deferred improvements. The Team shortcut is the working entry point; background offseason capture covers the weeks when Team is absent. Historical checkpoints below retain the behavior and test status at their respective versions.
+
 ## Current prototype: native Dynasty lifecycle
 
 - Active Dynasty and controlled program read from runtime tables instead of a configured save.
