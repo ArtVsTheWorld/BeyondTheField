@@ -95,7 +95,6 @@
       "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Signing2027-auto-20261103T141118Z"
     },
     "remaining": [
-      "Encouraged transfers and realignment",
       "Next preseason publication and reload"
     ],
     "trainingResults": {
@@ -109,6 +108,31 @@
       "qualifyingUlmPlayers": 15,
       "rosterSnapshot": 7002,
       "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Training2027-auto-20261103T141422Z"
+    },
+    "finalStage": {
+      "year": 2027,
+      "stage": 9,
+      "source": "automatic live runtime; no save recovery",
+      "departures": [
+        "Sergey Fitch",
+        "Styles Kennedy"
+      ],
+      "conferenceMoves": [
+        {
+          "team": "James Madison",
+          "from": "Sun Belt",
+          "to": "ACC"
+        },
+        {
+          "team": "Kennesaw St.",
+          "from": "CUSA",
+          "to": "Sun Belt"
+        }
+      ],
+      "kennesawDivision": "East; verified by a separate read-only native diagnostic",
+      "divisionNamesInProductionStoryModel": false,
+      "trainingEvidencePreserved": 2634,
+      "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Final2027-auto-20261103T142126Z"
     }
   }
 }
