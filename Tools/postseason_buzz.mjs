@@ -3,11 +3,12 @@ import {completeOffensiveLine} from './heisman_context.mjs';
 import {postseasonTiming} from './postseason_timing.mjs';
 import {conferencePrestige} from './conference_context.mjs';
 import {seasonEndings} from './season_ending_events.mjs';
-import {verifiedSeasonRecord} from './season_context.mjs';
+import {verifiedSeasonRecord,seasonReviewWeek,championshipFinal} from './season_context.mjs';
 import {verifiedTeamRows,finalGame} from './football_context.mjs';
 import {rosterStrengths,projectLine} from './betting_model.mjs';
 import {hash} from './story_authors.mjs';
 export function focusFixtures(s){
+ if(seasonReviewWeek(s)){const game=championshipFinal(s);return game?[{game,kind:'title',label:'national championship',tier:3}]:[];}
  if(s.reconstructed||s.season.CurrentStage!=='NFLSeason')return [];
  const cc=postseasonTiming(s).championshipWeek,conferences=new Map((s.conferences??[]).map(c=>[c.id,c])),teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),grades=new Map(conferencePrestige(s).map(c=>[c.id,c.grade]));
  return s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase===s.season.CurrentWeekType&&g.week===s.season.CurrentWeek&&teams.has(g.home)&&teams.has(g.away)&&g.home!==g.away).flatMap(g=>{
@@ -34,7 +35,7 @@ export function postseasonBuzz(s){
     add('fan:'+t.id,won?'fan-champion':'fan-final-loss','fan',t.id,{...values,persona:1},{priority:146});
     if(p)add('player:'+t.id,won?'player-champion':'player-final-loss','player',t.id,values,{player:p.id,priority:148});
    }
-   for(const persona of [0,1,2,3,4,5].slice(0,depth>=2?6:2))add('analysis:'+persona,'final-analysis-'+persona,'analyst',win.id,{...values,analystPersona:persona},{priority:147});
+   if(!seasonReviewWeek(s))for(const persona of [0,1,2,3,4,5].slice(0,depth>=2?6:2))add('analysis:'+persona,'final-analysis-'+persona,'analyst',win.id,{...values,analystPersona:persona},{priority:147});
    if(depth>=2)for(const t of outside.filter(t=>!t.rivals?.includes(win.id)&&!win.rivals?.includes(t.id)).slice(0,4))add('outside-final:'+t.id,'outside-final','fan',t.id,{...values,persona:hash(t.id+'|fan-tone')%2},{national:major,priority:143});
    continue;
   }

@@ -1,0 +1,168 @@
+{
+  "format": 1,
+  "revision": "season-review-v81",
+  "families": {
+    "review.title-insider": [
+      {
+        "id": "review.title-insider.v81.1",
+        "body": "The season ends with {winner} on top: {score} over {loser} in the national championship. The offseason begins with every contender trying to answer what this team just accomplished."
+      },
+      {
+        "id": "review.title-insider.v81.2",
+        "body": "{winner} closes the season as national champion after beating {loser}, {score}. That is the final answer on the field. Roster retention and the next coaching cycle are the next questions."
+      }
+    ],
+    "review.title-debate": [
+      {
+        "id": "review.title-debate.v81.1",
+        "body": "{winner} earned the championship, {score}. Give {loser} credit for getting there, too. Losing the final does not turn an entire season into a failure. Those two things can both be true."
+      },
+      {
+        "id": "review.title-debate.v81.2",
+        "body": "{loser} lost the title game to {winner}, {score}. The title belongs to the winner. Calling the runner-up a bad team because of one result is still a terrible argument."
+      }
+    ],
+    "review.title-film": [
+      {
+        "id": "review.title-film.v81.1",
+        "body": "{winner} over {loser}, {score}, for the title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.v81.2",
+        "body": "The championship in context: {turningPoint} Final: {winner} {score} over {loser}."
+      }
+    ],
+    "review.champion-season": [
+      {
+        "id": "review.champion-season.v81.1",
+        "body": "{school} finishes {record}{coachDetail}, with the national championship as the final chapter. This season has a permanent place in the program’s history."
+      },
+      {
+        "id": "review.champion-season.v81.2",
+        "body": "Season complete: {school}, {record}{coachDetail}, national champions. There will be roster decisions soon. First, a season worth remembering."
+      }
+    ],
+    "review.runnerup-season": [
+      {
+        "id": "review.runnerup-season.v81.1",
+        "body": "{school} finishes {record}{coachDetail}. The national championship loss hurts, but the full season still includes a run to the final. The next question is how much of that core comes back."
+      },
+      {
+        "id": "review.runnerup-season.v81.2",
+        "body": "The {school} season ends at {record}{coachDetail}, one win short of the title. Evaluate the whole run before turning every offseason discussion into an argument about the last game."
+      }
+    ],
+    "review.title-turnovers": [
+      {
+        "id": "review.title-turnovers.v81.1",
+        "body": "One championship detail: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. That is the actual ball-security comparison from the final, not a prediction based on season averages."
+      },
+      {
+        "id": "review.title-turnovers.v81.2",
+        "body": "Reviewing the national final: {school} finished with {ownGiveaways} giveaways against {opponent}’s {otherGiveaways}. Final result: {winner}, {score}."
+      }
+    ],
+    "review.title-player": [
+      {
+        "id": "review.title-player.v81.1",
+        "body": "{school}’s {playerName} in the national championship: {line}. The full offensive line belongs in the discussion of how this final played out."
+      },
+      {
+        "id": "review.title-player.v81.2",
+        "body": "A final-game line worth revisiting: {school}’s {playerName}, {line}. That is part of the championship story beyond the final score."
+      }
+    ],
+    "review.title-roster": [
+      {
+        "id": "review.title-roster.v81.1",
+        "body": "The next {school} evaluation is roster continuity: {seniors} listed seniors and {nonSeniors} non-seniors. Those are roster counts, not a prediction about who returns or enters the portal. A championship does not answer every offseason question."
+      }
+    ],
+    "review.calendar": [
+      {
+        "id": "review.calendar.v81.1",
+        "body": "The college football season is officially in the rearview. No game preview for next weekend. Just title arguments, roster questions and people convincing themselves the offseason will go quickly."
+      },
+      {
+        "id": "review.calendar.v81.2",
+        "body": "No more college football games this season. The championship is settled; the arguments about it are absolutely not. Next up: who stays, who moves and which programs can build on this year."
+      }
+    ],
+    "review.fan-calendar": [
+      {
+        "id": "review.fan-calendar.v81.1",
+        "body": "wait so the season is actually over? {school} football already had me missing Saturdays and now there is no college football left at all. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.v81.2",
+        "body": "The worst part of the final is remembering there is no next week. See y’all in the {school} recruiting replies until football comes back"
+      },
+      {
+        "id": "review.fan-calendar.v81.3",
+        "body": "Another college football season gone. Going to miss this. I will still be arguing about {school} by tomorrow morning but let me be sentimental for a minute"
+      },
+      {
+        "id": "review.fan-calendar.v81.4",
+        "body": "No more games and somehow I am expected to have normal weekends again. {school} news is going to have to carry me through this"
+      }
+    ],
+    "review.retrospect": [
+      {
+        "id": "review.retrospect.v81.1",
+        "body": "Season in retrospect: {school} finishes {record}. {expectationNote} That is the starting point for evaluating its offseason, before the next recruiting headline changes the mood."
+      },
+      {
+        "id": "review.retrospect.v81.2",
+        "body": "{school}: {record}, season complete. {expectationNote} Judge the next roster decisions against that context, rather than pretending every program had the same goals."
+      }
+    ],
+    "review.staff-hired": [
+      {
+        "id": "review.staff-hired.v81.1",
+        "body": "Carousel recap: {school} hired {coachName} as {role} during this cycle. With the season finished, the focus shifts from the announcement to the roster and staff taking shape."
+      },
+      {
+        "id": "review.staff-hired.v81.2",
+        "body": "One confirmed move from this coaching cycle: {coachName} was hired as {school}’s {role}. The offseason is where that change starts affecting the program’s next chapter."
+      }
+    ],
+    "review.staff-retained": [
+      {
+        "id": "review.staff-retained.v81.1",
+        "body": "Staff recap at {school}: {role} {coachName} secured a new deal this cycle. That is a confirmed contract development, with the next roster-building phase still ahead."
+      }
+    ],
+    "review.staff-fired": [
+      {
+        "id": "review.staff-fired.v81.1",
+        "body": "Looking back at the carousel: {school} dismissed {role} {coachName} this cycle. That decision belongs in the season review alongside the results on the field."
+      }
+    ],
+    "review.staff-departed": [
+      {
+        "id": "review.staff-departed.v81.1",
+        "body": "Coaching-cycle recap at {school}: {role} {coachName} {action}. That is one of the confirmed staff changes as the program turns toward next season."
+      }
+    ],
+    "review.retention-watch": [
+      {
+        "id": "review.retention-watch.v81.1",
+        "body": "{school}’s {playerName} belongs on the offseason retention watch. His current transfer-risk indicator is elevated. That is a reason to monitor his situation, not a report that he has entered the portal."
+      },
+      {
+        "id": "review.retention-watch.v81.2",
+        "body": "A name to monitor at {school}: {playerName}. The current retention indicator flags transfer risk. There is no confirmed portal entry or destination to report."
+      }
+    ],
+    "transactions.nil-review": [
+      {
+        "id": "transactions.nil-review.v81.1",
+        "body": "Following last week’s season review, {school}’s {playerName} has a listed NIL deal of {current}, {change} from {previous}. The observed adjustment is {difference}."
+      },
+      {
+        "id": "transactions.nil-review.v81.2",
+        "body": "NIL follow-up from last week’s review: {school} {playerName}, {previous} to {current}. Listed compensation {change} by {difference}."
+      }
+    ]
+  }
+}

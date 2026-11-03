@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v80
+# Dynasty Enhancer - MMC prototype v81
 
 Native Social Media inside the offline Dynasty CFB hub. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v80/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v80/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v81/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v81/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,15 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - For You shows up to 30 posts, National 100 and a conference 60. Editorial priority and variety order parent threads; likes are flavor and replies remain attached. Missing real candidates are not replaced with sample tweets.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v80 changes
+## v81 changes
+
+- Offseason Week 0 is the season-recap edition: completed title coverage, both finalists, verified quarter-score analysis, all five national analysts, end-of-season fans, season assessments and confirmed carousel retrospectives.
+- National eligibility survives the phase change and week-number reset. Prior title-week stories remain archived; completed finals never become new pregame predictions.
+- Portal watch uses valid elevated transfer-risk indicators, never the -1 sentinel, confirmed entry language or invented destinations. Seniors are excluded without verified returning eligibility.
+- Net NIL adjustments made in recap week publish in Offseason Week 1. Unchanged/reverted edits, unknown amounts and team changes do not produce deals. Later offseason changes remain observable normally.
+- 263 Node tests and native checks pass, including every scope in the real 23-edition archive. Live UI and next-week NIL confirmation are separate checks.
+
+## Previous v80 changes
 
 - Explicit news cycles shift finished programs toward recruiting, roster planning, farewells and prestige-aware expectations instead of stale in-season averages.
 - Current playoff/title games dominate national discussion. Five analyst voices, distinct player voices, non-rival spectator fans and conference-prestige-sensitive championship coverage use the actual fixtures.
@@ -85,11 +93,11 @@ TeamBuilder fan/beat accounts use the primary logo because the alternate numeric
 
 ## History, diagnostics and limits
 
-Preserve `Runtime-v80/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
+Preserve `Runtime-v81/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
 
 - MMC status: `Plugins/DynastyEnhancer-launcher.log`.
-- Runtime/UI status: `Runtime-v80/social-media.jsonl`.
-- Generator diagnostics: `Runtime-v80/runtime-generator.log`.
+- Runtime/UI status: `Runtime-v81/social-media.jsonl`.
+- Generator diagnostics: `Runtime-v81/runtime-generator.log`.
 
 `active` and `runtime_feed_published` identify successful readiness/publication; `runtime_feed_resumed` identifies an exact cache match after reload. Unsupported native code, conflicting UI ownership, invalid catalogues and changed protected payloads are rejected. User configuration/history are editable; changing protected runtime/content files requires rebuilding the package manifest.
 

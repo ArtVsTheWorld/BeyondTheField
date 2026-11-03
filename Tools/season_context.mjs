@@ -1,4 +1,9 @@
-import {visibleGame} from './football_context.mjs';
+import {visibleGame,finalGame} from './football_context.mjs';
+export const seasonReviewWeek=s=>s.season.CurrentStage==='OffSeason'&&s.season.CurrentWeekType==='OffSeason'&&s.season.CurrentWeek===0&&!s.reconstructed;
+export function championshipFinal(s){
+ const teams=new Set(s.teams.filter(t=>t.id!==255).map(t=>t.id)),games=s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase==='NationalChampionship');
+ return games.length===1&&finalGame(games[0])&&games[0].home!==games[0].away&&teams.has(games[0].home)&&teams.has(games[0].away)?games[0]:null;
+}
 export function verifiedSeasonRecord(s,t){
  const played=s.games.filter(g=>visibleGame(s,g)&&(g.home===t.id||g.away===t.id));
  if(!played.length||new Set(played.map(g=>g.id)).size!==played.length)return null;

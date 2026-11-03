@@ -2,6 +2,7 @@ import {newsCycle} from './season_context.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
 import {applyNewsCycle,offseasonEvents} from './news_cycles.mjs';
 import {postseasonBuzz} from './postseason_buzz.mjs';
+import {seasonReviewEvents,portalRiskEvents} from './season_review_events.mjs';
 import {gameStory} from './box_score_stories.mjs';
 import {transactionEvents} from './transaction_events.mjs';
 import {contextualAnalytics} from './context_analytics.mjs';
@@ -118,7 +119,7 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s)])emit(e.id,e.category,e.facts,e.options);
+  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s),...seasonReviewEvents(s),...portalRiskEvents(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=liveAnalysis?teamAnalytics(s):{teams:[],milestones:[]};
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

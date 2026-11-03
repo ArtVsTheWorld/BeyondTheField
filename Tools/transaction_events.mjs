@@ -1,3 +1,4 @@
+import {seasonReviewWeek} from './season_context.mjs';
 import {money,NIL_DOLLARS_PER_POINT} from './football_context.mjs';
 import {postseasonTiming} from './postseason_timing.mjs';
 export function transactionObservation(s){
@@ -7,12 +8,16 @@ export function transactionObservation(s){
   signings:(s.signings??[]).map(c=>({player:c.player,team:c.team}))};
 }
 export function transactionEvents(s){
- if(s.reconstructed||s.season.CurrentStage!=='NFLSeason')return [];
+ if(s.reconstructed||!['NFLSeason','OffSeason'].includes(s.season.CurrentStage))return [];
  const base=s.transactionBaseline,valid=base?.version===1&&base.year===s.season.CurrentSeasonYear,oldPlayers=new Map((valid?base.players:[]).map(p=>[p.id,p])),oldCoaches=new Map((valid?base.coaches:[]).map(c=>[c.id,c])),oldSignings=new Set((valid?base.signings:[]).map(c=>c.team+':'+c.player)),teams=new Map(s.teams.map(t=>[t.id,t])),events=[];
  const add=(id,key,team,values,options={})=>events.push({id:'transaction:'+id,category:options.category??'transactions',facts:{family:'transactions.'+key,voice:'beat',school:teams.get(team)?.name,...values},options:{team,priority:98,...options}});
- if(valid)for(const p of s.players.filter(p=>p.team!==255)){
+ if(valid&&!seasonReviewWeek(s))for(const p of s.players.filter(p=>p.team!==255)){
   const old=oldPlayers.get(p.id);if(!old||old.team!==p.team||!Number.isFinite(old.nil)||!Number.isFinite(p.nil)||old.nil<0||p.nil<0||p.nil===old.nil)continue;
   add('nil:'+p.id,'nil-change',p.team,{playerName:p.name,position:p.position,previous:money(old.nil*NIL_DOLLARS_PER_POINT),current:money(p.nil*NIL_DOLLARS_PER_POINT),change:p.nil>old.nil?'increased':'decreased',difference:money(Math.abs(p.nil-old.nil)*NIL_DOLLARS_PER_POINT),verdict:'neutral'},{category:'nil',player:p.id,thread:'nil:'+p.id});
+ }
+ for(const c of s.delayedNILChanges??[]){
+  const p=s.players.find(p=>p.id===c.id);if(!p||!teams.has(c.team)||!Number.isFinite(c.before)||!Number.isFinite(c.after)||c.before<0||c.after<0||c.before===c.after)continue;
+  add('nil-review:'+c.id,'nil-review',c.team,{playerName:p.name,position:p.position,previous:money(c.before*NIL_DOLLARS_PER_POINT),current:money(c.after*NIL_DOLLARS_PER_POINT),change:c.after>c.before?'increased':'decreased',difference:money(Math.abs(c.after-c.before)*NIL_DOLLARS_PER_POINT)},{category:'nil',player:p.id,thread:'nil-review:'+p.id});
  }
  const selection=postseasonTiming(s);
  if(valid||selection.locked&&s.season.CurrentWeekType==='BowlSeason1')for(const c of s.signings??[]){
@@ -28,4 +33,11 @@ export function transactionEvents(s){
   add('coach-deal:'+c.id,'coach-deal',t.id,{coachName:c.name,role:({headCoach:'head coach',offensiveCoordinator:'offensive coordinator',defensiveCoordinator:'defensive coordinator'})[role],term:years?' The recorded contract term is '+years+(years===1?' year.':' years.'):'',analystPersona:1},{category:'coaching',national:role==='headCoach',priority:106});
  }
  return events;
+}
+
+// Only net changes between two verified observations of the same season/team.
+export function blueprintNILChanges(before,after){
+ if(before?.version!==1||after?.version!==1||before.year!==after.year)return [];
+ const old=new Map(before.players.map(p=>[p.id,p]));
+ return after.players.flatMap(p=>{const a=old.get(p.id);return a&&a.team===p.team&&[a.nil,p.nil].every(n=>Number.isFinite(n)&&n>=0)&&a.nil!==p.nil?[{id:p.id,team:p.team,before:a.nil,after:p.nil}]:[];});
 }

@@ -12,19 +12,19 @@ using FrostySdk.Interfaces;
 [assembly: AssemblyTitle("Dynasty Enhancer")]
 [assembly: AssemblyProduct("Dynasty Enhancer")]
 [assembly: AssemblyDescription("Native Dynasty Social Media: weekly and midweek worldbuilding")]
-[assembly: AssemblyVersion("0.1.80.0")]
-[assembly: AssemblyFileVersion("0.1.80.0")]
-[assembly: PluginVersion("0.1.80-prototype")]
+[assembly: AssemblyVersion("0.1.81.0")]
+[assembly: AssemblyFileVersion("0.1.81.0")]
+[assembly: PluginVersion("0.1.81-prototype")]
 [assembly: PluginAuthor("ArtVsTheWorld")]
 [assembly: PluginDisplayName("Dynasty Enhancer (Prototype)")]
 [assembly: RegisterExecutionAction(typeof(DynastyEnhancer.LaunchAction))]
 namespace DynastyEnhancer {
  public sealed class LaunchAction : ExecutionAction {
-  public const string NativeFile="DynastyEnhancerNative-v80.dll";
+  public const string NativeFile="DynastyEnhancerNative-v81.dll";
   private static int watching;
   private static Mutex watcherMutex;
   public static string PluginsFolder {get{return Path.GetDirectoryName(typeof(LaunchAction).Assembly.Location);}}
-  public static string RuntimeFolder {get{return Path.Combine(PluginsFolder,"DynastyEnhancer","Runtime-v80");}}
+  public static string RuntimeFolder {get{return Path.Combine(PluginsFolder,"DynastyEnhancer","Runtime-v81");}}
   public LaunchAction(){using(var host=Process.GetCurrentProcess())if(String.Equals(host.ProcessName,"MMCModManager",StringComparison.OrdinalIgnoreCase))Start();}
   public override Action<ILogger,PluginManagerType,CancellationToken> PreLaunchAction {get{return (log,type,token)=>Start();}}
   public override Action<ILogger,PluginManagerType,CancellationToken> PostLaunchAction {get{return (log,type,token)=>Start();}}
@@ -63,7 +63,7 @@ namespace DynastyEnhancer {
    bool first;watcherMutex=new Mutex(false,"Local\\DynastyEnhancer.MMC."+Process.GetCurrentProcess().Id,out first);if(!first)return;
    new Thread(()=>{
     try{
-     Prepare();Note("v80 watcher ready; native activation waits for the active Dynasty and UI assets.");
+     Prepare();Note("v81 watcher ready; native activation waits for the active Dynasty and UI assets.");
      var loaded=new HashSet<string>();var retryAt=new Dictionary<string,DateTime>();var attempts=new Dictionary<string,int>();string previousIssue=null;
      while(true){
       var issue=ConfigurationIssue();if(issue.Length!=0){if(issue!=previousIssue)Note(issue);previousIssue=issue;Thread.Sleep(1000);continue;}previousIssue=null;
@@ -78,7 +78,7 @@ namespace DynastyEnhancer {
         if(loader==null)throw new IOException("Loader did not start");
         var output=loader.StandardOutput.ReadToEnd();var errors=loader.StandardError.ReadToEnd();loader.WaitForExit();
         if(loader.ExitCode!=0)throw new IOException("Loader exit "+loader.ExitCode+": "+errors+output);
-        loaded.Add(key);Note("Native runtime loaded for PID "+game.Id+"; see Runtime-v80/social-media.jsonl for startup_waiting / active / runtime_feed_published.");
+        loaded.Add(key);Note("Native runtime loaded for PID "+game.Id+"; see Runtime-v81/social-media.jsonl for startup_waiting / active / runtime_feed_published.");
        }
       }catch(Exception error){Note("Load attempt failed: "+error.Message);}
       Thread.Sleep(1000);
