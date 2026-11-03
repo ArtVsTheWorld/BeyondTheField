@@ -1,5 +1,11 @@
 # Dynasty Enhancer roadmap
 
+## Automatic offseason capture verified — ULM 2027 to 2028
+
+The previously pending unassisted offseason test has passed in v91. The live reader captured a 7,002-player final-signing baseline (38 ULM players), 2,634 qualifying training changes (15 ULM players), the Fitch/Kennedy departures and Kennesaw/JMU conference moves. The following preseason published the expected stories. Main-menu Continue found a new native context and republished all 1,231 stories with identical IDs, text, authors, likes, templates, replies, avatars and scope views. The user confirmed the reopened feed and controls. No milestone-save recovery was used for this cycle.
+
+The separate bulk-sim crash remains unresolved: it reproduced at the same game instruction with Enhancer absent. Individual early-offseason advances passed; this capture test used those advances. Next recommended Social Media work is the content audit's context/freshness, For You selection, canonical portal-topic deduplication and targeted voice/analysis improvements, followed by remaining release checks and the grades/fog integrations. Earlier checkpoints below retain their historical test status.
+
 ## Current priorities after v89
 
 The live ULM preseason rollover retained all captured facts, but v90's small-team flavor limit suppressed the departure stories. v91 exempts factual departure/alignment media reports, and the actual replay now publishes both departures, both realignments and ULM training reports. Live v91 publication and same-preseason reload persistence are the next checks; a future fully automatic cycle still needs validation without milestone recovery. See [v91 details](docs/carryover-publication-v91.md).
