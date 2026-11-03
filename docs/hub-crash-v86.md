@@ -1,0 +1,11 @@
+# Withdraw dedicated-tab experiment — v86
+
+The user reported v85 crashing while loading BYU. Windows Application Error records an access violation at CollegeFB27.exe RVA 0x8aea296. Local crash-dump inspection places the failing thread inside the native boolean factory, called by the boolean map setter, called by v85's new hub descriptor construction loop. Its manager pointer is invalid. The dump confirms the dedicated-tab construction path is involved; it does not establish the complete cause of the invalid pointer. The earlier numeric-ABI correction and mocked readback tests did not make this path safe in-game.
+
+v85's adapter was renamed to DynastyEnhancer.dll.v85-disabled. CFB and MMC were closed. All eight BYU save files still match the checksum-verified pre-v85 backup byte for byte. No save repair or restoration was performed.
+
+v86 restores Source/NativeSocialMedia.cpp and Source/CurrentBindings.h exactly from v83 commit ab63d92. The production native build has no MenuPanelsReady hook, replacement hub descriptors, new number factory or dedicated-tab routes. It retains the established Dynasty Central and seasonal CFB shortcuts and persistent-source filter refresh. A native regression requires the hub MenuPanelsReady vtable slot to stay absent from the binding list. HubTab.h remains historical experimental support only and is not included by the production DLL or tests; its code is not active.
+
+Content/data changes remain: confirmed portal membership and supported former schools, remaining unsigned high-school prospects, actual 224-player draft class and native rounds, stable simulated NFL destinations/pick order, official NFL Draft account/icon and the complete National Transactions board. FeedData/FeedRefresh retain draft metadata and ordering; the read-only capture retains portal/draft fields. This is a UI rollback, not a content rollback.
+
+Native checks validate every dynamic scope in the real 25-edition catalog. The 273 content tests and MMC payload/registration checks remain required. The latest runtime history is checksum-copied into Runtime-v86, with fresh save/history backups. Clean-launch BYU loading, Social Media entry, filters, scrolling and Back are separate pending live checks until recorded in verified-v86.json. The requested dedicated hub tab remains unfinished.

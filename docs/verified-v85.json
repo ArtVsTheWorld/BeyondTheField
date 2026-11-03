@@ -35,5 +35,13 @@
     "DynastyEnhancerNative-v85.dll": "e9c4a3b625e085efbba7db29a42523fa7a63bfd4b3cea9f87328621d2726af93",
     "DynastyEnhancer-v85-MMC.zip": "5aff89b82132518c37580bf3e450d061f5019f9cac88135eb27f30f327f73c96",
     "DynastyEnhancer.dll": "83d4af96270c7e173cc7cb15e964e4223a494e5e2bc90beb24d19e0f5c8c9b8a"
+  },
+  "liveFailure": {
+    "fullPointerCauseUnresolved": true,
+    "byuLoadCrash": true,
+    "adapterDisabled": true,
+    "faultRva": "0x8aea296",
+    "path": "new hub descriptor boolean setter",
+    "replacedBy": "v86"
   }
 }

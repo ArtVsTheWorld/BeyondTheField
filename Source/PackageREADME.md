@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v85
+# Dynasty Enhancer - MMC prototype v86
 
-Native Social Media inside the offline Dynasty hub. Its dedicated tab contains Open Feed year-round; Dynasty Central/CFB shortcuts provide a fallback for an unsupported native tab layout. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
+Native Social Media inside the offline Dynasty hub. Open **Dynasty Central → Social Media** year-round, or its CFB shortcut when available. The dedicated-tab experiment is withdrawn after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v85/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v85/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v86/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v86/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,13 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - For You shows up to 30 posts, National 100 and a conference 60. Editorial priority and variety order parent threads; likes are flavor and replies remain attached. Missing real candidates are not replaced with sample tweets.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v85 changes
+## v86 changes
+
+- Withdraws the dedicated-tab path after the v85 cold-load crash. Native UI implementation and code gates match v83 exactly; stock MenuPanelsReady is not hooked or modified. Dynasty Central and seasonal CFB entries remain.
+- Retains portal/unsigned stories, native draft-class players/rounds, stable simulated picks/NFL destinations, all 224 official draft announcements and Transactions pick order.
+- Saves and archived feed history are preserved. Native/content/package checks and controller checks are recorded separately.
+
+## Previous v85 changes (withdrawn)
 
 - Corrects v84's descriptor-number ABI, which could blank the entire hub. Uses the native double-number factory and verifies all native scalar fields and the completed pointer array before sending a replacement. Failed verification forwards the untouched native hub.
 - Inserts the descriptor physically after Team, as well as assigning its intermediate priority.

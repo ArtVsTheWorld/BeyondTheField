@@ -14,8 +14,6 @@ void* expectedRequestSelf=nullptr;
 void* expectedRequestParams=nullptr;
 unsigned requestCalls=0;
 bool requestResult=true;
-double numberArgument=0;void* numberManager=nullptr;
-void* __fastcall nativeNumber(void* manager,void** result,double value){numberManager=manager;numberArgument=value;*result=&numberArgument;return result;}
 bool __fastcall originalRequest(void* self,void* panel,void* params){lastDonorPanel=argument(panel);++requestCalls;return requestResult&&self==expectedRequestSelf&&params==expectedRequestParams;}
 void __fastcall donorRows(void*,void* panel,void* out){
     lastDonorPanel=argument(panel);
@@ -37,21 +35,7 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
-        {
-            using social::hubtab::plan;
-            for(const auto value:{4.5,-1.0,13.0}){auto made=social::hubtab::number(nativeNumber,&numberManager,value);require(made==&numberArgument&&numberManager==&numberManager&&numberArgument==value,"Native descriptor numbers must preserve double ABI, fractions and negative sentinels");}
-            std::vector<Json> rows={{{"id","cm_team"},{"priority",5}},{{"id","CM_LEAGUE"},{"priority",4}},{{"id","DynastyCentral"},{"priority",1},{"screenId","PANEL_MENU"},{"numRows",13}}};const auto saved=rows;
-            const auto custom=plan(rows);require(custom&&custom->at("id")==social::hubtab::id&&custom->at("name")=="Social Media"&&custom->at("priority")==4.5&&custom->at("screenId")=="PANEL_MENU"&&custom->at("numRows")==1,"Dedicated tab must sit between Team and Stats and preserve the native screen type");require(rows==saved,"Dedicated tab planning mutated stock descriptors");
-            require(social::hubtab::insertAfterTeam(rows)==1,"Dedicated tab must be physically inserted after Team, not appended after Dynasty Central");require(social::hubtab::matches(*custom,custom),"Valid native readback was rejected");auto corrupted=*custom;corrupted["NumRows"]=123456789.0;require(!social::hubtab::matches(*custom,corrupted)&&!social::hubtab::matches(*custom,{}),"Invalid native layout readback must fall back to the stock hub");
-            rows.push_back(*custom);require(!plan(rows),"Dedicated tab must not be duplicated");rows=saved;rows.erase(rows.begin());require(!plan(rows),"Missing anchors must preserve the original hub");rows=saved;rows[1]["priority"]=5;require(!plan(rows),"Ambiguous tab ordering must not be guessed");
-            const uintptr_t image=0x140000000;std::array<unsigned char,64> map{},text{},number{};std::array<unsigned char,32> nodeA{},nodeB{};std::array<unsigned char,16> keyA{},keyB{},value{};std::array<uintptr_t,1> buckets{};
-            auto put=[](auto& b,size_t off,const auto& v){memcpy(b.data()+off,&v,sizeof(v));};
-            memcpy(keyA.data(),"id",2);keyA[15]=13;memcpy(keyB.data(),"priority",8);keyB[15]=7;memcpy(value.data(),"cm_team",7);value[15]=8;
-            put(map,0,image+0x1000);put(map,16,5u);put(map,32,reinterpret_cast<uintptr_t>(buckets.data()));put(map,40,1u);buckets[0]=reinterpret_cast<uintptr_t>(nodeA.data());
-            put(nodeA,8,reinterpret_cast<uintptr_t>(keyA.data()));put(nodeA,16,reinterpret_cast<uintptr_t>(text.data()));put(nodeA,24,reinterpret_cast<uintptr_t>(nodeB.data()));put(nodeB,8,reinterpret_cast<uintptr_t>(keyB.data()));put(nodeB,16,reinterpret_cast<uintptr_t>(number.data()));
-            put(text,0,image+0x2000);put(text,16,3u);put(text,32,reinterpret_cast<uintptr_t>(value.data()));put(number,0,image+0x3000);put(number,16,2u);put(number,24,5.5);
-            auto parsed=social::hubtab::fields(reinterpret_cast<uintptr_t>(map.data()),image,read);require(parsed&&parsed->at("id")=="cm_team"&&parsed->at("priority")==5.5,"Native tab reader must follow hash collisions and indirect SSO values");put(nodeB,24,reinterpret_cast<uintptr_t>(nodeA.data()));require(!social::hubtab::fields(reinterpret_cast<uintptr_t>(map.data()),image,read),"Cyclic tab-map nodes must be rejected");
-        }
+        for(const auto& binding:bindings)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
         uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
         {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,"CM_NEWSSUB",kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
         {
