@@ -95,7 +95,7 @@
       "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Signing2027-auto-20261103T141118Z"
     },
     "remaining": [
-      "Next preseason publication and reload"
+      "Same-preseason Dynasty reload persistence"
     ],
     "trainingResults": {
       "year": 2027,
@@ -133,6 +133,22 @@
       "divisionNamesInProductionStoryModel": false,
       "trainingEvidencePreserved": 2634,
       "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Final2027-auto-20261103T142126Z"
+    },
+    "preseason": {
+      "season": 2028,
+      "phase": "PreSeason",
+      "sourceCycle": 2027,
+      "source": "automatic runtime capture; no milestone recovery",
+      "stories": 1231,
+      "carryoverPosts": 364,
+      "allExpectedStoriesPublished": true,
+      "fitchDestination": "Missouri State",
+      "kennedyDestination": null,
+      "ulmTrainingReports": [
+        "Joe Bazley",
+        "Stephen Evans"
+      ],
+      "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Preseason2028-auto-20261103T142451Z"
     }
   }
 }
