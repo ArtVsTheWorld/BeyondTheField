@@ -2,7 +2,19 @@
 #include <cmath>
 #include <optional>
 #include <set>
+#include <array>
+#include <cstdint>
+#include <cstring>
+#include <map>
+#include <string>
+#include <vector>
+#include "../Vendor/json.hpp"
 namespace social::hubtab {
+// Descriptor cloning must retain the original values, including nested/opaque
+// properties. Decoding to JSON and recreating scalars loses that information.
+// Returned pointers are borrowed: a caller must retain each native value when
+// assigning it into a new descriptor, while the source array is still alive.
+template<class Read>std::optional<std::map<std::string,uintptr_t>> references(uintptr_t object,uintptr_t image,Read read);
 inline constexpr char id[]="CM_DYNASTY_SOCIAL";
 // The native number factory takes a double in XMM2. The similarly shaped
 // unsigned-integer factory takes R8D and must never be called through this ABI.
@@ -33,6 +45,20 @@ template<class Read>std::optional<nlohmann::json> fields(uintptr_t object,uintpt
             else if(kind==2){double number=0;memcpy(&number,v.data()+24,8);if(!std::isfinite(number))return {};result[key]=number;}
             else if(kind==1)result[key]=v[24]!=0;
             node=u64(n.data()+24);
+        }
+    }return result;
+}
+template<class Read>std::optional<std::map<std::string,uintptr_t>> references(uintptr_t object,uintptr_t image,Read read){
+    auto pointer=[&](uintptr_t address,uintptr_t& out){return read(address,&out,sizeof(out));};
+    uintptr_t vt=0,buckets=0;unsigned kind=0,count=0;
+    if(!pointer(object,vt)||vt<image||vt>=image+0x11ffe000||!read(object+16,&kind,4)||kind!=5||!pointer(object+32,buckets)||!read(object+40,&count,4)||!count||count>257)return {};
+    std::map<std::string,uintptr_t> result;std::set<uintptr_t> visited;
+    for(unsigned i=0;i<count;++i){uintptr_t node=0;if(!pointer(buckets+i*8,node))return {};
+        while(node&&node!=~uintptr_t(0)){
+            if(visited.size()>=256||!visited.insert(node).second)return {};
+            uintptr_t key=0,value=0,next=0,valueVt=0;std::string name;
+            if(!pointer(node+8,key)||!sso(key,name,read)||name.empty()||name.size()>128||!pointer(node+16,value)||!pointer(value,valueVt)||valueVt<image||valueVt>=image+0x11ffe000||!pointer(node+24,next)||!result.emplace(name,value).second)return {};
+            node=next;
         }
     }return result;
 }

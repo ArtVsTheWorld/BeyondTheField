@@ -32,5 +32,11 @@
     "Vertical scrolling and safe entry/exit/reload",
     "Separate package, preserve v96/saves/history"
   ],
-  "verificationScope": "Offline native ABI foundation only. Direct hub rendering, controls, year-round lifecycle and reload are not verified."
+  "verificationScope": "Offline native ABI foundation only. Direct hub rendering, controls, year-round lifecycle and reload are not verified.",
+  "descriptorReferenceTests": {
+    "preservesNestedValues": true,
+    "rejectsCycles": true,
+    "rejectsDuplicateKeys": true,
+    "rejectsForeignValues": true
+  }
 }
