@@ -38,7 +38,6 @@
   },
   "recovery": "Read-only milestone copies; active runtime remains the production source",
   "liveChecksRemaining": [
-    "Fresh MMC launch resumes live ULM capture",
     "Identifiable encouraged-transfer and conference changes",
     "Next-preseason carryover and reload persistence",
     "Future unassisted full-cycle capture"
@@ -49,5 +48,18 @@
     "DynastyEnhancer-v90-MMC.zip": "c50b75848fe68a7f35bd373a1b86d5fa22fa4a45f0e19d7e40d1c9cb92d1abaa"
   },
   "actualCatalogEditions": 31,
-  "initialHotReload": "Existing child-context search limit reached; clean launch requested"
+  "initialHotReload": "Existing child-context search limit reached; clean launch requested",
+  "freshLaunch": {
+    "userConfirmedHub": true,
+    "nativePid": 32348,
+    "activeDynastyCaptured": true,
+    "phase": "OffSeason",
+    "nativeWeek": 9,
+    "nativeStage": 9,
+    "storiesPublished": 941,
+    "baselineRetained": true,
+    "ulmDevelopmentFacts": 11,
+    "departuresBeforeChanges": 0,
+    "conferenceChangesBeforeChanges": 0
+  }
 }
