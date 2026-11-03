@@ -34,7 +34,7 @@ public:
                 social::refresh::writeAtomic(folder/L"runtime-feed.json.tmp",folder/L"runtime-feed.json",feed);
                 report({{"event",event},{"league",feed.at("leagueId")},{"team",feed.at("userTeamIndex")},{"week",feed.at("week")},{"stories",feed.at("stories").size()},{"saveRequired",false}});return feed;
             };
-            if(haveAccepted&&hash==accepted){lastError.clear();failures=0;return {};}
+            if(haveAccepted&&hash==accepted){lastError.clear();failures=0;pollAt=GetTickCount64()+8000;return {};}
             if(!haveObserved||hash!=observed){const bool mayResume=!haveObserved&&!haveAccepted;observed=hash;haveObserved=true;report({{"event","runtime_change_observed"},{"records",raw.at("records").size()}});
                 if(mayResume&&!cancelled()){
                     const auto input=folder/L"runtime-raw.json",output=folder/L"runtime-resume.json";social::refresh::writeAtomic(folder/L"runtime-raw.json.tmp",input,raw);

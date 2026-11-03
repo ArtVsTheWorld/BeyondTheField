@@ -21,7 +21,7 @@ test('native New scholarship state becomes a midweek offer event, and Offered do
  assert.equal(offer.facts.school,'Fixture University');assert.equal(offer.facts.playerName,'Fixture Recruit');assert.equal(offer.body,undefined);assert.ok(offer.scopes.includes('team'));assert.equal(offer.publication.week,8);
  const c=updateRuntime(await readRuntime(raw('Offered')),b.state);assert.equal(c.catalog.events.filter(p=>p.category==='offers').length,1);
  const next=raw('Offered');next.records.season.v.CurrentWeek=9;const d=updateRuntime(await readRuntime(next),c.state);assert.equal(d.catalog.events.filter(p=>p.category==='offers').length,0);
- assert.equal(d.catalog.weeks[0].events.filter(p=>p.category==='offers').length,1);
+ assert.equal(d.state.editions[0].feed.events.filter(p=>p.category==='offers').length,1);assert.equal(d.catalog.weeks[0].events,undefined);
 });
 test('initial native New offers seed quietly, while non-offer board entries stay excluded',async()=>{
  const s=await readRuntime(raw('New'));const initial=updateRuntime(s);assert.equal(initial.catalog.events.filter(p=>p.category==='offers').length,0);

@@ -8,7 +8,7 @@
 #include <string_view>
 #include "FeedRefresh.h"
 namespace social {
-struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;int likes=-1,uniformTeamLogo=-1;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
+struct FeedPost {std::string author,handle,body,stamp;int imageLibrary=79,imageValue=598;std::string category,voice,replyTo;bool transaction=false;int likes=-1,uniformTeamLogo=-1;FeedPost(std::string a,std::string h,std::string b,std::string s,int l=79,int v=598):author(std::move(a)),handle(std::move(h)),body(std::move(b)),stamp(std::move(s)),imageLibrary(l),imageValue(v){};};
 inline std::string compactCount(int value){
     if(value<1000)return std::to_string(value);
     const int unit=value>=999950?1000000:1000;const auto tenths=(static_cast<long long>(value)*10+unit/2)/unit;
@@ -19,6 +19,8 @@ inline std::string storyLabel(const nlohmann::json& post){
     const auto category=post.value("category",std::string());
     if(category=="upsets")return "Upset";
     if(category=="conference-talk")return "Conference Talk";
+    if(category=="transactions")return "Transaction";
+    if(category=="signings")return "Signing";
     if(category=="coaching")return "Coaching";
     if(category=="postseason")return "Postseason";
     if(category=="season-end")return "Season Review";
@@ -73,9 +75,9 @@ struct Edition {std::string key,label,conference,phase="RegularSeason";int seaso
 struct Catalog {std::vector<Edition> weeks;size_t active=0;std::vector<Scope> scopes;};
 struct Feed {std::vector<FeedPost> posts;std::string key="runtime-waiting",label="Social Media";std::shared_ptr<const Catalog> catalog;size_t edition=0;unsigned scope=0,type=0;};
 inline const std::vector<Scope>& scopesFor(const Catalog& c){static const std::vector<Scope> legacy={{"all","For You"},{"national","National"},{"conference","Conference"},{"team","My Team"}};return c.scopes.empty()?legacy:c.scopes;}
-inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:4096;}
-inline constexpr std::array<const char*,11> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Official Accounts","Players","Injuries","Fans"};
-inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks"||p.category=="matchup-recap"||p.category=="season-end";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason"||p.category=="matchup-preview";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records"||p.category=="history"||p.category=="championship"||p.category=="bowls";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";default:return false;}}
+inline size_t scopeLimit(const std::string& key){return key=="all"?30:key=="national"?100:key=="conference"||key.rfind("conference:",0)==0?60:20;}
+inline constexpr std::array<const char*,12> typeLabels={"All Types","Recruiting","Recaps","Upcoming","Rankings & Awards","Analysts","Beat Reporters","Official Accounts","Players","Injuries","Fans","Transactions"};
+inline bool matchesType(const FeedPost& p,unsigned type){switch(type){case 0:return true;case 1:return p.category=="recruiting"||p.category=="offers"||p.category=="signings"||p.voice=="recruit";case 2:return p.category=="results"||p.category=="team-stats"||p.category=="player-stats"||p.category=="upsets"||p.category=="streaks"||p.category=="matchup-recap"||p.category=="season-end";case 3:return p.category=="schedule"||p.category=="watch"||p.category=="lines"||p.category=="preseason"||p.category=="matchup-preview";case 4:return p.category=="polls"||p.category=="heisman"||p.category=="cfp"||p.category=="awards"||p.category=="records"||p.category=="history"||p.category=="championship"||p.category=="bowls";case 5:return p.voice=="analyst"||p.voice=="model";case 6:return p.voice=="beat";case 7:return p.voice=="official"||p.voice=="cfp";case 8:return p.voice=="player";case 9:return p.category=="injuries";case 10:return p.voice=="fan";case 11:return p.transaction||(p.category=="coaching"||p.category=="nil"||p.category=="transactions"||p.category=="transfer"||p.category=="signings")&&(p.voice=="analyst"||p.voice=="beat");default:return false;}}
 // System status is the only fallback; there are no illustrative tweet cards.
 inline std::shared_ptr<const Feed> statusFeed(unsigned count=1){
     auto f=std::make_shared<Feed>();
@@ -89,9 +91,8 @@ inline std::shared_ptr<const Feed> selectFeed(std::shared_ptr<const Catalog> cat
     const auto& option=scopesFor(*catalog).at(scope);const auto view=e.views.find(option.key);const auto limit=scopeLimit(option.key);
     if(view!=e.views.end()){
         std::set<std::string> members(view->second.begin(),view->second.end()),visited;std::vector<std::string> roots;std::map<std::string,std::vector<std::string>> children;
-        for(const auto& id:members){const auto& p=e.stories.at(id);if(p.replyTo.empty()){if(matchesType(p,type))roots.push_back(id);}else if(members.count(p.replyTo))children[p.replyTo].push_back(id);}
-        auto popular=[&](const std::string& a,const std::string& b){const int al=(std::max)(0,e.stories.at(a).likes),bl=(std::max)(0,e.stories.at(b).likes);return al!=bl?al>bl:a<b;};
-        std::sort(roots.begin(),roots.end(),popular);for(auto& [id,list]:children){(void)id;std::sort(list.begin(),list.end(),popular);}
+        for(const auto& id:view->second){const auto& p=e.stories.at(id);if(p.replyTo.empty()){if(matchesType(p,type))roots.push_back(id);}else if(members.count(p.replyTo))children[p.replyTo].push_back(id);}
+        // The exporter already supplies editorial conversation order.
         std::function<void(const std::string&)> append=[&](const std::string& id){if(f->posts.size()>=limit||!visited.insert(id).second)return;f->posts.push_back(e.stories.at(id));auto it=children.find(id);if(it!=children.end())for(const auto& child:it->second)append(child);};
         for(const auto& id:roots){if(f->posts.size()>=limit)break;append(id);}
     }
@@ -108,7 +109,7 @@ inline std::shared_ptr<const Feed> decodeFeed(const nlohmann::json& j){
         if(w.value("reconstructed",false))e.label+=" (recovered)";
         for(const auto& p:w.at("stories")){
             const auto stamp=storyLabel(p);
-            FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
+            FeedPost post{p.at("author").get<std::string>(),p.at("handle").get<std::string>(),p.at("body").get<std::string>(),stamp,p.at("imageLibrary").get<int>(),p.at("imageValue").get<int>()};post.category=p.value("category",std::string());post.voice=p.value("voice",std::string());post.replyTo=p.value("replyTo",std::string());post.likes=p.value("likes",-1);post.uniformTeamLogo=p.value("uniformTeamLogo",-1);post.transaction=p.value("transaction",false);e.stories.emplace(p.at("id").get<std::string>(),std::move(post));
         }
         for(const auto& [key,view]:w.at("views").items())e.views[key]=view.get<std::vector<std::string>>();
         catalog->weeks.push_back(std::move(e));

@@ -1,0 +1,61 @@
+{
+  "build": "v79",
+  "contentRevision": "transactions-editorial-v78",
+  "installed": true,
+  "gameLeftClosedForUserTesting": true,
+  "nodeTests": {
+    "pass": 232,
+    "fail": 0
+  },
+  "native": {
+    "unitChecks": true,
+    "verifiedNewsAllocationReuse": true,
+    "transactionCategory": true,
+    "teamCardCap": 20,
+    "catalogEditions": 21,
+    "allDynamicScopes": true,
+    "catalogBytes": 35969603,
+    "likesSortingRemoved": true
+  },
+  "mmc": {
+    "registration": true,
+    "payloadTamperChecks": true,
+    "installedVerification": true,
+    "precedingV78AutomaticLaunchObserved": true
+  },
+  "data": {
+    "league": -107703141,
+    "team": 15,
+    "week": 19,
+    "phase": "BowlSeason3",
+    "stories": 1272,
+    "forYou": 30,
+    "minimumTeamPosts": 5,
+    "maximumTeamPosts": 19,
+    "teamsBelowFive": 0,
+    "teamsAboveTwenty": 0,
+    "positiveSignedRecruitNILOffers": 1572,
+    "coachDollarSalariesVerified": false
+  },
+  "backups": {
+    "saveFiles": 8,
+    "historyFiles": 7,
+    "checksumVerified": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v79.dll": "6814037cb114df6a4de30a5c19be4a96af84d967bc988787d7f78d642e942435",
+    "DynastyEnhancer-v79-MMC.zip": "449d439b64ded752b410527439ebc09c0a8124e453f4044bb98f1ebe3d9b641c",
+    "DynastyEnhancer.dll": "76b9916104be799cb075dd3430ab3b37aa71224f8b86898a1149234fe999ea30"
+  },
+  "limitations": [
+    "No distinct verified receipt for same-compensation player retention",
+    "Coach ContractSalary fields are zero; no invented dollar salaries",
+    "First-time News lookup retains the bounded global fallback"
+  ],
+  "liveChecksRemaining": [
+    "v79 hover and repeated-entry latency",
+    "Transactions, dropdowns, LB/RB, scrolling and Back",
+    "Observed signing and midweek NIL change without saving",
+    "Forward Bowl Week 2 to Bowl Week 3 replay and subsequent advancement"
+  ]
+}

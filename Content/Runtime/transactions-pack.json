@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "revision": "transactions-editorial-v78",
+  "families": {
+    "transactions.nil-change": [
+      {
+        "id": "transactions.nil-change.v78.1",
+        "body": "{school}'s {playerName} has an updated NIL figure: {current}, {change} from {previous}. That's a {difference} change in listed compensation."
+      },
+      {
+        "id": "transactions.nil-change.v78.2",
+        "body": "NIL update at {school}: {playerName}'s listed compensation has {change} by {difference}, from {previous} to {current}."
+      }
+    ],
+    "transactions.signed": [
+      {
+        "id": "transactions.signed.v78.1",
+        "body": "{school} has signed {starDetail}{playerName}.{nilDetail} This is a signing, with the recruitment now closed."
+      },
+      {
+        "id": "transactions.signed.v78.2",
+        "body": "Signing confirmed: {starDetail}{playerName} to {school}.{nilDetail}"
+      }
+    ],
+    "transactions.coach-deal": [
+      {
+        "id": "transactions.coach-deal.v78.1",
+        "body": "{school} has retained {role} {coachName} on an updated contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.v78.2",
+        "body": "A new deal for {school} {role} {coachName}.{term} The staff keeps continuity in that role."
+      }
+    ],
+    "postseason.coach-hired": [
+      {
+        "id": "postseason.coach-hired.v78.1",
+        "body": "{school} has hired {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.v78.2",
+        "body": "The {role} job at {school} is filled: {coachName} is in.{contractTerm}"
+      }
+    ],
+    "postseason.coach-retained": [
+      {
+        "id": "postseason.coach-retained.v78.1",
+        "body": "{school} has retained {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.v78.2",
+        "body": "{coachName} is staying as {school}'s {role} after accepting a new contract.{contractTerm}"
+      }
+    ],
+    "postseason.coach-offer": [
+      {
+        "id": "postseason.coach-offer.v78.1",
+        "body": "{school} has offered {coachName} its {role} job.{contractTerm} An offer is not an accepted hire."
+      },
+      {
+        "id": "postseason.coach-offer.v78.2",
+        "body": "An offer is out to {coachName} for the {role} position at {school}.{contractTerm} No accepted deal yet."
+      }
+    ],
+    "postseason.coach-renewal-offer": [
+      {
+        "id": "postseason.coach-renewal-offer.v78.1",
+        "body": "{school} has made a retention offer to {role} {coachName}.{contractTerm} The decision is still pending."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.v78.2",
+        "body": "A new contract offer is on the table for {school} {role} {coachName}.{contractTerm} Acceptance is still pending."
+      }
+    ]
+  }
+}

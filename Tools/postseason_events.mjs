@@ -71,7 +71,7 @@ export function postseasonCandidates(s){
   const values={coachName:old?.name??null,role:label,negative:j.reason==='Fired'};
   if(j.filled&&j.selected?.id===j.current?.id){
    const extension=j.selected.id===old?.id,accepted=j.offerIds.some(id=>offers.get(id)?.status==='Accepted');
-   if(!extension||accepted)add('hire:'+j.id,extension?'coach-retained':'coach-hired','analyst',t.id,{...values,coachName:j.selected.name,analystPersona:1},{category:'coaching',national:j.role==='HeadCoach',priority:108});
+   if(!extension||accepted)add('hire:'+j.id,extension?'coach-retained':'coach-hired','analyst',t.id,{...values,coachName:j.selected.name,contractTerm:Number.isInteger(j.selected.contract?.length)&&j.selected.contract.length>0?' The contract term is '+j.selected.contract.length+(j.selected.contract.length===1?' year.':' years.'):'',analystPersona:1},{category:'coaching',national:j.role==='HeadCoach',priority:108});
   }else if(old?.name&&['Fired','Retired','Pro','NewJob','ContractEnding'].includes(j.reason)){
    const stillThere=j.current?.id===old.id,family=j.reason==='Fired'?stillThere?'coach-pending':'coach-fired':j.reason==='Retired'?'coach-retired':j.reason==='Pro'?'coach-pro':j.reason==='NewJob'?'coach-departed':stillThere?'coach-contract':'coach-open';
    add('opening:'+j.id,family,'analyst',t.id,{...values,analystPersona:1},{category:'coaching',national:j.role==='HeadCoach',priority:j.role==='HeadCoach'?111:101});
@@ -80,7 +80,7 @@ export function postseasonCandidates(s){
   if(j.filled)continue;
   let count=0;
   for(const id of [...j.offerIds].sort((a,b)=>(offers.get(a)?.index??999)-(offers.get(b)?.index??999)||a.localeCompare(b))){const o=offers.get(id);if(!o||used.has(id)||o.status!=='Pending'||o.team!==j.team||o.role!==j.role||!o.coach?.name||count>=2)continue;used.add(id);count++;
-   add('offer:'+id,j.current?.id===o.coach.id?'coach-renewal-offer':'coach-offer','beat',t.id,{coachName:o.coach.name,role:label},{category:'coaching',national:j.role==='HeadCoach',priority:99});
+   add('offer:'+id,j.current?.id===o.coach.id?'coach-renewal-offer':'coach-offer','beat',t.id,{coachName:o.coach.name,role:label,contractTerm:Number.isInteger(o.length)&&o.length>0?' The proposed term is '+o.length+(o.length===1?' year.':' years.'):''},{category:'coaching',national:j.role==='HeadCoach',priority:99});
   }
  }
  return events;

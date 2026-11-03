@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {curate,scopeViews,publishWeek,buildCatalog,conversationOrder} from '../Tools/feed_selection.mjs';
 const story=(id,scope,priority=80,category=id)=>({id,scopes:[scope],priority,category,thread:id,curated:true});
-test('every view ranks parent threads by likes, keeps replies adjacent and breaks equal-like ties by ID',()=>{
+test('editorial order ignores likes, keeps replies adjacent and is deterministic',()=>{
  const pool=[{...story('low','team',999),likes:20},{...story('high','national',1),likes:900},{...story('middle','conference'),likes:300},{...story('reply','team'),likes:15,replyTo:'high'},{...story('tie','national'),likes:300}];
- assert.deepEqual(conversationOrder(pool).map(p=>p.id),['high','reply','middle','tie','low']);
- assert.deepEqual(curate(pool).map(p=>p.id),['high','reply','middle','tie','low']);
- assert.deepEqual(scopeViews(pool).national,['high','tie']);
+ assert.deepEqual(conversationOrder(pool).map(p=>p.id),['low','middle','tie','high','reply']);
+ assert.deepEqual(curate(pool).map(p=>p.id),['low','middle','tie','high','reply']);assert.deepEqual(conversationOrder(pool.map(p=>({...p,likes:20000-(p.likes??0)}))).map(p=>p.id),conversationOrder(pool).map(p=>p.id));
+ assert.deepEqual(scopeViews(pool).national,['tie','high']);
 });
 test('curated mix favors the user team at 55/20/25 when strong distinct candidates are available',()=>{
   const pool=['national','conference','team'].flatMap(scope=>Array.from({length:20},(_,i)=>story(scope+i,scope,100-i)));

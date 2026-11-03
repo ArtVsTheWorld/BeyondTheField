@@ -4,7 +4,13 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Context and postseason recovery (v77)
+## Transactions and editorial feeds (v79)
+
+The current package is `Build/DynastyEnhancer-v79-MMC.zip`, with the MMC adapter and versioned native runtime. Transactions joins the LB/RB filters, supported signings/contract changes receive reported coverage, and all player references include positions. A shared brand/poll-based weekly allowance targets 5–20 posts per program across every voice. Likes can reach 20K for major events and no longer determine placement. Editorial ordering rotates topics and accounts while keeping replies attached.
+
+The UI payload omits duplicated historical event data, normal hover/entry stops requesting synthetic diagnostic panels, and large retired catalogs are released on the worker. See [v78 implementation and verification](docs/transactions-editorial-v79.md).
+
+## Previous context and postseason recovery (v77)
 
 The current package is `Build/DynastyEnhancer-v77-MMC.zip`, with managed `Plugins/DynastyEnhancer.dll` and native `Plugins/DynastyEnhancer/Runtime-v77/DynastyEnhancerNative-v77.dll`. Keep the complete versioned runtime beside the adapter.
 

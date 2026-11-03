@@ -1,3 +1,4 @@
+import {playerReferenceQualifier,publicPosition} from './player_references.mjs';
 import {heismanContext} from './heisman_context.mjs';
 import {cleanLanguage} from './clean_language.mjs';
 import {editorialAssignment,nationalCoverage} from './national_editorial.mjs';
@@ -17,6 +18,7 @@ const ranked=n=>Number.isInteger(n)&&n>0&&n<=25;
 const numeric=x=>Number.isFinite(x);
 export function renderStories(s,events,{authors={},history=[],sameWeek=null}={}){
  if(!pack.enabled)return {stories:[],authors};
+ const qualify=playerReferenceQualifier(s.players,{staffNames:s.teams.flatMap(t=>[t.headCoach?.name,t.offensiveCoordinator?.name,t.defensiveCoordinator?.name]).filter(Boolean)});
  const coverage=nationalCoverage(s),registry=authorRegistry(authors),teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),players=new Map(s.players.map(p=>[p.id,p])),games=new Map(s.games.map(g=>[g.id,g]));
  const stories=[],byId=new Map(),reactionGames=new Set(),sameStories=new Map((sameWeek?.stories??[]).map(p=>[p.id,p])),reactionAccounts=new Map(),reactionTopics=new Map(),replyCounts=new Map();
  const edition=`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${s.season.CurrentWeek}`;
@@ -27,18 +29,20 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   ({role,persona}=editorialAssignment(s,e,family,role,team,persona,coverage));
   const account=registry.get(s,role,team,player,persona),id=e.id+':'+suffix;
   const filled={recruitRankDetail:recruitRankDetail(values,e.id),starDescription:Number.isInteger(values.stars)?values.stars+'-star ':'',...values,...(parent?{parentHandle:parent.handle}:{})};
-  if(role==='player'&&player&&typeof filled.playerName==='string'){const subject=[...players.values()].find(p=>p.name===filled.playerName&&(p.team===player.team||p.team===255&&['offers','recruiting'].includes(e.category)&&e.teamIds.includes(player.team)));if(subject&&subject.id!==player.id)filled.playerName=subject.firstName||subject.name.trim().split(/\s+/)[0];}
+  if(role==='player'&&player&&typeof filled.playerName==='string'){const subject=[...players.values()].find(p=>p.name===filled.playerName&&(p.team===player.team||p.team===255&&['offers','recruiting'].includes(e.category)&&e.teamIds.includes(player.team)));if(subject&&subject.id!==player.id)filled.playerName=publicPosition(subject.position)+' '+(subject.firstName||subject.name.trim().split(/\s+/)[0]);}
+  const transformBody=body=>qualify(body,{playerId:e.playerId,teamIds:e.teamIds});
   const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
   const oldStory=sameStories.get(id),baseOld=oldStory?.rawBody?{...oldStory,body:oldStory.rawBody}:oldStory;
-  let chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:baseOld,renderKey});if(!chosen)return null;
+  let chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:baseOld,renderKey,transformBody});if(!chosen)return null;
   let voiceTemplateId=null;const rawBody=cleanLanguage(chosen.body);
-  if(role==='analyst'&&[2,3,5].includes(persona)&&!family.startsWith('playoff.')){const negative=values.verdict==='negative'||values.negative===true||values.metric==='turnoverMargin'&&values.margin<0||values.metric==='thirdDownConversionRate'&&values.rate<=.3||values.metric==='redZoneTouchdownRate'&&values.rate<=.45||/third_low|red_low|turnover_minus/.test(family);const positive=values.verdict==='positive'||!values.verdict&&(e.category==='awards'||/third_high|red_high|turnover_plus/.test(family));const voiceFamily='desk.'+({2:'marcus',3:'tina',5:'chris'})[persona]+(negative?'.negative':positive?'.positive':'.neutral');const voiced=chooseTemplate(voiceFamily,{...filled,analysisText:rawBody},edition+'|'+id,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:oldStory?.voiceTemplateId?{...oldStory,templateId:oldStory.voiceTemplateId}:null,renderKey});if(voiced){voiceTemplateId=voiced.templateId;chosen={...chosen,body:voiced.body};}}
+  if(role==='analyst'&&[2,3,5].includes(persona)&&!family.startsWith('playoff.')){const negative=values.verdict==='negative'||values.negative===true||values.metric==='turnoverMargin'&&values.margin<0||values.metric==='thirdDownConversionRate'&&values.rate<=.3||values.metric==='redZoneTouchdownRate'&&values.rate<=.45||/third_low|red_low|turnover_minus/.test(family);const positive=values.verdict==='positive'||!values.verdict&&(e.category==='awards'||/third_high|red_high|turnover_plus/.test(family));const voiceFamily='desk.'+({2:'marcus',3:'tina',5:'chris'})[persona]+(negative?'.negative':positive?'.positive':'.neutral');const voiced=chooseTemplate(voiceFamily,{...filled,analysisText:rawBody},edition+'|'+id,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:oldStory?.voiceTemplateId?{...oldStory,templateId:oldStory.voiceTemplateId}:null,renderKey,transformBody});if(voiced){voiceTemplateId=voiced.templateId;chosen={...chosen,body:voiced.body};}}
   chosen={...chosen,body:cleanLanguage(chosen.body)};
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
   if(reaction&&!important&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
   if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
   const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,rawBody,voiceTemplateId,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player,persona),likes:likesFor(s,id,role,team,e,sameStories.get(id)),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION};
   if(e.category==='heisman')p.heismanContextVersion=1;
+  if(['analyst','beat'].includes(role)&&(e.category==='coaching'||e.category==='transactions'||e.category==='nil'||family==='transactions.signed'))p.transaction=true;
   if(parent)p.likes=replyLikesFor(s,id,parent.likes,sameStories.get(id));p.engagementVersion=ENGAGEMENT_VERSION;
   if(parent){p.replyTo=parent.id;replyCounts.set(parent.id,(replyCounts.get(parent.id)??0)+1);}
   if(reaction){reactionAccounts.set(accountKey,(reactionAccounts.get(accountKey)??0)+1);if(topic)reactionTopics.set(topic,(reactionTopics.get(topic)??0)+1);}

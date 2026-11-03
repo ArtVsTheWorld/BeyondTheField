@@ -2,15 +2,27 @@ import {discoveryViews} from './social_discovery.mjs';
 import {visibleEdition,comparePublication} from './publication_timeline.mjs';
 export const SCOPES=['all','national','conference','team'];
 const order=(a,b)=>b.priority-a.priority||a.id.localeCompare(b.id);
-const byLikes=(a,b)=>Math.max(0,b.likes??0)-Math.max(0,a.likes??0)||(a.id<b.id?-1:a.id>b.id?1:0);
+// Editorial order is independent of flavor engagement. Rotate categories and
+// accounts while preserving major news and deterministic same-edition order.
+export function editorialRoots(roots){
+ const buckets=new Map(),counts=new Map(),accounts=new Map(),out=[];
+ for(const p of roots){const key=p.category??'news',list=buckets.get(key)??[];list.push(p);buckets.set(key,list);}
+ for(const list of buckets.values())list.sort(order);
+ let last=null;
+ while(buckets.size){let best=null,group=null,bestScore=-Infinity;
+  for(const [key,list] of buckets){const p=list[0],score=(p.priority??80)-(counts.get(key)??0)*4-(accounts.get(p.handle)??0)*7-(key===last?24:0);if(score>bestScore||score===bestScore&&p.id<best.id){best=p;group=key;bestScore=score;}}
+  out.push(best);counts.set(group,(counts.get(group)??0)+1);accounts.set(best.handle,(accounts.get(best.handle)??0)+1);last=group;
+  buckets.get(group).shift();if(!buckets.get(group).length)buckets.delete(group);
+ }return out;
+}
 const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:(p.scopes.includes('team')||p.scopes.includes('relevant'))?'team':p.scopes.includes('conference')?'conference':'national';
 // Order a real conversation with its parent immediately before the replies.
 // Orphans and cycles never become visible, including in dedicated scope views.
 export function conversationOrder(stories){
  const map=new Map(stories.map(p=>[p.id,p])),children=new Map(),roots=[],result=[],visited=new Set();
  for(const p of stories){if(!p.replyTo)roots.push(p);else if(map.has(p.replyTo)){const a=children.get(p.replyTo)??[];a.push(p);children.set(p.replyTo,a);}}
- function visit(p){if(visited.has(p.id))return;visited.add(p.id);result.push(p);for(const child of (children.get(p.id)??[]).sort(byLikes))visit(child);}
- for(const p of roots.sort(byLikes))visit(p);return result;
+ function visit(p){if(visited.has(p.id))return;visited.add(p.id);result.push(p);for(const child of (children.get(p.id)??[]).sort(order))visit(child);}
+ for(const p of editorialRoots(roots))visit(p);return result;
 }
 export function curate(stories,limit=30){
  const relevance=(a,b)=>Number(b.scopes.includes('team'))-Number(a.scopes.includes('team'))||order(a,b);
@@ -46,7 +58,7 @@ export function curate(stories,limit=30){
  for(const p of pool){if(counts.team>=target.team)break;if(bucketFor(p)==='team')accept(p,true,true);}
  for(const p of pool){if(selected.length>=limit)break;accept(p);}
  for(const p of pool){if(selected.length>=limit)break;accept(p,false,true);}
- // Editorial selection retains relevance/variety; presentation ranks threads by likes.
+ // Editorial selection and presentation both ignore flavor likes.
  return conversationOrder(selected);
 }
 export function scopeViews(stories){
@@ -58,7 +70,7 @@ export function publishWeek(feed){
   const publication={key:feed.key,season:feed.season,phase:feed.phase,week:feed.week};
   const stories=feed.stories.map(p=>({...p,publication}));
   const views={...scopeViews(stories),...(feed.scopeOptions?discoveryViews(conversationOrder(stories),feed.scopeOptions):{})},map=new Map(stories.map(p=>[p.id,p]));
-  return {...feed,stories,views,posts:views.all.map(id=>map.get(id)),publication};
+  return {...feed,editorialVersion:1,stories,views,posts:views.all.map(id=>map.get(id)),publication};
 }
 
 export function buildCatalog(active,history=[]){
@@ -68,7 +80,7 @@ export function buildCatalog(active,history=[]){
     if(!f.publication||f.publication.key!==f.key||f.publication.week!==f.week)throw Error('Invalid publication-week archive');
     const old=byWeek.get(f.key);if(!old||f===active||(f.sourceModifiedMs??0)>(old.sourceModifiedMs??0))byWeek.set(f.key,f);
   }
-  const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','publication'];
-  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),events:f.events??[],stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
+  const displayKeys=['id','author','handle','body','stamp','category','voice','replyTo','imageLibrary','imageValue','uniformTeamLogo','likes','transaction','publication'];
+  const weeks=[...byWeek.values()].sort(comparePublication).map(f=>({...Object.fromEntries(['format','engineVersion','key','leagueId','userTeamIndex','season','phase','week','conference','publication','reconstructed'].map(k=>[k,f[k]])),stories:f.stories.map(p=>Object.fromEntries(displayKeys.filter(k=>p[k]!==undefined).map(k=>[k,p[k]]))),views:f.views}));
   return {...active,catalogVersion:2,activeWeekKey:active.key,weeks};
 }

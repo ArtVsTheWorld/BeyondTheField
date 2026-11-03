@@ -1,3 +1,4 @@
+import {renderStories} from '../Tools/story_renderer.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {publishOffer,publishReply,currentPublicationPolicy} from '../Tools/publication_policy.mjs';
@@ -12,7 +13,7 @@ test('offer publication is approximately 20 percent, stable on refresh/rename an
 });
 test('unpublished offers remain observed events but have no standalone or orphan reply posts',()=>{
  const s=fixture();for(let n=0;n<1000;n++){const id='recruit'+n;s.players.push({id,name:'Recruit '+n,team:255,position:'WR',personality:'Neutral',injury:'Uninjured'});s.newOffers??=[];s.newOffers.push({player:id,team:n%2+1,rank:n+1});}
- const f=buildFeed(s),roots=f.stories.filter(p=>p.category==='offers'&&!p.replyTo);assert.equal(f.events.filter(e=>e.category==='offers').length,1000);assert.ok(roots.length>=160&&roots.length<=240,roots.length);const ids=new Set(f.stories.map(p=>p.id));assert.ok(f.stories.every(p=>!p.replyTo||ids.has(p.replyTo)));
+ const f=buildFeed(s),eligible=renderStories(s,f.events).stories,roots=eligible.filter(p=>p.category==='offers'&&!p.replyTo);assert.equal(f.events.filter(e=>e.category==='offers').length,1000);assert.ok(roots.length>=160&&roots.length<=240,roots.length);const ids=new Set(eligible.map(p=>p.id));assert.ok(eligible.every(p=>!p.replyTo||ids.has(p.replyTo)));
  const repeated=buildFeed(s);assert.deepEqual(repeated.stories,f.stories);
 });
 test('the publication-policy change invalidates legacy offer caches without rerolling other active-week wording',()=>{

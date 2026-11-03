@@ -11,7 +11,7 @@ export function discoveryViews(stories,options){
 }
 export const CATEGORY_FILTERS=[
  {key:'all',label:'All Types'},
- {key:'recruiting',label:'Recruiting',categories:['recruiting','offers'],voices:['recruit']},
+ {key:'recruiting',label:'Recruiting',categories:['recruiting','offers','signings'],voices:['recruit']},
  {key:'recaps',label:'Recaps',categories:['results','team-stats','player-stats','upsets','streaks','matchup-recap','season-end']},
  {key:'upcoming',label:'Upcoming',categories:['schedule','watch','lines','preseason','matchup-preview']},
  {key:'rankings',label:'Rankings & Awards',categories:['polls','heisman','cfp','awards','records','history','championship','bowls']},
@@ -20,11 +20,12 @@ export const CATEGORY_FILTERS=[
  {key:'official',label:'Official Accounts',voices:['official','cfp']},
  {key:'player',label:'Players',voices:['player']},
  {key:'injuries',label:'Injuries',categories:['injuries']},
- {key:'fan',label:'Fans',voices:['fan']}
+ {key:'fan',label:'Fans',voices:['fan']},
+ {key:'transactions',label:'Transactions',categories:['coaching','transactions','nil','transfer','signings']}
 ];
 export function filterConversations(stories,key='all'){
  const f=CATEGORY_FILTERS.find(x=>x.key===key);if(!f)throw Error('Unknown category filter');
  const accepted=new Set(),result=[];
- for(const p of stories){if(p.replyTo?accepted.has(p.replyTo):key==='all'||f.categories?.includes(p.category)||f.voices?.includes(p.voice)){accepted.add(p.id);result.push(p);}}
+ for(const p of stories){if(p.replyTo?accepted.has(p.replyTo):key==='all'||(key==='transactions'?(p.transaction||f.categories.includes(p.category)&&['analyst','beat'].includes(p.voice)):f.categories?.includes(p.category)||f.voices?.includes(p.voice))){accepted.add(p.id);result.push(p);}}
  return result;
 }

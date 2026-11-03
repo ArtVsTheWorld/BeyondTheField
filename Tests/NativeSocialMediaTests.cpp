@@ -110,8 +110,8 @@ int main(int argc,char** argv){
             {
                 Json large=data;auto& largeEdition=large["weeks"][0];largeEdition["stories"]=Json::array();largeEdition["views"]=Json::object();for(const char* scope:{"all","national","conference","team"})largeEdition["views"][scope]=Json::array();
                 for(unsigned n=0;n<9300;++n){const auto id="offer-"+std::to_string(n);largeEdition["stories"].push_back({{"id",id},{"author","Recruit"},{"handle","@Recruit"},{"body","Verified scholarship announcement"},{"stamp","Recruiting"},{"category","offers"},{"voice","recruit"},{"likes",n},{"imageLibrary",79},{"imageValue",598},{"publication",{{"key",large["key"]},{"week",7}}}});for(const char* scope:{"national","conference","team"})largeEdition["views"][scope].push_back(id);if(n<30)largeEdition["views"]["all"].push_back(id);}
-                validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==4096,"Large candidate catalog changed the 30/100/60/team display caps");
-                auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==100&&recruiting->posts[0].likes==9299,"Large recruiting category lost popularity ordering or its National cap");
+                validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==20,"Large candidate catalog changed the 30/100/60/team display caps");
+                auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==100&&recruiting->posts[0].likes==0,"Large recruiting category lost editorial order or its National cap");
                 auto excessive=large;excessive["weeks"][0]["stories"].get_ref<Json::array_t&>().resize(32769,largeEdition["stories"][0]);bool bounded=false;try{validate(excessive,config);}catch(const std::exception& e){bounded=std::string(e.what()).find("exceeds catalogue limit")!=std::string::npos;}require(bounded,"Unbounded weekly catalog was accepted");
             }
             {
@@ -185,11 +185,12 @@ int main(int argc,char** argv){
             social::FeedPost reply{"attached","@fan","reply","Reply"};reply.replyTo="0:0";reply.likes=200;reply.voice="fan";e.stories.emplace("reply",reply);ids.insert(ids.begin(),"reply");
             for(const auto& scope:catalog->scopes)e.views[scope.key]=ids;catalog->weeks.push_back(e);
             auto national=social::selectFeed(catalog,0,1);require(national->posts.size()==100,"National cap failed");
-            require(national->posts[0].author=="0:0"&&national->posts[1].author=="attached"&&national->posts[2].author=="0:1","Likes ordering split a conversation or followed incoming order");
-            require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==281,"Team feed was unexpectedly truncated");
+            require(national->posts[0].author=="0:0"&&national->posts[1].author=="attached"&&national->posts[2].author=="1:0","Editorial ordering split a conversation or followed likes");
+            require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==20,"Team feed card budget failed");
             auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==100&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
             require(social::selectFeed(catalog,0,2,5)->posts.size()==60,"Filtered conference cap failed");
         }
+        {social::FeedPost p{"reporter","@reporter","terms","Signing"};p.voice="beat";p.category="signings";require(social::matchesType(p,11)&&social::matchesType(p,1),"Reported signatures must appear in Transactions and Recruiting");p.category="coaching";p.voice="fan";require(!social::matchesType(p,11),"Speculative fan roots must not become transaction reports");p.voice="analyst";require(social::matchesType(p,11),"Coaching reports must appear in Transactions");}
         require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");
         unsigned changed=0;
         {
@@ -226,6 +227,10 @@ int main(int argc,char** argv){
             savedNav=navRequest;navRequest=originalNav;const bool previousValidated=feedValidated;feedValidated=true;opened=false;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","A failed dropdown model gate must complete through native no-action navigation");navForwardCalls=0;feedValidated=previousValidated;navRequest=savedNav;modelBytes[0x24ae0]^=1;
             require(configureNewsDropdowns(false)&&!dropdownScreenOwned&&!dropdownModelOwned,"Dropdown restore failed");
             for(const auto& p:dropdownPatches)require(memcmp((p.model?modelBytes:screenBytes)+p.offset,p.original.data(),p.original.size())==0,"Dropdown function failed exact restoration");
+            newsTemplate=0;const auto poolEvents=std::count_if(messages.begin(),messages.end(),[](const Json& j){return j.value("event",std::string())=="social_screen_pool_reused";});
+            require(configureNewsDropdowns(true)&&newsTemplate==dropdownScreenBase+0x8a0,"Verified previous News allocation did not resolve the new screen");
+            require(std::count_if(messages.begin(),messages.end(),[](const Json& j){return j.value("event",std::string())=="social_screen_pool_reused";})==poolEvents+1,"News lookup unnecessarily scanned unrelated process allocations");
+            require(configureNewsDropdowns(false),"Pool-discovered screen did not restore exactly");
             auto* replacementModel=static_cast<unsigned char*>(VirtualAlloc(nullptr,0x30000,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));require(replacementModel!=nullptr,"Replacement model fixture allocation failed");
             memcpy(replacementModel,"Apt Data:1:7:8",14);for(const auto& p:dropdownPatches)if(p.model)memcpy(replacementModel+p.offset,p.original.data(),p.original.size());
             modelBytes[0x24a58]^=1;require(ensureNewsModel()&&newsModelBase==reinterpret_cast<uintptr_t>(replacementModel),"Preseason replacement model was not reacquired");

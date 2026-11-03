@@ -1,3 +1,5 @@
+import {transactionObservation} from './transaction_events.mjs';
+import {applyWeeklyCoverage} from './weekly_coverage.mjs';
 // Approved prewritten voices applied only to verified Dynasty event facts.
 import {scopeCatalog} from './social_discovery.mjs';
 import {publishWeek} from './feed_selection.mjs';
@@ -26,5 +28,5 @@ export function buildFeed(s,previous=null,options={}){
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,publicationPolicyVersion:PUBLICATION_POLICY_VERSION,
-    presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,stories:rendered.stories});
+    presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,transactionObservation:transactionObservation(s),coverageVersion:1,stories:applyWeeklyCoverage(rendered.stories,s)});
 }

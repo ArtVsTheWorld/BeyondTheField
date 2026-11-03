@@ -22,7 +22,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     const seasonSlots=arraySlots?await arraySlots(v.TeamSeasonStats):[];
     const currentStats=seasonSlots[0];
     const seasonStats=currentStats?.type==='TeamStats'?{season:season.CurrentSeasonYear,slot:0,stats:currentStats.v}:null;
-    const coachFacts=c=>({seasonsWithTeam:Number.isInteger(c?.SeasonsWithTeam)?c.SeasonsWithTeam:null,yearsCoaching:Number.isInteger(c?.YearsCoaching)?c.YearsCoaching:null,style:c?.DominantArchetype??null});
+    const coachFacts=c=>({seasonsWithTeam:Number.isInteger(c?.SeasonsWithTeam)?c.SeasonsWithTeam:null,yearsCoaching:Number.isInteger(c?.YearsCoaching)?c.YearsCoaching:null,style:c?.DominantArchetype??null,contract:{length:c?.ContractLength??null,remaining:c?.ContractYearsRemaining??null,salaryRaw:c?.ContractSalary??null,count:c?.COACH_CONSECTEAMCONTRACTS??null,status:c?.ContractStatus??null}});
     const coachCareer=coach?await resolve(coach.v.CareerStats):null,coachSeason=coach?await resolve(coach.v.SeasonStats):null;
     const headCoach=coachName?{id:coach.key,name:coachName,firstName:coachFirst,lastName:coachLast,...coachFacts(coach.v),jobSecurity:coach.v.CurrentJobSecurityStatus??null,careerStats:coachCareer?.type==='CareerCoachStats'?coachCareer.v:null,seasonStats:coachSeason?.type==='SeasonCoachStats'?coachSeason.v:null}:null;
     const builder=await resolve(v.TeamBuilderData);
@@ -167,11 +167,11 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
         const p=await resolve(r.v.Player);if(p)offers.push({player:p.key,team:t.TeamIndex,rank:r.v.NationalRank});
       }
       if(!commit||commit.team!==t.TeamIndex)continue;
-      if(commit.stage==='Signed')signings.push({...commit});else commitments.push({...commit,week:target.v.CommittedWeekNumber});
+      if(commit.stage==='Signed')signings.push({...commit,nilOfferPoints:Number.isFinite(target.v.CurrentNILOffer)&&target.v.CurrentNILOffer>=0?target.v.CurrentNILOffer:null});else commitments.push({...commit,week:target.v.CommittedWeekNumber});
     }
   }
   const coachingOpenings=[],coachOffers=[];
-  const coachIdentity=async ref=>{const c=await resolve(ref);return c?.type==='Coach'?{id:c.key,name:[c.v.FirstName,c.v.LastName].filter(Boolean).join(' '),team:c.v.TeamIndex,position:c.v.Position??null,status:c.v.ContractStatus??null}:null;};
+  const coachIdentity=async ref=>{const c=await resolve(ref);return c?.type==='Coach'?{id:c.key,name:[c.v.FirstName,c.v.LastName].filter(Boolean).join(' '),team:c.v.TeamIndex,position:c.v.Position??null,status:c.v.ContractStatus??null,contract:{length:c.v.ContractLength??null,remaining:c.v.ContractYearsRemaining??null,salaryRaw:c.v.ContractSalary??null,count:c.v.COACH_CONSECTEAMCONTRACTS??null,status:c.v.ContractStatus??null}}:null;};
   for(const {v:h} of await records('StaffHiringEval')){
     const offers=new Map();
     for(const j of await array(h.JobOpenings))if(j.type==='JobOpening'){
@@ -182,7 +182,7 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
       coachingOpenings.push({id:j.key,team,role,reason:j.v.Reason,filled:j.v.Filled===true,previous:old,selected,current,offerIds:children.map(o=>o.key)});
     }
     for(const o of await array(h.OutstandingStaffPersonOffersList))if(o.type==='StaffPersonContractOffer')offers.set(o.key,o);
-    for(const o of offers.values()){const team=await teamIndex(o.v.Team),coach=await coachIdentity(o.v.StaffPerson);if(coach&&team!==null&&team!==255)coachOffers.push({id:o.key,team,coach,role:o.v.ContractPosition,status:o.v.Status,index:o.v.OfferIndex});}
+    for(const o of offers.values()){const team=await teamIndex(o.v.Team),coach=await coachIdentity(o.v.StaffPerson);if(coach&&team!==null&&team!==255)coachOffers.push({id:o.key,team,coach,role:o.v.ContractPosition,status:o.v.Status,index:o.v.OfferIndex,length:o.v.Length??null});}
   }
   return {format:2,sourceUnchanged:true,gameYear:27,...identity,leagueId:franchise.LeagueID,
     season,userTeamIndex,teams,conferences,players,games,playoffBracket,postseasonAssignments,performances,heisman,annualAwards,allAmericanHonors,coachingOpenings,coachOffers,signings,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,recruitVisits,preseasonHonors};
