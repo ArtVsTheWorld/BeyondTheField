@@ -17,4 +17,32 @@ inline std::optional<std::vector<unsigned char>> clone(const Program& program,co
 template<class Read>bool ownerMatches(uintptr_t owner,uintptr_t image,uintptr_t definition,Read read){
     std::array<unsigned char,0x60> bytes{};return owner>=0x10000&&owner%8==0&&read(owner,bytes.data(),bytes.size())&&field<uintptr_t>(bytes.data(),0)==image+functionVtable&&bytes[11]==0x46&&field<uintptr_t>(bytes.data(),definitionField)==definition;
 }
+// Validate the executing owner and its complete, still-original News model.
+// No heap discovery or assumption that an earlier class instance is alive.
+struct Candidate {
+    uintptr_t definition=0,model=0;
+    size_t program=0;
+    std::array<unsigned char,definitionHeader> header{};
+};
+template<class Read>std::optional<Candidate> inspectCandidate(uintptr_t owner,uintptr_t image,const std::vector<Program>& programs,Read read){
+    uintptr_t definition=0;
+    if(!read(owner+definitionField,&definition,sizeof(definition))||!ownerMatches(owner,image,definition,read))return {};
+    std::array<unsigned char,definitionHeader> header{};
+    if(!read(definition,header.data(),header.size()))return {};
+    for(size_t i=0;i<programs.size();++i){
+        const auto& program=programs[i];
+        if(!headerMatches(program,header)||definition<program.definition+0x10000)continue;
+        const auto model=definition-program.definition;
+        std::array<char,14> magic{};
+        if(!read(model,magic.data(),magic.size())||(memcmp(magic.data(),"Apt Data:1:7:8",14)&&memcmp(magic.data(),"Apt Data:1:8:8",14)))return {};
+        const auto pool=field<uintptr_t>(header.data(),40);
+        for(const auto& peer:programs){
+            std::array<unsigned char,definitionHeader> peerHeader{};
+            std::vector<unsigned char> body(peer.original.size());
+            if(!read(model+peer.definition,peerHeader.data(),peerHeader.size())||!headerMatches(peer,peerHeader)||field<unsigned>(peerHeader.data(),32)!=41||field<uintptr_t>(peerHeader.data(),40)!=pool||!read(model+peer.definition+definitionHeader,body.data(),body.size())||body!=peer.original)return {};
+        }
+        return Candidate{definition,model,i,header};
+    }
+    return {};
+}
 }

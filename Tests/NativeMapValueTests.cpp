@@ -61,6 +61,32 @@ int main(){
         require(ownerMatches(owner,image,definition,read));put(definitionField,definition+8);require(!ownerMatches(owner,image,definition,read));put(definitionField,definition);object[11]=0x45;require(!ownerMatches(owner,image,definition,read));
     }
     {
+        using namespace social::embedded::lifecycle;
+        const auto programs=social::embedded::lifecycle::programs();
+        std::vector<unsigned char> arena(0x30000);
+        const uintptr_t model=reinterpret_cast<uintptr_t>(arena.data()),owner=model+0x28000,image=0x140000000;
+        auto put=[&](uintptr_t at,auto value){memcpy(reinterpret_cast<void*>(at),&value,sizeof(value));};
+        auto read=[&](uintptr_t at,void* out,size_t size){if(at<model||at-model>arena.size()||size>arena.size()-(at-model))return false;memcpy(out,reinterpret_cast<void*>(at),size);return true;};
+        memcpy(arena.data(),"Apt Data:1:7:8",14);
+        for(const auto& p:programs){const auto d=model+p.definition;
+            put(d,model+0x26000);put(d+8,p.argc);put(d+12,static_cast<unsigned short>(p.registers));put(d+14,static_cast<unsigned short>(p.flags));put(d+16,model+0x26100);put(d+24,static_cast<unsigned>(p.original.size()));put(d+32,unsigned(41));put(d+40,model+0x26200);
+            memcpy(reinterpret_cast<void*>(d+definitionHeader),p.original.data(),p.original.size());
+        }
+        put(owner,image+functionVtable);put(owner+8,uint64_t(0x46000000));
+        for(size_t i=0;i<programs.size();++i){put(owner+definitionField,model+programs[i].definition);auto found=inspectCandidate(owner,image,programs,read);require(found&&found->program==i&&found->model==model&&found->definition==model+programs[i].definition);}
+        put(owner+definitionField,model+programs[0].definition);
+        const auto peer=model+programs[1].definition;
+        put(peer+32,unsigned(40));require(!inspectCandidate(owner,image,programs,read));put(peer+32,unsigned(41));
+        put(peer+40,model+0x26300);require(!inspectCandidate(owner,image,programs,read));put(peer+40,model+0x26200);
+        arena[programs[1].definition+definitionHeader]^=1;require(!inspectCandidate(owner,image,programs,read));arena[programs[1].definition+definitionHeader]^=1;
+        arena[0]='X';require(!inspectCandidate(owner,image,programs,read));arena[0]='A';
+        put(owner,image+functionVtable+8);require(!inspectCandidate(owner,image,programs,read));put(owner,image+functionVtable);
+        put(owner+definitionField,model+arena.size()+8);require(!inspectCandidate(owner,image,programs,read));
+        // A new owner must be validated from its own current model, independently
+        // of any owner or definition address recorded for an earlier Dynasty.
+        put(owner+definitionField,model+programs[0].definition);require(inspectCandidate(owner,image,programs,read).has_value());
+    }
+    {
         auto patches=social::dropdown::patches();const auto before=patches.front().changed;social::embedded::scopeTemplateFlow(patches);const auto& after=patches.front().changed;
         for(size_t i=0;i<after.size();++i)if(!(i>=0xcd&&i<0xcd+41)&&i!=0x118)require(after[i]==before[i]);
         require(after[0x118]==0x73);size_t at=0xcd;std::vector<std::pair<std::string,int>> fields;
@@ -82,4 +108,5 @@ int main(){
     std::cout<<"Passed: year-round placement without Team, duplicate/foreign donor rejection, registered News screen key and bumper-bubbling scroll.\n";
     std::cout<<"Passed: descriptor traversal preserves native arrays/objects by reference and rejects cycles, duplicate keys and foreign values.\n";
     std::cout<<"Passed: owned script definitions preserve relocated headers and reject foreign owners/metadata.\n";
+    std::cout<<"Passed: lazy script candidates require the current original News model, both full bodies, matching pools and a genuine script owner.\n";
 }

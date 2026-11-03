@@ -1,6 +1,6 @@
 {
   "prototype": "p05",
-  "status": "Offline checks passed; native visual test pending",
+  "status": "Shelved at user request after live presentation and input failures",
   "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DirectHub-DynastyEnhancerHubPrototype-p05-ddd872708a154711a3967e6c38927bab\\DynastyEnhancerHubPrototype-p05.dll",
   "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DynastyEnhancerHubPrototype-p05.zip",
   "nativeSha256": "997ec37fe453e85542b6e6c95b4dca17b7d6759dc8a59e7ea9c5a2dabf8aa36c",
@@ -30,10 +30,32 @@
     "nativeFunctionFormat": "Live opcode0x8e pool initialization and definition layout independently verified"
   },
   "notYetDone": [
-    "Live visual geometry/header/preview validation",
+    "Hide and restore all relevant stock preview content while Social Media focused",
+    "Refresh native dropdown providers when the initial preparing feed becomes ready",
     "Cold tab insertion without menu refresh",
     "Recreated CFM class handling on Continue/rollover",
-    "Dedicated native category hint"
+    "Dedicated native category hint",
+    "Full live controls and reload validation"
   ],
-  "privateHistoryIncludedInZip": false
+  "privateHistoryIncludedInZip": false,
+  "live": {
+    "pid": 34256,
+    "directFeed": true,
+    "hubTabsVisible": true,
+    "feedHigher": true,
+    "stockCoachPreviewStillVisible": true,
+    "dropdownsCachedPreparingChoices": true,
+    "controllerTabSwitchesLogged": true,
+    "sameSessionReloadTested": false,
+    "userConfirmed": [
+      "Hub tabs remain visible",
+      "Feed is higher",
+      "Team depth chart still remains",
+      "Filters do not work",
+      "Scrolling far enough moves to Stats & Records"
+    ],
+    "filtersWork": false,
+    "scrollRetainsTab": false
+  },
+  "userDecision": "Hold the direct-tab goal; restore button-based Social Media"
 }
