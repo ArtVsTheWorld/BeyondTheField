@@ -38,7 +38,6 @@
   },
   "recovery": "Read-only milestone copies; active runtime remains the production source",
   "liveChecksRemaining": [
-    "Identifiable encouraged-transfer and conference changes",
     "Next-preseason carryover and reload persistence",
     "Future unassisted full-cycle capture"
   ],
@@ -61,5 +60,37 @@
     "ulmDevelopmentFacts": 11,
     "departuresBeforeChanges": 0,
     "conferenceChangesBeforeChanges": 0
+  },
+  "userChanges": {
+    "capturedBeforeAdvance": true,
+    "stage": 9,
+    "departures": [
+      {
+        "name": "Bryson Kimbrough",
+        "position": "QB",
+        "school": "UL Monroe",
+        "nativePortalEntrant": true
+      },
+      {
+        "name": "Trevor Tyson",
+        "position": "RB",
+        "school": "UL Monroe",
+        "nativePortalEntrant": true
+      }
+    ],
+    "realignment": [
+      {
+        "team": "UNLV",
+        "from": "MW",
+        "to": "Pac-12"
+      },
+      {
+        "team": "Charlotte",
+        "from": "American",
+        "to": "Independent"
+      }
+    ],
+    "nextPreseasonProjection": true,
+    "livePreseasonPublicationPending": true
   }
 }
