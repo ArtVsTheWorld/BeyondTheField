@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v84
+# Dynasty Enhancer - MMC prototype v85
 
 Native Social Media inside the offline Dynasty hub. Its dedicated tab contains Open Feed year-round; Dynasty Central/CFB shortcuts provide a fallback for an unsupported native tab layout. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v84/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v84/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v85/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v85/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,13 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - For You shows up to 30 posts, National 100 and a conference 60. Editorial priority and variety order parent threads; likes are flavor and replies remain attached. Missing real candidates are not replaced with sample tweets.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v84 changes
+## v85 changes
+
+- Corrects v84's descriptor-number ABI, which could blank the entire hub. Uses the native double-number factory and verifies all native scalar fields and the completed pointer array before sending a replacement. Failed verification forwards the untouched native hub.
+- Inserts the descriptor physically after Team, as well as assigning its intermediate priority.
+- Native regression checks preserve fractional numbers, negative sentinels, insertion position and rejection of corrupt readback. The v84 portal/draft content and existing controls remain.
+
+## Previous v84 changes
 
 - Dedicated Social Media hub tab after Team, with one Open Feed button. Original tab descriptors stay intact; unsupported layouts retain existing shortcuts.
 - Opening-week portal news uses actual transfer-list membership, verified former schools and current recruiting interest. Remaining high-school prospect stories exclude committed/signed recruits.

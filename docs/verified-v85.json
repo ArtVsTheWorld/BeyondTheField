@@ -1,0 +1,39 @@
+{
+  "build": "v85",
+  "installed": true,
+  "contentRevision": "portal-draft-v84",
+  "nodeTests": {
+    "pass": 273,
+    "fail": 0
+  },
+  "native": {
+    "physicalInsertionAfterTeam": true,
+    "allDynamicScopes": true,
+    "arrayPointerOrderReadback": true,
+    "unitChecks": true,
+    "exactDescriptorReadback": true,
+    "catalogEditions": 25,
+    "doubleNumberAbi": true
+  },
+  "mmc": {
+    "registration": true,
+    "installedVerification": true,
+    "payloadTamperChecks": true
+  },
+  "backups": {
+    "historyMigrationVerified": true,
+    "checksumVerified": true,
+    "historyFiles": 10,
+    "saveFiles": 8
+  },
+  "liveChecksRemaining": [
+    "Clean launch: hub and tab placement",
+    "Open Feed, LT/RT, LB/RB, scrolling and Back",
+    "National Transactions draft order/icon"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v85.dll": "e9c4a3b625e085efbba7db29a42523fa7a63bfd4b3cea9f87328621d2726af93",
+    "DynastyEnhancer-v85-MMC.zip": "5aff89b82132518c37580bf3e450d061f5019f9cac88135eb27f30f327f73c96",
+    "DynastyEnhancer.dll": "83d4af96270c7e173cc7cb15e964e4223a494e5e2bc90beb24d19e0f5c8c9b8a"
+  }
+}

@@ -14,6 +14,8 @@ void* expectedRequestSelf=nullptr;
 void* expectedRequestParams=nullptr;
 unsigned requestCalls=0;
 bool requestResult=true;
+double numberArgument=0;void* numberManager=nullptr;
+void* __fastcall nativeNumber(void* manager,void** result,double value){numberManager=manager;numberArgument=value;*result=&numberArgument;return result;}
 bool __fastcall originalRequest(void* self,void* panel,void* params){lastDonorPanel=argument(panel);++requestCalls;return requestResult&&self==expectedRequestSelf&&params==expectedRequestParams;}
 void __fastcall donorRows(void*,void* panel,void* out){
     lastDonorPanel=argument(panel);
@@ -37,8 +39,10 @@ int main(int argc,char** argv){
     try {
         {
             using social::hubtab::plan;
+            for(const auto value:{4.5,-1.0,13.0}){auto made=social::hubtab::number(nativeNumber,&numberManager,value);require(made==&numberArgument&&numberManager==&numberManager&&numberArgument==value,"Native descriptor numbers must preserve double ABI, fractions and negative sentinels");}
             std::vector<Json> rows={{{"id","cm_team"},{"priority",5}},{{"id","CM_LEAGUE"},{"priority",4}},{{"id","DynastyCentral"},{"priority",1},{"screenId","PANEL_MENU"},{"numRows",13}}};const auto saved=rows;
             const auto custom=plan(rows);require(custom&&custom->at("id")==social::hubtab::id&&custom->at("name")=="Social Media"&&custom->at("priority")==4.5&&custom->at("screenId")=="PANEL_MENU"&&custom->at("numRows")==1,"Dedicated tab must sit between Team and Stats and preserve the native screen type");require(rows==saved,"Dedicated tab planning mutated stock descriptors");
+            require(social::hubtab::insertAfterTeam(rows)==1,"Dedicated tab must be physically inserted after Team, not appended after Dynasty Central");require(social::hubtab::matches(*custom,custom),"Valid native readback was rejected");auto corrupted=*custom;corrupted["NumRows"]=123456789.0;require(!social::hubtab::matches(*custom,corrupted)&&!social::hubtab::matches(*custom,{}),"Invalid native layout readback must fall back to the stock hub");
             rows.push_back(*custom);require(!plan(rows),"Dedicated tab must not be duplicated");rows=saved;rows.erase(rows.begin());require(!plan(rows),"Missing anchors must preserve the original hub");rows=saved;rows[1]["priority"]=5;require(!plan(rows),"Ambiguous tab ordering must not be guessed");
             const uintptr_t image=0x140000000;std::array<unsigned char,64> map{},text{},number{};std::array<unsigned char,32> nodeA{},nodeB{};std::array<unsigned char,16> keyA{},keyB{},value{};std::array<uintptr_t,1> buckets{};
             auto put=[](auto& b,size_t off,const auto& v){memcpy(b.data()+off,&v,sizeof(v));};

@@ -50,5 +50,11 @@
     "stories": 1000,
     "week": 2,
     "saveRequired": false
+  },
+  "liveHubFailure": {
+    "hubBlankAfterRefresh": true,
+    "nativeNumericAbiIncorrect": true,
+    "automaticLoaderDisabled": true,
+    "hooksStopped": true
   }
 }

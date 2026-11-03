@@ -4,7 +4,11 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Dedicated hub tab, portal and draft (v84)
+## Hub layout recovery (v85)
+
+The current package is `Build/DynastyEnhancer-v85-MMC.zip`. v84's first in-game hub refresh went blank: its new descriptor used an unsigned-integer native setter with a floating-point ABI. v85 uses the verified double-number factory, reads back the complete native descriptor and array before publication, and preserves the original hub if either fails. The tab is also physically inserted after Team. See [v85 recovery and verification](docs/hub-layout-v85.md). The portal/draft content from v84 remains.
+
+## Previous dedicated hub tab, portal and draft (v84)
 
 The current package is `Build/DynastyEnhancer-v84-MMC.zip`. A year-round **Social Media** hub tab after Team contains **Open Feed**, with the existing native feed and controls. Dynasty Central/CFB shortcuts remain a fallback if the native tab layout cannot be verified.
 

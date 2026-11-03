@@ -4,6 +4,12 @@
 #include <set>
 namespace social::hubtab {
 inline constexpr char id[]="CM_DYNASTY_SOCIAL";
+// The native number factory takes a double in XMM2. The similarly shaped
+// unsigned-integer factory takes R8D and must never be called through this ABI.
+using NumberFactory=void*(__fastcall*)(void*,void**,double);
+inline void* number(NumberFactory factory,void* manager,double value){void* result=nullptr;factory(manager,&result,value);return result;}
+inline size_t insertAfterTeam(const std::vector<nlohmann::json>& rows){for(size_t i=0;i<rows.size();++i)if(rows[i].value("id",std::string())=="cm_team")return i+1;return rows.size();}
+inline bool matches(const nlohmann::json& expected,const std::optional<nlohmann::json>& actual){return actual&&*actual==expected;}
 template<class Read>bool sso(uintptr_t address,std::string& value,Read read){
     std::array<unsigned char,16> b{};if(!read(address,b.data(),b.size()))return false;
     if(b[15]&128){uintptr_t p=0;uint32_t length=0;memcpy(&p,b.data(),8);memcpy(&length,b.data()+8,4);if(length>512)return false;value.resize(length);return !length||read(p,value.data(),length);}

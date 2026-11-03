@@ -429,7 +429,6 @@ FilterData filterData=nullptr;
 FilterChanged filterChanged=nullptr;
 void tileText(void* tile,const char* name,const char* value){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(tile,name,value);}
 void tileInt(void* tile,const char* name,int value){reinterpret_cast<void(__fastcall*)(void*,const char*,int)>(base+0x2b075c0)(tile,name,value);}
-void tileFloat(void* tile,const char* name,float value){reinterpret_cast<void(__fastcall*)(void*,const char*,float)>(base+0x2bf67d0)(tile,name,value);}
 void tileBool(void* tile,const char* name,bool value){reinterpret_cast<void(__fastcall*)(void*,const char*,bool)>(base+0x2b07670)(tile,name,value);}
 void releaseValue(void* value);
 void* makeObject(){void* result=nullptr;auto manager=reinterpret_cast<void*(__fastcall*)()>(base+0x3f0a1d0)();reinterpret_cast<void*(__fastcall*)(void*,void**)>(base+0x8aec980)(manager,&result);return result;}
@@ -440,6 +439,11 @@ void objectValue(void* target,const char* name,void* value){
     auto slot=reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(iterator[0])+0x10);
     if(value)InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(value)+0x14));
     releaseValue(*slot);*slot=value;
+}
+void tileNumber(void* tile,const char* name,double value){
+    void* manager=nullptr;if(!read(reinterpret_cast<uintptr_t>(tile)+8,&manager,8)||!manager)return;
+    auto number=social::hubtab::number(reinterpret_cast<social::hubtab::NumberFactory>(base+0x8aec870),manager,value);
+    if(number){objectValue(tile,name,number);releaseValue(number);}
 }
 void objectText(void* out,const char* name,const char* value){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>((*reinterpret_cast<void***>(out))[4])(out,name,value);}
 template<class T>void rowSet(void* out,unsigned row,const char* name,T value,size_t slot){reinterpret_cast<void(__fastcall*)(void*,unsigned,const char*,T)>((*reinterpret_cast<void***>(out))[slot])(out,row,name,value);}
@@ -575,8 +579,15 @@ void __fastcall menuReadyHook(void* self,void* data){
     for(auto p=span[0];p<span[1];p+=8){void* object=nullptr;if(!read(p,&object,8)){menuReady(self,data);return;}auto fields=social::hubtab::fields(reinterpret_cast<uintptr_t>(object),base,read);if(!fields){note({{"event","social_tab_layout_rejected"}});menuReady(self,data);return;}objects.push_back(object);rows.push_back(*fields);}
     auto custom=social::hubtab::plan(rows);if(!custom){for(const auto& row:rows)if(row.value("id",std::string())=="DynastyCentral")socialHubAvailable=false;note({{"event","social_tab_anchor_rejected"},{"panels",rows}});menuReady(self,data);return;}
     void* array=makeArray();void* tab=makeObject();if(!array||!tab){releaseValue(array);releaseValue(tab);menuReady(self,data);return;}
-    for(const auto& [key,value]:custom->items()){if(value.is_string())tileText(tab,key.c_str(),value.get_ref<const std::string&>().c_str());else if(value.is_boolean())tileBool(tab,key.c_str(),value.get<bool>());else if(value.is_number())tileFloat(tab,key.c_str(),value.get<float>());}
-    for(auto object:objects)appendArray(array,object);appendArray(array,tab);socialHubAvailable=true;note({{"event","social_tab_added"},{"priority",(*custom)["priority"]},{"panels",rows}});menuReady(self,array);releaseValue(tab);releaseValue(array);
+    for(const auto& [key,value]:custom->items()){if(value.is_string())tileText(tab,key.c_str(),value.get_ref<const std::string&>().c_str());else if(value.is_boolean())tileBool(tab,key.c_str(),value.get<bool>());else if(value.is_number())tileNumber(tab,key.c_str(),value.get<double>());}
+    // Validate the actual native map, not only the JSON plan. An incorrect
+    // scalar ABI must never reach MenuPanelsReady or hide the stock hub.
+    if(!social::hubtab::matches(*custom,social::hubtab::fields(reinterpret_cast<uintptr_t>(tab),base,read))){note({{"event","social_tab_descriptor_rejected"}});releaseValue(tab);releaseValue(array);socialHubAvailable=false;menuReady(self,data);return;}
+    const auto position=social::hubtab::insertAfterTeam(rows);auto expected=objects;expected.insert(expected.begin()+position,tab);for(auto object:expected)appendArray(array,object);
+    uintptr_t actualSpan[2]{};std::vector<void*> actual(expected.size());
+    const bool valid=read(reinterpret_cast<uintptr_t>(array)+0x18,actualSpan,16)&&actualSpan[1]>=actualSpan[0]&&actualSpan[1]-actualSpan[0]==expected.size()*8&&read(actualSpan[0],actual.data(),actual.size()*8)&&actual==expected;
+    if(!valid){note({{"event","social_tab_array_rejected"}});releaseValue(tab);releaseValue(array);socialHubAvailable=false;menuReady(self,data);return;}
+    socialHubAvailable=true;note({{"event","social_tab_added"},{"priority",(*custom)["priority"]},{"position",position},{"descriptorVerified",true},{"panels",rows}});menuReady(self,array);releaseValue(tab);releaseValue(array);
 }
 // The native category binding reads indexed display/key/isDefault/icon fields.
 std::string nativeString(const char* p);
