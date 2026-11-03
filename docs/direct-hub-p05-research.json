@@ -1,6 +1,6 @@
 {
   "nextPrototype": "p05",
-  "status": "Verified research; not implemented or loaded",
+  "status": "Scoped presentation implemented offline; native build/visual check pending",
   "runningPrototype": "p04",
   "pid": 18364,
   "branch": "prototype/direct-hub-feed",
@@ -18,7 +18,7 @@
       "scope instanceof art_screen.panel.career.HubPanelSwitcher",
       "bound listener iteration"
     ],
-    "plan": "Save holder._visible on child focus, set false; restore saved value on Unfocus and Shutdown",
+    "plan": "Per-holder shared hide count and original visibility; each view acquires once and final release restores",
     "avoid": "TriggerPanelsHide alone: cached same-tab early return can leave stock preview hidden",
     "holder": "scope.GetScreenInfo().GetHolderMovie()",
     "service": "logic_cfm.service.HubInfoPanelsService.Get(context)",
@@ -29,9 +29,9 @@
       -40,
       150
     ],
-    "localConversion": "outer.mcMount._parent.globalToLocal(targetPoint)",
+    "localConversion": "Preserve current mount-local X by remapping its global anchor; parent.globalToLocal handles scale",
     "outerReady": "Parent BasePanel assigns PanelData.mMovie before widget.SetData",
-    "childOriginY": "tabBottom+16-138",
+    "childOriginY": "Global dropdown target=max(live tab bottom+16, existing parent-body origin); convert target to parent-local, then subtract dropdown local138",
     "reapply": "On actual child Focus and UI timer if needed, after parent layout settles",
     "tabBottom": "p={x:0,y:realHeader.mcTabs.GetHeight()}; realHeader.mcTabs.localToGlobal(p)",
     "outer": "initParams.Panel.mMovie",
@@ -62,5 +62,12 @@
     "Evidence/DirectHub/script-function-runtime.json",
     "Evidence/DirectHub/panel-adapter-binding-map.md"
   ],
-  "installedFilesModified": false
+  "installedFilesModified": false,
+  "futureTypeHint": {
+    "class": "art_control.text.TextFieldGeneric",
+    "implemented": false,
+    "updates": "SetLabel",
+    "setup": "MakeTemplate, Context=view, Width700, Height40, display, ExtraInfo.fontSize28/hAlign center/useCrossFadefalse; attach at depth1001",
+    "cleanup": "Shutdown before removeMovieClip"
+  }
 }

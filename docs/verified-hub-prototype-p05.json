@@ -1,0 +1,39 @@
+{
+  "prototype": "p05",
+  "status": "Offline checks passed; native visual test pending",
+  "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DirectHub-DynastyEnhancerHubPrototype-p05-ddd872708a154711a3967e6c38927bab\\DynastyEnhancerHubPrototype-p05.dll",
+  "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DynastyEnhancerHubPrototype-p05.zip",
+  "nativeSha256": "997ec37fe453e85542b6e6c95b4dca17b7d6759dc8a59e7ea9c5a2dabf8aa36c",
+  "zipSha256": "ba94f25686cbbe6d56f17184e0c040f0816f8e18ef4e4b503c9a7d72670019e3",
+  "sourceHashes": {
+    "Source/HubScriptDefinition.h": "44864631bf7fda44266162a76a9a907776ef06f2fca88e0abe02d0ec69762327",
+    "Source/HubNewsLifecycle.h": "5bfa56ae42f76dadb770b6729cedf731a9fa61311bea158198daa742d5b032b9",
+    "Source/NativeSocialMedia.cpp": "117a3157fa166536247cbefaedca714a8499f9b10b03cb0cbb2565d70f1cebab",
+    "Tools/apt_subset_vm.py": "73eb1fb9a9d8df2f847063d9874fa499496c47d0593f358843929ab55fe81acc",
+    "Tools/build_hub_lifecycle.py": "f5ad2621153f47deeefccf874866cccceb7dcf82d673e6929d53e03c6e5cebd1"
+  },
+  "initBytes": 4380,
+  "shutdownBytes": 412,
+  "offlineCases": 12,
+  "nativeBuildAndChecks": true,
+  "actualCatalogAllScopes": true,
+  "installedFilesModified": false,
+  "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Backups\\DirectHub-p05-20261103-143403-1f61fde7",
+  "saveBackups": 37,
+  "historyFiles": 22,
+  "presentation": {
+    "header": "Per-view facade; disables child transition-out header hide",
+    "unload": "Clean game restart required",
+    "guards": "Undefined objects/classes, uninitialized height, nonfinite/out-of-range coordinate values, queued callbacks after Shutdown",
+    "position": "Live tab bottom/body floor, preserve local X, globalToLocal then subtract local dropdownY138",
+    "preview": "Dedicated layer-10 preview holder visibility, per-holder ownership counts, exact final restore",
+    "nativeFunctionFormat": "Live opcode0x8e pool initialization and definition layout independently verified"
+  },
+  "notYetDone": [
+    "Live visual geometry/header/preview validation",
+    "Cold tab insertion without menu refresh",
+    "Recreated CFM class handling on Continue/rollover",
+    "Dedicated native category hint"
+  ],
+  "privateHistoryIncludedInZip": false
+}

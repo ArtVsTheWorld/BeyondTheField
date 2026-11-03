@@ -11,7 +11,7 @@ inline bool headerMatches(const Program& program,const std::array<unsigned char,
     return field<unsigned>(bytes.data(),8)==program.argc&&field<unsigned short>(bytes.data(),12)==program.registers&&field<unsigned short>(bytes.data(),14)==program.flags&&field<unsigned>(bytes.data(),24)==program.original.size()&&field<uintptr_t>(bytes.data(),0)>=0x10000&&field<uintptr_t>(bytes.data(),16)>=0x10000&&field<unsigned>(bytes.data(),32)>0&&field<unsigned>(bytes.data(),32)<4096&&field<uintptr_t>(bytes.data(),40)>=0x10000;
 }
 inline std::optional<std::vector<unsigned char>> clone(const Program& program,const std::array<unsigned char,definitionHeader>& header){
-    if(!headerMatches(program,header)||program.body.empty()||program.body.size()>4096-definitionHeader)return {};
+    if(!headerMatches(program,header)||program.body.empty()||program.body.size()>16384-definitionHeader)return {};
     std::vector<unsigned char> bytes(header.begin(),header.end());bytes.insert(bytes.end(),program.body.begin(),program.body.end());const auto size=static_cast<unsigned>(program.body.size());memcpy(bytes.data()+24,&size,4);return bytes;
 }
 template<class Read>bool ownerMatches(uintptr_t owner,uintptr_t image,uintptr_t definition,Read read){

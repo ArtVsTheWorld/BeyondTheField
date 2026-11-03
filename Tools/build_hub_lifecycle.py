@@ -3,18 +3,22 @@
 The result needs a verified runtime function-body owner before it can be used.
 It is deliberately not an in-place patch of the 91-byte original function.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 import argparse
 import json
 import struct
-import sys
+
+# Exact supported-game gates captured independently from the live definitions.
+ORIGINAL_INIT = bytes.fromhex('5959b904a20b52a20c52870000000000030000001776b90349b800000000000009000000594387000300000017b903a20dad040e0f10114fb9035a59b904a20b52b212b905b904b906b503b902b20ab901a213744fb901a214744f')
+ORIGINAL_SHUTDOWN = bytes.fromhex('b901af14b800000031000000b901af23ad03161c1d4eb901af244e8700000000030000001759b903b22559b903b2227687000000000000000300000017b9045ab902b222')
 
 
 @dataclass
 class Program:
     code: bytes
     literals: list[tuple[int, str]]
+    references: list[tuple[int, str]] = field(default_factory=list)
 
 
 class Assembler:
@@ -23,6 +27,7 @@ class Assembler:
         self.literals = []
         self.labels = {}
         self.branches = []
+        self.references = []
 
     def raw(self, *values):
         self.code.extend(values)
@@ -71,14 +76,144 @@ class Assembler:
             self.string(value)
         self.raw(0x4F)
 
+    def function(self, program, *, argc=0, registers=2):
+        if argc not in (0, 1):
+            raise ValueError('Only the verified zero/one argument nested layouts are used')
+        self.raw(0x8E)
+        self.align()
+        header = len(self.code)
+        self.code.extend(bytes(48))
+        self.literals.append((header, ''))
+        struct.pack_into('<IHH', self.code, header + 8, argc, registers, 0x29)
+        if argc:
+            self.references.append((header + 16, 'focusParameters'))
+        struct.pack_into('<I', self.code, header + 24, len(program.code))
+        struct.pack_into('<I', self.code, header + 32, 0x98765432)
+        struct.pack_into('<Q', self.code, header + 40, 0x12345678)
+        body = len(self.code)
+        self.code.extend(program.code)
+        self.literals.extend((body + at, value) for at, value in program.literals)
+        self.references.extend((body + at, value) for at, value in program.references)
+
+    def header_facade(self):
+        # Keep the shared hub header out of the embedded News view's ownership.
+        self.reg(4)
+        self.string('mDynastySocialRealHeader')
+        self.number(0)
+        self.reg(4)
+        self.string('GetHeader')
+        self.raw(0x52, 0x4F)
+        self.set_field(4, 'mHideHeaderOnTransitionOut', False)
+        self.number(0)
+        self.raw(0x43)
+        self.store(0)
+        for name in ('SetState', 'SetTitle', 'Show', 'Hide'):
+            self.reg(0)
+            self.string(name)
+            self.reg(1)
+            self.member('_OnServiceTileFocusChanged')
+            self.raw(0x4F)
+        empty = Assembler()
+        empty.string('')
+        empty.raw(0x3E)
+        self.reg(0)
+        self.string('GetValidDisplayString')
+        self.function(empty.finish())
+        self.raw(0x4F)
+        self.reg(4)
+        self.string('mDynastySocialHeaderProxy')
+        self.reg(0)
+        self.raw(0x4F)
+        getter = Assembler()
+        getter.reg(1)
+        getter.member('mDynastySocialHeaderProxy')
+        getter.raw(0x3E)
+        self.reg(4)
+        self.string('GetHeader')
+        self.function(getter.finish())
+        self.raw(0x4F)
+
+    def missing(self, register, label):
+        self.raw(0x76)
+        self.reg(register)
+        self.raw(0x49)
+        self.branch(label, 0x9D)
+
+    def increment(self, register):
+        self.reg(register)
+        self.number(1)
+        self.raw(0x47)
+        self.store(register)
+
+    def context_service(self, *names):
+        self.reg(1)
+        self.member('mDynastySocialContext')
+        self.number(1)
+        self.global_object(*names)
+        self.string('Get')
+        self.raw(0x52)
+
+    def view_method(self, name, program, *, argc=0, registers=8):
+        self.reg(4)
+        self.string(name)
+        self.function(program, argc=argc, registers=registers)
+        self.raw(0x4F)
+
+    def call_self(self, method):
+        self.number(0)
+        self.reg(1)
+        self.call(method, 0)
+
+    def presentation(self):
+        self.set_field(4, 'mDynastySocialAlive', True)
+        self.reg(4)
+        self.string('mDynastySocialContext')
+        self.reg(6)
+        self.raw(0x4F)
+        # PanelData.mMovie is populated before SubScreenPanel.SetData, which
+        # supplies that PanelData to the child's initialization parameters.
+        self.reg(3)
+        self.member('Panel')
+        self.store(0)
+        self.missing(0, 'no_outer')
+        self.reg(0)
+        self.member('mId')
+        self.string('CM_DYNASTY_SOCIAL')
+        self.raw(0x66)
+        self.branch('no_outer', 0xB8)
+        self.reg(4)
+        self.string('mDynastySocialOuter')
+        self.reg(0)
+        self.member('mMovie')
+        self.raw(0x4F)
+        self.label('no_outer')
+        for name in ('Focus', 'Unfocus'):
+            self.reg(4)
+            self.string('mDynastySocialOriginal' + name)
+            self.reg(4)
+            self.member(name)
+            self.raw(0x4F)
+        for name, program in (
+                ('mDynastySocialAlignMount', align_mount()),
+                ('mDynastySocialHidePreview', hide_preview()),
+                ('mDynastySocialRestorePreview', restore_preview()),
+                ('mDynastySocialTick', presentation_tick())):
+            self.view_method(name, program)
+        for name in ('Focus', 'Unfocus'):
+            self.view_method(name, focus_wrapper(name), argc=1)
+
     def number(self, value):
         if value in (0, 1):
             self.raw(0x59 + value)
-        elif value < 128:
-            self.raw(0xB5, value)
-        else:
+        elif -128 <= value < 128:
+            self.raw(0xB5)
+            self.code.extend(struct.pack('<b', value))
+        elif -32768 <= value < 32768:
             self.raw(0xB6)
-            self.code.extend(struct.pack('<H', value))
+            self.code.extend(struct.pack('<h', value))
+        else:
+            self.raw(0xB7)
+            self.code.extend(struct.pack('<i', value))
 
     def global_object(self, *names):
         self.string(names[0])
@@ -123,18 +258,15 @@ class Assembler:
 
     def start_timer(self):
         self.clear_timer()
-        self.adapter()
-        self.store(0)
         self.number(250)
-        self.number(0)
-        self.string('SOCIAL_SYNC')
-        self.string('CM_DYNASTY_SOCIAL_FEED')
-        self.reg(0)
-        self.member('SetFilterChanged')
-        self.reg(0)
-        self.number(5)
+        self.reg(1)
+        self.member('mView')
+        self.member('mDynastySocialTick')
+        self.reg(1)
+        self.member('mView')
+        self.number(2)
         self.global_object('cafe', 'utility', 'Delegate')
-        self.string('Bind')
+        self.string('Create')
         self.raw(0x52)
         self.reg(1)
         self.member('mDynastySocialTimerName')
@@ -170,7 +302,372 @@ class Assembler:
     def finish(self):
         for at, label in self.branches:
             struct.pack_into('<i', self.code, at, self.labels[label] - at - 4)
-        return Program(bytes(self.code), self.literals)
+        return Program(bytes(self.code), self.literals, self.references)
+
+
+def align_mount():
+    a = Assembler()
+    a.reg(1)
+    a.member('mDynastySocialRealHeader')
+    a.store(3)
+    a.missing(3, 'done')
+    a.reg(3)
+    a.member('mcTabs')
+    a.store(3)
+    a.missing(3, 'done')
+    a.reg(1)
+    a.member('mDynastySocialOuter')
+    a.store(4)
+    a.missing(4, 'done')
+    a.reg(4)
+    a.member('mcMount')
+    a.store(6)
+    a.missing(6, 'done')
+    a.reg(6)
+    a.member('_parent')
+    a.store(5)
+    a.missing(5, 'done')
+    a.number(0)
+    a.raw(0x43)
+    a.store(0)
+    a.reg(0)
+    a.string('x')
+    a.number(0)
+    a.raw(0x4F)
+    a.number(0)
+    a.reg(3)
+    a.string('GetHeight')
+    a.raw(0x52)
+    a.store(7)
+    a.reg(7)
+    a.number(0)
+    a.raw(0x67)
+    a.branch('done', 0xB8)
+    a.reg(0)
+    a.string('y')
+    a.reg(7)
+    a.raw(0x4F)
+    a.reg(0)
+    a.number(1)
+    a.reg(3)
+    a.call('localToGlobal', 1)
+    a.number(0)
+    a.raw(0x43)
+    a.store(2)
+    a.reg(2)
+    a.string('x')
+    a.reg(6)
+    a.member('_x')
+    a.raw(0x4F)
+    a.reg(2)
+    a.string('y')
+    a.number(0)
+    a.raw(0x4F)
+    a.reg(2)
+    a.number(1)
+    a.reg(5)
+    a.call('localToGlobal', 1)
+    a.reg(0)
+    a.string('x')
+    a.reg(2)
+    a.member('x')
+    a.raw(0x4F)
+    a.reg(0)
+    a.string('y')
+    a.reg(0)
+    a.member('y')
+    a.number(16)
+    a.raw(0x47, 0x4F)
+    a.reg(0)
+    a.member('y')
+    a.reg(2)
+    a.member('y')
+    a.raw(0x48)
+    a.branch('body_floor_ready', 0xB8)
+    a.reg(0)
+    a.string('y')
+    a.reg(2)
+    a.member('y')
+    a.raw(0x4F)
+    a.label('body_floor_ready')
+    a.reg(0)
+    a.number(1)
+    a.reg(5)
+    a.call('globalToLocal', 1)
+    for field_name in ('x', 'y'):
+        for limit, operation in ((-32768, 0x67), (32767, 0x48)):
+            a.reg(0)
+            a.member(field_name)
+            a.number(limit)
+            a.raw(operation)
+            a.branch('done', 0xB8)
+    a.reg(0)
+    a.member('y')
+    a.number(138)
+    a.raw(0x0B)
+    a.reg(0)
+    a.member('x')
+    a.number(2)
+    a.reg(4)
+    a.call('SetScreenMountPosition', 2)
+    a.label('done')
+    a.raw(0x76, 0x3E)
+    return a.finish()
+
+
+def hide_preview():
+    a = Assembler()
+    a.reg(1)
+    a.member('mDynastySocialSavedPreviews')
+    a.store(3)
+    a.raw(0x76)
+    a.reg(3)
+    a.raw(0x49)
+    a.branch('have_saved', 0xB8)
+    a.number(0)
+    a.raw(0x42)
+    a.store(3)
+    a.reg(1)
+    a.string('mDynastySocialSavedPreviews')
+    a.reg(3)
+    a.raw(0x4F)
+    a.label('have_saved')
+    a.context_service('logic_cfm', 'service', 'HubInfoPanelsService')
+    a.store(4)
+    a.missing(4, 'done')
+    a.reg(4)
+    a.member('mHidePanelHandler')
+    a.store(4)
+    a.missing(4, 'done')
+    a.reg(4)
+    a.member('mListeners')
+    a.store(4)
+    a.missing(4, 'done')
+    a.number(0)
+    a.store(0)
+    a.label('loop')
+    for maximum in (16, None):
+        a.reg(0)
+        if maximum is None:
+            a.reg(4)
+            a.member('length')
+        else:
+            a.number(maximum)
+        a.raw(0x48)
+        a.branch('done', 0xB8)
+    a.reg(4)
+    a.reg(0)
+    a.raw(0x4E)
+    a.store(5)
+    a.missing(5, 'next')
+    a.reg(5)
+    a.member('Callback')
+    a.store(5)
+    a.missing(5, 'next')
+    a.reg(5)
+    a.member('scope')
+    a.store(6)
+    a.missing(6, 'next')
+    a.global_object('art_screen', 'panel', 'career', 'HubPanelSwitcher')
+    a.store(2)
+    a.missing(2, 'next')
+    a.reg(6)
+    a.reg(2)
+    a.raw(0x54)
+    a.branch('next', 0xB8)
+    a.reg(5)
+    a.member('func')
+    a.reg(6)
+    a.member('_HideAllScreens')
+    a.raw(0x66)
+    a.branch('next', 0xB8)
+    a.number(0)
+    a.number(0)
+    a.reg(6)
+    a.string('GetScreenInfo')
+    a.raw(0x52)
+    a.string('GetHolderMovie')
+    a.raw(0x52)
+    a.store(6)
+    a.missing(6, 'next')
+    a.reg(6)
+    a.member('_visible')
+    a.store(5)
+    a.missing(5, 'next')
+    a.number(0)
+    a.store(7)
+    a.label('saved_loop')
+    a.reg(7)
+    a.reg(3)
+    a.member('length')
+    a.raw(0x48)
+    a.branch('save', 0xB8)
+    a.reg(3)
+    a.reg(7)
+    a.raw(0x4E)
+    a.member('holder')
+    a.reg(6)
+    a.raw(0x66)
+    a.branch('hide', 0x9D)
+    a.increment(7)
+    a.branch('saved_loop', 0x99)
+    a.label('save')
+    a.reg(3)
+    a.member('length')
+    a.number(16)
+    a.raw(0x48)
+    a.branch('next', 0xB8)
+    a.reg(6)
+    a.member('mDynastySocialHideCount')
+    a.store(2)
+    a.raw(0x76)
+    a.reg(2)
+    a.raw(0x49)
+    a.branch('have_count', 0xB8)
+    a.number(0)
+    a.store(2)
+    a.label('have_count')
+    a.reg(2)
+    a.number(0)
+    a.raw(0x66)
+    a.branch('already_hidden', 0xB8)
+    a.reg(6)
+    a.string('mDynastySocialOriginalVisible')
+    a.reg(6)
+    a.member('_visible')
+    a.raw(0x4F)
+    a.label('already_hidden')
+    a.reg(6)
+    a.string('mDynastySocialHideCount')
+    a.reg(2)
+    a.number(1)
+    a.raw(0x47, 0x4F)
+    a.number(0)
+    a.raw(0x43)
+    a.store(5)
+    for name in ('holder', 'visible'):
+        a.reg(5)
+        a.string(name)
+        a.reg(6)
+        if name == 'visible':
+            a.member('_visible')
+        a.raw(0x4F)
+    a.reg(5)
+    a.number(1)
+    a.reg(3)
+    a.call('push', 1)
+    a.label('hide')
+    a.set_field(6, '_visible', False)
+    a.label('next')
+    a.increment(0)
+    a.branch('loop', 0x99)
+    a.label('done')
+    a.raw(0x76, 0x3E)
+    return a.finish()
+
+
+def restore_preview():
+    a = Assembler()
+    a.reg(1)
+    a.member('mDynastySocialSavedPreviews')
+    a.store(3)
+    a.missing(3, 'done')
+    a.number(0)
+    a.store(0)
+    a.label('loop')
+    for maximum in (16, None):
+        a.reg(0)
+        if maximum is None:
+            a.reg(3)
+            a.member('length')
+        else:
+            a.number(maximum)
+        a.raw(0x48)
+        a.branch('clear', 0xB8)
+    a.reg(3)
+    a.reg(0)
+    a.raw(0x4E)
+    a.store(4)
+    a.missing(4, 'next')
+    a.reg(4)
+    a.member('holder')
+    a.store(5)
+    a.missing(5, 'next')
+    a.reg(5)
+    a.member('mDynastySocialHideCount')
+    a.store(2)
+    a.missing(2, 'next')
+    a.reg(2)
+    a.number(0)
+    a.raw(0x67)
+    a.branch('next', 0xB8)
+    a.reg(2)
+    a.number(1)
+    a.raw(0x0B)
+    a.store(2)
+    a.reg(5)
+    a.string('mDynastySocialHideCount')
+    a.reg(2)
+    a.raw(0x4F)
+    a.reg(2)
+    a.number(0)
+    a.raw(0x66)
+    a.branch('next', 0xB8)
+    a.reg(5)
+    a.string('_visible')
+    a.reg(5)
+    a.member('mDynastySocialOriginalVisible')
+    a.raw(0x4F)
+    a.label('next')
+    a.increment(0)
+    a.branch('loop', 0x99)
+    a.label('clear')
+    a.reg(1)
+    a.string('mDynastySocialSavedPreviews')
+    a.number(0)
+    a.raw(0x42, 0x4F)
+    a.label('done')
+    a.raw(0x76, 0x3E)
+    return a.finish()
+
+
+def focus_wrapper(name):
+    a = Assembler()
+    if name == 'Unfocus':
+        a.call_self('mDynastySocialRestorePreview')
+    a.reg(2)
+    a.number(1)
+    a.reg(1)
+    a.call('mDynastySocialOriginal' + name, 1)
+    if name == 'Focus':
+        a.call_self('mDynastySocialAlignMount')
+        a.call_self('mDynastySocialHidePreview')
+    a.raw(0x76, 0x3E)
+    return a.finish()
+
+
+def presentation_tick():
+    a = Assembler()
+    a.reg(1)
+    a.member('mDynastySocialAlive')
+    a.raw(0x73, 0x66)
+    a.branch('done', 0xB8)
+    a.number(0)
+    a.context_service('panelmenu', 'service', 'PanelMenuDataService')
+    a.string('GetCurrentPanelFocus')
+    a.raw(0x52)
+    a.string('CM_DYNASTY_SOCIAL')
+    a.raw(0x66)
+    a.branch('inactive', 0xB8)
+    a.call_self('mDynastySocialAlignMount')
+    a.call_self('mDynastySocialHidePreview')
+    a.signal('SOCIAL_SYNC')
+    a.branch('done', 0x99)
+    a.label('inactive')
+    a.call_self('mDynastySocialRestorePreview')
+    a.label('done')
+    a.raw(0x76, 0x3E)
+    return a.finish()
 
 
 def scoped_init(*, timer=False):
@@ -225,6 +722,8 @@ def scoped_init(*, timer=False):
     a.member('_OnServiceTileFocusChanged')
     a.raw(0x4F)
     a.set_field(1, 'mDynastySocialEmbedded', True)
+    a.header_facade()
+    a.presentation()
     if timer:
         a.timer_name()
     a.signal('SOCIAL_CHILD_ATTACH')
@@ -268,6 +767,14 @@ def scoped_shutdown(*, timer=False):
     a.branch('native_shutdown', 0xB8)
     if timer:
         a.clear_timer()
+    a.reg(1)
+    a.member('mView')
+    a.store(0)
+    a.missing(0, 'native_shutdown')
+    a.set_field(0, 'mDynastySocialAlive', False)
+    a.number(0)
+    a.reg(0)
+    a.call('mDynastySocialRestorePreview', 0)
     a.label('native_shutdown')
     a.reg(1)
     a.raw(0xAF, 20)  # mAddedFilter
@@ -302,25 +809,27 @@ def scoped_shutdown(*, timer=False):
 
 
 def generate_header(destination):
-    sys.path.insert(0, 'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
-    from inspect_tb_ast import load
-    root = Path(__file__).resolve().parents[1]
-    model = load(root.parent / 'SocialMedia/Research/assets/common/ui/node_cfm/corenode.ast')
     result = ['// Generated by Tools/build_hub_lifecycle.py; prototype only.',
               '#pragma once', '#include <vector>', '#include <cstdint>',
               '#include <cstring>', 'namespace social::embedded::lifecycle {',
+              'struct Parameter {uint64_t reg;const char* name;};',
+              'static_assert(sizeof(Parameter)==16);',
+              'inline const Parameter focusParameters[]={{2,"method"}};',
               'struct Program {uintptr_t definition;unsigned argc,registers,flags;',
               'std::vector<unsigned char> original,body;};',
               'inline std::vector<Program> programs(){std::vector<Program> result;']
     array = lambda b: '{' + ','.join(f'0x{x:02x}' for x in b) + '}'
-    for definition, argc, registers, offset, count, program in (
-            (0x24940, 3, 7, 0x24970, 91, scoped_init(timer=True)),
-            (0x24b38, 1, 5, 0x24b68, 68, scoped_shutdown(timer=True))):
+    for definition, argc, registers, original, program in (
+            (0x24940, 3, 7, ORIGINAL_INIT, scoped_init(timer=True)),
+            (0x24b38, 1, 5, ORIGINAL_SHUTDOWN, scoped_shutdown(timer=True))):
         result.append(f'result.push_back({{0x{definition:x},{argc},{registers},25,'
-                      f'{array(model.data[offset:offset + count])},{array(program.code)}}});')
+                      f'{array(original)},{array(program.code)}}});')
         for at, literal in program.literals:
             result.append('{const auto p=reinterpret_cast<uintptr_t>('
                           f'{json.dumps(literal)});memcpy(result.back().body.data()+{at},&p,8);}}')
+        for at, reference in program.references:
+            result.append('{const auto p=reinterpret_cast<uintptr_t>('
+                          f'{reference});memcpy(result.back().body.data()+{at},&p,8);}}')
     result += ['return result;}', '}']
     Path(destination).write_text('\n'.join(result) + '\n')
 
