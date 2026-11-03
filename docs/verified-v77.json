@@ -1,0 +1,65 @@
+{
+  "build": "v77",
+  "contentRevision": "context-and-recovery-v77",
+  "nodeTests": {
+    "pass": 215,
+    "fail": 0
+  },
+  "native": {
+    "unitChecks": true,
+    "liveRecords": 212687,
+    "realCatalogEditions": 20,
+    "allDynamicScopes": true,
+    "publishedMatchesTestedPreview": true,
+    "catalogBytes": 97744320
+  },
+  "mmc": {
+    "registration": true,
+    "protectedPayload": true,
+    "tamperRejection": true,
+    "installedVerification": true
+  },
+  "runtime": {
+    "active": true,
+    "pid": 29272,
+    "league": -107703141,
+    "team": 15,
+    "calendarYear": 2026,
+    "phase": "BowlSeason2",
+    "week": 18,
+    "stories": 3592,
+    "forYou": 30,
+    "saveRequired": false
+  },
+  "data": {
+    "newContextFamilies": 25,
+    "newContextVariants": 51,
+    "totalFamilies": 405,
+    "totalVariants": 773,
+    "verifiedTeamSchedules": 138,
+    "contextCandidates": 1605,
+    "conferenceDiscussionEvents": 6,
+    "nilDollarsPerPoint": 2500,
+    "byuCurrentRosterCompensation": 6687500,
+    "byuOffensiveScheme": "OFF_POWER_SPREAD",
+    "byuDefensiveScheme": "DEF_4_3_MULTIPLE"
+  },
+  "backups": {
+    "historyFiles": 5,
+    "saves": 8,
+    "checksumVerified": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v77.dll": "c06d16aa6e3a51e50d9010638f65e3c7cd34a7f10c5bfdfa5d29d08d808a734b",
+    "DynastyEnhancer-v77-MMC.zip": "569a38cb86198ddd678d2f9ba205bbe5d3e4b0b32573a4ef30548c262743fa1b",
+    "DynastyEnhancer.dll": "605cb897ed3767a275f6f3559ef9b9bfa34a2538ae147597cdc8323cf11f25e9"
+  },
+  "liveUserConfirmed": [],
+  "remainingLiveChecks": [
+    "Week 18 page, archives and controls",
+    "Quarterfinal result to semifinal advancement",
+    "Accepted staff offers and completed hires",
+    "New-year reset",
+    "Fresh v77 MMC cold launch"
+  ]
+}

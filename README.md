@@ -4,6 +4,12 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Context and postseason recovery (v77)
+
+The current package is `Build/DynastyEnhancer-v77-MMC.zip`, with managed `Plugins/DynastyEnhancer.dll` and native `Plugins/DynastyEnhancer/Runtime-v77/DynastyEnhancerNative-v77.dll`. Keep the complete versioned runtime beside the adapter.
+
+v77 fixes Bowl Week 2 capture when historical bowl artwork contains an unrecognized optional presentation ID. It adds verified offense/defense efficiency, discipline, ball security, NIL position-group allocation, coaching context, native schemes and prestige-driven conference discussions. Heisman stories include meaningful dual-threat production and distinguish rank, latest performance and season totals. See [calculation and recovery details](docs/context-recovery-v77.md) and [verification](docs/verified-v77.json).
+
 ## Preseason and lifecycle prototype (v69)
 
 The current candidate adds 62 prewritten variants across 24 new families (339 variants total): native preseason AP and All-America/All-Conference honors, season outlooks, opening games, team hype, player camp posts, fans, top-100 recruiting watches, fictional title futures, clustered ranked-opponent gauntlets, AP/model debates with fan replies, explicit AP/Coaches comparisons, and conference talent maps. All teams, including TeamBuilder programs, use the same eligibility. See [preseason coverage and lifecycle details](docs/preseason-lifecycle.md).

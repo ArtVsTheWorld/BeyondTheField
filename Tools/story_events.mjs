@@ -1,3 +1,5 @@
+import {contextualAnalytics} from './context_analytics.mjs';
+import {conferenceDiscourse} from './conference_context.mjs';
 import {postseasonEvents} from './postseason_events.mjs';
 import {postseasonTiming} from './postseason_timing.mjs';
 import {matchupEvents} from './matchup_events.mjs';
@@ -51,8 +53,8 @@ export function detectEvents(s,previous=null){
   for(const r of s.performances){
     const g=games.get(r.game),p=players.get(r.player);if(!g||!p)continue;const st=r.stats,stats={};let impact=0;
     if(st.PASSATTEMPTS>0){Object.assign(stats,{passAttempts:st.PASSATTEMPTS,passCompletions:st.PASSCOMPLETED,passingYards:st.PASSYARDS,passingTouchdowns:st.PASSTDS,interceptionsThrown:st.PASSINTS});impact+=st.PASSYARDS/10+st.PASSTDS*8;}
-    if(st.RUSHATTEMPTS>0&&(st.RUSHYARDS>=50||st.RUSHTDS>0)){Object.assign(stats,{rushingYards:st.RUSHYARDS,rushingTouchdowns:st.RUSHTDS});impact+=st.RUSHYARDS/5+st.RUSHTDS*8;}
-    if(st.RECEIVECATCHES>0&&(st.RECEIVEYARDS>=60||st.RECEIVETDS>0)){Object.assign(stats,{catches:st.RECEIVECATCHES,receivingYards:st.RECEIVEYARDS,receivingTouchdowns:st.RECEIVETDS});impact+=st.RECEIVEYARDS/5+st.RECEIVETDS*8;}
+    if(st.RUSHATTEMPTS>0&&(st.RUSHYARDS>=(p.position==='QB'?20:50)||st.RUSHTDS>0)){Object.assign(stats,{rushingYards:st.RUSHYARDS,rushingTouchdowns:st.RUSHTDS});impact+=st.RUSHYARDS/5+st.RUSHTDS*8;}
+    if(st.RECEIVECATCHES>0&&(st.RECEIVEYARDS>=(['HB','RB','FB'].includes(p.position)?20:60)||st.RECEIVETDS>0)){Object.assign(stats,{catches:st.RECEIVECATCHES,receivingYards:st.RECEIVEYARDS,receivingTouchdowns:st.RECEIVETDS});impact+=st.RECEIVEYARDS/5+st.RECEIVETDS*8;}
     const sacks=(st.DLINESACKS??0)+(st.DLINEHALFSACK??0)*0.5;if(sacks>0){stats.sacks=sacks;impact+=sacks*12;}
     if(st.DSECINTS>0){stats.interceptionsCaught=st.DSECINTS;impact+=st.DSECINTS*15;}if(st.DEFTACKLES>=10){stats.soloTackles=st.DEFTACKLES;impact+=st.DEFTACKLES*2;}
     form.set(p.id,(form.get(p.id)??0)+impact);
@@ -109,7 +111,7 @@ export function detectEvents(s,previous=null){
     if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
-  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s)])emit(e.id,e.category,e.facts,e.options);
+  for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...deepAnalyticsEvents(s),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...contextualAnalytics(s),...conferenceDiscourse(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=teamAnalytics(s);
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

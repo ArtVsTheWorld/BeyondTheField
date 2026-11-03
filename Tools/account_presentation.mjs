@@ -1,10 +1,11 @@
+import {correctHeismanArchive} from './heisman_context.mjs';
 import {correctWaitingArchive} from './correct_waiting_archive.mjs';
 import {cleanFeedLanguage} from './clean_language.mjs';
 // Requested account presentation changes do not regenerate archived event prose.
 import {avatarFor} from './story_avatars.mjs';
 const analysts=[['ESPNCFB','ESPNCFB'],['Jake Whitmore','JakeWhitmoreCFB'],['Marcus Bennett','MBennettSports'],['Tina Brooks','TinaBrooksCFB'],['David Ellison','DavidEllisonFB'],['Chris Maddox','ChrisMaddoxCFB']];
 export function refreshAccountPresentation(feed,s){
- feed=correctWaitingArchive(cleanFeedLanguage(feed),s);
+ feed=correctHeismanArchive(correctWaitingArchive(cleanFeedLanguage(feed),s),s);
  if(feed.presentationVersion===3)return feed;
  const players=new Map(s.players.map(p=>[p.id,p])),teams=new Map(s.teams.map(t=>[t.id,t]));
  const stories=feed.stories.map(original=>{

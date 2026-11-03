@@ -33,7 +33,7 @@ export function deepAnalyticsEvents(s,{bounded=true}={}){
   const off=verifiedPlayerStats(s,p,'offense',index);
   if(off&&off.n>=3){const v=off.read,att=v('RUSHATTEMPTS'),broken=v('RUSHBROKENTACKLES'),contact=v('RUSHYARDSAFTER1STHIT'),ry=v('RUSHYARDS'),rec=v('RECEIVECATCHES'),yards=v('RECEIVEYARDS'),yac=v('RECEIVEYARDSAFTER'),drops=v('RECEIVEDROPS');
    if(att>=40&&broken>=10)add('broken-tackles',{broken,attempts:att,rate:one(broken/att*100)});
-   if(att>=40&&contact>=100&&ry!==null)add('after-contact',{yards:contact,attempts:att,rate:one(contact/att)});
+   if(att>=40&&contact>=100&&ry>0&&contact<=ry)add('after-contact',{yards:contact,rushing:ry,attempts:att,rate:percent(contact/ry)});
    if(rec>=15&&yards>=200&&yac!==null&&yac<=yards)add('yac-share',{yac,yards,rate:percent(yac/yards)});
    if(rec>=20&&drops>=3)add('drops',{catches:rec,drops,rate:percent(drops/(rec+drops)),negative:true});
    if(['HB','RB','FB'].includes(p.position)&&ry>=300&&yards>=150)add('receiving-back',{rushing:ry,receiving:yards,catches:rec},87);
