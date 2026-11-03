@@ -1,0 +1,48 @@
+{
+  "build": "v95",
+  "name": "Content review plus national prospect author routing",
+  "previousReview": "verified-v94.json",
+  "nodeTests": 343,
+  "nativeBuildAndChecks": true,
+  "mmcPackageTamperAndRegistrationChecks": true,
+  "actualCatalogNativeValidation": true,
+  "installed": true,
+  "installation": {
+    "runtime": "C:\\Apps\\CFB 27\\MMC\\MMC_ModManager_v1.1.0.6\\Plugins\\DynastyEnhancer\\Runtime-v95",
+    "historyPreserved": true,
+    "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ContentReview-v95-20261103-151949",
+    "historyFiles": 22,
+    "adapter": "C:\\Apps\\CFB 27\\MMC\\MMC_ModManager_v1.1.0.6\\Plugins\\DynastyEnhancer.dll",
+    "saveBackups": 37
+  },
+  "change": "Unaffiliated preseason prospect watches use Chris Maddox and Tina Brooks instead of a generated unassigned College Football beat account.",
+  "candidate": {
+    "stories": 1239,
+    "forYou": 30,
+    "prospectWatchPosts": 100,
+    "prospectAccounts": [
+      "Chris Maddox",
+      "Tina Brooks"
+    ],
+    "genericBeatProspectPosts": 0,
+    "carryoverNamesIntact": true
+  },
+  "live": {
+    "publication": "verified",
+    "controllerCheck": "v94 user-verified; v95 changes author assignment and retains native UI behavior",
+    "stories": 1239,
+    "forYou": 30,
+    "prospectWatchPosts": 100,
+    "prospectAccounts": [
+      "Chris Maddox",
+      "Tina Brooks"
+    ],
+    "matchesTestedStoriesAndViews": true
+  },
+  "artifacts": {
+    "zip": "Build/DynastyEnhancer-v95-MMC.zip",
+    "zipSha256": "ca6a585352b4a9c4047e2563b980ede81995a1df130256e43b93149dc9e5b0fd",
+    "native": "Build/DynastyEnhancerNative-v95.dll",
+    "nativeSha256": "1d5ed178fb2b0377bfa7146c3875e040caae2e87867c1dba2eacfda0ac2cc4c9"
+  }
+}

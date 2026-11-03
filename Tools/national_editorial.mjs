@@ -8,6 +8,9 @@ export function nationalCoverage(s){
  return new Set(teams.map(t=>t.id));
 }
 export function editorialAssignment(s,e,family,role,team,requestedPersona=0,coverage=null){
+ // National prospect watches have no school beat. Use the established desks
+ // instead of creating an unassigned "OnCollegeFootball" beat identity.
+ if(role==='beat'&&!team&&family==='preseason.recruit.watch')return {role:'analyst',persona:hash(e.id+'|prospect-desk')%3===0?3:5};
  if(role!=='analyst')return {role,persona:requestedPersona};
  const covered=coverage??nationalCoverage(s),teamIds=e.teamIds??[];
  const draftTalk=e.category==='draft-discourse';

@@ -4,11 +4,11 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Content review candidate (v94)
+## Content review (v95)
 
-The current candidate is `Build/DynastyEnhancer-v94-MMC.zip`. Three stages address factual context/freshness, For You relevance and duplicate conversations, then targeted voice and analysis variety. The pack includes 211 revised/new variants across 45 families; the complete runtime has 1,127 variants across 538 families. The frozen ULM review corpus is preserved. This candidate has passed offline tests and copied-data replay; live controller validation remains pending. See [v94 verification](docs/verified-v94.json), with the earlier stage evidence in [v92](docs/verified-v92.json) and [v93](docs/verified-v93.json).
+The current package is `Build/DynastyEnhancer-v95-MMC.zip`. Three stages address factual context/freshness, For You relevance and duplicate conversations, then targeted voice and analysis variety. The pack includes 211 revised/new variants across 45 families; the complete runtime has 1,127 variants across 538 families. The frozen ULM review corpus is preserved. The three-stage content build passed the live ULM feed/controller check. v95 additionally routes unaffiliated preseason prospect watches to Chris Maddox and Tina Brooks, replacing the generic national beat fallback. See [v95 verification](docs/verified-v95.json) and [v94 review evidence](docs/verified-v94.json), with the earlier stage evidence in [v92](docs/verified-v92.json) and [v93](docs/verified-v93.json).
 
-The previously active and user-verified build is v91. Later entries below describe the development history; they do not supersede the current candidate.
+The v94 live feed, carryover stories and controller check passed before the small v95 author-routing correction. Later entries below describe the development history; they do not supersede the current candidate.
 
 ## Preserve factual carryover reports (v91)
 

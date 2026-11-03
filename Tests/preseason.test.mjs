@@ -25,6 +25,11 @@ test('preseason story families stop when regular-season play begins; model proba
 test('unsaved preseason offers still use actual observation instead of fabricated commitments',()=>{
  const s=fixture();s.newOffers=[{player:'recruit',team:1,rank:1}];const f=buildFeed(s);assert.ok(f.stories.some(p=>p.category==='offers'&&p.body.includes('BYU')));assert.ok(!f.stories.some(p=>/committing to|welcome to the/i.test(p.body)));
 });
+
+test('unaffiliated preseason prospect watches use Maddox and Brooks rather than a generic school beat',()=>{
+ const s=fixture();for(let i=0;i<20;i++){s.players.push({id:'watch'+i,name:'Prospect '+i,team:255,position:'WR',starRating:5});s.recruitStatuses.push({player:'watch'+i,stage:'Top10',nationalRank:i+2});}
+ const f=buildFeed(s),posts=f.stories.filter(p=>p.eventId.startsWith('preseason:recruit-watch:'));assert.ok(posts.length>5);assert.ok(posts.every(p=>p.voice==='analyst'&&['Chris Maddox','Tina Brooks'].includes(p.author)));assert.ok(posts.some(p=>p.author==='Chris Maddox')&&posts.some(p=>p.author==='Tina Brooks'));assert.ok(!posts.some(p=>p.handle.includes('OnCollege')));assert.ok(f.stories.some(p=>p.voice==='beat'&&p.teamIds.length));
+});
 test('approved schedule gauntlets count actual AP-ranked opponents inside a four-week window',()=>{
  const s=fixture();s.teams[1].mediaRank=20;s.teams.push({id:3,name:'Mountain',mediaRank:3});s.games.push({id:'g2',year:0,phase:'RegularSeason',week:4,status:'Unplayed',home:1,away:3});
  const e=preseasonEvents(s).find(e=>e.id==='preseason:gauntlet:1');assert.equal(e.facts.count,2);assert.equal(e.facts.startWeek,1);assert.ok(e.facts.opponents.includes('No. 20 Harbor Tech'));s.games[1].week=5;assert.ok(!preseasonEvents(s).some(e=>e.id==='preseason:gauntlet:1'));
