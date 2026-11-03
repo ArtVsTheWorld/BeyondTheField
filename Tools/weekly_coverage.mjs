@@ -6,9 +6,14 @@ export function teamPostBudget(team){const {brand,poll}=brandAudience(team);retu
 // both involved teams' allowance; replies cannot outlive or exceed the parent.
 export function applyWeeklyCoverage(stories,s){
  const ranks=publicPoll(s).ranks,budgets=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,teamPostBudget({...t,mediaRank:ranks[t.id]})])),counts=new Map(),children=new Map(),roots=[],chosen=new Set();
- for(const p of stories){if(p.voice==='nflDraft'&&p.category==='draft')continue;if(p.replyTo){const list=children.get(p.replyTo)??[];list.push(p);children.set(p.replyTo,list);}else roots.push(p);}
+ for(const p of stories){if(p.coverageExempt||p.voice==='nflDraft'&&p.category==='draft')continue;if(p.replyTo){const list=children.get(p.replyTo)??[];list.push(p);children.set(p.replyTo,list);}else roots.push(p);}
  const slots=p=>[...new Set((p.teamIds??[]).filter(id=>budgets.has(id)))];
  function add(p){if(chosen.has(p.id))return false;const ids=slots(p);if(ids.some(id=>(counts.get(id)??0)>=budgets.get(id)))return false;chosen.add(p.id);for(const id of ids)counts.set(id,(counts.get(id)??0)+1);return true;}
+ for(const p of stories.filter(p=>p.coverageExempt))for(const child of children.get(p.id)??[])add(child);
+ // Specialist voices and the draft's national conclusions get room before
+ // a large local portal pool consumes a program's entire flavor allowance.
+ for(const name of ['Chris Maddox','Tina Brooks']){const p=editorialRoots(roots.filter(p=>p.author===name&&p.category==='recruiting'&&p.id.includes(':interest:')&&p.scopes.includes('national')))[0];if(p)add(p);}
+ const draftFamilies=new Set();for(const p of editorialRoots(roots.filter(p=>p.category==='draft-discourse'&&p.voice==='analyst'))){const family=p.templateId?.split('.v87.')[0];if(draftFamilies.has(family))continue;if(add(p))draftFamilies.add(family);}
  const focusGroups=new Map();for(const p of stories)if(p.eventFocus){const list=focusGroups.get(p.thread)??[];list.push(p);focusGroups.set(p.thread,list);for(const id of p.focusTeams??[])if(budgets.has(id))budgets.set(id,Math.max(budgets.get(id),p.eventFocus==='title'?20:p.eventFocus==='playoff'?16:budgets.get(id)));}
  // Keep one factual recap of the preceding game for each finalist. Hype
  // must not consume the whole allowance and erase how the team got here.
@@ -25,5 +30,5 @@ export function applyWeeklyCoverage(stories,s){
  // Replies get a bounded place in the same allowance, rather than an extra
  // hidden budget. Major news and the normal voice/category rotation follow.
  for(const p of ordered){if(!chosen.has(p.id)&&!add(p))continue;for(const child of children.get(p.id)??[])if(add(child))for(const sub of children.get(child.id)??[])add(sub);}
- return stories.filter(p=>chosen.has(p.id)||p.voice==='nflDraft'&&p.category==='draft');
+ return stories.filter(p=>p.coverageExempt||chosen.has(p.id)||p.voice==='nflDraft'&&p.category==='draft');
 }

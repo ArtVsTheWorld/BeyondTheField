@@ -13,6 +13,15 @@ export function addConversations({s,events,stories,byId,teams,players,games,regi
  const ordered=[...events].sort((a,b)=>(priorOrder.get(a.id)??Number.MAX_SAFE_INTEGER)-(priorOrder.get(b.id)??Number.MAX_SAFE_INTEGER)||b.priority-a.priority||a.id.localeCompare(b.id));
  for(const e of ordered){
   const root=roots.get(e.id),f=e.facts,t=teams.get(e.teamIds[0]);if(!root)continue;
+  if(f.recruitKind==='transfer'){
+   const old=teams.get(f.formerTeam),destination=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.school)),recruit=players.get(e.playerId);
+   const values={...teamValues(destination??t),...f,targetHandle:recruit?registry.get(s,'recruit',destination??old??t,recruit).handle:null};
+   if(old)add(e,f.rivalTransfer?'roster.rival-fan':hash(e.id+'|departure-tone')%2?'roster.departure-kind':'roster.departure-sour',{...values,...(!f.rivalTransfer?teamValues(old):{})},{role:'fan',team:old,suffix:'portal-departure',replyTo:root.id,priority:e.priority-1});
+   const status=s.recruitStatuses?.find(r=>r.player===e.playerId),committed=f.newlyObserved||f.signed||['HardCommitted','SoftCommitted','Signed'].includes(status?.stage);
+   const destinations=committed?[destination].filter(Boolean):(status?.topSchools??[]).map(id=>teams.get(id)).filter(x=>x&&x.id!==old?.id).slice(0,2);
+   for(const target of destinations)add(e,committed?'roster.welcome':'roster.pitch',{...values,...teamValues(target)},{role:'fan',team:target,persona:1,suffix:'portal-fan:'+target.id,replyTo:root.id,priority:e.priority-1});
+   if(root.voice==='recruit'||f.family?.startsWith('portal.')||f.family==='roster.interest')continue;
+  }
   if(e.category==='recruiting'&&(f.flipped||f.decommitted)){
    const team=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.oldSchool));if(team)add(e,f.flipped?'reply.fan.flip':'reply.fan.decommit',{...teamValues(team),...f},{role:'fan',team,persona:1,suffix:'departure-reaction',priority:e.priority+1,replyTo:root.id,important:f.stars===5});continue;
   }

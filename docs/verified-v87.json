@@ -1,0 +1,40 @@
+{
+  "build": "v87",
+  "installed": true,
+  "contentRevision": "offseason-discourse-v87",
+  "nodeTests": {
+    "fail": 0,
+    "pass": 283
+  },
+  "native": {
+    "allDynamicScopes": true,
+    "catalogEditions": 27,
+    "teamShortcutFirstRowLogged": true,
+    "unitChecks": true,
+    "stockHubCallbackUnhooked": true
+  },
+  "mmc": {
+    "registration": true,
+    "installedVerification": true,
+    "payloadTamperChecks": true,
+    "nativeLoadedPid": 31864
+  },
+  "backups": {
+    "historyFiles": 10,
+    "checksumVerified": true,
+    "saveFiles": 8
+  },
+  "live": {
+    "phase": "OffSeason",
+    "feedPublished": true,
+    "reason": "LT list cached once on initial For You page; dynamic page controls missing",
+    "pageNavigation": false,
+    "week": 4,
+    "stories": 1011
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v87.dll": "dad2d80f3508dd4e2e63e80e4e69a8093e4022d54416f7e5ba1b90fd4c20b455",
+    "DynastyEnhancer.dll": "73be9efad4e84fa685d3793af09624441a80af13201a0afeada707ab535dce0b",
+    "DynastyEnhancer-v87-MMC.zip": "823222e7b5bfb711d400b9450b342ea7fa1b4d1bdf11b28f58f76eca3f655572"
+  }
+}

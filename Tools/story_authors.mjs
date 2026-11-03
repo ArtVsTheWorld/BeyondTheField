@@ -9,7 +9,9 @@ export function authorRegistry(saved={}){
  return {entries,get(s,role,team,player,persona=0){
   const person=['player','recruit'].includes(role),family=person?'person':role;
   const key=`${s.leagueId}:${family}:${person?player.id:['analyst','model','cfp','nflDraft'].includes(role)?'national':team?.id??'national'}${!person&&persona?':'+persona:''}`;
-  const displayName=person?player.name+(role==='recruit'&&player.position?' | '+player.position:''):null;
+  const recruitClass=person?s.recruitStatuses?.find(r=>r.player===player.id)?.recruitClass:null;
+  const classLabel=recruitClass?.startsWith('Transfer_')?'Transfer ':recruitClass?.startsWith('JuniorCollege_')?'JUCO ':'';
+  const displayName=person?player.name+(role==='recruit'&&player.position?' | '+classLabel+player.position:''):null;
   if(entries[key]&&(person||entries[key].identityVersion===2)){if(role==='model'){const old=entries[key].handle.toLowerCase();entries[key].author='CanDuel Sports';entries[key].handle='@CanDuelSports';handles.delete(old);handles.set('@canduelsports',key);}if(person)entries[key].author=displayName;return entries[key];}
   if(entries[key])handles.delete(entries[key].handle.toLowerCase());
   const seed=hash(key),school=team?.name??'College Football',slug=clean(school).slice(0,13)||'College';let author,base;

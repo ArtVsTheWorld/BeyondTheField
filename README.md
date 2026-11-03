@@ -4,7 +4,15 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Stable hub recovery (v86)
+## Offseason discourse and paged browsing (v87)
+
+The current package is `Build/DynastyEnhancer-v87-MMC.zip`. Social Media is the first shortcut in **Team**, using a verified native Roster donor; Dynasty Central returns to its stock settings entries. The dedicated-tab experiment remains inactive. Existing CFB access stays available during the season.
+
+Filtered feeds now page through all qualifying published stories, keeping replies with their parent. LT places Next Page/Previous Page immediately after the selected scope; the header shows the page and metadata uses the full filtered count. For You stays curated, with every user-team draft selection retained in its draft edition. Commitment/signing reports bypass the flavor budget so a busy recruiting week does not silently lose factual announcements.
+
+New coverage includes team/conference first-round counts, draft congratulations and disappointment, top-ten discussion and subjective NFL draft-haul opinions. Recruiting distinguishes high school, JUCO and transfers; one-stars are excluded, occasional two-stars receive underdog coverage, and major transfer destinations name the former school and recognize native rivalries. Maddox/Brooks cover portal recruiting and ESPNCFB reports five-star commitments/signings. See [v87 details and verification](docs/offseason-discourse-v87.md).
+
+## Previous stable hub recovery (v86)
 
 The current package is `Build/DynastyEnhancer-v86-MMC.zip`. The dedicated hub-tab experiment in v84/v85 is withdrawn after a blank hub and then a confirmed crash during BYU loading. v86 restores the exact v83 native UI implementation and code gates; it does not hook or replace MenuPanelsReady. Use **Dynasty Central → Social Media** year-round, or the CFB shortcut when available. Portal/unsigned recruiting coverage, all 224 draft announcements, native draft icon and Transactions pick order remain. The user confirmed clean BYU loading, feed entry, filters, scrolling and Back in v86. See [v86 crash recovery](docs/hub-crash-v86.md). The dedicated tab remains unfinished.
 

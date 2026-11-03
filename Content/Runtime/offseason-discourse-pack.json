@@ -1,0 +1,183 @@
+{
+  "revision": "offseason-discourse-v87",
+  "families": {
+    "draft-talk.team-leader": [
+      {
+        "id": "draft-talk.team-leader.v87.1",
+        "body": "First-round count: {leaders} {leadVerb} with {count} selections. That's a lot of players reaching the front of the draft together."
+      },
+      {
+        "id": "draft-talk.team-leader.v87.2",
+        "body": "{leaders}: {count} first-round picks, the highest school total in this class. Development matters. So does getting that many prospects to draft day healthy."
+      }
+    ],
+    "draft-talk.conference-leader": [
+      {
+        "id": "draft-talk.conference-leader.v87.1",
+        "body": "Conference draft check: {conferences} {leadVerb} with {count} first-round picks. That is this year's count, not a free pass to claim every team in the league was great."
+      }
+    ],
+    "draft-talk.congrats": [
+      {
+        "id": "draft-talk.congrats.v87.1",
+        "body": "{count} {school} players drafted. Congrats to {names}{more}. Watching guys you cheered for get that call never gets old"
+      },
+      {
+        "id": "draft-talk.congrats.v87.2",
+        "body": "From {school} to Sundays. {count} draft picks this year. Big congrats to {names}{more}. Go make your own story"
+      }
+    ],
+    "draft-talk.empty": [
+      {
+        "id": "draft-talk.empty.v87.1",
+        "body": "No {school} players drafted this year. Not the result we wanted. Hope our guys get a chance as free agents and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.v87.2",
+        "body": "An entire draft without {school} having a name called. Yeah that stings. Wishing our guys well wherever the next opportunity comes"
+      }
+    ],
+    "draft-talk.conference-fan": [
+      {
+        "id": "draft-talk.conference-fan.v87.1",
+        "body": "{count} first-round picks out of {school}. You're welcome, {conference}. We'll be bringing this up all summer"
+      }
+    ],
+    "draft-talk.top-ten": [
+      {
+        "id": "draft-talk.top-ten.v87.1",
+        "body": "{school}'s {position} {playerName} to the {nflTeam} at No. {pick}. A top-ten investment means expectations arrive immediately. I'll be watching how they build around this pick."
+      },
+      {
+        "id": "draft-talk.top-ten.v87.2",
+        "body": "No. {pick}: {school}'s {position} {playerName}, {nflTeam}. Fun landing spot. The next part is finding the right role, not declaring somebody a star before the first practice."
+      }
+    ],
+    "draft-talk.nfl-haul": [
+      {
+        "id": "draft-talk.nfl-haul.v87.1",
+        "body": "One of my favorite hauls on this draft board: the {nflTeam} landed {names}. I like the starting point. Getting those picks into productive roles is the real test."
+      }
+    ],
+    "roster.underdog": [
+      {
+        "id": "roster.underdog.v87.1",
+        "body": "Under-the-radar watch: {school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A quieter recruitment and a chance to write a different story."
+      }
+    ],
+    "roster.commit": [
+      {
+        "id": "roster.commit.v87.1",
+        "body": "{school} lands {starDescription}{prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.v87.2",
+        "body": "New commitment for {school}: {starDescription}{prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      }
+    ],
+    "roster.rival-transfer": [
+      {
+        "id": "roster.rival-transfer.v87.1",
+        "body": "Across the rivalry line: {starDescription}transfer {position} {playerName} has committed to {school} from {formerSchool}. Both fanbases are going to have thoughts on this one."
+      }
+    ],
+    "roster.offer": [
+      {
+        "id": "roster.offer.v87.1",
+        "body": "AGTG! Blessed to receive an offer from {school}. Thankful for the opportunity and everybody supporting me through this process"
+      },
+      {
+        "id": "roster.offer.v87.2",
+        "body": "Offer from {school}! Appreciate the coaches believing in me. Excited to see where this goes"
+      }
+    ],
+    "roster.transfer-offer": [
+      {
+        "id": "roster.transfer-offer.v87.1",
+        "body": "Grateful for an offer from {school}. After my time at {formerSchool}, I'm looking for the right place for this next chapter."
+      }
+    ],
+    "roster.announce": [
+      {
+        "id": "roster.announce.v87.1",
+        "body": "Committed to {school}. Appreciate everyone who's been part of this journey. Ready for what's next"
+      },
+      {
+        "id": "roster.announce.v87.2",
+        "body": "{school} is home. Thank you to my family and everybody who had my back through this recruitment"
+      }
+    ],
+    "roster.transfer-announce": [
+      {
+        "id": "roster.transfer-announce.v87.1",
+        "body": "After my time at {formerSchool}, I'm committed to {school} for the next chapter. Grateful for the people who helped me get here. Let's get to work."
+      }
+    ],
+    "roster.major": [
+      {
+        "id": "roster.major.v87.1",
+        "body": "COMMITMENT: {school} lands 5-star {prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      }
+    ],
+    "roster.destination": [
+      {
+        "id": "roster.destination.v87.1",
+        "body": "Transfer update: {starDescription}{position} {playerName} is committed to {school} from {formerSchool}. A real addition to this class, not just another name on the interest list."
+      }
+    ],
+    "roster.interest": [
+      {
+        "id": "roster.interest.v87.1",
+        "body": "Transfer {position} {playerName}{originDetail} currently has {schools} among the leading schools. Those are the destinations to track; there is no commitment yet."
+      },
+      {
+        "id": "roster.interest.v87.2",
+        "body": "Keeping an eye on {position} {playerName}{originDetail}. {schools} are in the current leading group. Fit and opportunity will make this recruitment interesting."
+      },
+      {
+        "id": "roster.interest.v87.3",
+        "body": "My shortlist for transfer {position} {playerName}{originDetail} starts with {schools}, the current leading group. I'd watch those schools closely. This is a projection of the race, not a commitment."
+      }
+    ],
+    "roster.departure-kind": [
+      {
+        "id": "roster.departure-kind.v87.1",
+        "body": "Good luck with the next chapter, {targetHandle}. Appreciate what you gave {school}. Hope it works out for you"
+      }
+    ],
+    "roster.departure-sour": [
+      {
+        "id": "roster.departure-sour.v87.1",
+        "body": "{targetHandle} leaving {school} still stings. We'll be cheering for the guys who stayed. No free passes when we see you again"
+      }
+    ],
+    "roster.pitch": [
+      {
+        "id": "roster.pitch.v87.1",
+        "body": "{targetHandle} come to {school}. We can definitely make room for a player like you"
+      },
+      {
+        "id": "roster.pitch.v87.2",
+        "body": "{school} is right there, {targetHandle}. Just saying. We'd love to see you in our colors"
+      }
+    ],
+    "roster.rival-fan": [
+      {
+        "id": "roster.rival-fan.v87.1",
+        "body": "{targetHandle} from {formerSchool} to {school}? Of all the schools you could've picked. That rivalry game just got personal"
+      }
+    ],
+    "roster.welcome": [
+      {
+        "id": "roster.welcome.v87.1",
+        "body": "Welcome to {school}, {targetHandle}. Another piece for this team. Can't wait to see you out there"
+      }
+    ],
+    "roster.unsigned": [
+      {
+        "id": "roster.unsigned.v87.1",
+        "body": "Still available: {starDescription}{prospectType}{position} {playerName} is uncommitted. {recruitRankDetail} This recruitment remains open."
+      }
+    ]
+  }
+}

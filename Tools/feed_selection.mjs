@@ -41,13 +41,14 @@ export function curate(stories,limit=30){
   for(const item of bundle){
    const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();
    const focused=(item.focusTier??0)===focusTier&&focusTier>0,accountMax=['player','fan'].includes(item.voice)?2:3;
-   if(category==='offers'&&(c.get(category)??0)>=1||account&&(a.get(account)??0)>=accountMax||relaxed&&!focused&&(t.get(thread)??0)>=3)return false;
+   if(category==='offers'&&(c.get(category)??0)>=1||account&&!item.guaranteedUserDraft&&(a.get(account)??0)>=accountMax||relaxed&&!focused&&(t.get(thread)??0)>=3)return false;
    if(!relaxed&&((c.get(category)??0)>=(focused?focusTarget:scaled(categoryMax[category]??2))||(t.get(thread)??0)>=(focused?focusTarget:2)||item.templateId&&(forms.get(item.templateId)??0)>=2||item.voice&&(v.get(item.voice)??0)>=(focused?Math.max(6,scaled(voiceMax[item.voice]??20)):scaled(voiceMax[item.voice]??20))))return false;
    c.set(category,(c.get(category)??0)+1);t.set(thread,(t.get(thread)??0)+1);if(item.templateId)forms.set(item.templateId,(forms.get(item.templateId)??0)+1);if(account)a.set(account,(a.get(account)??0)+1);if(item.voice)v.set(item.voice,(v.get(item.voice)??0)+1);++byScope[scope];
   }
   if(respectTargets&&Object.keys(target).some(k=>byScope[k]>target[k]))return false;
   for(const item of bundle){const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();used.add(item.id);selected.push(item);++counts[scope];categories.set(category,c.get(category));threads.set(thread,t.get(thread));if(item.templateId)templates.set(item.templateId,forms.get(item.templateId));if(account)accounts.set(account,a.get(account));if(item.voice)voices.set(item.voice,v.get(item.voice));}return true;
  }
+ for(const p of pool.filter(p=>p.guaranteedUserDraft&&!p.replyTo).sort((a,b)=>a.draftPick-b.draftPick))accept(p,false,true);
  // Reserve the shared live postseason event before local offseason quotas.
  if(focusTier)for(const p of editorialRoots(pool.filter(p=>!p.replyTo&&p.focusTier===focusTier))){if(selected.filter(p=>p.focusTier===focusTier).length>=focusTarget)break;accept(p,false);}
  // Keep the actual user result before reserving room for personality/reactions.
@@ -66,15 +67,13 @@ export function curate(stories,limit=30){
 }
 export function scopeViews(stories){
  const visible=conversationOrder(stories),all=curate(visible);
- const national=visible.filter(p=>p.scopes.includes('national')),focusTier=Math.max(0,...national.map(p=>p.focusTier??0)),focus=national.filter(p=>p.focusTier===focusTier&&focusTier>0);
- let selectedNational=national;
- if(focus.length>=8){const chosen=new Set(focus.map(p=>p.id)),other=new Set(),cap=Math.floor(focus.length/2);for(const p of conversationOrder(national.filter(p=>p.focusTier!==focusTier))){if(other.size>=cap)break;if(p.replyTo&&!other.has(p.replyTo))continue;other.add(p.id);}selectedNational=national.filter(p=>chosen.has(p.id)||other.has(p.id)||p.voice==='nflDraft'&&p.draftPick>0);}
- return {all:all.map(p=>p.id),national:conversationOrder(selectedNational).map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
+ const national=visible.filter(p=>p.scopes.includes('national'));
+ return {all:all.map(p=>p.id),'all:default':conversationOrder([...new Map([...visible.filter(p=>p.guaranteedUserDraft),...all].map(p=>[p.id,p])).values()]).map(p=>p.id),'all:expanded':conversationOrder(visible.filter(p=>p.scopes.includes('team')||p.scopes.includes('relevant')||all.some(a=>a.id===p.id))).map(p=>p.id),national:national.map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
 }
 
 export function publishWeek(feed){
   const publication={key:feed.key,season:feed.season,phase:feed.phase,week:feed.week};
-  const stories=feed.stories.map(p=>({...p,publication}));
+  const stories=feed.stories.map(p=>({...p,publication,guaranteedUserDraft:p.voice==='nflDraft'&&p.teamIds?.includes(feed.userTeamIndex)}));
   const views={...scopeViews(stories),...(feed.scopeOptions?discoveryViews(conversationOrder(stories),feed.scopeOptions):{})},map=new Map(stories.map(p=>[p.id,p]));
   return {...feed,editorialVersion:1,stories,views,posts:views.all.map(id=>map.get(id)),publication};
 }

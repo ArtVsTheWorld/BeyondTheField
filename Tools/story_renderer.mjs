@@ -12,7 +12,7 @@ import {chooseTemplate,contentPack as pack} from './story_templates.mjs';
 import {addConversations} from './story_conversations.mjs';
 import {publishOffer,publishReply} from './publication_policy.mjs';
 export const CONTENT_REVISION=pack.revision;
-export const stampFor=category=>({'draft':'Draft','nil':'NIL',transfer:'Portal Watch','results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset','matchup-recap':'Matchup Recap','matchup-preview':'Matchup','season-end':'Season Review',coaching:'Coaching',postseason:'Postseason','conference-talk':'Conference Talk',offseason:'Offseason',history:'Milestone',championship:'Title Race',bowls:'Bowl Watch',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
+export const stampFor=category=>({'draft-discourse':'Draft','draft':'Draft','nil':'NIL',transfer:'Portal Watch','results':'Recap','team-stats':'Recap','player-stats':'Recap',recruiting:'Recruiting',offers:'Recruiting',schedule:'Upcoming',polls:'Rankings',heisman:'Heisman',cfp:'Playoff Watch',injuries:'Injury Report',standings:'Standings',watch:'Spotlight',lines:'Odds',holiday:'Calendar',analytics:'Analysis',upsets:'Upset','matchup-recap':'Matchup Recap','matchup-preview':'Matchup','season-end':'Season Review',coaching:'Coaching',postseason:'Postseason','conference-talk':'Conference Talk',offseason:'Offseason',history:'Milestone',championship:'Title Race',bowls:'Bowl Watch',records:'Record Book',streaks:'Streak',awards:'Award'}[category]??'News');
 const personalities=new Set(['Leader','Intense','Entertainer','TeamPlayer','Unpredictable']);
 const final=g=>g&&g.published!==false&&['HomeWon','AwayWon','Tie'].includes(g.status);
 const ranked=n=>Number.isInteger(n)&&n>0&&n<=25;
@@ -29,20 +29,29 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   const parent=replyTo?byId.get(replyTo):null;if(replyTo&&(!parent||!publishReply(s,e.id+':'+suffix,replyTo)))return null;
   ({role,persona}=editorialAssignment(s,e,family,role,team,persona,coverage));
   const account=registry.get(s,role,team,player,persona),id=e.id+':'+suffix;
-  const filled={recruitRankDetail:recruitRankDetail(values,e.id),starDescription:Number.isInteger(values.stars)?values.stars+'-star ':'',...values,...(parent?{parentHandle:parent.handle}:{})};
+  const filled={recruitRankDetail:recruitRankDetail(values,e.id),starDescription:Number.isInteger(values.stars)?values.stars+'-star ':'',...values,...(values.position?{position:publicPosition(values.position)}:{}),...(parent?{parentHandle:parent.handle}:{})};
   if(role==='player'&&player&&typeof filled.playerName==='string'){const subject=[...players.values()].find(p=>p.name===filled.playerName&&(p.team===player.team||p.team===255&&['offers','recruiting'].includes(e.category)&&e.teamIds.includes(player.team)));if(subject&&subject.id!==player.id)filled.playerName=publicPosition(subject.position)+' '+(subject.firstName||subject.name.trim().split(/\s+/)[0]);}
-  const transformBody=body=>qualify(body,{playerId:e.playerId,teamIds:e.teamIds});
+  const transformBody=body=>{
+   body=qualify(body,{playerId:e.playerId,teamIds:e.teamIds});
+   if(filled.prospectType&&filled.playerName&&!['player','recruit'].includes(role)){
+    const p=players.get(e.playerId),ref=p&&publicPosition(p.position)+' '+p.name;
+    if(ref&&body.includes(ref)&&!body.includes(filled.prospectType+ref))body=body.replace(ref,filled.prospectType+ref);
+    if(filled.recruitKind==='transfer'&&filled.formerSchool&&!body.includes(filled.formerSchool))body+=' Previously at '+filled.formerSchool+'.';
+   }return body;
+  };
   const renderKey=createHash('sha256').update(JSON.stringify({family,values:filled,handle:account.handle})).digest('hex');
   const oldStory=sameStories.get(id),baseOld=oldStory?.rawBody?{...oldStory,body:oldStory.rawBody}:oldStory;
   let chosen=chooseTemplate(family,filled,edition+'|'+id+'|'+account.handle,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:baseOld,renderKey,transformBody});if(!chosen)return null;
   let voiceTemplateId=null;const rawBody=cleanLanguage(chosen.body);
-  if(role==='analyst'&&[2,3,5].includes(persona)&&!family.startsWith('playoff.')&&!family.startsWith('buzz.')&&!family.startsWith('review.')){const negative=values.verdict==='negative'||values.negative===true||values.metric==='turnoverMargin'&&values.margin<0||values.metric==='thirdDownConversionRate'&&values.rate<=.3||values.metric==='redZoneTouchdownRate'&&values.rate<=.45||/third_low|red_low|turnover_minus/.test(family);const positive=values.verdict==='positive'||!values.verdict&&(e.category==='awards'||/third_high|red_high|turnover_plus/.test(family));const voiceFamily='desk.'+({2:'marcus',3:'tina',5:'chris'})[persona]+(negative?'.negative':positive?'.positive':'.neutral');const voiced=chooseTemplate(voiceFamily,{...filled,analysisText:rawBody},edition+'|'+id,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:oldStory?.voiceTemplateId?{...oldStory,templateId:oldStory.voiceTemplateId}:null,renderKey,transformBody});if(voiced){voiceTemplateId=voiced.templateId;chosen={...chosen,body:voiced.body};}}
+  if(role==='analyst'&&[2,3,5].includes(persona)&&!family.startsWith('playoff.')&&!family.startsWith('buzz.')&&!family.startsWith('review.')&&!family.startsWith('draft-talk.')&&!family.startsWith('roster.')){const negative=values.verdict==='negative'||values.negative===true||values.metric==='turnoverMargin'&&values.margin<0||values.metric==='thirdDownConversionRate'&&values.rate<=.3||values.metric==='redZoneTouchdownRate'&&values.rate<=.45||/third_low|red_low|turnover_minus/.test(family);const positive=values.verdict==='positive'||!values.verdict&&(e.category==='awards'||/third_high|red_high|turnover_plus/.test(family));const voiceFamily='desk.'+({2:'marcus',3:'tina',5:'chris'})[persona]+(negative?'.negative':positive?'.positive':'.neutral');const voiced=chooseTemplate(voiceFamily,{...filled,analysisText:rawBody},edition+'|'+id,{handle:account.handle,week:s.season.CurrentWeek,history,sameStory:oldStory?.voiceTemplateId?{...oldStory,templateId:oldStory.voiceTemplateId}:null,renderKey,transformBody});if(voiced){voiceTemplateId=voiced.templateId;chosen={...chosen,body:voiced.body};}}
   chosen={...chosen,body:cleanLanguage(chosen.body)};
   const reaction=['player','fan'].includes(role),accountKey=account.handle.toLowerCase(),topic=e.facts.gameId?e.facts.gameId+':'+team?.id:null;
   if(reaction&&!important&&((reactionAccounts.get(accountKey)??0)>=pack.publicationPolicy.reactionPostsPerAccount||(topic&&(reactionTopics.get(topic)??0)>=pack.publicationPolicy.reactionsPerGameTeam)))return null;
   if(parent&&(replyCounts.get(parent.id)??0)>=pack.publicationPolicy.maximumRepliesPerParent)return null;
   const p={id,eventId:e.id,category:e.category,voice:role,author:account.author,handle:account.handle,...chosen,rawBody,voiceTemplateId,renderKey,stamp:parent?'Reply':stampFor(e.category),...avatarFor(role,team,player,persona),likes:likesFor(s,id,role,team,e,sameStories.get(id)),priority,scopes:parent?parent.scopes:e.scopes,teamIds:e.teamIds,playerId:['player','recruit'].includes(role)?player.id:e.playerId,eventWeek:e.eventWeek,thread:e.thread,curated:curated!==false&&parent?.curated!==false,primaryScope:e.primaryScope,contentRevision:CONTENT_REVISION,...(e.facts.eventFocus?{eventFocus:e.facts.eventFocus,focusTier:e.facts.focusTier,focusTeams:e.facts.focusTeams}:{}),newsCycle:e.newsCycle??null};
   if(e.category==='heisman')p.heismanContextVersion=1;
+  if(e.category==='draft-discourse'&&role==='analyst')p.transaction=true;
+  if(!parent&&(e.id.startsWith('commit:')||e.category==='signings')&&(['beat','analyst'].includes(role))){p.coverageExempt=true;}
   if(role==='nflDraft'){p.transaction=true;p.draftPick=values.draftPick;p.draftRound=values.draftRound;}
   if(['analyst','beat'].includes(role)&&(e.category==='coaching'||e.category==='transactions'||e.category==='nil'||family==='transactions.signed'))p.transaction=true;
   if(parent)p.likes=replyLikesFor(s,id,parent.likes,sameStories.get(id));p.engagementVersion=ENGAGEMENT_VERSION;
@@ -107,11 +116,13 @@ export function renderStories(s,events,{authors={},history=[],sameWeek=null}={})
   }else if(e.category==='offers'||e.category==='recruiting'){
    const p=players.get(e.playerId),team=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.school));if(!p||!team)continue;
    const values={...teamValues(team),...f},personality=personalities.has(p.personality)?p.personality:'Neutral',account=registry.get(s,'recruit',team,p);
-   if(e.category==='offers')add(e,'recruit.offer.'+(account.faithLanguage?'faith':personality),values,{role:'recruit',team,player:p});
-   else if(f.newlyObserved&&f.commitment==='HardCommitted')add(e,'recruit.commit.'+personality,values,{role:'recruit',team,player:p});
-   else if(f.newlyObserved){values.recruitRankDetail=recruitRankDetail(f,e.id);values.coachDetail=team.headCoach?.lastName?` A new addition for Coach ${team.headCoach.lastName}.`:'';add(e,'beat.commit',values,{team});}
-   if(e.category==='recruiting'&&f.newlyObserved&&f.commitment==='HardCommitted'&&(f.recruitSignificance==='questioned'||f.stars>=4||hash(e.id+'|star-detail')%2===0)){
-    const starDescription=f.stars?f.stars+'-star ':'';add(e,f.recruitSignificance==='questioned'?'beat.recruit_questioned':'beat.recruit_pickup',{...values,starDescription},{role:f.stars===5||f.nationalRecruitRank>=1&&f.nationalRecruitRank<=100?'analyst':'beat',team,persona:5,suffix:'pickup',priority:e.priority-1});
+   if(e.category==='offers')add(e,f.recruitKind==='transfer'&&f.formerSchool?'roster.transfer-offer':'recruit.offer.'+(account.faithLanguage?'faith':personality),values,{role:'recruit',team,player:p});
+   else if(f.newlyObserved){
+    const rivalry=f.recruitKind==='transfer'&&f.rivalTransfer&&f.formerSchool;
+    const hard=f.commitment==='HardCommitted';
+    if(hard)add(e,f.recruitKind==='transfer'&&f.formerSchool?'roster.transfer-announce':'roster.announce',values,{role:'recruit',team,player:p});
+    const reportEvent={...e,facts:{...f,...(f.stars===5?{analystPersona:0}:{})}};
+    add(reportEvent,rivalry?'roster.rival-transfer':f.stars===5?'roster.major':f.recruitKind==='transfer'&&f.formerSchool?'roster.destination':'roster.commit',values,{role:f.stars>=4?'analyst':'beat',team,persona:f.stars===5?0:hash(e.id+'|recruit-writer')%3===0?3:5,suffix:hard?'report':'main'});
    }
   }else if(e.category==='injuries'){
    v.injuryDetail=f.injuryType?' Listed injury: '+f.injuryType.replace(/SeveralGames|CoupleGames|Couple/g,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase()+'.':'';v.timetable=f.timetable?.text??'A return timetable has not been established.';add(e,f.recovered?'beat.recovery':'injury.report',v);

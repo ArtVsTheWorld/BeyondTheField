@@ -10,7 +10,8 @@ export function playerReferenceQualifier(players,{staffNames=[]}={}){
   const preferred=all.find(p=>p.id===playerId)??(all.filter(p=>teamIds.includes(p.team)).length===1?all.find(p=>teamIds.includes(p.team)):null),positions=new Set(all.map(p=>publicPosition(p.position))),position=publicPosition(preferred?.position)??(positions.size===1?[...positions][0]:null);
   if(!position)return name;
   const before=body.slice(0,offset),after=body.slice(offset+name.length);
-  if(/(?:^|[^\p{L}\p{N}'’])(?:QB|RB|HB|FB|WR|TE|LT|LG|C|RG|RT|OT|OG|OL|DE|DT|EDGE|LB|MLB|OLB|CB|FS|SS|S|DB|K|P|LS)\s+$/u.test(before)||/\b(?:quarterback|running back|receiver|wide receiver|tight end|cornerback|safety|linebacker|lineman|kicker|punter)\s+$/i.test(before)||new RegExp('^\\s*\\('+esc(position)+'\\)').test(after))return name;
+  if(/^\s*,?\s*(?:(?:a|an)\s+)?(?:QB|RB|HB|FB|WR|TE|LT|LG|C|RG|RT|OT|OG|OL|DE|LE|RE|LEDG|REDG|DT|EDGE|LB|MLB|OLB|SAM|MIKE|WILL|CB|FS|SS|S|DB|K|P|LS)\b/u.test(after))return name;
+  if(/(?:^|[^\p{L}\p{N}'’])(?:QB|RB|HB|FB|WR|TE|LT|LG|C|RG|RT|OT|OG|OL|DE|LE|RE|LEDG|REDG|DT|EDGE|LB|MLB|OLB|SAM|MIKE|WILL|CB|FS|SS|S|DB|K|P|LS)\s+$/u.test(before)||/\b(?:quarterback|running back|receiver|wide receiver|tight end|cornerback|safety|linebacker|lineman|kicker|punter)\s+$/i.test(before)||new RegExp('^\\s*\\('+esc(position)+'\\)').test(after))return name;
   return position+' '+name;
  }):body;
 }

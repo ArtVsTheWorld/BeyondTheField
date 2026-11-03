@@ -1,4 +1,8 @@
+import {hash} from './story_authors.mjs';
+const hashForRecruit=id=>hash(id+'|portal-specialist')%3===0?3:5;
 import {draftEvents} from './draft_results.mjs';
+import {draftDiscourse} from './draft_discourse.mjs';
+import {recruitAttention,recruitContext,recruitingCategory} from './recruit_context.mjs';
 import {offseasonRecruitingEvents} from './offseason_recruiting.mjs';
 import {newsCycle} from './season_context.mjs';
 import {phaseIndex} from './publication_timeline.mjs';
@@ -40,7 +44,16 @@ export function detectEvents(s,previous=null){
   const poll=publicPoll(s,previous),rank=id=>ranked(poll.ranks[id])?poll.ranks[id]:99;
   const liveAnalysis=!['postseason','offseason'].includes(newsCycle(s).key),events=[],ids=new Set();
   const emit=(id,category,facts,{team=null,player=null,relatedTeams=[],national=null,eventWeek=null,priority=50,thread=null,curated=true,primaryScope=null}={})=>{
-    if(ids.has(id))return;const p=players.get(player);const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
+    if(ids.has(id))return;const p=players.get(player);
+    if(p&&recruitingCategory(category)){
+      if(!recruitAttention(s,p))return;
+      facts={...facts,...recruitContext(s,p)};
+      if(facts.recruitKind==='transfer'&&p.starRating>=4&&(facts.newlyObserved||facts.signed)){national=true;facts.analystPersona=hashForRecruit(id);}
+      if(p.starRating===5&&category==='signings')facts={...facts,voice:'analyst',analystPersona:0};
+      if(p.starRating===2){if(!id.startsWith('commit:')&&!id.startsWith('portal-opening:unsigned:')&&!id.startsWith('portal-opening:entrant:'))return;facts.family='roster.underdog';facts.voice='beat';}
+      if(facts.recruitKind==='transfer'&&facts.formerTeam!==null){relatedTeams=[...relatedTeams,facts.formerTeam];facts.rivalTransfer=Boolean(teams.get(team)?.rivals?.includes(facts.formerTeam)||teams.get(facts.formerTeam)?.rivals?.includes(team));}
+    }
+    const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
     if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
     if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');// Every program retains its dedicated news, even outside the personalized feed.
     if(['recruiting','offers'].includes(category)&&p&&(s.recruitInterests?.includes(p.id)||(p.homePipeline&&own.pipelines?.includes(p.homePipeline))||(p.homeState&&p.homeState===own.homeState)))scopes.push('relevant');
@@ -122,6 +135,7 @@ export function detectEvents(s,previous=null){
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
   for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s),...seasonReviewEvents(s),...portalRiskEvents(s),...offseasonRecruitingEvents(s),...draftEvents(s)])emit(e.id,e.category,e.facts,e.options);
+  for(const e of draftDiscourse(s))emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=liveAnalysis?teamAnalytics(s):{teams:[],milestones:[]};
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

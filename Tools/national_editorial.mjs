@@ -10,8 +10,9 @@ export function nationalCoverage(s){
 export function editorialAssignment(s,e,family,role,team,requestedPersona=0,coverage=null){
  if(role!=='analyst')return {role,persona:requestedPersona};
  const covered=coverage??nationalCoverage(s),teamIds=e.teamIds??[];
- const majorRecruit=['offers','recruiting','signings'].includes(e.category)&&(e.facts.stars===5||e.facts.nationalRecruitRank<=100&&e.facts.nationalRecruitRank>=1);
- if(team&&teamIds.length&&!teamIds.some(id=>covered.has(id))&&!majorRecruit&&!e.facts.eventFocus&&!(e.facts.finalAward&&e.facts.nationalAward))return {role:'beat',persona:0};
+ const draftTalk=e.category==='draft-discourse';
+ const majorRecruit=['offers','recruiting','signings'].includes(e.category)&&(e.facts.stars===5||e.facts.recruitKind==='transfer'&&e.facts.stars>=4||e.facts.nationalRecruitRank<=100&&e.facts.nationalRecruitRank>=1);
+ if(team&&teamIds.length&&!teamIds.some(id=>covered.has(id))&&!majorRecruit&&!draftTalk&&!e.facts.eventFocus&&!(e.facts.finalAward&&e.facts.nationalAward))return {role:'beat',persona:0};
  if(Number.isInteger(e.facts.analystPersona))return {role:'analyst',persona:e.facts.analystPersona};
  if(/recruit|freshman|breakout|heisman/.test(family))return {role:'analyst',persona:5};
  if(/poll|cfp/.test(family)&&e.category!=='analytics')return {role:'analyst',persona:1};

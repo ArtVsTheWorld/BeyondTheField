@@ -17,7 +17,7 @@ bool requestResult=true;
 bool __fastcall originalRequest(void* self,void* panel,void* params){lastDonorPanel=argument(panel);++requestCalls;return requestResult&&self==expectedRequestSelf&&params==expectedRequestParams;}
 void __fastcall donorRows(void*,void* panel,void* out){
     lastDonorPanel=argument(panel);
-    rowText(out,0,"panelId",lastDonorPanel.c_str());rowText(out,0,"tileCoords","5");
+    rowText(out,0,"panelId",lastDonorPanel.c_str());rowText(out,0,"tileCoords",lastDonorPanel=="cm_team"?"3":"5");
     rowSet(out,0,"UseTileDimensions",false,3);rowSet(out,0,"UseFrame",true,3);
     rowSet(out,0,"Priority",0,4);
 }
@@ -36,6 +36,17 @@ int main(int argc,char** argv){
     using namespace fixture;
     try {
         for(const auto& binding:bindings)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
+        {
+            auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"team:1","Team"}};social::Edition e;e.key="paged";
+            for(int n=0;n<38;++n){auto id=std::to_string(n);social::FeedPost parent{"Beat","@Beat","Report","Recruiting"};parent.category="recruiting";e.stories.emplace(id,parent);auto reply=parent;reply.replyTo=id;reply.voice="fan";e.stories.emplace(id+"r",reply);e.views["team:1"].push_back(id);e.views["team:1"].push_back(id+"r");}c->weeks.push_back(e);
+            auto first=social::selectFeed(c,0,1,1);require(first->pages==3&&first->total==76&&first->posts.size()==30,"Filtered teams must retain every qualifying post in bounded pages");size_t count=0;
+            for(size_t page=0;page<first->pages;++page){auto f=social::selectFeed(c,0,1,1,page);require(f->posts.size()%2==0&&f->offset==count,"Page boundary detached a reply or corrupted global numbering");count+=f->posts.size();}
+            require(count==76&&social::selectFeed(c,0,1,1,99)->page==2&&social::selectFeed(c,0,1,1)->page==0,"Page clamping/reset lost content");
+        }
+        {
+            Collector original{vt,{}};ContainerProxy p{containerVt,&original,{},true};containerString(&p,3,"tileCoords","3");containerString(&p,8,"tileCoords","5");containerString(&p,9,"tileCoords","11");containerBool(&p,3,"AllowFocus",true);containerFloat(&p,3,"Opacity",0.5f);
+            require(appendContainer(p,teamEntry)&&original.rows.size()==4&&original.rows[0]["tileCoords"]=="12"&&original.rows[1]["tileCoords"]=="3"&&original.rows[2]["tileCoords"]=="5"&&original.rows[3]["tileCoords"]=="11"&&original.rows[0]["Opacity"]==0.5f,"Prominent shortcut must precede stock settings/retirement without changing their identities");
+        }
         uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
         {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,"CM_NEWSSUB",kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
         {
@@ -74,7 +85,7 @@ int main(int argc,char** argv){
         for(unsigned row=0;row<7;++row){require(out.rows.at(row).at("tileCoords")==std::string(row<6?coordinates[row]:"12"),"Original coordinates changed");require(out.rows.at(row).at("Priority")==0,"Native priorities changed");require(out.rows.at(row).at("Opacity")==0.875f,"Float collector ABI changed");require(out.rows.at(row).at("AllowFocus")==true,"Focus state lost");}
         Collector absent{vt,{}};ContainerProxy noDonor{containerVt,&absent,{}};containerString(&noDonor,0,"tileCoords","1");require(!appendContainer(noDonor)&&absent.rows.size()==1,"Missing donor must preserve the original menu");
         {
-            require(hubEntry("DynastyCentral")==&centralEntry&&hubEntry("CM_NEWSTAB")==&cfbEntry&&!hubEntry("CM_LEAGUE"),"Persistent shortcut must be scoped to the two verified hubs");
+            require(hubEntry("cm_team")==&teamEntry&&!hubEntry("DynastyCentral")&&hubEntry("CM_NEWSTAB")==&cfbEntry&&!hubEntry("CM_LEAGUE"),"Persistent shortcut must be scoped to the two verified hubs");
             {const auto savedRequest=requestPanel;requestPanel=originalRequest;expectedRequestSelf=&out;expectedRequestParams=&proxy;requestCalls=0;
              require(requestSocialPanel(&out,&proxy)&&requestCalls==1&&lastDonorPanel=="DynastyCentral","Category refresh must request the persistent panel and preserve its native self/params");
              requestResult=false;require(!requestSocialPanel(&out,&proxy)&&requestCalls==2,"A failed native refresh must not report success");requestResult=true;requestPanel=savedRequest;}
@@ -100,7 +111,7 @@ int main(int argc,char** argv){
             require(feed.rows.at(row).at("UseTileDimensions")==true,"Feed must size from post widgets");
         }
         if constexpr(listFeed)require(feed.rows.at(0).at("linkage")=="art_control.group.PanelListContainer","List feed must use the native list control");
-        {opened=false;Collector central{vt,{}};Alias hub{aliasVt,"DynastyCentral"};containerHook(nullptr,&hub,&central);require(central.rows.size()==2&&admittedHubEntries["DynastyCentral"],"Persistent hub did not admit a separate Social Media row");Collector other{vt,{}};Alias untouched{aliasVt,"OTHER_PANEL"};containerHook(nullptr,&untouched,&other);require(other.rows.size()==1&&!admittedHubEntries.count("OTHER_PANEL"),"Unrelated menus received the Social Media shortcut");opened=true;}
+        {opened=false;Collector central{vt,{}};Alias hub{aliasVt,"cm_team"};containerHook(nullptr,&hub,&central);require(central.rows.size()==2&&admittedHubEntries["cm_team"],"Persistent hub did not admit a separate Social Media row");Collector other{vt,{}};Alias untouched{aliasVt,"OTHER_PANEL"};containerHook(nullptr,&untouched,&other);require(other.rows.size()==1&&!admittedHubEntries.count("OTHER_PANEL"),"Unrelated menus received the Social Media shortcut");opened=true;}
         filterData=originalFilter;
         Collector filter{vt,{}};Alias kind{aliasVt,"NEWS_CATEGORY"};filterDataHook(nullptr,&filter,&panel,&kind);
         require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="For You"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");
@@ -134,7 +145,7 @@ int main(int argc,char** argv){
                 Json large=data;auto& largeEdition=large["weeks"][0];largeEdition["stories"]=Json::array();largeEdition["views"]=Json::object();for(const char* scope:{"all","national","conference","team"})largeEdition["views"][scope]=Json::array();
                 for(unsigned n=0;n<9300;++n){const auto id="offer-"+std::to_string(n);largeEdition["stories"].push_back({{"id",id},{"author","Recruit"},{"handle","@Recruit"},{"body","Verified scholarship announcement"},{"stamp","Recruiting"},{"category","offers"},{"voice","recruit"},{"likes",n},{"imageLibrary",79},{"imageValue",598},{"publication",{{"key",large["key"]},{"week",7}}}});for(const char* scope:{"national","conference","team"})largeEdition["views"][scope].push_back(id);if(n<30)largeEdition["views"]["all"].push_back(id);}
                 validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==20,"Large candidate catalog changed the 30/100/60/team display caps");
-                auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==100&&recruiting->posts[0].likes==0,"Large recruiting category lost editorial order or its National cap");
+                auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==30&&recruiting->posts[0].likes==0,"Large recruiting category lost editorial order or its National cap");
                 auto excessive=large;excessive["weeks"][0]["stories"].get_ref<Json::array_t&>().resize(32769,largeEdition["stories"][0]);bool bounded=false;try{validate(excessive,config);}catch(const std::exception& e){bounded=std::string(e.what()).find("exceeds catalogue limit")!=std::string::npos;}require(bounded,"Unbounded weekly catalog was accepted");
             }
             {
@@ -210,13 +221,13 @@ int main(int argc,char** argv){
             auto national=social::selectFeed(catalog,0,1);require(national->posts.size()==100,"National cap failed");
             require(national->posts[0].author=="0:0"&&national->posts[1].author=="attached"&&national->posts[2].author=="1:0","Editorial ordering split a conversation or followed likes");
             require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==20,"Team feed card budget failed");
-            auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==100&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
-            require(social::selectFeed(catalog,0,2,5)->posts.size()==60,"Filtered conference cap failed");
+            auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==30&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
+            require(social::selectFeed(catalog,0,2,5)->posts.size()==30,"Filtered conference cap failed");
         }
         {
             auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"national","National"}};social::Edition e;e.key="draft";
             for(int pick=224;pick>=1;--pick){auto id=std::to_string(pick);social::FeedPost p{"NFL Draft","@NFLDraft","Selection","Draft"};p.category="draft";p.voice="nflDraft";p.transaction=true;p.draftPick=pick;p.draftRound=(pick-1)/32+1;e.stories.emplace(id,p);e.views["national"].push_back(id);}
-            c->weeks.push_back(e);auto f=social::selectFeed(c,0,1,11);require(f->posts.size()==224&&f->posts.front().draftPick==1&&f->posts.back().draftPick==224,"National Transactions must show all picks in round/pick order");require(social::selectFeed(c,0,1)->posts.size()==100,"The ordinary National cap must stay at 100");require(social::matchesType(f->posts.front(),7),"NFL Draft must also count as an official account");
+            c->weeks.push_back(e);auto f=social::selectFeed(c,0,1,11);require(f->posts.size()==30&&f->pages==8&&f->posts.front().draftPick==1,"National Transactions must paginate the full board");int seen=0;for(size_t page=0;page<f->pages;++page){auto selected=social::selectFeed(c,0,1,11,page);for(const auto& post:selected->posts)require(post.draftPick==++seen,"Draft pagination lost pick order");}require(seen==224,"Draft pagination lost a pick");require(social::selectFeed(c,0,1)->posts.size()==100,"The ordinary National cap must stay at 100");require(social::matchesType(f->posts.front(),7),"NFL Draft must also count as an official account");
         }
         {social::FeedPost p{"reporter","@reporter","terms","Signing"};p.voice="beat";p.category="signings";require(social::matchesType(p,11)&&social::matchesType(p,1),"Reported signatures must appear in Transactions and Recruiting");p.category="coaching";p.voice="fan";require(!social::matchesType(p,11),"Speculative fan roots must not become transaction reports");p.voice="analyst";require(social::matchesType(p,11),"Coaching reports must appear in Transactions");}
         require(socialFilter("SOCIAL_TYPE_PREV")==SocialFilter::typePrev,"RB reverse category callback is not recognized");

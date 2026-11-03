@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v86
+# Dynasty Enhancer - MMC prototype v87
 
-Native Social Media inside the offline Dynasty hub. Open **Dynasty Central → Social Media** year-round, or its CFB shortcut when available. The dedicated-tab experiment is withdrawn after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
+Native Social Media inside the offline Dynasty hub. Open **Team → Social Media**, or its CFB shortcut when available. The dedicated-tab experiment remains inactive after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v86/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v86/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v87/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v87/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -16,10 +16,18 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - LT selects For You, National, a native conference or a native team.
 - RT selects one publication edition, with the active week selected initially and older editions listed first.
 - LB/RB cycle topic/account categories in both directions. Recruiting includes recruit-written posts; Players remains separate. Injuries is a dedicated category. Official Accounts includes CFP.
-- For You shows up to 30 posts, National 100 and a conference 60. Editorial priority and variety order parent threads; likes are flavor and replies remain attached. Missing real candidates are not replaced with sample tweets.
+- Default pages show up to 30 For You, 100 National, 60 conference and 20 team posts. Filtered categories show 30 per page. LT offers Next Page/Previous Page immediately after the active scope when more posts qualify. Page boundaries keep conversations together; the header shows the page and post numbers use the full filtered total. Likes remain flavor.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v86 changes
+## v87 changes
+
+- Social Media moves to the top of Team using its existing Roster donor and an unused coordinate. Stock Team entries keep their identities and order. Missing donors/occupied coordinates preserve the stock menu. Dynasty Central is unchanged. No hub-tab-list hook is installed.
+- Team/conference first-round leadership, top-ten discussion, fan draft reactions and subjective NFL-haul opinions use the verified/persisted draft class. Actual players/rounds remain native; NFL destinations/picks remain simulated. Select the draft publication edition for all official picks; later recruiting weeks can discuss that recorded class without republishing every selection.
+- HS/JUCO/transfer labels, verified former schools, rivalry-transfer reports and fan replies. One-star prospects receive no new recruiting posts; a deterministic 10% of two-stars can receive underdog coverage. Big portal moves get Maddox/Brooks coverage; five-star commitments/signings get ESPNCFB reports.
+- Factual commitment/signing reports survive normal flavor budgets. Paged browsing exposes all qualifying published posts. For You retains user-team draft picks; archived view expansion preserves existing prose, likes and publication dates.
+- Fixes redundant position prefixes before a trailing position description. 283 content tests plus native pagination, full draft ordering, Team shortcut and existing ABI/ownership checks pass. Live checks are tracked separately.
+
+## Previous v86 changes
 
 - Withdraws the dedicated-tab path after the v85 cold-load crash. Native UI implementation and code gates match v83 exactly; stock MenuPanelsReady is not hooked or modified. Dynasty Central and seasonal CFB entries remain.
 - Retains portal/unsigned stories, native draft-class players/rounds, stable simulated picks/NFL destinations, all 224 official draft announcements and Transactions pick order.

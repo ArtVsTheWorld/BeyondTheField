@@ -8,6 +8,9 @@ const analysts=[['ESPNCFB','ESPNCFB'],['Jake Whitmore','JakeWhitmoreCFB'],['Marc
 export function refreshAccountPresentation(feed,s){
  feed=correctHeismanArchive(correctWaitingArchive(cleanFeedLanguage(feed),s),s);
  if(feed.editorialVersion!==1&&feed.stories.every(p=>Array.isArray(p.scopes)))feed=publishWeek(feed);
+ // Expand archived browsing/guaranteed draft visibility without regenerating
+ // the wording, engagement or publication dates of existing stories.
+ if(!feed.views?.['all:expanded']&&feed.stories.every(p=>Array.isArray(p.scopes)))feed=publishWeek(feed);
  if(feed.presentationVersion===3)return feed;
  const players=new Map(s.players.map(p=>[p.id,p])),teams=new Map(s.teams.map(t=>[t.id,t]));
  const stories=feed.stories.map(original=>{
