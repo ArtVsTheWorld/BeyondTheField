@@ -57,5 +57,28 @@
     "storyIdsBodiesLikesTemplatesAndRepliesIdentical": true,
     "scopeViewsIdentical": true,
     "feedRepublishedAndAdopted": true
+  },
+  "multiweekSimulation": {
+    "bulkPreseasonToSecondSigningDay": "Crashed with v91 active and again with no Enhancer module loaded",
+    "sameGameFaultRva": "0x7bfb10e",
+    "rootCause": "Not established; other-mod versus game/save/multiweek-flow cause remains unisolated",
+    "steppedControl": {
+      "enhancerAbsent": true,
+      "season": 2027,
+      "endOfSeasonRecap": true,
+      "playersLeaving": true,
+      "draftResults": true,
+      "manualCheckpointsBackedUpAndVerified": true
+    },
+    "resumed": {
+      "nativePid": 17704,
+      "phase": "OffSeason",
+      "week": 2,
+      "stage": 3,
+      "storiesPublished": 2411,
+      "ledgerYear": 2027,
+      "baselineRosterPlayers": 9310,
+      "source": "active runtime; no save recovery"
+    }
   }
 }
