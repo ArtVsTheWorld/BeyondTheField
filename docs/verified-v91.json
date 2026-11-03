@@ -80,5 +80,24 @@
       "baselineRosterPlayers": 9310,
       "source": "active runtime; no save recovery"
     }
+  },
+  "automaticOffseason2027": {
+    "signingDay": {
+      "year": 2027,
+      "phase": "OffSeason",
+      "week": 6,
+      "stage": 7,
+      "source": "automatic active-runtime observation; no save recovery",
+      "baselinePlayers": 7002,
+      "ulmPlayers": 38,
+      "allAttributesMatch": true,
+      "stories": 2852,
+      "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Preseason\\Backups\\ULM-Signing2027-auto-20261103T141118Z"
+    },
+    "remaining": [
+      "Training Results capture",
+      "Encouraged transfers and realignment",
+      "Next preseason publication and reload"
+    ]
   }
 }
