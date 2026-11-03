@@ -748,22 +748,26 @@ DWORD WINAPI worker(void*){
         HMODULE pinned=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&tileHook),&pinned))throw std::runtime_error("Cannot pin runtime");
         for(auto& b:bindings){if(!replace(reinterpret_cast<void**>(base+b.vt+b.offset),reinterpret_cast<void*>(base+b.rva),b.hook))throw std::runtime_error("UI hook ownership changed during activation");b.installed=true;}
         note({{"event","menu_hooks_active"},{"pid",GetCurrentProcessId()}});flush();
-        const bool ready=social::awaitStartup([]{return disabled.load();},[]{
-            // UI readiness is independent of news generation. A valid native
-            // page can show its status card while the reader observes a stable
-            // active Dynasty; no save or completed capture gates navigation.
-            if(!locateNewsLayout())return std::string("Waiting for the supported native Dynasty news layout");
+        // The read-only collector runs even when no News UI assets exist.
+        // In particular, cold loading Training Results must seed the ledger.
+        uint64_t uiProbeAt=0;std::string previousUiReason;
+        note({{"event","background_capture_started"},{"uiRequired",false}});
+        while(!disabled){
+            collectRetiredFeeds();flush();
+            if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);
+            if(!uiReady&&GetTickCount64()>=uiProbeAt&&!disabled){
+                uiProbeAt=GetTickCount64()+3000;std::string reason;
+                if(!locateNewsLayout())reason="Waiting for the supported native Dynasty news layout";
 #ifdef SOCIAL_DUAL_DROPDOWN
-            if(!newsModelBase)return std::string("Waiting for the native Dynasty filter model");
+                else if(!newsModelBase)reason="Waiting for the native Dynasty filter model";
 #endif
-            return std::string();
-        },[](const std::string& reason){note({{"event","startup_waiting"},{"reason",reason}});flush();},[]{for(int i=0;i<15&&!disabled;++i)Sleep(200);});
-        if(!ready){note({{"event","startup_cancelled"}});flush();return 0;}
-        // Ownership can change while waiting at the title screen.
-        for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=reinterpret_cast<uintptr_t>(b.hook))throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
-        uiReady.store(true);
-        note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
-        while(!disabled){collectRetiredFeeds();flush();if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);Sleep(200);}note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
+                if(reason.empty()){
+                    for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=reinterpret_cast<uintptr_t>(b.hook))throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
+                    uiReady.store(true);note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
+                }else if(reason!=previousUiReason){previousUiReason=reason;note({{"event","startup_waiting"},{"reason",reason},{"backgroundCapture",true}});}
+            }
+            Sleep(200);
+        }note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
     }catch(const std::exception& e){stop();note({{"event","activation_failed"},{"error",e.what()}});flush();}
     return 0;
 }

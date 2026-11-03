@@ -13,6 +13,10 @@ export function addConversations({s,events,stories,byId,teams,players,games,regi
  const ordered=[...events].sort((a,b)=>(priorOrder.get(a.id)??Number.MAX_SAFE_INTEGER)-(priorOrder.get(b.id)??Number.MAX_SAFE_INTEGER)||b.priority-a.priority||a.id.localeCompare(b.id));
  for(const e of ordered){
   const root=roots.get(e.id),f=e.facts,t=teams.get(e.teamIds[0]);if(!root)continue;
+  if(f.carryoverKind&&t){
+   const family=f.carryoverKind==='training'?'carry.fan-training':f.carryoverKind==='departure'?'carry.fan-departure':f.carryoverKind==='realignment'?'carry.fan-move':null;
+   if(family)add(e,family,{...teamValues(t),...f},{role:'fan',team:t,persona:1,suffix:'carry-reply',priority:e.priority-1,replyTo:root.id});continue;
+  }
   if(f.recruitKind==='transfer'){
    const old=teams.get(f.formerTeam),destination=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.school)),recruit=players.get(e.playerId);
    const values={...teamValues(destination??t),...f,targetHandle:recruit?registry.get(s,'recruit',destination??old??t,recruit).handle:null};

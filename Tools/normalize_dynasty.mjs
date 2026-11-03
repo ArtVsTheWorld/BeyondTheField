@@ -7,6 +7,8 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   for(const {v:u} of await records('FranchiseUser')){if(u.IsRetired)continue;const team=await resolve(u.Team)??await resolve(u.UserEntity);
     if(team&&(userTeamIndex===null||u.AdminLevel==='Owner'))userTeamIndex=team.v.TeamIndex;}
   if(userTeamIndex===null)throw Error('No controlled Dynasty team');
+  const stageRows=(await records('OffseasonStageTypeEnumTableEntry')).filter(r=>r.v.NativeValueCode===season.CurrentOffseasonStage);
+  const offseasonStageLabel=stageRows.length===1?[stageRows[0].v.ShortName,stageRows[0].v.LongName,stageRows[0].v.Description].filter(v=>typeof v==='string'&&v.trim()).join(' | '):null;
   const finalStatuses=['HomeWon','AwayWon','Tie'];
   const publicStatus=g=>g.HasBeenPublished===false&&finalStatuses.includes(g.GameStatus)?'Unplayed':g.GameStatus;
   const cleanText=v=>typeof v==='string'&&v.trim()?v.trim():null;
@@ -52,19 +54,20 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
     for(const t of await array(c.TeamSlots))if(t.type==='Team')members.add(t.v.TeamIndex);
     for(const d of await array(c.Divisions))for(const t of await array(d.v.Teams))if(t.type==='Team')members.add(t.v.TeamIndex);
     if(!members.size)continue;
-    const conference={id:key,name:c.Name||c.ConferenceEnum,independent:c.ConferenceEnum==='Independents',championshipType:c.ChampionshipGameType??null,championshipName:cleanText(c.ConfChampGameName),teams:[...members]};
+    const conference={id:key,code:c.ConferenceEnum??null,name:c.Name||c.ConferenceEnum,independent:c.ConferenceEnum==='Independents',championshipType:c.ChampionshipGameType??null,championshipName:cleanText(c.ConfChampGameName),teams:[...members]};
     conferences.push(conference);
     for(const team of teams)if(members.has(team.id)){
       if(team.conferenceId&&team.conferenceId!==key)throw Error('Team belongs to conflicting conference records');
-      team.conferenceId=key;team.conferenceName=conference.name;team.independent=conference.independent;
+      team.conferenceId=key;team.conferenceCode=c.ConferenceEnum??null;team.conferenceName=conference.name;team.independent=conference.independent;
     }
   }
   for(const t of rawTeams){const team=teams.find(p=>p.id===t.TeamIndex);team.rivals=[];
     for(const ref of [t.Rival1TeamRef,t.Rival2TeamRef,t.Rival3TeamRef]){const id=await teamIndex(ref);if(id!=null)team.rivals.push(id);}}
   const players=[],playerRefs=new Map(),rawPlayers=[];
-  for(const {key,v:p} of await records('Player')){
-    const player={id:key,firstName:cleanText(p.FirstName),lastName:cleanText(p.LastName),name:`${p.FirstName} ${p.LastName}`,position:p.Position,personality:['Leader','Intense','Entertainer','TeamPlayer','Unpredictable'].includes(p.Personality)?p.Personality:null,team:p.TeamIndex,
-      homePipeline:p.HomePipeline??null,homeState:p.PLYR_HOME_STATE??null,jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,portraitForcedSilhouette:p.PortraitForceSilhouette===true,isNil:p.IsNIL,overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,redshirt:p.RedshirtStatus??null,yearsWithTeam:Number.isInteger(p.PLYR_CONSECYEARSWITHTEAM)?p.PLYR_CONSECYEARSWITHTEAM:null,
+  for(const {key,v:p,capacity} of await records('Player')){
+    const player={id:key,rosterEligible:capacity===undefined||capacity>1,firstName:cleanText(p.FirstName),lastName:cleanText(p.LastName),name:`${p.FirstName} ${p.LastName}`,position:p.Position,personality:['Leader','Intense','Entertainer','TeamPlayer','Unpredictable'].includes(p.Personality)?p.Personality:null,team:p.TeamIndex,
+      homePipeline:p.HomePipeline??null,homeState:p.PLYR_HOME_STATE??null,jerseyNumber:p.TeamIndex!==255&&Number.isInteger(p.JerseyNum)&&p.JerseyNum>=0&&p.JerseyNum<=99?p.JerseyNum:null,portrait:p.PLYR_PORTRAIT,portraitForcedSilhouette:p.PortraitForceSilhouette===true,isNil:p.IsNIL,presentationId:Number.isInteger(p.PresentationId)&&p.PresentationId>0?p.PresentationId:null,
+      trainingAttributes:Object.fromEntries(['SpeedRating','AccelerationRating','AgilityRating','StrengthRating','AwarenessRating','ThrowPowerRating','ThrowAccuracyShortRating','ThrowAccuracyMidRating','ThrowAccuracyDeepRating','CatchingRating','CatchInTrafficRating','ShortRouteRunningRating','MediumRouteRunningRating','DeepRouteRunningRating','BreakTackleRating','CarryingRating','RunBlockRating','PassBlockRating','BlockSheddingRating','FinesseMovesRating','PowerMovesRating','TackleRating','PlayRecognitionRating','ManCoverageRating','ZoneCoverageRating','KickPowerRating','KickAccuracyRating'].filter(k=>Number.isInteger(p[k])&&p[k]>=0&&p[k]<=99).map(k=>[k,p[k]])),overall:p.OverallRating,age:p.Age,classYear:p.SchoolYear,redshirt:p.RedshirtStatus??null,yearsWithTeam:Number.isInteger(p.PLYR_CONSECYEARSWITHTEAM)?p.PLYR_CONSECYEARSWITHTEAM:null,
       injury:p.InjuryStatus,injuryType:p.InjuryType,injurySeverity:p.InjurySeverity??null,totalInjuryDuration:p.TotalInjuryDuration??null,seasonEndingInjuryWeek:p.CurrentYearSeasonEndingInjuryWeek??null,injuryWeek:p.LatestInjuryWeek,injuryYear:p.LatestInjuryYear,
       injuryStage:p.LatestInjuryStage,minInjury:p.MinInjuryDuration,maxInjury:p.MaxInjuryDuration,
       transferRisk:p.AbsoluteTransferChance,nil:p.CurrentNILCompensation,stars:p.ProspectStarRating,starRating:({ONE_STAR:1,TWO_STAR:2,THREE_STAR:3,FOUR_STAR:4,FIVE_STAR:5})[p.ProspectStarRating]??null,seasonStats:[],previousSeasonStats:[],allSeasonStats:[]};
@@ -190,5 +193,5 @@ export async function normalizeDynasty({records,resolve,array,arraySlots},identi
   }
   const portalEntrants=[];for(const r of await array(franchise.Transfers)){if(r.type!=='Recruit'||!r.v.Class?.startsWith('Transfer_'))continue;const p=await resolve(r.v.Player);if(p)portalEntrants.push(p.key);}
   return {format:2,sourceUnchanged:true,gameYear:27,...identity,leagueId:franchise.LeagueID,
-    season,userTeamIndex,teams,conferences,players,games,playoffBracket,postseasonAssignments,performances,heisman,annualAwards,allAmericanHonors,coachingOpenings,coachOffers,draftResults,portalEntrants,signings,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,recruitVisits,preseasonHonors};
+    season,offseasonStageLabel,userTeamIndex,teams,conferences,players,games,playoffBracket,postseasonAssignments,performances,heisman,annualAwards,allAmericanHonors,coachingOpenings,coachOffers,draftResults,portalEntrants,signings,commitments,offers,recruitInterests,weeklyAwards,records:recordsList,recruitStatuses,recruitVisits,preseasonHonors};
 }

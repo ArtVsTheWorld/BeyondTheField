@@ -4,6 +4,10 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Offseason carryover (v89)
+
+The current package is `Build/DynastyEnhancer-v89-MMC.zip`. The background reader now runs independently of News UI readiness, including Training Results and Encourage Transfers while the Team tab is absent. A persistent, league/team-specific offseason ledger carries verified development, roster departures and conference changes into the next preseason. Save filenames and season-folder changes do not break that ledger. Private attribute comparisons become football descriptions; numerical ratings never appear in these posts. Missing observations do not become invented stories. See [capture rules, calendar and verification](docs/offseason-carryover-v89.md).
+
 ## Complete category scrolling (v88)
 
 The current package is `Build/DynastyEnhancer-v88-MMC.zip`. LT remains a scope dropdown. LB/RB category views now show every qualifying published story in one vertical feed, with replies attached and no page controls. All Types keeps the ordinary For You 30/National 100/conference 60/team 20 limits; team draft announcements remain visible beyond the ordinary team limit. The Team shortcut and v87 content are retained. See [v88 verification](docs/category-scrolling-v88.md).
@@ -93,7 +97,7 @@ The real Week 1 replay selected 857 of 4,089 offer events (20.96%), yielding 2,4
 
 RT now lists earlier observed phases in the same Dynasty/team/season: Preseason, then Week 0 and later regular-season weeks. The active edition is the default and the picker still selects one edition only. Existing preseason wording, author identities, likes and feed order are read from history, not regenerated. Future phases/weeks and other Dynasties/teams/seasons are excluded. History files remain separated by phase for event reconciliation.
 
-An unchanged edition can resume after the first verified native capture when its normalized fact hash and content revision match its stored snapshot. New or changed facts still require stable observations; a rewind follows normal reconciliation. Save filenames are not identity keys. A brief preparing card can still appear while the active native context is first validated.
+An unchanged regular-season edition can resume after the first verified native capture when its normalized fact hash and content revision match its stored snapshot. Preseason and offseason reconcile the cross-year ledger through the stable-observation path. New or changed facts still require stable observations; a rewind follows normal reconciliation. Save filenames are not identity keys. A brief preparing card can still appear while the active native context is first validated.
 
 The before/after reload comparison found all 62 Week 0 posts and For You order identical. The real-data archive test also preserved all 2,382 preseason posts. The user verified both editions in chronological order and all controls in v68. 113 Node tests and native/package tests pass. See [v68 verification](docs/verified-v68.json).
 

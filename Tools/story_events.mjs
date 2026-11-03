@@ -1,3 +1,4 @@
+import {offseasonCarryEvents} from './offseason_carry_events.mjs';
 import {hash} from './story_authors.mjs';
 const hashForRecruit=id=>hash(id+'|portal-specialist')%3===0?3:5;
 import {draftEvents} from './draft_results.mjs';
@@ -148,6 +149,7 @@ export function detectEvents(s,previous=null){
   for(const a of liveAnalysis?advancedAnalytics(s):[])emit(`advanced:${a.team}:${a.player??'team'}:${a.key}`,'analytics',{...a.values,family:a.family,scenario:a.key,negative:a.negative},{team:a.team,player:a.player,national:a.national,priority:a.priority,thread:`advanced:${a.team}:${a.player??a.key}`});
   for(const e of worldEvents(s))emit(e.id,e.category,e.facts,e.options);
   for(const e of preseasonEvents(s,{strengths:modelStrengths}))emit(e.id,e.category,e.facts,e.options);
+  for(const e of offseasonCarryEvents(s))emit(e.id,e.category,e.facts,e.options);
   for(const e of seasonLaunchEvents(s))emit(e.id,e.category,e.facts,e.options);
   return applyNewsCycle(s,events);
 }

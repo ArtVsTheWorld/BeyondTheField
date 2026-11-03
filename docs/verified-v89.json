@@ -1,0 +1,57 @@
+{
+  "build": "v89",
+  "installed": true,
+  "contentRevision": "offseason-carryover-v89",
+  "nodeTests": {
+    "pass": 308,
+    "fail": 0,
+    "carryover": 25
+  },
+  "native": {
+    "build": true,
+    "warningsAsErrors": true,
+    "unitChecks": true,
+    "currentCatalogEveryScope": true,
+    "newUiHooks": false,
+    "backgroundCaptureIndependentOfUi": true
+  },
+  "mmc": {
+    "registration": true,
+    "payloadTamperChecks": true,
+    "installedVerification": true,
+    "nativeLoadedPid": 31864
+  },
+  "backups": {
+    "saveFiles": 8,
+    "historyFiles": 10,
+    "checksumVerified": true
+  },
+  "actualData": {
+    "phase": "PreSeason",
+    "season": 2027,
+    "records": 105974,
+    "stories": 1149,
+    "carryoverFacts": 0,
+    "liveFeedPublished": true,
+    "ledgerWritten": true,
+    "completedPriorTrainingUnavailable": true
+  },
+  "copiedDataReplay": {
+    "nativeNormalizedPath": true,
+    "sourceSeason": 2027,
+    "targetSeason": 2028,
+    "training": true,
+    "rosterReviewDeparture": true,
+    "samePreseasonCatalogUnchanged": true,
+    "gameDataModified": false
+  },
+  "liveChecksRemaining": [
+    "Controller regression after v89 load",
+    "Next-cycle signing day to Training Results to Encourage Transfers to next preseason"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v89.dll": "3ae3e1eea458546eb846344cc91b8d3517a3095a548d113735328d74c619fcfd",
+    "DynastyEnhancer.dll": "d38374a52f392b63a8fb26591ab9a42cb88aab4accda9d6f6b49f20af7d5cf41",
+    "DynastyEnhancer-v89-MMC.zip": "d3776cbad8d4ebb1477d07ed4c06f559f06c2c10407646b5f2b893e4b225e992"
+  }
+}

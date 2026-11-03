@@ -1,0 +1,111 @@
+{
+  "revision": "offseason-carryover-v89",
+  "families": {
+    "carry.training": [
+      {
+        "id": "carry.training.v89.1",
+        "body": "Preseason watch at {school}: {position} {playerName} made a noticeable jump in {area} during {period}. The next question is how that development translates when the games start."
+      },
+      {
+        "id": "carry.training.v89.2",
+        "body": "Keep {school}'s {position} {playerName} on your radar. Progress in {area} stood out during {period}. It gives this staff another player to watch heading into the season."
+      }
+    ],
+    "carry.player-training": [
+      {
+        "id": "carry.player-training.v89.1",
+        "body": "Put a lot into this offseason. Excited to get back out there with my guys at {school}"
+      },
+      {
+        "id": "carry.player-training.v89.2",
+        "body": "Different offseason, same goal. Appreciate everybody pushing me. Ready to get back to football with {school}"
+      }
+    ],
+    "carry.player-training-qb": [
+      {
+        "id": "carry.player-training-qb.v89.1",
+        "body": "Good offseason of work. Looking forward to being back out there with this group at {school}."
+      },
+      {
+        "id": "carry.player-training-qb.v89.2",
+        "body": "Appreciate the guys putting the work in beside me all offseason. Excited for this next season at {school}."
+      }
+    ],
+    "carry.move": [
+      {
+        "id": "carry.move.v89.1",
+        "body": "New conference, new schedule context: {school} moves from {oldConference} to {newConference} for the upcoming season. The first year in a new league is going to give this program plenty to learn."
+      },
+      {
+        "id": "carry.move.v89.2",
+        "body": "{school} is now in {newConference} after competing in {oldConference} last season. New opponents and a new conference race to follow this fall."
+      }
+    ],
+    "carry.team-move": [
+      {
+        "id": "carry.team-move.v89.1",
+        "body": "A new chapter for {school} Football. {newConference} is our home this season. See you this fall."
+      },
+      {
+        "id": "carry.team-move.v89.2",
+        "body": "New league. Same {school}. Looking forward to our first season in {newConference}."
+      }
+    ],
+    "carry.history": [
+      {
+        "id": "carry.history.v89.1",
+        "body": "Last season, {school} competed in {oldConference}. This season it is part of {newConference}. A different conference picture heading into the fall."
+      },
+      {
+        "id": "carry.history.v89.2",
+        "body": "Conference context for {school}: {oldConference} last season, {newConference} this season. Keep the new alignment in mind as the conference race takes shape."
+      }
+    ],
+    "carry.rename": [
+      {
+        "id": "carry.rename.v89.1",
+        "body": "Conference update: {oldConference} is now known as {newConference}. A new name for the league heading into the season."
+      }
+    ],
+    "carry.departure": [
+      {
+        "id": "carry.departure.v89.1",
+        "body": "{school} roster update following {period}: {position} {playerName} will not be returning to the program. No next school has been confirmed."
+      },
+      {
+        "id": "carry.departure.v89.2",
+        "body": "One departure to note as {school}'s new roster takes shape: {position} {playerName} is no longer with the program after {period}. No destination to report."
+      }
+    ],
+    "carry.departure-destination": [
+      {
+        "id": "carry.departure-destination.v89.1",
+        "body": "{position} {playerName} has left {school} and is now on {destination}'s roster following {period}. A confirmed destination as both teams prepare for the new season."
+      }
+    ],
+    "carry.departure-portal": [
+      {
+        "id": "carry.departure-portal.v89.1",
+        "body": "After leaving {school} during {period}, {position} {playerName} is listed among the transfer-portal entrants. Another opportunity to find a fit; no destination has been confirmed."
+      }
+    ],
+    "carry.fan-training": [
+      {
+        "id": "carry.fan-training.v89.1",
+        "body": "Good to hear about {position} {playerName}. Please let this be the year that offseason progress shows up on Saturdays for {school}"
+      }
+    ],
+    "carry.fan-move": [
+      {
+        "id": "carry.fan-move.v89.1",
+        "body": "New conference, whole new set of fanbases to argue with. {school} in {newConference} is going to take some getting used to"
+      }
+    ],
+    "carry.fan-departure": [
+      {
+        "id": "carry.fan-departure.v89.1",
+        "body": "Wishing {position} {playerName} well. Roster turnover never feels simple when you've spent seasons cheering for the guy at {school}"
+      }
+    ]
+  }
+}

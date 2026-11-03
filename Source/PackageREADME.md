@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v88
+# Dynasty Enhancer - MMC prototype v89
 
 Native Social Media inside the offline Dynasty hub. Open **Team → Social Media**, or its CFB shortcut when available. The dedicated-tab experiment remains inactive after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v88/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v88/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v89/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v89/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,16 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - All Types shows up to 30 For You, 100 National, 60 conference and 20 team posts, with team draft announcements retained beyond the ordinary team limit. LB/RB category views show every qualifying published story in one vertical feed. LT selects scope only; RT still selects one publication edition. Replies remain attached and likes remain flavor.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v88 changes
+## v89 changes
+
+- Captures Training Results, conference realignment and Encourage Transfers in the background, independently of native News UI readiness. The Team tab and Social Media page need not be available.
+- Keeps a cross-year ledger at `RuntimeHistory/<league>/<user-team>/offseason-ledger.json`. Preserve the complete RuntimeHistory folder when updating the runtime.
+- Publishes supported carryover stories in the next preseason: noteworthy development in position-relevant skills, roster-review departures and new conference context. Ratings remain private; no save data or simulation outcomes are changed.
+- Filters graduates, known draft departures and recycled player records. Unconfirmed destinations stay unconfirmed. A missing record only at year rollover does not prove a roster-review departure.
+- Training needs an earlier snapshot. Leave the game running through the final signing day, Training Results and Encourage Transfers, with a few seconds for stable capture at each stage. Periods skipped entirely cannot be fully reconstructed; prior-year conference history can supply limited alignment context.
+- Retains the Team/CFB shortcuts, complete category scrolling, filters, replies and existing UI.
+
+## Previous v88 changes
 
 - Removes the attempted LT pagination: the native game caches the list on first entry, so v87's conditional page rows were missing after a later category change. LT remains purely a scope selector.
 - Category views scroll through the complete matching story pool, without a 30-post page limit or pagination header. All Types remains curated/capped, with a team draft exception so every selection is visible.
