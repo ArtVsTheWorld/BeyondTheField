@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {comparePublication} from './publication_timeline.mjs';
-export const EDITORIAL_POLICY_VERSION=2;
+export const EDITORIAL_POLICY_VERSION=3;
 const stable=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
 const digest=v=>createHash('sha256').update(stable(v)).digest('hex');
 export function validEditorialContext(e){

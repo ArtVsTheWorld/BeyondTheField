@@ -1,5 +1,6 @@
 import {discoveryViews} from './social_discovery.mjs';
 import {visibleEdition,comparePublication} from './publication_timeline.mjs';
+import {bodyKey,deduplicateConversations} from './conversation_topics.mjs';
 export const SCOPES=['all','national','conference','team'];
 const order=(a,b)=>b.priority-a.priority||a.id.localeCompare(b.id);
 // Editorial order is independent of flavor engagement. Rotate categories and
@@ -15,7 +16,7 @@ export function editorialRoots(roots){
   buckets.get(group).shift();if(!buckets.get(group).length)buckets.delete(group);
  }return out;
 }
-const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:(p.scopes.includes('team')||p.scopes.includes('relevant'))?'team':p.scopes.includes('conference')?'conference':'national';
+const bucketFor=p=>p.primaryScope&&p.scopes.includes(p.primaryScope)?p.primaryScope:p.scopes.includes('team')?'team':p.scopes.includes('conference')||p.scopes.includes('relevant')?'conference':'national';
 // Order a real conversation with its parent immediately before the replies.
 // Orphans and cycles never become visible, including in dedicated scope views.
 export function conversationOrder(stories){
@@ -24,19 +25,23 @@ export function conversationOrder(stories){
  function visit(p){if(visited.has(p.id))return;visited.add(p.id);result.push(p);for(const child of (children.get(p.id)??[]).sort(order))visit(child);}
  for(const p of editorialRoots(roots))visit(p);return result;
 }
-export function curate(stories,limit=30){
+export function curate(stories,limit=30,context={}){
  const relevance=(a,b)=>Number(b.scopes.includes('team'))-Number(a.scopes.includes('team'))||order(a,b);
  const pool=stories.filter(p=>p.curated!==false&&p.scopes.length).sort(relevance),map=new Map(pool.map(p=>[p.id,p]));
- const target={national:Math.round(limit*.25),conference:Math.floor(limit*.20),team:0};target.team=limit-target.national-target.conference;
+ const target={team:Math.round(limit*.4),conference:Math.round(limit*8/30),national:0};target.national=limit-target.team-target.conference;
  const selected=[],used=new Set(),counts={national:0,conference:0,team:0},categories=new Map(),threads=new Map(),templates=new Map(),accounts=new Map(),voices=new Map();
  const categoryMax={'results':4,'team-stats':1,'player-stats':3,'polls':3,'injuries':2,'recruiting':2,'offers':1,'heisman':2,'cfp':1,'standings':1,'schedule':3,'watch':1,'lines':1,'holiday':1,'status':1,'replies':5,'preseason':5};
  const voiceMax={beat:8,analyst:4,official:4,player:4,fan:5,recruit:3,model:1};
  const scaled=n=>Math.ceil(n*limit/20);
+ const regular=!context.phase||context.phase==='RegularSeason',recruiting=new Set(['recruiting','offers','signings']),seenBodies=new Set();let recruitingUsed=0;
+ const routineRecruit=p=>recruiting.has(p.category)&&!p.guaranteedUserDraft&&(p.priority??0)<108;
  const focusTier=Math.max(0,...pool.map(p=>p.focusTier??0)),focusTarget=focusTier?Math.ceil(limit*(focusTier===3?.65:.55)):0;
  function accept(post,respectTargets=false,relaxed=false){
   const bundle=[],seen=new Set();let p=post;
   while(p&&!used.has(p.id)){if(seen.has(p.id)||p.curated===false)return false;seen.add(p.id);bundle.unshift(p);if(!p.replyTo)break;p=map.get(p.replyTo);if(!p)return false;}
   if(!bundle.length||selected.length+bundle.length>limit)return false;
+  const normalized=bundle.map(p=>bodyKey(p.body)).filter(Boolean);if(normalized.some(k=>seenBodies.has(k))||new Set(normalized).size!==normalized.length)return false;
+  if(regular&&recruitingUsed+bundle.filter(routineRecruit).length>7)return false;
   const c=new Map(categories),t=new Map(threads),v=new Map(voices),a=new Map(accounts),forms=new Map(templates),byScope={...counts};
   for(const item of bundle){
    const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();
@@ -46,11 +51,13 @@ export function curate(stories,limit=30){
    c.set(category,(c.get(category)??0)+1);t.set(thread,(t.get(thread)??0)+1);if(item.templateId)forms.set(item.templateId,(forms.get(item.templateId)??0)+1);if(account)a.set(account,(a.get(account)??0)+1);if(item.voice)v.set(item.voice,(v.get(item.voice)??0)+1);++byScope[scope];
   }
   if(respectTargets&&Object.keys(target).some(k=>byScope[k]>target[k]))return false;
-  for(const item of bundle){const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();used.add(item.id);selected.push(item);++counts[scope];categories.set(category,c.get(category));threads.set(thread,t.get(thread));if(item.templateId)templates.set(item.templateId,forms.get(item.templateId));if(account)accounts.set(account,a.get(account));if(item.voice)voices.set(item.voice,v.get(item.voice));}return true;
+  for(const item of bundle){const category=item.replyTo?'replies':item.category,thread=item.thread??item.id,scope=bucketFor(item),account=item.handle?.toLowerCase();used.add(item.id);selected.push(item);if(routineRecruit(item))recruitingUsed++;const body=bodyKey(item.body);if(body)seenBodies.add(body);++counts[scope];categories.set(category,c.get(category));threads.set(thread,t.get(thread));if(item.templateId)templates.set(item.templateId,forms.get(item.templateId));if(account)accounts.set(account,a.get(account));if(item.voice)voices.set(item.voice,v.get(item.voice));}return true;
  }
  for(const p of pool.filter(p=>p.guaranteedUserDraft&&!p.replyTo).sort((a,b)=>a.draftPick-b.draftPick))accept(p,false,true);
  // Reserve the shared live postseason event before local offseason quotas.
  if(focusTier)for(const p of editorialRoots(pool.filter(p=>!p.replyTo&&p.focusTier===focusTier))){if(selected.filter(p=>p.focusTier===focusTier).length>=focusTarget)break;accept(p,false);}
+ // Reserve real local developments before broad recruiting and reactions.
+ for(const category of ['results','player-stats','injuries','schedule','matchup-preview','transfer','coaching','nil']){const p=pool.find(p=>!p.replyTo&&p.scopes.includes('team')&&p.primaryScope!=='conference'&&p.category===category&&!['fan','player','recruit'].includes(p.voice));if(p)accept(p,true);}
  // Keep the actual user result before reserving room for personality/reactions.
  for(const p of pool.filter(p=>!p.replyTo&&p.category==='results'&&!pool.some(x=>x.category==='upsets'&&x.thread===p.thread)&&p.scopes.includes('team')&&!['fan','player'].includes(p.voice)))accept(p,true);
  // Preserve a confirmed user-team postseason announcement before its fan
@@ -65,16 +72,16 @@ export function curate(stories,limit=30){
  // Editorial selection and presentation both ignore flavor likes.
  return conversationOrder(selected);
 }
-export function scopeViews(stories){
- const visible=conversationOrder(stories),all=curate(visible);
+export function scopeViews(stories,context={}){
+ const visible=conversationOrder(stories),all=curate(visible,30,context);
  const national=visible.filter(p=>p.scopes.includes('national'));
  return {all:all.map(p=>p.id),'all:default':conversationOrder([...new Map([...visible.filter(p=>p.guaranteedUserDraft),...all].map(p=>[p.id,p])).values()]).map(p=>p.id),'all:expanded':conversationOrder(visible.filter(p=>p.scopes.includes('team')||p.scopes.includes('relevant')||all.some(a=>a.id===p.id))).map(p=>p.id),national:national.map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
 }
 
 export function publishWeek(feed){
   const publication={key:feed.key,season:feed.season,phase:feed.phase,week:feed.week};
-  const stories=feed.stories.map(p=>({...p,publication,guaranteedUserDraft:p.voice==='nflDraft'&&p.teamIds?.includes(feed.userTeamIndex)}));
-  const views={...scopeViews(stories),...(feed.scopeOptions?discoveryViews(conversationOrder(stories),feed.scopeOptions):{})},map=new Map(stories.map(p=>[p.id,p]));
+  const stories=deduplicateConversations(feed.stories,feed.events).map(p=>({...p,publication,guaranteedUserDraft:p.voice==='nflDraft'&&p.teamIds?.includes(feed.userTeamIndex)}));
+  const views={...scopeViews(stories,feed),...(feed.scopeOptions?discoveryViews(conversationOrder(stories),feed.scopeOptions):{})},map=new Map(stories.map(p=>[p.id,p]));
   return {...feed,editorialVersion:1,stories,views,posts:views.all.map(id=>map.get(id)),publication};
 }
 

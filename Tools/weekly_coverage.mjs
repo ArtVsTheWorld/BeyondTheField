@@ -9,6 +9,12 @@ export function applyWeeklyCoverage(stories,s){
  for(const p of stories){if(p.coverageExempt||p.voice==='nflDraft'&&p.category==='draft')continue;if(p.replyTo){const list=children.get(p.replyTo)??[];list.push(p);children.set(p.replyTo,list);}else roots.push(p);}
  const slots=p=>[...new Set((p.teamIds??[]).filter(id=>budgets.has(id)))];
  function add(p){if(chosen.has(p.id))return false;const ids=slots(p);if(ids.some(id=>(counts.get(id)??0)>=budgets.get(id)))return false;chosen.add(p.id);for(const id of ids)counts.set(id,(counts.get(id)??0)+1);return true;}
+ // Actual news density can raise a small program's allowance, with the same
+ // rule for CPU and controlled teams. Brand/poll still set the base budget.
+ const meaningful=new Set(['results','player-stats','injuries','schedule','matchup-preview','analytics','transfer']);
+ for(const [id] of budgets){const local=roots.filter(p=>slots(p).includes(id)&&p.primaryScope!=='conference'&&meaningful.has(p.category)&&!['fan','player','recruit'].includes(p.voice));const topics=new Set(local.map(p=>p.thread??p.eventId??p.id));budgets.set(id,Math.max(budgets.get(id),Math.min(12,topics.size+2)));
+  for(const category of ['results','player-stats','injuries','schedule','matchup-preview','transfer']){const p=editorialRoots(local.filter(p=>p.category===category))[0];if(p)add(p);}
+ }
  for(const p of stories.filter(p=>p.coverageExempt))for(const child of children.get(p.id)??[])add(child);
  // Specialist voices and the draft's national conclusions get room before
  // a large local portal pool consumes a program's entire flavor allowance.

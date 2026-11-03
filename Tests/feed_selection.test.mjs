@@ -8,10 +8,10 @@ test('editorial order ignores likes, keeps replies adjacent and is deterministic
  assert.deepEqual(curate(pool).map(p=>p.id),['low','middle','tie','high','reply']);assert.deepEqual(conversationOrder(pool.map(p=>({...p,likes:20000-(p.likes??0)}))).map(p=>p.id),conversationOrder(pool).map(p=>p.id));
  assert.deepEqual(scopeViews(pool).national,['tie','high']);
 });
-test('curated mix favors the user team at 55/20/25 when strong distinct candidates are available',()=>{
+test('curated mix favors the user team at 40/27/33 when strong distinct candidates are available',()=>{
   const pool=['national','conference','team'].flatMap(scope=>Array.from({length:20},(_,i)=>story(scope+i,scope,100-i)));
   const selected=curate(pool);assert.equal(selected.length,30);
-  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:8,conference:6,team:16});
+  assert.deepEqual(Object.fromEntries(['national','conference','team'].map(s=>[s,selected.filter(p=>p.scopes[0]===s).length])),{national:10,conference:8,team:12});
 });
 test('sparse scope redistributes available slots without filler or duplicate stories',()=>{
   const pool=Array.from({length:35},(_,i)=>story('n'+i,'national'));pool.push(story('t','team'));

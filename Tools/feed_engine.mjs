@@ -7,6 +7,7 @@ import {detectEvents,weekKey} from './story_events.mjs';
 import {renderStories,CONTENT_REVISION} from './story_renderer.mjs';
 import {PUBLICATION_POLICY_VERSION} from './publication_policy.mjs';
 import {freshEditorialEvents,EDITORIAL_POLICY_VERSION} from './editorial_policy.mjs';
+import {deduplicateConversations} from './conversation_topics.mjs';
 export {detectEvents,weekKey};
 export const ENGINE_VERSION=2;
 export function trackOffers(s,sameWeek=null,previous=null,earlier=null){
@@ -29,5 +30,5 @@ export function buildFeed(s,previous=null,options={}){
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,publicationPolicyVersion:PUBLICATION_POLICY_VERSION,
-    editorialPolicyVersion:EDITORIAL_POLICY_VERSION,presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,transactionObservation:transactionObservation(s),coverageVersion:1,stories:applyWeeklyCoverage(rendered.stories,s)});
+    editorialPolicyVersion:EDITORIAL_POLICY_VERSION,presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,transactionObservation:transactionObservation(s),coverageVersion:1,stories:applyWeeklyCoverage(deduplicateConversations(rendered.stories,events),s)});
 }

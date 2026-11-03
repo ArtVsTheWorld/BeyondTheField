@@ -7,9 +7,9 @@ $installRoot=[IO.Path]::GetFullPath($MmcRoot)
 if(-not (Test-Path -LiteralPath (Join-Path $installRoot 'MMCModManager.exe') -PathType Leaf)){throw 'MMC executable is unavailable at the selected root'}
 if(Get-Process MMCModManager,CollegeFB27 -ErrorAction SilentlyContinue){throw 'Close MMC and College Football 27 before installing the package'}
 $installPlugins=Join-Path $installRoot 'Plugins'
-$installRuntime=[IO.Path]::GetFullPath((Join-Path $installPlugins 'DynastyEnhancer/Runtime-v92'))
+$installRuntime=[IO.Path]::GetFullPath((Join-Path $installPlugins 'DynastyEnhancer/Runtime-v93'))
 if(-not $installRuntime.StartsWith($installRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Runtime target is outside MMC root'}
-$installBackup=Join-Path $installProject ('Backups/MMC-v92-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
+$installBackup=Join-Path $installProject ('Backups/MMC-v93-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
 New-Item -ItemType Directory -Path $installBackup,$installRuntime -Force | Out-Null
 $installAdapter=Join-Path $installPlugins 'DynastyEnhancer.dll'
 if(Test-Path -LiteralPath $installAdapter){Copy-Item -LiteralPath $installAdapter -Destination (Join-Path $installBackup 'DynastyEnhancer.dll')}
