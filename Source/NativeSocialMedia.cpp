@@ -685,7 +685,7 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-const char* socialDestination(){return uiReady?"NEWS":"DO_NOTHING";}
+const char* socialDestination(){return uiReady&&feedReady()?"NEWS":"DO_NOTHING";}
 void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();

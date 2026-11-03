@@ -75,7 +75,7 @@
     "controls": "failed: hub navigation locked",
     "reload": "user returned to main menu and continued; lock persisted",
     "prototypeStopped": true,
-    "hotBaselineRecovery": "failed: News page blank with RT only; full process restart requested to clear shared UI state"
+    "hotBaselineRecovery": "Failed: blank News with RT only. A subsequent fresh process reproduced early-entry failure with installed v96; persistent prototype UI state was not established as the cause."
   },
   "subagentReview": "Independent ABI, screen routing, focus notification, input dispatch and lifecycle review; fixes applied for overflow, prefetch teardown, root callback recovery and priority consistency.",
   "failure": {
@@ -89,5 +89,13 @@
     "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-HubFeed\\Build\\DirectHub-DynastyEnhancerHubPrototype-p02-72d7dfb8f8a042a2bb20a9eb9d0a6905\\DynastyEnhancerBaseline-v96-r01.dll",
     "installedFilesModified": false
   },
-  "installedV96CodeStillUnchanged": true
+  "installedV96CodeStillUnchanged": true,
+  "separateBaselineIssue": {
+    "confirmed": "v96 navigation metadata advertises NEWS when UI is ready but the feed is not; click-time cancellation occurs after the native frontend can begin transition.",
+    "correction": "Keep navigation metadata inert until both UI and feed are ready.",
+    "regressionCoverage": "Native test now checks metadata with uiReady=true and feedReady=false.",
+    "recoveryRuntime": "DynastyEnhancerBaseline-v96-r02.dll",
+    "directHubEnabled": false,
+    "liveStatus": "Recovery r02 loaded at main menu in PID 27496. User verified Feed opens; B returns normally. Direct hub mode disabled."
+  }
 }
