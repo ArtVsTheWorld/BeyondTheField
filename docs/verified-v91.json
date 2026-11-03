@@ -35,8 +35,6 @@
     "tysonDestination": null
   },
   "liveChecksRemaining": [
-    "Controller check after v91 load",
-    "Same-preseason Dynasty reload preserves stories",
     "Future unassisted full-cycle capture"
   ],
   "sha256": {
@@ -50,5 +48,14 @@
     "phase": "PreSeason",
     "stories": 1231,
     "allSixTargetsPublished": true
+  },
+  "liveReload": {
+    "userReopenedFeed": true,
+    "newNativeContextObserved": true,
+    "edition": "PreSeason 2027",
+    "stories": 1231,
+    "storyIdsBodiesLikesTemplatesAndRepliesIdentical": true,
+    "scopeViewsIdentical": true,
+    "feedRepublishedAndAdopted": true
   }
 }
