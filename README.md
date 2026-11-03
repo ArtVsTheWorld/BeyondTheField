@@ -4,6 +4,12 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Content review candidate (v94)
+
+The current candidate is `Build/DynastyEnhancer-v94-MMC.zip`. Three stages address factual context/freshness, For You relevance and duplicate conversations, then targeted voice and analysis variety. The pack includes 211 revised/new variants across 45 families; the complete runtime has 1,127 variants across 538 families. The frozen ULM review corpus is preserved. This candidate has passed offline tests and copied-data replay; live controller validation remains pending. See [v94 verification](docs/verified-v94.json), with the earlier stage evidence in [v92](docs/verified-v92.json) and [v93](docs/verified-v93.json).
+
+The previously active and user-verified build is v91. Later entries below describe the development history; they do not supersede the current candidate.
+
 ## Preserve factual carryover reports (v91)
 
 The current package is `Build/DynastyEnhancer-v91-MMC.zip`. The live ULM preseason test preserved the captured departures and alignment changes, but training reactions consumed the small program's flavor allowance before the two departure reports reached the published pool. v91 retains factual media reports of captured departures/alignment outside that allowance, as existing recruiting/signing reports already do. Training and reaction posts keep their ordinary limits. See [v91 verification](docs/carryover-publication-v91.md).

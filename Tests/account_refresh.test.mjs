@@ -16,7 +16,7 @@ test('Merged Recruiting retains recruit roots and replies while Players stays in
 });
 test('teammate references use given names in player voices, with full names retained by media and handles unchanged',()=>{
  const s=fixture(),event={id:'personal',category:'results',teamIds:[1],playerId:'a',scopes:['team'],priority:80,thread:'personal',facts:{family:'player.win.TeamPlayer',voice:'player',playerName:'Devin Mercer',hashtag:'#Harbor'}};
- const bodies=[];for(let i=0;i<30;i++){s.leagueId=i;const p=renderStories(s,[event]).stories[0];bodies.push(p.body);assert.ok(!p.body.includes('Devin Mercer'));assert.equal(p.author,'Caleb Moss');}assert.ok(bodies.some(b=>b.includes('Devin was eating')));
+ const bodies=[];for(let i=0;i<30;i++){s.leagueId=i;const p=renderStories(s,[event]).stories[0];bodies.push(p.body);assert.ok(!p.body.includes('Devin Mercer'));assert.equal(p.author,'Caleb Moss');}assert.ok(bodies.some(b=>b.includes('Devin had a day')));
  const media={...event,id:'media',playerId:'b',facts:{family:'beat.watch',voice:'beat',playerName:'Devin Mercer',school:'Harbor',opponent:'Away',watchDetail:' A name to watch.'}};assert.ok(renderStories(s,[media]).stories[0].body.includes('Devin Mercer'));
 });
 test('recruit state and position ranks are explicit and repeatable, and missing/sentinel ranks are suppressed',()=>{

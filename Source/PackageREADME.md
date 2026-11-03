@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v93
+# Dynasty Enhancer - MMC prototype v94
 
 Native Social Media inside the offline Dynasty hub. Open **Team → Social Media**, or its CFB shortcut when available. The dedicated-tab experiment remains inactive after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v93/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v93/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v94/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v94/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,7 +19,14 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - All Types shows up to 30 For You, 100 National, 60 conference and 20 team posts, with team draft announcements retained beyond the ordinary team limit. LB/RB category views show every qualifying published story in one vertical feed. LT selects scope only; RT still selects one publication edition. Replies remain attached and likes remain flavor.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v93 changes
+## v94 changes
+
+- Content review stages 1–3: invalid/empty standings are withheld, zero-sack claims require corroboration, and unchanged roster-plan/season-wrapup topics stop repeating across weeks.
+- For You uses a soft 12 local / 8 conference-and-pipeline / 10 national mix, reserves useful local news, limits routine regular-season recruiting, and removes duplicate text and repeated same-account portal reactions. Dedicated category coverage remains available.
+- 211 revised/new variants across 45 busy story families, stable personal writing styles, cross-phase template cooldowns, clearer matchup averages and complete Heisman performance context. Verified close-game/comeback season patterns add occasional local analysis.
+- Frozen review archives are preserved. Existing archived wording is not retroactively rewritten; the active edition is regenerated for the new content policy.
+
+## Previous v89–v91 changes
 
 - Preserves factual media reports of captured roster departures and conference changes outside the weekly flavor budget. A small school's training reactions can no longer erase those reports from category views.
 - Uses native offseason stage IDs rather than a fixed week counter. The final roster/alignment stage can have internal week counter 9; it must preserve the captured training baseline. Unknown offseason stages retain evidence.

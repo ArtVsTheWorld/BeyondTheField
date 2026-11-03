@@ -1,0 +1,1049 @@
+{
+  "revision": "editorial-variety-v94",
+  "families": {
+    "recruit.offer.Leader": [
+      {
+        "id": "recruit.offer.Leader.v94.1",
+        "body": "Thankful for an offer from {school}. Appreciate the staff taking the time to get to know me.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Leader.v94.2",
+        "body": "An offer from {school}! Thank you to my family and coaches for helping me get here.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Leader.v94.3",
+        "body": "Appreciate the offer, {school}. A lot of people helped me get to this point",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Leader.v94.4",
+        "body": "Thank you Coach {coachLastName} and {school} for the opportunity. Means a lot",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Leader.v94.5",
+        "body": "{school} offered! Really grateful for this one.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.Leader.v94.6",
+        "body": "Blessed to have an opportunity at {school}. Thank you to everyone supporting me.",
+        "style": "measured"
+      }
+    ],
+    "recruit.offer.Intense": [
+      {
+        "id": "recruit.offer.Intense.v94.1",
+        "body": "Offer from {school}. Appreciate the opportunity. Keeping my head down and working.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Intense.v94.2",
+        "body": "Thank you {school} for the offer. Excited to keep building on this.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Intense.v94.3",
+        "body": "{school} offered. Still a lot I want to do",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Intense.v94.4",
+        "body": "Another opportunity to be grateful for. Thank you {school}",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Intense.v94.5",
+        "body": "{school}!! Appreciate the offer. We keep going.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.Intense.v94.6",
+        "body": "Offer from {school}! Not done yet.",
+        "style": "expressive"
+      }
+    ],
+    "recruit.offer.Entertainer": [
+      {
+        "id": "recruit.offer.Entertainer.v94.1",
+        "body": "An offer from {school}! Definitely calling my family about this one.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Entertainer.v94.2",
+        "body": "{school} offered! Appreciate everyone who has been in my corner.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Entertainer.v94.3",
+        "body": "okay {school}!! appreciate the offer",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Entertainer.v94.4",
+        "body": "{school} offer came through. Pretty good day if you ask me",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Entertainer.v94.5",
+        "body": "{school} offered!! Yeah I smiled when I saw that.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.Entertainer.v94.6",
+        "body": "Got an offer from {school}! My people are going to hear about this one.",
+        "style": "expressive"
+      }
+    ],
+    "recruit.offer.TeamPlayer": [
+      {
+        "id": "recruit.offer.TeamPlayer.v94.1",
+        "body": "Thankful for an offer from {school}. My coaches and teammates are a big part of this.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.TeamPlayer.v94.2",
+        "body": "Appreciate the offer from {school}. Thank you to everyone helping me along the way.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.TeamPlayer.v94.3",
+        "body": "Offer from {school}. Shoutout to my people who keep pushing me",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.TeamPlayer.v94.4",
+        "body": "Grateful for {school} and everybody helping me get here",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.TeamPlayer.v94.5",
+        "body": "{school} offered! Could not do any of this by myself.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.TeamPlayer.v94.6",
+        "body": "Thank you {school}! Love sharing days like this with my family.",
+        "style": "expressive"
+      }
+    ],
+    "recruit.offer.Unpredictable": [
+      {
+        "id": "recruit.offer.Unpredictable.v94.1",
+        "body": "Appreciate the offer from {school}. Excited to see where this goes.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.v94.2",
+        "body": "{school} offered! A lot to be thankful for today.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.v94.3",
+        "body": "{school} offered. Had to read that twice",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.v94.4",
+        "body": "New offer from {school}. My phone has been busy today",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.v94.5",
+        "body": "{school}!! Okay then. Appreciate the opportunity.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.Unpredictable.v94.6",
+        "body": "Offer from {school}! Yeah that got my attention.",
+        "style": "expressive"
+      }
+    ],
+    "recruit.offer.Neutral": [
+      {
+        "id": "recruit.offer.Neutral.v94.1",
+        "body": "Thankful to receive an offer from {school}. Appreciate the opportunity.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Neutral.v94.2",
+        "body": "Excited about an offer from {school}. Thank you to the staff and my coaches.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.Neutral.v94.3",
+        "body": "Appreciate the offer {school}. Grateful for everybody supporting me",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Neutral.v94.4",
+        "body": "Got an offer from {school} today. Thankful for this journey",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.Neutral.v94.5",
+        "body": "{school} offered! Appreciate the love.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.Neutral.v94.6",
+        "body": "New offer from {school}! Thank you to everybody in my corner.",
+        "style": "expressive"
+      }
+    ],
+    "recruit.offer.faith": [
+      {
+        "id": "recruit.offer.faith.v94.1",
+        "body": "AGTG! Blessed to receive an offer from {school}.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.faith.v94.2",
+        "body": "All glory to God. Thankful for an offer from {school} and everyone helping me along the way.",
+        "style": "measured"
+      },
+      {
+        "id": "recruit.offer.faith.v94.3",
+        "body": "AGTG! Blessed with an offer from {school}. Thank you to the staff",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.faith.v94.4",
+        "body": "Blessed to receive an offer from {school}. God is good",
+        "style": "conversational"
+      },
+      {
+        "id": "recruit.offer.faith.v94.5",
+        "body": "AGTG!! {school} offered. So thankful.",
+        "style": "expressive"
+      },
+      {
+        "id": "recruit.offer.faith.v94.6",
+        "body": "Blessed with another opportunity! Thank you {school}.",
+        "style": "expressive"
+      }
+    ],
+    "roster.commit": [
+      {
+        "id": "roster.commit.v94.1",
+        "body": "{school} adds {starDescription}{prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.v94.2",
+        "body": "{starDescription}{prospectType}{position} {playerName}{originDetail} has committed to {school}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.v94.3",
+        "body": "A new name in {school}'s class: {starDescription}{prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.v94.4",
+        "body": "Recruiting update: {school} lands {starDescription}{prospectType}{position} {playerName}{originDetail}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.v94.5",
+        "body": "{position} {playerName}{originDetail} chooses {school}. The {starDescription}{prospectType}prospect joins the incoming class. {recruitRankDetail}"
+      }
+    ],
+    "roster.announce": [
+      {
+        "id": "roster.announce.v94.1",
+        "body": "Committed to {school}. Thank you to my family, coaches and everyone who helped me get here.",
+        "style": "measured"
+      },
+      {
+        "id": "roster.announce.v94.2",
+        "body": "I will be continuing my career at {school}. Grateful for this opportunity and excited for what comes next.",
+        "style": "measured"
+      },
+      {
+        "id": "roster.announce.v94.3",
+        "body": "{school} is home. Appreciate everybody who had my back through this",
+        "style": "conversational"
+      },
+      {
+        "id": "roster.announce.v94.4",
+        "body": "Made my decision. {school}, let's get to work",
+        "style": "conversational"
+      },
+      {
+        "id": "roster.announce.v94.5",
+        "body": "{school}!! Ready for this next chapter.",
+        "style": "expressive"
+      },
+      {
+        "id": "roster.announce.v94.6",
+        "body": "Committed to {school}! My family and I are excited for what is ahead.",
+        "style": "expressive"
+      }
+    ],
+    "roster.interest": [
+      {
+        "id": "roster.interest.v94.1",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. No commitment yet."
+      },
+      {
+        "id": "roster.interest.v94.2",
+        "body": "{schools} are the schools to follow for transfer {position} {playerName}{originDetail}. The decision is still ahead."
+      },
+      {
+        "id": "roster.interest.v94.3",
+        "body": "The race for transfer {position} {playerName}{originDetail} currently includes {schools}. Still an open recruitment."
+      },
+      {
+        "id": "roster.interest.v94.4",
+        "body": "Portal watch: {position} {playerName}{originDetail}. {schools} are among the current leaders."
+      },
+      {
+        "id": "roster.interest.v94.5",
+        "body": "Transfer {position} {playerName}{originDetail} remains available, with {schools} in the leading group."
+      }
+    ],
+    "roster.unsigned": [
+      {
+        "id": "roster.unsigned.v94.1",
+        "body": "Still on the board: {starDescription}{prospectType}{position} {playerName}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.v94.2",
+        "body": "An unsigned name to follow: {starDescription}{prospectType}{position} {playerName}. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.v94.3",
+        "body": "{starDescription}{prospectType}{position} {playerName} has yet to commit. {recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.v94.4",
+        "body": "The remaining recruiting board includes {starDescription}{prospectType}{position} {playerName}. {recruitRankDetail}"
+      }
+    ],
+    "player.win.Leader": [
+      {
+        "id": "player.win.Leader.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Leader.v94.2",
+        "body": "Nothing better than a win with my teammates. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Leader.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Leader.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Leader.v94.5",
+        "body": "That was fun!! Love winning with my guys. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.Leader.v94.6",
+        "body": "W!! Appreciate y'all showing up for us. {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.Intense": [
+      {
+        "id": "player.win.Intense.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Intense.v94.2",
+        "body": "Nothing better than a win with my teammates. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Intense.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Intense.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Intense.v94.5",
+        "body": "W. Keep that scoreboard up a little longer. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.Intense.v94.6",
+        "body": "W!! Appreciate y'all showing up for us. {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.Entertainer": [
+      {
+        "id": "player.win.Entertainer.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Entertainer.v94.2",
+        "body": "Nothing better than a win with my teammates. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Entertainer.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Entertainer.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Entertainer.v94.5",
+        "body": "Got the W. My mentions can stay open tonight lol {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.Entertainer.v94.6",
+        "body": "W!! Appreciate y'all showing up for us. {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.TeamPlayer": [
+      {
+        "id": "player.win.TeamPlayer.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.TeamPlayer.v94.2",
+        "body": "{playerName} had a day. Love seeing my teammates get theirs. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.TeamPlayer.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.TeamPlayer.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.TeamPlayer.v94.5",
+        "body": "That was fun!! Love winning with my guys. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.TeamPlayer.v94.6",
+        "body": "W!! Appreciate y'all showing up for us. {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.Unpredictable": [
+      {
+        "id": "player.win.Unpredictable.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Unpredictable.v94.2",
+        "body": "Nothing better than a win with my teammates. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Unpredictable.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Unpredictable.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Unpredictable.v94.5",
+        "body": "That was fun!! Love winning with my guys. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.Unpredictable.v94.6",
+        "body": "Win with my guys. Phone is staying on tonight!! {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.Neutral": [
+      {
+        "id": "player.win.Neutral.v94.1",
+        "body": "Good win with this group. Appreciate everybody who showed up for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Neutral.v94.2",
+        "body": "Nothing better than a win with my teammates. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.Neutral.v94.3",
+        "body": "Team W. Love this group {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Neutral.v94.4",
+        "body": "Appreciate everybody riding with us. Good day for the {nickname}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.win.Neutral.v94.5",
+        "body": "That was fun!! Love winning with my guys. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.win.Neutral.v94.6",
+        "body": "W!! Appreciate y'all showing up for us. {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "player.win.QB": [
+      {
+        "id": "player.win.QB.v94.1",
+        "body": "Proud of this group. Good win and grateful for everyone supporting us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.QB.v94.2",
+        "body": "A win with my guys. Appreciate everybody who came out for us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.QB.v94.3",
+        "body": "Love sharing a win with this team. Thank you for the support. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.win.QB.v94.4",
+        "body": "Good day for the {nickname}. Grateful to be part of this group. {hashtag}",
+        "style": "measured"
+      }
+    ],
+    "player.rivalry": [
+      {
+        "id": "player.rivalry.v94.1",
+        "body": "Rivalry win. We know how much this one means to everybody supporting us. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.rivalry.v94.2",
+        "body": "That one means a lot. Proud of my guys. {hashtag}",
+        "style": "measured"
+      },
+      {
+        "id": "player.rivalry.v94.3",
+        "body": "Rivalry W. Y'all know what this one means {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.rivalry.v94.4",
+        "body": "Keep that scoreboard up. Love this team {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "player.rivalry.v94.5",
+        "body": "Rivalry W!! Do not get quiet now. {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "player.rivalry.v94.6",
+        "body": "Bragging rights with my guys. That one felt good!! {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "fan.narrow_win": [
+      {
+        "id": "fan.narrow_win.v94.1",
+        "body": "A {margin}-point win. I would love to watch the {nickname} without checking my pulse next time"
+      },
+      {
+        "id": "fan.narrow_win.v94.2",
+        "body": "{nickname} by {margin}. Never in doubt. Please ignore everything I said during the game"
+      },
+      {
+        "id": "fan.narrow_win.v94.3",
+        "body": "A {margin}-point win is still a win. I am going to need a minute though {hashtag}"
+      },
+      {
+        "id": "fan.narrow_win.v94.4",
+        "body": "{school} wins by {margin} and somehow I am more tired than the players"
+      },
+      {
+        "id": "fan.narrow_win.v94.5",
+        "body": "{nickname} win by {margin}. The standings do not ask how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.v94.6",
+        "body": "Final: {school} {ownScore}, {opponent} {opponentScore}. I survived another week"
+      }
+    ],
+    "fan.win": [
+      {
+        "id": "fan.win.v94.1",
+        "body": "{nickname} win and suddenly the rest of the weekend looks a lot better"
+      },
+      {
+        "id": "fan.win.v94.2",
+        "body": "Good day to be a {school} fan. I will be enjoying this one"
+      },
+      {
+        "id": "fan.win.v94.3",
+        "body": "{nickname} win. Yes I will be talking about it all week"
+      },
+      {
+        "id": "fan.win.v94.4",
+        "body": "Weekend improved considerably. Thank you {nickname}"
+      },
+      {
+        "id": "fan.win.v94.5",
+        "body": "{school} got the W. My group chat is about to hear from me"
+      },
+      {
+        "id": "fan.win.v94.6",
+        "body": "I would like to thank the {nickname} for making me tolerable to be around today"
+      }
+    ],
+    "fan.rivalry": [
+      {
+        "id": "fan.rivalry.v94.1",
+        "body": "{school} {ownScore}, {opponent} {opponentScore}. Screenshot saved. Receipts secured"
+      },
+      {
+        "id": "fan.rivalry.v94.2",
+        "body": "{nickname} win over {opponent}. Our group chat is going to be unbearable and I am fine with that"
+      },
+      {
+        "id": "fan.rivalry.v94.3",
+        "body": "{opponent} fans, no need to rush back online. Take your time. {hashtag}"
+      },
+      {
+        "id": "fan.rivalry.v94.4",
+        "body": "Rivalry win for the {nickname}. That score is staying in my bio for a while"
+      },
+      {
+        "id": "fan.rivalry.v94.5",
+        "body": "{school} beat {opponent}. Bragging rights are a yearlong subscription"
+      },
+      {
+        "id": "fan.rivalry.v94.6",
+        "body": "{nickname} win. {opponent}, see you in the comments"
+      }
+    ],
+    "fan.loss": [
+      {
+        "id": "fan.loss.v94.1",
+        "body": "{opponent} {opponentScore}, {school} {ownScore}. That is enough football for my mood today"
+      },
+      {
+        "id": "fan.loss.v94.2",
+        "body": "{nickname} lose {score} to {opponent}. Logging off seems like a healthy choice"
+      },
+      {
+        "id": "fan.loss.v94.3",
+        "body": "{school} lost to {opponent} and I still have to answer messages from people. Brutal"
+      },
+      {
+        "id": "fan.loss.v94.4",
+        "body": "{opponent} {opponentScore}, {school} {ownScore}. Coach {coachLastName}, this is getting old"
+      },
+      {
+        "id": "fan.loss.v94.5",
+        "body": "Love the {nickname}. Did not love watching that {score} loss to {opponent}"
+      },
+      {
+        "id": "fan.loss.v94.6",
+        "body": "{school} loses {score}. I am going to be thinking about this longer than I should"
+      }
+    ],
+    "fan.picks": [
+      {
+        "id": "fan.picks.v94.1",
+        "body": "Two picks from {playerName} in a loss. Love this team, but that is a rough afternoon to sit through"
+      },
+      {
+        "id": "fan.picks.v94.2",
+        "body": "{playerName} throws two picks and {school} loses. Hard to enjoy the rest of the scoreboard after that"
+      },
+      {
+        "id": "fan.picks.v94.3",
+        "body": "Two interceptions from {playerName}. Coach {coachLastName}, we need an answer to this"
+      },
+      {
+        "id": "fan.picks.v94.4",
+        "body": "I am still a {school} fan tomorrow. Today I am frustrated about those two picks from {playerName}"
+      }
+    ],
+    "cycle.player-reset": [
+      {
+        "id": "cycle.player-reset.v94.1",
+        "body": "Thank you to everyone who supported us this season. Grateful for my teammates and looking forward to being back.",
+        "style": "measured"
+      },
+      {
+        "id": "cycle.player-reset.v94.2",
+        "body": "Appreciate the fans, my family and everyone who showed up for this team. Excited for what is next.",
+        "style": "measured"
+      },
+      {
+        "id": "cycle.player-reset.v94.3",
+        "body": "Season went fast. Appreciate everybody who rode with us. Ready to keep building with my guys",
+        "style": "conversational"
+      },
+      {
+        "id": "cycle.player-reset.v94.4",
+        "body": "Thank you for all the support this year. Already looking forward to being back",
+        "style": "conversational"
+      },
+      {
+        "id": "cycle.player-reset.v94.5",
+        "body": "Love this team!! Thank you to everybody who was with us this season.",
+        "style": "expressive"
+      },
+      {
+        "id": "cycle.player-reset.v94.6",
+        "body": "Appreciate y'all all year. Looking forward to doing this again with my guys!",
+        "style": "expressive"
+      }
+    ],
+    "cycle.staff-plan": [
+      {
+        "id": "cycle.staff-plan.v94.1",
+        "body": "With {school}'s season finished, {coachName} turns to roster retention and the incoming class. Those decisions will shape the next team."
+      },
+      {
+        "id": "cycle.staff-plan.v94.2",
+        "body": "Next for {coachName} at {school}: keeping the core together and filling the remaining roster needs. The offseason starts with those decisions."
+      },
+      {
+        "id": "cycle.staff-plan.v94.3",
+        "body": "{school}'s games are over. For {coachName}, the next part of the job is deciding what this roster needs and keeping the players who can help."
+      },
+      {
+        "id": "cycle.staff-plan.v94.4",
+        "body": "The focus at {school} shifts to the roster. What {coachName} retains and adds will tell us more about next season than an early prediction."
+      }
+    ],
+    "cycle.portal-plan": [
+      {
+        "id": "cycle.portal-plan.v94.1",
+        "body": "{school}'s offseason begins with its own roster. Who stays will help determine where the program needs to look in the portal."
+      },
+      {
+        "id": "cycle.portal-plan.v94.2",
+        "body": "The portal board at {school} depends on the players already in the building. Retention comes before calling every available name a target."
+      },
+      {
+        "id": "cycle.portal-plan.v94.3",
+        "body": "For {school}, the next questions are roster questions: returning players, incoming recruits and the gaps still left to fill."
+      },
+      {
+        "id": "cycle.portal-plan.v94.4",
+        "body": "{school} moves into offseason planning. Recruiting additions and returning eligibility will shape which portal options actually fit."
+      }
+    ],
+    "cycle.fan-future": [
+      {
+        "id": "cycle.fan-future.v94.1",
+        "body": "{school} football is over and I am already checking recruiting news. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.v94.2",
+        "body": "Going to miss having the {nickname} to plan my weekends around. Now somebody give me good recruiting news"
+      },
+      {
+        "id": "cycle.fan-future.v94.3",
+        "body": "The wait for {school} football starts again. I will be handling it by refreshing the recruiting board"
+      },
+      {
+        "id": "cycle.fan-future.v94.4",
+        "body": "See everybody next season. Or in five minutes when I check for {school} roster news again"
+      }
+    ],
+    "cycle.fan-standards": [
+      {
+        "id": "cycle.fan-standards.v94.1",
+        "body": "{record} was not what we wanted at {school}. Need to see a real plan for the roster this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.v94.2",
+        "body": "{school} finishes {record}. I love this team, but love is not the same thing as being happy with that season"
+      },
+      {
+        "id": "cycle.fan-standards.v94.3",
+        "body": "A {record} season and a whole offseason to think about it. Give {school} fans something to look forward to"
+      },
+      {
+        "id": "cycle.fan-standards.v94.4",
+        "body": "{record}. That has to be a starting point for changes at {school}, not something we just get used to"
+      }
+    ],
+    "carry.training": [
+      {
+        "id": "carry.training.v94.1",
+        "body": "{school}'s {position} {playerName} improved in {area} during {period}. A name to follow when the new season starts."
+      },
+      {
+        "id": "carry.training.v94.2",
+        "body": "Offseason development to watch at {school}: {position} {playerName}, with progress in {area} during {period}."
+      },
+      {
+        "id": "carry.training.v94.3",
+        "body": "Keep an eye on {school}'s {position} {playerName}. Work in {period} brought improvement in {area}; now comes the chance to show it in games."
+      },
+      {
+        "id": "carry.training.v94.4",
+        "body": "{position} {playerName} enters the season with progress in {area} from {period}. One of the development stories to follow at {school}."
+      }
+    ],
+    "carry.player-training": [
+      {
+        "id": "carry.player-training.v94.1",
+        "body": "Grateful for the work with my teammates this offseason. Looking forward to being back out there for {school}.",
+        "style": "measured"
+      },
+      {
+        "id": "carry.player-training.v94.2",
+        "body": "A lot of time put in with this group. Excited to get back to football at {school}.",
+        "style": "measured"
+      },
+      {
+        "id": "carry.player-training.v94.3",
+        "body": "Good offseason with my guys. Ready to get back out there {hashtag}",
+        "style": "conversational"
+      },
+      {
+        "id": "carry.player-training.v94.4",
+        "body": "Appreciate everybody who pushed me this offseason. Ready for football again",
+        "style": "conversational"
+      },
+      {
+        "id": "carry.player-training.v94.5",
+        "body": "Ready to be back with my guys!! {hashtag}",
+        "style": "expressive"
+      },
+      {
+        "id": "carry.player-training.v94.6",
+        "body": "A lot of work this offseason. Excited to get back to it! {hashtag}",
+        "style": "expressive"
+      }
+    ],
+    "carry.player-training-qb": [
+      {
+        "id": "carry.player-training-qb.v94.1",
+        "body": "Good offseason with this group. Appreciate everyone putting the time in together. Ready for {school} football.",
+        "style": "measured"
+      },
+      {
+        "id": "carry.player-training-qb.v94.2",
+        "body": "Grateful for my teammates and the work we have put in. Looking forward to being back out there for {school}.",
+        "style": "measured"
+      },
+      {
+        "id": "carry.player-training-qb.v94.3",
+        "body": "Excited for another season with this group at {school}. Appreciate the people helping us get ready.",
+        "style": "measured"
+      },
+      {
+        "id": "carry.player-training-qb.v94.4",
+        "body": "Looking forward to getting back to football. Good offseason of work with my teammates at {school}.",
+        "style": "measured"
+      }
+    ],
+    "context.heisman": [
+      {
+        "id": "context.heisman.v94.1",
+        "body": "Heisman No. {rank}: {school}'s {playerName}. Season: {seasonLine}. Latest against {opponent}: {recentLine}, in {result}."
+      },
+      {
+        "id": "context.heisman.v94.2",
+        "body": "{school}'s {playerName} holds No. {rank} on the Heisman watch. Latest: {recentLine} in {result} against {opponent}. Season: {seasonLine}."
+      },
+      {
+        "id": "context.heisman.v94.3",
+        "body": "{school}'s {playerName}, No. {rank} on the Heisman watch: {recentLine} against {opponent}, in {result}."
+      }
+    ],
+    "context.heisman-recent": [
+      {
+        "id": "context.heisman-recent.v94.1",
+        "body": "{school}'s {playerName} is No. {rank} on the Heisman watch. Against {opponent}: {recentLine}, in {result}."
+      },
+      {
+        "id": "context.heisman-recent.v94.2",
+        "body": "Heisman No. {rank}: {playerName}, {school}. Latest game: {recentLine} against {opponent}, in {result}."
+      },
+      {
+        "id": "context.heisman-recent.v94.3",
+        "body": "{recentLine} in {result} against {opponent} for {school}'s {playerName}. Currently No. {rank} on the Heisman watch."
+      }
+    ],
+    "editorial.heisman-movement": [
+      {
+        "id": "editorial.heisman-movement.v94.1",
+        "body": "{school}'s {playerName} moves {movement} from No. {previousRank} to No. {rank} on the Heisman watch. Latest: {recentLine} against {opponent}, in {result}."
+      },
+      {
+        "id": "editorial.heisman-movement.v94.2",
+        "body": "Heisman movement: {school}'s {playerName}, No. {previousRank} to No. {rank}. Last game: {recentLine} in {result} against {opponent}."
+      },
+      {
+        "id": "editorial.heisman-movement.v94.3",
+        "body": "{school}'s {playerName} is now No. {rank}, previously No. {previousRank}, on the Heisman watch. Latest against {opponent}: {recentLine}, in {result}."
+      }
+    ],
+    "editorial.heisman-slip": [
+      {
+        "id": "editorial.heisman-slip.v94.1",
+        "body": "{school}'s {playerName} slips from No. {previousRank} to No. {rank} on the Heisman watch despite {recentLine} in a win over {opponent}. A productive game and a ranking drop in the same week."
+      },
+      {
+        "id": "editorial.heisman-slip.v94.2",
+        "body": "{recentLine} in a win over {opponent}, yet {school}'s {playerName} moves from No. {previousRank} to No. {rank} in the Heisman race. The production held up; the ranking moved the other way."
+      },
+      {
+        "id": "editorial.heisman-slip.v94.3",
+        "body": "{school}'s {playerName} drops from No. {previousRank} to No. {rank} on the Heisman watch. Still a strong game: {recentLine} in a win over {opponent}."
+      }
+    ],
+    "editorial.close-wins": [
+      {
+        "id": "editorial.close-wins.v94.1",
+        "body": "{school} is {record}, and every one of its {wins} wins has come by {maxMargin} points or fewer. Combined winning margin: {totalMargin} points. Very little separation in the games that have gone its way."
+      },
+      {
+        "id": "editorial.close-wins.v94.2",
+        "body": "All {wins} of {school}'s wins have been by {maxMargin} points or fewer, adding up to {totalMargin} points. At {record}, this team has been living on the smallest margins."
+      },
+      {
+        "id": "editorial.close-wins.v94.3",
+        "body": "{school}'s {record} season includes {wins} wins by a combined {totalMargin} points. None by more than {maxMargin}. That is a lot of Saturdays decided by very little."
+      }
+    ],
+    "editorial.close-losses": [
+      {
+        "id": "editorial.close-losses.v94.1",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those defeats add up to {totalMargin} points. Small margins have taken a real toll on the record."
+      },
+      {
+        "id": "editorial.close-losses.v94.2",
+        "body": "There are {count} losses by three points or fewer in {school}'s {record} season. Combined margin in those games: {totalMargin}. The near-misses are adding up."
+      },
+      {
+        "id": "editorial.close-losses.v94.3",
+        "body": "At {record}, {school} has lost {count} games by three points or fewer, by a combined {totalMargin} points. A different kind of frustration than being out of games early."
+      }
+    ],
+    "editorial.comebacks": [
+      {
+        "id": "editorial.comebacks.v94.1",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth quarter. At {record}, the record includes repeated second-half recoveries."
+      },
+      {
+        "id": "editorial.comebacks.v94.2",
+        "body": "Comeback note at {school}: {count} wins from a halftime or fourth-quarter deficit. The {record} record has not always come the straightforward way."
+      },
+      {
+        "id": "editorial.comebacks.v94.3",
+        "body": "{school} is {record}, including {count} wins after trailing at the half or entering the fourth. This group has had to work its way back more than once."
+      }
+    ],
+    "matchup.passing-preview-rates": [
+      {
+        "id": "matchup.passing-preview-rates.v94.1",
+        "body": "{school} averages {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation} Per-game yardage: {attack} produced, {defense} allowed."
+      },
+      {
+        "id": "matchup.passing-preview-rates.v94.2",
+        "body": "{school} vs. {opponent}, passing: {attackRate} yards per pass attempt on offense against {defenseRate} allowed by the defense. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.v94.3",
+        "body": "Passing matchup: {school} produces {attack} yards a game at {attackRate} per pass attempt. {opponent} allows {defense} at {defenseRate}. {interpretation}"
+      }
+    ],
+    "matchup.passing-preview": [
+      {
+        "id": "matchup.passing-preview.v94.1",
+        "body": "{school} averages {attack} passing yards through {games} games; {opponent} allows {defense} through {opponentGames}. Different schedules, but a useful place to start this matchup."
+      },
+      {
+        "id": "matchup.passing-preview.v94.2",
+        "body": "Passing matchup this week: {school}, {attack} yards a game, against {opponent}, {defense} allowed. Samples: {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.passing-preview.v94.3",
+        "body": "{school} brings {attack} passing yards per game into {opponent}. The defense has allowed {defense}. Those averages will meet on the field this week."
+      }
+    ],
+    "matchup.rushing-preview-rates": [
+      {
+        "id": "matchup.rushing-preview-rates.v94.1",
+        "body": "{school} averages {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation} Per-game yardage: {attack} produced, {defense} allowed."
+      },
+      {
+        "id": "matchup.rushing-preview-rates.v94.2",
+        "body": "{school} vs. {opponent}, rushing: {attackRate} yards per carry on offense against {defenseRate} allowed by the defense. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.v94.3",
+        "body": "Rushing matchup: {school} produces {attack} yards a game at {attackRate} per carry. {opponent} allows {defense} at {defenseRate}. {interpretation}"
+      }
+    ],
+    "matchup.rushing-preview": [
+      {
+        "id": "matchup.rushing-preview.v94.1",
+        "body": "{school} averages {attack} rushing yards through {games} games; {opponent} allows {defense} through {opponentGames}. Different schedules, but a useful place to start this matchup."
+      },
+      {
+        "id": "matchup.rushing-preview.v94.2",
+        "body": "Rushing matchup this week: {school}, {attack} yards a game, against {opponent}, {defense} allowed. Samples: {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.rushing-preview.v94.3",
+        "body": "{school} brings {attack} rushing yards per game into {opponent}. The defense has allowed {defense}. Those averages will meet on the field this week."
+      }
+    ],
+    "matchup.receiver-secondary-preview": [
+      {
+        "id": "matchup.receiver-secondary-preview.v94.1",
+        "body": "{school}'s {receiver} has {catches} catches for {yards} yards. This week: a {opponent} secondary featuring {defender} ({breakups} PBU, {interceptions} INT). Production on both sides of the passing matchup."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.v94.2",
+        "body": "{receiver}, {school}: {catches} catches, {yards} yards. {defender}, {opponent}: {breakups} PBU, {interceptions} INT. Two names to follow when these passing-game units meet."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.v94.3",
+        "body": "{school}'s passing game includes {receiver} ({catches} catches, {yards} yards). {opponent}'s secondary includes {defender} ({breakups} PBU, {interceptions} INT). A matchup with production on both sides."
+      }
+    ],
+    "deep.broken-tackles": [
+      {
+        "id": "deep.broken-tackles.v94.1",
+        "body": "{school}'s {playerName} has broken {broken} tackles on {attempts} carries. Contact has been part of the rushing production."
+      },
+      {
+        "id": "deep.broken-tackles.v94.2",
+        "body": "{broken} recorded broken tackles on {attempts} carries for {school}'s {playerName}. More to his rushing workload than the yardage total."
+      },
+      {
+        "id": "deep.broken-tackles.v94.3",
+        "body": "Contact numbers for {school}'s {playerName}: {broken} broken tackles on {attempts} carries."
+      }
+    ]
+  }
+}

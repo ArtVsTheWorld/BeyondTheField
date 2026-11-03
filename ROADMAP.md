@@ -1,5 +1,9 @@
 # Dynasty Enhancer roadmap
 
+## Content review stages 1–3 — v94 candidate
+
+All three content-review stages are implemented: factual context and change-based freshness; curated relevance and canonical portal conversation cleanup; expanded personal voices and useful season/matchup/Heisman analysis. Offline checks include 342 Node tests, native regression checks, a 31-edition frozen published-pool replay, and regeneration of the actual 2028 ULM preseason capture with carryover facts intact. The published-pool replay cannot recover candidates that the original generator never archived, so it is not evidence of complete historical regeneration or guaranteed local-story counts. The original corpus remains available for comparison. Package installation and a focused live controller/content check are the next steps, followed by release lifecycle/performance checks and the grades/fog integrations.
+
 ## Automatic offseason capture verified — ULM 2027 to 2028
 
 The previously pending unassisted offseason test has passed in v91. The live reader captured a 7,002-player final-signing baseline (38 ULM players), 2,634 qualifying training changes (15 ULM players), the Fitch/Kennedy departures and Kennesaw/JMU conference moves. The following preseason published the expected stories. Main-menu Continue found a new native context and republished all 1,231 stories with identical IDs, text, authors, likes, templates, replies, avatars and scope views. The user confirmed the reopened feed and controls. No milestone-save recovery was used for this cycle.

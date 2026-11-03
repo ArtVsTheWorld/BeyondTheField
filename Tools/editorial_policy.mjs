@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {comparePublication} from './publication_timeline.mjs';
-export const EDITORIAL_POLICY_VERSION=3;
+export const EDITORIAL_POLICY_VERSION=4;
 const stable=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
 const digest=v=>createHash('sha256').update(stable(v)).digest('hex');
 export function validEditorialContext(e){
@@ -19,6 +19,7 @@ export function editorialTopic(e){
  else if(['cycle.portal-needs','cycle.outlook','cycle.class-build'].includes(family)){key=[family,team];state=[f.position??null,f.count??null,f.record??null,f.classRank??null,f.verdict??null];}
  else if(family==='cycle.portal-target'){key=[family,team,person];state=[f.schools??null,f.formerSchool??null];}
  else if(family==='draft-talk.empty'){key=[family,team];state=true;}
+ else if(family.startsWith('editorial.')||family.startsWith('context.coach-')){key=[family,team];state=[f.coachName??null,f.wins??null,f.losses??null,f.count??null,f.totalMargin??null];}
  else if(e.id?.startsWith('portal-opening:')||family==='roster.interest'){
   key=['recruit-watch',person,team,family];state=[f.schools??null,f.stars??null,f.nationalRecruitRank??null,f.positionRecruitRank??null,f.stateRecruitRank??null,f.formerSchool??null];
  }else if(family==='roster.underdog'&&!f.newlyObserved&&!f.signed){key=[family,team,person];state=[f.stars,f.nationalRecruitRank??null];}

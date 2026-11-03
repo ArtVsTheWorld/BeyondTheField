@@ -33,7 +33,7 @@ export function matchupEvents(s,{force=false}={}){
   if(angle===2&&!protectionCorroborated)continue;
   const values={school:off.name,opponent:def.name,games:o.n,opponentGames:d.n,protectionCorroborated,attack:one(own/o.n),defense:one(other/d.n)};
   const attemptField=angle===0?'PASSATTEMPTS':'RUSHATTEMPTS',attempts=angle<2?o.read(attemptField):null,defAttempts=angle<2?d.read(attemptField,true):null;
-  const rates=attempts>=80&&defAttempts>=80;if(rates)Object.assign(values,{attackRate:one(own/attempts),defenseRate:one(other/defAttempts)});
+  const rates=attempts>=80&&defAttempts>=80;if(rates){const difference=own/attempts-other/defAttempts,threshold=angle===0?1.5:1;Object.assign(values,{attackRate:one(own/attempts),defenseRate:one(other/defAttempts),interpretation:Math.abs(difference)<threshold?'Little separation in those efficiency averages.':difference>0?'The offense has averaged more than this defense has allowed.':'The defense has allowed more than this offense has averaged.'});}
   const options={team:off.id,relatedTeams:[def.id],national:covered.has(off.id)||covered.has(def.id),eventWeek:g.week,priority:recap?91:90,thread:'game:'+g.id};
   const emit=(key,family,facts,extra={})=>events.push({id:`matchup:${g.id}:${key}`,category:recap?'matchup-recap':'matchup-preview',facts:{family:'matchup.'+family,voice:'analyst',...values,...facts},options:{...options,...extra}});
   const base=angle===0?'passing':angle===1?'rushing':'protection';

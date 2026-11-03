@@ -1,0 +1,221 @@
+{
+  "provenance": {
+    "source": "ULM frozen 2026 result events",
+    "sha256": "0090e14c55c52df865029f274c857fa7cab8683bc4fddfa5a0f96f263260e4fc",
+    "reconstructedTestFixture": true
+  },
+  "leagueId": 831346515,
+  "userTeamIndex": 63,
+  "season": {
+    "CurrentYear": 0,
+    "CurrentSeasonYear": 2026,
+    "CurrentStage": "NFLSeason",
+    "CurrentWeekType": "RegularSeason",
+    "CurrentWeek": 15
+  },
+  "teams": [
+    {
+      "id": 53,
+      "name": "Mississippi St"
+    },
+    {
+      "id": 63,
+      "name": "UL Monroe",
+      "wins": 3,
+      "losses": 9,
+      "ties": 0
+    },
+    {
+      "id": 96,
+      "name": "UAB"
+    },
+    {
+      "id": 114,
+      "name": "FLA Atlantic"
+    },
+    {
+      "id": 120,
+      "name": "South Alabama"
+    },
+    {
+      "id": 41,
+      "name": "Louisiana Tech"
+    },
+    {
+      "id": 122,
+      "name": "Troy"
+    },
+    {
+      "id": 83,
+      "name": "Southern Miss"
+    },
+    {
+      "id": 6,
+      "name": "Arkansas State"
+    },
+    {
+      "id": 84,
+      "name": "Louisiana"
+    },
+    {
+      "id": 125,
+      "name": "App St."
+    },
+    {
+      "id": 44,
+      "name": "Marshall"
+    },
+    {
+      "id": 255,
+      "name": "FCS Southeast"
+    }
+  ],
+  "players": [],
+  "games": [
+    {
+      "id": "6347:98",
+      "year": 0,
+      "week": 1,
+      "phase": "RegularSeason",
+      "home": 53,
+      "away": 63,
+      "homeScore": 42,
+      "awayScore": 0,
+      "published": true,
+      "status": "HomeWon"
+    },
+    {
+      "id": "6347:420",
+      "year": 0,
+      "week": 2,
+      "phase": "RegularSeason",
+      "home": 96,
+      "away": 63,
+      "homeScore": 21,
+      "awayScore": 14,
+      "published": true,
+      "status": "HomeWon"
+    },
+    {
+      "id": "6347:522",
+      "year": 0,
+      "week": 3,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 255,
+      "homeScore": 27,
+      "awayScore": 26,
+      "published": true,
+      "status": "HomeWon"
+    },
+    {
+      "id": "6347:616",
+      "year": 0,
+      "week": 4,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 114,
+      "homeScore": 25,
+      "awayScore": 32,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:648",
+      "year": 0,
+      "week": 5,
+      "phase": "RegularSeason",
+      "home": 120,
+      "away": 63,
+      "homeScore": 35,
+      "awayScore": 17,
+      "published": true,
+      "status": "HomeWon"
+    },
+    {
+      "id": "6347:788",
+      "year": 0,
+      "week": 7,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 41,
+      "homeScore": 25,
+      "awayScore": 28,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:825",
+      "year": 0,
+      "week": 8,
+      "phase": "RegularSeason",
+      "home": 122,
+      "away": 63,
+      "homeScore": 16,
+      "awayScore": 18,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:903",
+      "year": 0,
+      "week": 9,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 83,
+      "homeScore": 15,
+      "awayScore": 32,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:102",
+      "year": 0,
+      "week": 10,
+      "phase": "RegularSeason",
+      "home": 6,
+      "away": 63,
+      "homeScore": 41,
+      "awayScore": 7,
+      "published": true,
+      "status": "HomeWon"
+    },
+    {
+      "id": "6347:173",
+      "year": 0,
+      "week": 11,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 84,
+      "homeScore": 29,
+      "awayScore": 31,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:261",
+      "year": 0,
+      "week": 12,
+      "phase": "RegularSeason",
+      "home": 125,
+      "away": 63,
+      "homeScore": 21,
+      "awayScore": 23,
+      "published": true,
+      "status": "AwayWon"
+    },
+    {
+      "id": "6347:328",
+      "year": 0,
+      "week": 13,
+      "phase": "RegularSeason",
+      "home": 63,
+      "away": 44,
+      "homeScore": 9,
+      "awayScore": 50,
+      "published": true,
+      "status": "AwayWon"
+    }
+  ],
+  "performances": []
+}
