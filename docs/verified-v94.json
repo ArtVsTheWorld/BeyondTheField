@@ -52,7 +52,20 @@
         "posts": 5
       }
     ],
-    "controllerCheck": "pending"
+    "controllerCheck": "pending",
+    "preseasonWordingComparison": {
+      "sameCapturedFacts": true,
+      "before": {
+        "exactDuplicateGroups": 7,
+        "distinctPersonalBodies": 59,
+        "personalPosts": 70
+      },
+      "after": {
+        "exactDuplicateGroups": 2,
+        "distinctPersonalBodies": 65,
+        "personalPosts": 70
+      }
+    }
   },
   "content": {
     "revision": "editorial-variety-v94",
