@@ -9,8 +9,10 @@ void __fastcall i(Collector* c,unsigned r,const char* k,int v){c->rows[r][k]=v;}
 void __fastcall f(Collector* c,unsigned r,const char* k,float v){c->rows[r][k]=v;}
 void __fastcall s(Collector* c,unsigned r,const char* k,const char* v){c->rows[r][k]=v;}
 void* vt[]={nullptr,nullptr,nullptr,reinterpret_cast<void*>(b),reinterpret_cast<void*>(i),reinterpret_cast<void*>(f),reinterpret_cast<void*>(s)};
-void __fastcall donorRows(void*,void*,void* out){
-    rowText(out,0,"panelId","CM_NEWSTAB");rowText(out,0,"tileCoords","1");
+std::string lastDonorPanel;
+void __fastcall donorRows(void*,void* panel,void* out){
+    lastDonorPanel=argument(panel);
+    rowText(out,0,"panelId",lastDonorPanel.c_str());rowText(out,0,"tileCoords","5");
     rowSet(out,0,"UseTileDimensions",false,3);rowSet(out,0,"UseFrame",true,3);
     rowSet(out,0,"Priority",0,4);
 }
@@ -65,12 +67,23 @@ int main(int argc,char** argv){
         require(out.rows.size()==7,"Expected six visible containers plus Social Media");
         for(unsigned row=0;row<7;++row){require(out.rows.at(row).at("tileCoords")==std::string(row<6?coordinates[row]:"12"),"Original coordinates changed");require(out.rows.at(row).at("Priority")==0,"Native priorities changed");require(out.rows.at(row).at("Opacity")==0.875f,"Float collector ABI changed");require(out.rows.at(row).at("AllowFocus")==true,"Focus state lost");}
         Collector absent{vt,{}};ContainerProxy noDonor{containerVt,&absent,{}};containerString(&noDonor,0,"tileCoords","1");require(!appendContainer(noDonor)&&absent.rows.size()==1,"Missing donor must preserve the original menu");
+        {
+            require(hubEntry("DynastyCentral")==&centralEntry&&hubEntry("CM_NEWSTAB")==&cfbEntry&&!hubEntry("CM_LEAGUE"),"Persistent shortcut must be scoped to the two verified hubs");
+            Collector central{vt,{}};ContainerProxy cp{containerVt,&central,{}};
+            containerString(&cp,2,"tileCoords","2");containerString(&cp,9,"tileCoords","5");containerString(&cp,9,"panelId","DynastyCentral");containerBool(&cp,9,"AllowFocus",true);containerInt(&cp,9,"Priority",0);containerFloat(&cp,9,"Opacity",0.5f);
+            require(appendContainer(cp,centralEntry)&&central.rows.size()==3,"Sparse Dynasty Central rows lost the User Settings donor");
+            require(central.rows.at(10).at("tileCoords")=="12"&&central.rows.at(10).at("panelId")=="DynastyCentral"&&central.rows.at(10).at("AllowFocus")==true&&central.rows.at(10).at("Opacity")==0.5f&&central.rows.at(9).at("tileCoords")=="5","Persistent shortcut changed stock identities or typed fields");
+            Collector occupied{vt,{}};ContainerProxy collision{containerVt,&occupied,{}};containerString(&collision,0,"tileCoords","5");containerString(&collision,1,"tileCoords","12");
+            require(!appendContainer(collision,centralEntry)&&occupied.rows.size()==2,"An existing foreign coordinate must not be overwritten");
+            Collector unavailable{vt,{}};ContainerProxy missing{containerVt,&unavailable,{}};containerString(&missing,0,"tileCoords","7");require(!appendContainer(missing,centralEntry)&&unavailable.rows.size()==1,"Persistent donor absence must leave native menu intact");
+        }
         require(postNumber("1")==1,"First post must be addressable");
         require(postNumber(std::to_string(feedPostCount))==feedPostCount,"Last post must be addressable");
         for(const auto& invalid:{"","0","01","-1","1x","999999999999999999999"})require(postNumber(invalid)==0,"Invalid coordinate accepted");
         require(postNumber(std::to_string(feedPostCount+1))==0,"Out-of-range post accepted");
         containers=donorRows;opened=true;
         Collector feed{vt,{}};Alias panel{aliasVt,"CM_NEWSSUB"};containerHook(nullptr,&panel,&feed);
+        require(lastDonorPanel=="DynastyCentral","Offseason feed still depends on the hidden CFB panel");
         require(feed.rows.size()==feedContainerCount,"Feed count differs from native containers");
         for(unsigned row=0;row<feedContainerCount;++row){
             require(feed.rows.at(row).at("tileCoords")==std::to_string(row+1),"Feed coordinate sequence changed");
@@ -78,6 +91,7 @@ int main(int argc,char** argv){
             require(feed.rows.at(row).at("UseTileDimensions")==true,"Feed must size from post widgets");
         }
         if constexpr(listFeed)require(feed.rows.at(0).at("linkage")=="art_control.group.PanelListContainer","List feed must use the native list control");
+        {opened=false;Collector central{vt,{}};Alias hub{aliasVt,"DynastyCentral"};containerHook(nullptr,&hub,&central);require(central.rows.size()==2&&admittedHubEntries["DynastyCentral"],"Persistent hub did not admit a separate Social Media row");Collector other{vt,{}};Alias untouched{aliasVt,"OTHER_PANEL"};containerHook(nullptr,&untouched,&other);require(other.rows.size()==1&&!admittedHubEntries.count("OTHER_PANEL"),"Unrelated menus received the Social Media shortcut");opened=true;}
         filterData=originalFilter;
         Collector filter{vt,{}};Alias kind{aliasVt,"NEWS_CATEGORY"};filterDataHook(nullptr,&filter,&panel,&kind);
         require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="For You"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");

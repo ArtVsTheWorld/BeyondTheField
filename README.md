@@ -4,7 +4,11 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Season recap and NIL timing (v81)
+## Year-round Social Media access (v82)
+
+The current package is `Build/DynastyEnhancer-v82-MMC.zip`. Social Media now has a permanent shortcut in **Dynasty Central**, alongside its existing CFB shortcut. The page no longer borrows CFB/Heisman records, which the native game removes during Players Leaving and the rest of the offseason. See [v82 access and verification](docs/year-round-access-v82.md).
+
+## Previous season recap and NIL timing (v81)
 
 The current package is `Build/DynastyEnhancer-v81-MMC.zip`. Offseason Week 0 now covers the completed national championship, both finalists, season retrospectives, confirmed staff moves and the wait for next season. National no longer empties when the game resets the week counter. Elevated native transfer risk can produce retention-watch stories without claiming a portal entry. NIL adjustments observed during the season-review week publish in the following week. See [v81 behavior and verification](docs/season-review-v81.md).
 

@@ -24,7 +24,6 @@
   "portalRiskAvailable": false,
   "nilReportsDeferred": true,
   "liveChecksRemaining": [
-    "National season-recap news, archives, filters, scrolling and Back",
     "Observed recap-week NIL adjustment appears in following week",
     "Cold launch CFP bracket with Dynasty Enhancer disabled"
   ],
@@ -52,5 +51,16 @@
     "DynastyEnhancerNative-v81.dll": "02a77a647f20c7bb623f7738ecd87e3036f962553647b2c0b11a914fc12142a8",
     "DynastyEnhancer.dll": "1a213d0993cad0360c933d3ba55255f53a9d027f106bf5ae7d9decae73071572",
     "DynastyEnhancer-v81-MMC.zip": "243cbd52cacd409d2668dee7e625d470b8132b3a91bc9c7c377234aa7e6ed62f"
+  },
+  "userConfirmed": {
+    "nationalSeasonRecap": true,
+    "scrolling": true,
+    "backNavigation": true
+  },
+  "nextWeekObservation": {
+    "phase": "OffSeason",
+    "week": 1,
+    "nilFollowupStories": 479,
+    "userDealAccuracyConfirmed": false
   }
 }

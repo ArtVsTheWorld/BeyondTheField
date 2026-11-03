@@ -450,28 +450,38 @@ void __fastcall containerString(ContainerProxy* p,unsigned row,const char* name,
 }
 void __fastcall unmapped(){/* The verified collector uses only typed slots 3..6. */}
 void* containerVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(containerBool),reinterpret_cast<void*>(containerInt),reinterpret_cast<void*>(containerFloat),reinterpret_cast<void*>(containerString)};
-bool appendContainer(ContainerProxy& proxy){
+struct HubEntry {const char* panel;const char* donor;const char* coordinate;};
+constexpr HubEntry cfbEntry{"CM_NEWSTAB","7","12"},centralEntry{"DynastyCentral","5","12"};
+// User Settings is present in the persistent Dynasty Central menu. CFB's
+// Heisman records are filtered out entirely during Players Leaving and later.
+constexpr HubEntry feedEntry=centralEntry;
+std::map<std::string,bool> admittedHubEntries; // Owned by UI callbacks only.
+const HubEntry* hubEntry(std::string_view panel){if(panel==cfbEntry.panel)return &cfbEntry;if(panel==centralEntry.panel)return &centralEntry;return nullptr;}
+bool appendContainer(ContainerProxy& proxy,const HubEntry& entry=cfbEntry){
     if(proxy.captured.empty())return false;
+    for(const auto& [row,fields]:proxy.captured){(void)row;if(fields.value("tileCoords",std::string())==entry.coordinate){note({{"event","social_hub_coordinate_occupied"},{"panel",entry.panel},{"coordinate",entry.coordinate}});return false;}}
     for(const auto& [row,fields]:proxy.captured){
-        if(fields.value("tileCoords",std::string())!="7")continue;
+        if(fields.value("tileCoords",std::string())!=entry.donor)continue;
         unsigned added=proxy.captured.rbegin()->first+1;
         for(const auto& [name,value]:fields.items()){
             if(value.is_boolean())rowSet(proxy.target,added,name.c_str(),value.get<bool>(),3);
             else if(value.is_number_integer())rowSet(proxy.target,added,name.c_str(),value.get<int>(),4);
             else if(value.is_number_float())rowSet(proxy.target,added,name.c_str(),value.get<float>(),5);
-            else if(value.is_string())rowText(proxy.target,added,name.c_str(),name=="tileCoords"?"12":value.get_ref<const std::string&>().c_str());
+            else if(value.is_string())rowText(proxy.target,added,name.c_str(),name=="tileCoords"?entry.coordinate:value.get_ref<const std::string&>().c_str());
         }
-        note({{"event","cfb_container_added"},{"donorRow",row},{"addedRow",added},{"coordinate","12"}});return true;
+        note({{"event","social_hub_container_added"},{"panel",entry.panel},{"donorRow",row},{"addedRow",added},{"coordinate",entry.coordinate}});return true;
     }
-    note({{"event","cfb_donor_missing"},{"rows",proxy.captured}});return false;
+    note({{"event","social_hub_donor_missing"},{"panel",entry.panel},{"rows",proxy.captured}});return false;
 }
 void __fastcall containerHook(void* self,void* panel,void* out){
     Guard guard;auto name=argument(panel);
-    if(!disabled&&uiReady&&!preflightRunning&&name=="CM_NEWSTAB"){configureNewsDropdowns(false);configureNewsPolish(false);}
-    if(!disabled&&uiReady&&opened&&!preflightRunning&&name=="CM_NEWSTAB"){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
+    const auto entry=hubEntry(name);
+    if(!disabled&&uiReady&&!preflightRunning&&entry){configureNewsDropdowns(false);configureNewsPolish(false);}
+    if(!disabled&&uiReady&&opened&&!preflightRunning&&entry){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
     if(!disabled&&opened&&name=="CM_NEWSSUB"){
-        Alias donor{aliasVt,"CM_NEWSTAB"};ContainerProxy proxy{containerVt,out,{},true};containers(self,&donor,&proxy);
-        if(!proxy.captured.empty())for(unsigned row=0;row<feedContainerCount;++row){auto coords=std::to_string(row+1);for(const auto& [key,value]:proxy.captured.begin()->second.items()){
+        Alias donor{aliasVt,feedEntry.panel};ContainerProxy proxy{containerVt,out,{},true};containers(self,&donor,&proxy);
+        const auto source=std::find_if(proxy.captured.begin(),proxy.captured.end(),[](const auto& row){return row.second.value("tileCoords",std::string())==feedEntry.donor;});
+        if(source!=proxy.captured.end())for(unsigned row=0;row<feedContainerCount;++row){auto coords=std::to_string(row+1);for(const auto& [key,value]:source->second.items()){
             if(value.is_boolean())rowSet(out,row,key.c_str(),key=="useTileDimensions"||key=="UseTileDimensions"?true:key=="UseFrame"?false:value.get<bool>(),3);
             else if(value.is_number_integer())rowSet(out,row,key.c_str(),value.get<int>(),4);
             else if(value.is_number_float())rowSet(out,row,key.c_str(),value.get<float>(),5);
@@ -480,7 +490,7 @@ void __fastcall containerHook(void* self,void* panel,void* out){
             if constexpr(listFeed){rowText(out,row,"linkage","art_control.group.PanelListContainer");rowSet(out,row,"Width",1200,4);rowSet(out,row,"Height",600,4);rowSet(out,row,"ScrollByMount",false,3);rowSet(out,row,"UseScrollArrows",false,3);rowSet(out,row,"ShowScroller",true,3);rowSet(out,row,"WrapList",false,3);}
         }note({{"event","social_feed_containers"},{"donor",proxy.captured},{"listFeed",listFeed}});return;
     }
-    if(disabled||name!="CM_NEWSTAB"){containers(self,panel,out);return;}ContainerProxy proxy{containerVt,out,{}};containers(self,panel,&proxy);appendContainer(proxy);
+    if(disabled||!entry){containers(self,panel,out);return;}ContainerProxy proxy{containerVt,out,{}};containers(self,panel,&proxy);admittedHubEntries[entry->panel]=appendContainer(proxy,*entry);
 }
 void populatePost(void* tile,unsigned number){
     const auto c=std::to_string(number);
@@ -509,7 +519,7 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
         if(!disabled&&opened&&p=="CM_NEWSSUB"&&c=="1"&&out){
             void* array=makeArray();if(!array){*out=nullptr;return out;}
             for(unsigned number=1;number<=feedPostCount;++number){
-                Alias donorPanel{aliasVt,"CM_NEWSTAB"},donorCoords{aliasVt,"7"};void* donor=nullptr;tiles(self,&donor,&donorPanel,&donorCoords);
+                Alias donorPanel{aliasVt,feedEntry.panel},donorCoords{aliasVt,feedEntry.donor};void* donor=nullptr;tiles(self,&donor,&donorPanel,&donorCoords);
                 uintptr_t span[2]{};void* tile=nullptr;
                 if(donor&&read(reinterpret_cast<uintptr_t>(donor)+0x18,span,16)&&span[1]-span[0]==8&&read(span[0],&tile,8)&&tile){populatePost(tile,number);appendArray(array,tile);}
                 releaseValue(donor);
@@ -518,18 +528,19 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
         }
     }
     if(!listFeed&&!disabled&&opened&&p=="CM_NEWSSUB"&&postNumber(c)){
-        Alias donorPanel{aliasVt,"CM_NEWSTAB"},donorCoords{aliasVt,"7"};result=tiles(self,out,&donorPanel,&donorCoords);
+        Alias donorPanel{aliasVt,feedEntry.panel},donorCoords{aliasVt,feedEntry.donor};result=tiles(self,out,&donorPanel,&donorCoords);
         uintptr_t span[2]{};if(out&&*out&&read(reinterpret_cast<uintptr_t>(*out)+0x18,span,16)&&span[1]-span[0]==8){void* tile=nullptr;if(read(span[0],&tile,8)&&tile){
             populatePost(tile,postNumber(c));
         }}return result;
     }
-    if(!disabled&&p=="CM_NEWSTAB"&&c=="12"){
-        Alias alias{aliasVt,"7"};result=tiles(self,out,panel,&alias);
+    const auto entry=hubEntry(p);
+    if(!disabled&&entry&&admittedHubEntries[entry->panel]&&c==entry->coordinate){
+        Alias alias{aliasVt,entry->donor};result=tiles(self,out,panel,&alias);
         uintptr_t span[2]{};unsigned kind=0;
         if(out&&*out&&read(reinterpret_cast<uintptr_t>(*out)+0x10,&kind,4)&&kind==4&&read(reinterpret_cast<uintptr_t>(*out)+0x18,span,16)&&span[1]>=span[0]&&span[1]-span[0]<=128){
             for(uintptr_t a=span[0];a<span[1];a+=8){void* tile=nullptr;if(!read(a,&tile,8)||!tile)continue;
                 tileText(tile,"Coordinates",c.c_str());
-                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1","See what everyone is saying around college football");tileText(tile,"NavigationId","NEWS_MENU");note({{"event","social_button_added"}});
+                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1","See what everyone is saying around college football");tileText(tile,"NavigationId","NEWS_MENU");note({{"event","social_button_added"},{"panel",entry->panel}});
             }
         }
     }else result=tiles(self,out,panel,coords);
@@ -648,11 +659,11 @@ bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;
 #ifdef SOCIAL_EXPERIMENTAL_FOCUS
     if(!preflightRunning&&!focusNewsPanel(true)){note({{"event","news_focus_unavailable"}});return false;}
 #endif
-    Alias donor{aliasVt,"CM_NEWSTAB"};bool result=requestPanel(self,&donor,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
+    Alias donor{aliasVt,feedEntry.panel};bool result=requestPanel(self,&donor,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
 void __fastcall panelReadyHook(void* self,const char* name,void* data){
     Guard guard;
-    if(preflightRunning){unsigned kind=0;bool valid=name&&strcmp(name,"CM_NEWSTAB")==0&&data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5;preflightReady=valid;if(valid&&!preflightPanelData){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));preflightPanelData=data;}note({{"event","preflight_panel_ready"},{"name",name?name:""},{"kind",kind},{"valid",valid}});return;}
-    if(!disabled&&opened&&name&&strcmp(name,"CM_NEWSTAB")==0){
+    if(preflightRunning){unsigned kind=0;bool valid=name&&strcmp(name,feedEntry.panel)==0&&data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5;preflightReady=valid;if(valid&&!preflightPanelData){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));preflightPanelData=data;}note({{"event","preflight_panel_ready"},{"name",name?name:""},{"kind",kind},{"valid",valid}});return;}
+    if(!disabled&&opened&&name&&strcmp(name,feedEntry.panel)==0){
         unsigned kind=0;
         if(data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5){tileText(data,"id","CM_NEWSSUB");tileText(data,"name",pageFeed->label.c_str());tileInt(data,"numRows",static_cast<int>(feedContainerCount));tileInt(data,"numColumns",1);tileText(data,"FilterTypeA","NEWS_CATEGORY");tileText(data,"PositionOffset","0,0");}
         note({{"event","social_panel_ready"}});panelReady(self,"CM_NEWSSUB",data);return;
@@ -676,7 +687,7 @@ bool runPreflight(){
         auto manager=reinterpret_cast<void*(__fastcall*)()>(base+0x3f0a1d0)();
         reinterpret_cast<void*(__fastcall*)(void*,void**)>(base+0x8aec980)(manager,&params);
         if(!params)throw std::runtime_error("Native parameter object is unavailable");
-        Alias donor{aliasVt,"CM_NEWSTAB"};requested=requestPanel(adapter,&donor,params);
+        Alias donor{aliasVt,feedEntry.panel};requested=requestPanel(adapter,&donor,params);
         releaseValue(params);params=nullptr;
         opened=true;CheckCollector output{checkVt,{}};Alias socialPanel{aliasVt,"CM_NEWSSUB"};containerHook(adapter,&socialPanel,&output);
         if(output.rows.size()!=feedContainerCount)throw std::runtime_error("Feed container count does not match the selected content");

@@ -1,0 +1,57 @@
+{
+  "build": "v82",
+  "contentRevision": "season-review-v81",
+  "installed": true,
+  "nodeTests": {
+    "pass": 263,
+    "fail": 0
+  },
+  "native": {
+    "unitChecks": true,
+    "persistentHost": "DynastyCentral",
+    "buttonCoordinate": "12",
+    "feedDonorCoordinate": "5",
+    "cfbShortcutPreserved": true,
+    "foreignCoordinatePreserved": true,
+    "unrelatedPanelsUnchanged": true,
+    "catalogEditions": 24,
+    "allDynamicScopes": true
+  },
+  "liveChecksRemaining": [
+    "CFB and Dynasty Central entries in preseason",
+    "Cold launch directly into offseason"
+  ],
+  "mmc": {
+    "registration": true,
+    "payloadTamperChecks": true,
+    "installedVerification": true,
+    "hotLoadedPid": 21468
+  },
+  "backups": {
+    "saveFiles": 8,
+    "historyFiles": 10,
+    "checksumVerified": true
+  },
+  "live": {
+    "phase": "OffSeason",
+    "week": 1,
+    "stories": 1296,
+    "entryFromDynastyCentral": true,
+    "feedVisible": true,
+    "scrolledPostsVisible": true,
+    "nilFollowupVisible": {
+      "player": "Keanu Tanuvasa",
+      "before": 375000,
+      "after": 850000
+    }
+  },
+  "userConfirmed": {
+    "backReturnsNormally": true,
+    "persistentShortcutStillAvailable": true
+  },
+  "sha256": {
+    "DynastyEnhancerNative-v82.dll": "2e04e02a0eb98feea3bff6b2ad7573722990c2f03603d5da2698ca7e82642af0",
+    "DynastyEnhancer.dll": "c85b4818f081415d9855c6f37834250fb670d3de66138a44491a1f32ddca4940",
+    "DynastyEnhancer-v82-MMC.zip": "705afc8107d4dc6ebe228d949a0ee3e7120a4928e0c81d25a5b4548e7b96fbcb"
+  }
+}
