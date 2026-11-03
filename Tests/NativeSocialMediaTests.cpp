@@ -3,6 +3,9 @@
 #include <map>
 #include <set>
 namespace fixture {
+std::string completedPanel;void* completedData=nullptr;
+void __fastcall completedRoot(void*,const char* name,void* data){completedPanel=name;completedData=data;}
+void __fastcall focusOriginal(void* self,void* name){const auto text=argument(name);strncpy_s(reinterpret_cast<char*>(self)+0x428,64,text.c_str(),_TRUNCATE);}
 struct Collector {void** vt;std::map<unsigned,Json> rows;};
 void __fastcall b(Collector* c,unsigned r,const char* k,bool v){c->rows[r][k]=v;}
 void __fastcall i(Collector* c,unsigned r,const char* k,int v){c->rows[r][k]=v;}
@@ -35,7 +38,18 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
-        for(const auto& binding:bindings)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
+        if constexpr(hubFeed){
+            std::array<unsigned char,0x468> owner{};Alias social{aliasVt,social::embedded::panelId},team{aliasVt,"cm_team"};
+            const auto previous=panelFocusChanged;panelFocusChanged=focusOriginal;panelFocusChangedHook(owner.data(),&social);
+            require(embeddedActive&&opened&&std::string(reinterpret_cast<char*>(owner.data())+0x428)==social::embedded::panelId,"Direct ownership must follow the canonical native focus notification");
+            const auto previousContainers=containers;containers=donorRows;Collector prefetched{vt,{}};containerHook(nullptr,&team,&prefetched);
+            require(embeddedActive&&opened,"Stock panel prefetch must not revoke active child ownership");containers=previousContainers;
+            panelFocusChangedHook(owner.data(),&team);require(!embeddedActive&&!opened,"Leaving the native tab must release embedded ownership");panelFocusChanged=previous;
+            const auto originalReady=panelReady;auto* priorDescriptor=embeddedDescriptor;panelReady=completedRoot;embeddedDescriptor=owner.data();embeddedRootPending=true;embeddedActive=true;opened=true;
+            panelReadyHook(nullptr,social::embedded::donorId,nullptr);require(!embeddedRootPending&&completedPanel==social::embedded::panelId&&completedData==owner.data(),"A rejected donor must complete the custom panel with retained recovery data");
+            panelReady=originalReady;embeddedDescriptor=priorDescriptor;embeddedActive=false;opened=false;
+        }
+        for(const auto& binding:bindings)if(!hubFeed)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
         {
             auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"team:1","Team"}};social::Edition e;e.key="paged";
             for(int n=0;n<38;++n){auto id=std::to_string(n);social::FeedPost parent{"Beat","@Beat","Report","Recruiting"};parent.category="recruiting";e.stories.emplace(id,parent);auto reply=parent;reply.replyTo=id;reply.voice="fan";e.stories.emplace(id+"r",reply);e.views["team:1"].push_back(id);e.views["team:1"].push_back(id+"r");}c->weeks.push_back(e);
@@ -86,7 +100,7 @@ int main(int argc,char** argv){
         for(unsigned row=0;row<7;++row){require(out.rows.at(row).at("tileCoords")==std::string(row<6?coordinates[row]:"12"),"Original coordinates changed");require(out.rows.at(row).at("Priority")==0,"Native priorities changed");require(out.rows.at(row).at("Opacity")==0.875f,"Float collector ABI changed");require(out.rows.at(row).at("AllowFocus")==true,"Focus state lost");}
         Collector absent{vt,{}};ContainerProxy noDonor{containerVt,&absent,{}};containerString(&noDonor,0,"tileCoords","1");require(!appendContainer(noDonor)&&absent.rows.size()==1,"Missing donor must preserve the original menu");
         {
-            require(hubEntry("cm_team")==&teamEntry&&!hubEntry("DynastyCentral")&&!hubEntry("CM_NEWSTAB")&&!hubEntry("CM_LEAGUE"),"Social shortcut must be restricted to Team");
+            require(hubEntry("cm_team")== (hubFeed?nullptr:&teamEntry)&&!hubEntry("DynastyCentral")&&!hubEntry("CM_NEWSTAB")&&!hubEntry("CM_LEAGUE"),"Social shortcut must be restricted to Team");
             {const auto savedRequest=requestPanel;requestPanel=originalRequest;expectedRequestSelf=&out;expectedRequestParams=&proxy;requestCalls=0;
              require(requestSocialPanel(&out,&proxy)&&requestCalls==1&&lastDonorPanel=="DynastyCentral","Category refresh must request the persistent panel and preserve its native self/params");
              requestResult=false;require(!requestSocialPanel(&out,&proxy)&&requestCalls==2,"A failed native refresh must not report success");requestResult=true;requestPanel=savedRequest;}
@@ -112,7 +126,7 @@ int main(int argc,char** argv){
             require(feed.rows.at(row).at("UseTileDimensions")==true,"Feed must size from post widgets");
         }
         if constexpr(listFeed)require(feed.rows.at(0).at("linkage")=="art_control.group.PanelListContainer","List feed must use the native list control");
-        {opened=false;Collector central{vt,{}};Alias hub{aliasVt,"cm_team"};containerHook(nullptr,&hub,&central);require(central.rows.size()==2&&admittedHubEntries["cm_team"],"Persistent hub did not admit a separate Social Media row");Collector other{vt,{}};Alias untouched{aliasVt,"OTHER_PANEL"};containerHook(nullptr,&untouched,&other);require(other.rows.size()==1&&!admittedHubEntries.count("OTHER_PANEL"),"Unrelated menus received the Social Media shortcut");opened=true;}
+        {opened=false;Collector central{vt,{}};Alias hub{aliasVt,"cm_team"};containerHook(nullptr,&hub,&central);require(hubFeed?central.rows.size()==1&&!admittedHubEntries.count("cm_team"):central.rows.size()==2&&admittedHubEntries["cm_team"],"Hub mode did not preserve its expected shortcut policy");Collector other{vt,{}};Alias untouched{aliasVt,"OTHER_PANEL"};containerHook(nullptr,&untouched,&other);require(other.rows.size()==1&&!admittedHubEntries.count("OTHER_PANEL"),"Unrelated menus received the Social Media shortcut");opened=true;}
         filterData=originalFilter;
         Collector filter{vt,{}};Alias kind{aliasVt,"NEWS_CATEGORY"};filterDataHook(nullptr,&filter,&panel,&kind);
         require(filter.rows.size()==1&&filter.rows.at(0).at("display")=="For You"&&filter.rows.at(0).at("isDefault")==true,"Native category must have one labeled default");
@@ -286,7 +300,7 @@ int main(int argc,char** argv){
             auto* memory=static_cast<unsigned char*>(VirtualAlloc(nullptr,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));
             require(memory!=nullptr,"Scroll fixture allocation failed");newsScroll=reinterpret_cast<uintptr_t>(memory);memcpy(memory,social::newsScrollOriginal.data(),1432);
             require(configureNewsScroll(true)&&scrollOwned&&configureNewsScroll(true),"Smooth scrolling activation failed");
-            for(size_t n=0;n<1432;++n)if(memory[n]!=social::newsScrollOriginal[n])require((n>=0xe&&n<0x12)||(n>=0x141&&n<0x145)||(n>=0x199&&n<0x19d)||(n>=0xbc&&n<0xdc)||(n>=0x2f4&&n<0x395),"Scrolling changed a native branch, opcode or input contract");
+            for(size_t n=0;n<1432;++n)if(memory[n]!=social::newsScrollOriginal[n])require((n>=0xe&&n<0x12)||(n>=0x141&&n<0x145)||(n>=0x199&&n<0x19d)||(n>=0xbc&&n<0xdc)||(n>=0x2f4&&n<0x395)||(hubFeed&&n>=0x100&&n<0x104),"Scrolling changed a native branch, opcode or input contract");
             float step=0,analog=0;memcpy(&step,memory+0xe,4);memcpy(&analog,memory+0x141,4);
             require(step*5686>163.9f&&step*5686<164.1f,"D-pad step must be one card plus its spacing");require(analog<-.00999f&&analog>-.01001f,"Analog polling scale must be one-third of the original");
             memory[0]^=1;require(!configureNewsScroll(false)&&scrollOwned&&memory[0]!=social::newsScrollOriginal[0],"Scrolling must preserve foreign changes");memory[0]^=1;

@@ -1,4 +1,4 @@
-param([string]$NativeName='DynastyEnhancerNative-v96',[switch]$Preflight,[switch]$ScrollTest,[switch]$ExperimentalFocus,[switch]$ListFeed,[switch]$ReadOnlyFeed=$true,[switch]$DualDropdown=$true)
+param([string]$NativeName='DynastyEnhancerNative-v96',[switch]$HubFeed,[switch]$Preflight,[switch]$ScrollTest,[switch]$ExperimentalFocus,[switch]$ListFeed,[switch]$ReadOnlyFeed=$true,[switch]$DualDropdown=$true)
 $ErrorActionPreference='Stop'
 $analyticsRoot=Split-Path -Parent $PSScriptRoot
 $analyticsOut=Join-Path $analyticsRoot 'Build'
@@ -15,7 +15,7 @@ $analyticsCommon=@('/nologo','/O2','/MT','/W4','/WX','/EHsc','/std:c++17','/utf-
 $analyticsCommon+=('/I'+(Join-Path $analyticsSdk.FullName 'winrt'))
 Push-Location $analyticsOut
 try {
-    $socialDefines=@();if($ScrollTest){$socialDefines+='/DSOCIAL_SCROLL_TEST'};if($Preflight){$socialDefines+='/DSOCIAL_PREFLIGHT_ONLY'};if($ExperimentalFocus){$socialDefines+='/DSOCIAL_EXPERIMENTAL_FOCUS'};if($ListFeed){$socialDefines+='/DSOCIAL_LIST_FEED'};if($ReadOnlyFeed){$socialDefines+='/DSOCIAL_READ_ONLY_FEED'};if($DualDropdown){$socialDefines+='/DSOCIAL_DUAL_DROPDOWN'}
+    $socialDefines=@();if($HubFeed){$socialDefines+='/DSOCIAL_HUB_FEED'};if($ScrollTest){$socialDefines+='/DSOCIAL_SCROLL_TEST'};if($Preflight){$socialDefines+='/DSOCIAL_PREFLIGHT_ONLY'};if($ExperimentalFocus){$socialDefines+='/DSOCIAL_EXPERIMENTAL_FOCUS'};if($ListFeed){$socialDefines+='/DSOCIAL_LIST_FEED'};if($ReadOnlyFeed){$socialDefines+='/DSOCIAL_READ_ONLY_FEED'};if($DualDropdown){$socialDefines+='/DSOCIAL_DUAL_DROPDOWN'}
     & $analyticsCl @analyticsCommon @socialDefines /LD (Join-Path $PSScriptRoot 'NativeSocialMedia.cpp') ('/Fe:'+$NativeName+'.dll') /link @analyticsLib /INCREMENTAL:NO
     if($LASTEXITCODE -ne 0){throw 'Native Social Media build failed'}
     & $analyticsCl @analyticsCommon @socialDefines (Join-Path $analyticsRoot 'Tests/NativeSocialMediaTests.cpp') /Fe:NativeSocialMediaTests.exe /link @analyticsLib /INCREMENTAL:NO

@@ -11,6 +11,27 @@ inline constexpr char scopeRootName[]="madden";
 inline constexpr char scopeAdaptersName[]="Adapters";
 inline constexpr char scopeGetAdapterName[]="GetPanelMenuAdapter";
 inline constexpr char scopeSetFilterName[]="SetFilterChanged";
+inline constexpr char embeddedTypeKey[]="CODE_R3";
+inline auto embeddedNewsScroll(){
+    auto b=newsScrollSmooth;size_t pos=0x2f4;
+    auto byte=[&](unsigned char v){b.at(pos++)=v;};
+    auto align=[&](){while(pos%8)byte(0);};
+    auto word=[&](uint64_t v,size_t n){for(size_t i=0;i<n;++i)byte(static_cast<unsigned char>(v>>(8*i)));};
+    auto literal=[&](const char* text){byte(0xa1);align();word(reinterpret_cast<uintptr_t>(text),8);};
+    auto jump=[&](unsigned char op,size_t to){byte(op);align();const auto from=pos+4;word(static_cast<uint32_t>(static_cast<int64_t>(to)-static_cast<int64_t>(from)),4);};
+    auto branch=[&](size_t displacement,size_t target){const auto relative=static_cast<int32_t>(target-(displacement+4));memcpy(b.data()+displacement,&relative,4);};
+    // Dictionary 19/20/21 is the vanilla cafe.enum.Input namespace. Resolve R3
+    // through the runtime enum, never an assumed platform-specific number.
+    branch(0xc8,0x3ec);branch(0xd8,0x3ec);branch(0x100,0x2f4);
+    byte(0xb9);byte(0);byte(0xad);byte(3);byte(19);byte(20);byte(21);literal(embeddedTypeKey);byte(0x4e);byte(0x66);
+    const auto conditional=pos;jump(0x9d,0);jump(0x99,0x3ec);const auto callback=pos;
+    byte(0x59);literal(scopeFilterName);literal(scopePanelName);byte(0xb5);byte(3);
+    byte(0x59);literal(scopeRootName);byte(0x1c);literal(scopeAdaptersName);byte(0x4e);
+    literal(scopeGetAdapterName);byte(0x52);literal(scopeSetFilterName);byte(0x52);byte(0x17);byte(0x73);byte(0x3e);
+    if(pos>0x395)throw std::runtime_error("Embedded type input exceeds its reserved span");
+    const auto end=pos;pos=conditional;jump(0x9d,callback);pos=end;while(pos<0x395)byte(0);
+    return b;
+}
 inline auto scopedNewsScroll(){
     auto b=newsScrollSmooth;size_t pos=0;
     auto byte=[&](unsigned char v){b.at(pos++)=v;};

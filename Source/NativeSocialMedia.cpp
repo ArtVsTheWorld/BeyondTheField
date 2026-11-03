@@ -26,8 +26,17 @@
 #include "RuntimeFeed.h"
 #include "Startup.h"
 #include "NativeMapValue.h"
+#include "HubFeedModel.h"
 namespace {
 using Json=nlohmann::json;
+#ifdef SOCIAL_HUB_FEED
+constexpr bool hubFeed=true;
+#else
+constexpr bool hubFeed=false;
+#endif
+bool embeddedActive=false,embeddedRootPending=false,embeddedBorrowing=false;
+void* embeddedDescriptor=nullptr;
+
 #ifdef SOCIAL_SCROLL_TEST
 unsigned feedPostCount=12;
 #else
@@ -90,9 +99,9 @@ bool flowOwned=false;
 uintptr_t newsScroll=0;
 bool scrollOwned=false;
 #ifdef SOCIAL_DUAL_DROPDOWN
-const auto scopedScroll=social::scopedNewsScroll();
+const auto scopedScroll=hubFeed?social::embeddedNewsScroll():social::scopedNewsScroll();
 #else
-const auto scopedScroll=social::scopedNewsScroll();
+const auto scopedScroll=hubFeed?social::embeddedNewsScroll():social::scopedNewsScroll();
 #endif
 auto dropdownPatches=social::dropdown::patches();
 uintptr_t newsModelBase=0,dropdownScreenBase=0;
@@ -210,6 +219,7 @@ bool configureNewsScroll(bool enable){
     const auto& desired=enable?scopedScroll:social::newsScrollOriginal;
     for(size_t offset:{size_t(0xe),size_t(0x141),size_t(0x199)})memcpy(reinterpret_cast<void*>(newsScroll+offset),desired.data()+offset,4);
     memcpy(reinterpret_cast<void*>(newsScroll+0xbc),desired.data()+0xbc,0x20);
+    if constexpr(hubFeed)memcpy(reinterpret_cast<void*>(newsScroll+0x100),desired.data()+0x100,4);
     memcpy(reinterpret_cast<void*>(newsScroll+0x2f4),desired.data()+0x2f4,0x395-0x2f4);
     VirtualProtect(reinterpret_cast<void*>(newsScroll),current.size(),old,&unused);
     scrollOwned=enable;note({{"event",enable?"news_smooth_scroll_enabled":"news_smooth_scroll_restored"},{"dpadStepPixels",enable?164:853}});return true;
@@ -421,6 +431,10 @@ using NavRequest=void(__fastcall*)(void*,unsigned,const char*,void*);
 using RequestPanel=bool(__fastcall*)(void*,void*,void*);
 using FilterData=void(__fastcall*)(void*,void*,void*,void*);
 using PanelReady=void(__fastcall*)(void*,const char*,void*);
+using PanelFocusChanged=void(__fastcall*)(void*,void*);
+PanelFocusChanged panelFocusChanged=nullptr;
+using MenuReady=void(__fastcall*)(void*,void*);
+MenuReady menuReady=nullptr;
 using FilterChanged=void(__fastcall*)(void*,const char*,const char*,void*);
 Tiles tiles=nullptr;Containers containers=nullptr;NavInfo navInfo=nullptr;NavRequest navRequest=nullptr;
 RequestPanel requestPanel=nullptr;
@@ -460,8 +474,8 @@ constexpr HubEntry cfbEntry{"CM_NEWSTAB","7","12"},centralEntry{"DynastyCentral"
 // Heisman records are filtered out entirely during Players Leaving and later.
 constexpr HubEntry feedEntry=centralEntry;
 std::map<std::string,bool> admittedHubEntries; // Owned by UI callbacks only.
-const HubEntry* hubEntry(std::string_view panel){if(panel==teamEntry.panel)return &teamEntry;return nullptr;}
-bool requestSocialPanel(void* self,void* params){Alias donor{aliasVt,feedEntry.panel};return requestPanel(self,&donor,params);}
+const HubEntry* hubEntry(std::string_view panel){if(!hubFeed&&panel==teamEntry.panel)return &teamEntry;return nullptr;}
+bool requestSocialPanel(void* self,void* params){Alias donor{aliasVt,feedEntry.panel};const bool previous=embeddedBorrowing;if(hubFeed&&embeddedActive)embeddedBorrowing=true;const bool result=requestPanel(self,&donor,params);embeddedBorrowing=previous;return result;}
 void forwardContainerFields(void* out,unsigned row,const Json& fields,const char* coordinate=nullptr){
     for(const auto& [name,value]:fields.items()){
         if(value.is_boolean())rowSet(out,row,name.c_str(),value.get<bool>(),3);
@@ -493,6 +507,7 @@ bool appendContainer(ContainerProxy& proxy,const HubEntry& entry=cfbEntry){
 }
 void __fastcall containerHook(void* self,void* panel,void* out){
     Guard guard;auto name=argument(panel);
+
     const auto entry=hubEntry(name);
     if(!disabled&&uiReady&&!preflightRunning&&entry){configureNewsDropdowns(false);configureNewsPolish(false);}
     if(!disabled&&uiReady&&opened&&!preflightRunning&&entry){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
@@ -531,6 +546,34 @@ void appendArray(void* array,void* value){
     // explicit reference to the array, whose destructor releases its items.
     InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(value)+0x14));
     reinterpret_cast<void(__fastcall*)(void*,void**)>(base+0x8aed930)(reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(array)+0x18),&value);
+}
+void __fastcall panelFocusChangedHook(void* self,void* name){
+    Guard guard;const auto requested=argument(name);
+    if(!disabled&&hubFeed){
+        const bool selected=requested==social::embedded::panelId;
+        if(embeddedActive&&!selected){embeddedActive=false;opened=false;configureNewsDropdowns(false);configureNewsPolish(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
+        if(selected){embeddedActive=true;opened=true;adoptFeed();}
+    }
+    panelFocusChanged(self,name);
+    if(!disabled&&hubFeed){char actual[64]{};if(read(reinterpret_cast<uintptr_t>(self)+0x428,actual,64)){actual[63]=0;note({{"event","embedded_focus_changed"},{"requested",requested},{"actual",actual},{"embedded",embeddedActive}});}}
+}
+void __fastcall menuReadyHook(void* self,void* data){
+    Guard guard;if(disabled||!data){menuReady(self,data);return;}
+    unsigned kind=0;uintptr_t span[2]{};std::vector<void*> objects;std::vector<Json> rows;
+    if(!read(reinterpret_cast<uintptr_t>(data)+16,&kind,4)||kind!=4||!read(reinterpret_cast<uintptr_t>(data)+24,span,16)||span[1]<span[0]||(span[1]-span[0])%8||span[1]-span[0]>512){menuReady(self,data);return;}
+    for(auto ptr=span[0];ptr<span[1];ptr+=8){void* object=nullptr;if(!read(ptr,&object,8)){menuReady(self,data);return;}auto fields=social::hubtab::fields(reinterpret_cast<uintptr_t>(object),base,read);if(!fields){menuReady(self,data);return;}objects.push_back(object);rows.push_back(*fields);}
+    auto plan=social::embedded::plan(rows);if(!plan){menuReady(self,data);return;}
+    auto refs=social::hubtab::references(reinterpret_cast<uintptr_t>(objects[plan->donor]),base,read);if(!refs){menuReady(self,data);return;}
+    void* array=makeArray();void* tab=makeObject();if(!array||!tab){releaseValue(array);releaseValue(tab);menuReady(self,data);return;}
+    for(const auto& [key,value]:*refs)objectValue(tab,key.c_str(),reinterpret_cast<void*>(value));
+    tileText(tab,"id",social::embedded::panelId);tileText(tab,"name","Social Media");tileText(tab,"screenId",social::embedded::screenKey);tileText(tab,"linkage",social::embedded::linkage);tileBool(tab,"isVisible",true);tileBool(tab,"Visible",true);
+    auto manager=reinterpret_cast<void*(__fastcall*)()>(base+0x3f0a1d0)();auto number=social::hubtab::number(reinterpret_cast<social::hubtab::NumberFactory>(base+0x8aec870),manager,plan->priority);objectValue(tab,"priority",number);objectValue(tab,"Priority",number);releaseValue(number);
+    auto decoded=social::hubtab::fields(reinterpret_cast<uintptr_t>(tab),base,read);
+    if(!decoded||decoded->value("id",std::string())!=social::embedded::panelId||decoded->value("screenId",std::string())!=social::embedded::screenKey||decoded->value("priority",-999.)!=plan->priority){releaseValue(array);releaseValue(tab);menuReady(self,data);return;}
+    auto expected=objects;expected.insert(expected.begin()+plan->position,tab);for(auto object:expected)appendArray(array,object);
+    uintptr_t actualSpan[2]{};std::vector<void*> actual(expected.size());const bool valid=read(reinterpret_cast<uintptr_t>(array)+24,actualSpan,16)&&actualSpan[1]>=actualSpan[0]&&actualSpan[1]-actualSpan[0]==expected.size()*8&&read(actualSpan[0],actual.data(),actual.size()*8)&&actual==expected;
+    if(valid){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(tab)+0x14));releaseValue(embeddedDescriptor);embeddedDescriptor=tab;note({{"event","embedded_tab_added"},{"position",plan->position},{"screenKey",social::embedded::screenKey}});menuReady(self,array);}else menuReady(self,data);
+    releaseValue(tab);releaseValue(array);
 }
 void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
     Guard guard;const auto p=argument(panel),c=argument(coords);void* result=nullptr;
@@ -673,7 +716,13 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
         if(!configureNewsPolish(selected)&&selected){configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);cancel("Native text/viewport gate failed");return;}
         opened=selected;note({{"event","navigation_request"},{"name",name?name:""},{"prepareMs",GetTickCount64()-began}});
     }navRequest(self,user,selected?"NEWS":name,params);}
-bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;auto name=argument(arg);if(!disabled&&opened){note({{"event","social_panel_request_argument"},{"name",name}});if(name=="CM_NEWSSUB"){const auto dropdownBegan=GetTickCount64();
+bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;auto name=argument(arg);if(hubFeed&&!disabled&&name==social::embedded::panelId){
+    if(!embeddedDescriptor)return requestPanel(self,arg,params);
+    embeddedRootPending=true;if(embeddedActive)adoptFeed();
+    Alias donor{aliasVt,social::embedded::donorId};const bool result=requestPanel(self,&donor,params);
+    if(!result){embeddedRootPending=false;panelReady(self,social::embedded::panelId,embeddedDescriptor);return true;}return result;
+}if(!disabled&&opened){note({{"event","social_panel_request_argument"},{"name",name}});if(name=="CM_NEWSSUB"){const auto dropdownBegan=GetTickCount64();
+    if(hubFeed&&embeddedActive&&uiReady){ensureNewsModel();alignNewsFrame(true);configureNewsFlow(true);configureNewsScroll(true);configureNewsPolish(true);}
     if(!configureNewsDropdowns(true)){note({{"event","social_dropdown_fallback"},{"reason","Dropdown resources changed during entry; supplying native page data to preserve Back navigation"}});}
 #ifdef SOCIAL_EXPERIMENTAL_FOCUS
     if(!preflightRunning&&!focusNewsPanel(true)){note({{"event","news_focus_unavailable"}});return false;}
@@ -681,10 +730,19 @@ bool __fastcall requestPanelHook(void* self,void* arg,void* params){Guard guard;
     bool result=requestSocialPanel(self,params);note({{"event","news_panel_requested"},{"result",result},{"prepareMs",GetTickCount64()-dropdownBegan}});return result;}}return requestPanel(self,arg,params);}
 void __fastcall panelReadyHook(void* self,const char* name,void* data){
     Guard guard;
+    if(hubFeed&&!disabled&&embeddedRootPending&&name&&strcmp(name,social::embedded::donorId)==0){
+        embeddedRootPending=false;auto refs=social::hubtab::references(reinterpret_cast<uintptr_t>(data),base,read);void* descriptor=refs?makeObject():nullptr;
+        if(!descriptor||!refs){releaseValue(descriptor);note({{"event","embedded_root_recovered"}});panelReady(self,social::embedded::panelId,embeddedDescriptor);return;}
+        for(const auto& [key,value]:*refs)objectValue(descriptor,key.c_str(),reinterpret_cast<void*>(value));
+        tileText(descriptor,"id",social::embedded::panelId);tileText(descriptor,"name","Social Media");tileText(descriptor,"linkage",social::embedded::linkage);tileText(descriptor,"screenId",social::embedded::screenKey);
+        tileBool(descriptor,"isVisible",true);tileBool(descriptor,"Visible",true);
+        if(auto saved=social::hubtab::references(reinterpret_cast<uintptr_t>(embeddedDescriptor),base,read))for(const char* key:{"priority","Priority"}){const auto it=saved->find(key);if(it!=saved->end())objectValue(descriptor,key,reinterpret_cast<void*>(it->second));}
+        note({{"event","embedded_root_ready"}});panelReady(self,social::embedded::panelId,descriptor);releaseValue(descriptor);return;
+    }
     if(preflightRunning){unsigned kind=0;bool valid=name&&strcmp(name,feedEntry.panel)==0&&data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5;preflightReady=valid;if(valid&&!preflightPanelData){InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(data)+0x14));preflightPanelData=data;}note({{"event","preflight_panel_ready"},{"name",name?name:""},{"kind",kind},{"valid",valid}});return;}
     if(!disabled&&opened&&name&&strcmp(name,feedEntry.panel)==0){
         unsigned kind=0;
-        if(data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5){tileText(data,"id","CM_NEWSSUB");tileText(data,"name",pageFeed->label.c_str());tileInt(data,"numRows",static_cast<int>(feedContainerCount));tileInt(data,"numColumns",1);tileText(data,"FilterTypeA","NEWS_CATEGORY");tileText(data,"PositionOffset","0,0");}
+        if(data&&read(reinterpret_cast<uintptr_t>(data)+0x10,&kind,4)&&kind==5){tileText(data,"id","CM_NEWSSUB");const auto title=pageFeed->label+(embeddedActive?" | RS: Type":"");tileText(data,"name",title.c_str());tileInt(data,"numRows",static_cast<int>(feedContainerCount));tileInt(data,"numColumns",1);tileText(data,"FilterTypeA","NEWS_CATEGORY");tileText(data,"PositionOffset","0,0");}
         note({{"event","social_panel_ready"}});panelReady(self,"CM_NEWSSUB",data);return;
     }
     panelReady(self,name,data);
@@ -725,6 +783,10 @@ bool runPreflight(){
 }
 struct Binding{uintptr_t vt,offset,rva;void* hook;bool installed=false;};
 Binding bindings[]={
+#ifdef SOCIAL_HUB_FEED
+    {0xbac63a8,0x20,0x7a26310,reinterpret_cast<void*>(menuReadyHook)},
+    {0xbac63a8,0x98,0x7a28ce0,reinterpret_cast<void*>(panelFocusChangedHook)},
+#endif
     {0xbac63a8,0xa0,0x7a1af50,reinterpret_cast<void*>(containerHook)},
     {0xbac63a8,0xb0,0x7a1b4c0,reinterpret_cast<void*>(tileHook)},
     {0xbac8c40,0x50,0x7a1c8e0,reinterpret_cast<void*>(navInfoHook)},
@@ -744,6 +806,8 @@ DWORD WINAPI worker(void*){
         dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
+        if constexpr(hubFeed){menuReady=reinterpret_cast<MenuReady>(base+0x7a26310);panelFocusChanged=reinterpret_cast<PanelFocusChanged>(base+0x7a28ce0);
+            const unsigned char gate[]={0x48,0x8b,0xc4,0x48,0x89,0x48,0x08,0x53,0x57,0x48,0x83,0xec,0x68,0x48,0x89,0x68,0x20,0x48,0x8d,0x99,0x28,0x04,0x00,0x00,0x4c,0x89,0x70,0xd0,0x4c,0x8b,0xca,0x4c};unsigned char actual[32]{};if(!read(base+0x7a28ce0,actual,32)||memcmp(actual,gate,32))throw std::runtime_error("Unsupported native hub focus binding");}
         tiles=reinterpret_cast<Tiles>(base+0x7a1b4c0);containers=reinterpret_cast<Containers>(base+0x7a1af50);navInfo=reinterpret_cast<NavInfo>(base+0x7a1c8e0);navRequest=reinterpret_cast<NavRequest>(base+0x7a2cca0);
         requestPanel=reinterpret_cast<RequestPanel>(base+0x7a2cdd0);
         panelReady=reinterpret_cast<PanelReady>(base+0x7a27f10);

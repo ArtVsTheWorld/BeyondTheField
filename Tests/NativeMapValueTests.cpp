@@ -1,5 +1,7 @@
 #include "../Source/NativeMapValue.h"
 #include "../Source/HubTab.h"
+#include "../Source/HubFeedModel.h"
+#include "../Source/NewsScopeInput.h"
 #include <array>
 #include <cstring>
 #include <iostream>
@@ -39,6 +41,17 @@ int main(){
         put(184,uintptr_t(0));put(168,start+256);require(!social::hubtab::references(start,image,read)); // Duplicate key
         put(168,start+288);put(576,uintptr_t(1));require(!social::hubtab::references(start,image,read)); // Foreign value
     }
+    {
+        using J=nlohmann::json;
+        std::vector<J> rows={J{{"id","CM_ACTIONHOME"},{"linkage",social::embedded::linkage},{"priority",0}},J{{"id","cm_team"},{"priority",4},{"isVisible",false}},J{{"id","CM_LEAGUE"},{"priority",5}},J{{"id","DynastyCentral"},{"priority",6}}};
+        auto plan=social::embedded::plan(rows);require(plan&&plan->donor==0&&plan->position==2&&plan->priority==4.5);
+        rows.erase(rows.begin()+1);plan=social::embedded::plan(rows);require(plan&&plan->position==1&&plan->priority==4.5);
+        rows.push_back(J{{"id",social::embedded::panelId}});require(!social::embedded::plan(rows));rows.pop_back();
+        rows[0]["linkage"]="foreign";require(!social::embedded::plan(rows));
+        const auto scroll=social::embeddedNewsScroll();auto target=[&](size_t at){int32_t n=0;std::memcpy(&n,scroll.data()+at,4);return int64_t(at+4)+n;};require(target(0xc8)==0x3ec&&target(0xd8)==0x3ec&&target(0x100)==0x2f4);require(std::string(social::embeddedTypeKey)=="CODE_R3");require(scroll[0x141]==social::newsScrollSmooth[0x141]&&scroll[0x199]==social::newsScrollSmooth[0x199]);
+        require(std::string(social::embedded::screenKey)=="screen_news");
+    }
     std::cout<<"Passed: 17-byte native insertion/existing-key writes fit a 24-byte result; adjacent stack canaries preserved.\n";
+    std::cout<<"Passed: year-round placement without Team, duplicate/foreign donor rejection, registered News screen key and bumper-bubbling scroll.\n";
     std::cout<<"Passed: descriptor traversal preserves native arrays/objects by reference and rejects cycles, duplicate keys and foreign values.\n";
 }

@@ -1,7 +1,10 @@
+param([switch]$TestsOnly)
 $ErrorActionPreference='Stop'
 # Isolated native-only foundation. No MMC adapter, installation or injection.
-& (Join-Path $PSScriptRoot 'build.ps1') -NativeName 'DynastyEnhancerHubFoundation-p01'
-if($LASTEXITCODE -ne 0){throw 'Foundation native build failed'}
+if(-not $TestsOnly){
+ & (Join-Path $PSScriptRoot 'build.ps1') -NativeName 'DynastyEnhancerHubFoundation-p01'
+ if($LASTEXITCODE -ne 0){throw 'Foundation native build failed'}
+}
 $hubProject=Split-Path -Parent $PSScriptRoot
 $hubVs=& 'C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe' -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
 $hubTool=Get-ChildItem -LiteralPath (Join-Path $hubVs 'VC/Tools/MSVC') -Directory | Sort-Object Name -Descending | Select-Object -First 1
