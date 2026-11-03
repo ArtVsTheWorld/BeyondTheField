@@ -1,0 +1,54 @@
+{
+  "status": "Diagnosis captured; broad performance optimization not implemented",
+  "scope": "ULM full-season test, user first reported slowdown at Week 12",
+  "runtime": "Button-based v96 recovery, no direct-tab experiment",
+  "process": 22736,
+  "liveEvidence": {
+    "initialObservationSeconds": 45,
+    "initialReaderCpuSeconds": 18.109,
+    "stationaryComparison": {
+      "samplingSecondsPerArm": 20,
+      "firstSecondsDiscardedPerArm": 3,
+      "readerRunning": {"measuredSeconds": 17, "readerCpuSeconds": 7.203, "percentOfOneCore": 42.4},
+      "modStopped": {"measuredSeconds": 17.002, "readerCpuSeconds": 0},
+      "userResponse": "Noticeably smoother",
+      "scopeLimit": "Stopping the whole mod disables both its reader and UI hooks; this proves a mod contribution, but does not isolate the reader from every hook or provide quantitative frame times."
+    },
+    "nativePageSetup": {"loggedDelaysMs": [3329,3422,5015,4078,3734,3797,5016], "cause": "configureNewsDropdowns can discover pooled News assets by scanning process memory on the UI request callback"},
+    "generation": {"lateObservedMs": 9609, "captureMs": 1313},
+    "frozenSnapshot": {"week": 14, "year": 2028, "records": 218982, "rawBytes": 110572573, "largestGroups": ["ProspectTargetSchool", "GameDefensiveStats", "GameOffensiveStats", "Player", "GameOLineStats"]}
+  },
+  "offlineEvidence": {
+    "nodeProfileSeconds": 10.481,
+    "historyReadAndSerializationPercent": 24.6,
+    "advancedAnalyticsPercent": 12.7,
+    "garbageCollectionPercent": 6.7,
+    "currentRegularSeasonHistoryApproxMiB": 257.1,
+    "scopeLimit": "One frozen Week 14 generation with CPU profiling enabled; these sampled shares do not measure idle native polling or game frame times.",
+    "location": "Evidence/Week12/Frozen",
+    "sourceHistoryModifiedByOfflineRun": false
+  },
+  "recommendedOrder": [
+    "Use cheap verified change detection on stable weeks; decode full captures only when relevant data changes, retaining midweek news and all identity/stage checks",
+    "Read/write the changed edition and small index rather than the entire growing season history; preserve existing archives and legacy reading",
+    "Move bounded discovery off the UI callback and cache/revalidate native resource ownership before entry"
+  ],
+  "recovery": {
+    "firstIdenticalDllReload": "Hit the existing bounded child-context discovery limit; stopped its retries",
+    "currentBuild": "DynastyEnhancerBaseline-v96-perf-r02.dll",
+    "changes": ["Retains previously verified 24-byte native map ABI and early-entry readiness gate", "Diagnostic hot-reload hint accepted only for exact process creation time, process ID, CareerManager, database, child vtable and parent relationship"],
+    "nativeBuildAndTests": "passed",
+    "foreignOrUnreadableHintRejectionTests": "passed",
+    "published": "runtime_feed_resumed, Week 14, 1397 stories",
+    "generatorAndContent": "unchanged",
+    "installedMmcFilesModified": false,
+    "temporaryConfigHint": "removed after initialization",
+    "uiControlsAfterThisReload": "not yet user-verified"
+  },
+  "tools": {
+    "processSampler": "Tools/observe_runtime_performance.py",
+    "profileSummary": "Tools/summarize_performance.py",
+    "kernelProfiler": "WPR denied profiling policy; no policy or privilege changes attempted",
+    "processSamplerPermissions": "Query/read only; no suspension, debug attachment, game calls or game-memory writes"
+  }
+}

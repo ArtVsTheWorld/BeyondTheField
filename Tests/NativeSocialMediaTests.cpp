@@ -56,6 +56,14 @@ int main(int argc,char** argv){
             auto q=[&](Address a){return cells.at(a);};const auto bound=dynasty::live::activeSession(image,q);require(bound.career==career&&bound.database==db,"Canonical CareerManager ownership did not resolve the shared database");cells[db]=image+0xbd0d378;require(dynasty::live::activeSession(image,q).database==db,"Direct active child context was rejected");
             for(const auto& fault:std::vector<std::pair<Address,Address>>{{svc+0x7b1,0},{svc+0x468,0},{career,0},{ui,0},{career+0x20,0},{db,0}}){const auto old=cells.at(fault.first);cells[fault.first]=fault.second;bool rejected=false;try{dynasty::live::activeSession(image,q);}catch(...){rejected=true;}require(rejected,"Inactive or foreign career ownership was accepted");cells[fault.first]=old;}
             require(dynasty::live::supportedRecordLayout(true,1,8100,9)&&!dynasty::live::supportedRecordLayout(false,1,8100,9)&&!dynasty::live::supportedRecordLayout(true,1,16385,9),"Award-array capacity exception escaped its array-only bounds");
+            const Address child=0x150000;cells[child]=image+0xbd0d378;cells[child+0x1a8]=db;
+            const dynasty::live::SessionContextHint hint{career,db,child};
+            require(dynasty::live::verifiedContextHint(image,bound,hint,q)==child,"Verified same-session context hint was not accepted");
+            auto foreign=hint;foreign.career+=8;require(!dynasty::live::verifiedContextHint(image,bound,foreign,q),"Hint from another CareerManager was accepted");
+            foreign=hint;foreign.database+=8;require(!dynasty::live::verifiedContextHint(image,bound,foreign,q),"Hint from another database was accepted");
+            cells[child+0x1a8]=db+8;require(!dynasty::live::verifiedContextHint(image,bound,hint,q),"Hint with a foreign parent was accepted");cells[child+0x1a8]=db;
+            cells[child]=0;require(!dynasty::live::verifiedContextHint(image,bound,hint,q),"Hint with a foreign vtable was accepted");cells.erase(child);
+            require(!dynasty::live::verifiedContextHint(image,bound,hint,q),"Unreadable hint was accepted");
         }
         {
             unsigned probes=0,pauses=0,reports=0;bool cancel=false;

@@ -38,6 +38,13 @@ struct Schema {std::string name;uint32_t capacity=0;std::vector<Field> fields;};
 struct Table {Address address=0,context=0,dataAddress=0,stringBase=0;uint32_t id=0,rows=0,words=0,first=0;bool array=false;Schema* schema=nullptr;std::vector<unsigned char> data;std::set<uint32_t> free;};
 inline bool supportedRecordLayout(bool array,uint32_t rows,uint32_t words,uint32_t first){return rows<=131072&&words<=(array?16384u:4096u)&&first<=0x10000;}
 struct SessionBinding {Address service=0,career=0,database=0;bool operator==(const SessionBinding& b)const{return service==b.service&&career==b.career&&database==b.database;}};
+struct SessionContextHint {Address career=0,database=0,context=0;};
+inline SessionContextHint& sessionContextHint(){static SessionContextHint hint;return hint;}
+template<class Read>Address verifiedContextHint(Address image,const SessionBinding& active,const SessionContextHint& hint,Read q){
+    if(!hint.context||hint.career!=active.career||hint.database!=active.database)return 0;
+    try{if(q(hint.context)!=image+0xbd0d378||q(hint.context+0x1a8)!=active.database)return 0;}catch(...){return 0;}
+    return hint.context;
+}
 template<class Read>SessionBinding activeSession(Address image,Read q){
     // Native front-end service owns the actual CareerManager. The former
     // e1eac10 manager is only 0xd0 bytes; reading it at +0x290 crossed objects.
@@ -154,6 +161,8 @@ class Capture {
             static std::atomic<Address> cached{0},cachedOwner{0};
             auto belongs=[&](Address candidate){try{return candidate&&memory.at<Address>(candidate)==image+0xbd0d378&&parent(candidate)==sessionContext;}catch(...){return false;}};
             context=cachedOwner.load()==root?cached.load():0;
+            if(!belongs(context))context=verifiedContextHint(image,session,sessionContextHint(),[&](Address a){return memory.at<Address>(a);});
+            if(context&&belongs(context)){cached.store(context);cachedOwner.store(root);}
             if(!belongs(context)){
                 Address found=0;unsigned count=0;size_t scanned=0;const auto began=GetTickCount64();
                 MEMORY_BASIC_INFORMATION region{};std::vector<unsigned char> buffer(0x100000+7);

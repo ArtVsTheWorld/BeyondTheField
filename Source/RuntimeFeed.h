@@ -19,6 +19,14 @@ public:
         folder=directory;base=image;auto c=social::refresh::readJson(folder/L"dynasty-enhancer.json");
         auto resolve=[&](const char* key){auto p=std::filesystem::u8path(c.at(key).get<std::string>());return std::filesystem::absolute(p.is_absolute()?p:folder/p);};node=resolve("node");exporter=resolve("exporter");
         resumer=exporter.parent_path()/L"resume_runtime.mjs";
+        // A diagnostic hot reload may reuse a previously verified context only
+        // in this exact process lifetime; Capture rechecks native ownership.
+        if(c.contains("diagnosticSessionHint")){
+            const auto& hint=c.at("diagnosticSessionHint");FILETIME created{},exited{},kernel{},user{};uint64_t creation=0;
+            if(GetProcessTimes(GetCurrentProcess(),&created,&exited,&kernel,&user))memcpy(&creation,&created,sizeof(creation));
+            if(hint.value("pid",DWORD(0))==GetCurrentProcessId()&&creation&&hint.value("creation",uint64_t(0))==creation)
+                sessionContextHint()={hint.at("career").get<Address>(),hint.at("database").get<Address>(),hint.at("context").get<Address>()};
+        }
         if(!std::filesystem::is_regular_file(node)||!std::filesystem::is_regular_file(exporter)||!std::filesystem::is_regular_file(resumer))throw std::runtime_error("Dynasty Enhancer runtime generator is unavailable");
     }
     std::optional<Json> tick(const std::function<bool()>& cancelled,const std::function<void(Json)>& report,const std::function<void()>& invalidate){

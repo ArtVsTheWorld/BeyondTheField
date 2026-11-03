@@ -25,6 +25,7 @@
 #include "NewsDiscovery.h"
 #include "RuntimeFeed.h"
 #include "Startup.h"
+#include "NativeMapValue.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
@@ -434,8 +435,9 @@ void* makeObject(){void* result=nullptr;auto manager=reinterpret_cast<void*(__fa
 void objectValue(void* target,const char* name,void* value){
     // The captured native string/int setters both acquire a map node through
     // this helper, retain the replacement, release node+0x10, then assign it.
-    void* iterator[2]{};reinterpret_cast<void*(__fastcall*)(void*,void*,const char*)>(base+0x8aed560)(target,iterator,name);
-    auto slot=reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(iterator[0])+0x10);
+    const auto result=social::native::findOrInsert(reinterpret_cast<social::native::Lookup>(base+0x8aed560),target,name);
+    if(!result.node){note({{"event","native_map_lookup_rejected"},{"key",name}});return;}
+    auto slot=reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(result.node)+0x10);
     if(value)InterlockedIncrement(reinterpret_cast<volatile LONG*>(reinterpret_cast<uintptr_t>(value)+0x14));
     releaseValue(*slot);*slot=value;
 }
@@ -640,7 +642,7 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-const char* socialDestination(){return uiReady?"NEWS":"DO_NOTHING";}
+const char* socialDestination(){return uiReady&&feedReady()?"NEWS":"DO_NOTHING";}
 void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
