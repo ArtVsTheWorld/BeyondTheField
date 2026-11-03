@@ -6,6 +6,7 @@ import {verifiedPlayerStats} from './deep_analytics.mjs';
 const final=g=>g.published!==false&&Number.isFinite(g.homeScore)&&Number.isFinite(g.awayScore)&&(g.status==='HomeWon'&&g.homeScore>g.awayScore||g.status==='AwayWon'&&g.awayScore>g.homeScore||g.status==='Tie'&&g.homeScore===g.awayScore);
 const before=(a,b)=>phaseIndex(a.phase)<phaseIndex(b.phase)||a.phase===b.phase&&a.week<b.week;
 const finite=Number.isFinite,one=n=>n.toFixed(1);
+export const corroboratedSackGames=games=>games.length>0&&games.every(x=>finite(x.homeStats?.SACKSALLOWED)&&finite(x.awayStats?.SACKS)&&x.homeStats.SACKSALLOWED>=0&&x.homeStats.SACKSALLOWED===x.awayStats.SACKS&&finite(x.awayStats?.SACKSALLOWED)&&finite(x.homeStats?.SACKS)&&x.awayStats.SACKSALLOWED>=0&&x.awayStats.SACKSALLOWED===x.homeStats.SACKS);
 export function matchupEvents(s,{force=false}={}){
  if(s.reconstructed||s.season.CurrentStage!=='NFLSeason')return [];
  const teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),covered=nationalCoverage(s),events=[];
@@ -28,7 +29,9 @@ export function matchupEvents(s,{force=false}={}){
   const first=hash(g.id+'|matchup-side')%2,off=sides[first],def=sides[1-first],o=first===0?a:b,d=first===0?b:a;
   const angle=hash(g.id+'|matchup-angle')%3,field=angle===0?'OFFPASSYARDS':angle===1?'OFFRUSHYARDS':'SACKSALLOWED',allowed=angle===0?'DEFPASSYARDS':angle===1?'DEFRUSHYARDS':'SACKS';
   const own=o.read(field),other=d.read(allowed);if(own===null||other===null)continue;
-  const values={school:off.name,opponent:def.name,games:o.n,opponentGames:d.n,attack:one(own/o.n),defense:one(other/d.n)};
+  const protectionCorroborated=angle!==2||corroboratedSackGames(o.prior)&&corroboratedSackGames(d.prior);
+  if(angle===2&&!protectionCorroborated)continue;
+  const values={school:off.name,opponent:def.name,games:o.n,opponentGames:d.n,protectionCorroborated,attack:one(own/o.n),defense:one(other/d.n)};
   const attemptField=angle===0?'PASSATTEMPTS':'RUSHATTEMPTS',attempts=angle<2?o.read(attemptField):null,defAttempts=angle<2?d.read(attemptField,true):null;
   const rates=attempts>=80&&defAttempts>=80;if(rates)Object.assign(values,{attackRate:one(own/attempts),defenseRate:one(other/defAttempts)});
   const options={team:off.id,relatedTeams:[def.id],national:covered.has(off.id)||covered.has(def.id),eventWeek:g.week,priority:recap?91:90,thread:'game:'+g.id};

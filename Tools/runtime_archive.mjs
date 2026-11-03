@@ -5,6 +5,7 @@ import {scopeKey} from './runtime_lifecycle.mjs';
 import {buildCatalog} from './feed_selection.mjs';
 import {CONTENT_REVISION} from './story_renderer.mjs';
 import {refreshAccountPresentation} from './account_presentation.mjs';
+import {EDITORIAL_POLICY_VERSION} from './editorial_policy.mjs';
 import {currentPublicationPolicy} from './publication_policy.mjs';
 export async function readHistory(file){
  let value;try{value=JSON.parse(await fs.readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return null;throw e;}
@@ -22,7 +23,7 @@ export function resumeEdition(s,state,archives=[]){
  const entries=state.editions.filter(e=>e.scope===scope),same=entries.find(e=>e.week===week);
  // Rewinds follow normal reconciliation so future observations are pruned.
  if(!same||entries.some(e=>e.week>week)||same.snapshot?.sha256!==s.sha256)return null;
- const f=same.feed;if(f?.sourceKind!=='runtime'||f.key!==`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${week}`||f.leagueId!==s.leagueId||f.userTeamIndex!==s.userTeamIndex||f.season!==s.season.CurrentSeasonYear||f.phase!==s.season.CurrentWeekType||f.week!==week||f.sha256!==s.sha256||f.contentRevision!==CONTENT_REVISION||!currentPublicationPolicy(f))return null;
+ const f=same.feed;if(f?.editorialPolicyVersion!==EDITORIAL_POLICY_VERSION)return null;if(f?.sourceKind!=='runtime'||f.key!==`${s.leagueId}/${s.season.CurrentSeasonYear}/${s.season.CurrentWeekType}/${week}`||f.leagueId!==s.leagueId||f.userTeamIndex!==s.userTeamIndex||f.season!==s.season.CurrentSeasonYear||f.phase!==s.season.CurrentWeekType||f.week!==week||f.sha256!==s.sha256||f.contentRevision!==CONTENT_REVISION||!currentPublicationPolicy(f))return null;
  return buildCatalog(refreshAccountPresentation(f,s),[...archives,...entries.map(e=>e.feed)].map(old=>refreshAccountPresentation(old,s)));
 }
 export async function atomicJson(file,data){const tmp=`${file}.${process.pid}.tmp`;try{await fs.writeFile(tmp,JSON.stringify(data));await fs.rename(tmp,file);}finally{await fs.rm(tmp,{force:true}).catch(()=>{});}}

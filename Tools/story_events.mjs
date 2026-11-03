@@ -131,8 +131,8 @@ export function detectEvents(s,previous=null){
   }
   if(postseasonTiming(s).standings)for(const conference of s.conferences??[]){
     const members=new Set(conference.teams),independent=conference.independent;
-    const leaders=s.teams.filter(t=>members.has(t.id)&&Number.isFinite(independent?t.wins:t.conferenceRank)).sort((a,b)=>independent?b.wins-a.wins||a.losses-b.losses:a.conferenceRank-b.conferenceRank).slice(0,3);
-    if(leaders.length)emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
+    const leaders=s.teams.filter(t=>members.has(t.id)&&(independent?Number.isFinite(t.wins):Number.isInteger(t.conferenceRank)&&t.conferenceRank>=0)).sort((a,b)=>independent?b.wins-a.wins||a.losses-b.losses:a.conferenceRank-b.conferenceRank).slice(0,3);
+    if(leaders.some(t=>(independent?t.wins:t.conferenceWins)+(independent?t.losses:t.conferenceLosses)>0))emit(`standings:${conference.id}`,'standings',{conference:conference.name,independent:Boolean(independent),leaders:leaders.map(t=>({school:t.name,wins:independent?t.wins:t.conferenceWins,losses:independent?t.losses:t.conferenceLosses,conferencePlace:independent?null:t.conferenceRank}))},
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
   for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s),...seasonReviewEvents(s),...portalRiskEvents(s),...offseasonRecruitingEvents(s),...draftEvents(s)])emit(e.id,e.category,e.facts,e.options);

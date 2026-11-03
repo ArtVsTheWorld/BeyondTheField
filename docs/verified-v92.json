@@ -1,0 +1,290 @@
+{
+  "build": "v92",
+  "stage": 1,
+  "name": "Correctness and freshness",
+  "nodeTests": 324,
+  "nativeBuildAndChecks": true,
+  "installed": false,
+  "audit": {
+    "mode": "Frozen published-pool replay, not complete historical regeneration",
+    "editions": 31,
+    "before": {
+      "pool": 35234,
+      "forYou": 930,
+      "ulmTagged": 143,
+      "recruiting": 391,
+      "unchangedStaffPlans": 902,
+      "teamResets": 719,
+      "invalidOrEmptyStandings": 29,
+      "duplicateGroups": 393
+    },
+    "after": {
+      "pool": 29453,
+      "forYou": 930,
+      "ulmTagged": 106,
+      "recruiting": 428,
+      "unchangedStaffPlans": 167,
+      "teamResets": 126,
+      "invalidOrEmptyStandings": 0,
+      "duplicateGroups": 294
+    },
+    "rows": [
+      {
+        "edition": "831346515/2026/PreSeason/0",
+        "before": 987,
+        "after": 987,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 8
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/0",
+        "before": 730,
+        "after": 719,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 12
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/1",
+        "before": 951,
+        "after": 943,
+        "forYou": 30,
+        "ulm": 2,
+        "recruiting": 4
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/2",
+        "before": 980,
+        "after": 974,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 8
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/3",
+        "before": 1038,
+        "after": 1035,
+        "forYou": 30,
+        "ulm": 3,
+        "recruiting": 13
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/4",
+        "before": 1092,
+        "after": 1079,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 12
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/5",
+        "before": 1147,
+        "after": 1129,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 16
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/6",
+        "before": 1154,
+        "after": 1145,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 13
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/7",
+        "before": 1118,
+        "after": 1107,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 15
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/8",
+        "before": 1118,
+        "after": 1102,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 16
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/9",
+        "before": 1104,
+        "after": 1091,
+        "forYou": 30,
+        "ulm": 6,
+        "recruiting": 13
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/10",
+        "before": 1103,
+        "after": 1089,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 14
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/11",
+        "before": 1052,
+        "after": 1044,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 11
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/12",
+        "before": 1061,
+        "after": 1042,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 13
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/13",
+        "before": 1039,
+        "after": 1025,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 15
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/14",
+        "before": 1026,
+        "after": 1005,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 8
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/15",
+        "before": 932,
+        "after": 910,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 2
+      },
+      {
+        "edition": "831346515/2026/RegularSeason/16",
+        "before": 866,
+        "after": 739,
+        "forYou": 30,
+        "ulm": 5,
+        "recruiting": 4
+      },
+      {
+        "edition": "831346515/2026/BowlSeason1/17",
+        "before": 2470,
+        "after": 2363,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 4
+      },
+      {
+        "edition": "831346515/2026/BowlSeason2/18",
+        "before": 1001,
+        "after": 774,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 0
+      },
+      {
+        "edition": "831346515/2026/BowlSeason3/19",
+        "before": 1055,
+        "after": 702,
+        "forYou": 30,
+        "ulm": 4,
+        "recruiting": 0
+      },
+      {
+        "edition": "831346515/2026/NationalChampionship/20",
+        "before": 1009,
+        "after": 403,
+        "forYou": 30,
+        "ulm": 2,
+        "recruiting": 3
+      },
+      {
+        "edition": "831346515/2026/OffSeason/0",
+        "before": 1047,
+        "after": 519,
+        "forYou": 30,
+        "ulm": 2,
+        "recruiting": 3
+      },
+      {
+        "edition": "831346515/2026/OffSeason/1",
+        "before": 1373,
+        "after": 877,
+        "forYou": 30,
+        "ulm": 1,
+        "recruiting": 27
+      },
+      {
+        "edition": "831346515/2026/OffSeason/2",
+        "before": 1057,
+        "after": 707,
+        "forYou": 30,
+        "ulm": 3,
+        "recruiting": 24
+      },
+      {
+        "edition": "831346515/2026/OffSeason/3",
+        "before": 897,
+        "after": 476,
+        "forYou": 30,
+        "ulm": 0,
+        "recruiting": 28
+      },
+      {
+        "edition": "831346515/2026/OffSeason/4",
+        "before": 977,
+        "after": 514,
+        "forYou": 30,
+        "ulm": 1,
+        "recruiting": 28
+      },
+      {
+        "edition": "831346515/2026/OffSeason/5",
+        "before": 1125,
+        "after": 654,
+        "forYou": 30,
+        "ulm": 0,
+        "recruiting": 28
+      },
+      {
+        "edition": "831346515/2026/OffSeason/6",
+        "before": 2831,
+        "after": 2586,
+        "forYou": 30,
+        "ulm": 3,
+        "recruiting": 29
+      },
+      {
+        "edition": "831346515/2026/OffSeason/7",
+        "before": 953,
+        "after": 433,
+        "forYou": 30,
+        "ulm": 1,
+        "recruiting": 27
+      },
+      {
+        "edition": "831346515/2026/OffSeason/9",
+        "before": 941,
+        "after": 280,
+        "forYou": 30,
+        "ulm": 1,
+        "recruiting": 30
+      }
+    ]
+  },
+  "limits": [
+    "Frozen published-pool replay cannot regenerate stories suppressed before archival",
+    "No controller test requested for this intermediate candidate"
+  ],
+  "sha256": {
+    "DynastyEnhancerNative-v92.dll": "9184ad92cfcb84d92a88e1539ed6afb0a27b6a9cf077c4e74c0f8707b5831e60",
+    "DynastyEnhancer-v92-MMC.zip": "53e103a176aa9445517fec6471298f0d588f7f9e802024e874620cfe159df85a"
+  }
+}

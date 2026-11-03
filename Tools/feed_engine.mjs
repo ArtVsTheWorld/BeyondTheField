@@ -6,6 +6,7 @@ import {publishWeek} from './feed_selection.mjs';
 import {detectEvents,weekKey} from './story_events.mjs';
 import {renderStories,CONTENT_REVISION} from './story_renderer.mjs';
 import {PUBLICATION_POLICY_VERSION} from './publication_policy.mjs';
+import {freshEditorialEvents,EDITORIAL_POLICY_VERSION} from './editorial_policy.mjs';
 export {detectEvents,weekKey};
 export const ENGINE_VERSION=2;
 export function trackOffers(s,sameWeek=null,previous=null,earlier=null){
@@ -21,12 +22,12 @@ export function trackOffers(s,sameWeek=null,previous=null,earlier=null){
   return [...events.values()];
 }
 export function buildFeed(s,previous=null,options={}){
-  const events=detectEvents(s,previous),key=weekKey(s);
+  const publication={key:weekKey(s),leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,season:s.season.CurrentSeasonYear,phase:s.season.CurrentWeekType,week:s.season.CurrentWeek};
+  const events=freshEditorialEvents(detectEvents(s,previous),publication,options.history??[]),key=weekKey(s);
   const rendered=renderStories(s,events,{authors:options.authors??{},history:options.history??[],sameWeek:options.sameWeek??null});
   options.onAuthors?.(rendered.authors);
-  const publication={key,season:s.season.CurrentSeasonYear,phase:s.season.CurrentWeekType,week:s.season.CurrentWeek};
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,
     conference:s.teams.find(t=>t.id===s.userTeamIndex)?.conferenceName??null,contentStatus:'generated',contentRevision:CONTENT_REVISION,publicationPolicyVersion:PUBLICATION_POLICY_VERSION,
-    presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,transactionObservation:transactionObservation(s),coverageVersion:1,stories:applyWeeklyCoverage(rendered.stories,s)});
+    editorialPolicyVersion:EDITORIAL_POLICY_VERSION,presentationVersion:3,scopeOptions:scopeCatalog(s),events:events.map(e=>({...e,publication})),dialogueEventOrder:rendered.dialogueEventOrder,transactionObservation:transactionObservation(s),coverageVersion:1,stories:applyWeeklyCoverage(rendered.stories,s)});
 }

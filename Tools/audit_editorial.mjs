@@ -1,0 +1,13 @@
+// Counterfactual selection/freshness replay. Original wording and archives stay immutable.
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {comparePublication} from './publication_timeline.mjs';
+import {freshEditorialEvents} from './editorial_policy.mjs';
+import {publishWeek} from './feed_selection.mjs';
+const [root,output]=process.argv.slice(2);if(!root||!output)throw Error('Usage: audit_editorial.mjs frozen-review-folder output.json');
+const feeds=[];
+async function walk(dir){for(const x of await fs.readdir(dir,{withFileTypes:true})){const p=path.join(dir,x.name);if(x.isDirectory())await walk(p);else if(x.name==='history.json'){const h=JSON.parse(await fs.readFile(p,'utf8'));for(const e of h.editions??[])if(e.feed?.leagueId===831346515&&e.feed?.season===2026)feeds.push(e.feed);}}}
+await walk(path.join(root,'RuntimeHistory'));feeds.sort(comparePublication);const candidates=[],rows=[];
+for(const f of feeds){const events=freshEditorialEvents(f.events,f,candidates),allowed=new Set(events.map(e=>e.id)),stories=f.stories.filter(p=>!p.eventId||allowed.has(p.eventId)),ids=new Set(stories.map(p=>p.id));const next=publishWeek({...f,events,stories:stories.filter(p=>!p.replyTo||ids.has(p.replyTo))});candidates.push(next);rows.push({edition:f.key,before:f.stories.length,after:next.stories.length,forYou:next.posts.length,ulm:next.posts.filter(p=>p.teamIds?.includes(63)).length,recruiting:next.posts.filter(p=>['recruiting','offers','signings'].includes(p.category)).length});}
+const metrics=list=>{const p=list.flatMap(f=>f.stories),fy=list.flatMap(f=>f.posts);return {pool:p.length,forYou:fy.length,ulmTagged:fy.filter(p=>p.teamIds?.includes(63)).length,recruiting:fy.filter(p=>['recruiting','offers','signings'].includes(p.category)).length,unchangedStaffPlans:p.filter(p=>p.templateId?.startsWith('cycle.staff-plan')).length,teamResets:p.filter(p=>p.templateId?.startsWith('cycle.team-reset')).length,invalidOrEmptyStandings:p.filter(p=>p.category==='standings'&&((p.body.match(/0[–-]0/g)??[]).length===3)).length,duplicateGroups:list.reduce((n,f)=>n+Object.values(Object.groupBy(f.stories,p=>p.body)).filter(a=>a.length>1).length,0)};};
+await fs.writeFile(output,JSON.stringify({mode:'Frozen published-pool replay, not complete historical regeneration',editions:rows.length,before:metrics(feeds),after:metrics(candidates),rows},null,2));console.log(JSON.stringify({editions:rows.length,before:metrics(feeds),after:metrics(candidates)}));
