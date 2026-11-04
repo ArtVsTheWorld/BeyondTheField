@@ -36,10 +36,11 @@
       "liveVerified": false,
       "evidence": "Active model rows use native RightLabelDisplayOverride plus cloned font styles; source rating/min/max/increase values unchanged. Offline 101-boundary/migration/unknown/ABI tests; trace match of actual GenericSlider.Draw and UpdateSubskillsList. p39 shared renderer masks unused AttributesItem path separately.",
       "remaining": [
-        "Other position cards and Mentals/secondary tooltips",
-        "Injured-player Health path (numeric wear-and-tear deltas intentionally remain)"
+        "Mentals/secondary tooltips",
+        "Live p61 abbreviated route ability requirements",
+        "Health numeric wear-and-tear penalty case when present (Kyle currently has none)"
       ],
-      "liveStatus": "p46 clean session: Brady Schaefer header D orange, IQ/Awareness C yellow, Pass Blocking C headings/attributes yellow; Physicals requirement/current grades correct with native numeric costs and Not Met. Ratings tab reentry keeps colors. Edit Player numeric ratings are explicitly excluded by user."
+      "liveStatus": "p46 clean session: Brady Schaefer header D orange, IQ/Awareness C yellow, Pass Blocking C headings/attributes yellow; Physicals requirement/current grades correct with native numeric costs and Not Met. Ratings tab reentry keeps colors. Edit Player numeric ratings are explicitly excluded by user. p60 KyleMcNeal injured Health verified by user and screenshot: OverallC/yellow, Low risk, None W&T impact, nativeSeason/Career bars, injury DislocatedHip Out2Weeks and skillpoints2/jersey7 preserved. Physicals Cutter/DoubleDip route aliases leaked numeric requirements; fixed offline p61 pending live."
     },
     {
       "surface": "Native spreadsheet grade colors",
@@ -567,9 +568,9 @@
     "releaseReady": false,
     "previewSha256": "c893f250426662d455ab163953e2bb6e7afd510ea66bbb0ddc79f504de8a3fee",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p60.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p60-MMC.zip",
-    "nextCandidateSha256": "c893f250426662d455ab163953e2bb6e7afd510ea66bbb0ddc79f504de8a3fee"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p61.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p61-MMC.zip",
+    "nextCandidateSha256": "84e02ddadf7d17238264499ad4b6bccdf29717bd960a9cafbc91a475c2551bd6"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -610,7 +611,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Injured-player Health and Mentals; stock hub available menus only.",
+    "nextManualCheck": "Clean restart to main menu for p61 activation, then KyleMcNeal Physicals route requirements.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -635,7 +636,11 @@
     "p60Activation": "Observed main menu in clean PID30540; installed recruit baseline stop0, p60 loaded, active event and empty14-bank retention confirmed before Dynasty entry.",
     "p60EncourageLive": "User confirms allgroup andmultipleindividual-position/far-right filters. Actual RG screenshot confirms colored eligible grades, disabledgray playerratings, NIL0/10, team75/75/74, roster70/85 and ordinary stats0 unchanged. No gameplay changes.",
     "p60HubComparisonLive": "Actual screenshot all8 attribute letters/colors and2Overallbadges pass. Source numeric strings were handled only after exactattribute-name gate; no game start/advance/save.",
-    "p60InjuryReentry": "Automated Team hub\u2192InjuryReport and native FIU cached entry/reentry pass: Kyle McNeal table/panel C, Shamir Sterlin C; lengths2/33, injury/status text, NIL0, team74/74/75 preserved. Native View Player Card keyboard E ignored; manual Y\u2192Health requested. No roster changes."
+    "p60InjuryReentry": "Automated Team hub\u2192InjuryReport and native FIU cached entry/reentry pass: Kyle McNeal table/panel C, Shamir Sterlin C; lengths2/33, injury/status text, NIL0, team74/74/75 preserved. Native View Player Card keyboard E ignored; manual Y\u2192Health requested. No roster changes.",
+    "p60HealthLive": "KyleMcNeal injured Health user+actualscreenshot passes Overallgrade and untouchedinjury/recovery/nativebars/skillpoints. No W&T numericpenalties present to inspect.",
+    "p61Build": "MSVC/W4/WX/native/all10UIVM suites passed. Actual Cutter/DoubleDip route aliases added; all101gradeboundaries and preservation/stat/plural collision tests pass.",
+    "p61Review": "Independent read-only parser/longest-match/scope review passed. No new hooks or per-frame work.",
+    "p61Package": "Combined MMC registration/launch/tamper/path/config checks pass; installed baseline unchanged. Notloaded; p60active."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

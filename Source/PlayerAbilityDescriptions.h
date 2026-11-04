@@ -21,7 +21,9 @@ inline const std::vector<std::string_view>& abilityAttributeNames(){
     static const std::vector<std::string_view> names=[](){
         std::vector<std::string_view> result={"Awareness","Speed","Acceleration","Agility","Change of Direction","Strength",
         "Carrying","Ball Carrier Vision","BC Vision","Break Tackle","Trucking","Stiff Arm","Spin Move","Juke Move",
-        "Catching","Catch in Traffic","Spectacular Catch","Short Route Running","Medium Route Running","Deep Route Running","Release","Jumping",
+        "Catching","Catch in Traffic","Spectacular Catch","Short Route Running","Medium Route Running","Deep Route Running",
+        // Native receiver Physicals abbreviate these names in requirements.
+        "Short Route","Medium Route","Deep Route","Release","Jumping",
         "Throw Power","Throw Accuracy Short","Throw Accuracy Mid","Throw Accuracy Deep","Short Throw Accuracy","Medium Throw Accuracy","Deep Throw Accuracy",
         "Short Accuracy","Medium Accuracy","Deep Accuracy","Throw on Run","Throw on the Run","Throw Under Pressure","Under Pressure","Break Sack","Play Action",
         "Pass Block Power","Pass Block Finesse","Pass Block","Run Block Power","Run Block Finesse","Run Block","Lead Block","Impact Blocking",

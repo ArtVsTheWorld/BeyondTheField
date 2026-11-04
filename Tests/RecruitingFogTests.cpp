@@ -60,6 +60,11 @@ int main(){try{
         require(abilityDescriptionGrades("Bronze Requires: 84 Pass Block Power (75 Currently)")=="Bronze Requires: B Pass Block Power (C Currently)","Ability paired attribute ratings leaked");
         require(abilityDescriptionGrades("Bronze Requires: 82 Acceleration (73 Currently) \nand 68 Speed (61 Currently)")=="Bronze Requires: B Acceleration (C Currently) \nand D Speed (D Currently)","Two-attribute ability wording/newline failed");
         require(abilityDescriptionGrades("Costs 2 points. Gold Requires: 90 Speed (? Currently), jersey99, 25% boost")=="Costs 2 points. Gold Requires: A Speed (? Currently), jersey99, 25% boost","Ability costs/unknown/stat numbers changed");
+        require(abilityDescriptionGrades("Bronze Requires: 86 Medium Route (75 Currently)")=="Bronze Requires: B Medium Route (C Currently)","Native Cutter route requirement leaked");
+        require(abilityDescriptionGrades("Bronze Requires: 84 Deep Route (72 Currently)")=="Bronze Requires: B Deep Route (C Currently)","Native Double Dip route requirement leaked");
+        require(abilityDescriptionGrades("Gold Requires: 90 Short Route (89 Currently). Costs 4 points; 20% bonus.")=="Gold Requires: A Short Route (B Currently). Costs 4 points; 20% bonus.","Short route alias changed costs or gameplay bonuses");
+        for(const auto* untouched:{"Requires: 86 Medium Route Yards (75 Currently)","Requires: 84 Deep Routes (72 Currently)","Requires: 90 Short Route Completions (89 Currently)"})
+            require(abilityDescriptionGrades(untouched)==untouched,"Route alias matched an ordinary statistic or partial word");
         for(const auto* untouched:{"Costs 84 points. 75 Currently","Requires: 84 Skill Points (75 Currently)","Requires: 84 Pass Block Powerful (75 Currently)","Requires: 84 Pass Block Powerhouse (75 Currently)","Requires: 5 Speed Boosts (3 Currently)","Requires: -84 Speed (-75 Currently)","Requires: 84.5 Speed (75 Currently)","Requires: 101 Speed (75 Currently)","Requires: 84% Speed (75 Currently)","Requires: +84 Speed (75 Currently)","Requires: 84 Speediness (75 Currently)","Requires: 90 Passing Yards (80 Currently)"})
             require(abilityDescriptionGrades(untouched)==untouched,"Unrecognized/ordinary/invalid ability number was changed");
         for(int rating=0;rating<=100;++rating)for(auto name:abilityAttributeNames()){
