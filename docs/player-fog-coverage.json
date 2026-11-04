@@ -554,9 +554,9 @@
     "releaseReady": false,
     "previewSha256": "84e02ddadf7d17238264499ad4b6bccdf29717bd960a9cafbc91a475c2551bd6",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p61.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p61-MMC.zip",
-    "nextCandidateSha256": "84e02ddadf7d17238264499ad4b6bccdf29717bd960a9cafbc91a475c2551bd6"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p62.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p62-MMC.zip",
+    "nextCandidateSha256": "2380677c1caaa7bd3ef1259264f2cf0c3667d12016d37a0389eb652fb44ab0e6"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -641,7 +641,11 @@
     "p61CoachAwardLive": "Actual BearBryant COTY SpencerDanielson nativeB+Prestige/LVL42/Architect, scheme4-2-5 and career/rival/bowl/top25 records remain intact. Player annual/allAmerican confirmed.",
     "positionChangesAudit": "Closed repeat normal-position request using prior explicit user confirmation that onlyATH view failed; normaladapter unchanged, ATHfixalready liveverified.",
     "p61InGameLeaks": "FreePractice before first snap: user reports Personnel Group and pause Depth Chart numeric ratings. Actual Formation Key Players82/69/66/63 and pause table OVR/attributes numeric; sidebar already graded. No plays, lineup changes or Dynasty advance.",
-    "p62Scope": "Four exact node_ig display-only Draw suffixes and3legacy Cafe2 display adapters; no new native hooks, UI banks, numeric-model changes or background scans. p62 build/review/package and live QA in progress."
+    "p62Scope": "Four exact node_ig display-only Draw suffixes and3legacy Cafe2 display adapters; no new native hooks, UI banks, numeric-model changes or background scans. p62 build/review/package and live QA in progress.",
+    "p62Build": "MSVC /W4 /WX, native tests and all10UI VM suites pass. Four player-only IG label paths and three legacy pause adapters preserve original register frames and native numeric source values.",
+    "p62Review": "Independent source/native-fingerprint/return-register/bytecode-copy-alignment/preservation review and two affected UI suites pass. No new native hooks or background discovery. Invalid marked color cells may read one-cell data twice before native fallback; valid labels use the native one-read count.",
+    "p62Package": "MMC registration/launch/tamper/path/config smoke checks pass. Installed baseline and histories unchanged. Six manual milestones still match verified backups. Clean-session live test pending.",
+    "p62Probes": "Roster column probes p12/p13/p14 and UI trace p5 explicitly stopped0; final records inflight0. No probes remain active."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
