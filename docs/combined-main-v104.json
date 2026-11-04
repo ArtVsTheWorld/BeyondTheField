@@ -1,0 +1,24 @@
+{
+  "project": "Dynasty Enhancer",
+  "branch": "main",
+  "merge": "Fast-forward of research/recruiting-fog; includes Social Media v103 history and recruiting p27. No direct hub-tab experiment was enabled.",
+  "modManagerEntry": "Dynasty Enhancer (Prototype)",
+  "plugin": "Plugins/DynastyEnhancer.dll",
+  "components": [
+    "Social Media v103",
+    "Recruiting Fog p27"
+  ],
+  "package": "Build/DynastyEnhancer-v104-MMC.zip",
+  "validation": {
+    "javascriptTests": 375,
+    "nativeSocialChecks": "passed",
+    "nativeRecruitingChecks": "passed",
+    "nativeGradeRanges": 5151,
+    "nativeUiBytecodeChecks": "passed",
+    "combinedMmcAdapterAndPayloadChecks": "passed",
+    "installedSocialStaticPayload": "Matches main source text; byte differences are line endings only. Package preserves installed payload bytes."
+  },
+  "installState": "Staged; current game/MMC session has not been replaced. Awaiting closed apps for installation and automatic-launch check.",
+  "liveRecruitingVerification": "User confirmed persistent midpoint colors, correct Class labels, and responsive menus in p27.",
+  "sha256": "3eac506f12391cc01e92eb56cd55a8c891f62e624f0a419c1506de0a1b5c9c5e"
+}

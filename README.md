@@ -4,23 +4,25 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Recruiting Fog prototype (research branch)
+## Combined prototype on main
 
-Stage 2 adds letter grades and grade ranges to native recruit Scouting attributes. Hidden values retain their hidden state; ranges use only the bounds the game already reveals. Stage 3 masks recruit-dependent Playing Time grades in dealbreakers, motivations, affected pitch bundles, visits and My School comparisons. See [Scouting validation](docs/recruiting-fog-stage2.json) and [Playing Time coverage and limits](docs/recruiting-fog-stage3.json).
+Social Media and recruiting Fog of War now share one **Dynasty Enhancer** MMC plugin and installation. The verified components are Social Media v103 and recruiting p27. Active-roster Fog and player analytics remain later work toward 1.0; the separate hub-tab experiment stays deferred.
 
-The current verified separate test DLL is `Build/DynastyEnhancerRecruitFog-p18.dll`, which also includes the [Stage 4 native Notes tab](docs/recruiting-notes-stage4.json) to the right of Scouting. Broad profile hints are available immediately; more detailed qualitative observations use only revealed scouting information. Live checks confirmed text/tab alignment, selected-recruit notes, Luke’s arm-strength report, restoration of Scouting letters/ranges and 40% progress, Back, and leaving/reopening Recruiting. Richer narrative wording remains follow-up work.
+Recruiting includes native letter grades and public-bound ranges, midpoint grade colors that survive profile-tab changes, Playing Time masking (including the Prospect List preview), and a Notes tab. Notes contain persistent generated high-school résumés, completion and blocking percentages, noisy awareness-linked GPA, and fictional D3/D2/FCS backgrounds for game JUCO entries. College transfers use actual linked college statistics. The Board, Prospect List Class column and side panel share the same stored college association. Player attributes, recruiting decisions and game saves are not rewritten.
 
-This separate research DLL is not part of the installed v103 MMC package and must be loaded per session. Notes is enabled with `-RecruitNotesUi` and disabled in ordinary Fog builds. Its fingerprint-gated invocation-setup hook attaches definitions as Recruiting loads, without retaining released script-object addresses. A clean game restart is required to unload it. The generated UI header contains custom bytecode and native method hashes; rebuilding the DLL does not require distributing extracted game assets. Active-roster Fog remains later work.
+The package is `Build/DynastyEnhancer-v104-MMC.zip`. Its single installed plugin is `Plugins/DynastyEnhancer.dll`; Social Media and recruiting run as two internal native components managed by that plugin. This avoids a second mod-manager entry or manual per-session loading. Existing Social Media history, configuration and résumé journals are preserved on installation.
 
-## High-school resume expansion (p19 candidate)
+Build and validate the components sequentially from this repository:
 
-The [expansion reports](docs/recruit-resume-expansion.json) record the verified audit, revised competition/production model, 378 authored scouting observations and native persistence candidate. User review retired all development-linked public wording and added OL sacks-allowed percentage plus OL/TE/FB pancakes. The p19 DLL is built and loaded for live validation; the verified p18 DLL is preserved as recovery. The automatic-loading package is staged for final installation testing.
+```powershell
+.\Source\build.ps1 -NativeName DynastyEnhancerNative-v103
+.\Source\build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-p27 -RecruitNotesUi
+.\Source\Package-DynastyEnhancer.ps1
+```
 
-The p19 live test now confirms expanded reports, blocking percentages/pancakes, Scouting/Back controls, and unchanged figures after a Dynasty reload. A p20 MMC package is staged for automatic loading with the current installed Social Media payload preserved exactly. Installation and the final automatic-launch check are pending.
+Use a fresh `pNN` filename for subsequent development candidates; pinned DLLs must not be overwritten. The package builder preserves the installed, verified Social Media payload. After closing CFB and MMC, install with `Source/Install-Mmc.ps1 -RecruitResumeHistoryFrom <existing-RecruitResumeHistory-folder>`. Generated history is intentionally excluded from the distributable ZIP.
 
-The native background reader captures only recruit/linked-player/identity records and publishes an immutable cache. The UI getter formats cached public resumes plus already-revealed scouting observations. Journals under `Build/RecruitResumeHistory/<LeagueID>/<Season>.json` preserve generated resumes across reloads and rating changes, with prior-season identity lookup and atomic publication. Generated stats never change game data. Preparing reports use bounded native retries, cancelled on exit. Detailed implementation, limitations and test results are in the stage report.
-
-Build developer tools with `Source/build-recruit-resume-tools.ps1`; build a fresh Notes DLL with `Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesUi`. Package automatic loading with `Source/Package-Recruiting.ps1`, then install with `Source/Install-Mmc.ps1 -RecruitResumeHistoryFrom Build/RecruitResumeHistory` after closing CFB and MMC. The package builder uses the installed, working Social Media payload to preserve post-fork content updates, and keeps generated histories out of the ZIP. Both native build commands validate the authored catalog; the latter also runs the native UI bytecode checks. `RecruitResumeTools.exe --self-test` covers boundaries, development isolation and journal persistence. `--native-parity capture.json inputs.json` verifies the native source bridge against audited offline data. Private captures/evaluations and the local HTML review remain excluded from Git.
+The user verified p27's stable colors, midpoint ranges, Prospect List labels and responsive menus. Native checks and 375 JavaScript tests pass. The combined adapter/package passes MMC registration, payload-integrity and path-boundary checks. Automatic loading of the combined package still needs the final clean-launch check. See [recruiting UI verification](docs/recruiting-ui-colors-class-fix.json) and [résumé details](docs/recruit-resume-additions.json).
 
 ## Content and menu performance review (v103)
 

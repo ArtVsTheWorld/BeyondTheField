@@ -1,6 +1,6 @@
-Dynasty Enhancer - Recruiting Fog prototype
+Dynasty Enhancer - Combined Prototype
 
-This package retains the installed Social Media prototype and adds native
+One Dynasty Enhancer MMC plugin automatically loads Social Media and native
 recruiting letter grades/ranges, Playing Time masking and the Notes tab.
 Notes include a generated previous high-school season, GPA, and qualitative
 scouting observations. The generated 1A-6A scale is a consistent competition

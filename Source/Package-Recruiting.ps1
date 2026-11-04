@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 $recruitProject=Split-Path -Parent $PSScriptRoot
 $recruitBuild=Join-Path $recruitProject 'Build'
 $recruitBase=Join-Path $MmcRoot 'Plugins/DynastyEnhancer/Runtime-v103'
-$recruitStage=Join-Path $recruitBuild ('Package-Recruiting-v1-'+[Guid]::NewGuid().ToString('N'))
+$recruitStage=Join-Path $recruitBuild ('Package-DynastyEnhancer-v104-'+[Guid]::NewGuid().ToString('N'))
 $recruitPlugins=Join-Path $recruitStage 'Plugins'
 $recruitRuntime=Join-Path $recruitPlugins 'DynastyEnhancer/Runtime-v103'
 New-Item -ItemType Directory -Path $recruitRuntime,(Join-Path $recruitRuntime 'Tools'),(Join-Path $recruitRuntime 'Content/Runtime') -Force | Out-Null
@@ -30,8 +30,8 @@ if($LASTEXITCODE -ne 0){throw 'Recruiting MMC adapter build failed'}
 if($LASTEXITCODE -ne 0){throw 'Adapter smoke-test build failed'}
 & (Join-Path $recruitBuild 'AdapterSmoke.exe') (Join-Path $recruitPlugins 'DynastyEnhancer.dll') $MmcRoot
 if($LASTEXITCODE -ne 0){throw 'Recruiting MMC package checks failed'}
-$recruitZip=Join-Path $recruitBuild 'DynastyEnhancer-Recruiting-v1-MMC.zip'
+$recruitZip=Join-Path $recruitBuild 'DynastyEnhancer-v104-MMC.zip'
 Compress-Archive -Path (Join-Path $recruitStage '*') -DestinationPath $recruitZip -Force
-@{stage=$recruitStage;runtime=$recruitRuntime;zip=$recruitZip;recruitingSource=$RecruitingName;kind='recruiting-v1'} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $recruitBuild 'mmc-package.json') -Encoding utf8NoBOM
+@{stage=$recruitStage;runtime=$recruitRuntime;zip=$recruitZip;recruitingSource=$RecruitingName;kind='dynasty-enhancer-v104'} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $recruitBuild 'mmc-package.json') -Encoding utf8NoBOM
 Write-Output ('Staged and verified: '+$recruitZip)
 Write-Output 'Installed MMC files and history remain unchanged.'
