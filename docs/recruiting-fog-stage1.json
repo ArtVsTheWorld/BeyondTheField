@@ -1,0 +1,344 @@
+{
+  "stage": 1,
+  "status": "Read-only mapping complete; implementation and mutation-based state tests have not started",
+  "branch": "research/recruiting-fog",
+  "scope": "Recruit profile Scouting attributes and recruiting playing-time presentation; active-roster changes deferred",
+  "liveReference": {
+    "pid": 28440,
+    "recruit": "Luke Callen",
+    "position": "QB",
+    "class": "High School",
+    "scoutingPercent": 40,
+    "observedRevealedAttributes": {
+      "Throw Power": {
+        "nativeValue": 92,
+        "plannedGrade": "A"
+      },
+      "Medium Accuracy": {
+        "nativeValue": 79,
+        "plannedGrade": "C"
+      }
+    },
+    "source": "User-provided live screenshot plus matching installed assets and current process binding reads"
+  },
+  "actions": {
+    "gameAccess": "PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ",
+    "gettersInvoked": false,
+    "hooksInstalled": false,
+    "scoutingHoursSpent": 0,
+    "saveWrites": false,
+    "installedPluginsChanged": false
+  },
+  "assetValidation": {
+    "count": 53,
+    "readErrors": 0,
+    "decodeErrors": 0,
+    "cacheVersion": 6,
+    "staleMetadataFound": true,
+    "resolution": "Fresh selected-GUID metadata parsed from the installed MMC cache; original cache and old research files unchanged",
+    "moduleSha256": "c4350fa1105fd8aaaca8f17c58d843db799e988c2de88ec7187c1f26882110f7",
+    "privateEvidence": "Evidence/RecruitingFog; ASTs and module snapshot excluded from source/package"
+  },
+  "coverage": [
+    {
+      "surface": "Scouting revealed attribute tiles",
+      "state": "Mapped",
+      "model": "logic_cfm.model.recruitinghub.board.Scouting",
+      "source": "GetTeamRecruitList -> current recruit ScoutingAttributes",
+      "widget": "art_control.recruitinghub.AttributeButton",
+      "fields": [
+        "Name",
+        "HaveSlider",
+        "Points",
+        "SliderStart",
+        "SliderEnd",
+        "IsScoutComplete"
+      ],
+      "display": "mcPoints.SetLabel in AttributeButton.Draw",
+      "requirement": "Convert only the number that the native visibility branch would display. Preserve unknown/hidden state."
+    },
+    {
+      "surface": "Partially scouted attribute range bars",
+      "state": "Mapped",
+      "display": "mcSlider Start/End populated from SliderStart/SliderEnd when HaveSlider is true",
+      "requirement": "Replace exact bar endpoints with grade-band ranges derived only from the already-revealed bounds, never the hidden true rating",
+      "proposedDisplay": "C-B, or a single letter if both endpoints occupy the same band; final presentation decision for stage 2"
+    },
+    {
+      "surface": "Unscouted/incognito attribute cells",
+      "state": "Visibility controls located; 0% live state not independently exercised",
+      "display": "AttributeButton.Draw controls mcIncognito, mcName, mcSlider, mcPoints",
+      "requirement": "A hidden/sentinel Points value must not turn into F. Zero and unknown require the native visibility flags."
+    },
+    {
+      "surface": "Scouting percentage, hours and costs",
+      "state": "Mapped and excluded from rating conversion",
+      "fields": [
+        "PercentageScouted",
+        "ScoutingHours",
+        "HoursTotal",
+        "MaxHours",
+        "BonusHours",
+        "OfferPoints",
+        "CurrentNILOffer"
+      ],
+      "requirement": "Preserve meaningful non-rating numbers, including the 40% scouting label."
+    },
+    {
+      "surface": "Abilities, mentals and development trait",
+      "state": "Separate data paths located",
+      "fields": [
+        "ScoutingPhysicalAbilities",
+        "ScoutingMentalAbilities",
+        "DevTrait",
+        "DevTraitName"
+      ],
+      "requirement": "Leave native reveal mechanics intact in the initial grade pass."
+    },
+    {
+      "surface": "Recruit Overview playing-time dealbreaker",
+      "state": "Mapped potential leak; actual playing-time-selected screen not opened during this audit",
+      "model": "logic_cfm.model.recruitinghub.board.Overview",
+      "fields": [
+        "RecruitingMotivation",
+        "DealbreakerTeamGrade",
+        "DealbreakerTeamLevel",
+        "ValueAchieved",
+        "ValueRequired"
+      ],
+      "requirement": "Scope replacement to playing-time motivation. Preserve other dealbreakers and real eligibility behavior; threshold feedback can remain an indirect clue."
+    },
+    {
+      "surface": "Recruiting pitches and visit activity grades",
+      "state": "Mapped",
+      "nativeGetter": "GetMotivationsForRecruit",
+      "models": [
+        "logic_cfm.model.recruitinghub.board.Recruiting",
+        "logic_cfm.model.recruitinghub.board.RecruitingPitches"
+      ],
+      "fields": [
+        "MotivationString",
+        "Motivation",
+        "Grade",
+        "ShowHotColdGrade"
+      ],
+      "widgets": [
+        "GradeItem",
+        "RecruitingPitchGridTile",
+        "AttributeGradeListItem"
+      ],
+      "requirement": "Use the same recruit-independent opportunity description everywhere playing-time grade is displayed. Do not change all school grades globally."
+    },
+    {
+      "surface": "My School position-dependent pitch grade and description",
+      "state": "Mapped",
+      "nativeGetter": "GetPitchInfo",
+      "model": "logic_cfm.model.recruitinghub.MySchool",
+      "fields": [
+        "PitchName",
+        "PitchDescription",
+        "Grade",
+        "Position",
+        "ShowFilter",
+        "PositionFilterItems"
+      ],
+      "widgets": [
+        "MySchoolPitchDescription",
+        "MySchoolGradeItem",
+        "MySchoolGridTile"
+      ],
+      "requirement": "Playing-time masking follows school and position; numeric ratings of the selected recruit must not affect its substitute wording."
+    },
+    {
+      "surface": "Recruit board sorting",
+      "state": "Static comparator inventory mapped",
+      "comparators": [
+        "_OrderByDecision",
+        "_OrderByInterestedStatus",
+        "_OrderByNationalRank",
+        "_OrderByRank"
+      ],
+      "requirement": "Keep ordinary recruiting sorting. No rating-column sort found in the Scouting tile view; do not copy roster-wide Name sorting into the board."
+    }
+  ],
+  "nativeBindings": [
+    {
+      "name": "GetTeamRecruitList",
+      "registrationRva": "0xa0e3880",
+      "thunkRva": "0xa0e45e0",
+      "globalRva": "0xfcd9f20",
+      "vtableRva": "0xc752bc8",
+      "slot": "0x40",
+      "functionRva": "0xa0e91a0",
+      "prefix": "488954241048894c240855534156488dac24d0fcffff4881ec30040000488bda",
+      "nameVerified": true
+    },
+    {
+      "name": "GetMotivationsForRecruit",
+      "registrationRva": "0xa0e3700",
+      "thunkRva": "0xa0e4210",
+      "globalRva": "0xfcd9f20",
+      "vtableRva": "0xc752bc8",
+      "slot": "0x90",
+      "functionRva": "0xa0e7530",
+      "prefix": "488954241048894c2408555356574156488d6c24d04881ec30010000418bd848",
+      "nameVerified": true
+    },
+    {
+      "name": "GetPitchInfo",
+      "registrationRva": "0xa1014f0",
+      "thunkRva": "0xa101b30",
+      "globalRva": "0xfcda488",
+      "vtableRva": "0xc754b08",
+      "slot": "0x60",
+      "functionRva": "0xa103350",
+      "prefix": "4489442418488954241055535657415441554156488dac2460f5ffff4881eca0",
+      "nameVerified": true
+    },
+    {
+      "name": "GetRecruitInfoData",
+      "registrationRva": "0xa0f1580",
+      "thunkRva": "0xa0f1840",
+      "globalRva": "0xfcda030",
+      "vtableRva": "0xc7537a8",
+      "slot": "0x30",
+      "functionRva": "0xa0f1a90",
+      "prefix": "48896c24104889742418574883ec20488bf2488be9e82687e1f9488bd6488bc8",
+      "nameVerified": true
+    }
+  ],
+  "scriptTargets": [
+    {
+      "class": "_global.logic_cfm.Object.model.recruitinghub.Board.mSortInfo.sortFunction._OrderByDecision",
+      "method": "Init",
+      "definition": [
+        "",
+        3,
+        [
+          7,
+          25
+        ],
+        "0x5630",
+        360
+      ]
+    },
+    {
+      "class": "_global.logic_cfm.Object.model.recruitinghub.Board.mSortInfo.sortFunction._OrderByDecision",
+      "method": "_OnCategoryChanged",
+      "definition": [
+        "",
+        1,
+        [
+          3,
+          41
+        ],
+        "0x7300",
+        67
+      ]
+    },
+    {
+      "class": "_global.logic_cfm.Object.model.recruitinghub.board.Scouting.fb_logic_com.BaseModel",
+      "method": "Init",
+      "definition": [
+        "",
+        3,
+        [
+          6,
+          25
+        ],
+        "0x169f8",
+        319
+      ]
+    },
+    {
+      "class": "_global.logic_cfm.Object.model.recruitinghub.board.Scouting.fb_logic_com.BaseModel",
+      "method": "_PopulateData",
+      "definition": [
+        "",
+        0,
+        [
+          35,
+          41
+        ],
+        "0x17980",
+        1576
+      ]
+    },
+    {
+      "class": "_global.art_control.Object.recruitinghub.AttributeButton.cafe.enum.InvalidationType.FIRST_CUSTOM",
+      "method": "Init",
+      "definition": [
+        "",
+        1,
+        [
+          8,
+          25
+        ],
+        "0x18648",
+        353
+      ]
+    },
+    {
+      "class": "_global.art_control.Object.recruitinghub.AttributeButton.cafe.enum.InvalidationType.FIRST_CUSTOM",
+      "method": "Draw",
+      "definition": [
+        "",
+        0,
+        [
+          4,
+          25
+        ],
+        "0x18aa0",
+        266
+      ]
+    }
+  ],
+  "notesTab": {
+    "requestedPlacement": [
+      "Overview",
+      "Recruiting",
+      "Scouting",
+      "Notes"
+    ],
+    "status": "Native architecture identified; fourth-tab implementation and live navigation are not yet proven",
+    "parent": "art_screen.recruitinghub.Board",
+    "control": "PageModuleTabs",
+    "model": "logic_cfm.model.recruitinghub.Board",
+    "providerFields": [
+      "mTabProvider",
+      "mSubscreensData",
+      "SubscreensData",
+      "mCurrentTabIndex"
+    ],
+    "requiredWork": [
+      "Register a Notes subscreen and model in the recruiting node ModelFactory/ScreenPathLookup",
+      "Supply selected recruit identity through RecruitingBoardService notifications",
+      "Add tab metadata and a matching navigation/state entry",
+      "Preserve profile-tab versus recruiting-hub bumper focus, input locks, recruit changes and Back behavior"
+    ],
+    "scopeNote": "This is a recruit-profile subtab, separate from the deferred Dynasty hub tab experiment."
+  },
+  "prototypeCompatibility": {
+    "conversionLogicReusable": true,
+    "existingNativeGatesMatchingCurrentExecutable": 0,
+    "existingNativeGatesCompared": 10,
+    "requirement": "Build new recruiting-scoped bindings for the running executable; do not load or transplant the old RosterFog native addresses",
+    "integration": "Coordinate ownership with Social Media and Player Analytics; use a dispatcher if a shared slot becomes necessary."
+  },
+  "nextStage": {
+    "firstPrototype": "Letters on already-revealed Scouting values, with range-bar masking and native hidden-state preservation",
+    "boundaries": [
+      "59/60",
+      "69/70",
+      "79/80",
+      "89/90"
+    ],
+    "liveChecksNeeded": [
+      "0% and 100% scouting states",
+      "Different position and recruit selection refresh",
+      "Playing-time motivation selected on Overview, pitch/visit and My School views",
+      "Later Notes-tab geometry and controller behavior"
+    ],
+    "approvalBoundary": "Stage 1 complete; no UI modification performed."
+  }
+}
