@@ -99,7 +99,7 @@
   },
   "postgameUiRecovery": {
     "build": "v103",
-    "status": "v103 installed and package verified after preserving saves/history; clean-launch visual and subsequent postgame reacquisition tests pending.",
+    "status": "v103 installed and clean-launch Week 2 feed, all filters/categories, scrolling and Back user-confirmed. Next postgame asset-reacquisition check remains.",
     "dataCapture": "Week 2 and recruiting change already published by v102; this is a separate UI lifetime/navigation gate failure",
     "verification": "Full bundle readiness, stale cache, replacement cache, unreadable memory and no bytecode writes during readiness checks"
   }

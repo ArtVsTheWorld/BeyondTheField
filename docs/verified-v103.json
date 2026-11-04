@@ -1,6 +1,6 @@
 {
   "build": "v103",
-  "status": "Built, installed and MMC payload verified; clean-launch visual and later postgame tests pending",
+  "status": "Built, installed, automatically loaded and user-confirmed Week 2 entry/controller check passed",
   "rootCause": "Week 2 and the scholarship change published successfully, but cached News layout/handle/flow addresses were released after gameplay. Navigation info still promised NEWS before the layout gate rejected entry.",
   "fix": [
     "Validate layout, body, grid, input, scrolling and viewport before promising native News navigation",
@@ -14,8 +14,14 @@
   "dataReader": "v102 direct active-view recovery retained; live Week 2 data published with 1601 stories",
   "backup": "Eight latest save/profile files checksum-verified; history, runtime data and current read-only snapshot preserved privately",
   "remaining": [
-    "Install and clean launch",
-    "Feed entry and controls",
     "Another gameplay return to exercise automatic UI asset reacquisition"
+  ],
+  "liveVerified": [
+    "Clean launch through MMC",
+    "East Point Week 2 visible",
+    "LT/RT filters",
+    "LB/RB categories",
+    "Scrolling",
+    "B returns normally"
   ]
 }
