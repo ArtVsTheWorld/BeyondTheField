@@ -4,6 +4,7 @@ import argparse
 import json
 import sys
 from build_recruit_notes_ui import Assembler, fnv
+from build_player_legacy_depth_ui import SPECS as DEPTH_SPECS,color_prefix
 
 
 def spreadsheet_columns():
@@ -80,6 +81,15 @@ def generate(asset, destination):
     groups=[('programs',[
         (legacy_color(),legacy_offset,2,4,41,legacy_size,legacy_hash,0,0)]),
         ('modernPrograms',[(spreadsheet_columns(),offset,4,9,41,size,expected,0,0)])]
+    for off,argc,regs,flags,native_size,hash_,suffix,copy_size in DEPTH_SPECS:
+        native=legacy.data[off+48:off+48+native_size]
+        if fnv(native)!=hash_:raise ValueError(f'Unsupported native legacy depth method {off:x}')
+        a=Assembler()
+        if suffix is color_prefix:
+            suffix(a);copy_at=len(a.code);a.code.extend(bytes(copy_size))
+        else:
+            copy_at=0;a.code.extend(bytes(copy_size));suffix(a)
+        groups[0][1].append((a.finish(),off,argc,regs,flags,native_size,hash_,copy_at,copy_size))
     for name,specs in groups:
         lines.append(f'inline std::vector<notesui::Program> {name}(){{std::vector<notesui::Program> result;')
         for p,off,argc,regs,flags,native_size,hash_,copy_at,copy_size in specs:
@@ -90,7 +100,7 @@ def generate(asset, destination):
         lines.append('return result;}')
     lines.append('}')
     destination.write_text('\n'.join(lines)+'\n', encoding='utf8')
-    print(json.dumps({'methods': 2, 'legacyRegistersPreserved': [4], 'modernRegistersPreserved': 9, 'selectedRow': 'native black foreground'}))
+    print(json.dumps({'methods': 2+len(DEPTH_SPECS), 'legacyRegistersPreserved': [4]+[s[2] for s in DEPTH_SPECS], 'modernRegistersPreserved': 9, 'selectedRow': 'native black foreground'}))
 
 
 if __name__ == '__main__':

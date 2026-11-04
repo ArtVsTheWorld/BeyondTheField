@@ -155,6 +155,10 @@ class Machine:
                     value=stack.pop();stack.append('string' if isinstance(value,str) else 'undefined' if value is UNDEFINED else 'number' if isinstance(value,(int,float)) else 'object')
                 elif op==0x0C:
                     right,left=stack.pop(),stack.pop();stack.append(left*right)
+                elif op==0x4A:
+                    value=stack.pop()
+                    try:stack.append(float(value))
+                    except (TypeError,ValueError):stack.append(float('nan'))
                 elif op in (0x47, 0x0B, 0x48, 0x67):
                     right, left = stack.pop(), stack.pop()
                     if op == 0x47:

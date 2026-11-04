@@ -639,12 +639,14 @@
     "p61WeeklyAwardsLive": "Native PlayersOfWeek fullwidth National Week3 cards inspected; no OVR/attributes shown. Ordinary stats including decimal9.9YPA and negative-4 rushing unchanged. No speculative sidebar patch added.",
     "p61AnnualPlayerLive": "Actual MaxwellWatchlist screenshot OverallA/green, native ranks/jersey/NIL/year preserved; user also confirms awardwinner and AllAmerican screens. Coachcategory check next.",
     "p61CoachAwardLive": "Actual BearBryant COTY SpencerDanielson nativeB+Prestige/LVL42/Architect, scheme4-2-5 and career/rival/bowl/top25 records remain intact. Player annual/allAmerican confirmed.",
-    "positionChangesAudit": "Closed repeat normal-position request using prior explicit user confirmation that onlyATH view failed; normaladapter unchanged, ATHfixalready liveverified."
+    "positionChangesAudit": "Closed repeat normal-position request using prior explicit user confirmation that onlyATH view failed; normaladapter unchanged, ATHfixalready liveverified.",
+    "p61InGameLeaks": "FreePractice before first snap: user reports Personnel Group and pause Depth Chart numeric ratings. Actual Formation Key Players82/69/66/63 and pause table OVR/attributes numeric; sidebar already graded. No plays, lineup changes or Dynasty advance.",
+    "p62Scope": "Four exact node_ig display-only Draw suffixes and3legacy Cafe2 display adapters; no new native hooks, UI banks, numeric-model changes or background scans. p62 build/review/package and live QA in progress."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "In progress: awards and MySchool risk-player adapters built, live verification pending.",
+    "remainingMenusLeakAudit": "In progress: annual/weekly awards and All-Americans verified p61; in-game Key Players/Personnel Group and pause Depth Chart numeric leaks confirmed and addressed in p62 source, live verification pending.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {

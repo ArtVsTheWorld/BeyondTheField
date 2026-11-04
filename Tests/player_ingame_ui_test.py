@@ -1,11 +1,13 @@
 """Execute isolated overlay display suffix without a game or gameplay changes."""
 from pathlib import Path
 import copy
+import math
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
-from build_player_ingame_ui import FIELDS,player_ratings_suffix
-from recruit_notes_vm import Machine
+from build_player_ingame_ui import (FIELDS,player_ratings_suffix,key_player_suffix,
+                                  playcall_player_suffix,substitution_player_suffix,depth_panel_player_suffix,SPECS)
+from recruit_notes_vm import Machine,UNDEFINED
 
 
 def widget(value):
@@ -38,3 +40,48 @@ receiver={'mData':{'ExtraInfo':{}},'mcOvr':{'mData':{'value':85},'mcValue':widge
 Machine({},[]).run(program,{1:receiver})
 assert receiver['mcOvr']['mcValue']['mData']['display']==85 and receiver['mcOvr']['_visible'] is False
 print('Passed: all101 coach-camera grade/color boundaries; hidden values, model values, fonts, coordinates, jerseys and scores preserved.')
+
+for suffix,field,name,colored,tail in [
+        (key_player_suffix,'overall','mcOVR',True,' OVR'),
+        (playcall_player_suffix,'PrimaryTargetOVR','mcOvrStat',False,''),
+        (substitution_player_suffix,'overallRating','mcOvrStat',False,''),
+        (depth_panel_player_suffix,'PlayerOvr','mcOvr',False,'')]:
+    a=Assembler();suffix(a);program=a.finish()
+    for visible in [True,False,UNDEFINED]:
+        for value in [*range(101),UNDEFINED,None,'?',-1,101,'85',math.nan,math.inf]:
+            child=widget('native');child['_visible']=visible
+            child['mData']['ExtraInfo']['fontColor']=0 # Native focused black
+            extra={field:value,'PrimaryTargetPlayerId':42,'jersey':11,'numPlays':7,
+                   'avgYards':7.6,'goToPercent':20,'Ovr':85}
+            receiver={'mData':{'ExtraInfo':extra},name:child}
+            Machine({},[]).run(program,{1:receiver})
+            assert receiver['mData']['ExtraInfo'] is extra and extra[field] is value
+            assert extra['jersey']==11 and extra['numPlays']==7 and extra['avgYards']==7.6 and extra['goToPercent']==20 and extra['Ovr']==85
+            if visible is True and isinstance(value,int) and 0<=value<=100:
+                grade='A' if value>=90 else 'B' if value>=80 else 'C' if value>=70 else 'D' if value>=60 else 'F'
+                assert child['mData']['display']==grade+tail
+                assert child['mData']['ExtraInfo']['fontColor']==(GRADE_COLORS[grade] if colored else 0)
+            else:assert child['mData']['display']=='native' and child['mData']['ExtraInfo']['fontColor']==0
+    for receiver in [{},{'mData':{}},{'mData':{'ExtraInfo':{field:90}}}]:
+        Machine({},[]).run(program,{1:receiver})
+    # A recycled row must not reuse its prior grade when the player changes.
+    child=widget('native');child['_visible']=True
+    extra={field:92};receiver={'mData':{'ExtraInfo':extra},name:child}
+    Machine({},[]).run(program,{1:receiver});assert child['mData']['display']=='A'+tail
+    extra[field]=63;child['mData']['display']='63';child['mData']['ExtraInfo']['fontColor']=0xFFFFFF
+    Machine({},[]).run(program,{1:receiver});assert child['mData']['display']=='D'+tail
+    if not colored:assert child['mData']['ExtraInfo']['fontColor']==0xFFFFFF
+    # This suffix never touches a group-only play-count/yards/percentage row.
+    group={'numPlays':20,'avgYards':17.7,'goToPercent':30}
+    child=widget(20);child['_visible']=True
+    Machine({},[]).run(program,{1:{'mData':{'ExtraInfo':group},name:child}})
+    assert child['mData']['display']==20 and group=={'numPlays':20,'avgYards':17.7,'goToPercent':30}
+
+assert all(newregs==regs for off,argc,regs,flags,size,expected,newregs,suffix in SPECS[1:]), 'Playcall labels must attach safely on fixed-frame dispatch'
+class BoundedAssembler(Assembler):
+    def __init__(self,limit):super().__init__();self.limit=limit
+    def reg(self,n):assert 0<=n<self.limit,(n,self.limit);super().reg(n)
+    def store(self,n):assert 0<=n<self.limit,(n,self.limit);super().store(n)
+for off,argc,regs,flags,size,expected,newregs,suffix in SPECS:
+    a=BoundedAssembler(newregs);suffix(a);a.finish()
+print('Passed:4 in-game player label paths,101 boundaries each, hidden/invalid/absent fields, recycled players, native focus colors and non-rating playcall statistics.')

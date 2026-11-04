@@ -11,7 +11,9 @@
 namespace {
 using Json=nlohmann::json;using Columns=void(__fastcall*)(void*,void*,int);
 HMODULE self;uintptr_t base;Columns original=nullptr;std::atomic<bool> disabled{false};std::atomic<unsigned> calls{0},inflight{0};std::mutex mutex,lifecycle;std::deque<Json> queue;bool installed=false;
-bool swap(void* from,void* to){auto at=reinterpret_cast<PVOID volatile*>(base+0xbaa78b8+0x70);DWORD old=0,unused=0;if(!VirtualProtect(const_cast<PVOID*>(at),8,PAGE_READWRITE,&old))return false;auto* prior=InterlockedCompareExchangePointer(at,to,from);VirtualProtect(const_cast<PVOID*>(at),8,old,&unused);return prior==from;}
+constexpr uintptr_t table=0xbacd668,slot=0x88,rva=0x7a89420;
+constexpr unsigned char prefix[]={0x48,0x89,0x5c,0x24,0x20,0x55,0x56,0x57,0x48,0x8d,0xac,0x24,0x60,0xfe,0xff,0xff,0x48,0x81,0xec,0xa0,0x02,0x00,0x00,0x48,0x8b,0x05,0x02,0x94,0x00,0x06,0x48,0x33};
+bool swap(void* from,void* to){auto at=reinterpret_cast<PVOID volatile*>(base+table+slot);DWORD old=0,unused=0;if(!VirtualProtect(const_cast<PVOID*>(at),8,PAGE_READWRITE,&old))return false;auto* prior=InterlockedCompareExchangePointer(at,to,from);VirtualProtect(const_cast<PVOID*>(at),8,old,&unused);return prior==from;}
 void __fastcall hook(void* source,void* target,int form){
     ++inflight;
     if(disabled||calls.fetch_add(1)>=64){original(source,target,form);--inflight;return;}
@@ -29,8 +31,8 @@ DWORD stop(){{std::lock_guard<std::mutex> lock(lifecycle);disabled=true;if(insta
 DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"roster-view-probe.jsonl";
     {std::lock_guard<std::mutex> lock(lifecycle);if(disabled)return 1;
-    auto* parent=*reinterpret_cast<void**>(base+0xbaa78b8+0x70);HMODULE owner=nullptr;wchar_t ownerPath[32768]{};
-    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p59.dll")return 1;
+    auto* parent=*reinterpret_cast<void**>(base+table+slot);
+    if(parent!=reinterpret_cast<void*>(base+rva)||memcmp(parent,prefix,sizeof(prefix)))return 1;
     HMODULE pin=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&pin))return 2;
     original=reinterpret_cast<Columns>(parent);if(!swap(parent,reinterpret_cast<void*>(hook))){original=nullptr;return 3;}installed=true;}
     const auto flush=[&](){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(mutex);batch.swap(queue);}if(!batch.empty()){std::ofstream out(file,std::ios::app);for(const auto& item:batch)out<<item.dump()<<'\n';}};

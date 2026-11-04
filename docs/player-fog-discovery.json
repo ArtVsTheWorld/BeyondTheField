@@ -390,5 +390,31 @@
     "unfocus": "1fc0/104/argc1/regs2/flags41/hashd0acdf397686b473",
     "schema": "ExtraInfo.Ovr ->directmcOvr TextFieldGeneric; originalmodel remainsnumeric; no GetRosterNILPlayerList hook",
     "preserved": "CurrentNIL/NILValue/OfferMin/OfferMax/RiskOfTransfer/PlayerKey/identity and selectednativecontrast"
+  },
+  "inGamePlaycallLabels": {
+    "status": "p62 built-source; live verification pending",
+    "asset": "common/ui/node_ig/scriptpod.ast",
+    "methods": [
+      "KeyPlayerItem.Draw",
+      "PlaycallButton.Draw",
+      "PlayerNameButton.Draw",
+      "DepthChartPanelListItem.Draw"
+    ],
+    "preservation": "Label-only; numeric ExtraInfo/source ratings, jersey numbers, depth slot/year, counts, yards, percentages, selection foreground and visibility remain native. Exact fingerprints and fixed register frames verified.",
+    "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
+  },
+  "pauseDepthChart": {
+    "status": "p62 implemented; clean-session live test pending",
+    "asset": "common/ui/node_com/scriptpod.ast",
+    "screenAsset": "madden/screens/roster/madden_scrdepthchartselectplayer/madden_scrdepthchartselectplayer.ast",
+    "provider": "madden.provider.Cafe2SpreadsheetProvider",
+    "scope": "mSpreadsheetId == Player - DepthChart Slotted plus full initial Slot/Player/POS/OVR/Year header gate and known rating headers",
+    "methods": {
+      "GetColumnDefinitions": "0x107490",
+      "GetRowData": "0x107278",
+      "Cafe2SpecialColoringProvider.GetCellColor": "0x107c88"
+    },
+    "preservation": "Only fresh returned cell display changes. Native rating/trend, underlying model, sorting, slots, years, filters and native highlight colors preserved. Header mask cached per provider, no new native hook or process discovery.",
+    "research": "Frontend and generic native column probes saw no calls; each stopped0/inflight0. Bounded script trace stopped0/inflight0. Actual legacy screen asset identifies Cafe2 provider."
   }
 }

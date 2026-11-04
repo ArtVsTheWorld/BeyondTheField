@@ -75,3 +75,77 @@ header=Path("Source/PlayerFogUiPrograms.h").read_text()
 assert "controlPrograms" not in header and "462D3820" not in header
 assert "inline std::vector<notesui::Program> programs()" in header
 print("Passed: selected-row override absent; native highlight foreground preserved.")
+
+# The older in-game depth chart uses Cafe2SpreadsheetProvider, not Ucm's
+# native column collector. Its returned cells are fresh presentation objects.
+from build_recruit_notes_ui import Assembler,GRADE_COLORS,fnv
+from build_player_legacy_depth_ui import SHEET,ATTRIBUTES,columns_suffix,rows_suffix,color_prefix,SPECS as DEPTH_SPECS
+from recruit_notes_vm import UNDEFINED
+
+def suffix_program(suffix):
+    a=Assembler();suffix(a);return a.finish()
+
+headers=['Slot','Player','POS','OVR','Year',*ATTRIBUTES,'Other statistic']
+definitions=[{'mHeaderText':h,'mHint':h+' hint','mIsStatic':i<2,'width':80} for i,h in enumerate(headers)]
+original_defs=copy.deepcopy(definitions)
+receiver={'mSpreadsheetId':SHEET}
+assert Machine({},[]).run(suffix_program(columns_suffix),{1:receiver,13:definitions}) is definitions
+assert definitions==original_defs
+mask=receiver['DEPauseRatingColumns']
+assert mask==[False,False,False,True,False]+[True]*len(ATTRIBUTES)+[False]
+
+for rating in range(101):
+    grade='A' if rating>=90 else 'B' if rating>=80 else 'C' if rating>=70 else 'D' if rating>=60 else 'F'
+    for raw in [rating,str(rating)]:
+        # Deliberately request out-of-order/noncontiguous columns. Conversion
+        # must use semantic IDs, never the visible position in the row.
+        columns=[4,3,6,0,len(headers)-1]
+        cells=[{'display':v,'trend':'TrendDown','rating':rating,'intValue':rating,'rowKey':42} for v in ['SR',raw,raw,'2.',raw]]
+        before=copy.deepcopy(cells);provider_before=copy.deepcopy(receiver)
+        assert Machine({},[]).run(suffix_program(rows_suffix),{1:receiver,3:cells,5:columns}) is cells
+        assert receiver==provider_before
+        for i in [0,3,4]:assert cells[i]==before[i], 'Non-rating display was changed'
+        for i in [1,2]:
+            assert cells[i]['display']==grade and cells[i]['DEPauseGradeColor']==GRADE_COLORS[grade]
+            assert cells[i]['DEPausePlayerRating'] is True
+            for key in ['trend','rating','intValue','rowKey']:assert cells[i][key]==before[i][key]
+
+for invalid in [UNDEFINED,None,'?','--','',-1,101,'01','090','1000','85.0','9.5','-1','+90',' 90','90 ','9%','A','85,TrendUp',float('nan'),float('inf')]:
+    cell={'display':invalid,'trend':'TrendNone','rating':99}
+    Machine({},[]).run(suffix_program(rows_suffix),{1:receiver,3:[cell],5:[3]})
+    assert cell['display'] is invalid and 'DEPausePlayerRating' not in cell
+
+for sheet in ['Roster','Edit Player','Player - DepthChart',None,UNDEFINED]:
+    other={'mSpreadsheetId':sheet,'DEPauseRatingColumns':[True]*90};before=copy.deepcopy(other)
+    result=Machine({},[]).run(suffix_program(columns_suffix),{1:other,13:definitions})
+    assert result is definitions and other['DEPauseRatingColumns']==before['DEPauseRatingColumns']
+    cell={'display':'92','rating':92,'trend':'TrendUp'}
+    Machine({},[]).run(suffix_program(rows_suffix),{1:other,3:[cell],5:[3]})
+    assert cell=={'display':'92','rating':92,'trend':'TrendUp'}
+
+for bad_defs in [None,[],definitions[:5],definitions*2,[{'mHeaderText':'Jersey'},*definitions[1:]], [{'mHeaderText':'Slot'},{'mHeaderText':'Stats'},*definitions[2:]]]:
+    other={'mSpreadsheetId':SHEET,'DEPauseRatingColumns':[True]*90}
+    assert Machine({},[]).run(suffix_program(columns_suffix),{1:other,13:bad_defs}) is bad_defs
+    assert other['DEPauseRatingColumns'] is UNDEFINED, 'Stale mask survived unsupported headers'
+
+for column in [0,3,4,5,len(headers)-1]:
+    calls=[]
+    def get_row(row,cols):
+        calls.append((row,cols));assert row==17 and cols==[column]
+        return [{'display':'A','DEPausePlayerRating':True,'DEPauseGradeColor':GRADE_COLORS['A']}]
+    provider={**receiver,'GetRowData':get_row}
+    a=Assembler();color_prefix(a);a.number(12);a.raw(0x3E)
+    super_object={'native':'preserved'}
+    result=Machine({},[]).run(a.finish(),{1:provider,2:super_object,7:17,8:column})
+    assert result==(GRADE_COLORS['A'] if mask[column] else 12)
+    assert calls==([(17,[column])] if mask[column] else [])
+    assert super_object=={'native':'preserved'}
+
+class DepthBoundedAssembler(Assembler):
+    def __init__(self,limit):super().__init__();self.limit=limit
+    def reg(self,n):assert 0<=n<self.limit;super().reg(n)
+    def store(self,n):assert 0<=n<self.limit;super().store(n)
+for off,argc,regs,flags,size,hash_,suffix,copy_size in DEPTH_SPECS:
+    a=DepthBoundedAssembler(regs);suffix(a);a.finish()
+    assert fnv(legacy.data[off+48:off+48+size])==hash_
+print('Passed: legacy pause depth101 numeric/string boundaries, exact named-sheet/header gates, reordered column subsets, hidden values, untouched source/trends/sort/slot/year fields, cached masks and fixed register frames.')
