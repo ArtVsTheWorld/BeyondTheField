@@ -1,4 +1,4 @@
-param([string]$Name='DynastyEnhancerRecruitListProbe-p2',[ValidateSet('RecruitListProbe','RosterViewProbe','PlayerUiTrace','PlayerUiPreview')][string]$Source='RecruitListProbe')
+param([string]$Name='DynastyEnhancerRecruitListProbe-p2',[ValidateSet('RecruitListProbe','RosterViewProbe','PlayerUiTrace','PlayerUiPreview','PlayerAbilityProbe','PlayerAbilityPreview')][string]$Source='RecruitListProbe')
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath ('Build/'+$Name+'.dll')){throw 'Choose a fresh probe name'}
 $listProbeVs=& 'C:/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe' -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath

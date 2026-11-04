@@ -158,5 +158,47 @@
     "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats.",
     "preparedAdapter": "Tools/build_player_ingame_ui.py and PlayerInGameUiPrograms.h are isolated future-stage code; not wired into p43. All101 boundaries and hidden/stale-OVR preservation tests pass. Numeric-string fields and live attachment remain unverified.",
     "nativeCollector": "Saved PE globalfa60810+448 resolves empty base implementation7ba1690; do not hook. Renderer-only method avoids assumptions about the actual gameplay collector."
+  },
+  "depthChartGrid": {
+    "nativeCapture": "Development-only bounded column collector; Build/roster-view-probe.jsonl",
+    "form": 0,
+    "prefix": [
+      "",
+      "POS",
+      "#",
+      "RS",
+      "Name",
+      "Year",
+      "POS",
+      "OVR",
+      "NIL",
+      "MOR"
+    ],
+    "ratingIds": "7 and known attribute columns10..63",
+    "preserved": "Depth2, RS3, Name4, Year5, position1/6, NIL8, morale9, intValue and sorting",
+    "implemented": "p46 awaiting live test"
+  },
+  "abilityDescriptions": {
+    "native": "0xbab1b28+0xa0 ->0x794d200",
+    "abi": "void* (self,void** out,bool IsMentals)",
+    "fields": [
+      "Description",
+      "UpgradeDescription"
+    ],
+    "liveObserved": "Bronze Requires:84PassBlockPower(75Currently); parser preview showsB/C, costs/eligibility remain native.",
+    "bounds": "4096chars,128ability records; defaultotherUIstrings remain128",
+    "renderer": "Plain TextFieldGeneric; no HTML tags injected",
+    "remaining": "Other-position/localized wording and separate ability-tooltip row collector"
+  },
+  "awardsDiscovery": {
+    "table": "0xc7502f8",
+    "slots": {
+      "0x58": "0xa0c5180 AnnualAwardsPlayerInfo",
+      "0x60": "0xa0c71f0 HeismanAwardsPlayerInfo",
+      "0x68": "0xa0c63b0 AwardsPlayerInfo"
+    },
+    "fields": "overall and fully-scoped attributesSubpanelInfo[].ratingValue",
+    "implemented": false,
+    "caution": "AnnualAwards may be a coach; explicit isCoach true passthrough required."
   }
 }

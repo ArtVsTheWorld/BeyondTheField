@@ -8,12 +8,27 @@ from build_recruit_notes_ui import Assembler, GRADE_COLORS
 from build_player_card_ui import (header_suffix,badge_suffix,attributes_suffix,
                                  template_suffix,group_suffix,level_suffix,attribute_slots_suffix,
                                  skill_slots_suffix,rating_value_draw_suffix,subskills_suffix,
-                                 SPECS,append_program,fnv)
+                                 generic_slider_draw_suffix,SPECS,append_program,fnv)
 from recruit_notes_vm import Machine,UNDEFINED
 
 
 def program(suffix):
     a=Assembler();suffix(a);a.ret();return a.finish()
+
+
+for marked in [False,True]:
+    for grade in ['A','B','C','D','F','?','85',85,None]:
+        target={'mData':{'display':'native','ExtraInfo':{'fontColor':0xFFFFFF,'font':'native'}}}
+        target['SetLabel']=lambda value:target['mData'].update(display=value)
+        target['SetExtraInfo']=lambda extra:target['mData']['ExtraInfo'].update(extra)
+        data={'value':4,'ExtraInfo':{'DEPlayerRating':marked,'RightLabelDisplayOverride':grade,'MinValue':0,'MaxValue':100}}
+        before=copy.deepcopy(data)
+        Machine({},[]).run(program(generic_slider_draw_suffix),{1:{'mData':data,'mcRightValue':target}})
+        assert data==before, 'Shared slider model was changed'
+        if marked and isinstance(grade,str) and grade in GRADE_COLORS:
+            assert target['mData']['display']==grade and target['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
+        else:assert target['mData']['display']=='native' and target['mData']['ExtraInfo']['fontColor']==0xFFFFFF
+        assert target['mData']['ExtraInfo']['font']=='native'
 
 
 def text_widget(label='old',color=0xFFFFFF):
@@ -102,6 +117,7 @@ for rating in [0,59,60,79,80,90,100]:
         style=clip['mData']['ExtraInfo'][name]
         assert style['fontColor']==GRADE_COLORS[expected(rating)] and style['font']=='native-font' and style['size']==28
     updates=[];old_extra={'font':'native-title','hAlign':'right','fontColor':0xFFFFFF}
+    old_extra['CloneAndModify']=lambda patch,original=old_extra:{**original,**patch}
     levels=[{'display':rating,'ExtraInfo':old_extra},{'display':3,'ExtraInfo':{'fontColor':0x00FF00}}]
     bonus=copy.deepcopy(levels[1])
     def level_update(index,key,value):updates.append((index,key));levels[index][key]=value
@@ -132,7 +148,7 @@ for rating in [59,70,90]:
     before=copy.deepcopy(entry)
     Machine({},[]).run(program(skill_slots_suffix),{1:receiver})
     assert entry==before and gauge['mData']['value']==3
-    assert gauge['calls']==[{'RightLabelDisplayOverride':expected(rating)}]
+    assert gauge['calls']==[{'RightLabelDisplayOverride':expected(rating),'DEPlayerRating':True}]
 for suffix in [attribute_slots_suffix,skill_slots_suffix]:
     for receiver in [{},{'mData':{}},{'mData':{'ExtraInfo':{}}}]:Machine({},[]).run(program(suffix),{1:receiver})
 

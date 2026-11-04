@@ -10,6 +10,11 @@ namespace recruitingfog::playerfog {
 // Semantic column IDs, not screen positions. Native position/team filters may
 // reorder or request only a subset of these columns.
 inline bool rosterRatingColumn(int id){return id==5||(id>=8&&id<=61);}
+enum class GridSchema{None,Roster,DepthChart};
+inline uint64_t gridState(int form,GridSchema schema){return form<0||schema==GridSchema::None?0:(uint64_t(uint32_t(form)+1)<<32)|uint32_t(schema);}
+inline int gridStateForm(uint64_t state){return state?int((state>>32)-1):-1;}
+inline GridSchema gridStateSchema(uint64_t state){return GridSchema(uint32_t(state));}
+inline bool ratingColumn(GridSchema schema,int id){return schema==GridSchema::Roster?rosterRatingColumn(id):schema==GridSchema::DepthChart?(id==7||(id>=10&&id<=63)):false;}
 inline bool ratingText(std::string_view text,int& value){
     unsigned result=0;size_t i=0;
     while(i<text.size()&&text[i]>='0'&&text[i]<='9'){
@@ -28,17 +33,27 @@ inline std::string ratingLabel(const char* value){
 inline int gradeColor(char value){
     switch(value){case 'A':return 0x1FE840;case 'B':return 0xA8D943;case 'C':return 0xFFD34D;case 'D':return 0xF68C2E;default:return 0xF04444;}
 }
-inline bool rosterSchema(const std::array<std::string,90>& names,unsigned count){
-    if(count<9||count>62||names[1]!="RS"||names[2]!="Name"||names[3]!="Year"||names[4]!="POS"||names[5]!="OVR"||names[6]!="NIL"||names[7]!="DEV")return false;
+inline bool knownAttributeColumns(const std::array<std::string,90>& names,unsigned first,unsigned count){
     // Position views retain the roster identity fields but select/reorder a
     // smaller attribute set. Admit only known rating headers after that prefix.
     const std::string allowed="|SPD|ACC|AGI|COD|STR|AWR|CAR|BCV|BTK|TRK|SFA|SPM|JKM|CTH|CIT|SPC|SRR|MRR|DRR|RLS|JMP|THP|SAC|MAC|DAC|RUN|TUP|BSK|PAC|PBK|PBP|PBF|RBK|RBP|RBF|LBK|IBL|PRC|TAK|POW|BSH|FMV|PMV|PUR|MCV|ZCV|PRS|RET|KPW|KAC|STA|TGH|INJ|LSP|";
-    for(unsigned i=8;i<count;++i)if(names[i].empty()||allowed.find("|"+names[i]+"|")==std::string::npos)return false;
+    for(unsigned i=first;i<count;++i)if(names[i].empty()||allowed.find("|"+names[i]+"|")==std::string::npos)return false;
     return true;
+}
+inline bool rosterSchema(const std::array<std::string,90>& names,unsigned count){
+    return count>=9&&count<=62&&names[1]=="RS"&&names[2]=="Name"&&names[3]=="Year"&&names[4]=="POS"&&names[5]=="OVR"&&names[6]=="NIL"&&names[7]=="DEV"&&knownAttributeColumns(names,8,count);
+}
+inline GridSchema classifyGrid(const std::array<std::string,90>& names,unsigned count){
+    if(rosterSchema(names,count))return GridSchema::Roster;
+    // Verified native depth-chart identity prefix. # is depth, not a rating;
+    // hidden position/morale, year and NIL also retain their original types.
+    if(count>=10&&count<=64&&names[1]=="POS"&&names[2]=="#"&&names[3]=="RS"&&names[4]=="Name"&&names[5]=="Year"&&names[6]=="POS"&&names[7]=="OVR"&&names[8]=="NIL"&&names[9]=="MOR"&&knownAttributeColumns(names,10,count))return GridSchema::DepthChart;
+    return GridSchema::None;
 }
 struct GridSink{
     void** vtable;void* target;
     std::array<int,90> columns{};unsigned count=0,changed=0;
+    GridSchema schema=GridSchema::Roster;
 };
 template<class T>inline void put(void* target,unsigned row,const char* key,T value,unsigned slot){
     reinterpret_cast<void(__fastcall*)(void*,unsigned,const char*,T)>((*reinterpret_cast<void***>(target))[slot])(target,row,key,value);
@@ -49,7 +64,7 @@ inline void __fastcall gridBool(GridSink* s,unsigned r,const char* k,bool v){put
 inline void __fastcall gridInt(GridSink* s,unsigned r,const char* k,int v){put(s->target,r,k,v,4);}
 inline void __fastcall gridFloat(GridSink* s,unsigned r,const char* k,float v){put(s->target,r,k,v,5);}
 inline void __fastcall gridString(GridSink* s,unsigned r,const char* k,const char* v){
-    if(r<s->count&&rosterRatingColumn(s->columns[r])&&k&&!strcmp(k,"display")){
+    if(r<s->count&&ratingColumn(s->schema,s->columns[r])&&k&&!strcmp(k,"display")){
         const auto label=ratingLabel(v);put(s->target,r,k,label.c_str(),6);
         if(v&&label!=v){++s->changed;put(s->target,r,"DEPlayerRating",true,3);put(s->target,r,"DEGradeColor",gradeColor(label[0]),4);}
     }else put(s->target,r,k,v,6);
@@ -79,8 +94,8 @@ inline void __fastcall columnString(ColumnSink* s,unsigned r,const char* k,const
     if(r<s->names.size()&&f.key=="display")s->names[r]=f.text;s->fields.push_back(std::move(f));
 }
 inline void* columnTable[]={nullptr,reinterpret_cast<void*>(columnReserve),nullptr,reinterpret_cast<void*>(columnBool),reinterpret_cast<void*>(columnInt),reinterpret_cast<void*>(columnFloat),reinterpret_cast<void*>(columnString)};
-inline void replayColumns(const ColumnSink& sink,void* target,bool roster){
-    for(const auto& f:sink.fields){const bool rating=roster&&rosterRatingColumn(int(f.row));
+inline void replayColumns(const ColumnSink& sink,void* target,bool roster,GridSchema schema=GridSchema::Roster){
+    for(const auto& f:sink.fields){const bool rating=roster&&ratingColumn(schema,int(f.row));
         switch(f.slot){
         case 1:reserve(target,f.row);break;
         case 3:put(target,f.row,f.key.c_str(),rating&&f.key=="isTrend"?false:f.flag,3);break;
@@ -89,7 +104,7 @@ inline void replayColumns(const ColumnSink& sink,void* target,bool roster){
         case 6:put(target,f.row,f.key.c_str(),f.nullText?nullptr:f.text.c_str(),6);break;
         }
     }
-    if(roster)for(unsigned column=0;column<sink.names.size();++column)if(rosterRatingColumn(int(column))&&!sink.names[column].empty())put(target,column,"DEPlayerRating",true,3);
+    if(roster)for(unsigned column=0;column<sink.names.size();++column)if(ratingColumn(schema,int(column))&&!sink.names[column].empty())put(target,column,"DEPlayerRating",true,3);
 }
 template<class View,class Setter>bool selectedOverall(View& view,uintptr_t root,Setter setString){
     std::map<std::string,uintptr_t> fields;double rating=0;

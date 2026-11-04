@@ -41,11 +41,11 @@
       "liveVerified": false,
       "evidence": "Active model rows use native RightLabelDisplayOverride plus cloned font styles; source rating/min/max/increase values unchanged. Offline 101-boundary/migration/unknown/ABI tests; trace match of actual GenericSlider.Draw and UpdateSubskillsList. p39 shared renderer masks unused AttributesItem path separately.",
       "remaining": [
-        "p39 live Overall/individual attributes",
-        "group heading color",
-        "all card tabs/comparisons/boost/reentry paths"
+        "Combined p46 reentry/focus regression",
+        "Other position cards and Mentals/secondary tooltips",
+        "Injured-player Health path (numeric wear-and-tear deltas intentionally remain)"
       ],
-      "liveStatus": "p39: player-card Overall letter and skill-group grades verified live. Attribute rows initially numeric; bounded renderer trace proved active GenericSlider. Supplement PlayerUiPreview-p1 then attached active _UpdateSubskillsList and live WR Quickness showed colored Speed B / Acceleration A / Stamina B / Kick Return D. Header and selected group heading remain white; secondary card tabs and other positions pending."
+      "liveStatus": "p43 + isolated supplements: Overall and group headings colored; default-style attribute colors fixed and verified for Awareness/Acceleration C, Speed D, passing-blocking C and Power B. Physicals requirements/current grades verified live with unchanged numeric costs/Not Met. Overview/healthy Health/More inspected with no raw Overall. p46 combines these, awaiting restart."
     },
     {
       "surface": "Native spreadsheet grade colors",
@@ -61,11 +61,12 @@
       "surface": "Depth chart and lineup/comparison",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "p39 builds exact fingerprinted player-only entry hooks for depth chart and reduced-context sidebar, fully-scouted attribute guards. Native team Overall/Offense/Defense getter remains untouched. SkillGroupsInfoSlot and AttributesInfoSlot label/style suffixes added.",
+      "evidence": "Native QB depth columns captured: form0; identity POS,#,RS,Name,Year,POS,OVR,NIL,MOR; rating IDs7,10+. p46 exact-prefix/known-attribute schema plus one atomic form/schema snapshot. Tests preserve depth2 ordinal formatter13, NIL8 currency49, MOR9, intValue/sorting and names.",
       "remaining": [
         "live table schemas and complete depth chart/lineup/comparison navigation",
         "formation cards/popups and colors"
-      ]
+      ],
+      "liveStatus": "Before p46, list still numeric while selected-player Overall is colored D. Captured actual native metadata; conversion awaiting p46 live test."
     },
     {
       "surface": "Dynasty hub player previews",
@@ -76,7 +77,8 @@
         "live formation and comparison/watch previews",
         "default-style players-to-watch grade colors",
         "reentry/selection"
-      ]
+      ],
+      "liveStatus": "p43 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers and team ratings remain numeric. Other hub panels pending."
     },
     {
       "surface": "Recruit scouting grades, ranges and colors",
@@ -105,8 +107,14 @@
     },
     {
       "surface": "Secondary tooltips, boosts and popups",
-      "implemented": false,
-      "liveVerified": false
+      "implemented": "Partial",
+      "liveVerified": false,
+      "evidence": "Ability requirements/current ratings fixed and live-verified via typed native preview. p46 includes same parser only in Description/UpgradeDescription; costs, ranks and eligibility untouched. TextFieldGeneric uses plain text, so requirement paragraphs keep their native text color. Other tooltips pending.",
+      "remaining": [
+        "Ability tooltip row-collector path",
+        "Additional player popup displays",
+        "Temporary boost audit; no generic number replacement"
+      ]
     }
   ],
   "invariants": [
@@ -148,18 +156,21 @@
       "Fast native body accessors bypass setup for some renderers; exact-frame adapters are now eligible at the existing length accessor",
       "Actual comparison Overall is in PlayerA/B.RecordList[]; source now corrects this explicit path while preserving StatLine. Corrected native-shaped fixture added after p40 build, pending next build.",
       "Active selected-row renderer is madden Spreadsheet 272-byte method, not Ion 408-byte method. Native black selection foreground retained after live readability feedback.",
-      "Current comparison fixture covers PlayerA/B.RecordList[].Overall and leaves StatLine numeric."
+      "Current comparison fixture covers PlayerA/B.RecordList[].Overall and leaves StatLine numeric.",
+      "Default GenericSlider value style may reset a grade to white: exact private-marker/existing-grade Draw suffix fixes it after native styling.",
+      "Physicals ability prose includes exact requirement/current ratings; explicit attribute grammar changes only those two UI string fields. HTML color markup is unsupported and is not injected.",
+      "Roster/depth both use form0; packed form+schema in a single atomic snapshot prevents mixed-layout reads."
     ]
   },
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p43.dll",
-    "cleanRestartRequired": "Game is closed. Await user main-menu confirmation to activate p43; installed baseline unchanged.",
-    "activeRuntime": "No game process at last read. p43 not activated.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p43-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p46.dll",
+    "cleanRestartRequired": "Pending main-menu confirmation for p46 clean-start test; installed baseline untouched.",
+    "activeRuntime": "p43 plus retained slider repaint supplement p4 in PID19292. Ability preview stopped0; column probe auto-expires. p46 is not active yet.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p46-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "7ce9f7d15756a71495cfe88d7f03424613a41fc36befd3cadd031d82daec161f",
+    "previewSha256": "cb8d9f8a088911841ba2b23e787ae4885a04c92329d3f8b0232fb539a5a9b368",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP."
   },
   "latestVerification": {
@@ -170,6 +181,7 @@
     "viewProbe": "Build/roster-view-probe.jsonl records full and QB schemas; game assets and private observations are not distributed",
     "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet.",
     "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test.",
-    "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text."
+    "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text.",
+    "p46Build": "Passed MSVC /W4 /WX, C++ including101xfull-attribute ability grammar and captured-depth-schema tests, all UI VM suites, independent review and MMC package smoke checks. No installed changes."
   }
 }

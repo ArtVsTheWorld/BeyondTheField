@@ -90,8 +90,26 @@ def rating_value_draw_suffix(a):
     path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
     path(a,1,'mData','ExtraInfo','DEPlayerRating');a.raw(0x73,0x66);a.branch(done,0xB8)
     path(a,1,'mData','value');a.store(0)
-    numeric_grade(a,0,2,done,'ratingDrawGrade');palette(a,2,3,done,'ratingDrawPalette')
+    a.reg(0);a.raw(0x44);a.string('number');a.raw(0x66);a.branch('ratingDrawNumeric')
+    a.reg(0);a.store(2);a.branch('ratingDrawLabel',0x99)
+    a.label('ratingDrawNumeric');numeric_grade(a,0,2,done,'ratingDrawGrade')
+    a.label('ratingDrawLabel');palette(a,2,3,done,'ratingDrawPalette')
     path(a,1,'mcValue');a.store(4);text_label(a,4,2,3,5,done,'ratingDrawText')
+    a.label(done)
+
+
+def generic_slider_draw_suffix(a):
+    # GenericSlider is shared with progression/settings. Recolor only a
+    # private-marked, already-converted player display override; never infer
+    # a rating from the shared numeric slider value or skill-group level.
+    done='sliderDrawDone'
+    path(a,1,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo','DEPlayerRating');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,1,'mData','ExtraInfo','RightLabelDisplayOverride');a.store(2)
+    palette(a,2,3,done,'sliderDrawPalette')
+    path(a,1,'mcRightValue');a.store(4)
+    text_label(a,4,2,3,5,done,'sliderDrawText')
     a.label(done)
 
 
@@ -138,6 +156,7 @@ def group_suffix(a):
     numeric_grade(a, 3, 4, done, 'groupGrade')
     palette(a, 4, 6, done, 'groupPalette')
     a.empty_object(5); a.reg(5); a.string('RightLabelDisplayOverride'); a.reg(4); a.raw(0x4F)
+    a.set_field(5,'DEPlayerRating',True)
     # Native slider applies these style objects again on focus changes. Clone
     # each available style and alter only its color, retaining fonts/layout.
     path(a, 2, 'mData'); a.raw(0x76, 0x49); a.branch('groupApply')
@@ -159,8 +178,8 @@ def level_suffix(a):
     palette(a,6,7,'levelDone','levelPalette')
     a.number(0);a.number(1);path(a,1,'mSkillLevelDataProvider');a.string('GetItemData');a.raw(0x52);a.store(8);a.missing(8,'levelDone')
     path(a,8,'ExtraInfo');a.store(9);a.missing(9,'levelDone')
-    a.empty_object(10)
-    a.reg(9);a.reg(10);a.number(2);a.global_object('cafe','utility','ObjectUtil');a.call('MergeInto')
+    a.empty_object(10);a.reg(10);a.string('fontColor');a.reg(7);a.raw(0x4F)
+    a.reg(10);a.number(1);a.reg(9);a.string('CloneAndModify');a.raw(0x52);a.store(10)
     a.reg(10);a.string('fontColor');a.reg(7);a.raw(0x4F)
     a.set_field(10,'DEPlayerRating',True)
     a.reg(10);a.string('ExtraInfo');a.number(0);a.number(3)
@@ -219,6 +238,7 @@ def skill_slots_suffix(a):
     palette(a,15,16,'skillSlotsNext','skillSlotsPalette')
     a.reg(1);a.string('mcSkill');a.reg(12);a.raw(0x47,0x4E);a.store(17);a.missing(17,'skillSlotsNext')
     a.empty_object(18);a.reg(18);a.string('RightLabelDisplayOverride');a.reg(15);a.raw(0x4F)
+    a.set_field(18,'DEPlayerRating',True)
     path(a,17,'mData');a.raw(0x76,0x49);a.branch('skillSlotsApply')
     path(a,17,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch('skillSlotsApply')
     for index,name in enumerate(('FocusValueTextStyle','UnfocusValueTextStyle','UnfocusableValueTextStyle')):
@@ -244,6 +264,8 @@ SPECS={
         (0x327E8,0,9,25,388,0x45B4DB9AE855957E,9,attribute_slots_suffix,None),
         (0x44BF8,0,12,25,204,0xC3220200E8D796CA,21,skill_slots_suffix,None),
         (0x22150,0,9,25,1730,0x444360923A963AB5,9,rating_value_draw_suffix,None)]),
+    'sliderPrograms': ('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_com/scriptpod.ast', [
+        (0x3EEB0,0,10,25,2587,0xF364EAE7B6CB59CA,10,generic_slider_draw_suffix,None)]),
     'cardPrograms': ('Evidence/PlayerFog/manageplayerart.ast', [
         (0x3038,1,30,41,2224,0xA6909B15969FC597,30,header_suffix,None),
         (0x3EF0,6,18,41,876,0x944C06B02B868F03,18,header_event_suffix,None)]),

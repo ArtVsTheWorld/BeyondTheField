@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
 from build_player_hub_ui import formation_suffix,ovr_template_suffix
+from build_player_card_ui import rating_value_draw_suffix
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -29,6 +30,16 @@ for n in range(101):
     result=Machine({},[]).run(program(ovr_template_suffix),{2:data})
     assert result is data and data['value']==grade(n) and data['display']=='OVR' and data['ExtraInfo']['unrelated']==12
     assert data['ExtraInfo']['ValueTextStyle']['font']=='native' and data['ExtraInfo']['ValueTextStyle']['fontColor']==GRADE_COLORS[grade(n)]
+    # Player-watch templates omit ValueTextStyle. Its private marker lets the
+    # shared badge Draw recolor the existing native text without inventing a font.
+    default_data={'value':n};Machine({},[]).run(program(ovr_template_suffix),{2:default_data})
+    assert default_data['ExtraInfo']['DEPlayerRating'] is True
+    child={'mData':{'display':grade(n),'ExtraInfo':{'font':'native-default','fontColor':0xFFFFFF}}}
+    child['SetLabel']=lambda value:child['mData'].update(display=value)
+    child['SetExtraInfo']=lambda value:child['mData']['ExtraInfo'].update(value)
+    suffix=Assembler();rating_value_draw_suffix(suffix);suffix.ret()
+    Machine({},[]).run(suffix.finish(),{1:{'mData':default_data,'mcValue':child}})
+    assert child['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade(n)] and child['mData']['ExtraInfo']['font']=='native-default'
 for n in ['?','Hidden',-1,101,UNDEFINED,None]:
     data={'value':n};Machine({},[]).run(program(ovr_template_suffix),{2:data});assert data=={'value':n}
 for receiver in [{},{'FIELDED_PLAYERS':11}]:

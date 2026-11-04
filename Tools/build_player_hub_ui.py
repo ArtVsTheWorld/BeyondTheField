@@ -28,6 +28,7 @@ def ovr_template_suffix(a):
     path(a,2,'ExtraInfo');a.raw(0x76,0x49);a.branch('previewExtra',0xB8)
     a.reg(2);a.string('ExtraInfo');a.number(0);a.raw(0x43,0x4F)
     a.label('previewExtra')
+    path(a,2,'ExtraInfo');a.string('DEPlayerRating');a.raw(0x73,0x4F)
     # Clone an existing ValueTextStyle; absence leaves the native default style
     # intact rather than inventing an unverified default font or widget type.
     path(a,2,'ExtraInfo','ValueTextStyle');a.store(7);a.missing(7,'templateReturn')

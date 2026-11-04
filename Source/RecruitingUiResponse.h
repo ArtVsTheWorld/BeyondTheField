@@ -12,13 +12,14 @@ namespace recruitingfog {
 // caller's native RefPtr for the entire callback. No database object is used.
 template<class Read>class UiResponse {
     Read read;
+    size_t textLimit;
 public:
-    explicit UiResponse(Read r):read(r){}
+    explicit UiResponse(Read r,size_t maximumText=128):read(r),textLimit((std::min)(maximumText,size_t(4096))){}
     template<class T>bool get(uintptr_t at,T& out){return at>=0x10000&&read(at,&out,sizeof(out));}
     unsigned kind(uintptr_t at){unsigned out=0;get(at+0x10,out);return out;}
     bool text(uintptr_t at,std::string& out){
         std::array<unsigned char,16> bytes{};if(!read(at,bytes.data(),bytes.size()))return false;
-        if(bytes[15]&128){uintptr_t data=0;unsigned size=0;memcpy(&data,bytes.data(),8);memcpy(&size,bytes.data()+8,4);if(size>128)return false;out.resize(size);return !size||read(data,out.data(),size);}
+        if(bytes[15]&128){uintptr_t data=0;unsigned size=0;memcpy(&data,bytes.data(),8);memcpy(&size,bytes.data()+8,4);if(size>textLimit)return false;out.resize(size);return !size||read(data,out.data(),size);}
         if(bytes[15]>15)return false;out.assign(reinterpret_cast<const char*>(bytes.data()),15-bytes[15]);return true;
     }
     bool array(uintptr_t at,std::vector<uintptr_t>& out,size_t maximum){

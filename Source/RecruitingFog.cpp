@@ -28,6 +28,7 @@
 #include "PlayerCardUiPrograms.h"
 #include "PlayerFogPerformance.h"
 #include "PlayerHubUiPrograms.h"
+#include "PlayerAbilityDescriptions.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -53,9 +54,10 @@ notesui::Runtime playerCardUi(playercardui::cardPrograms());
 notesui::Runtime playerTemplateUi(playercardui::templatePrograms());
 notesui::Runtime playerSkillUi(playercardui::skillPrograms());
 notesui::Runtime playerHubUi(playerhubui::programs());
-const std::array<notesui::Runtime*,5> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi};
-std::array<std::atomic<bool>,5> cardUiFailed{};
-std::array<std::atomic<unsigned>,5> cardUiAttached{};
+notesui::Runtime playerSliderUi(playercardui::sliderPrograms());
+const std::array<notesui::Runtime*,6> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi};
+std::array<std::atomic<bool>,6> cardUiFailed{};
+std::array<std::atomic<unsigned>,6> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
 resume::Cache resumeCache;
 using ClassRows=void(__fastcall*)(void*,void*,int,int,void*);
@@ -67,7 +69,7 @@ using GridClose=void(__fastcall*)(void*,int);
 using RosterPlayer=void*(__fastcall*)(void*,void**,void*);
 RosterColumns originalRosterColumns=nullptr;GridClose originalGridClose=nullptr;RosterPlayer originalRosterPlayer=nullptr;
 bool rosterColumnsInstalled=false,gridCloseInstalled=false,rosterPlayerInstalled=false;
-std::atomic<int> rosterForm{-1};std::atomic<unsigned> rosterCells{0},rosterPanels{0};
+std::atomic<uint64_t> ratingGridState{0};std::atomic<unsigned> rosterCells{0},rosterPanels{0};
 std::atomic<unsigned> rosterColumnCalls{0};
 constexpr uintptr_t rosterColumnsTable=0xbaa78b8,rosterColumnsRva=0x78ef740,gridCloseRva=0x7a88c90,rosterPlayerTable=0xbab18c0,rosterPlayerRva=0x79472b0;
 struct PlayerBinding{uintptr_t table,slot,rva;const char* prefix;playerfog::Surface surface;};
@@ -91,6 +93,10 @@ constexpr MapBinding mapBindings[]={
     {0x58,0x794ba00,"48896c24104889742418574883ec50488bb118040000488bfa488be94885f60f","overall"},
     {0x118,0x7951580,"48896c2420565741564883ec70488b05ac1214064833c44889442468488be948","Overall"}};
 std::array<PlayerMap,2> mapOriginal{};std::array<bool,2> mapInstalled{};std::array<std::atomic<unsigned>,2> mapCalls{};
+using PlayerAbilities=void*(__fastcall*)(void*,void**,bool);
+PlayerAbilities originalAbilities=nullptr;bool abilitiesInstalled=false;std::atomic<unsigned> abilityCalls{0};
+constexpr uintptr_t abilitiesTable=0xbab1b28,abilitiesSlot=0xa0,abilitiesRva=0x794d200;
+constexpr std::array<unsigned char,32> abilitiesPrefix={0x44,0x88,0x44,0x24,0x18,0x48,0x89,0x54,0x24,0x10,0x48,0x89,0x4c,0x24,0x08,0x55,0x53,0x56,0x41,0x54,0x41,0x56,0x41,0x57,0x48,0x8d,0x6c,0x24,0x88,0x48,0x81,0xec};
 using ScriptSetup=uintptr_t(__fastcall*)(void*,void*,uintptr_t,uintptr_t,uintptr_t);
 ScriptSetup originalScriptSetup=nullptr;bool notesSetupInstalled=false;
 using ColorLength=unsigned(__fastcall*)(void*);
@@ -231,8 +237,10 @@ std::string classGridLabel(void* source,int form,int row,const char* originalLab
 }
 void __fastcall classRowsHook(void* source,void* target,int form,int row,void* columns){
     playerperf::Sample performance(playerperf::rows);
-    if(!disabled&&form==rosterForm.load()){
+    const auto gridState=ratingGridState.load();
+    if(!disabled&&form==playerfog::gridStateForm(gridState)){
         playerfog::GridSink sink{playerfog::gridTable,target};
+        sink.schema=playerfog::gridStateSchema(gridState);
         if(playerfog::gridColumns(sink,columns)){CallGuard guard;{playerperf::Sample nativePerformance(playerperf::nativeRows);originalClassRows(source,&sink,form,row,columns);}rosterCells+=sink.changed;return;}
     }
     CallGuard guard;if(disabled||!classGridColumns(columns)){originalClassRows(source,target,form,row,columns);return;}
@@ -244,12 +252,13 @@ void __fastcall rosterColumnsHook(void* source,void* target,int form){
     playerfog::ColumnSink sink{playerfog::columnTable};sink.fields.reserve(768);
     originalRosterColumns(source,&sink,form);
     unsigned columnCount=0;for(unsigned i=0;i<sink.names.size();++i)if(!sink.names[i].empty())columnCount=i+1;
-    const bool recognized=form>=0&&playerfog::rosterSchema(sink.names,columnCount);rosterForm=recognized?form:-1;
-    playerfog::replayColumns(sink,target,recognized);
-    if(rosterColumnCalls.fetch_add(1)<3)note({{"event","player_fog_roster_columns"},{"form",form},{"columns",columnCount},{"recognized",recognized},{"names",sink.names}});
+    const auto schema=form>=0?playerfog::classifyGrid(sink.names,columnCount):playerfog::GridSchema::None;
+    const bool recognized=schema!=playerfog::GridSchema::None;ratingGridState=playerfog::gridState(form,schema);
+    playerfog::replayColumns(sink,target,recognized,schema);
+    if(rosterColumnCalls.fetch_add(1)<3)note({{"event","player_fog_roster_columns"},{"form",form},{"columns",columnCount},{"recognized",recognized},{"schema",int(schema)},{"names",sink.names}});
 }
 void __fastcall gridCloseHook(void* source,int form){
-    CallGuard guard;if(form==rosterForm.load())rosterForm=-1;originalGridClose(source,form);
+    CallGuard guard;auto state=ratingGridState.load();if(form==playerfog::gridStateForm(state))ratingGridState.compare_exchange_strong(state,0);originalGridClose(source,form);
 }
 void* __fastcall rosterPlayerHook(void* source,void** out,void* argument){
     CallGuard guard;auto* result=originalRosterPlayer(source,out,argument);
@@ -268,6 +277,13 @@ template<size_t Index>void* __fastcall playerResponseHook(void* source,void** ou
     }return result;
 }
 const DetailGetter playerHooks[]={playerResponseHook<0>,playerResponseHook<1>,playerResponseHook<2>,playerResponseHook<3>,playerResponseHook<4>,playerResponseHook<5>,playerResponseHook<6>,playerResponseHook<7>,playerResponseHook<8>,playerResponseHook<9>,playerResponseHook<10>};
+void* __fastcall playerAbilitiesHook(void* source,void** out,bool mentals){
+    CallGuard guard;auto* result=originalAbilities(source,out,mentals);
+    if(!disabled&&out&&*out){UiResponse view(read,4096);
+        const auto changed=playerfog::convertAbilityDescriptions(view,reinterpret_cast<uintptr_t>(*out),[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);});
+        if(abilityCalls.fetch_add(1)<3)note({{"event","player_fog_ability_descriptions"},{"mentals",mentals},{"changed",changed}});
+    }return result;
+}
 template<size_t Index>void __fastcall playerMapHook(void* source,void* target){
     CallGuard guard;if(disabled){mapOriginal[Index](source,target);return;}
     playerfog::MapSink sink{playerfog::mapTable,target,mapBindings[Index].ratingKey};
@@ -374,6 +390,8 @@ void installRosterProviders(bool preflightOnly=false){
         if(!read(base+0xbab1b28+binding.slot,&current,8)||current!=base+binding.rva||!read(current,actual.data(),32))throw std::runtime_error("Unsupported or owned card map provider");
         const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported card map fingerprint");
     }
+    uintptr_t currentAbilities=0;std::array<unsigned char,32> actualAbilities{};
+    if(!read(base+abilitiesTable+abilitiesSlot,&currentAbilities,8)||currentAbilities!=base+abilitiesRva||!read(currentAbilities,actualAbilities.data(),actualAbilities.size())||actualAbilities!=abilitiesPrefix)throw std::runtime_error("Unsupported or owned player ability description provider");
     if(preflightOnly)return;
     originalRosterColumns=reinterpret_cast<RosterColumns>(base+rosterColumnsRva);originalGridClose=reinterpret_cast<GridClose>(base+gridCloseRva);originalRosterPlayer=reinterpret_cast<RosterPlayer>(base+rosterPlayerRva);
     if(!replace(reinterpret_cast<void*>(originalRosterColumns),reinterpret_cast<void*>(rosterColumnsHook),rosterColumnsTable,0x70))throw std::runtime_error("Roster columns ownership changed");rosterColumnsInstalled=true;
@@ -385,6 +403,8 @@ void installRosterProviders(bool preflightOnly=false){
     for(size_t i=0;i<mapOriginal.size();++i){const auto& binding=mapBindings[i];mapOriginal[i]=reinterpret_cast<PlayerMap>(base+binding.rva);
         if(!replace(reinterpret_cast<void*>(mapOriginal[i]),reinterpret_cast<void*>(mapHooks[i]),0xbab1b28,binding.slot))throw std::runtime_error("Card map ownership changed");mapInstalled[i]=true;
     }
+    originalAbilities=reinterpret_cast<PlayerAbilities>(base+abilitiesRva);
+    if(!replace(reinterpret_cast<void*>(originalAbilities),reinterpret_cast<void*>(playerAbilitiesHook),abilitiesTable,abilitiesSlot))throw std::runtime_error("Player abilities ownership changed");abilitiesInstalled=true;
 }
 #endif
 DWORD stop(){
@@ -399,7 +419,8 @@ DWORD stop(){
     disabled=true;
     bool ownershipFailed=false;
 #if defined(RECRUIT_NOTES_UI)
-    rosterForm=-1;
+    ratingGridState=0;
+    if(abilitiesInstalled){if(replace(reinterpret_cast<void*>(playerAbilitiesHook),reinterpret_cast<void*>(originalAbilities),abilitiesTable,abilitiesSlot))abilitiesInstalled=false;else ownershipFailed=true;}
     for(size_t i=0;i<mapOriginal.size();++i)if(mapInstalled[i]){const auto& binding=mapBindings[i];if(replace(reinterpret_cast<void*>(mapHooks[i]),reinterpret_cast<void*>(mapOriginal[i]),0xbab1b28,binding.slot))mapInstalled[i]=false;else ownershipFailed=true;}
     for(size_t i=0;i<playerOriginal.size();++i)if(playerInstalled[i]){const auto& binding=playerBindings[i];if(replace(reinterpret_cast<void*>(playerHooks[i]),reinterpret_cast<void*>(playerOriginal[i]),binding.table,binding.slot))playerInstalled[i]=false;else ownershipFailed=true;}
     if(rosterPlayerInstalled){if(replace(reinterpret_cast<void*>(rosterPlayerHook),reinterpret_cast<void*>(originalRosterPlayer),rosterPlayerTable,0x50))rosterPlayerInstalled=false;else ownershipFailed=true;}

@@ -17,16 +17,24 @@ void __fastcall hook(void* source,void* target,int form){
     if(disabled||calls.fetch_add(1)>=64){original(source,target,form);--inflight;return;}
     recruitingfog::playerfog::ColumnSink sink{recruitingfog::playerfog::columnTable};sink.fields.reserve(768);original(source,&sink,form);
     recruitingfog::playerfog::replayColumns(sink,target,false);
-    {std::lock_guard<std::mutex> lock(mutex);if(queue.size()<16)queue.push_back({{"form",form},{"names",sink.names}});}--inflight;
+    Json fields=Json::array();for(const auto& f:sink.fields){
+        Json value={{"row",f.row},{"slot",f.slot},{"key",f.key}};
+        if(f.slot==6)value["value"]=f.nullText?Json(nullptr):Json(f.text);
+        else if(f.slot==4)value["value"]=f.integer;else if(f.slot==3)value["value"]=f.flag;else if(f.slot==5)value["value"]=f.real;
+        fields.push_back(std::move(value));
+    }
+    {std::lock_guard<std::mutex> lock(mutex);if(queue.size()<16)queue.push_back({{"form",form},{"names",sink.names},{"fields",fields}});}--inflight;
 }
 DWORD stop(){disabled=true;if(original&&!swap(reinterpret_cast<void*>(hook),reinterpret_cast<void*>(original)))return 2;const auto deadline=GetTickCount64()+5000;while(inflight&&GetTickCount64()<deadline)Sleep(1);return inflight?3:0;}
 DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"roster-view-probe.jsonl";
     auto* parent=*reinterpret_cast<void**>(base+0xbaa78b8+0x70);HMODULE owner=nullptr;wchar_t ownerPath[32768]{};
-    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p36.dll")return 1;
+    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p43.dll")return 1;
     HMODULE pin=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&pin))return 2;
     original=reinterpret_cast<Columns>(parent);if(!swap(parent,reinterpret_cast<void*>(hook))){original=nullptr;return 3;}
-    while(!disabled){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(mutex);batch.swap(queue);}if(!batch.empty()){std::ofstream out(file,std::ios::app);for(const auto& item:batch)out<<item.dump()<<'\n';}Sleep(200);}return 0;
+    const auto deadline=GetTickCount64()+120000;
+    while(!disabled&&GetTickCount64()<deadline){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(mutex);batch.swap(queue);}if(!batch.empty()){std::ofstream out(file,std::ios::app);for(const auto& item:batch)out<<item.dump()<<'\n';}Sleep(200);}
+    if(!disabled)stop();return 0;
 }
 }
 extern "C" __declspec(dllexport) DWORD WINAPI DynastyEnhancerStop(void*){return stop();}

@@ -14,7 +14,7 @@ namespace {
 using Json=nlohmann::json;using Setup=uintptr_t(__fastcall*)(void*,void*,uintptr_t,uintptr_t,uintptr_t);
 HMODULE self;uintptr_t base;Setup previousSetup=nullptr;
 std::atomic<bool> disabled{false},failed{false};std::atomic<unsigned> inflight{0},attached{0};
-std::vector<recruitingfog::notesui::Program> previewPrograms(){return recruitingfog::playercardui::skillPrograms();}
+std::vector<recruitingfog::notesui::Program> previewPrograms(){return recruitingfog::playercardui::sliderPrograms();}
 recruitingfog::notesui::Runtime previewUi(previewPrograms());
 std::mutex mutex;std::deque<Json> pending;
 bool read(uintptr_t at,void* out,size_t size){SIZE_T copied=0;return ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<const void*>(at),out,size,&copied)&&copied==size;}
@@ -30,7 +30,7 @@ DWORD stop(){if(previewUi.ownerCount())return 4;disabled=true;if(previousSetup&&
 DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"player-ui-preview.jsonl";
     const auto current=*reinterpret_cast<void**>(base+0xbc42fe8+0xc8);HMODULE owner=nullptr;wchar_t ownerPath[32768]{};
-    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(current),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p39.dll")return 1;
+    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(current),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p43.dll")return 1;
     HMODULE pin=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&pin))return 2;
     previewUi.prepare();previousSetup=reinterpret_cast<Setup>(current);if(!swap(current,reinterpret_cast<void*>(setupHook))){previousSetup=nullptr;return 3;}
     note({{"event","player_ui_preview_active"},{"pid",GetCurrentProcessId()},{"reader",false},{"sourceFilesChanged",false}});

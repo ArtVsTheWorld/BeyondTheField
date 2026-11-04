@@ -1,6 +1,7 @@
 #include "../Source/RecruitingFog.cpp"
 #include <iostream>
 #include "../Source/RecruitNotes.h"
+#include "../Source/PlayerAbilityDescriptions.h"
 void require(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
 unsigned forwarded=0;
 void* __fastcall fakeGetter(void*,void** out){++forwarded;return out;}
@@ -9,6 +10,8 @@ void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t sec
 #if defined(RECRUIT_NOTES_UI)
 std::array<uintptr_t,5> setupArguments{};
 unsigned __fastcall fakeColorLength(void*){return 148;}
+unsigned abilityForwarded=0;bool abilityMentals=false;
+void* __fastcall fakeAbilities(void*,void** out,bool mentals){++abilityForwarded;abilityMentals=mentals;return out;}
 uintptr_t __fastcall fakeScriptSetup(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){setupArguments={reinterpret_cast<uintptr_t>(object),reinterpret_cast<uintptr_t>(saved),receiver,parent,super};return 0xabcdef;}
 #endif
 #if defined(RECRUIT_NOTES_UI)
@@ -49,6 +52,20 @@ struct FixtureView {
     bool boolean(uintptr_t at,bool& out){if(!booleans.count(at))return false;out=booleans.at(at);return true;}
 };
 int main(){try{
+    using namespace recruitingfog;
+    {
+        using namespace playerfog;
+        require(abilityDescriptionGrades("Bronze Requires: 84 Pass Block Power (75 Currently)")=="Bronze Requires: B Pass Block Power (C Currently)","Ability paired attribute ratings leaked");
+        require(abilityDescriptionGrades("Bronze Requires: 82 Acceleration (73 Currently) \nand 68 Speed (61 Currently)")=="Bronze Requires: B Acceleration (C Currently) \nand D Speed (D Currently)","Two-attribute ability wording/newline failed");
+        require(abilityDescriptionGrades("Costs 2 points. Gold Requires: 90 Speed (? Currently), jersey99, 25% boost")=="Costs 2 points. Gold Requires: A Speed (? Currently), jersey99, 25% boost","Ability costs/unknown/stat numbers changed");
+        for(const auto* untouched:{"Costs 84 points. 75 Currently","Requires: 84 Skill Points (75 Currently)","Requires: 84 Pass Block Powerful (75 Currently)","Requires: 84 Pass Block Powerhouse (75 Currently)","Requires: 5 Speed Boosts (3 Currently)","Requires: -84 Speed (-75 Currently)","Requires: 84.5 Speed (75 Currently)","Requires: 101 Speed (75 Currently)","Requires: 84% Speed (75 Currently)","Requires: +84 Speed (75 Currently)","Requires: 84 Speediness (75 Currently)","Requires: 90 Passing Yards (80 Currently)"})
+            require(abilityDescriptionGrades(untouched)==untouched,"Unrecognized/ordinary/invalid ability number was changed");
+        for(int rating=0;rating<=100;++rating)for(auto name:abilityAttributeNames()){
+            const auto input="Bronze Requires: "+std::to_string(rating)+" "+std::string(name)+" ("+std::to_string(rating)+" Currently)";
+            const auto grade=display(Visibility::Revealed,rating);
+            require(abilityDescriptionGrades(input)=="Bronze Requires: "+grade+" "+std::string(name)+" ("+grade+" Currently)","Ability rating boundary or longest attribute name failed");
+        }
+    }
     using namespace recruitingfog;
     for(int rating=0;rating<=100;++rating){const char expected=rating<60?'F':rating<70?'D':rating<80?'C':rating<90?'B':'A';require(display(Visibility::Revealed,rating)==std::string(1,expected),"Incorrect revealed grade");require(display(Visibility::Unknown,rating)=="?","Unknown rating leaked");}
     for(int low=0;low<=100;++low)for(int high=low;high<=100;++high){const auto label=display(Visibility::Range,99,low,high);require(label.find_first_of("0123456789")==std::string::npos,"Range exposed numerical precision");require(label==display(Visibility::Range,0,low,high),"Range depends on hidden true rating");}
@@ -153,6 +170,22 @@ int main(){try{
         output.values=nlohmann::json::array();replayColumns(columns,&output,true);
         require(output.values[2]["value"]==0&&output.values[3]["value"]==false&&output.values[4]["value"]==4&&output.values[5]["value"]==42.5,"Roster columns changed unrelated metadata");
         output.values=nlohmann::json::array();replayColumns(columns,&output,false);require(output.values[2]["value"]==4&&output.values[3]["value"]==true,"Unknown schema changed formats");
+        std::array<std::string,90> depthNames{};const char* depthHeaders[]={"","POS","#","RS","Name","Year","POS","OVR","NIL","MOR","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
+        for(size_t i=0;i<std::size(depthHeaders);++i)depthNames[i]=depthHeaders[i];
+        require(classifyGrid(depthNames,35)==GridSchema::DepthChart&&!rosterSchema(depthNames,35),"Captured native depth schema misclassified");
+        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart}){
+            const auto state=gridState(form,schema);require(gridStateForm(state)==form&&gridStateSchema(state)==schema,"Atomic form/schema snapshot lost identity");
+        }
+        require(gridState(-1,GridSchema::Roster)==0&&gridState(0,GridSchema::None)==0&&gridStateForm(0)==-1,"Inactive grid state admitted a row");
+        depthNames[16]="Passing Yards";require(classifyGrid(depthNames,35)==GridSchema::None,"Depth schema admitted a statistic");depthNames[16]="THP";
+        depthNames[2]="Jersey";require(classifyGrid(depthNames,35)==GridSchema::None,"Depth identity prefix accepted another table");depthNames[2]="#";
+        output.values=nlohmann::json::array();GridSink depthCells{gridTable,&output};depthCells.schema=GridSchema::DepthChart;depthCells.count=7;depthCells.columns={2,7,8,9,10,63,4};
+        for(unsigned i=0;i<7;++i)gridString(&depthCells,i,"display",std::array<const char*,7>{"1","66,TrendUp","10","76","92","59","Whitaker"}[i]);
+        gridInt(&depthCells,1,"intValue",66);
+        require(output.values[0]["value"]=="1"&&output.values[1]["value"]=="D"&&output.values[4]["value"]=="10"&&output.values[5]["value"]=="76"&&output.values[6]["value"]=="A"&&output.values[9]["value"]=="F"&&output.values[12]["value"]=="Whitaker"&&output.values[13]["value"]==66,"Depth cells changed depth/NIL/morale/name/sort value or missed rating subset");
+        ColumnSink depthColumns{columnTable};columnString(&depthColumns,7,"display","OVR");columnInt(&depthColumns,7,"formatType",15);columnBool(&depthColumns,7,"isTrend",true);columnInt(&depthColumns,8,"formatType",49);columnInt(&depthColumns,2,"formatType",13);
+        output.values=nlohmann::json::array();replayColumns(depthColumns,&output,true,GridSchema::DepthChart);
+        require(output.values[1]["value"]==0&&output.values[2]["value"]==false&&output.values[3]["value"]==49&&output.values[4]["value"]==13,"Depth rating format change affected NIL or ordinal formatter");
         FixtureView view;view.maps[1]={{"overall",2},{"teamOverall",3},{"jersey",4}};view.numbers={{2,82},{3,64},{4,1}};std::string changed;
         require(selectedOverall(view,1,[&](uintptr_t root,const char* key,const char* value){require(root==1,"Selected player root changed");changed=std::string(key)+"="+value;})&&changed=="overall=B","Selected overall not scoped to player field");
         view.numbers[2]=-1;require(!selectedOverall(view,1,[&](uintptr_t,const char*,const char*){throw std::runtime_error("Invalid selected rating exposed");}),"Invalid player overall changed");
@@ -175,6 +208,12 @@ int main(){try{
         require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Roster NIL changed compensation/points or uncertain/invalid attributes");
         view.maps[50]={{"ovr",51},{"Height",52},{"Weight",53},{"PlayerId",54},{"Stats",55}};view.numbers[51]=59;view.numbers[52]=73;view.numbers[53]=200;view.numbers[54]=88;edits.clear();
         require(convert(view,50,Surface::ContextPlayer,capture)==1&&edits==std::vector<std::string>{"50:ovr=F"},"Context player panel touched physical/identity/statistical fields");
+        view.arrays[70]={71};view.maps[71]={{"Description",72},{"UpgradeDescription",73},{"Cost",74},{"CurrentRank",75},{"HasMetRequirements",76}};
+        view.strings[72]="Improved pass blocking";view.strings[73]="Bronze Requires: 84 Pass Block Power (75 Currently)";view.numbers[74]=2;view.numbers[75]=1;view.booleans[76]=false;edits.clear();
+        const auto beforeAbilityNumbers=view.numbers;const auto beforeAbilityFlags=view.booleans;
+        require(convertAbilityDescriptions(view,70,capture)==1&&edits==std::vector<std::string>{"71:UpgradeDescription=Bronze Requires: B Pass Block Power (C Currently)"}&&view.numbers==beforeAbilityNumbers&&view.booleans==beforeAbilityFlags,"Ability UI conversion changed cost/rank/eligibility or another field");
+        runtime::originalAbilities=fakeAbilities;void* abilityValue=reinterpret_cast<void*>(0x1234);
+        runtime::disabled=true;require(runtime::playerAbilitiesHook(nullptr,&abilityValue,true)==&abilityValue&&abilityMentals&&abilityForwarded==1&&abilityValue==reinterpret_cast<void*>(0x1234),"Stopped ability getter changed bool argument/native return");runtime::disabled=false;
         MapTestOutput mapOutput{mapTestTable};MapSink map{mapTable,&mapOutput,"overall"};mapInt(&map,"overall",66);mapInt(&map,"Overall",83);mapInt(&map,"jersey",92);mapFloat(&map,"height",74.5f);mapBool(&map,"redshirt",true);mapString(&map,"lastName","Branham");mapUndefined(&map,"injury");mapOpaque(&map,"nested",reinterpret_cast<void*>(123));
         require(mapOutput.values==nlohmann::json({{"overall","D"},{"Overall",83},{"jersey",92},{"height",74.5},{"redshirt",true},{"lastName","Branham"},{"injury",nullptr},{"nested",123}})&&map.changed==1,"Native map collector changed another property's type or value");
         mapInt(&map,"overall",-1);require(mapOutput.values["overall"]==-1&&map.changed==1,"Map collector converted hidden overall sentinel");
