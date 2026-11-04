@@ -118,9 +118,10 @@
       "liveVerified": false,
       "evidence": "p47 separate typed3-argument native bindings and exact32-byte fingerprint gates. AnnualAwards requires explicit isCoach=false. Tests preserve coach/unknown records and exactly-once native return/key/output.",
       "remaining": [
-        "p47 clean-start activation",
-        "live awards/Heisman sidebar and colors"
-      ]
+        "Live annual/weekly awards including coach-category preservation",
+        "Heisman selection/reentry regression"
+      ],
+      "liveStatus": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected."
     },
     {
       "surface": "Recruiting My School player-risk Overall",
@@ -575,7 +576,9 @@
     },
     "p57Blueprint": "MSVC/W4/WX/native/nineUIVMsuites pass; independent scopedbadge/fixed5frame/source/compensation/12thbank review passed. Package/live pending; p55 active.",
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
-    "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active."
+    "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
+    "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
+    "nextManualCheck": "User asked for clean restart at mainmenu; activate p57 only after actual restart. Test hub PlayerCompare attributes and Program Overview roster badges."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
