@@ -3,10 +3,15 @@
 void require(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
 unsigned forwarded=0;
 void* __fastcall fakeGetter(void*,void** out){++forwarded;return out;}
+std::array<uintptr_t,2> detailArguments{};
+void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t second){++forwarded;detailArguments={first,second};return out;}
 struct FixtureView {
     std::map<uintptr_t,std::vector<uintptr_t>> arrays;
     std::map<uintptr_t,std::map<std::string,uintptr_t>> maps;
     std::map<uintptr_t,double> numbers;std::map<uintptr_t,bool> booleans;
+    std::map<uintptr_t,std::string> strings;
+    unsigned kind(uintptr_t at){return arrays.count(at)?4:maps.count(at)?5:strings.count(at)?3:numbers.count(at)?2:booleans.count(at)?1:0;}
+    bool string(uintptr_t at,std::string& out){if(!strings.count(at))return false;out=strings.at(at);return true;}
     bool array(uintptr_t at,std::vector<uintptr_t>& out,size_t max){if(!arrays.count(at)||arrays.at(at).size()>max)return false;out=arrays.at(at);return true;}
     bool members(uintptr_t at,std::map<std::string,uintptr_t>& out){if(!maps.count(at))return false;out=maps.at(at);return true;}
     bool number(uintptr_t at,double& out){if(!numbers.count(at))return false;out=numbers.at(at);return true;}
@@ -19,6 +24,58 @@ int main(){try{
     require(display(Visibility::Range,99,75,85)==u8"C–B","C-B range incorrect");require(display(Visibility::Range,99,80,89)=="B","Same-band range must collapse");require(display(Visibility::Range,99,89,90)==u8"B–A","Boundary-crossing range incorrect");
     require(display(Visibility::Revealed,-1)=="?"&&display(Visibility::Revealed,101)=="?"&&display(Visibility::Revealed,79.5)=="?","Malformed rating was accepted");
     require(display(Visibility::Range,90,80,70)=="?"&&display(Visibility::Range,90,-1,90)=="?","Malformed range was accepted");
+    {
+        FixtureView view;view.arrays[1]={10,20};
+        view.maps[10]={{"MotivationString",11},{"Grade",12},{"IntelStatus",13},{"IsDealbreakerViolated",14}};
+        view.maps[20]={{"MotivationString",21},{"Grade",22}};
+        view.strings={{11,"Playing Time"},{12,"A+"},{21,"Playing Style"},{22,"C"}};view.numbers[13]=2;view.booleans[14]=true;
+        std::map<uintptr_t,std::map<std::string,std::string>> texts;std::map<uintptr_t,std::map<std::string,unsigned>> numbers;
+        auto setText=[&](uintptr_t at,const char* key,const char* value){texts[at][key]=value;};
+        auto setNumber=[&](uintptr_t at,const char* key,unsigned value){numbers[at][key]=value;};
+        const auto beforeNumbers=view.numbers;const auto beforeFlags=view.booleans;
+        for(const auto* grade:{"A+","A","B+","B","C+","C","D","F"}){
+            view.strings[12]=grade;texts.clear();auto stats=maskPlayingTime(view,1,PlayingTimeSurface::Motivations,0,{},setText,setNumber);
+            require(stats.grades==1&&texts[10]["Grade"]=="?"&&!texts.count(20),"Playing Time mask depends on the hidden grade or changes another motivation");
+        }
+        require(view.numbers==beforeNumbers&&view.booleans==beforeFlags&&numbers.empty(),"Interest or native eligibility was changed");
+        view.maps[10]={{"RecruitingMotivation",11},{"DealbreakerTeamGrade",12},{"DealbreakerTeamLevel",13},{"Locked",14}};
+        view.maps[20]={{"RecruitingMotivation",21},{"DealbreakerTeamGrade",22}};texts.clear();numbers.clear();
+        auto stats=maskPlayingTime(view,1,PlayingTimeSurface::RecruitList,0,{},setText,setNumber);
+        require(stats.dealbreakers==2&&numbers[10]["DealbreakerTeamGrade"]==255&&numbers[10]["DealbreakerTeamLevel"]==255&&!numbers.count(20),"Dealbreaker mask is not scoped to Playing Time");
+        require(!numbers[10].count("Locked"),"Dealbreaker eligibility was changed");
+        // My School's board-comparison grade must be hidden too.
+        view.maps[10]={{"Grade",12}};view.maps[20]={{"Grade",22}};texts.clear();numbers.clear();
+        stats=maskPlayingTime(view,1,PlayingTimeSurface::SchoolModule,playingTimeSchoolTile,{},setText,setNumber);
+        require(stats.grades==2&&texts[10]["Grade"]=="?"&&texts[20]["Grade"]=="?","My School comparison leaked Playing Time grades");
+        texts.clear();stats=maskPlayingTime(view,1,PlayingTimeSurface::SchoolModule,0,{},setText,setNumber);require(texts.empty(),"Other My School categories were changed");
+        // Only bundle 2 contains Playing Time. Preserve other aggregate grades
+        // and individual non-Playing-Time grades within the same pitch.
+        view.maps[10]={{"PitchTypeID",15},{"Grade",12},{"Gain",16},{"Motivations",2}};view.numbers[15]=2;view.arrays[2]={30,40};
+        view.maps[20]={{"PitchTypeID",25},{"Grade",22}};view.numbers[25]=0;
+        view.maps[30]={{"Name",31},{"Grade",32}};view.strings[31]="Playing Time";view.strings[32]="A+";
+        view.maps[40]={{"Name",41},{"Grade",42}};view.strings[41]="Brand Exposure";view.strings[42]="C";
+        texts.clear();stats=maskPlayingTime(view,1,PlayingTimeSurface::Pitches,0,{2},setText,setNumber);
+        require(texts[10]["Grade"]=="?"&&texts[10]["Gain"]=="?"&&texts[30]["Grade"]=="?"&&!texts.count(20)&&!texts.count(40),"Pitch aggregate or nested motivation masking is incorrect");
+        view.maps[30]={{"Motivation",33},{"Grade",32},{"ActivityId",34},{"Triangles",35},{"MaxInfluenceTriangles",36}};view.numbers[33]=9;view.numbers[34]=123;
+        texts.clear();numbers.clear();stats=maskPlayingTime(view,2,PlayingTimeSurface::VisitActivities,0,{},setText,setNumber);
+        require(texts[30]["Grade"]=="?"&&numbers[30]["Triangles"]==0&&numbers[30]["MaxInfluenceTriangles"]==0&&!numbers[30].count("ActivityId")&&!texts.count(40),"Visit preview leaked grade or changed the action ID");
+        stats=maskPlayingTime(view,999,PlayingTimeSurface::Motivations,0,{},setText,setNumber);require(stats.unsupported==1,"Invalid Playing Time root was not reported");
+    }
+    {
+        // Exercise the guarded reader against a synthetic native pitch config,
+        // not a hard-coded list of the six stock bundles.
+        std::array<unsigned char,0x430> object{};std::array<unsigned char,0x150> context{};std::array<unsigned char,0x470> config{};
+        std::array<unsigned char,0x40> entry{};std::array<unsigned char,3> motives={2,9,12};
+        auto pointer=[](auto& bytes,size_t at,uintptr_t value){memcpy(bytes.data()+at,&value,8);};
+        const auto entryPointer=reinterpret_cast<uintptr_t>(entry.data());
+        const auto begin=reinterpret_cast<uintptr_t>(&entryPointer);
+        pointer(object,0x420,reinterpret_cast<uintptr_t>(context.data()));pointer(context,0x148,reinterpret_cast<uintptr_t>(config.data()));
+        pointer(config,0x460,begin);pointer(config,0x468,begin+8);entry[0x10]=17;
+        pointer(entry,0x30,reinterpret_cast<uintptr_t>(motives.data()));pointer(entry,0x38,reinterpret_cast<uintptr_t>(motives.data())+3);
+        auto result=runtime::pitchMask(reinterpret_cast<uintptr_t>(object.data()));require(result==std::set<unsigned>{17},"Pitch membership was not read from verified native configuration");
+        motives[1]=10;result=runtime::pitchMask(reinterpret_cast<uintptr_t>(object.data()));require(result.empty(),"Non-Playing-Time bundle was masked");
+        pointer(config,0x468,begin+9);result=runtime::pitchMask(reinterpret_cast<uintptr_t>(object.data()));require(result.size()==256,"Invalid pitch configuration must not expose aggregate grades");
+    }
     {
         FixtureView view;view.arrays[1]={2};view.maps[2]={{"PercentageScouted",3},{"ScoutingAttributes",4}};view.numbers[3]=40;
         // Actual visible bounds captured from the reference QB, followed by an
@@ -47,5 +104,8 @@ int main(){try{
     runtime::original=fakeGetter;void* value=reinterpret_cast<void*>(0x1234);auto out=&value;
     require(runtime::getterHook(nullptr,out)==out&&value==reinterpret_cast<void*>(0x1234)&&forwarded==1,"Probe changed the native return or output");
     runtime::disabled=true;require(runtime::getterHook(nullptr,out)==out&&forwarded==2,"Stopped probe did not pass through");
-    std::cout<<"Passed: grade boundaries, hidden states, 5151 range pairs, hidden-rating independence, live-response fixtures, interned-string layout, malformed values and native pass-through ABI.\n";
+    runtime::detailOriginal[0]=fakeDetailGetter;runtime::disabled=false;
+    require(runtime::detailHook<0>(nullptr,out,0xabcdef,0x123456)==out&&forwarded==3&&detailArguments==std::array<uintptr_t,2>{0xabcdef,0x123456},"Detail getter changed native arguments or return");
+    runtime::disabled=true;require(runtime::detailHook<0>(nullptr,out,5,6)==out&&forwarded==4&&detailArguments==std::array<uintptr_t,2>{5,6},"Stopped detail hook did not pass through");
+    std::cout<<"Passed: grade boundaries, hidden states, 5151 ranges, Playing Time/dealbreaker/bundle/visit/My School masks, native pitch configuration, malformed values and native getter ABIs.\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}return 0;}

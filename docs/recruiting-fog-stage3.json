@@ -1,0 +1,81 @@
+{
+  "stage": 3,
+  "feature": "Recruiting Playing Time grade masking",
+  "status": "Implemented; user verified Overview, Recruiting/Soft Sell, My School comparisons, other grades, Scouting and controls",
+  "branch": "research/recruiting-fog",
+  "prototype": {
+    "dll": "Build/DynastyEnhancerRecruitFog-p08.dll",
+    "sha256": "4ef7dcf3c87cdfe4f18b232848193fdea52918ae8e477aba868ee39d995f1e99",
+    "install": "Separate DLL loaded for the current game session. Installed Social Media/MMC files remain unchanged.",
+    "presentationTestBuild": "p07",
+    "finalBuildChanges": "p08 removes three pass-through probes, skips unrelated My School category traversal, and replaces detailed Playing Time snapshots with bounded counter logs. The Playing Time masking behavior is retained.",
+    "build": "./Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN",
+    "load": "./Build/LoadDynastyEnhancer.exe <CollegeFB27 PID> <absolute prototype DLL path>",
+    "stop": "./Build/LoadDynastyEnhancer.exe <CollegeFB27 PID> <absolute prototype DLL path> --stop",
+    "recovery": "Stop restores only owned native getter slots. Reopening the recruiting view requests fresh native values. A clean restart unloads this session-only prototype."
+  },
+  "presentation": {
+    "gradeMarker": "? for Playing Time string grades and affected pitch aggregate grades",
+    "dealbreakerMarker": "Native unknown-grade sentinel 255 for both displayed Playing Time dealbreaker levels",
+    "recruitIndependence": "The mask does not use the recruit's true rating, scouting progress, original Playing Time grade or roster comparisons to choose its output.",
+    "identity": "Playing Time remains labeled as a recruiting motivation, including revealed interest and dealbreaker status.",
+    "otherGrades": "Other individual school/motivation grades and pitch bundles without Playing Time retain their native presentation."
+  },
+  "coverage": [
+    {"surface": "Overview and dealbreaker lockout displays", "getter": "GetTeamRecruitList", "fields": ["DealbreakerTeamGrade", "DealbreakerTeamLevel"], "condition": "RecruitingMotivation is Playing Time", "live": "User confirmed hidden"},
+    {"surface": "Recruiting motivation list and Soft/Hard Sell motivation grades", "getter": "GetMotivationsForRecruit", "fields": ["Grade"], "condition": "MotivationString is Playing Time", "live": "User confirmed hidden; native log shows one masked grade among fourteen motivations"},
+    {"surface": "Pitch selection aggregate grades", "getter": "GetPitchGridData", "fields": ["Grade"], "condition": "PitchTypeID includes Playing Time in the active native pitch configuration", "live": "User confirmed; six affected bundles masked, fourteen other bundle grades retained"},
+    {"surface": "Active pitch summaries", "getter": "GetPitchesForRecruit", "fields": ["Motivations[].Grade", "Gain", "InfluenceArrows", "InfluenceArrowsMax"], "condition": "Only Playing Time individual grades and grade-derived previews for bundles containing Playing Time", "live": "Getter pass-through exercised with no active pitches; populated pitch fixtures tested locally"},
+    {"surface": "Visit activity grades and influence previews", "getter": "GetVisitActivitiesGridData", "fields": ["Grade", "Triangles", "MaxInfluenceTriangles", "MinInfluenceTriangles", "InfluenceArrowsTotal"], "condition": "Motivation enum is Playing Time", "live": "Policy tested with visit fixtures; populated visit screen not independently verified live"},
+    {"surface": "Visit summary motivation grades", "getter": "GetVisitSummaryData", "fields": ["Grade"], "condition": "Playing Time identity on the motivation row", "live": "Native construction path inspected; generic nested motivation mask covered locally"},
+    {"surface": "My School Playing Time description grade", "getter": "GetPitchInfo", "fields": ["Grade"], "condition": "Playing Time tile and PitchName", "live": "One masked grade, zero unsupported fields"},
+    {"surface": "My School position/recruit comparison, including QBs on Board", "getter": "MySchool.GetModuleData", "fields": ["ModuleItems[].Grade"], "condition": "Playing Time tile selected", "live": "Two QB grades masked; user confirmed both hidden and other school categories working"}
+  ],
+  "nativeConfiguration": {
+    "motivationEnum": 9,
+    "mySchoolTile": 13,
+    "pitchMembership": "Read-only lookup through the native recruiting adapter's active pitch configuration; no assumptions from pitch names or analyst models",
+    "verifiedStockPitchIdsContainingPlayingTime": [2, 8, 9, 13, 14, 15],
+    "configFallback": "If configuration bounds or entries cannot be verified, mask all bundle grades rather than expose an aggregate containing the hidden component.",
+    "bindings": "Source/PlayingTimeGates.h contains seven additional getter gates. Each original function and the string/number factories are fingerprint-checked before installing. All original arguments, return pointers and output objects are preserved."
+  },
+  "unchanged": [
+    "Actual recruiting grades, ratings and simulation outcomes",
+    "Native pitch/visit action IDs, scholarship terms, hours and costs",
+    "Recruit interest discovery, Locked and IsDealbreakerViolated flags",
+    "Earned recruiting influence and recruiting eligibility",
+    "Scouting letter grades, partial ranges and unknown-state behavior",
+    "Save files, installed MMC plugins and Social Media hooks"
+  ],
+  "performance": {
+    "polling": "No new database/background scan. Work runs only when the game requests these recruiting UI responses.",
+    "bounds": "At most 512 array entries, bounded maps, seven recursive levels and 4096 container visits; guarded current-process reads",
+    "unrelatedMySchoolCategories": "Return immediately without traversing team comparisons or player-risk lists",
+    "removedProbes": ["GetPitchSummaryMotivationList", "GetVisitGridData", "MySchool.GetGridData"],
+    "diagnostics": "Bounded queue, compact Playing Time counter records for the first twenty calls per getter, and five limited Scouting snapshots"
+  },
+  "checks": {
+    "build": "MSVC x64 C++17 /O2 /MT /W4 /WX; build and tests pass",
+    "policy": [
+      "Playing Time original grades A+ through F all produce the same mask",
+      "Playing Style, Brand Exposure and other motivations remain unchanged",
+      "Only Playing Time dealbreaker label fields are changed; native lockout flags preserved",
+      "My School Playing Time comparison masked; other school selections unchanged",
+      "Only configured Playing Time bundles and nested Playing Time grades are masked",
+      "Visit previews hidden without changing ActivityId",
+      "Synthetic native pitch config verifies dynamic membership and invalid-config fallback",
+      "Native getters preserve original calls, arguments, output pointers and return values, including when stopped",
+      "Stage 2 boundaries, 5151 integer range pairs and unknown-state tests still pass"
+    ],
+    "observed": {"recruits": 34, "playingTimeDealbreakerDisplayFieldsMasked": 26, "playingTimeMotivationGradesMasked": 1, "pitchBundleGradesMasked": 6, "mySchoolQbComparisonGradesMasked": 2, "unsupported": 0},
+    "userConfirmed": "Playing Time hidden; other grades and controls work",
+    "visualInspection": "Computer-use snapshot shows Playing Time with a neutral ? while surrounding school grades remain visible"
+  },
+  "limits": [
+    "This removes the direct grade-comparison shortcut, not every possible indirect inference from real recruiting outcomes or native eligibility feedback.",
+    "The native My School Players At Risk list still shows active-player ratings. Active-roster Fog is outside this recruiting stage.",
+    "English motivation labels and the verified executable/UI schema are currently targeted.",
+    "Populated active-pitch and visit-summary screens still need live checks when available without consuming test scouting/recruiting resources.",
+    "Automatic MMC loading and a combined release package remain separate integration work."
+  ]
+}

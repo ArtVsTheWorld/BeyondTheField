@@ -37,6 +37,7 @@ public:
         return true;
     }
     bool number(uintptr_t at,double& out){return kind(at)==2&&get(at+0x18,out)&&std::isfinite(out);}
+    bool string(uintptr_t at,std::string& out){uintptr_t value=0;return kind(at)==3&&get(at+0x20,value)&&text(value,out);}
     bool boolean(uintptr_t at,bool& out){unsigned char value=0;if(kind(at)!=1||!get(at+0x18,value)||value>1)return false;out=value!=0;return true;}
 };
 struct ConversionStats {unsigned recruits=0,attributes=0,revealed=0,ranges=0,unknown=0,unsupported=0;};

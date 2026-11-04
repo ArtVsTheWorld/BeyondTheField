@@ -6,7 +6,7 @@ This is a development prototype, not the planned 1.0 release.
 
 ## Recruiting Fog prototype (research branch)
 
-Stage 2 adds letter grades and grade ranges to the native recruit Scouting attributes. Hidden values retain their hidden state; ranges use only the bounds the game already reveals. The separate test DLL is `Build/DynastyEnhancerRecruitFog-p04.dll`; it is not part of the installed v103 MMC package and must currently be loaded per session. See [scope, build instructions and validation](docs/recruiting-fog-stage2.json). Playing-time masking, recruiting Notes and active-roster Fog remain later work.
+Stage 2 adds letter grades and grade ranges to the native recruit Scouting attributes. Hidden values retain their hidden state; ranges use only the bounds the game already reveals. Stage 3 masks recruit-dependent Playing Time grades in dealbreakers, motivations, affected pitch bundles, visits and My School comparisons. The current separate test DLL is `Build/DynastyEnhancerRecruitFog-p08.dll`; it is not part of the installed v103 MMC package and must currently be loaded per session. See [Scouting validation](docs/recruiting-fog-stage2.json) and [Playing Time coverage and limits](docs/recruiting-fog-stage3.json). Recruiting Notes and active-roster Fog remain later work.
 
 ## Content and menu performance review (v103)
 
