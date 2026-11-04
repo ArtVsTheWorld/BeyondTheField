@@ -29,7 +29,12 @@ inline int gradeColor(char value){
     switch(value){case 'A':return 0x1FE840;case 'B':return 0xA8D943;case 'C':return 0xFFD34D;case 'D':return 0xF68C2E;default:return 0xF04444;}
 }
 inline bool rosterSchema(const std::array<std::string,90>& names,unsigned count){
-    return count==62&&names[1]=="RS"&&names[2]=="Name"&&names[3]=="Year"&&names[4]=="POS"&&names[5]=="OVR"&&names[6]=="NIL"&&names[7]=="DEV"&&names[8]=="SPD"&&names[9]=="ACC"&&names[61]=="LSP";
+    if(count<9||count>62||names[1]!="RS"||names[2]!="Name"||names[3]!="Year"||names[4]!="POS"||names[5]!="OVR"||names[6]!="NIL"||names[7]!="DEV")return false;
+    // Position views retain the roster identity fields but select/reorder a
+    // smaller attribute set. Admit only known rating headers after that prefix.
+    const std::string allowed="|SPD|ACC|AGI|COD|STR|AWR|CAR|BCV|BTK|TRK|SFA|SPM|JKM|CTH|CIT|SPC|SRR|MRR|DRR|RLS|JMP|THP|SAC|MAC|DAC|RUN|TUP|BSK|PAC|PBK|PBP|PBF|RBK|RBP|RBF|LBK|IBL|PRC|TAK|POW|BSH|FMV|PMV|PUR|MCV|ZCV|PRS|RET|KPW|KAC|STA|TGH|INJ|LSP|";
+    for(unsigned i=8;i<count;++i)if(names[i].empty()||allowed.find("|"+names[i]+"|")==std::string::npos)return false;
+    return true;
 }
 struct GridSink{
     void** vtable;void* target;
@@ -84,7 +89,7 @@ inline void replayColumns(const ColumnSink& sink,void* target,bool roster){
         case 6:put(target,f.row,f.key.c_str(),f.nullText?nullptr:f.text.c_str(),6);break;
         }
     }
-    if(roster)for(unsigned column=0;column<62;++column)if(rosterRatingColumn(int(column)))put(target,column,"DEPlayerRating",true,3);
+    if(roster)for(unsigned column=0;column<sink.names.size();++column)if(rosterRatingColumn(int(column))&&!sink.names[column].empty())put(target,column,"DEPlayerRating",true,3);
 }
 template<class View,class Setter>bool selectedOverall(View& view,uintptr_t root,Setter setString){
     std::map<std::string,uintptr_t> fields;double rating=0;

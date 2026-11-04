@@ -2,21 +2,155 @@
   "goal": "Native letter grades for all player rating displays; team ratings stay numeric",
   "state": "In progress; no game-wide completion claim",
   "baseline": "Installed combined v104 / recruiting p27; source academic update p28",
-  "policy": {"A": "90-100", "B": "80-89", "C": "70-79", "D": "60-69", "F": "0-59", "unknown": "remain hidden", "partialColor": "public grade midpoint"},
+  "policy": {
+    "A": "90-100",
+    "B": "80-89",
+    "C": "70-79",
+    "D": "60-69",
+    "F": "0-59",
+    "unknown": "remain hidden",
+    "partialColor": "public grade midpoint"
+  },
   "surfaces": [
-    {"surface": "Roster OVR and 54 attribute columns", "implemented": true, "liveVerified": false, "liveStatus": "Partial: visible OVR/SPD/ACC/AGI/COD/STR/AWR letters, reentry and vertical row changes observed on p31/p35", "evidence": "PlayerRatingGrid.h exact 62-column schema; all101 rating boundaries, trend suffixes, reordered subset and unrelated numeric fixtures; p36 compiled", "remaining": ["all horizontal columns", "team/position filters", "native colors"]},
-    {"surface": "Roster selected-player overall panel", "implemented": true, "liveVerified": false, "liveStatus": "Partial: B and D Overall panels follow different roster selections", "evidence": "Current getter fingerprint, overall-only response fixture and live screenshots", "remaining": ["alternate panel views", "colors"]},
-    {"surface": "Player cards reachable from roster", "implemented": false, "liveVerified": false, "evidence": "Native map collector and top-attributes response implemented/tested; live card still shows numeric Overall and skill groups", "remaining": ["header widget uses DEOverallGrade", "numeric-safe skill/attribute widgets", "all card tabs and comparisons", "colors"]},
-    {"surface": "Native spreadsheet grade colors", "implemented": true, "liveVerified": false, "evidence": "p36 includes legacy SpreadsheetProvider marker-gated GetCellColor and modern provider adapter; offline native-equivalence and color/fallback tests pass", "remaining": ["live legacy method attachment", "focus/scroll performance and recycling"]},
-    {"surface": "Depth chart and lineup/comparison", "implemented": false, "liveVerified": false},
-    {"surface": "Dynasty hub player previews", "implemented": false, "liveVerified": false, "evidence": "Offline asset distinguishes player Ovr from TeamOVR/OFF/DEF"},
-    {"surface": "Recruit scouting grades, ranges and colors", "implemented": true, "liveVerified": true, "evidence": "User-confirmed p27 persistence, class labels and controls", "remaining": ["additional transfer/entry preview leak audit"]},
-    {"surface": "Training and position changes", "implemented": false, "liveVerified": false},
-    {"surface": "Pregame and in-game menus", "implemented": false, "liveVerified": false, "evidence": "Playcall-substitution OVR-only response implemented and fixture-tested; no live in-game entry"},
-    {"surface": "Secondary tooltips, boosts and popups", "implemented": false, "liveVerified": false}
+    {
+      "surface": "Roster OVR and 54 attribute columns",
+      "implemented": true,
+      "liveVerified": false,
+      "liveStatus": "p38: full roster visible rating columns and compact QB filter show letters. Unselected grade colors and colored selected-player Overall badge verified. Selected spreadsheet row still black; fixed-frame accessor correction built in p39, pending live test.",
+      "evidence": "PlayerRatingGrid.h recognizes the complete roster identity prefix plus only known attribute headers; p38 built. Actual QB view captured with form0 and 33 columns, matching the generalized schema.",
+      "remaining": [
+        "all other position views",
+        "all horizontal columns",
+        "team filters",
+        "selected row colors in p39",
+        "alternate views"
+      ]
+    },
+    {
+      "surface": "Roster selected-player overall panel",
+      "implemented": true,
+      "liveVerified": false,
+      "liveStatus": "p38: selected player overall follows full roster and QB filter, with native palette color.",
+      "evidence": "Current selected getter plus live B/D panel changes; p38 adds shared PlayerModule color suffix only for existing exact grade strings, never numeric NIL/stat values.",
+      "remaining": [
+        "alternate panel views",
+        "colors"
+      ]
+    },
+    {
+      "surface": "Player cards reachable from roster",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p38 contains seven fingerprinted native UI suffixes: player-card Overall update/refresh, marked individual attribute/max labels, Skills template marker, group label/styles and skill-level label. Original numeric model, slider, Level, caps, costs and deltas remain numeric; offline execution tests pass 101 boundaries/colors/unknowns and source fingerprints.",
+      "remaining": [
+        "p39 live Overall/individual attributes",
+        "group heading color",
+        "all card tabs/comparisons/boost/reentry paths"
+      ],
+      "liveStatus": "p38: actual Ratings-page skill groups show colored grades; selected group heading shows letter, upgrade bonus/cost unchanged. Individual attributes and main Overall remain numeric. Header bank rejected nested callback loader metadata; template fixed-frame path did not attach. Both corrections built in p39."
+    },
+    {
+      "surface": "Native spreadsheet grade colors",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p36 includes legacy SpreadsheetProvider marker-gated GetCellColor and modern provider adapter; offline native-equivalence and color/fallback tests pass",
+      "remaining": [
+        "live selected-row override",
+        "focus/scroll performance and recycling",
+        "position filter colors"
+      ],
+      "liveStatus": "p38: unselected roster colors verified; selected row black. p39 preserves native frame and extends body accessor for exact player methods."
+    },
+    {
+      "surface": "Depth chart and lineup/comparison",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p39 builds exact fingerprinted player-only entry hooks for depth chart and reduced-context sidebar, fully-scouted attribute guards. Native team Overall/Offense/Defense getter remains untouched. SkillGroupsInfoSlot and AttributesInfoSlot label/style suffixes added.",
+      "remaining": [
+        "live table schemas and complete depth chart/lineup/comparison navigation",
+        "formation cards/popups and colors"
+      ]
+    },
+    {
+      "surface": "Dynasty hub player previews",
+      "implemented": false,
+      "liveVerified": false,
+      "evidence": "Offline asset distinguishes player Ovr from TeamOVR/OFF/DEF"
+    },
+    {
+      "surface": "Recruit scouting grades, ranges and colors",
+      "implemented": true,
+      "liveVerified": true,
+      "evidence": "User-confirmed p27 persistence, class labels and controls",
+      "remaining": [
+        "additional transfer/entry preview leak audit"
+      ]
+    },
+    {
+      "surface": "Training and position changes",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p39 hooks verified player-only GetEntryInfo UI maps for PositionChanges and Injury/Training; common RosterManagement entry hook now applies beyond rosterForm. Actual training/position-change table schemas still need discovery.",
+      "remaining": [
+        "live stage access without advancing",
+        "rating column schemas and delta/current/max labels"
+      ]
+    },
+    {
+      "surface": "Pregame and in-game menus",
+      "implemented": false,
+      "liveVerified": false,
+      "evidence": "Playcall-substitution OVR-only response implemented and fixture-tested; no live in-game entry"
+    },
+    {
+      "surface": "Secondary tooltips, boosts and popups",
+      "implemented": false,
+      "liveVerified": false
+    }
   ],
-  "invariants": ["Presentation only", "One native getter invocation", "Ordinary numbers unchanged", "No background player scanning", "No roster data writes or sorting changes", "Preserve Social Media and recruiting Notes"],
-  "performance": {"liveMeasured": "Initial idle sample only", "evidence": "35-second p35 read-only thread sample: preview worker 0.015625 CPU seconds; installed recruit worker 0; Social worker0.375. This does not measure UI hook cost or certify late-season performance.", "remaining": ["UI callback latency", "colored focus/scroll overhead", "late-season regression"]},
-  "review": {"independentReviewer": "fog_coverage_review", "corrections": ["Preserve shared GetPlayerData.Overall as numeric for progression; add DEOverallGrade for presentation instead", "Observed roster uses legacy SpreadsheetProvider rather than modern framework provider", "Derive column count from returned definitions, not the reserve callback"]},
-  "package": {"combinedBuilt": false, "installedBaselineUntouched": true}
+  "invariants": [
+    "Presentation only",
+    "One native getter invocation",
+    "Ordinary numbers unchanged",
+    "No background player scanning",
+    "No roster data writes or sorting changes",
+    "Preserve Social Media and recruiting Notes"
+  ],
+  "performance": {
+    "liveMeasured": "Initial idle sample only",
+    "evidence": "35-second p35 read-only thread sample: preview worker 0.015625 CPU seconds; installed recruit worker 0; Social worker0.375. This does not measure UI hook cost or certify late-season performance.",
+    "remaining": [
+      "UI callback latency",
+      "colored focus/scroll overhead",
+      "late-season regression"
+    ]
+  },
+  "review": {
+    "independentReviewer": "fog_coverage_review",
+    "corrections": [
+      "Preserve shared GetPlayerData.Overall as numeric for progression; add DEOverallGrade for presentation instead",
+      "Observed roster uses legacy SpreadsheetProvider rather than modern framework provider",
+      "Derive column count from returned definitions, not the reserve callback",
+      "Position filters use compact reordered rating schemas, not the full 62-column list",
+      "Card adapters preserve original function bodies and change renderer labels; reviewer independently confirmed register budgets, return boundaries, template marker and style cloning",
+      "Roster NIL and generic context sidebar sources discovered; awaiting consumer/arithmetic safety audit",
+      "HandleArtEvent contains three nested callback headers: only validated loader pointer/pool metadata is normalized for semantic hash; copied live callback bytes remain unchanged and modified instructions still reject",
+      "Fast native body accessors bypass setup for some renderers; exact-frame adapters are now eligible at the existing length accessor"
+    ]
+  },
+  "package": {
+    "combinedBuilt": false,
+    "installedBaselineUntouched": true,
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p39.dll",
+    "cleanRestartRequired": "User asked to stop at main menu after clean restart to activate p39. Current p38 Definitions cannot be unloaded safely in-session.",
+    "activeRuntime": "p38 development runtime in PID29424; installed p27 file untouched"
+  },
+  "latestVerification": {
+    "cppChecks": "passed",
+    "spreadsheetVm": "passed",
+    "cardVm": "passed",
+    "review": "independent read-only reviewer passed register/branch/preservation audit; remaining active-template checks tracked",
+    "viewProbe": "Build/roster-view-probe.jsonl records full and QB schemas; game assets and private observations are not distributed",
+    "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet."
+  }
 }

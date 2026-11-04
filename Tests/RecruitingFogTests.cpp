@@ -79,6 +79,18 @@ int main(){try{
         require(field<unsigned>(cloned.data(),24)==16&&field<unsigned short>(cloned.data(),12)==10&&std::equal(original.begin(),original.end(),cloned.begin()+56),"Notes definition header/body copy differs");
         require(std::equal(h.begin()+32,h.end(),cloned.begin()+32),"Notes clone changed the native constant pool");
         original[0]^=1;bool rejected=false;try{makeDefinition(p,h,original);}catch(const std::exception&){rejected=true;}require(rejected,"Changed native method body bypassed the Notes gate");
+        std::vector<unsigned char> callback(64,0);const uintptr_t name=0x120,params=0x128,sourcePool=0x12345678;const unsigned sourceCount=0x98765432;
+        memcpy(callback.data(),&name,8);memcpy(callback.data()+16,&params,8);memcpy(callback.data()+32,&sourceCount,4);memcpy(callback.data()+40,&sourcePool,8);callback[55]=0x59;
+        Program nested{0,1,3,41,64,bodyHash(callback),3,0,64,std::vector<unsigned char>(66,0)};nested.nestedDefinitions.push_back({0,name,params});put(24,unsigned(64));
+        require(sourceBodyHash(nested,h,callback,0x100000)==nested.hash,"Lazy callback source metadata was rejected");
+        const uintptr_t liveName=0x100000+name,liveParams=0x100000+params,livePool=0x20000;const unsigned liveCount=5;
+        memcpy(callback.data(),&liveName,8);memcpy(callback.data()+16,&liveParams,8);memcpy(callback.data()+32,&liveCount,4);memcpy(callback.data()+40,&livePool,8);
+        require(sourceBodyHash(nested,h,callback,0x100000)==nested.hash,"Verified loader relocations changed the semantic callback hash");
+        const auto retained=makeDefinition(nested,h,callback,0x100000);require(std::equal(callback.begin(),callback.end(),retained.begin()+48),"Normalized metadata replaced live callback pointers");
+        callback[55]^=1;rejected=false;try{makeDefinition(nested,h,callback,0x100000);}catch(const std::exception&){rejected=true;}require(rejected,"Changed callback instruction escaped the full body gate");
+        callback[55]^=1;callback[40]^=1;rejected=false;try{sourceBodyHash(nested,h,callback,0x100000);}catch(const std::exception&){rejected=true;}require(rejected,"Foreign nested pool accepted");callback[40]^=1;callback[0]^=1;
+        rejected=false;try{sourceBodyHash(nested,h,callback,0x100000);}catch(const std::exception&){rejected=true;}require(rejected,"Unknown nested pointer relocation accepted");
+        put(24,unsigned(4));
         const std::vector<OwnedDefinition> definitions={{0x10000,0x20000},{0x30000,0x40000}};
         PVOID volatile location=reinterpret_cast<void*>(0x30000);
         require(redirectDefinition(&location,definitions)==1&&location==reinterpret_cast<void*>(0x40000),"Live invocation did not attach its matching definition");
@@ -128,8 +140,11 @@ int main(){try{
         using namespace playerfog;
         for(int n=0;n<=100;++n){const auto expected=display(Visibility::Revealed,n);for(const auto* suffix:{"",",TrendUp",",TrendDown",",TrendNone"})require(ratingLabel((std::to_string(n)+suffix).c_str())==expected,"Roster rating/trend converted incorrectly");}
         for(const auto* hidden:{"?","--","", "Hidden","-1","101","79.5","92 yards"})require(ratingLabel(hidden)==hidden,"Roster transformed hidden or non-rating text");
-        std::array<std::string,90> names{};names[1]="RS";names[2]="Name";names[3]="Year";names[4]="POS";names[5]="OVR";names[6]="NIL";names[7]="DEV";names[8]="SPD";names[9]="ACC";names[61]="LSP";
-        require(rosterSchema(names,62),"Roster schema rejected");names[5]="Yards";require(!rosterSchema(names,62),"Statistics schema accepted as ratings");
+        std::array<std::string,90> names{};names[1]="RS";names[2]="Name";names[3]="Year";names[4]="POS";names[5]="OVR";names[6]="NIL";names[7]="DEV";names[8]="SPD";names[9]="ACC";
+        for(unsigned col=10;col<62;++col)names[col]="LSP";
+        require(rosterSchema(names,62),"Roster schema rejected");names[5]="Yards";require(!rosterSchema(names,62),"Statistics schema accepted as ratings");names[5]="OVR";
+        names[8]="THP";names[9]="SAC";names[10]="MAC";require(rosterSchema(names,11),"Position-specific attribute subset rejected");
+        names[10]="Passing Yards";require(!rosterSchema(names,11),"Position schema admitted a statistic");names[10]="MAC";names[7]="GAMES";require(!rosterSchema(names,11),"Stats identity fields accepted as roster");
         GridTestOutput output{gridTestTable};GridSink cells{gridTable,&output};cells.count=5;cells.columns={6,61,5,8,2};
         gridString(&cells,0,"display","92");gridString(&cells,1,"display","59");gridString(&cells,2,"display","83,TrendUp");gridString(&cells,3,"tooltip","90");gridString(&cells,4,"display","91");
         require(output.values[0]["value"]=="92"&&output.values[1]["value"]=="F"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="90"&&output.values[8]["value"]=="91","Subset/reordered roster columns changed NIL, names or tooltip unexpectedly");
@@ -149,6 +164,12 @@ int main(){try{
         view.maps[20]={{"OVR",21},{"Jersey",22},{"PrimaryPositionDepth",23}};view.strings[21]="80";edits.clear();
         require(convert(view,20,Surface::PlaycallSubstitution,capture)==1&&edits==std::vector<std::string>{"20:OVR=B"},"Playcall substitution touched jersey or depth");
         view.strings[21]="?";require(convert(view,20,Surface::PlaycallSubstitution,capture)==0,"Hidden playcall rating became a grade");
+        view.maps[30]={{"overall",31},{"attributesSubpanelInfo",32},{"NILCompensation",33},{"skillPoints",34}};view.numbers[31]=88;view.numbers[33]=90;view.numbers[34]=70;
+        view.arrays[32]={35,36,37};view.maps[35]={{"ratingValue",38},{"isFullyScouted",39}};view.maps[36]={{"ratingValue",40},{"isFullyScouted",41}};view.maps[37]={{"ratingValue",42},{"isFullyScouted",43}};
+        view.numbers[38]=92;view.booleans[39]=true;view.numbers[40]=80;view.booleans[41]=false;view.numbers[42]=90.5;view.booleans[43]=true;edits.clear();
+        require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Roster NIL changed compensation/points or uncertain/invalid attributes");
+        view.maps[50]={{"ovr",51},{"Height",52},{"Weight",53},{"PlayerId",54},{"Stats",55}};view.numbers[51]=59;view.numbers[52]=73;view.numbers[53]=200;view.numbers[54]=88;edits.clear();
+        require(convert(view,50,Surface::ContextPlayer,capture)==1&&edits==std::vector<std::string>{"50:ovr=F"},"Context player panel touched physical/identity/statistical fields");
         MapTestOutput mapOutput{mapTestTable};MapSink map{mapTable,&mapOutput,"overall"};mapInt(&map,"overall",66);mapInt(&map,"Overall",83);mapInt(&map,"jersey",92);mapFloat(&map,"height",74.5f);mapBool(&map,"redshirt",true);mapString(&map,"lastName","Branham");mapUndefined(&map,"injury");mapOpaque(&map,"nested",reinterpret_cast<void*>(123));
         require(mapOutput.values==nlohmann::json({{"overall","D"},{"Overall",83},{"jersey",92},{"height",74.5},{"redshirt",true},{"lastName","Branham"},{"injury",nullptr},{"nested",123}})&&map.changed==1,"Native map collector changed another property's type or value");
         mapInt(&map,"overall",-1);require(mapOutput.values["overall"]==-1&&map.changed==1,"Map collector converted hidden overall sentinel");

@@ -10,9 +10,24 @@
 namespace recruitingfog::notesui {
 inline uint64_t bodyHash(const std::vector<unsigned char>& bytes){uint64_t hash=14695981039346656037ull;for(auto b:bytes){hash^=b;hash*=1099511628211ull;}return hash;}
 template<class T>T field(const unsigned char* bytes,size_t at){T value{};memcpy(&value,bytes+at,sizeof(value));return value;}
+inline uint64_t sourceBodyHash(const Program& p,const std::array<unsigned char,48>& h,const std::vector<unsigned char>& original,uintptr_t asset){
+    if(p.nestedDefinitions.empty())return bodyHash(original);
+    auto normalized=original;
+    for(const auto& nested:p.nestedDefinitions){
+        if(nested.offset+48>original.size())throw std::runtime_error("Nested player UI definition exceeds its method");
+        const auto at=nested.offset;const auto name=field<uintptr_t>(original.data(),at),params=field<uintptr_t>(original.data(),at+16);
+        const auto poolCount=field<unsigned>(original.data(),at+32);const auto pool=field<uintptr_t>(original.data(),at+40);
+        if((name!=nested.name&&(!asset||name!=asset+nested.name))||(params!=nested.params&&(!asset||params!=asset+nested.params)))throw std::runtime_error("Nested player UI pointer relocation is unsupported");
+        if(!((poolCount==0x98765432u&&pool==0x12345678u)||(poolCount==field<unsigned>(h.data(),32)&&pool==field<uintptr_t>(h.data(),40))))throw std::runtime_error("Nested player UI pool differs from its enclosing class");
+        const unsigned sourceCount=0x98765432u;const uintptr_t sourcePool=0x12345678u;
+        memcpy(normalized.data()+at,&nested.name,8);memcpy(normalized.data()+at+16,&nested.params,8);
+        memcpy(normalized.data()+at+32,&sourceCount,4);memcpy(normalized.data()+at+40,&sourcePool,8);
+    }
+    return bodyHash(normalized);
+}
 inline bool headerMatches(const Program& p,const std::array<unsigned char,48>& h){return field<unsigned>(h.data(),8)==p.argc&&field<unsigned short>(h.data(),12)==p.registers&&field<unsigned short>(h.data(),14)==p.flags&&field<unsigned>(h.data(),24)==p.size&&field<unsigned>(h.data(),32)>0&&field<unsigned>(h.data(),32)<16384&&field<uintptr_t>(h.data(),40)>=0x10000;}
-inline std::vector<unsigned char> makeDefinition(const Program& p,const std::array<unsigned char,48>& h,const std::vector<unsigned char>& original){
-    if(!headerMatches(p,h)||original.size()!=p.size||bodyHash(original)!=p.hash||p.newRegisters>64||p.newRegisters<p.registers||p.code.empty()||p.code.size()>32768||p.copyBytes>original.size()||p.copyAt+p.copyBytes>p.code.size())throw std::runtime_error("Notes method definition is unsupported");
+inline std::vector<unsigned char> makeDefinition(const Program& p,const std::array<unsigned char,48>& h,const std::vector<unsigned char>& original,uintptr_t asset=0){
+    if(!headerMatches(p,h)||original.size()!=p.size||sourceBodyHash(p,h,original,asset)!=p.hash||p.newRegisters>64||p.newRegisters<p.registers||p.code.empty()||p.code.size()>32768||p.copyBytes>original.size()||p.copyAt+p.copyBytes>p.code.size())throw std::runtime_error("Native UI method unsupported at offset "+std::to_string(p.offset)+" (body hash "+std::to_string(bodyHash(original))+")");
     std::vector<unsigned char> result(h.begin(),h.end());result.insert(result.end(),p.code.begin(),p.code.end());
     if(p.copyBytes)memcpy(result.data()+48+p.copyAt,original.data(),p.copyBytes);
     const auto registers=static_cast<unsigned short>(p.newRegisters);const auto size=static_cast<unsigned>(p.code.size());memcpy(result.data()+12,&registers,2);memcpy(result.data()+24,&size,4);return result;
@@ -33,6 +48,11 @@ public:
     explicit Runtime(std::vector<Program> selected=programs()):code(std::move(selected)){}
     bool prepared=false;
     void prepare(){prepared=true;}
+    bool acceptsFrame(const unsigned char* h,bool fixedFrame=false)const{
+        if(!prepared)return false;
+        for(const auto& p:code)if((!fixedFrame||p.newRegisters==p.registers)&&field<unsigned>(h,24)==p.size&&field<unsigned>(h,8)==p.argc&&field<unsigned short>(h,12)==p.registers&&field<unsigned short>(h,14)==p.flags)return true;
+        return false;
+    }
     template<class Read>int beforeInvoke(void* object,Read read,bool fixedFrame=false){
         if(!prepared)return -1;
         // The native invocation guarantees a live ScriptFunction2 receiver and
@@ -55,7 +75,7 @@ public:
         for(const auto& p:code){
             const auto original=asset+p.offset;std::array<unsigned char,48> h{};std::vector<unsigned char> body(p.size);
             if(!read(original,h.data(),48)||!read(original+48,body.data(),body.size()))throw std::runtime_error("Notes source definition is no longer readable");
-            const auto bytes=makeDefinition(p,h,body);std::vector<unsigned char> pool(field<unsigned>(h.data(),32)*8);
+            const auto bytes=makeDefinition(p,h,body,asset);std::vector<unsigned char> pool(field<unsigned>(h.data(),32)*8);
             if(!read(field<uintptr_t>(h.data(),40),pool.data(),pool.size()))throw std::runtime_error("Notes native constant pool is no longer readable");
             bank.headers.push_back(h);verified.push_back(bytes);
         }

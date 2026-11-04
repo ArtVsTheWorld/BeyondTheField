@@ -4,7 +4,7 @@ import copy
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Program
-from build_player_fog_ui import spreadsheet_columns, legacy_color
+from build_player_fog_ui import spreadsheet_columns, legacy_color, selected_color
 from recruit_notes_vm import Machine
 sys.path.insert(0, 'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
 from inspect_tb_ast import load
@@ -69,3 +69,18 @@ for column_marked in [True,False]:
                 assert result==0x123456 and calls==[('fallback',7,0)]
             calls.clear();assert Machine({},legacy_pool).run(native_color,{1:receiver,2:7,3:0})==0x123456 and calls==[('fallback',7,0)]
 print('Passed: legacy column+row marker gating, all five colors, native callback fallback, one-column reads and no color recursion.')
+
+selected,copy_at,copy_size=selected_color(408)
+assert copy_at%8==0 and copy_size==408 and selected.code[copy_at:]==bytes(408)
+# Exercise the custom guard/fallthrough prefix independently. The real fallback
+# is inserted byte-for-byte only after its header/full-body hash passes at runtime.
+prefix=Program(selected.code[:copy_at]+bytes([0x59,0x3E]),selected.literals,selected.references)
+for marked in [True,False]:
+    calls=[]
+    def cell_color(row,col):calls.append((row,col));return 0xFFD34D
+    provider={'mColumnData':[{'DEPlayerRating':marked}],'GetCellColor':cell_color}
+    result=Machine({},[]).run(prefix,{1:{'mDataProvider':provider},4:12,5:0})
+    assert result==(0xFFD34D if marked else 0) and calls==([(12,0)] if marked else [])
+for receiver in [{},{'mDataProvider':{}},{'mDataProvider':{'mColumnData':[]}}]:
+    assert Machine({},[]).run(prefix,{1:receiver,4:12,5:0})==0
+print('Passed: selected-rating color routing, missing-provider guards and aligned unmodified native fallback.')

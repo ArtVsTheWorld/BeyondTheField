@@ -25,6 +25,8 @@
 #include "PlayerRatingResponses.h"
 #include "PlayerRatingMap.h"
 #include "PlayerFogUiPrograms.h"
+#include "PlayerCardUiPrograms.h"
+#include "PlayerFogPerformance.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -45,6 +47,13 @@ std::mutex queueMutex;std::deque<Json> pending;
 notesui::Runtime notesUi;
 notesui::Runtime playerUi(playerui::programs());
 notesui::Runtime modernPlayerUi(playerui::modernPrograms());
+notesui::Runtime playerControlUi(playercardui::controlPrograms());
+notesui::Runtime playerCardUi(playercardui::cardPrograms());
+notesui::Runtime playerTemplateUi(playercardui::templatePrograms());
+notesui::Runtime playerSkillUi(playercardui::skillPrograms());
+const std::array<notesui::Runtime*,4> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi};
+std::array<std::atomic<bool>,4> cardUiFailed{};
+std::array<std::atomic<unsigned>,4> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
 resume::Cache resumeCache;
 using ClassRows=void(__fastcall*)(void*,void*,int,int,void*);
@@ -63,8 +72,17 @@ struct PlayerBinding{uintptr_t table,slot,rva;const char* prefix;playerfog::Surf
 constexpr PlayerBinding playerBindings[]={
     {0xbab1b28,0x228,0x7955fc0,"405553565741554156488d6c24c84881ec38010000488b0564c813064833c448",playerfog::Surface::TopAttributes},
     {0xbab0e60,0xc0,0x793d8c0,"48895c240855565741564157488d6c24c94881ec900000004c8bf24c8bf9e8ed",playerfog::Surface::Comparison},
-    {0xbac4e50,0xb8,0x7a0f320,"405557415441564157488d6c24c94881ec00010000488b05043508064833c448",playerfog::Surface::PlaycallSubstitution}};
-std::array<DetailGetter,3> playerOriginal{};std::array<bool,3> playerInstalled{};std::array<std::atomic<unsigned>,3> playerCalls{};
+    {0xbac4e50,0xb8,0x7a0f320,"405557415441564157488d6c24c94881ec00010000488b05043508064833c448",playerfog::Surface::PlaycallSubstitution},
+    {0xbab5778,0xd0,0x796ee90,"48894c24085553565741554157488d6c24d14881ecf8000000498bd84c8bfa48",playerfog::Surface::RosterNIL},
+    {0xc74ed78,0x28,0xa0b6110,"48895c24085556574154415541564157488dac2420faffff4881ec2007000048",playerfog::Surface::ContextPlayer},
+    {0xbab5b70,0x40,0x7975c70,"488bc448894808554156488d68b84881ec38010000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL},
+    {0xc7522c8,0x38,0xa0ddfe0,"405553574156488d6c24c14881ec88000000498bd8488bfa4c8bf1e8d0c1e2f9",playerfog::Surface::RosterNIL},
+    {0xc74fd70,0x58,0xa0c03f0,"4c8944241848894c2408555357415441554156488d6c24d14881ecd80000004d",playerfog::Surface::RosterNIL},
+    {0xc751ea0,0x58,0xa0da9c0,"488bc448894808554157488d68b84881ec38010000488958e84c8bfa488970e0",playerfog::Surface::RosterNIL},
+    {0xc753aa0,0x38,0xa0f2e20,"48894c2408555356574154415541564157488d6c24f84881ec08010000498bf0",playerfog::Surface::RosterNIL},
+    {0xc754328,0x38,0xa0f9fb0,"488bc448894808554156488d68a14881ecc8000000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL}};
+constexpr size_t playerBindingCount=sizeof(playerBindings)/sizeof(playerBindings[0]);
+std::array<DetailGetter,playerBindingCount> playerOriginal{};std::array<bool,playerBindingCount> playerInstalled{};std::array<std::atomic<unsigned>,playerBindingCount> playerCalls{};
 using PlayerMap=void(__fastcall*)(void*,void*);
 struct MapBinding{uintptr_t slot,rva;const char* prefix;const char* ratingKey;};
 constexpr MapBinding mapBindings[]={
@@ -180,10 +198,18 @@ struct CallGuard{CallGuard(){++inflight;}~CallGuard(){--inflight;}};
 unsigned __fastcall colorLengthHook(void* object){
     // Ordinary scripts leave through a read-only fast path: no atomics are
     // incremented, no allocation, no logging, and no process-memory queries.
-    if(!disabled&&!notesAttachmentFailed){
+    if(!disabled){
         const auto definition=*reinterpret_cast<const uintptr_t*>(static_cast<const unsigned char*>(object)+0x58);
         const auto* h=reinterpret_cast<const unsigned char*>(definition);
-        if(notesui::field<unsigned>(h,24)==148&&notesui::field<unsigned>(h,8)==1&&notesui::field<unsigned short>(h,12)==2&&notesui::field<unsigned short>(h,14)==41)
+        const auto size=notesui::field<unsigned>(h,24),argc=notesui::field<unsigned>(h,8);const auto registers=notesui::field<unsigned short>(h,12),flags=notesui::field<unsigned short>(h,14);
+        if(!playerUiFailed&&size==408&&argc==2&&registers==6&&flags==41)
+        try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=playerUi.beforeInvoke(object,read,true);if(index>=0)note({{"event","player_fog_selected_color_attached"},{"program",index}});}
+        catch(const std::exception& error){playerUiFailed=true;note({{"event","player_fog_selected_color_failed"},{"reason",error.what()}});}
+        for(size_t bank=0;bank<cardUiBanks.size();++bank)if(!cardUiFailed[bank]&&cardUiBanks[bank]->acceptsFrame(h,true))
+        try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=cardUiBanks[bank]->beforeInvoke(object,read,true);
+            if(index>=0){const auto bit=1u<<index;if(!(cardUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_card_adapter_attached"},{"bank",bank},{"method",index},{"path","fixed frame body accessor"}});}}
+        catch(const std::exception& error){cardUiFailed[bank]=true;note({{"event","player_fog_card_adapter_failed"},{"bank",bank},{"reason",error.what()}});}
+        if(!notesAttachmentFailed&&size==148&&argc==1&&registers==2&&flags==41)
         try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=notesUi.beforeInvoke(object,read,true);if(index>=0){const auto bit=1u<<index;if(!(notesAttachedMethods.fetch_or(bit)&bit))note({{"event","recruit_color_focus_attached"},{"program",index}});}}
         catch(const std::exception& error){notesAttachmentFailed=true;note({{"event","recruit_color_focus_failed"},{"reason",error.what()}});}
     }
@@ -205,19 +231,21 @@ std::string classGridLabel(void* source,int form,int row,const char* originalLab
     if(classGridChanges.fetch_add(1)<3)note({{"event","recruit_class_grid_label"},{"record",record},{"label",label}});return label;
 }
 void __fastcall classRowsHook(void* source,void* target,int form,int row,void* columns){
+    playerperf::Sample performance(playerperf::rows);
     if(!disabled&&form==rosterForm.load()){
         playerfog::GridSink sink{playerfog::gridTable,target};
-        if(playerfog::gridColumns(sink,columns)){CallGuard guard;originalClassRows(source,&sink,form,row,columns);rosterCells+=sink.changed;return;}
+        if(playerfog::gridColumns(sink,columns)){CallGuard guard;{playerperf::Sample nativePerformance(playerperf::nativeRows);originalClassRows(source,&sink,form,row,columns);}rosterCells+=sink.changed;return;}
     }
     CallGuard guard;if(disabled||!classGridColumns(columns)){originalClassRows(source,target,form,row,columns);return;}
     ClassGridSink sink{classGridTable,target,source,form,row,classGridLabel};originalClassRows(source,&sink,form,row,columns);classGridFlush(&sink);
 }
 void __fastcall rosterColumnsHook(void* source,void* target,int form){
+    playerperf::Sample performance(playerperf::columns);
     CallGuard guard;if(disabled){originalRosterColumns(source,target,form);return;}
     playerfog::ColumnSink sink{playerfog::columnTable};sink.fields.reserve(768);
     originalRosterColumns(source,&sink,form);
     unsigned columnCount=0;for(unsigned i=0;i<sink.names.size();++i)if(!sink.names[i].empty())columnCount=i+1;
-    const bool recognized=form==0&&playerfog::rosterSchema(sink.names,columnCount);rosterForm=recognized?form:-1;
+    const bool recognized=form>=0&&playerfog::rosterSchema(sink.names,columnCount);rosterForm=recognized?form:-1;
     playerfog::replayColumns(sink,target,recognized);
     if(rosterColumnCalls.fetch_add(1)<3)note({{"event","player_fog_roster_columns"},{"form",form},{"columns",columnCount},{"recognized",recognized},{"names",sink.names}});
 }
@@ -226,9 +254,10 @@ void __fastcall gridCloseHook(void* source,int form){
 }
 void* __fastcall rosterPlayerHook(void* source,void** out,void* argument){
     CallGuard guard;auto* result=originalRosterPlayer(source,out,argument);
-    if(!disabled&&rosterForm.load()==0&&out&&*out){
+    if(!disabled&&out&&*out){
         UiResponse view(read);
-        if(playerfog::selectedOverall(view,reinterpret_cast<uintptr_t>(*out),[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);})){if(rosterPanels.fetch_add(1)<3)note({{"event","player_fog_roster_panel"}});}
+        const auto changed=playerfog::convert(view,reinterpret_cast<uintptr_t>(*out),playerfog::Surface::RosterNIL,[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);});
+        if(changed&&rosterPanels.fetch_add(1)<3)note({{"event","player_fog_roster_panel"},{"changed",changed}});
     }
     return result;
 }
@@ -239,7 +268,7 @@ template<size_t Index>void* __fastcall playerResponseHook(void* source,void** ou
         if(playerCalls[Index].fetch_add(1)<3)note({{"event","player_fog_response"},{"surface",Index},{"changed",changed}});
     }return result;
 }
-const DetailGetter playerHooks[]={playerResponseHook<0>,playerResponseHook<1>,playerResponseHook<2>};
+const DetailGetter playerHooks[]={playerResponseHook<0>,playerResponseHook<1>,playerResponseHook<2>,playerResponseHook<3>,playerResponseHook<4>,playerResponseHook<5>,playerResponseHook<6>,playerResponseHook<7>,playerResponseHook<8>,playerResponseHook<9>,playerResponseHook<10>};
 template<size_t Index>void __fastcall playerMapHook(void* source,void* target){
     CallGuard guard;if(disabled){mapOriginal[Index](source,target);return;}
     playerfog::MapSink sink{playerfog::mapTable,target,mapBindings[Index].ratingKey};
@@ -249,14 +278,21 @@ template<size_t Index>void __fastcall playerMapHook(void* source,void* target){
 const PlayerMap mapHooks[]={playerMapHook<0>,playerMapHook<1>};
 uintptr_t __fastcall notesSetupHook(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){
     CallGuard guard;
+    {
+    playerperf::Sample performance(playerperf::scriptAdapters);
 #if !defined(PLAYER_FOG_PREVIEW) || defined(PLAYER_FOG_COLORS)
     if(!disabled&&!playerUiFailed)try{const auto legacy=playerUi.beforeInvoke(object,read);const auto modern=legacy>=0?-1:modernPlayerUi.beforeInvoke(object,read);
         if((legacy>=0||modern>=0)&&!playerUiLogged.exchange(true))note({{"event","player_fog_color_adapter_attached"},{"legacy",legacy>=0}});}
     catch(const std::exception& error){playerUiFailed=true;note({{"event","player_fog_color_adapter_failed"},{"reason",error.what()}});}
+    if(!disabled)for(size_t bank=0;bank<cardUiBanks.size();++bank)if(!cardUiFailed[bank])try{
+        const auto index=cardUiBanks[bank]->beforeInvoke(object,read);
+        if(index>=0){const auto bit=1u<<index;if(!(cardUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_card_adapter_attached"},{"bank",bank},{"method",index}});}
+    }catch(const std::exception& error){cardUiFailed[bank]=true;note({{"event","player_fog_card_adapter_failed"},{"bank",bank},{"reason",error.what()}});}
 #endif
     if(!disabled&&!notesAttachmentFailed)try{const auto index=notesUi.beforeInvoke(object,read);if(index>=0){const auto bit=1u<<index;
         if(!(notesAttachedMethods.fetch_or(bit)&bit))note({{"event","recruit_notes_method_attached"},{"program",index}});}}
     catch(const std::exception& error){notesAttachmentFailed=true;note({{"event","recruit_notes_attachment_failed"},{"reason",error.what()}});}
+    }
     return originalScriptSetup(object,saved,receiver,parent,super);
 }
 #endif
@@ -319,7 +355,7 @@ void* __fastcall getterHook(void* object,void** out){
     return result;
 }
 #if defined(RECRUIT_NOTES_UI)
-void installRosterProviders(){
+void installRosterProviders(bool preflightOnly=false){
     struct Binding{uintptr_t table,offset,rva;const char* prefix;void* hook;};
     const Binding bindings[]={
         {rosterColumnsTable,0x70,rosterColumnsRva,"488bc455488bec4881ec80000000488958084881c11804000048897010488bda",reinterpret_cast<void*>(rosterColumnsHook)},
@@ -331,20 +367,21 @@ void installRosterProviders(){
         const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};
         for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported roster provider fingerprint");
     }
-    originalRosterColumns=reinterpret_cast<RosterColumns>(base+rosterColumnsRva);originalGridClose=reinterpret_cast<GridClose>(base+gridCloseRva);originalRosterPlayer=reinterpret_cast<RosterPlayer>(base+rosterPlayerRva);
-    if(!replace(reinterpret_cast<void*>(originalRosterColumns),reinterpret_cast<void*>(rosterColumnsHook),rosterColumnsTable,0x70))throw std::runtime_error("Roster columns ownership changed");rosterColumnsInstalled=true;
-    if(!replace(reinterpret_cast<void*>(originalGridClose),reinterpret_cast<void*>(gridCloseHook),classTableRva,0x60))throw std::runtime_error("Roster close ownership changed");gridCloseInstalled=true;
-    if(!replace(reinterpret_cast<void*>(originalRosterPlayer),reinterpret_cast<void*>(rosterPlayerHook),rosterPlayerTable,0x50))throw std::runtime_error("Roster player ownership changed");rosterPlayerInstalled=true;
     for(size_t i=0;i<playerOriginal.size();++i){const auto& binding=playerBindings[i];uintptr_t current=0;std::array<unsigned char,32> actual{};
         if(!read(base+binding.table+binding.slot,&current,8)||current!=base+binding.rva||!read(current,actual.data(),32))throw std::runtime_error("Unsupported or owned player response");
         const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported player response fingerprint");
     }
-    for(size_t i=0;i<playerOriginal.size();++i){const auto& binding=playerBindings[i];playerOriginal[i]=reinterpret_cast<DetailGetter>(base+binding.rva);
-        if(!replace(reinterpret_cast<void*>(playerOriginal[i]),reinterpret_cast<void*>(playerHooks[i]),binding.table,binding.slot))throw std::runtime_error("Player response ownership changed");playerInstalled[i]=true;
-    }
     for(size_t i=0;i<mapOriginal.size();++i){const auto& binding=mapBindings[i];uintptr_t current=0;std::array<unsigned char,32> actual{};
         if(!read(base+0xbab1b28+binding.slot,&current,8)||current!=base+binding.rva||!read(current,actual.data(),32))throw std::runtime_error("Unsupported or owned card map provider");
         const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported card map fingerprint");
+    }
+    if(preflightOnly)return;
+    originalRosterColumns=reinterpret_cast<RosterColumns>(base+rosterColumnsRva);originalGridClose=reinterpret_cast<GridClose>(base+gridCloseRva);originalRosterPlayer=reinterpret_cast<RosterPlayer>(base+rosterPlayerRva);
+    if(!replace(reinterpret_cast<void*>(originalRosterColumns),reinterpret_cast<void*>(rosterColumnsHook),rosterColumnsTable,0x70))throw std::runtime_error("Roster columns ownership changed");rosterColumnsInstalled=true;
+    if(!replace(reinterpret_cast<void*>(originalGridClose),reinterpret_cast<void*>(gridCloseHook),classTableRva,0x60))throw std::runtime_error("Roster close ownership changed");gridCloseInstalled=true;
+    if(!replace(reinterpret_cast<void*>(originalRosterPlayer),reinterpret_cast<void*>(rosterPlayerHook),rosterPlayerTable,0x50))throw std::runtime_error("Roster player ownership changed");rosterPlayerInstalled=true;
+    for(size_t i=0;i<playerOriginal.size();++i){const auto& binding=playerBindings[i];playerOriginal[i]=reinterpret_cast<DetailGetter>(base+binding.rva);
+        if(!replace(reinterpret_cast<void*>(playerOriginal[i]),reinterpret_cast<void*>(playerHooks[i]),binding.table,binding.slot))throw std::runtime_error("Player response ownership changed");playerInstalled[i]=true;
     }
     for(size_t i=0;i<mapOriginal.size();++i){const auto& binding=mapBindings[i];mapOriginal[i]=reinterpret_cast<PlayerMap>(base+binding.rva);
         if(!replace(reinterpret_cast<void*>(mapOriginal[i]),reinterpret_cast<void*>(mapHooks[i]),0xbab1b28,binding.slot))throw std::runtime_error("Card map ownership changed");mapInstalled[i]=true;
@@ -354,7 +391,9 @@ void installRosterProviders(){
 DWORD stop(){
 #if defined(RECRUIT_NOTES_UI)
 #if !defined(PLAYER_FOG_PREVIEW) || defined(PLAYER_FOG_COLORS)
-    if(playerUi.ownerCount()||modernPlayerUi.ownerCount()){note({{"event","player_ui_restart_required"},{"reason","Native spreadsheet colors retain a copied script definition"}});return 4;}
+    bool retainedPlayerUi=playerUi.ownerCount()||modernPlayerUi.ownerCount();
+    for(const auto* bank:cardUiBanks)retainedPlayerUi=retainedPlayerUi||bank->ownerCount();
+    if(retainedPlayerUi){note({{"event","player_ui_restart_required"},{"reason","Native player UI retains a copied script definition"}});return 4;}
 #endif
     if(notesUi.ownerCount()){note({{"event","notes_ui_restart_required"},{"reason","The game can retain cloned Notes definitions; use a clean restart"}});return 4;}
 #endif
@@ -394,13 +433,18 @@ DWORD WINAPI worker(void*){
         if(!replace(reinterpret_cast<void*>(originalClassRows),reinterpret_cast<void*>(classRowsHook),classTableRva,0x68))throw std::runtime_error("Shared row owner changed");classRowsInstalled=true;
 #if defined(PLAYER_FOG_COLORS)
         if(!read(base+scriptTableRva+scriptSetupSlot,&parent,8)||!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-v1.dll")throw std::runtime_error("Preview requires installed script owner");
-        playerUi.prepare();modernPlayerUi.prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(parent);
+        playerUi.prepare();modernPlayerUi.prepare();for(auto* bank:cardUiBanks)bank->prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(parent);
         if(!replace(reinterpret_cast<void*>(originalScriptSetup),reinterpret_cast<void*>(notesSetupHook),scriptTableRva,scriptSetupSlot))throw std::runtime_error("Script invocation owner changed");notesSetupInstalled=true;
 #endif
         note({{"event","player_fog_preview_active"},{"reader",false},{"installedFilesChanged",false}});
         while(!disabled){flush();Sleep(200);}flush();return 0;
 #endif
         std::array<unsigned char,32> actual{};uintptr_t current=0;
+#if defined(RECRUIT_NOTES_UI)
+        // Reject an unsupported/occupied player surface before Notes definitions
+        // can be attached and retained by a concurrent native UI request.
+        installRosterProviders(true);
+#endif
         if(!read(base+getterRva,actual.data(),actual.size())||actual!=prefix)throw std::runtime_error("Unsupported recruiting getter fingerprint");
         for(const auto& gate:recruitingUiGates){if(!read(base+gate.rva,actual.data(),actual.size())||actual!=gate.bytes)throw std::runtime_error("Unsupported UI-value setter fingerprint");}
         for(const auto& gate:playingTimeGates){if(!read(base+gate.rva,actual.data(),actual.size())||actual!=gate.bytes||!read(base+gate.vtable+gate.slot,&current,8)||current!=base+gate.rva)throw std::runtime_error("Unsupported or already-owned playing-time getter");}
@@ -411,7 +455,7 @@ DWORD WINAPI worker(void*){
         for(size_t i=0;i<detailCount;++i){const auto& gate=playingTimeGates[i];detailOriginal[i]=reinterpret_cast<DetailGetter>(base+gate.rva);if(!replace(reinterpret_cast<void*>(detailOriginal[i]),reinterpret_cast<void*>(hooks[i]),gate.vtable,gate.slot))throw std::runtime_error("Playing-time getter ownership changed");detailInstalled[i]=true;}
 #if defined(RECRUIT_NOTES_UI)
         if(!read(base+scriptSetupRva,actual.data(),scriptSetupPrefix.size())||memcmp(actual.data(),scriptSetupPrefix.data(),scriptSetupPrefix.size())||!read(base+scriptTableRva+scriptSetupSlot,&current,8)||current!=base+scriptSetupRva)throw std::runtime_error("Unsupported or already-owned script invocation setup");
-        notesUi.prepare();playerUi.prepare();modernPlayerUi.prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(current);
+        notesUi.prepare();playerUi.prepare();modernPlayerUi.prepare();for(auto* bank:cardUiBanks)bank->prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(current);
         if(!replace(reinterpret_cast<void*>(originalScriptSetup),reinterpret_cast<void*>(notesSetupHook),scriptTableRva,scriptSetupSlot))throw std::runtime_error("Notes invocation setup ownership changed");
         notesSetupInstalled=true;
         constexpr unsigned char colorLengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};
@@ -434,6 +478,11 @@ DWORD WINAPI worker(void*){
 #endif
         note({{"event","active"},{"mode","letter grades, ranges and Playing Time masking"},{"scope","recruiting UI responses only"}});
         while(!disabled){
+#if defined(PLAYER_FOG_PERF) && defined(RECRUIT_NOTES_UI)
+            static uint64_t nextPerformance=0;if(GetTickCount64()>=nextPerformance){nextPerformance=GetTickCount64()+30000;
+                note({{"event","player_fog_performance"},{"sampleCapPerPath",8192},{"rows",playerperf::report<Json>(playerperf::rows)},{"nativeRowsIncludingCollector",playerperf::report<Json>(playerperf::nativeRows)},{"scriptAdapters",playerperf::report<Json>(playerperf::scriptAdapters)},{"columns",playerperf::report<Json>(playerperf::columns)}});
+            }
+#endif
 #if defined(RECRUIT_NOTES_UI)
             static uint64_t nextResumeTick=0;if(GetTickCount64()>=nextResumeTick){nextResumeTick=GetTickCount64()+1000;
                 try{auto report=resumeCache.tick(base,folder,read);if(!report.is_null())note(std::move(report));}

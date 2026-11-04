@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name,[switch]$RecruitNotesProbe,[switch]$RecruitNotesUi,[switch]$PlayerFogPreview,[switch]$PlayerFogColors)
+param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name,[switch]$RecruitNotesProbe,[switch]$RecruitNotesUi,[switch]$PlayerFogPreview,[switch]$PlayerFogColors,[switch]$PlayerFogPerf)
 $ErrorActionPreference='Stop'
 $fogRoot=Split-Path -Parent $PSScriptRoot
 $fogOut=Join-Path $fogRoot 'Build'
@@ -18,6 +18,7 @@ if($RecruitNotesProbe){$fogFlags+='/DRECRUIT_NOTES_PROBE'}
 if($RecruitNotesUi){$fogFlags+='/DRECRUIT_NOTES_UI'}
 if($PlayerFogPreview){if(-not $RecruitNotesUi){throw 'Preview requires the shared UI implementation'};$fogFlags+='/DPLAYER_FOG_PREVIEW'}
 if($PlayerFogColors){if(-not $RecruitNotesUi){throw 'Player colors require UI support'};$fogFlags+='/DPLAYER_FOG_COLORS'}
+if($PlayerFogPerf){if(-not $RecruitNotesUi){throw 'Player profiling requires UI support'};$fogFlags+='/DPLAYER_FOG_PERF'}
 if($RecruitNotesUi){
  & python (Join-Path $fogRoot 'Tools/build_lower_division_schools.py')
  if($LASTEXITCODE -ne 0){throw 'College school catalog validation failed'}
@@ -27,6 +28,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'Notes UI bytecode checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_fog_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Player UI bytecode checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_card_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Player card label checks failed'}
 }
 Push-Location $fogOut
 try{
