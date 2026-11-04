@@ -85,10 +85,10 @@
       "liveVerified": false,
       "evidence": "p39 hooks verified player-only GetEntryInfo UI maps for PositionChanges and Injury/Training; common RosterManagement entry hook now applies beyond rosterForm. Actual training/position-change table schemas still need discovery. Captured Training61 schema and ATH32 schema; source now recognizes both. Nativeformat35 switch8254680/82551B0 calls7e0c670 producing exactcomma TrendWithDelta suffix, retainedunchanged; only base token graded. ATH hiddenDEV6 preserved. Build/review/live pending.",
       "remaining": [
-        "Live next-build Training grade/delta/color verification",
-        "ATH and normal position filters/reentry without changing players"
+        "Training position/far-right and reentry regression",
+        "p59 ATH and normal Position Changes liveverification"
       ],
-      "liveStatus": "p57 ULMTRAININGRESULTS28 loaded read-only; Training Results sidebar grades work, team75/75/74 numeric. Table current ratings remain numeric, native improvement deltas+1/+2/+8 visible. Captured61-column schema has blank0/RS1/Name2/Year3/POS4/OVR5/NIL6/attributes7..60; formatter35 and trendtrue onratings."
+      "liveStatus": "p59 live Training Results: Jotavian Pierce selected row C with nativegreen(+1), AWRB(+2); otherrows coloredgrades plus(+2)/(+8)/(+10), native delta child layout preserved. SidebarC; NIL10/0 and team75/75/74 numeric. User confirms looks good. ATH/nativeposition livecheck next."
     },
     {
       "surface": "Pregame and in-game menus",
@@ -196,13 +196,12 @@
     {
       "surface": "NIL roster list OVR",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "Current exact Draw/unfocus fingerprints; scoped direct mcOvr label only. Unfocus retains native2-register frame with stack color object. EightUIVMsuites and independent review pass; numericOvr/compensation/limits/risk unchanged. Includedp54built, notactive. p59 adds14thbank for current screen-embedded RosterNILRowItem, defs2610/2b40, fullassetSHA0851ae84..., matchingstandalonebodyhashes with different sourceoffsets. Bothvariants independentlyverified, numericNIL/risk/model preserved.",
       "remaining": [
-        "Live bank13 attachment and selected/unselected list grade verification",
-        "Filter/reentry and compensation preservation"
+        "All/risk filter and reopen regression without changing deals"
       ],
-      "liveStatus": "p57 ULMEOSRECAP28 native editable list opened read-only: table OVR80/79/76/75 remain numeric while sidebarB works. Bank10 did not attach and no failure event, indicating a different active row renderer. No deals/slider changes."
+      "liveStatus": "p59 clean PID17172 actual editableHighRisk list: selectedToothman B black, otherC/D colored, sidebarB; current/expectedNIL0, budget840,roster80,recruit215,team75/75/74 and riskbars preserved. Bank13 Draw+unfocus attached; user confirms looks good. No deals changed."
     },
     {
       "surface": "Dynasty Blueprint Highest NIL Players overview",
@@ -534,6 +533,17 @@
       ],
       "retainedScriptBytes": 61440,
       "caveat": "Query-only thread times; zero worker CPU does not measure UI suffix rendering or prove no frame-time impact. Private-memory movement includes whole game. Not a late-season or A/B baseline test."
+    },
+    "p59MenuObservation": {
+      "evidence": "Evidence/PlayerFog/p59-menu-observation.jsonl and summary",
+      "seconds": 35,
+      "recruitFogWorkerCpuSeconds": 0,
+      "socialWorkerCpuSeconds": 0.515625,
+      "processPrivateMiBRange": [
+        13553.9,
+        13554.0
+      ],
+      "caveat": "Read-only mixed menu observation; worker CPU excludes UI hooks/main-thread AS work. No A/B baseline or frame-time/late-season certification."
     }
   },
   "review": {
@@ -621,7 +631,10 @@
     "p59Build": "MSVC/W4/WX/native/all10UIVM suites passed. Independent source/frame/model/lifecycle reviews passed for hubstrings, four captured grids, weeklypractice and embeddedNIL.",
     "p59Package": "Combined MMC registration/launch/tamper/path/config smoke passed; installed baseline unchanged; p59 not loaded.",
     "milestonePersistence": "Allfive milestone sourcefiles stillmatchSHA256 backups afterread-onlymenuQA; noadvance/save/player/deal changes.",
-    "p59Activation": "Observed main menu in fresh PID17172; installed recruit baseline stop0, p59 active event and empty14-bank retention confirmed before Dynasty load."
+    "p59Activation": "Observed main menu in fresh PID17172; installed recruit baseline stop0, p59 active event and empty14-bank retention confirmed before Dynasty load.",
+    "p59NilLive": "p59 clean PID17172 actual editableHighRisk list: selectedToothman B black, otherC/D colored, sidebarB; current/expectedNIL0, budget840,roster80,recruit215,team75/75/74 and riskbars preserved. Bank13 Draw+unfocus attached; user confirms looks good. No deals changed.",
+    "p59TrainingLive": "p59 live Training Results: Jotavian Pierce selected row C with nativegreen(+1), AWRB(+2); otherrows coloredgrades plus(+2)/(+8)/(+10), native delta child layout preserved. SidebarC; NIL10/0 and team75/75/74 numeric. User confirms looks good. ATH/nativeposition livecheck next.",
+    "p59TrainingQbFilter": "Automated native dropdown selection toQB passed. Marc Friedel Overall D(+4), strengthD(+1), awarenessD(+4), throwpowerB(+2); selectedblack, numericNIL0/team75/75/74 preserved. Horizontal automated scroll ignored; user controller far-right check requested."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
