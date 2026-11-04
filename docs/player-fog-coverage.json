@@ -564,12 +564,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p59.dll",
-    "cleanRestartRequired": "p59 clean activation complete; future copied UI definition changes need clean restart.",
-    "activeRuntime": "p59 active in PID17172; p11 metadata probe explicitly stopped0 with inflight0. p60 not loaded.",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p60.dll",
+    "cleanRestartRequired": "p60 clean activation complete; future copied UI definition changes require a clean restart.",
+    "activeRuntime": "p60 active alone in clean PID30540 after installed recruit baseline stop0 at observed main menu; no probes loaded.",
     "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p59-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "98eb31b0ef8fe68a9c890a36a473acd327fbf021b4e229e504fd4f282cd945d9",
+    "previewSha256": "c893f250426662d455ab163953e2bb6e7afd510ea66bbb0ddc79f504de8a3fee",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p60.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p60-MMC.zip",
@@ -635,7 +635,8 @@
     "p60Build": "MSVC /W4 /WX, native tests and all10 UI VM suites passed. Four actual filtered metadata fixtures verify shifted rating columns, unchanged NIL/sorting/unknown/disabled fields, and rejection of stats/unrelated schemas.",
     "p60Review": "Independent read-only review passed allfour schemas and native preservation. Native disabled foreground pending visual QA.",
     "p60Package": "MMC registration/launch/tamper/path/config checks passed. Installed baseline untouched; p60 not loaded.",
-    "p59LeavingEncourage": "User confirmed Players Leaving and Encourage All. Filtered Encourage raw rating leak reproduced and fixed in p60."
+    "p59LeavingEncourage": "User confirmed Players Leaving and Encourage All. Filtered Encourage raw rating leak reproduced and fixed in p60.",
+    "p60Activation": "Observed main menu in clean PID30540; installed recruit baseline stop0, p60 loaded, active event and empty14-bank retention confirmed before Dynasty entry."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
