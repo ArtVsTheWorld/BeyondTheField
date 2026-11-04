@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
-from build_player_hub_ui import formation_suffix,ovr_template_suffix
+from build_player_hub_ui import formation_suffix,ovr_template_suffix,comparison_stat_suffix,ATTRIBUTE_NAMES,SPECS
 from build_player_card_ui import rating_value_draw_suffix
 from recruit_notes_vm import Machine,UNDEFINED
 
@@ -44,4 +44,33 @@ for n in ['?','Hidden',-1,101,UNDEFINED,None]:
     data={'value':n};Machine({},[]).run(program(ovr_template_suffix),{2:data});assert data=={'value':n}
 for receiver in [{},{'FIELDED_PLAYERS':11}]:
     Machine({},[]).run(program(formation_suffix),{1:receiver,3:[]})
-print('Passed: player-only hub labels, all101 grade boundaries/colors, source Ovr unchanged, ordinary numbers/team ratings preserved and hidden previews untouched.')
+
+comparison=program(comparison_stat_suffix)
+assert len(comparison.code)<32768
+assert SPECS[-1][3:6]==(2,5,5) # native argc and fixed register frame
+def comparison_result(name,value):
+    entry={'StatName':name,'StatValue':value}
+    team={'Stats':[{'StatName':'Passing Yards','StatValue':312},entry]}
+    receiver={'mTeamList':[{'Stats':[]},team]}
+    style={'font':'native','fontColor':0xFFFFFF,'resizeWidth':84,'hAlign':'CENTER'}
+    data={'display':value,'ExtraInfo':style}
+    result=Machine({},[]).run(comparison,{1:receiver,2:data,3:1,4:1})
+    assert result is data and entry=={'StatName':name,'StatValue':value}
+    assert team['Stats'][0]['StatValue']==312
+    assert all(style[k]==v for k,v in {'font':'native','resizeWidth':84,'hAlign':'CENTER'}.items())
+    return result
+for n in range(101):
+    for name in ('Awareness','SPEED','acceleration','Catching'):
+        data=comparison_result(name,n)
+        assert data['display']==grade(n) and data['ExtraInfo']['fontColor']==GRADE_COLORS[grade(n)]
+for name in ATTRIBUTE_NAMES:
+    for form in (name,name.upper(),name.lower()):
+        assert comparison_result(form,85)['display']=='B'
+for name in ('Passing Yards','Rushing Yards','Completions','Passing TD','INT','REC','TKL','Yards','Rank','NIL','Unknown'):
+    for n in range(101):
+        data=comparison_result(name,n)
+        assert data['display']==n and data['ExtraInfo']['fontColor']==0xFFFFFF
+for value in ('?', 'Hidden', '85', -1,101,None,UNDEFINED,float('nan')):
+    data=comparison_result('Awareness',value)
+    assert data['ExtraInfo']['fontColor']==0xFFFFFF
+print('Passed: player-only hub labels/comparison attributes, all101 grade boundaries/colors, source values unchanged, ordinary statistics/team ratings preserved and hidden previews untouched.')

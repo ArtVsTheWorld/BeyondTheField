@@ -65,10 +65,10 @@
       "liveVerified": false,
       "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass. Loaded in p50; Starting Offense live verified. Reviewer confirms PlayerCompare helper is called twice from Init; PlayersToWatch helper has no current Init caller or OVR children, so attachment absence alone is not a visible leak.",
       "remaining": [
-        "Live PlayerCompare preview and reentry/selection",
-        "PlayersToWatch current layout inspection; helper appears dormant and pane may not display OVR"
+        "Mask actualPlayerCompare8attribute labels withouttouchingpassing/rushing/stat panes",
+        "PlayersToWatch currentlayoutinspection; dormantOVRhelpernotrequiredunlessvisible"
       ],
-      "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending."
+      "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending. p55liveMismatchOnPapercomparison: bothOVRbadgesC/Bcolored;8attributes79/82/83/78 vs85/87/90/83 remainnumeric. Discoveredadditionalvisibleattributeleak, do notmarkStage2passed."
     },
     {
       "surface": "Recruit scouting grades, ranges and colors",
@@ -155,10 +155,9 @@
       "surface": "Formation Subs player OVRs and detail views",
       "implemented": true,
       "liveVerified": false,
-      "liveStatus": "p51 clean PID20872 initial WingTight view: JaCoreyMcNeil67->D orange; reserve60->D and59/55/52/47->F, native alpha preserved. Names/positions, portrait, jersey diagram and0/50 substitution counter unchanged. Bank8 methods attached. No replacements chosen. Deeperedit view reveals rightpanel OVR67 orange and attributes62/85/89/68/64/85 numeric; direct parent suffix is overwritten by child refresh. Center/list remaingrades. Counter0/50.",
+      "liveStatus": "p55 clean PID7528: Wing Tight right detail now shows JaCorey McNeil Overall D and six colored attributes D/B/B/D/D/B, matching prior native67/62/85/89/68/64/85. Center/reserve grades remain correct; jersey diagram, measurements and0/50 counter unchanged. No substitutions/reset/advance.",
       "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed. p55 adds scoped parent/attribute-slot conversion after the nativechildrepaint. Regression reproduces live67/62/85/89/68/64/85 ordering and preserves sourcevalues, unknowns, numericstatbadges and native23/9/21-registerframes.",
       "remaining": [
-        "Fix right-hand detail OVR/attribute refresh path; source numeric model unchanged",
         "Live defense/reentry and selected reserve contrast"
       ]
     },
@@ -196,6 +195,17 @@
       "evidence": "Current exact Draw/unfocus fingerprints; scoped direct mcOvr label only. Unfocus retains native2-register frame with stack color object. EightUIVMsuites and independent review pass; numericOvr/compensation/limits/risk unchanged. Includedp54built, notactive.",
       "remaining": [
         "Live list attachment, selection/reentry and budget-number preservation without editing any deals"
+      ],
+      "liveStatus": "p55 Week4 Program Overview opens normally; Manage Roster NIL returns native availability notice: editable only End of Season Recap. List remains awaiting milestone-save QA; no deals changed."
+    },
+    {
+      "surface": "Dynasty Blueprint Highest NIL Players overview",
+      "implemented": false,
+      "liveVerified": false,
+      "liveStatus": "p55 actual visible OVR82/55/56/49/63 remain numeric; compensation45/25/20/15/10 and budget values should remain numeric.",
+      "remaining": [
+        "Discover scoped player-only overview renderer",
+        "Implement and live verify without editing budget/deals"
       ]
     }
   ],
@@ -514,16 +524,16 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p51.dll",
-    "cleanRestartRequired": "Clean p51 activation completed; later retained UI definition changes require clean restart.",
-    "activeRuntime": "p51 active alone in clean PID20872, installed baseline stop0 at main menu. No development probes loaded.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p51-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p55.dll",
+    "cleanRestartRequired": "Cleanp55activationcompleted; laterretainedUIchanges requirecleanrestart.",
+    "activeRuntime": "p55 active alone in clean PID7528 after baseline stop0 at mainmenu. No probes loaded.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p55-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "822102a51fa29db7276c2d2c889686be304330657c27de95e7c8994614edafca",
+    "previewSha256": "2958924bb4c91803459ffb025f1b0ab05ff35150f96da21ede501b9e3eaadbde",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p55.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p55-MMC.zip",
-    "nextCandidateSha256": "2958924bb4c91803459ffb025f1b0ab05ff35150f96da21ede501b9e3eaadbde"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p56.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p56-MMC.zip",
+    "nextCandidateSha256": "2dae7679900c2d22493c803e9089b0a3dd2b421f55842339da907107a4ad979d"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -549,10 +559,13 @@
     "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet.",
     "p51Activation": "Baseline stop0, p51 active event and empty10-bank initial retention report confirmed before Dynasty entry in PID20872.",
     "p51Live": "Clean Dynasty entry and StartingOffense pass. FormationSubs initial selected player/reserve grades live verified; detailed subview next. No swaps/reset/player edits/advance.",
-    "queuedNext": "p55 packaged/readypendingcleanrestart toreplacep51. p52/p53/p54neverloaded. p3Prospectread-onlyprobe explicitlystopped0.",
+    "queuedNext": "p55 live QA now; p52/p53/p54 neverloaded. RosterViewProbe-p9 andTooltipProbe-p3 prepared/unloaded, notinpackage.",
     "p54Build": "MSVC/W4/WX/native and eight UI suites passed. Includes NILrow, allthree stats sidebars and unchanged-list redrawoptimization. Independentlyreviewed. Unloaded; p51 remainsactive and its deeperFormationdetail gap mustbe fixed before nextlivecandidate.",
     "p55Prepared": "p55 buildpassedMSVC/W4/WX/native/eightUIVMsuites; independentparent/slot repaintreview and fouraffected suites pass; actualFormationlate-repaintverificationpending.",
-    "p55Package": "MMC registration/launch/tamper/path/config checks pass; installedfiles/history unchanged."
+    "p55Package": "MMC registration/launch/tamper/path/config checks pass; installedfiles/history unchanged.",
+    "p55Activation": "Baseline stop0; p55active and empty11-bankretentionreport confirmed at mainmenu PID7528. Includes all7 typed3 getter gates.",
+    "p55FormationLive": "p55 clean PID7528: Wing Tight right detail now shows JaCorey McNeil Overall D and six colored attributes D/B/B/D/D/B, matching prior native67/62/85/89/68/64/85. Center/reserve grades remain correct; jersey diagram, measurements and0/50 counter unchanged. No substitutions/reset/advance.",
+    "hubComparisonFix": "p56 built with MSVC/W4/WX, native tests and all8UIVM suites; independent review passed exact2argc/fixed5register/nativecopy51/54bytes, ordinary stats and source preservation. MMC package checks pass. Not loaded; p55 active."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
