@@ -8,7 +8,25 @@ std::array<uintptr_t,2> detailArguments{};
 void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t second){++forwarded;detailArguments={first,second};return out;}
 #if defined(RECRUIT_NOTES_UI)
 std::array<uintptr_t,5> setupArguments{};
+unsigned __fastcall fakeColorLength(void*){return 148;}
 uintptr_t __fastcall fakeScriptSetup(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){setupArguments={reinterpret_cast<uintptr_t>(object),reinterpret_cast<uintptr_t>(saved),receiver,parent,super};return 0xabcdef;}
+#endif
+#if defined(RECRUIT_NOTES_UI)
+struct GridTestOutput{void** vtable;nlohmann::json values=nlohmann::json::array();};
+void __fastcall gridTestReserve(GridTestOutput* o,unsigned n){o->values.push_back({{"reserve",n}});}
+template<class T>void gridTestField(GridTestOutput* o,unsigned row,const char* key,T value){o->values.push_back({{"row",row},{"key",key},{"value",value}});}
+void __fastcall gridTestBool(GridTestOutput* o,unsigned r,const char* k,bool v){gridTestField(o,r,k,v);}
+void __fastcall gridTestInt(GridTestOutput* o,unsigned r,const char* k,int v){gridTestField(o,r,k,v);}
+void __fastcall gridTestFloat(GridTestOutput* o,unsigned r,const char* k,float v){gridTestField(o,r,k,v);}
+void __fastcall gridTestString(GridTestOutput* o,unsigned r,const char* k,const char* v){gridTestField(o,r,k,v);}
+void* gridTestTable[]={nullptr,reinterpret_cast<void*>(gridTestReserve),nullptr,reinterpret_cast<void*>(gridTestBool),reinterpret_cast<void*>(gridTestInt),reinterpret_cast<void*>(gridTestFloat),reinterpret_cast<void*>(gridTestString)};
+std::string gridTestLabel(void* source,int form,int row,const char*){return source==reinterpret_cast<void*>(123)&&form==0&&row==7?"FCS (SO)":"";}
+struct GridTestColumns{void** vtable;int column;};
+int __fastcall gridTestCount(void*){return 1;}
+int __fastcall gridTestColumn(GridTestColumns* columns,int){return columns->column;}
+void* gridTestColumnsTable[]={nullptr,reinterpret_cast<void*>(gridTestCount),reinterpret_cast<void*>(gridTestColumn)};
+std::array<uintptr_t,5> gridTestArgs{};
+void __fastcall fakeClassRows(void* s,void* out,int form,int row,void* cols){gridTestArgs={reinterpret_cast<uintptr_t>(s),reinterpret_cast<uintptr_t>(out),static_cast<uintptr_t>(form),static_cast<uintptr_t>(row),reinterpret_cast<uintptr_t>(cols)};}
 #endif
 struct FixtureView {
     std::map<uintptr_t,std::vector<uintptr_t>> arrays;
@@ -78,13 +96,39 @@ int main(){try{
         asset[second.offset+48]^=1;
         require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=assetBase+p.offset&&live.ownerCount()==1,"Notes failed to attach to a newly-created live script");
         const auto owned=object[11];object[11]=assetBase+p.offset;
+        require(live.beforeInvoke(object.data(),runtime::read,true)==-1&&object[11]==assetBase+p.offset,"Late color hook changed a method requiring more registers");
+        auto fixed=p;fixed.newRegisters=fixed.registers;Runtime safe({fixed});safe.prepare();
+        require(safe.beforeInvoke(object.data(),runtime::read,true)==0,"Frame-preserving method was rejected by late gate");
+        object[11]=assetBase+p.offset;
+        runtime::originalColorLength=fakeColorLength;
+        for(bool stopped:{false,true}){runtime::disabled=stopped;require(runtime::colorLengthHook(object.data())==148,"Color accessor changed the native return");}runtime::disabled=false;
         require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]==owned,"Fresh receiver failed to reuse verified script generation");
         // Same source allocation may be reused after leaving Recruiting. A
         // changed pool pointer must generate fresh headers, never stale ones.
+        LARGE_INTEGER frequency{},started{},finished{};QueryPerformanceFrequency(&frequency);QueryPerformanceCounter(&started);
+        unsigned total=0;for(unsigned i=0;i<1000000;++i)total+=runtime::colorLengthHook(object.data());QueryPerformanceCounter(&finished);
+        require(total==148000000,"Color fast path did not preserve native lengths");
+        std::cout<<"Color accessor fast path: "<<double(finished.QuadPart-started.QuadPart)*1e9/frequency.QuadPart/1000000<<" ns/call (standalone mock; not a game frame-time measurement).\n";
         const auto nextPool=reinterpret_cast<uintptr_t>(pool.data()+1);memcpy(asset.data()+p.offset+40,&nextPool,8);
         object[11]=assetBase+p.offset;
         require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=owned,"Reloaded source reused a stale constant-pool header");
         require(field<uintptr_t>(reinterpret_cast<const unsigned char*>(object[11]),40)==nextPool,"Reloaded definition lost its current pool");
+    }
+#endif
+#if defined(RECRUIT_NOTES_UI)
+    {
+        GridTestOutput output{gridTestTable};ClassGridSink sink{classGridTable,&output,reinterpret_cast<void*>(123),0,7,gridTestLabel};
+        classGridReserve(&sink,2);classGridBool(&sink,0,"isTrend",true);classGridInt(&sink,0,"value",42);classGridFloat(&sink,0,"trend",1.5f);
+        classGridString(&sink,0,"display","JC (SO)");classGridString(&sink,0,"tooltip","JC (SO)");classGridString(&sink,1,"display","HS");require(sink.count==1&&output.values.size()==6,"Class cell was not deferred until the native getter returned");classGridFlush(&sink);
+        require(output.values[1]["value"]==true&&output.values[2]["value"]==42&&output.values[3]["value"]==1.5,"Class grid changed another cell property type");
+        require(output.values[6]["value"]=="FCS (SO)"&&output.values[4]["value"]=="JC (SO)"&&output.values[5]["value"]=="HS","Class grid edited an unrelated label");
+        sink.row=8;classGridString(&sink,0,"display","JC (SO)");classGridFlush(&sink);require(output.values.back()["value"]=="JC (SO)","Unmatched record received another recruit's class");
+        runtime::originalClassRows=fakeClassRows;GridTestColumns columns{gridTestColumnsTable,15};
+        require(classGridColumns(&columns),"Recruit Class column not recognized");columns.column=14;require(!classGridColumns(&columns),"Non-Class columns missed the passthrough fast path");columns.column=15;
+        for(bool stopped:{false,true}){runtime::disabled=stopped;runtime::classRowsHook(reinterpret_cast<void*>(1),&output,2,3,&columns);
+            require(gridTestArgs[0]==1&&gridTestArgs[2]==2&&gridTestArgs[3]==3&&gridTestArgs[4]==reinterpret_cast<uintptr_t>(&columns),"Class grid getter changed native argument registers or fifth stack argument");
+            if(stopped)require(gridTestArgs[1]==reinterpret_cast<uintptr_t>(&output),"Stopped class grid failed to pass through");}
+        runtime::disabled=false;
     }
 #endif
     {
@@ -95,6 +139,15 @@ int main(){try{
         std::map<uintptr_t,std::map<std::string,std::string>> texts;std::map<uintptr_t,std::map<std::string,unsigned>> numbers;
         auto setText=[&](uintptr_t at,const char* key,const char* value){texts[at][key]=value;};
         auto setNumber=[&](uintptr_t at,const char* key,unsigned value){numbers[at][key]=value;};
+        {
+            FixtureView preview;preview.maps[1]={{"dealBreakerSubpanelInfo",2},{"attributesSubpanelInfo",9}};
+            preview.maps[2]={{"playingTime",3},{"hasGradeText",4},{"neededGradeText",5},{"hasGrade",6},{"neededGrade",7}};
+            preview.strings={{3,"Playing Time"},{4,"A+"},{5,"C-"}};preview.numbers={{6,0},{7,8}};
+            auto result=maskPlayingTime(preview,1,PlayingTimeSurface::ProspectEntry,0,{},setText,setNumber);
+            require(result.grades==2&&texts[2]["hasGradeText"]=="?"&&texts[2]["neededGradeText"]=="?"&&numbers[2]["hasGrade"]==0&&numbers[2]["neededGrade"]==0,"Prospect List Playing Time grades or arrow comparison leaked");
+            texts.clear();numbers.clear();preview.strings[3]="Playing Style";result=maskPlayingTime(preview,1,PlayingTimeSurface::ProspectEntry,0,{},setText,setNumber);
+            require(!result.grades&&texts.empty()&&numbers.empty(),"Prospect List mask hid another motivation");
+        }
         const auto beforeNumbers=view.numbers;const auto beforeFlags=view.booleans;
         for(const auto* grade:{"A+","A","B+","B","C+","C","D","F"}){
             view.strings[12]=grade;texts.clear();auto stats=maskPlayingTime(view,1,PlayingTimeSurface::Motivations,0,{},setText,setNumber);

@@ -20,6 +20,7 @@
 #if defined(RECRUIT_NOTES_UI)
 #include "RecruitNotesUiRuntime.h"
 #include "RecruitResumeRuntime.h"
+#include "RecruitClassGrid.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -32,15 +33,21 @@ constexpr size_t detailCount=sizeof(playingTimeGates)/sizeof(playingTimeGates[0]
 std::array<DetailGetter,detailCount> detailOriginal{};
 std::array<bool,detailCount> detailInstalled{};
 std::array<std::atomic<unsigned>,detailCount> detailCalls{};
-constexpr PlayingTimeSurface detailSurfaces[]={PlayingTimeSurface::Motivations,PlayingTimeSurface::SchoolPitch,PlayingTimeSurface::Pitches,PlayingTimeSurface::PitchGrid,PlayingTimeSurface::VisitActivities,PlayingTimeSurface::VisitSummary,PlayingTimeSurface::SchoolModule};
+constexpr PlayingTimeSurface detailSurfaces[]={PlayingTimeSurface::Motivations,PlayingTimeSurface::SchoolPitch,PlayingTimeSurface::Pitches,PlayingTimeSurface::PitchGrid,PlayingTimeSurface::VisitActivities,PlayingTimeSurface::VisitSummary,PlayingTimeSurface::SchoolModule,PlayingTimeSurface::ProspectEntry};
 static_assert(sizeof(detailSurfaces)/sizeof(detailSurfaces[0])==detailCount);
 std::atomic<bool> disabled{false};std::atomic<unsigned> inflight{0},calls{0};bool installed=false;
 std::mutex queueMutex;std::deque<Json> pending;
 #if defined(RECRUIT_NOTES_UI)
 notesui::Runtime notesUi;
 resume::Cache resumeCache;
+using ClassRows=void(__fastcall*)(void*,void*,int,int,void*);
+ClassRows originalClassRows=nullptr;bool classRowsInstalled=false;
+constexpr uintptr_t classTableRva=0xbacd668,classRowsRva=0x7a88cd0,classKeyRva=0x7a89180,classParseRva=0x376f6d0;
+std::atomic<unsigned> classGridChanges{0};
 using ScriptSetup=uintptr_t(__fastcall*)(void*,void*,uintptr_t,uintptr_t,uintptr_t);
 ScriptSetup originalScriptSetup=nullptr;bool notesSetupInstalled=false;
+using ColorLength=unsigned(__fastcall*)(void*);
+ColorLength originalColorLength=nullptr;bool colorLengthInstalled=false;
 std::atomic<unsigned> notesAttachedMethods{0};
 std::atomic<bool> notesAttachmentFailed{false};
 constexpr uintptr_t scriptSetupRva=0x7c36850,scriptTableRva=0xbc42fe8,scriptSetupSlot=0xc8;
@@ -140,6 +147,40 @@ Json snapshot(uintptr_t at,unsigned depth=0,bool full=false,size_t rootLimit=2){
 }
 struct CallGuard{CallGuard(){++inflight;}~CallGuard(){--inflight;}};
 #if defined(RECRUIT_NOTES_UI)
+// Focus callbacks use a native path that can bypass invocation setup. Their
+// replacement keeps argc, flags, parameters and register count unchanged, so
+// redirecting before the body length is returned preserves the existing frame.
+unsigned __fastcall colorLengthHook(void* object){
+    // Ordinary scripts leave through a read-only fast path: no atomics are
+    // incremented, no allocation, no logging, and no process-memory queries.
+    if(!disabled&&!notesAttachmentFailed){
+        const auto definition=*reinterpret_cast<const uintptr_t*>(static_cast<const unsigned char*>(object)+0x58);
+        const auto* h=reinterpret_cast<const unsigned char*>(definition);
+        if(notesui::field<unsigned>(h,24)==148&&notesui::field<unsigned>(h,8)==1&&notesui::field<unsigned short>(h,12)==2&&notesui::field<unsigned short>(h,14)==41)
+        try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=notesUi.beforeInvoke(object,read,true);if(index>=0){const auto bit=1u<<index;if(!(notesAttachedMethods.fetch_or(bit)&bit))note({{"event","recruit_color_focus_attached"},{"program",index}});}}
+        catch(const std::exception& error){notesAttachmentFailed=true;note({{"event","recruit_color_focus_failed"},{"reason",error.what()}});}
+    }
+    return originalColorLength(object);
+}
+std::string classGridLabel(void* source,int form,int row,const char* originalLabel){
+    const auto cached=resumeCache.current(base,read);if(!cached)return {};
+    ClassKeySink key{classKeyTable,{}};
+    reinterpret_cast<void(__fastcall*)(void*,void*,int,int)>(base+classKeyRva)(source,&key,form,row);
+    if(key.value.empty()||key.value.size()>=32)return {};
+    std::array<unsigned char,32> bytes{};memcpy(bytes.data(),key.value.data(),key.value.size());
+    ClassKeyBlob blob{32,0,bytes.data(),false};
+    const auto record=reinterpret_cast<unsigned(__fastcall*)(void*)>(base+classParseRva)(&blob);
+    const auto found=cached->data.entries.find(static_cast<uint32_t>(record));
+    if(found==cached->data.entries.end()||!found->second.juniorCollege||found->second.classYear.empty())return {};
+    const auto& entry=found->second;
+    if(std::string(originalLabel).find(entry.classYear)==std::string::npos)return {};
+    const auto label=entry.saved.at("competitionClass").get<std::string>()+" ("+entry.classYear+")";
+    if(classGridChanges.fetch_add(1)<3)note({{"event","recruit_class_grid_label"},{"record",record},{"label",label}});return label;
+}
+void __fastcall classRowsHook(void* source,void* target,int form,int row,void* columns){
+    CallGuard guard;if(disabled||!classGridColumns(columns)){originalClassRows(source,target,form,row,columns);return;}
+    ClassGridSink sink{classGridTable,target,source,form,row,classGridLabel};originalClassRows(source,&sink,form,row,columns);classGridFlush(&sink);
+}
 uintptr_t __fastcall notesSetupHook(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){
     CallGuard guard;
     if(!disabled&&!notesAttachmentFailed)try{const auto index=notesUi.beforeInvoke(object,read);if(index>=0){const auto bit=1u<<index;
@@ -152,6 +193,21 @@ template<size_t Index>void* __fastcall detailHook(void* object,void** out,uintpt
     CallGuard guard;auto result=detailOriginal[Index](object,out,first,second);const auto call=++detailCalls[Index];
     if(!disabled){uintptr_t value=0;if(out)read(reinterpret_cast<uintptr_t>(out),&value,8);
         try{const auto stats=applyPlayingTime(value,detailSurfaces[Index],static_cast<unsigned>(first),reinterpret_cast<uintptr_t>(object));
+#if defined(RECRUIT_NOTES_UI)
+            if constexpr(Index==detailCount-1){
+                const auto cache=resumeCache.current(base,read);UiResponse view(read);std::map<std::string,uintptr_t> fields;
+                if(cache&&view.members(value,fields)&&fields.count("recordKey")&&fields.count("firstName")&&fields.count("lastName")){
+                    double id=0;std::string firstName,lastName;
+                    if(view.number(fields.at("recordKey"),id)&&id>=0&&id<=4294967295.&&std::floor(id)==id&&view.string(fields.at("firstName"),firstName)&&view.string(fields.at("lastName"),lastName)){
+                        const auto found=cache->data.entries.find(static_cast<uint32_t>(id));
+                        if(found!=cache->data.entries.end()&&found->second.first==firstName&&found->second.last==lastName&&found->second.juniorCollege&&!found->second.classYear.empty()){
+                            const auto label=found->second.saved.at("competitionClass").get<std::string>()+" ("+found->second.classYear+")";
+                            reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(value),"className",label.c_str());
+                        }
+                    }
+                }
+            }
+#endif
             if(call<=20&&(call==1||stats.grades||stats.previews||stats.unsupported))note({{"event","playing_time_masked"},{"getter",playingTimeGates[Index].name},{"call",call},{"first",first},{"grades",stats.grades},{"dealbreakers",stats.dealbreakers},{"previews",stats.previews},{"unsupported",stats.unsupported}});
         }catch(const std::exception& error){note({{"event","playing_time_failed"},{"getter",playingTimeGates[Index].name},{"reason",error.what()}});}}
     return result;
@@ -198,6 +254,8 @@ DWORD stop(){
     disabled=true;
     bool ownershipFailed=false;
 #if defined(RECRUIT_NOTES_UI)
+    if(classRowsInstalled){if(replace(reinterpret_cast<void*>(classRowsHook),reinterpret_cast<void*>(originalClassRows),classTableRva,0x68))classRowsInstalled=false;else ownershipFailed=true;}
+    if(colorLengthInstalled){if(replace(reinterpret_cast<void*>(colorLengthHook),reinterpret_cast<void*>(originalColorLength),scriptTableRva,0xb0))colorLengthInstalled=false;else ownershipFailed=true;}
     if(notesSetupInstalled){if(replace(reinterpret_cast<void*>(notesSetupHook),reinterpret_cast<void*>(originalScriptSetup),scriptTableRva,scriptSetupSlot))notesSetupInstalled=false;else ownershipFailed=true;}
 #endif
 #if defined(RECRUIT_NOTES_PROBE)
@@ -225,7 +283,18 @@ DWORD WINAPI worker(void*){
         if(!read(base+scriptSetupRva,actual.data(),scriptSetupPrefix.size())||memcmp(actual.data(),scriptSetupPrefix.data(),scriptSetupPrefix.size())||!read(base+scriptTableRva+scriptSetupSlot,&current,8)||current!=base+scriptSetupRva)throw std::runtime_error("Unsupported or already-owned script invocation setup");
         notesUi.prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(current);
         if(!replace(reinterpret_cast<void*>(originalScriptSetup),reinterpret_cast<void*>(notesSetupHook),scriptTableRva,scriptSetupSlot))throw std::runtime_error("Notes invocation setup ownership changed");
-        notesSetupInstalled=true;note({{"event","recruit_notes_ui_prepared"},{"methods",notesUi.methodCount()},{"attachment","live invocation setup"},{"unload","clean restart required after entry"}});
+        notesSetupInstalled=true;
+        constexpr unsigned char colorLengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};
+        if(!read(base+scriptTableRva+0xb0,&current,8)||current!=base+0x7c34e40||!read(current,actual.data(),sizeof(colorLengthPrefix))||memcmp(actual.data(),colorLengthPrefix,sizeof(colorLengthPrefix)))throw std::runtime_error("Unsupported or already-owned color focus accessor");
+        originalColorLength=reinterpret_cast<ColorLength>(current);
+        if(!replace(reinterpret_cast<void*>(originalColorLength),reinterpret_cast<void*>(colorLengthHook),scriptTableRva,0xb0))throw std::runtime_error("Color focus accessor ownership changed");colorLengthInstalled=true;
+        constexpr unsigned char classRowsPrefix[]={0x40,0x53,0x55,0x56,0x41,0x56,0x41,0x57,0x48,0x81,0xec,0x70,0x01,0,0,0x48,0x8b,0x05,0x5a,0x9b,0,0x06,0x48,0x33,0xc4,0x48,0x89,0x84,0x24,0x60,0x01,0};
+        constexpr unsigned char classKeyPrefix[]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74,0x24,0x20,0x57,0x48,0x81,0xec,0x70,0x01,0,0};
+        constexpr unsigned char classParsePrefix[]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xf9};
+        if(!read(base+classRowsRva,actual.data(),sizeof(classRowsPrefix))||memcmp(actual.data(),classRowsPrefix,sizeof(classRowsPrefix))||!read(base+classKeyRva,actual.data(),sizeof(classKeyPrefix))||memcmp(actual.data(),classKeyPrefix,sizeof(classKeyPrefix))||!read(base+classParseRva,actual.data(),sizeof(classParsePrefix))||memcmp(actual.data(),classParsePrefix,sizeof(classParsePrefix))||!read(base+classTableRva+0x78,&current,8)||current!=base+classKeyRva||!read(base+classTableRva+0x68,&current,8)||current!=base+classRowsRva)throw std::runtime_error("Unsupported or already-owned recruit Class grid provider");
+        originalClassRows=reinterpret_cast<ClassRows>(current);
+        if(!replace(reinterpret_cast<void*>(originalClassRows),reinterpret_cast<void*>(classRowsHook),classTableRva,0x68))throw std::runtime_error("Class grid provider ownership changed");classRowsInstalled=true;
+        note({{"event","recruit_notes_ui_prepared"},{"methods",notesUi.methodCount()},{"attachment","live invocation setup"},{"unload","clean restart required after entry"}});
 #endif
 #if defined(RECRUIT_NOTES_PROBE)
         constexpr unsigned char lengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};

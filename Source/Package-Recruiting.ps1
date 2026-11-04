@@ -1,4 +1,4 @@
-param([string]$RecruitingName='DynastyEnhancerRecruitFog-p22',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6')
+param([string]$RecruitingName='DynastyEnhancerRecruitFog-p27',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6')
 $ErrorActionPreference='Stop'
 $recruitProject=Split-Path -Parent $PSScriptRoot
 $recruitBuild=Join-Path $recruitProject 'Build'

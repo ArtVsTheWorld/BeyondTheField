@@ -230,24 +230,47 @@ def fnv(data):
 GRADE_COLORS={'A':0x1FE840,'B':0xA8D943,'C':0xFFD34D,'D':0xF68C2E,'F':0xF04444}
 
 
+def grade_palette():
+    # Ordinal midpoint of the public letter bands. Half steps blend adjacent
+    # palette colors; no hidden numeric rating is consulted.
+    order='FDCBA';palette=dict(GRADE_COLORS)
+    for lo in range(5):
+        for hi in range(lo+1,5):
+            middle=(lo+hi)/2;left=GRADE_COLORS[order[int(middle)]];right=GRADE_COLORS[order[int(middle+.5)]]
+            color=left if middle.is_integer() else sum(round((((left>>shift)&255)+((right>>shift)&255))/2)<<shift for shift in (16,8,0))
+            palette[order[lo]+'–'+order[hi]]=color
+    return palette
+
+
 def grade_colors(a):
-    # This suffix runs only on the fingerprinted AttributeButton.Draw method.
-    # Read the same public widget fields as the native label; never ratings.
-    a.reg(1); a.member('mData'); a.store(4); a.missing(4,'color_done')
-    a.reg(4); a.member('ExtraInfo'); a.store(4); a.missing(4,'color_done')
-    a.reg(4); a.member('Points'); a.store(4)
-    a.reg(4); a.raw(0x44); a.string('string'); a.raw(0x66); a.branch('color_done',0xB8)
-    a.reg(1); a.member('mcPoints'); a.store(5); a.missing(5,'color_done')
-    a.reg(4); a.reg(1); a.member('mDEGradeLabel'); a.raw(0x66); a.branch('color_done')
-    a.reg(1); a.string('mDEGradeLabel'); a.reg(4); a.raw(0x4F)
-    a.number(0); a.number(1); a.reg(4); a.string('charAt'); a.raw(0x52); a.store(6)
-    a.empty_object(7)
-    a.reg(7); a.string('fontColor'); a.global_object('art_styleguide','Color','UNFOCUS_BUTTON_FONT_COLOR'); a.raw(0x4F)
-    for index,(grade,color) in enumerate(GRADE_COLORS.items()):
-        a.reg(6); a.string(grade); a.raw(0x66); a.branch(f'grade_next{index}',0xB8)
-        a.set_field(7,'fontColor',color); a.branch('color_apply',0x99); a.label(f'grade_next{index}')
-    a.label('color_apply'); a.reg(7); a.number(1); a.reg(5); a.call('SetExtraInfo')
-    a.label('color_done'); a.ret()
+    # Register 1 only: the small focus callbacks can be redirected at the body
+    # accessor without changing an already-established native call frame.
+    def get(*parts):
+        a.reg(1)
+        for part in parts:a.member(part)
+    def set_(field,emit):
+        a.reg(1);a.string(field);emit();a.raw(0x4F)
+    def missing(parts):
+        a.raw(0x76);get(*parts);a.raw(0x49);a.branch('color_done')
+    missing(('mData',));missing(('mData','ExtraInfo'))
+    set_('mDEColorLabel',lambda:get('mData','ExtraInfo','Points'))
+    get('mDEColorLabel');a.raw(0x44);a.string('string');a.raw(0x66);a.branch('color_done',0xB8)
+    missing(('mcPoints',))
+    get('mDEColorLabel');get('mDEGradeLabel');a.raw(0x66);a.branch('color_check')
+    set_('mDEGradeLabel',lambda:get('mDEColorLabel'))
+    set_('mDEGradeStyle',lambda:(a.number(0),a.raw(0x43)))
+    get('mDEGradeStyle');a.string('fontColor');a.global_object('art_styleguide','Color','UNFOCUS_BUTTON_FONT_COLOR');a.raw(0x4F)
+    for index,(label,color) in enumerate(grade_palette().items()):
+        get('mDEColorLabel');a.string(label);a.raw(0x66);a.branch(f'grade_next{index}',0xB8)
+        get('mDEGradeStyle');a.string('fontColor');a.number(color);a.raw(0x4F);a.branch('color_check',0x99);a.label(f'grade_next{index}')
+    a.label('color_check')
+    # The label cache alone is insufficient: native focus/reentry can replace
+    # the child's style while retaining the same public grade string.
+    a.raw(0x76);get('mcPoints','mData');a.raw(0x49);a.branch('color_apply')
+    a.raw(0x76);get('mcPoints','mData','ExtraInfo');a.raw(0x49);a.branch('color_apply')
+    get('mcPoints','mData','ExtraInfo','fontColor');get('mDEGradeStyle','fontColor');a.raw(0x66);a.branch('color_done')
+    a.label('color_apply');get('mDEGradeStyle');a.number(1);get('mcPoints');a.call('SetExtraInfo')
+    a.label('color_done');a.ret()
 
 
 def generate_header(destination, evidence):
@@ -276,7 +299,6 @@ def generate_header(destination, evidence):
         elif mode in ('grade_colors','grade_focus'):
             assert original[-1]==0x4F if mode=='grade_colors' else original[-2:]==bytes([0xB2,56])
             copy_size=size;a.code.extend(bytes(size))
-            if mode=='grade_focus':a.reg(1);a.string('mDEGradeLabel');a.raw(0x76,0x4F)
             grade_colors(a)
         else:
             a.notes_flag();a.raw(0x73,0x66);a.branch('normal',0xB8)
@@ -286,7 +308,7 @@ def generate_header(destination, evidence):
             a.label('normal')
             if mode=='draw':restore_layout(a)
             a.label('native');a.pad_code();copy_at=len(a.code);copy_size=size;a.code.extend(bytes(size))
-        p=a.finish();newregs=max(registers[0],10)
+        p=a.finish();newregs=registers[0] if mode in ('grade_colors','grade_focus') else max(registers[0],10)
         programs.append((offset-0x30,argc,registers[0],registers[1],size,fnv(original),newregs,copy_at,copy_size,p))
         report.append(dict(name=cls+name,definition=offset-0x30,argc=argc,registers=registers[0],flags=registers[1],size=size,hash=fnv(original),customBytes=len(p.code),copyAt=copy_at,copyBytes=copy_size))
     lines=['// Generated by Tools/build_recruit_notes_ui.py; custom bytecode only.','#pragma once','#include <vector>','#include <cstdint>','#include <cstring>','namespace recruitingfog::notesui {','struct Program {uintptr_t offset;unsigned argc,registers,flags,size;uint64_t hash;unsigned newRegisters,copyAt,copyBytes;std::vector<unsigned char> code;};','inline std::vector<Program> programs(){std::vector<Program> result;']

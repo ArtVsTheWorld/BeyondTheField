@@ -6,7 +6,7 @@
 #include <cstdint>
 
 namespace recruitingfog {
-enum class PlayingTimeSurface { RecruitList, Motivations, SchoolPitch, PitchSummary, Pitches, PitchGrid, VisitActivities, VisitGrid, VisitSummary, SchoolGrid, SchoolModule };
+enum class PlayingTimeSurface { RecruitList, Motivations, SchoolPitch, PitchSummary, Pitches, PitchGrid, VisitActivities, VisitGrid, VisitSummary, SchoolGrid, SchoolModule, ProspectEntry };
 struct PlayingTimeStats {unsigned grades=0,dealbreakers=0,previews=0,unsupported=0;};
 // The verified native motivation enum is 9. My School's separately ordered
 // tile index is 13. Neither is a player rating or a derived roster comparison.
@@ -27,6 +27,16 @@ PlayingTimeStats maskPlayingTime(View& view,uintptr_t root,PlayingTimeSurface su
         std::vector<uintptr_t> children;
         for(const auto& field:fields){const auto childKind=view.kind(field.second);if(childKind==4||childKind==5)children.push_back(field.second);}
         auto named=[&](const char* key){std::string label;return fields.count(key)&&view.string(fields.at(key),label)&&label=="Playing Time";};
+        if(surface==PlayingTimeSurface::ProspectEntry){
+            if(named("playingTime")){
+                for(const auto* key:{"hasGradeText","neededGradeText"})if(fields.count(key)){setString(at,key,"?");++stats.grades;}
+                // Fixed UI-only comparison values also remove the directional
+                // arrow as an alternate grade comparison. No eligibility data.
+                for(const auto* key:{"hasGrade","neededGrade"})if(fields.count(key))setNumber(at,key,0);
+            }
+            if(depth==0&&fields.count("dealBreakerSubpanelInfo"))self(self,fields.at("dealBreakerSubpanelInfo"),depth+1,false);
+            return;
+        }
         bool direct=named("MotivationString")||named("Name")||named("PitchName")||named("Motivation");
         double motivation=0;
         if(fields.count("Motivation")&&view.number(fields.at("Motivation"),motivation)&&motivation==playingTimeMotivation)direct=true;

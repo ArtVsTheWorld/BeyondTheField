@@ -1,0 +1,38 @@
+{
+  "candidate": "DynastyEnhancerRecruitFog-p27",
+  "status": "Built and offline verified; awaiting clean-restart in-game checks. p22 remains active until restart.",
+  "changes": [
+    "Grade ranges use the midpoint palette; C\u2013A matches B and D\u2013B matches C. Half-band midpoints blend the two neighboring palette colors.",
+    "Style checks detect a native white reset even if the grade label is unchanged; same-style redraws do not call SetExtraInfo again.",
+    "Focus callbacks retain original argc, flags, parameters and register counts and can attach through a fingerprint-gated body accessor when native setup is bypassed.",
+    "Ordinary script accessor fast path does not allocate, log, query process memory or increment counters.",
+    "Prospect List Class cells use native row-key serialization and the verified native parser to match persistent recruit associations. Typed row properties and original getter arguments are forwarded unchanged.",
+    "Class-cell lookup is deferred until the native row getter returns, avoiding data-source reentry in collector callbacks.",
+    "Prospect List side panel receives the same class label and masks Playing Time text and its UI-only comparison values, preserving other motivations and eligibility.",
+    "Grid collector is bypassed entirely for column sets without Class column 15; non-JC strings are checked without allocation."
+  ],
+  "checks": {
+    "nativeGradeAndPlayingTimeRegression": "passed",
+    "fullGradeRanges": 5151,
+    "unchangedRedrawsPerPaletteFixture": 100,
+    "nativeFocusResetReproduction": "passed",
+    "framePreservingLateGate": "passed",
+    "classGridTypedForwardingAndDeferredFields": "passed",
+    "nativeGetterFifthStackArgument": "passed",
+    "currentProspectRowIdsObserved": 8,
+    "classColumnObserved": 15,
+    "bodyAccessorMockNsPerCall": 2.3,
+    "performanceLimit": "Standalone mock timing is not game frame-time evidence; live idle/menu checks remain pending.",
+    "nonClassGridFastPath": "passed"
+  },
+  "artifact": {
+    "bytes": 1007104,
+    "sha256": "c0cb8c7edbf4c195d0c99509b67c59fe018cd27ee1a25cf024baabf24be1618b"
+  },
+  "pending": [
+    "Color persistence across profile tabs and recruit changes, including both top attributes",
+    "Prospect List class cells and side panel",
+    "Native menu responsiveness",
+    "Automatic-loading installation"
+  ]
+}

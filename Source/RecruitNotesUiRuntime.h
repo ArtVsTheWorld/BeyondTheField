@@ -33,7 +33,7 @@ public:
     explicit Runtime(std::vector<Program> selected=programs()):code(std::move(selected)){}
     bool prepared=false;
     void prepare(){prepared=true;}
-    template<class Read>int beforeInvoke(void* object,Read read){
+    template<class Read>int beforeInvoke(void* object,Read read,bool fixedFrame=false){
         if(!prepared)return -1;
         // The native invocation guarantees a live ScriptFunction2 receiver and
         // definition. Most calls leave after these small in-process comparisons;
@@ -41,7 +41,7 @@ public:
         auto location=reinterpret_cast<PVOID volatile*>(static_cast<unsigned char*>(object)+0x58);
         const auto definition=reinterpret_cast<uintptr_t>(*location);
         std::array<unsigned char,48> current{};memcpy(current.data(),reinterpret_cast<const void*>(definition),current.size());
-        size_t index=0;for(;index<code.size();++index)if(headerMatches(code[index],current))break;
+        size_t index=0;for(;index<code.size();++index)if((!fixedFrame||code[index].newRegisters==code[index].registers)&&headerMatches(code[index],current))break;
         if(index==code.size()||definition<code[index].offset+0x10000)return -1;
         const auto asset=definition-code[index].offset;
         std::lock_guard<std::mutex> lock(bankMutex);
