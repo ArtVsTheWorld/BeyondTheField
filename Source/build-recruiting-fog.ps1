@@ -42,6 +42,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'NIL roster player renderer checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_blueprint_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Blueprint player renderer checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_practice_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Practice Plans player renderer checks failed'}
 }
 Push-Location $fogOut
 try{

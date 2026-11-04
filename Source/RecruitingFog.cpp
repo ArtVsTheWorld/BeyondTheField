@@ -33,6 +33,7 @@
 #include "PlayerFormationUiPrograms.h"
 #include "PlayerNilUiPrograms.h"
 #include "PlayerBlueprintUiPrograms.h"
+#include "PlayerPracticeUiPrograms.h"
 #include "PlayerAbilityDescriptions.h"
 #endif
 
@@ -66,7 +67,8 @@ notesui::Runtime playerFormationUi(playerformationui::programs());
 notesui::Runtime playerLegacyOvrUi(playerformationui::legacyPrograms());
 notesui::Runtime playerNilUi(playernilui::programs());
 notesui::Runtime playerBlueprintUi(playerblueprintui::programs());
-const std::array<notesui::Runtime*,12> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi};
+notesui::Runtime playerPracticeUi(playerpracticeui::programs());
+const std::array<notesui::Runtime*,13> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi,&playerPracticeUi};
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
