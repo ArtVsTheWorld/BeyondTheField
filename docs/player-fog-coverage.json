@@ -646,7 +646,8 @@
     "p62Review": "Independent source/native-fingerprint/return-register/bytecode-copy-alignment/preservation review and two affected UI suites pass. No new native hooks or background discovery. Invalid marked color cells may read one-cell data twice before native fallback; valid labels use the native one-read count.",
     "p62Package": "MMC registration/launch/tamper/path/config smoke checks pass. Installed baseline and histories unchanged. Six manual milestones still match verified backups. Clean-session live test pending.",
     "p62Probes": "Roster column probes p12/p13/p14 and UI trace p5 explicitly stopped0; final records inflight0. No probes remain active.",
-    "p62Activation": "Observed main menu in clean PID17856; installed recruiting baseline stopped0, p62 loaded and active event confirmed, initial retained definitions/banks/bytes zero before Dynasty entry. No probes loaded."
+    "p62Activation": "Observed main menu in clean PID17856; installed recruiting baseline stopped0, p62 loaded and active event confirmed, initial retained definitions/banks/bytes zero before Dynasty entry. No probes loaded.",
+    "p62PlaycallLive": "Clean PID17856 FreePractice Personnel Group user confirms looks good; actual screenshot shows Hollins B OVR, Callahan/Rooks/Whitaker D OVR with colors. Jerseys1/10/3/11, formation diagram jerseys, personnel counts, GoTo%, decimal/negative average yards and play counts remain numeric. IG bank6 KeyPlayer and PlayerRoot Draw attachments recorded. Pause chart check next; no play/snap/lineup change."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
