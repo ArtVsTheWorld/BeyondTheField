@@ -11,7 +11,8 @@ assets=[Path('C:/Apps/CFB 27/MMC/AbilityColors/Research/assets/common/ui/art_con
         Path('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_com/scriptpod.ast'),
         Path('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_com/frameworkscriptpod.ast'),
         Path('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_cfm/corenode.ast'),
-        Path('Evidence/PlayerFog/manageplayerart.ast'),Path('Evidence/PlayerFog/manageplayer-skills.ast')]
+        Path('Evidence/PlayerFog/manageplayerart.ast'),Path('Evidence/PlayerFog/manageplayer-skills.ast'),
+        Path('Evidence/PlayerFog/node-fe-scriptpodart.ast')]
 matches=[];matched=set();failures=[]
 for asset in assets:
     apt=load(asset)

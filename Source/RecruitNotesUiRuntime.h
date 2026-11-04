@@ -44,6 +44,8 @@ class Runtime {
     struct Bank {uintptr_t asset=0;std::vector<OwnedDefinition> definitions;std::vector<std::array<unsigned char,48>> headers;};
     std::vector<Program> code;std::vector<Bank> banks;std::mutex bankMutex;
     std::atomic<unsigned> attached{0};
+    std::atomic<size_t> retainedBytes{0};
+    std::atomic<unsigned> retainedDefinitions{0},retainedBanks{0};
 public:
     explicit Runtime(std::vector<Program> selected=programs()):code(std::move(selected)){}
     bool prepared=false;
@@ -81,15 +83,20 @@ public:
         }
         // Gate the entire set before allocating or changing the first receiver.
         for(size_t i=0;i<code.size();++i){const auto& bytes=verified[i];
-            auto memory=VirtualAlloc(nullptr,(bytes.size()+4095)&~size_t(4095),MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);if(!memory)throw std::runtime_error("Cannot retain a Notes script definition");
+            const auto allocationBytes=(bytes.size()+4095)&~size_t(4095);
+            auto memory=VirtualAlloc(nullptr,allocationBytes,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);if(!memory)throw std::runtime_error("Cannot retain a Notes script definition");
+            retainedBytes.fetch_add(allocationBytes,std::memory_order_relaxed);retainedDefinitions.fetch_add(1,std::memory_order_relaxed);
             memcpy(memory,bytes.data(),bytes.size());bank.definitions.push_back({asset+code[i].offset,reinterpret_cast<uintptr_t>(memory)});
         }
         // Script owners are released on leaving Recruiting. Never retain their
         // addresses: attach only to the live receiver at native invocation setup,
         // before flags, argument registers, body length or body are consumed.
-        banks.push_back(std::move(bank));const auto result=redirectDefinition(location,banks.back().definitions);if(result>=0)++attached;return result;
+        banks.push_back(std::move(bank));retainedBanks.fetch_add(1,std::memory_order_relaxed);const auto result=redirectDefinition(location,banks.back().definitions);if(result>=0)++attached;return result;
     }
     unsigned ownerCount()const{return attached.load();}
     size_t methodCount()const{return code.size();}
+    size_t retainedByteCount()const{return retainedBytes.load(std::memory_order_relaxed);}
+    unsigned retainedDefinitionCount()const{return retainedDefinitions.load(std::memory_order_relaxed);}
+    unsigned retainedBankCount()const{return retainedBanks.load(std::memory_order_relaxed);}
 };
 }

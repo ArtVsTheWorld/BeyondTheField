@@ -206,10 +206,70 @@
     "native": "UcmCreatePlayerFlow globalfa53818 / vtbab74e0; GetAllAttributes slot1b0 ->798f7a0",
     "abi": "self,void**out",
     "fields": "Grouped AttributeName/Id/Min/Max/Value are editable model fields. Do not modify getter. Actual Dynasty renderer needs live capture.",
-    "implemented": false
+    "implemented": false,
+    "status": "Excluded by explicit user instruction. Leave numeric; no adapter implemented.",
+    "liveObserved": "Read-only Edit Player Ratings shows numeric values; exited without edits. Actual renderer GenericSlider/settings path differs from older AttributeSlider. Probe stopped0."
   },
   "recruitingTypeAudit": {
     "finding": "Existing HaveSlider false setter address2bf6720 emits unsigned-byte numeric value, not actual native Boolean wrapper2b07670. Baseline behavior user-verified; no change made during player-fog preview.",
     "remaining": "Add native type-consistency test before independently changing this established path."
+  },
+  "mySchoolPlayerRisk": {
+    "asset": "node_cfm/recruitinghub/corenode",
+    "definition": "0x2a380",
+    "size": 596,
+    "argc": 0,
+    "registers": 4,
+    "flags": 25,
+    "fnv64": "26c26cc3e3bfac83",
+    "field": "ExtraInfo.OVR -> mcOVR TextFieldGeneric",
+    "preserve": "RiskValue, risk percentage, position/name, source OVR, header labels",
+    "status": "p48 built; offline and independent review passed; live pending"
+  },
+  "redshirtsGrid": {
+    "form": 0,
+    "count": 61,
+    "prefix": [
+      "RS",
+      "Name",
+      "POS",
+      "Year",
+      "OVR",
+      "NIL",
+      "GP"
+    ],
+    "ratingIds": "4 and7..59",
+    "trailingIdentity": "60 Last Name",
+    "status": "p50 built and reviewed; live candidate test pending",
+    "preserved": "RS/name/POS/year/NIL/games played/last name/intValue/sort"
+  },
+  "injuryGrid": {
+    "form": 0,
+    "headers": [
+      "",
+      "POS",
+      "Name",
+      "POS",
+      "OVR",
+      "Injury",
+      "Length",
+      "IR",
+      "Return",
+      "Status"
+    ],
+    "ratingIds": [
+      4
+    ],
+    "status": "p50 built and reviewed against both native raw captures; live candidate test pending",
+    "preserved": "Injury/length/status/return data, position/name/intValue/sort"
+  },
+  "injurySidebar": {
+    "native": "baa78b8+80 ->78efa70",
+    "abi": "void* (self,void** out,void* opaqueKey)",
+    "prefix32": "488bc45557488d68884881ec68010000488958e8488bfa488970e04c8960d84c",
+    "liveGate": "Target address and full32-byte prefix verified in PID30084 before candidate activation",
+    "fields": "overall and fully-revealed attributesSubpanelInfo.ratingValue only",
+    "preserved": "injuryName, injuryStatus, injuryLength, risk, age, season stats",
+    "status": "p50 built; live display verification pending"
   }
 }

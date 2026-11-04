@@ -29,6 +29,7 @@
 #include "PlayerFogPerformance.h"
 #include "PlayerHubUiPrograms.h"
 #include "PlayerInGameUiPrograms.h"
+#include "PlayerRecruitUiPrograms.h"
 #include "PlayerAbilityDescriptions.h"
 #endif
 
@@ -57,7 +58,8 @@ notesui::Runtime playerSkillUi(playercardui::skillPrograms());
 notesui::Runtime playerHubUi(playerhubui::programs());
 notesui::Runtime playerSliderUi(playercardui::sliderPrograms());
 notesui::Runtime playerInGameUi(playeringameui::programs());
-const std::array<notesui::Runtime*,7> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi};
+notesui::Runtime playerRecruitUi(playerrecruitui::programs());
+const std::array<notesui::Runtime*,8> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi};
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
@@ -91,13 +93,14 @@ constexpr size_t playerBindingCount=sizeof(playerBindings)/sizeof(playerBindings
 std::array<DetailGetter,playerBindingCount> playerOriginal{};std::array<bool,playerBindingCount> playerInstalled{};std::array<std::atomic<unsigned>,playerBindingCount> playerCalls{};
 // These native wrappers take exactly one opaque key after the output pointer.
 // Keep the ABI separate from the four-argument roster/detail wrappers.
-using AwardGetter=void*(__fastcall*)(void*,void**,void*);
-constexpr PlayerBinding awardBindings[]={
+using KeyedPlayerGetter=void*(__fastcall*)(void*,void**,void*);
+constexpr PlayerBinding keyedPlayerBindings[]={
     {0xc7502f8,0x58,0xa0c5180,"40555356574154415541564157488d6c24e84881ec180100004d8bf0488bda4c",playerfog::Surface::AnnualAwardsPlayer},
     {0xc7502f8,0x60,0xa0c71f0,"488bc448894808554157488d68b84881ec38010000488958e84c8bfa488970e0",playerfog::Surface::RosterNIL},
-    {0xc7502f8,0x68,0xa0c63b0,"488bc448894808554156488d68a14881ecc8000000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL}};
-constexpr size_t awardBindingCount=sizeof(awardBindings)/sizeof(awardBindings[0]);
-std::array<AwardGetter,awardBindingCount> awardOriginal{};std::array<bool,awardBindingCount> awardInstalled{};std::array<std::atomic<unsigned>,awardBindingCount> awardCalls{};
+    {0xc7502f8,0x68,0xa0c63b0,"488bc448894808554156488d68a14881ecc8000000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL},
+    {0xbaa78b8,0x80,0x78efa70,"488bc45557488d68884881ec68010000488958e8488bfa488970e04c8960d84c",playerfog::Surface::RosterNIL}};
+constexpr size_t keyedPlayerBindingCount=sizeof(keyedPlayerBindings)/sizeof(keyedPlayerBindings[0]);
+std::array<KeyedPlayerGetter,keyedPlayerBindingCount> keyedPlayerOriginal{};std::array<bool,keyedPlayerBindingCount> keyedPlayerInstalled{};std::array<std::atomic<unsigned>,keyedPlayerBindingCount> keyedPlayerCalls{};
 using PlayerMap=void(__fastcall*)(void*,void*);
 struct MapBinding{uintptr_t slot,rva;const char* prefix;const char* ratingKey;};
 constexpr MapBinding mapBindings[]={
@@ -288,14 +291,14 @@ template<size_t Index>void* __fastcall playerResponseHook(void* source,void** ou
     }return result;
 }
 const DetailGetter playerHooks[]={playerResponseHook<0>,playerResponseHook<1>,playerResponseHook<2>,playerResponseHook<3>,playerResponseHook<4>,playerResponseHook<5>,playerResponseHook<6>,playerResponseHook<7>,playerResponseHook<8>,playerResponseHook<9>,playerResponseHook<10>};
-template<size_t Index>void* __fastcall awardResponseHook(void* source,void** out,void* key){
-    CallGuard guard;auto* result=awardOriginal[Index](source,out,key);
+template<size_t Index>void* __fastcall keyedPlayerResponseHook(void* source,void** out,void* key){
+    CallGuard guard;auto* result=keyedPlayerOriginal[Index](source,out,key);
     if(!disabled&&out&&*out){UiResponse view(read);
-        const auto changed=playerfog::convert(view,reinterpret_cast<uintptr_t>(*out),awardBindings[Index].surface,[&](uintptr_t at,const char* field,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),field,text);});
-        if(awardCalls[Index].fetch_add(1)<3)note({{"event","player_fog_award_response"},{"surface",Index},{"changed",changed}});
+        const auto changed=playerfog::convert(view,reinterpret_cast<uintptr_t>(*out),keyedPlayerBindings[Index].surface,[&](uintptr_t at,const char* field,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),field,text);});
+        if(keyedPlayerCalls[Index].fetch_add(1)<3)note({{"event","player_fog_keyed_response"},{"surface",Index},{"changed",changed}});
     }return result;
 }
-const AwardGetter awardHooks[]={awardResponseHook<0>,awardResponseHook<1>,awardResponseHook<2>};
+const KeyedPlayerGetter keyedPlayerHooks[]={keyedPlayerResponseHook<0>,keyedPlayerResponseHook<1>,keyedPlayerResponseHook<2>,keyedPlayerResponseHook<3>};
 void* __fastcall playerAbilitiesHook(void* source,void** out,bool mentals){
     CallGuard guard;auto* result=originalAbilities(source,out,mentals);
     if(!disabled&&out&&*out){UiResponse view(read,4096);
@@ -411,9 +414,9 @@ void installRosterProviders(bool preflightOnly=false){
     }
     uintptr_t currentAbilities=0;std::array<unsigned char,32> actualAbilities{};
     if(!read(base+abilitiesTable+abilitiesSlot,&currentAbilities,8)||currentAbilities!=base+abilitiesRva||!read(currentAbilities,actualAbilities.data(),actualAbilities.size())||actualAbilities!=abilitiesPrefix)throw std::runtime_error("Unsupported or owned player ability description provider");
-    for(const auto& binding:awardBindings){uintptr_t current=0;std::array<unsigned char,32> actual{};
-        if(!read(base+binding.table+binding.slot,&current,8)||current!=base+binding.rva||!read(current,actual.data(),32))throw std::runtime_error("Unsupported or owned award player response");
-        const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported award player response fingerprint");
+    for(const auto& binding:keyedPlayerBindings){uintptr_t current=0;std::array<unsigned char,32> actual{};
+        if(!read(base+binding.table+binding.slot,&current,8)||current!=base+binding.rva||!read(current,actual.data(),32))throw std::runtime_error("Unsupported or owned keyed player response");
+        const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};for(size_t b=0;b<32;++b)if(actual[b]!=(digit(binding.prefix[2*b])*16+digit(binding.prefix[2*b+1])))throw std::runtime_error("Unsupported keyed player response fingerprint");
     }
     if(preflightOnly)return;
     originalRosterColumns=reinterpret_cast<RosterColumns>(base+rosterColumnsRva);originalGridClose=reinterpret_cast<GridClose>(base+gridCloseRva);originalRosterPlayer=reinterpret_cast<RosterPlayer>(base+rosterPlayerRva);
@@ -428,8 +431,8 @@ void installRosterProviders(bool preflightOnly=false){
     }
     originalAbilities=reinterpret_cast<PlayerAbilities>(base+abilitiesRva);
     if(!replace(reinterpret_cast<void*>(originalAbilities),reinterpret_cast<void*>(playerAbilitiesHook),abilitiesTable,abilitiesSlot))throw std::runtime_error("Player abilities ownership changed");abilitiesInstalled=true;
-    for(size_t i=0;i<awardOriginal.size();++i){const auto& binding=awardBindings[i];awardOriginal[i]=reinterpret_cast<AwardGetter>(base+binding.rva);
-        if(!replace(reinterpret_cast<void*>(awardOriginal[i]),reinterpret_cast<void*>(awardHooks[i]),binding.table,binding.slot))throw std::runtime_error("Award response ownership changed");awardInstalled[i]=true;
+    for(size_t i=0;i<keyedPlayerOriginal.size();++i){const auto& binding=keyedPlayerBindings[i];keyedPlayerOriginal[i]=reinterpret_cast<KeyedPlayerGetter>(base+binding.rva);
+        if(!replace(reinterpret_cast<void*>(keyedPlayerOriginal[i]),reinterpret_cast<void*>(keyedPlayerHooks[i]),binding.table,binding.slot))throw std::runtime_error("Keyed player response ownership changed");keyedPlayerInstalled[i]=true;
     }
 }
 #endif
@@ -446,7 +449,7 @@ DWORD stop(){
     bool ownershipFailed=false;
 #if defined(RECRUIT_NOTES_UI)
     ratingGridState=0;
-    for(size_t i=0;i<awardOriginal.size();++i)if(awardInstalled[i]){const auto& binding=awardBindings[i];if(replace(reinterpret_cast<void*>(awardHooks[i]),reinterpret_cast<void*>(awardOriginal[i]),binding.table,binding.slot))awardInstalled[i]=false;else ownershipFailed=true;}
+    for(size_t i=0;i<keyedPlayerOriginal.size();++i)if(keyedPlayerInstalled[i]){const auto& binding=keyedPlayerBindings[i];if(replace(reinterpret_cast<void*>(keyedPlayerHooks[i]),reinterpret_cast<void*>(keyedPlayerOriginal[i]),binding.table,binding.slot))keyedPlayerInstalled[i]=false;else ownershipFailed=true;}
     if(abilitiesInstalled){if(replace(reinterpret_cast<void*>(playerAbilitiesHook),reinterpret_cast<void*>(originalAbilities),abilitiesTable,abilitiesSlot))abilitiesInstalled=false;else ownershipFailed=true;}
     for(size_t i=0;i<mapOriginal.size();++i)if(mapInstalled[i]){const auto& binding=mapBindings[i];if(replace(reinterpret_cast<void*>(mapHooks[i]),reinterpret_cast<void*>(mapOriginal[i]),0xbab1b28,binding.slot))mapInstalled[i]=false;else ownershipFailed=true;}
     for(size_t i=0;i<playerOriginal.size();++i)if(playerInstalled[i]){const auto& binding=playerBindings[i];if(replace(reinterpret_cast<void*>(playerHooks[i]),reinterpret_cast<void*>(playerOriginal[i]),binding.table,binding.slot))playerInstalled[i]=false;else ownershipFailed=true;}
@@ -523,11 +526,15 @@ DWORD WINAPI worker(void*){
         if(!read(base+0xbc42fe8+0xb0,&current,8)||current!=base+0x7c34e40||!read(current,actual.data(),sizeof(lengthPrefix))||memcmp(actual.data(),lengthPrefix,sizeof(lengthPrefix)))throw std::runtime_error("Unsupported script length accessor; Notes probe stopped");
         originalScriptLength=reinterpret_cast<ScriptLength>(current);if(!replace(reinterpret_cast<void*>(originalScriptLength),reinterpret_cast<void*>(notesLengthHook),0xbc42fe8,0xb0))throw std::runtime_error("Script length accessor ownership changed");notesProbeInstalled=true;
 #endif
-        note({{"event","active"},{"mode","letter grades, ranges and Playing Time masking"},{"scope","recruiting UI responses only"}});
+        note({{"event","active"},{"mode","letter grades, ranges and Playing Time masking"},{"scope","player and recruiting display values; numeric models preserved"}});
         while(!disabled){
 #if defined(PLAYER_FOG_PERF) && defined(RECRUIT_NOTES_UI)
             static uint64_t nextPerformance=0;if(GetTickCount64()>=nextPerformance){nextPerformance=GetTickCount64()+30000;
-                note({{"event","player_fog_performance"},{"sampleCapPerPath",8192},{"rows",playerperf::report<Json>(playerperf::rows)},{"nativeRowsIncludingCollector",playerperf::report<Json>(playerperf::nativeRows)},{"scriptAdapters",playerperf::report<Json>(playerperf::scriptAdapters)},{"columns",playerperf::report<Json>(playerperf::columns)}});
+                Json retention=Json::array();size_t retainedBytesTotal=0;
+                const auto retain=[&](const char* name,const notesui::Runtime& runtime){const auto bytes=runtime.retainedByteCount();retainedBytesTotal+=bytes;retention.push_back({{"name",name},{"bytes",bytes},{"definitions",runtime.retainedDefinitionCount()},{"banks",runtime.retainedBankCount()}});};
+                retain("recruitNotes",notesUi);retain("legacyGrid",playerUi);retain("modernGrid",modernPlayerUi);
+                for(size_t bank=0;bank<cardUiBanks.size();++bank){const auto name="playerBank"+std::to_string(bank);retain(name.c_str(),*cardUiBanks[bank]);}
+                note({{"event","player_fog_performance"},{"sampleCapPerPath",8192},{"rows",playerperf::report<Json>(playerperf::rows)},{"nativeRowsIncludingCollector",playerperf::report<Json>(playerperf::nativeRows)},{"scriptAdapters",playerperf::report<Json>(playerperf::scriptAdapters)},{"columns",playerperf::report<Json>(playerperf::columns)},{"retainedBytes",retainedBytesTotal},{"retention",retention}});
             }
 #endif
 #if defined(RECRUIT_NOTES_UI)

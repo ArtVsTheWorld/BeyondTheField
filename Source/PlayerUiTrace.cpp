@@ -35,7 +35,7 @@ unsigned __fastcall lengthHook(void* object){++inflight;observe(object,"original
 DWORD stop(){disabled=true;bool okay=true;if(setup)okay=swap(setupSlot,reinterpret_cast<void*>(setupHook),reinterpret_cast<void*>(setup))&&okay;if(originalLength)okay=swap(lengthSlot,reinterpret_cast<void*>(lengthHook),reinterpret_cast<void*>(originalLength))&&okay;const auto deadline=GetTickCount64()+5000;while(inflight&&GetTickCount64()<deadline)Sleep(1);return !okay?2:inflight?3:0;}
 bool ownerIs(void* pointer,bool setupOwner){HMODULE owner=nullptr;wchar_t path[32768]{};
     if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(pointer),&owner)||!GetModuleFileNameW(owner,path,32768))return false;
-    const auto name=std::filesystem::path(path).filename();return name==L"DynastyEnhancerRecruitFog-p39.dll"||(setupOwner&&name==L"DynastyEnhancerPlayerUiPreview-p1.dll");}
+    const auto name=std::filesystem::path(path).filename();(void)setupOwner;return name==L"DynastyEnhancerRecruitFog-p46.dll";}
 DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"player-ui-trace.jsonl";
     const auto a=*reinterpret_cast<void**>(base+table+setupSlot),b=*reinterpret_cast<void**>(base+table+lengthSlot);if(!ownerIs(a,true)||!ownerIs(b,false))return 1;

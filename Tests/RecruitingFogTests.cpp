@@ -175,7 +175,7 @@ int main(){try{
         std::array<std::string,90> depthNames{};const char* depthHeaders[]={"","POS","#","RS","Name","Year","POS","OVR","NIL","MOR","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
         for(size_t i=0;i<std::size(depthHeaders);++i)depthNames[i]=depthHeaders[i];
         require(classifyGrid(depthNames,35)==GridSchema::DepthChart&&!rosterSchema(depthNames,35),"Captured native depth schema misclassified");
-        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart}){
+        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart,GridSchema::Redshirts,GridSchema::InjuryReport}){
             const auto state=gridState(form,schema);require(gridStateForm(state)==form&&gridStateSchema(state)==schema,"Atomic form/schema snapshot lost identity");
         }
         require(gridState(-1,GridSchema::Roster)==0&&gridState(0,GridSchema::None)==0&&gridStateForm(0)==-1,"Inactive grid state admitted a row");
@@ -188,6 +188,26 @@ int main(){try{
         ColumnSink depthColumns{columnTable};columnString(&depthColumns,7,"display","OVR");columnInt(&depthColumns,7,"formatType",15);columnBool(&depthColumns,7,"isTrend",true);columnInt(&depthColumns,8,"formatType",49);columnInt(&depthColumns,2,"formatType",13);
         output.values=nlohmann::json::array();replayColumns(depthColumns,&output,true,GridSchema::DepthChart);
         require(output.values[1]["value"]==0&&output.values[2]["value"]==false&&output.values[3]["value"]==49&&output.values[4]["value"]==13,"Depth rating format change affected NIL or ordinal formatter");
+        std::array<std::string,90> redshirtNames{};
+        const char* redshirtHeaders[]={"RS","Name","POS","Year","OVR","NIL","GP","SPD","ACC","AGI","COD","STR","AWR","CAR","BCV","BTK","TRK","SFA","SPM","JKM","CTH","CIT","SPC","SRR","MRR","DRR","RLS","JMP","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","PBK","PBP","PBF","RBK","RBP","RBF","LBK","IBL","PRC","TAK","POW","BSH","FMV","PMV","PUR","MCV","ZCV","PRS","RET","KPW","KAC","STA","TGH","INJ","Last Name"};
+        for(size_t i=0;i<std::size(redshirtHeaders);++i)redshirtNames[i]=redshirtHeaders[i];
+        require(classifyGrid(redshirtNames,61)==GridSchema::Redshirts,"Captured Redshirts schema not recognized");
+        redshirtNames[60]="Last Name Rating";require(classifyGrid(redshirtNames,61)==GridSchema::None,"Redshirts trailing identity field not gated");redshirtNames[60]="Last Name";
+        redshirtNames[7]="Yards";require(classifyGrid(redshirtNames,61)==GridSchema::None,"Redshirts accepted statistics in attribute columns");redshirtNames[7]="SPD";
+        require(classifyGrid(redshirtNames,60)==GridSchema::None,"Unverified compact Redshirts schema accepted");
+        output.values=nlohmann::json::array();GridSink redshirtCells{gridTable,&output};redshirtCells.schema=GridSchema::Redshirts;redshirtCells.count=6;redshirtCells.columns={4,5,6,7,59,60};
+        for(unsigned i=0;i<6;++i)gridString(&redshirtCells,i,"display",std::array<const char*,6>{"83,TrendUp","45","4","90","59","88"}[i]);
+        gridInt(&redshirtCells,0,"intValue",83);
+        require(output.values[0]["value"]=="B"&&output.values[3]["value"]=="45"&&output.values[4]["value"]=="4"&&output.values[5]["value"]=="A"&&output.values[8]["value"]=="F"&&output.values[11]["value"]=="88"&&output.values[12]["value"]==83,"Redshirts conversion touched NIL, games played, last name or sorting");
+        std::array<std::string,90> injuryNames{};const char* injuryHeaders[]={"","POS","Name","POS","OVR","Injury","Length","IR","Return","Status"};
+        for(size_t i=0;i<std::size(injuryHeaders);++i)injuryNames[i]=injuryHeaders[i];
+        require(classifyGrid(injuryNames,10)==GridSchema::InjuryReport,"Captured Injury Report schema not recognized");
+        require(classifyGrid(injuryNames,9)==GridSchema::None,"Injury Report lost its hidden leading column");
+        injuryNames[8]="Yards";require(classifyGrid(injuryNames,10)==GridSchema::None,"Injury Report accepted an unrelated schema");
+        output.values=nlohmann::json::array();GridSink injuryCells{gridTable,&output};injuryCells.schema=GridSchema::InjuryReport;injuryCells.count=6;injuryCells.columns={2,4,5,6,8,9};
+        for(unsigned i=0;i<6;++i)gridString(&injuryCells,i,"display",std::array<const char*,6>{"McNeal","78","Dislocated Hip","2","33","Injured"}[i]);
+        gridInt(&injuryCells,1,"intValue",78);
+        require(output.values[0]["value"]=="McNeal"&&output.values[1]["value"]=="C"&&output.values[4]["value"]=="Dislocated Hip"&&output.values[5]["value"]=="2"&&output.values[6]["value"]=="33"&&output.values[7]["value"]=="Injured"&&output.values[8]["value"]==78,"Injury conversion changed injury text, length, return/status or sorting");
         FixtureView view;view.maps[1]={{"overall",2},{"teamOverall",3},{"jersey",4}};view.numbers={{2,82},{3,64},{4,1}};std::string changed;
         require(selectedOverall(view,1,[&](uintptr_t root,const char* key,const char* value){require(root==1,"Selected player root changed");changed=std::string(key)+"="+value;})&&changed=="overall=B","Selected overall not scoped to player field");
         view.numbers[2]=-1;require(!selectedOverall(view,1,[&](uintptr_t,const char*,const char*){throw std::runtime_error("Invalid selected rating exposed");}),"Invalid player overall changed");
@@ -208,6 +228,9 @@ int main(){try{
         view.arrays[32]={35,36,37};view.maps[35]={{"ratingValue",38},{"isFullyScouted",39}};view.maps[36]={{"ratingValue",40},{"isFullyScouted",41}};view.maps[37]={{"ratingValue",42},{"isFullyScouted",43}};
         view.numbers[38]=92;view.booleans[39]=true;view.numbers[40]=80;view.booleans[41]=false;view.numbers[42]=90.5;view.booleans[43]=true;edits.clear();
         require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Roster NIL changed compensation/points or uncertain/invalid attributes");
+        view.maps[30]["injuryLength"]=45;view.maps[30]["injuryRisk"]=46;view.maps[30]["age"]=47;view.maps[30]["injuryName"]=48;view.maps[30]["seasonStats"]=49;
+        view.numbers[45]=33;view.numbers[46]=78;view.numbers[47]=21;view.strings[48]="Torn Pectoral";view.maps[49]={{"Yards",70}};view.numbers[70]=450;edits.clear();
+        require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Injury sidebar touched duration/risk/age/injury name/season statistics");
         view.maps[30]["isCoach"]=44;view.booleans[44]=false;edits.clear();
         require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Annual award player fields missed");
         view.booleans[44]=true;edits.clear();
@@ -224,10 +247,10 @@ int main(){try{
         require(convertAbilityDescriptions(view,70,capture)==1&&edits==std::vector<std::string>{"71:UpgradeDescription=Bronze Requires: B Pass Block Power (C Currently)"}&&view.numbers==beforeAbilityNumbers&&view.booleans==beforeAbilityFlags,"Ability UI conversion changed cost/rank/eligibility or another field");
         runtime::originalAbilities=fakeAbilities;void* abilityValue=reinterpret_cast<void*>(0x1234);
         runtime::disabled=true;require(runtime::playerAbilitiesHook(nullptr,&abilityValue,true)==&abilityValue&&abilityMentals&&abilityForwarded==1&&abilityValue==reinterpret_cast<void*>(0x1234),"Stopped ability getter changed bool argument/native return");runtime::disabled=false;
-        for(size_t i=0;i<runtime::awardBindingCount;++i)runtime::awardOriginal[i]=fakeAward;
+        for(size_t i=0;i<runtime::keyedPlayerBindingCount;++i)runtime::keyedPlayerOriginal[i]=fakeAward;
         runtime::disabled=true;
-        for(const auto hook:runtime::awardHooks)require(hook(nullptr,&abilityValue,reinterpret_cast<void*>(0x4567))==&abilityValue&&awardKey==reinterpret_cast<void*>(0x4567)&&abilityValue==reinterpret_cast<void*>(0x1234),"Award getter changed opaque key/output/native return");
-        require(awardForwarded==3,"Award getter did not invoke native exactly once");runtime::disabled=false;
+        for(const auto hook:runtime::keyedPlayerHooks)require(hook(nullptr,&abilityValue,reinterpret_cast<void*>(0x4567))==&abilityValue&&awardKey==reinterpret_cast<void*>(0x4567)&&abilityValue==reinterpret_cast<void*>(0x1234),"Award getter changed opaque key/output/native return");
+        require(awardForwarded==runtime::keyedPlayerBindingCount,"Award getter did not invoke native exactly once");runtime::disabled=false;
         MapTestOutput mapOutput{mapTestTable};MapSink map{mapTable,&mapOutput,"overall"};mapInt(&map,"overall",66);mapInt(&map,"Overall",83);mapInt(&map,"jersey",92);mapFloat(&map,"height",74.5f);mapBool(&map,"redshirt",true);mapString(&map,"lastName","Branham");mapUndefined(&map,"injury");mapOpaque(&map,"nested",reinterpret_cast<void*>(123));
         require(mapOutput.values==nlohmann::json({{"overall","D"},{"Overall",83},{"jersey",92},{"height",74.5},{"redshirt",true},{"lastName","Branham"},{"injury",nullptr},{"nested",123}})&&map.changed==1,"Native map collector changed another property's type or value");
         mapInt(&map,"overall",-1);require(mapOutput.values["overall"]==-1&&map.changed==1,"Map collector converted hidden overall sentinel");

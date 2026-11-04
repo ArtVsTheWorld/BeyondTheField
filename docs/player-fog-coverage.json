@@ -10,30 +10,25 @@
     "F": "0-59",
     "unknown": "remain hidden",
     "partialColor": "public grade midpoint",
-    "selectedRow": "Native black foreground on light selection highlight, per user readability preference"
+    "selectedRow": "Native black foreground on light selection highlight, per user readability preference",
+    "editPlayer": "Explicit user exception: leave Edit Player Ratings numeric. No adapter implemented for that screen."
   },
   "surfaces": [
     {
       "surface": "Roster OVR and 54 attribute columns",
       "implemented": true,
-      "liveVerified": false,
-      "liveStatus": "p39 + temporary supplements: full roster, compact QB filter, alternate team Florida State, initial/middle and far-right columns show letters. Selected-row color override worked but user requested native black foreground for readability; removed from p42.",
+      "liveVerified": true,
+      "liveStatus": "p46 clean session: user cycled remaining position filters, switched team and scrolled far-right, reporting Looks good. Final FIU HB screenshot confirms far-right SPC/SRR/MRR/RLS/PBK/PBP/PBF/RBK/RBP/RBF/LBK/IBL/RET/STA/TGH/INJ letters; selected row black, other rows colored, panel B colored. Team74/74/75 and ordinary numbers unchanged.",
       "evidence": "PlayerRatingGrid.h recognizes the complete roster identity prefix plus only known attribute headers; p38 built. Actual QB view captured with form0 and 33 columns, matching the generalized schema.",
-      "remaining": [
-        "Remaining position-specific schemas",
-        "Reentry/focus recycling in combined p42",
-        "Secondary card panels and numeric rating leak audit"
-      ]
+      "remaining": []
     },
     {
       "surface": "Roster selected-player overall panel",
       "implemented": true,
-      "liveVerified": false,
-      "liveStatus": "Colored Overall follows selection, team filter and alternate attribute/skill-group panels in p39. Team ratings remain numeric.",
+      "liveVerified": true,
+      "liveStatus": "p46 clean session: user cycled remaining position filters, switched team and scrolled far-right, reporting Looks good. Final FIU HB screenshot confirms far-right SPC/SRR/MRR/RLS/PBK/PBP/PBF/RBK/RBP/RBF/LBK/IBL/RET/STA/TGH/INJ letters; selected row black, other rows colored, panel B colored. Team74/74/75 and ordinary numbers unchanged.",
       "evidence": "Current selected getter plus live B/D panel changes; p38 adds shared PlayerModule color suffix only for existing exact grade strings, never numeric NIL/stat values.",
-      "remaining": [
-        "Combined p42 regression across remaining filters/panels"
-      ]
+      "remaining": []
     },
     {
       "surface": "Player cards reachable from roster",
@@ -45,17 +40,15 @@
         "Other position cards and Mentals/secondary tooltips",
         "Injured-player Health path (numeric wear-and-tear deltas intentionally remain)"
       ],
-      "liveStatus": "p43 + isolated supplements: Overall and group headings colored; default-style attribute colors fixed and verified for Awareness/Acceleration C, Speed D, passing-blocking C and Power B. Physicals requirements/current grades verified live with unchanged numeric costs/Not Met. Overview/healthy Health/More inspected with no raw Overall. p46 combines these, awaiting restart."
+      "liveStatus": "p46 clean session: Brady Schaefer header D orange, IQ/Awareness C yellow, Pass Blocking C headings/attributes yellow; Physicals requirement/current grades correct with native numeric costs and Not Met. Ratings tab reentry keeps colors. Edit Player numeric ratings are explicitly excluded by user."
     },
     {
       "surface": "Native spreadsheet grade colors",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p36 includes legacy SpreadsheetProvider marker-gated GetCellColor and modern provider adapter; offline native-equivalence and color/fallback tests pass",
-      "remaining": [
-        "Combined p42 reentry and focus/scroll performance"
-      ],
-      "liveStatus": "Unselected grades and selected-player panel colors verified. Selected-row grades deliberately remain native black on light highlight; user requested reverting colored selected grades."
+      "remaining": [],
+      "liveStatus": "p46 clean session: user cycled remaining position filters, switched team and scrolled far-right, reporting Looks good. Final FIU HB screenshot confirms far-right SPC/SRR/MRR/RLS/PBK/PBP/PBF/RBK/RBP/RBF/LBK/IBL/RET/STA/TGH/INJ letters; selected row black, other rows colored, panel B colored. Team74/74/75 and ordinary numbers unchanged."
     },
     {
       "surface": "Depth chart and lineup/comparison",
@@ -63,10 +56,9 @@
       "liveVerified": false,
       "evidence": "Native QB depth columns captured: form0; identity POS,#,RS,Name,Year,POS,OVR,NIL,MOR; rating IDs7,10+. p46 exact-prefix/known-attribute schema plus one atomic form/schema snapshot. Tests preserve depth2 ordinal formatter13, NIL8 currency49, MOR9, intValue/sorting and names.",
       "remaining": [
-        "live table schemas and complete depth chart/lineup/comparison navigation",
-        "formation cards/popups and colors"
+        "Separate lineup/comparison/formation popups and remaining hub comparison/watch previews"
       ],
-      "liveStatus": "p46 clean session: QB and C position filters show letter OVR/attributes, native black selected row, colored unselected rows and colored selected-player Overall. Numeric depth ordinals, NIL, jersey/measurements and team64/64/63 preserved. Remaining positions/far-right/comparison still pending."
+      "liveStatus": "p46 clean session QB/C table and panel verified; user additionally checked offense, defense, return/specialist filters and far-right ratings, reporting all letters while depth/NIL/team ratings remain numeric. No lineup edits."
     },
     {
       "surface": "Dynasty hub player previews",
@@ -131,6 +123,34 @@
         "p47 clean-start activation",
         "live awards/Heisman sidebar and colors"
       ]
+    },
+    {
+      "surface": "Recruiting My School player-risk Overall",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p48 exact596-byte MySchoolRiskListItem.Draw gate, source OVR numeric and RiskValue unchanged, four-register label/color suffix. All101-boundary/unknown/header/reentry tests and independent review pass.",
+      "remaining": [
+        "Clean p48 activation",
+        "Live My School risk list attachment, letters and colors"
+      ]
+    },
+    {
+      "surface": "Redshirts table and player panel",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p46 panel colored but native table numeric. Captured full61-column schema; source adds exact schema with rating4,7..59, preservingGP6/NIL5/LastName60 and sorting.",
+      "remaining": [
+        "p50 live all/focused filters and scroll"
+      ]
+    },
+    {
+      "surface": "Injury Report table and player panel",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p46 live raw78; native10-column metadata including hiddenblank0 captured. p50 masksOVR4 only plus separately typed3 GetInjuryInfo overall/revealed attributes. Tests preserve injury duration/risk/status/age/stats/sorting. Independent review corrected leading-hidden-column shift before any live activation.",
+      "remaining": [
+        "p50 clean-start live injury table/panel and filters"
+      ]
     }
   ],
   "invariants": [
@@ -147,7 +167,8 @@
     "remaining": [
       "UI callback latency",
       "colored focus/scroll overhead",
-      "late-season regression"
+      "late-season regression",
+      "p50 retained script allocation/bank counts across repeated menu visits; logging only worker30sec, no new per-draw I/O/scans"
     ],
     "uiSamples": {
       "source": "p39 bounded live callback instrumentation, first8192 samples",
@@ -267,9 +288,9 @@
     "releaseReady": false,
     "previewSha256": "cb8d9f8a088911841ba2b23e787ae4885a04c92329d3f8b0232fb539a5a9b368",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p47.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p47-MMC.zip",
-    "nextCandidateSha256": "1f38cbe60678cd8e177a60b0221f3eeaae1033dedc46b2a2045418c14946d437"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p50.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p50-MMC.zip",
+    "nextCandidateSha256": "95d6e18510c659308e23fcd57843ff43ba07f0b2ced4fa0c0ee102b43ba07281"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -281,9 +302,19 @@
     "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test.",
     "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text.",
     "p46Build": "Passed MSVC /W4 /WX, C++ including101xfull-attribute ability grammar and captured-depth-schema tests, all UI VM suites, independent review and MMC package smoke checks. No installed changes.",
-    "p46Live": "Clean main-menu activation; Team hub Starting Offense and QB/C Depth Chart grade displays verified. Card reentry test in progress.",
+    "p46Live": "Team Starting Offense, QB/C Depth Chart, roster card Ratings/Physicals and reentry pass. Roster remaining filters next; no player edits or advance.",
     "p47Build": "Passed MSVC /W4 /WX, native tests, all UI VM suites including coach-camera renderer. Not loaded; p46 remains active.",
     "p47Review": "Independent reviewer passed typed award ABI/gates/preflight/CAS restoration/coach guard and seven-bank IG lifecycle; independently reran card and IG VM tests.",
-    "p47Package": "MMC registration/callback/tamper/path/editable-config smoke checks passed; baseline files/history unchanged."
+    "p47Package": "MMC registration/callback/tamper/path/editable-config smoke checks passed; baseline files/history unchanged.",
+    "p48Build": "Passed MSVC /W4 /WX, native tests and all UI VM suites, independent risk adapter register/ABI/preservation review. No live p48 loading yet.",
+    "p48Package": "MMC registration/callback/tamper/path/config smoke checks passed; baseline remains untouched.",
+    "p50Build": "Passed MSVC /W4 /WX, native tests and all six UI VM suites. Corrected Injury hidden-column fixture, native Injury typed3 getter, Redshirts schema, risk-player labels and retained-memory counters independently reviewed.",
+    "p50Package": "MMC registration/launch/tamper/path/config smoke passed. No installed file or history changes."
+  },
+  "stages": {
+    "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
+    "depthCardsHub": "In progress: QB/C depth and Starting Offense verified; remaining depth/comparison/watch views pending.",
+    "remainingMenusLeakAudit": "In progress: awards and MySchool risk-player adapters built, live verification pending.",
+    "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   }
 }

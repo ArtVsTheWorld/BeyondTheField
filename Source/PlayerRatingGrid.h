@@ -10,11 +10,11 @@ namespace recruitingfog::playerfog {
 // Semantic column IDs, not screen positions. Native position/team filters may
 // reorder or request only a subset of these columns.
 inline bool rosterRatingColumn(int id){return id==5||(id>=8&&id<=61);}
-enum class GridSchema{None,Roster,DepthChart};
+enum class GridSchema{None,Roster,DepthChart,Redshirts,InjuryReport};
 inline uint64_t gridState(int form,GridSchema schema){return form<0||schema==GridSchema::None?0:(uint64_t(uint32_t(form)+1)<<32)|uint32_t(schema);}
 inline int gridStateForm(uint64_t state){return state?int((state>>32)-1):-1;}
 inline GridSchema gridStateSchema(uint64_t state){return GridSchema(uint32_t(state));}
-inline bool ratingColumn(GridSchema schema,int id){return schema==GridSchema::Roster?rosterRatingColumn(id):schema==GridSchema::DepthChart?(id==7||(id>=10&&id<=63)):false;}
+inline bool ratingColumn(GridSchema schema,int id){return schema==GridSchema::Roster?rosterRatingColumn(id):schema==GridSchema::DepthChart?(id==7||(id>=10&&id<=63)):schema==GridSchema::Redshirts?(id==4||(id>=7&&id<=59)):schema==GridSchema::InjuryReport?id==4:false;}
 inline bool ratingText(std::string_view text,int& value){
     unsigned result=0;size_t i=0;
     while(i<text.size()&&text[i]>='0'&&text[i]<='9'){
@@ -48,6 +48,10 @@ inline GridSchema classifyGrid(const std::array<std::string,90>& names,unsigned 
     // Verified native depth-chart identity prefix. # is depth, not a rating;
     // hidden position/morale, year and NIL also retain their original types.
     if(count>=10&&count<=64&&names[1]=="POS"&&names[2]=="#"&&names[3]=="RS"&&names[4]=="Name"&&names[5]=="Year"&&names[6]=="POS"&&names[7]=="OVR"&&names[8]=="NIL"&&names[9]=="MOR"&&knownAttributeColumns(names,10,count))return GridSchema::DepthChart;
+    // Captured Redshirts uses zero-based RS, swaps position/year, includes
+    // games played and ends with a hidden last-name column. Those remain native.
+    if(count==61&&names[0]=="RS"&&names[1]=="Name"&&names[2]=="POS"&&names[3]=="Year"&&names[4]=="OVR"&&names[5]=="NIL"&&names[6]=="GP"&&names[60]=="Last Name"&&knownAttributeColumns(names,7,60))return GridSchema::Redshirts;
+    if(count==10&&names[0].empty()&&names[1]=="POS"&&names[2]=="Name"&&names[3]=="POS"&&names[4]=="OVR"&&names[5]=="Injury"&&names[6]=="Length"&&names[7]=="IR"&&names[8]=="Return"&&names[9]=="Status")return GridSchema::InjuryReport;
     return GridSchema::None;
 }
 struct GridSink{
