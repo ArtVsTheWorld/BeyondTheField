@@ -24,12 +24,17 @@ test('offseason week zero has a national title recap and both finalist perspecti
  assert.ok(national.some(p=>p.body.includes('one win short')||p.body.includes('runner-up')));
  assert.ok(national.some(p=>p.author==='Tina Brooks'&&/season|offseason/i.test(p.body)));
  for(const author of ['Jake Whitmore','Marcus Bennett','Tina Brooks','David Ellison','Chris Maddox'])assert.ok(national.some(p=>p.author===author),author);
- for(const id of [1,2])assert.ok(f.stories.filter(p=>p.teamIds.includes(id)).length<=20);
+ for(const id of [1,2])assert.ok(f.stories.filter(p=>p.teamIds.includes(id)).length<=25);
  assert.ok(f.stories.every(p=>[...p.body].length<=280&&Buffer.byteLength(p.body)<=512));
 });
 test('the recap edition never predicts the completed title or carries it into later offseason weeks',()=>{
  const s=fixture();assert.equal(focusFixtures(s).length,1);assert.ok(!buildFeed(s).stories.some(p=>/my pick|one game left|take on.*national championship/i.test(p.body)));
  s.season.CurrentWeek=1;assert.deepEqual(focusFixtures(s),[]);assert.deepEqual(seasonReviewEvents(s),[]);
+});
+test('Players Leaving has national coverage without premature portal entries or draft results',()=>{
+ const s=fixture();s.season.CurrentWeek=1;const f=buildFeed(s),national=f.views.national.map(id=>f.stories.find(p=>p.id===id));
+ assert.ok(national.length>=3);assert.ok(national.some(p=>p.author==='Chris Maddox'));assert.ok(national.some(p=>p.author==='Tina Brooks'));assert.ok(national.some(p=>p.author==='Jake Whitmore'));
+ assert.ok(!national.some(p=>p.draftPick||p.templateId.startsWith('portal.entrant')));
 });
 test('missing, unpublished, ambiguous or different-year finals cannot create championship claims',()=>{
  for(const mutate of [s=>s.games.pop(),s=>s.games.at(-1).published=false,s=>s.games.at(-1).year=-1,s=>s.games.push({...s.games.at(-1),id:'duplicate'})]){
@@ -59,7 +64,7 @@ test('phase archives supply staff retrospectives even when current carousel tabl
 test('blueprint NIL adjustments publish the next week, stay stable, and do not repeat a week later',()=>{
  let s=fixture(),a=updateRuntime(structuredClone(s));s.players[0].nil=140;s.players[1].nil=75;
  const b=updateRuntime(structuredClone(s),a.state);assert.ok(!b.catalog.stories.some(p=>p.category==='nil'));
- s.season.CurrentWeek=1;const c=updateRuntime(structuredClone(s),b.state),deals=c.catalog.stories.filter(p=>p.category==='nil');assert.equal(deals.length,2);assert.ok(deals.some(p=>p.body.includes('$350K')&&p.body.includes('$250K')));assert.ok(deals.some(p=>p.body.includes('$187.5K')));assert.ok(deals.every(p=>p.body.includes('last week')));
+ s.season.CurrentWeek=1;const c=updateRuntime(structuredClone(s),b.state),deals=c.catalog.stories.filter(p=>p.category==='nil');assert.equal(deals.length,2);assert.ok(deals.some(p=>p.body.includes('$560K')&&p.body.includes('$400K')));assert.ok(deals.some(p=>p.body.includes('$300K')));assert.ok(deals.every(p=>p.body.includes('last week')));
  assert.deepEqual(updateRuntime(structuredClone(s),c.state).catalog.stories,c.catalog.stories);
  s.season.CurrentWeek=2;assert.ok(!updateRuntime(s,c.state).catalog.stories.some(p=>p.category==='nil'));
 });

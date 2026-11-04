@@ -7,7 +7,7 @@ export function draftDiscourse(s){
  const players=new Map(s.players.map(p=>[p.id,p])),teams=new Map(s.teams.filter(t=>t.id!==255).map(t=>[t.id,t])),events=[];
  for(const d of board)if(d.teamId!==undefined&&d.playerName&&d.position)players.set(d.player,{id:d.player,team:d.teamId,name:d.playerName,position:d.position});
  if(board.some(d=>!teams.has(players.get(d.player)?.team)))return [];
- const add=(id,family,team,values,voice='analyst',persona=5,relatedTeams=[])=>events.push({id:'draft-talk:'+id,category:'draft-discourse',facts:{family:'draft-talk.'+family,voice,analystPersona:persona,school:teams.get(team)?.name,...values},options:{team,relatedTeams,national:voice==='analyst',priority:105,thread:'draft-talk:'+id}});
+ const add=(id,family,team,values,voice='analyst',persona=5,relatedTeams=[])=>events.push({id:'draft-talk:'+id,category:'draft-discourse',facts:{family:'draft-talk.'+family,voice,analystPersona:persona,school:teams.get(team)?.name,...values},options:{team,relatedTeams,national:voice==='analyst',priority:105,thread:'draft-talk:'+id,...(family==='conference-leader'?{primaryScope:'conference'}:{})}});
  const counts=[...teams.values()].map(t=>({t,all:board.filter(d=>players.get(d.player)?.team===t.id),first:board.filter(d=>d.round===1&&players.get(d.player)?.team===t.id)}));
  const leaders=counts.filter(c=>c.first.length).sort((a,b)=>b.first.length-a.first.length||a.t.id-b.t.id),high=leaders[0]?.first.length;
  if(high){const tied=leaders.filter(c=>c.first.length===high);add('team-leader','team-leader',tied[0].t.id,{leaders:tied.map(c=>c.t.name).join(', '),count:high,leadVerb:tied.length>1?'tie for the most':'has the most'},'analyst',5,tied.map(c=>c.t.id));}

@@ -34,7 +34,7 @@
     {
       "id": 4,
       "name": "Dropdown discovery",
-      "status": "Built and active; native gates/tests pass; live entry test pending",
+      "status": "Live preseason entry and all controls verified; 0 ms measured setup in three requests; late-season remains pending",
       "gates": [
         "Remove process-wide UI-thread scans",
         "Validate cached ownership/generation",
@@ -45,12 +45,12 @@
     {
       "id": 5,
       "name": "Correctness and contextual review",
-      "status": "Full published 2028 corpus audited; 13 milestone saves backed up; fixes pending"
+      "status": "Core corrections implemented; 359 Node tests and native checks pass; real 224-pick draft replay yields 25 eligible undrafted signings with no duplicate early QB; live content check pending"
     },
     {
       "id": 6,
       "name": "Thousands of natural variants",
-      "status": "pending",
+      "status": "In progress: static analyst and personal copy expanded; full 31-edition eligibility audit identifies remaining thin paths",
       "targets": {
         "usableVariants": 5000,
         "minimumEligibleVariantsPerPath": 8
@@ -81,7 +81,9 @@
     "Returning portal player: beat report and smug fans, no official commitment announcement; stronger positive reaction for exceptional player",
     "Natural position and HS/JUCO context only when useful; avoid repeated name/handle/position",
     "Encouraged departure without verified destination: FCS continuation flavor without inventing a named destination",
-    "Thorough bugs/context/repetition audit and new contextual opportunity report"
+    "Thorough bugs/context/repetition audit and new contextual opportunity report",
+    "Verified signings, draft picks and major roster changes may exceed 25; cap routine coverage",
+    "User approved fewer than 10 stories on genuinely quiet weeks; never force filler"
   ],
   "reporting": "Report offline results separately from live verification after each stage"
 }

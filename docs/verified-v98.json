@@ -1,6 +1,6 @@
 {
   "build": "v98",
-  "status": "Live archive migration published unchanged preseason; dropdown live entry/control test pending",
+  "status": "Live preseason entry and all controls verified; user reports faster entry",
   "nodeTests": 351,
   "nativeBuildAndTests": true,
   "archiveReplay": {
@@ -19,7 +19,13 @@
     "stories": 1226,
     "catalogExactlyEqual": true,
     "legacyArchiveByteIdentical": true,
-    "newIndexExists": true
+    "newIndexExists": true,
+    "userConfirmed": "Both entries and controls work; entry feels faster",
+    "panelPrepareMs": [
+      0,
+      0,
+      0
+    ]
   },
   "nativeChanges": [
     "Actual GetTemplate body identifies current News asset before execution",
@@ -30,7 +36,6 @@
     "Same-address resource recycling revalidated"
   ],
   "limits": [
-    "Live dropdown observations and setup timings pending",
     "Late-season performance and Week 0 scholarship capture pending",
     "First legacy migration remains a one-time cost",
     "No new wording or variety pack loaded yet"

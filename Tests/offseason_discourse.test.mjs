@@ -29,6 +29,11 @@ test('one-stars get no recruiting coverage and occasional two-stars get only und
 test('transfer commitment names both schools and recognizes either side of a native rivalry',()=>{
  const s=fixture();s.draftResults=[];s.teams[0].name='Florida';s.teams[1].name='Florida State';s.teams[0].rivals=[2];recruit(s);const f=buildFeed(s),report=f.stories.find(p=>p.templateId.startsWith('roster.rival-transfer'));assert.ok(report);assert.match(report.body,/Florida State/);assert.match(report.body,/from Florida/);assert.match(report.body,/4-star transfer QB/);assert.ok(detectEvents(s).find(e=>e.id==='commit:2:r').facts.rivalTransfer);
 });
+test('a returning portal player gets beat retention coverage and smug fans, never an official welcome',()=>{
+ const s=fixture();s.draftResults=[];const p=recruit(s,{team:1});s.players.at(-1).overall=91;
+ while(!publishReply(s,'x','commit:1:r:main'))s.leagueId++;
+ const f=buildFeed(s),posts=f.stories.filter(x=>x.eventId==='commit:1:r');assert.ok(posts.some(x=>x.voice==='beat'&&x.templateId.startsWith('roster.returning')));assert.ok(posts.some(x=>x.voice==='fan'&&x.templateId.startsWith('roster.returning-star-fan')));assert.ok(!posts.some(x=>x.voice==='official'||/previously at|from School 1 to School 1/i.test(x.body)));
+});
 test('JUCO is explicit in reports and recruit profile; five-stars are announced by ESPNCFB',()=>{
  const s=fixture();s.draftResults=[];recruit(s,{stars:5,kind:'JuniorCollege_Sophomore'});const f=buildFeed(s);assert.ok(f.stories.some(p=>p.handle==='@ESPNCFB'&&/5-star JUCO QB/.test(p.body)));assert.ok(f.stories.some(p=>p.voice==='recruit'&&/JUCO QB/.test(p.author)));
 });

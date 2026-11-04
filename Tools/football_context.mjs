@@ -1,5 +1,5 @@
 import {phaseIndex} from './publication_timeline.mjs';
-export const NIL_DOLLARS_PER_POINT=2500; // User verified against the in-game display.
+export const NIL_DOLLARS_PER_POINT=4000; // Latest user-confirmed Dynasty conversion.
 export const finalGame=g=>g.published!==false&&Number.isFinite(g.homeScore)&&Number.isFinite(g.awayScore)&&(g.status==='HomeWon'&&g.homeScore>g.awayScore||g.status==='AwayWon'&&g.awayScore>g.homeScore||g.status==='Tie'&&g.homeScore===g.awayScore);
 export const visibleGame=(s,g)=>g.year===s.season.CurrentYear&&phaseIndex(g.phase)>=0&&(phaseIndex(g.phase)<phaseIndex(s.season.CurrentWeekType)||g.phase===s.season.CurrentWeekType&&g.week<=s.season.CurrentWeek)&&finalGame(g);
 export const schemes={OFF_WEST_COAST_ZONE_RUN:'West Coast zone run',OFF_MULTIPLE_OFFENSE:'multiple offense',OFF_VEER_AND_SHOOT:'veer and shoot',OFF_POWER_SPREAD:'power spread',OFF_SPREAD_OPTION:'spread option',OFF_PRO_STYLE:'pro style',OFF_SPREAD:'spread',OFF_RUN_AND_SHOOT:'run and shoot',OFF_AIR_RAID:'air raid',OFF_PISTOL:'pistol',OFF_OPTION:'option',DEF_BASE4_3:'base 4-3',DEF_3_3_5:'3-3-5',DEF_BASE3_4:'base 3-4',DEF_4_2_5:'4-2-5',DEF_MULTIPLE_DEFENSE:'multiple defense',DEF_4_3_MULTIPLE:'4-3 multiple',DEF_3_4_MULTIPLE:'3-4 multiple',DEF_3_3_5_TITE:'3-3-5 tite',DEF_3_2_6:'3-2-6'};

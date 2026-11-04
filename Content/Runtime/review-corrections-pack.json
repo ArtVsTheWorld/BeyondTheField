@@ -1,0 +1,165 @@
+{
+ "revision":"content-review-v99",
+ "families":{
+  "leaving.calendar":[
+   {"id":"leaving.calendar.1","body":"The next set of decisions is about rosters. Who is coming back, who is moving on, and which staffs can keep their core together? The portal and draft-results stages are still ahead."},
+   {"id":"leaving.calendar.2","body":"Players Leaving week: retention conversations now, portal recruiting next. A transfer-risk flag is not an announcement, and a draft projection is not a selection."},
+   {"id":"leaving.calendar.3","body":"The season is over; roster decisions are not. This is the week to separate confirmed departures from players still weighing their options."},
+   {"id":"leaving.calendar.4","body":"Every staff has a different version of the same question right now: how much of this roster will be back? Decisions this week set up the next recruiting cycle."},
+   {"id":"leaving.calendar.5","body":"Before anyone hands out offseason grades, find out who is staying. Players Leaving week can change a program's needs before portal recruiting even opens."},
+   {"id":"leaving.calendar.6","body":"Roster retention takes the spotlight this week. The draft and portal will have their turns; first come the decisions that reshape those depth charts."},
+   {"id":"leaving.calendar.7","body":"College football's quietest-looking week can matter a lot. Returning starters and available roster spots will shape what each school needs next."},
+   {"id":"leaving.calendar.8","body":"The next season starts with the players already in the building. Retention first, then the portal and the remaining high school class."}
+  ],
+  "leaving.retention":[
+   {"id":"leaving.retention.1","body":"Keeping a proven contributor can matter as much as adding a new name. This is the part of roster building that does not come with a commitment graphic."},
+   {"id":"leaving.retention.2","body":"A portal shopping list means very little until a staff knows who it is bringing back. Retention decisions come first this week."},
+   {"id":"leaving.retention.3","body":"Do not confuse transfer interest with a departure. There are still decisions to make before the portal recruiting stage begins."},
+   {"id":"leaving.retention.4","body":"The biggest recruiting win this week might already have a locker on campus. Keeping experienced production is its own kind of offseason addition."},
+   {"id":"leaving.retention.5","body":"Depth-chart plans can change fast during Players Leaving. The schools that retain their core will have fewer holes to address when recruiting resumes."},
+   {"id":"leaving.retention.6","body":"A new recruit is exciting. A returning starter who already knows the system can be just as valuable. This week's retention decisions deserve attention."},
+   {"id":"leaving.retention.7","body":"Before projecting portal destinations, establish who actually enters. A player's risk of leaving is a reason to watch, not proof of a move."},
+   {"id":"leaving.retention.8","body":"Staffs are balancing departing seniors, pro prospects and players considering a change. Keeping the right pieces is the first job of the offseason."}
+  ],
+  "leaving.fan-clock":[
+   {"id":"leaving.fan-clock.1","body":"We went from checking scores to checking whether everyone is coming back. College football really does find a new way to stress people out every week."},
+   {"id":"leaving.fan-clock.2","body":"No games this week. Somehow everyone is still staring at their phone waiting for roster news."},
+   {"id":"leaving.fan-clock.3","body":"The offseason is here: fewer touchdowns, considerably more refreshing the timeline."},
+   {"id":"leaving.fan-clock.4","body":"A fanbase can survive a bye week. Waiting to find out which players return is a different test entirely."},
+   {"id":"leaving.fan-clock.5","body":"Today's depth chart is not next season's depth chart. Please remember that before declaring the offseason won or lost."},
+   {"id":"leaving.fan-clock.6","body":"Nobody has played a snap and the offseason arguments are already warming up. First, maybe find out who is staying?"},
+   {"id":"leaving.fan-clock.7","body":"The season ends and fans immediately start rooting for retention. Truly an excellent sport for people who enjoy relaxing."},
+   {"id":"leaving.fan-clock.8","body":"Every fan wants offseason news. Preferably the kind that does not begin with their favorite player's farewell."}
+  ],
+  "leaving.senior-class":[
+   {"id":"leaving.senior-class.1","body":"{school} has {count} seniors with completed eligibility on this roster. Replacing that experience is a different task from just filling the same number of spots."},
+   {"id":"leaving.senior-class.2","body":"The next {school} roster will need a new layer of experience: {count} seniors are at the end of their eligibility."},
+   {"id":"leaving.senior-class.3","body":"{count} departing seniors for {school}. The staff has to replace leadership and familiarity along with the football production."},
+   {"id":"leaving.senior-class.4","body":"Roster turnover at {school} starts with {count} seniors who have used their eligibility. That is the backdrop for the next recruiting stretch."},
+   {"id":"leaving.senior-class.5","body":"{school}'s senior group numbers {count}. With that eligibility ending, younger players and incoming recruits have an opening to earn larger roles."},
+   {"id":"leaving.senior-class.6","body":"The experience gap to address at {school}: {count} seniors completing their eligibility. New arrivals will not be the only players asked to step forward."},
+   {"id":"leaving.senior-class.7","body":"{school} is turning the page on a {count}-player senior group. Continuity elsewhere on the roster becomes that much more valuable."},
+   {"id":"leaving.senior-class.8","body":"A recruiting class has to fit what is leaving. At {school}, that includes {count} seniors at the end of their college eligibility."}
+  ],
+  "leaving.pro-watch":[
+   {"id":"leaving.pro-watch.1","body":"{school}'s {position} {playerName} is part of the pro evaluation conversation. The draft results come later; for now the focus is the move from college football to the next level."},
+   {"id":"leaving.pro-watch.2","body":"One name to keep on the pro radar: {position} {playerName} from {school}. There is still a difference between an evaluation and a confirmed draft destination."},
+   {"id":"leaving.pro-watch.3","body":"The next evaluation for {school}'s {position} {playerName} will be a different kind of test. The pro process is ahead; no NFL destination has been settled here."},
+   {"id":"leaving.pro-watch.4","body":"Watching {position} {playerName} as {school}'s players move into offseason decisions. A projected round is useful context, but it is not a draft result."},
+   {"id":"leaving.pro-watch.5","body":"{position} {playerName} gives {school} a name in the pro conversation. The college season is complete; the next stage is evaluation."},
+   {"id":"leaving.pro-watch.6","body":"For {school}'s {position} {playerName}, attention turns toward the pro level. We will know the actual draft outcome when that stage arrives."},
+   {"id":"leaving.pro-watch.7","body":"{school} has a pro prospect to follow in {position} {playerName}. This week is about decisions and preparation, with the draft still to come."},
+   {"id":"leaving.pro-watch.8","body":"The college tape is in for {school}'s {position} {playerName}. Now comes the pro evaluation; a projected landing spot is still only a projection."}
+  ],
+  "draft.undrafted":[
+   {"id":"draft.undrafted.1","body":"Undrafted signing: {position} {playerName}, {school}, joins the {nflTeam}. A chance to earn a roster spot after the draft."},
+   {"id":"draft.undrafted.2","body":"The {nflTeam} add {school}'s {position} {playerName} as an undrafted free agent. The next opportunity comes at the pro level."},
+   {"id":"draft.undrafted.3","body":"{position} {playerName} has a landing spot: the {nflTeam}. The {school} product signs as an undrafted free agent."},
+   {"id":"draft.undrafted.4","body":"From {school} to the {nflTeam}: {position} {playerName} signs after going undrafted."},
+   {"id":"draft.undrafted.5","body":"An opportunity beyond the seven rounds. The {nflTeam} sign {school}'s {position} {playerName} as an undrafted free agent."},
+   {"id":"draft.undrafted.6","body":"{school}'s {position} {playerName} joins the {nflTeam}'s undrafted class. No pick number, but a pro opportunity all the same."},
+   {"id":"draft.undrafted.7","body":"Undrafted free agency: {position} {playerName} of {school} signs with the {nflTeam}."},
+   {"id":"draft.undrafted.8","body":"The draft ended; the opportunities did not. {position} {playerName} ({school}) signs an undrafted deal with the {nflTeam}."}
+  ],
+  "roster.returning":[
+   {"id":"roster.returning.1","body":"{playerName} is staying at {school} after considering a transfer. The staff keeps a familiar face on the roster rather than adding a new arrival."},
+   {"id":"roster.returning.2","body":"A return, rather than a new addition: {playerName} is back with {school} after exploring the portal."},
+   {"id":"roster.returning.3","body":"{school} retains {playerName}. After a look at the portal, the next chapter is at the same school."},
+   {"id":"roster.returning.4","body":"{playerName}'s destination is familiar: {school}. The portal process ends with a return."},
+   {"id":"roster.returning.5","body":"No school change for {playerName}. {school} keeps the player after the portal process."},
+   {"id":"roster.returning.6","body":"{school} gets continuity from {playerName}, who is returning after exploring a move. This is roster retention, not an incoming transfer."},
+   {"id":"roster.returning.7","body":"After considering other options, {playerName} is returning to {school}. A familiar name stays in the building."},
+   {"id":"roster.returning.8","body":"{playerName} will remain at {school}. The transfer search comes back to where it started."}
+  ],
+  "roster.returning-fan":[
+   {"id":"roster.returning-fan.1","body":"{targetHandle} took the scenic route back to {school}. Welcome back, I guess we can put the farewell speeches away"},
+   {"id":"roster.returning-fan.2","body":"So {targetHandle} is staying at {school}. Some of those goodbye posts aged impressively fast"},
+   {"id":"roster.returning-fan.3","body":"{targetHandle} back at {school}. Everybody who wrote the roster obituary can relax now"},
+   {"id":"roster.returning-fan.4","body":"Turns out {school} was a pretty good destination after all, huh {targetHandle}"},
+   {"id":"roster.returning-fan.5","body":"{targetHandle} staying. Same school, considerably longer announcement process"},
+   {"id":"roster.returning-fan.6","body":"Welcome back {targetHandle}. The {nickname} group chat would like everyone to delete their dramatic goodbye messages"},
+   {"id":"roster.returning-fan.7","body":"{targetHandle} really checked the options and picked {school} again. Fine by me"},
+   {"id":"roster.returning-fan.8","body":"{school} retains {targetHandle}. The panic lasted longer than the departure"}
+  ],
+  "roster.returning-star-fan":[
+   {"id":"roster.returning-star-fan.1","body":"Keeping {targetHandle} at {school}? That feels like a commitment worth celebrating. Welcome BACK"},
+   {"id":"roster.returning-star-fan.2","body":"{targetHandle} staying is huge for the {nickname}. We can laugh at the panic now"},
+   {"id":"roster.returning-star-fan.3","body":"Everybody wanted {targetHandle} and the answer was {school} again. I'll take that win"},
+   {"id":"roster.returning-star-fan.4","body":"{targetHandle} BACK. That is one offseason update I actually wanted to refresh the timeline for"},
+   {"id":"roster.returning-star-fan.5","body":"Keeping a player like {targetHandle} matters. {school} fans can breathe again"},
+   {"id":"roster.returning-star-fan.6","body":"The {nickname} retain {targetHandle}. Other fanbases had their welcome posts drafted and everything"},
+   {"id":"roster.returning-star-fan.7","body":"{targetHandle} back in the building. Call it retention, call it whatever, that is a big deal for {school}"},
+   {"id":"roster.returning-star-fan.8","body":"{school} keeps {targetHandle}. I will happily pretend I was calm about this the whole time"}
+  ],
+  "carry.departure-fcs":[
+   {"id":"carry.departure-fcs.1","body":"After leaving {school} during {period}, {position} {playerName} is moving on to pursue an opportunity at the FCS level."},
+   {"id":"carry.departure-fcs.2","body":"The next chapter for {position} {playerName} is an FCS opportunity after the offseason departure from {school}."},
+   {"id":"carry.departure-fcs.3","body":"{school}'s offseason roster review includes the departure of {position} {playerName}, who will look to continue playing at the FCS level."},
+   {"id":"carry.departure-fcs.4","body":"{position} {playerName} moves on from {school} with the FCS level the next path to playing time."},
+   {"id":"carry.departure-fcs.5","body":"An FCS opportunity is next for {position} {playerName} after leaving {school} during {period}."},
+   {"id":"carry.departure-fcs.6","body":"{position} {playerName} is no longer with {school} following {period}. The next playing opportunity will be at the FCS level."},
+   {"id":"carry.departure-fcs.7","body":"Following {period}, {position} {playerName} leaves {school} to continue the search for playing time in the FCS."},
+   {"id":"carry.departure-fcs.8","body":"A different college path for {position} {playerName}: moving on from {school} toward an opportunity in the FCS."}
+  ],
+  "model.line":[
+   {"id":"sportsbook.line.1","body":"This week's line: {favorite} -{spread} vs. {opponent}. Who are you backing?"},
+   {"id":"sportsbook.line.2","body":"On the board: {favorite} favored by {spread} against {opponent}."},
+   {"id":"sportsbook.line.3","body":"{favorite} -{spread}. {opponent} gets the points. This week's matchup is on the board."},
+   {"id":"sportsbook.line.4","body":"The spread for {favorite} vs. {opponent}: {favorite} -{spread}."},
+   {"id":"sportsbook.line.5","body":"CanDuel college football line: {favorite} -{spread} against {opponent}."},
+   {"id":"sportsbook.line.6","body":"Laying the points or taking the underdog? {favorite} is -{spread} vs. {opponent}."},
+   {"id":"sportsbook.line.7","body":"{opponent} +{spread} against {favorite} this week. The underdog side of the matchup."},
+   {"id":"sportsbook.line.8","body":"{favorite} enters as a {spread}-point favorite over {opponent}. The line is up."}
+  ],
+  "model.pickem":[
+   {"id":"sportsbook.pickem.1","body":"{home} vs. {away}: pick 'em. No points to separate them on the spread."},
+   {"id":"sportsbook.pickem.2","body":"Pick 'em on the board: {away} vs. {home}. Choose your side."},
+   {"id":"sportsbook.pickem.3","body":"No favorite on the spread for {home} vs. {away}. This one is a pick 'em."},
+   {"id":"sportsbook.pickem.4","body":"CanDuel has {home} vs. {away} at pick 'em this week."},
+   {"id":"sportsbook.pickem.5","body":"A straight choice: {home} or {away}. Pick 'em on the spread."},
+   {"id":"sportsbook.pickem.6","body":"The line is even for {away} vs. {home}. Which side do you like?"},
+   {"id":"sportsbook.pickem.7","body":"{home}. {away}. No points either way: pick 'em."},
+   {"id":"sportsbook.pickem.8","body":"This week's pick 'em: {away} vs. {home}. The spread offers no head start."}
+  ],
+  "preseason.title.model":[
+   {"id":"sportsbook.futures.1","body":"National championship futures: {school} {odds}. The preseason title board is up."},
+   {"id":"sportsbook.futures.2","body":"{school} to win the national championship: {odds}. Who is on your preseason ticket?"},
+   {"id":"sportsbook.futures.3","body":"A title run for {school}? The national championship price is {odds}."},
+   {"id":"sportsbook.futures.4","body":"On CanDuel's preseason title board: {school}, {odds}."},
+   {"id":"sportsbook.futures.5","body":"{school}: {odds} to finish the season as national champion. The futures board is open."},
+   {"id":"sportsbook.futures.6","body":"Preseason futures spotlight: {school} at {odds} for the national title."},
+   {"id":"sportsbook.futures.7","body":"The road to a championship starts here. {school} is {odds} on the title futures board."},
+   {"id":"sportsbook.futures.8","body":"Looking for a season-long ticket? {school}'s national championship odds sit at {odds}."}
+  ],
+  "official.performance.tag":[
+   {"id":"official.tag.review.1","body":"{playerHandle} was DIFFERENT.\n{statLine}. {hashtag}"},
+   {"id":"official.tag.review.2","body":"Give {playerHandle} some love.\n{statLine}. {hashtag}"},
+   {"id":"official.tag.review.3","body":"{statLine}. What a day, {playerHandle}. {hashtag}"},
+   {"id":"official.tag.review.4","body":"Put some respect on {playerHandle}. {statLine}."},
+   {"id":"official.tag.review.5","body":"A big one from {playerHandle}: {statLine}. {hashtag}"},
+   {"id":"official.tag.review.6","body":"{playerHandle}. That is the post.\n{statLine}."},
+   {"id":"official.tag.review.7","body":"Today's spotlight: {playerHandle}. {statLine}."},
+   {"id":"official.tag.review.8","body":"{statLine} for {playerHandle}. Keep going. {hashtag}"}
+  ],
+  "cycle.team-welcome":[
+   {"id":"official.welcome.review.1","body":"Welcome to the squad, {tagHandle}! Officially a {nickname} signing. {hashtag}"},
+   {"id":"official.welcome.review.2","body":"Signed and part of the family. Welcome, {tagHandle}. {hashtag}"},
+   {"id":"official.welcome.review.3","body":"Make it official. {tagHandle} is joining the {nickname}."},
+   {"id":"official.welcome.review.4","body":"The signature is in. Welcome to {school}, {tagHandle}!"},
+   {"id":"official.welcome.review.5","body":"A new name in the family. Signed: {tagHandle}. {hashtag}"},
+   {"id":"official.welcome.review.6","body":"It's official, {tagHandle}. You're one of us now. {hashtag}"},
+   {"id":"official.welcome.review.7","body":"{tagHandle} is signed. Welcome to the {nickname}!"},
+   {"id":"official.welcome.review.8","body":"The next chapter starts here. Welcome aboard, {tagHandle}. {hashtag}"}
+  ],
+  "cycle.signed-spotlight":[
+   {"id":"official.signed.review.1","body":"The next chapter includes {tagHandle}. Proud to have you in our signed class."},
+   {"id":"official.signed.review.2","body":"Part of the future. {tagHandle} is signed with the {nickname}."},
+   {"id":"official.signed.review.3","body":"A signed addition to the squad: {tagHandle}. {hashtag}"},
+   {"id":"official.signed.review.4","body":"Meet a member of our signed class: {tagHandle}. Welcome to {school}."},
+   {"id":"official.signed.review.5","body":"The {nickname} family is growing. Excited for {tagHandle} to join us."},
+   {"id":"official.signed.review.6","body":"Building the next {school} roster. {tagHandle} is signed and on the way."},
+   {"id":"official.signed.review.7","body":"Signed class spotlight: {tagHandle}. Let's get to work. {hashtag}"},
+   {"id":"official.signed.review.8","body":"A place in our next chapter. Welcome, {tagHandle}. {hashtag}"}
+  ]
+ }
+}

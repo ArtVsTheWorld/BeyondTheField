@@ -8,9 +8,9 @@ function fixture(){
  for(const team of s.teams)for(const position of ['QB','HB','FB','WR','TE','LT','LG','C','RG','RT','DT','LE','RE','MLB','LOLB','ROLB','CB','FS','SS','K','P'])s.players.push({id:team.id+'-'+position,name:'Evan '+position,team:team.id,position,injury:'Uninjured',overall:team.id===1?85:72,personality:'Leader'});
  s.preseasonHonors=[{id:'a',player:'1-QB',team:1,type:'ALL_AM_1ST_PRE',year:0},{id:'b',player:'230-WR',team:230,type:'ALL_AM_1ST_PRE_CONF',conferenceId:'custom',year:0}];s.players.push({id:'recruit',name:'Jay Moss',team:255,position:'WR',starRating:5,personality:'Entertainer'});s.recruitStatuses=[{player:'recruit',stage:'Top10',nationalRank:1}];return s;
 }
-test('preseason mixes native poll, honors, outlooks, openers, camp, fans, recruits and explicitly fictional futures',()=>{
+test('preseason mixes native poll, honors, outlooks, openers, camp, fans, recruits and sportsbook futures',()=>{
  const s=fixture(),f=buildFeed(s);for(const voice of ['official','beat','analyst','player','fan','recruit','model'])assert.ok(f.stories.some(p=>p.voice===voice),voice+' missing');
- assert.ok(f.stories.some(p=>p.templateId.startsWith('preseason.poll')&&p.body.includes('12')));assert.ok(f.stories.some(p=>p.body.includes('All-Custom Conference')));assert.ok(f.stories.some(p=>p.templateId.startsWith('preseason.title')&&/fictional/i.test(p.body)));
+ assert.ok(f.stories.some(p=>p.templateId.startsWith('preseason.poll')&&p.body.includes('12')));assert.ok(f.stories.some(p=>p.body.includes('All-Custom Conference')));assert.ok(f.stories.some(p=>p.templateId.startsWith('sportsbook.futures')&&/title|champion/i.test(p.body)&&!/(fictional|model)/i.test(p.body)));
  assert.ok(f.stories.some(p=>p.teamIds.includes(230)&&p.voice==='official'));assert.ok(!f.events.some(e=>e.category==='offers'));assert.ok(f.stories.every(p=>![...p.body].some(c=>c==='\uFFFD')&&[...p.body].length<=280&&Buffer.byteLength(p.body,'utf8')<=512));
 });
 test('missing poll evidence, wrong-year honors and committed recruits do not become preseason claims',()=>{
@@ -40,6 +40,6 @@ test('native conference selections drive talent maps, deduplicating player appea
 test('preseason outlooks do not inherit in-season production or coach-performance replies',()=>{
  const s=fixture();s.teams[0].headCoach={name:'Casey Dunn',lastName:'Dunn'};const f=buildFeed(s),previews=new Set(f.stories.filter(p=>p.category==='analytics'&&p.eventId.startsWith('preseason:')&&!p.eventId.includes('poll-debate')).map(p=>p.id));assert.ok(!f.stories.some(p=>p.replyTo&&previews.has(p.replyTo)));
 });
-test('poll-model disagreements are explicit fictional opinions with attached fan replies; Coaches comparisons are labeled',()=>{
- const s=fixture();s.teams[0].mediaRank=20;s.teams[0].coachesRank=4;const f=buildFeed(s),p=f.stories.find(p=>p.eventId==='preseason:poll-debate:1');assert.ok(p&&p.body.includes('fictional'));assert.equal(f.stories.some(r=>r.replyTo===p.id),publishReply(s,'reply',p.id));assert.ok(f.stories.some(p=>p.eventId==='preseason:poll-comparison:1'&&p.body.includes('Coaches poll')&&p.body.includes('AP')));
+test('poll-model disagreements are labeled model opinions with attached fan replies; Coaches comparisons are labeled',()=>{
+ const s=fixture();s.teams[0].mediaRank=20;s.teams[0].coachesRank=4;const f=buildFeed(s),p=f.stories.find(p=>p.eventId==='preseason:poll-debate:1');assert.ok(p&&p.body.includes('model')&&!p.body.includes('fictional'));assert.equal(f.stories.some(r=>r.replyTo===p.id),publishReply(s,'reply',p.id));assert.ok(f.stories.some(p=>p.eventId==='preseason:poll-comparison:1'&&p.body.includes('Coaches poll')&&p.body.includes('AP')));
 });

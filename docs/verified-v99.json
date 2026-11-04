@@ -1,0 +1,27 @@
+{
+  "build": "v99",
+  "status": "Built locally; not yet deployed; wording expansion continues",
+  "nodeTests": 359,
+  "nativeBuildAndTests": true,
+  "nativeSha256": "58bf9b3164e9fa02dd0e55fca62dd32c961cc707944b1eb83ef7a80e5f883150",
+  "verifiedCorrections": [
+    "Players Leaving national coverage without early portal/draft announcements",
+    "NIL uses $4000 per point and ignores changes ending at zero",
+    "Sentence capitalization preserves handles and abbreviations",
+    "Direct team scopes exclude broad conference reports",
+    "Routine brand/poll coverage targets 10-25; genuinely quiet weeks may be lower",
+    "Verified signings, draft picks and major staff changes remain visible beyond routine caps",
+    "CanDuel publishes sportsbook spreads and futures",
+    "Five analyst models emphasize different verified roster/scoring/efficiency evidence",
+    "Native-round-preserving draft allocation avoids repeated early QBs on actual ULM class",
+    "25 real eligible undrafted seniors selected from the frozen 2028 milestone",
+    "Same-school portal returns get beat/fan coverage without official welcome",
+    "Encouraged departures with no FBS destination get generic FCS continuation wording",
+    "Personal references use given names for teammates; unnecessary position/HS labels reduced",
+    "Dual-threat games survive missing opponent labels",
+    "Cold wording precedes recycled wording before style preference"
+  ],
+  "varietyStatus": "Incomplete; per-path eligibility audit remains the gate, not raw template count",
+  "liveContentCheck": "Pending; v98 native/archive optimizations remain active with prior content",
+  "archivePolicy": "Frozen wording/save corpus preserved; no historical regeneration or edits"
+}

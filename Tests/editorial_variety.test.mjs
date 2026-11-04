@@ -18,7 +18,7 @@ test('personal style persists for a handle and gives trained quarterbacks a rest
 });
 test('style selects matching language while another body is preferred within an edition',()=>{
  const values={school:'Harbor'},a=chooseTemplate('recruit.offer.Neutral',values,'same',{style:'measured'}),b=chooseTemplate('recruit.offer.Neutral',values,'same',{style:'measured',avoidBodies:new Set([a.body])});
- assert.equal(pack.families['recruit.offer.Neutral'].find(t=>t.id===a.templateId).style,'measured');assert.notEqual(a.body,b.body);
+ assert.equal(contentPack.families['recruit.offer.Neutral'].find(t=>t.id===a.templateId).style,'measured');assert.notEqual(a.body,b.body);
 });
 test('exhausted wording never hides a factual story and same-week wording remains frozen',()=>{
  const values={school:'Harbor'},all=new Set(pack.families['recruit.offer.Neutral'].map(t=>t.body.replace('{school}','Harbor'))),a=chooseTemplate('recruit.offer.Neutral',values,'same',{avoidBodies:all});assert.ok(a);

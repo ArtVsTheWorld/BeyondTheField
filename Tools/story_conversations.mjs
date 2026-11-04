@@ -20,6 +20,7 @@ export function addConversations({s,events,stories,byId,teams,players,games,regi
   if(f.recruitKind==='transfer'){
    const old=teams.get(f.formerTeam),destination=teams.get(e.teamIds.find(id=>teams.get(id)?.name===f.school)),recruit=players.get(e.playerId);
    const values={...teamValues(destination??t),...f,targetHandle:recruit?registry.get(s,'recruit',destination??old??t,recruit).handle:null};
+   if(f.returningPortal&&destination){add(e,f.exceptionalReturn?'roster.returning-star-fan':'roster.returning-fan',values,{role:'fan',team:destination,suffix:'portal-return',replyTo:root.id,priority:e.priority-1});continue;}
    if(old)add(e,f.rivalTransfer?'roster.rival-fan':hash(e.id+'|departure-tone')%2?'roster.departure-kind':'roster.departure-sour',{...values,...(!f.rivalTransfer?teamValues(old):{})},{role:'fan',team:old,suffix:'portal-departure',replyTo:root.id,priority:e.priority-1});
    const status=s.recruitStatuses?.find(r=>r.player===e.playerId),committed=f.newlyObserved||f.signed||['HardCommitted','SoftCommitted','Signed'].includes(status?.stage);
    const destinations=committed?[destination].filter(Boolean):(status?.topSchools??[]).map(id=>teams.get(id)).filter(x=>x&&x.id!==old?.id).slice(0,2);

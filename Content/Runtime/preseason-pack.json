@@ -185,15 +185,15 @@
     "preseason.title.model": [
       {
         "id": "preseason.title.model.1",
-        "body": "Model title futures: {school} {odds}. A fictional preseason price from our roster-based model, not a sportsbook line. Plenty can change once the games start."
+        "body": "Model title futures: {school} {odds}. A preseason price from our roster-based model, not a sportsbook line. Plenty can change once the games start."
       },
       {
         "id": "preseason.title.model.2",
-        "body": "{school}: {odds} in our model’s national-title futures. These are fictional preseason estimates, with the entire season still to be played."
+        "body": "{school}: {odds} in our model’s national-title futures. These are preseason estimates, with the entire season still to be played."
       },
       {
         "id": "preseason.title.model.3",
-        "body": "Our fictional title board has {school} at {odds}. A preseason model estimate, not a real betting market."
+        "body": "Our title board has {school} at {odds}. A preseason model estimate, not a real betting market."
       }
     ],
     "preseason.recruit.watch": [
@@ -237,21 +237,21 @@
     "preseason.respect.analyst": [
       {
         "id": "preseason.respect.analyst.1",
-        "body": "{school} is No. {rank} in the preseason AP poll, but No. {modelRank} on our fictional title-model board. The model is higher on this roster than the voters are. Worth watching once the games start."
+        "body": "{school} is No. {rank} in the preseason AP poll, but No. {modelRank} on our title-model board. The model is higher on this roster than the voters are. Worth watching once the games start."
       },
       {
         "id": "preseason.respect.analyst.2",
-        "body": "One preseason disagreement: AP has {school} No. {rank}; our fictional title model puts them No. {modelRank}. That gap is a reason to watch, not a guarantee the voters got it wrong."
+        "body": "One preseason disagreement: AP has {school} No. {rank}; our title model puts them No. {modelRank}. That gap is a reason to watch, not a guarantee the voters got it wrong."
       }
     ],
     "preseason.caution.analyst": [
       {
         "id": "preseason.caution.analyst.1",
-        "body": "{school} starts No. {rank} in the AP poll. Our fictional title model has them No. {modelRank}. The voters see a stronger contender than the model does; the season will settle that argument."
+        "body": "{school} starts No. {rank} in the AP poll. Our title model has them No. {modelRank}. The voters see a stronger contender than the model does; the season will settle that argument."
       },
       {
         "id": "preseason.caution.analyst.2",
-        "body": "The AP voters have {school} No. {rank}, compared with No. {modelRank} on our fictional title-model board. A preseason ranking to keep in mind when judging what this team actually does."
+        "body": "The AP voters have {school} No. {rank}, compared with No. {modelRank} on our title-model board. A preseason ranking to keep in mind when judging what this team actually does."
       }
     ],
     "preseason.debate.fan": [

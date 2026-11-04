@@ -18,7 +18,7 @@ function fixture(){
 }
 test('NIL converts user-verified points to dollars and groups only the current roster',()=>{
  const s=fixture();s.players.push({id:'rb',team:1,position:'HB',nil:50},{id:'recruit',team:255,position:'QB',nil:900});
- const a=nilAllocation(s,1);assert.equal(NIL_DOLLARS_PER_POINT,2500);assert.equal(a.total,500000);assert.equal(a.groups[0].share,.75);assert.equal(a.groups[1].dollars,125000);
+ const a=nilAllocation(s,1);assert.equal(NIL_DOLLARS_PER_POINT,4000);assert.equal(a.total,800000);assert.equal(a.groups[0].share,.75);assert.equal(a.groups[1].dollars,200000);
  s.players[0].nil=null;assert.equal(nilAllocation(s,1),null);
 });
 test('team rates use verified final games, actual opponent attempts and native schemes',()=>{

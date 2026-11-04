@@ -33,6 +33,12 @@ const carryPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/offseason
 Object.assign(contentPack.families,carryPack.families);contentPack.revision=carryPack.revision;
 const editorialPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/editorial-variety-pack.json',import.meta.url),'utf8'));
 Object.assign(contentPack.families,editorialPack.families);contentPack.revision=editorialPack.revision;
+const correctionsPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/review-corrections-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,correctionsPack.families);contentPack.revision=correctionsPack.revision;
+const analyticsVarietyPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/analytics-variety-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,analyticsVarietyPack.families);contentPack.revision=analyticsVarietyPack.revision;
+const voiceVarietyPack=JSON.parse(fs.readFileSync(new URL('../Content/Runtime/voice-variety-pack.json',import.meta.url),'utf8'));
+Object.assign(contentPack.families,voiceVarietyPack.families);contentPack.revision=voiceVarietyPack.revision;
 // These stock endings add no information to an otherwise factual analysis.
 const emptyEndings=['The whole stat line belongs in the conversation.','Worth keeping alongside the headline numbers.','A profile worth following as the evaluation develops.','A candidate, not a coronation.','A useful unit comparison before kickoff.'];
 for(const variants of Object.values(contentPack.families))for(const t of variants)for(const ending of emptyEndings)t.body=t.body.replace(ending,'').trim();
@@ -40,7 +46,7 @@ const slots=/\{([A-Za-z][A-Za-z0-9]*)\}/g,ids=new Set();
 for(const variants of Object.values(contentPack.families))for(const t of variants){
  if(!t.id||ids.has(t.id)||typeof t.body!=='string'||/[\uFFFD\u{1F000}-\u{1FAFF}\u2600-\u27BF]/u.test(t.body))throw Error('Invalid runtime template '+t.id);ids.add(t.id);
 }
-export function chooseTemplate(family,values,seed,{handle,week,history=[],sameStory,renderKey,transformBody=body=>body,style=null,avoidBodies=new Set(),publication=null}={}){
+export function chooseTemplate(family,values,seed,{handle,week,history=[],sameStory,renderKey,transformBody=body=>body,style=null,avoidBodies=new Set(),publication=null,onCandidates=null}={}){
  const eligible=(contentPack.families[family]??[]).filter(t=>[...t.body.matchAll(slots)].every(m=>values[m[1]]!==null&&values[m[1]]!==undefined));
  if(sameStory?.contentRevision===contentPack.revision&&sameStory.renderKey===renderKey&&eligible.some(t=>t.id===sameStory.templateId))return {body:sameStory.body,templateId:sameStory.templateId,cooldownFallback:sameStory.cooldownFallback??false};
  const lastUsed=new Map();
@@ -48,7 +54,8 @@ export function chooseTemplate(family,values,seed,{handle,week,history=[],sameSt
  for(let i=0;i<recent.length;i++)for(const p of recent[i].stories??[])if(p.handle===handle){lastUsed.set(p.templateId,i);if(p.voiceTemplateId)lastUsed.set(p.voiceTemplateId,i);}
  // Prefer a different phrase for this account across weeks. If all valid phrases
  // are cooling down, use the least recent one rather than inventing news/facts.
- const ranked=eligible.map(t=>({t,body:transformBody(t.body.replace(slots,(_,k)=>values[k])).replace(/[ \t]+\n/g,'\n').replace(/[ \t]{2,}/g,' ').trim()})).filter(({body})=>body&&!/[\uFFFD\x00-\x08\x0b\x0c\x0e-\x1f]/u.test(body)&&[...body].length<=280&&Buffer.byteLength(body,'utf8')<=512).sort((a,b)=>Number(avoidBodies.has(a.body))-Number(avoidBodies.has(b.body))||(style?Number(a.t.style!==style)-Number(b.t.style!==style):0)||(lastUsed.get(a.t.id)??-1)-(lastUsed.get(b.t.id)??-1)||score(seed,a.t.id)-score(seed,b.t.id)||a.t.id.localeCompare(b.t.id));
+ const ranked=eligible.map(t=>({t,body:transformBody(t.body.replace(slots,(_,k)=>values[k])).replace(/[ \t]+\n/g,'\n').replace(/[ \t]{2,}/g,' ').trim()})).filter(({body})=>body&&!/[\uFFFD\x00-\x08\x0b\x0c\x0e-\x1f]/u.test(body)&&[...body].length<=280&&Buffer.byteLength(body,'utf8')<=512).sort((a,b)=>Number(avoidBodies.has(a.body))-Number(avoidBodies.has(b.body))||Number(lastUsed.has(a.t.id))-Number(lastUsed.has(b.t.id))||(style?Number(a.t.style!==style)-Number(b.t.style!==style):0)||(lastUsed.get(a.t.id)??-1)-(lastUsed.get(b.t.id)??-1)||score(seed,a.t.id)-score(seed,b.t.id)||a.t.id.localeCompare(b.t.id));
+ if(onCandidates)onCandidates({family,values,style,candidates:ranked.map(({t,body})=>({id:t.id,body,style:t.style??null}))});
  if(ranked.length){const {t,body}=ranked[0];return {body,templateId:t.id,cooldownFallback:lastUsed.has(t.id)};}
  return null;
 }

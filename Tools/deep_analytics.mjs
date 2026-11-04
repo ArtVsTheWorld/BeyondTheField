@@ -65,7 +65,7 @@ export function deepAnalyticsEvents(s,{bounded=true}={}){
  const recent=new Map(s.games.filter(g=>g.year===s.season.CurrentYear&&g.phase===s.season.CurrentWeekType&&[s.season.CurrentWeek-1,s.season.CurrentWeek].includes(g.week)&&final(g)).map(g=>[g.id,g])),players=new Map(s.players.map(p=>[p.id,p]));
  for(const r of s.performances){const p=players.get(r.player),t=teams.get(r.team),g=recent.get(r.game);if(!p||!t||!g||family(r.type)!=='offense')continue;
   const st=r.stats,qb=p.position==='QB'&&st.PASSYARDS>=250&&st.RUSHYARDS>=50,back=['HB','RB','FB'].includes(p.position)&&st.RUSHYARDS>=100&&st.RECEIVEYARDS>=40;
-  if(qb||back)events.push({id:`deep:two-way:${p.id}:${g.id}`,category:'player-stats',facts:{family:qb?'deep.dual-qb-game':'deep.dual-back-game',voice:'beat',playerName:p.name,school:t.name,passing:st.PASSYARDS,rushing:st.RUSHYARDS,receiving:st.RECEIVEYARDS,opponent:teams.get(g.home===r.team?g.away:g.home)?.name},options:{team:r.team,player:p.id,eventWeek:g.week,priority:94,thread:'game:'+g.id}});
+  if(qb||back)events.push({id:`deep:two-way:${p.id}:${g.id}`,category:'player-stats',facts:{family:qb?'deep.dual-qb-game':'deep.dual-back-game',voice:'beat',playerName:p.name,school:t.name,passing:st.PASSYARDS,rushing:st.RUSHYARDS,receiving:st.RECEIVEYARDS,opponent:teams.get(g.home===r.team?g.away:g.home)?.name??(g.home===r.team?g.awayName:g.homeName)},options:{team:r.team,player:p.id,eventWeek:g.week,priority:94,thread:'game:'+g.id}});
  }
  if(!bounded)return events;
  const selected=[],counts=new Map(),types=new Map();

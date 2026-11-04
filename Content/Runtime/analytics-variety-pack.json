@@ -1,0 +1,3701 @@
+{
+  "revision": "analytics-variety-v99",
+  "families": {
+    "analysis.team.scoring-offense": [
+      {
+        "id": "analysis.team.scoring-offense.variety.1",
+        "body": "{school}: {value} points a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.2",
+        "body": "Scoring average for {school}: {value} points a game (through {games} games)."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.3",
+        "body": "Through {games} games: {school}, {value} points a game."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.4",
+        "body": "{school}'s scoring average: {value} points a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.5",
+        "body": "A look at {school}: {value} points a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.6",
+        "body": "Checking scoring average at {school}: {value} points a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.7",
+        "body": "{value} points a game for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.8",
+        "body": "The scoring average figure for {school} is {value} points a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.9",
+        "body": "Through {games} games, the scoring average number for {school} is {value} points a game."
+      },
+      {
+        "id": "analysis.team.scoring-offense.variety.10",
+        "body": "{school} in numbers: {value} points a game through {games} games."
+      }
+    ],
+    "analysis.team.scoring-defense": [
+      {
+        "id": "analysis.team.scoring-defense.variety.1",
+        "body": "{school}: {value} points allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.2",
+        "body": "Points allowed for {school}: {value} points allowed a game (through {games} games)."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.3",
+        "body": "Through {games} games: {school}, {value} points allowed a game."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.4",
+        "body": "{school}'s points allowed: {value} points allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.5",
+        "body": "A look at {school}: {value} points allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.6",
+        "body": "Checking points allowed at {school}: {value} points allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.7",
+        "body": "{value} points allowed a game for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.8",
+        "body": "The points allowed figure for {school} is {value} points allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.9",
+        "body": "Through {games} games, the points allowed number for {school} is {value} points allowed a game."
+      },
+      {
+        "id": "analysis.team.scoring-defense.variety.10",
+        "body": "{school} in numbers: {value} points allowed a game through {games} games."
+      }
+    ],
+    "analysis.team.scoring-margin": [
+      {
+        "id": "analysis.team.scoring-margin.variety.1",
+        "body": "{school}: {value} points through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.2",
+        "body": "Average scoring margin for {school}: {value} points (through {games} games)."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.3",
+        "body": "Through {games} games: {school}, {value} points."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.4",
+        "body": "{school}'s average scoring margin: {value} points through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.5",
+        "body": "A look at {school}: {value} points through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.6",
+        "body": "Checking average scoring margin at {school}: {value} points through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.7",
+        "body": "{value} points for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.8",
+        "body": "The average scoring margin figure for {school} is {value} points through {games} games."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.9",
+        "body": "Through {games} games, the average scoring margin number for {school} is {value} points."
+      },
+      {
+        "id": "analysis.team.scoring-margin.variety.10",
+        "body": "{school} in numbers: {value} points through {games} games."
+      }
+    ],
+    "analysis.team.yards-per-attempt": [
+      {
+        "id": "analysis.team.yards-per-attempt.variety.1",
+        "body": "{school}: {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.2",
+        "body": "Offensive efficiency for {school}: {value} yards per pass/rush attempt (across {attempts} recorded attempts)."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.3",
+        "body": "Across {attempts} recorded attempts: {school}, {value} yards per pass/rush attempt."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.4",
+        "body": "{school}'s offensive efficiency: {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.5",
+        "body": "A look at {school}: {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.6",
+        "body": "Checking offensive efficiency at {school}: {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.7",
+        "body": "{value} yards per pass/rush attempt for {school} across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.8",
+        "body": "The offensive efficiency figure for {school} is {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.9",
+        "body": "Across {attempts} recorded attempts, the offensive efficiency number for {school} is {value} yards per pass/rush attempt."
+      },
+      {
+        "id": "analysis.team.yards-per-attempt.variety.10",
+        "body": "{school} in numbers: {value} yards per pass/rush attempt across {attempts} recorded attempts."
+      }
+    ],
+    "analysis.team.passing-efficiency": [
+      {
+        "id": "analysis.team.passing-efficiency.variety.1",
+        "body": "{school}: {value} yards per pass attempt on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.2",
+        "body": "Passing efficiency for {school}: {value} yards per pass attempt (on {attempts} throws)."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.3",
+        "body": "On {attempts} throws: {school}, {value} yards per pass attempt."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.4",
+        "body": "{school}'s passing efficiency: {value} yards per pass attempt on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.5",
+        "body": "A look at {school}: {value} yards per pass attempt on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.6",
+        "body": "Checking passing efficiency at {school}: {value} yards per pass attempt on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.7",
+        "body": "{value} yards per pass attempt for {school} on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.8",
+        "body": "The passing efficiency figure for {school} is {value} yards per pass attempt on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.9",
+        "body": "On {attempts} throws, the passing efficiency number for {school} is {value} yards per pass attempt."
+      },
+      {
+        "id": "analysis.team.passing-efficiency.variety.10",
+        "body": "{school} in numbers: {value} yards per pass attempt on {attempts} throws."
+      }
+    ],
+    "analysis.team.rushing-efficiency": [
+      {
+        "id": "analysis.team.rushing-efficiency.variety.1",
+        "body": "{school}: {value} yards per carry across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.2",
+        "body": "Rushing efficiency for {school}: {value} yards per carry (across {attempts} carries)."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.3",
+        "body": "Across {attempts} carries: {school}, {value} yards per carry."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.4",
+        "body": "{school}'s rushing efficiency: {value} yards per carry across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.5",
+        "body": "A look at {school}: {value} yards per carry across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.6",
+        "body": "Checking rushing efficiency at {school}: {value} yards per carry across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.7",
+        "body": "{value} yards per carry for {school} across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.8",
+        "body": "The rushing efficiency figure for {school} is {value} yards per carry across {attempts} carries."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.9",
+        "body": "Across {attempts} carries, the rushing efficiency number for {school} is {value} yards per carry."
+      },
+      {
+        "id": "analysis.team.rushing-efficiency.variety.10",
+        "body": "{school} in numbers: {value} yards per carry across {attempts} carries."
+      }
+    ],
+    "analysis.team.offensive-balance": [
+      {
+        "id": "analysis.team.offensive-balance.variety.1",
+        "body": "{school}: {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.2",
+        "body": "Offensive balance for {school}: {value}% {approach} attempts (among recorded pass/rush plays through {games} games)."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.3",
+        "body": "Among recorded pass/rush plays through {games} games: {school}, {value}% {approach} attempts."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.4",
+        "body": "{school}'s offensive balance: {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.5",
+        "body": "A look at {school}: {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.6",
+        "body": "Checking offensive balance at {school}: {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.7",
+        "body": "{value}% {approach} attempts for {school} among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.8",
+        "body": "The offensive balance figure for {school} is {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.9",
+        "body": "Among recorded pass/rush plays through {games} games, the offensive balance number for {school} is {value}% {approach} attempts."
+      },
+      {
+        "id": "analysis.team.offensive-balance.variety.10",
+        "body": "{school} in numbers: {value}% {approach} attempts among recorded pass/rush plays through {games} games."
+      }
+    ],
+    "analysis.team.interception-rate": [
+      {
+        "id": "analysis.team.interception-rate.variety.1",
+        "body": "{school}: {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.2",
+        "body": "Interception rate for {school}: {value}% of throws intercepted (with {interceptions} INT on {attempts} pass attempts)."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.3",
+        "body": "With {interceptions} INT on {attempts} pass attempts: {school}, {value}% of throws intercepted."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.4",
+        "body": "{school}'s interception rate: {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.5",
+        "body": "A look at {school}: {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.6",
+        "body": "Checking interception rate at {school}: {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.7",
+        "body": "{value}% of throws intercepted for {school} with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.8",
+        "body": "The interception rate figure for {school} is {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.9",
+        "body": "With {interceptions} INT on {attempts} pass attempts, the interception rate number for {school} is {value}% of throws intercepted."
+      },
+      {
+        "id": "analysis.team.interception-rate.variety.10",
+        "body": "{school} in numbers: {value}% of throws intercepted with {interceptions} INT on {attempts} pass attempts."
+      }
+    ],
+    "analysis.team.passing-td-rate": [
+      {
+        "id": "analysis.team.passing-td-rate.variety.1",
+        "body": "{school}: {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.2",
+        "body": "Passing touchdown rate for {school}: {value}% of pass attempts ending in TD (with {touchdowns} TD on {attempts} throws)."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.3",
+        "body": "With {touchdowns} TD on {attempts} throws: {school}, {value}% of pass attempts ending in TD."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.4",
+        "body": "{school}'s passing touchdown rate: {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.5",
+        "body": "A look at {school}: {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.6",
+        "body": "Checking passing touchdown rate at {school}: {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.7",
+        "body": "{value}% of pass attempts ending in TD for {school} with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.8",
+        "body": "The passing touchdown rate figure for {school} is {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.9",
+        "body": "With {touchdowns} TD on {attempts} throws, the passing touchdown rate number for {school} is {value}% of pass attempts ending in TD."
+      },
+      {
+        "id": "analysis.team.passing-td-rate.variety.10",
+        "body": "{school} in numbers: {value}% of pass attempts ending in TD with {touchdowns} TD on {attempts} throws."
+      }
+    ],
+    "analysis.team.fourth-down": [
+      {
+        "id": "analysis.team.fourth-down.variety.1",
+        "body": "{school}: {value}% with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.2",
+        "body": "Fourth-down conversion rate for {school}: {value}% (with {conversions} conversions on {attempts} tries)."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.3",
+        "body": "With {conversions} conversions on {attempts} tries: {school}, {value}%."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.4",
+        "body": "{school}'s fourth-down conversion rate: {value}% with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.5",
+        "body": "A look at {school}: {value}% with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.6",
+        "body": "Checking fourth-down conversion rate at {school}: {value}% with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.7",
+        "body": "{value}% for {school} with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.8",
+        "body": "The fourth-down conversion rate figure for {school} is {value}% with {conversions} conversions on {attempts} tries."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.9",
+        "body": "With {conversions} conversions on {attempts} tries, the fourth-down conversion rate number for {school} is {value}%."
+      },
+      {
+        "id": "analysis.team.fourth-down.variety.10",
+        "body": "{school} in numbers: {value}% with {conversions} conversions on {attempts} tries."
+      }
+    ],
+    "analysis.team.run-defense": [
+      {
+        "id": "analysis.team.run-defense.variety.1",
+        "body": "{school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.2",
+        "body": "Rushing yards allowed for {school}: {value} yards allowed a game (through {games} games)."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.3",
+        "body": "Through {games} games: {school}, {value} yards allowed a game."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.4",
+        "body": "{school}'s rushing yards allowed: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.5",
+        "body": "A look at {school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.6",
+        "body": "Checking rushing yards allowed at {school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.7",
+        "body": "{value} yards allowed a game for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.8",
+        "body": "The rushing yards allowed figure for {school} is {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.9",
+        "body": "Through {games} games, the rushing yards allowed number for {school} is {value} yards allowed a game."
+      },
+      {
+        "id": "analysis.team.run-defense.variety.10",
+        "body": "{school} in numbers: {value} yards allowed a game through {games} games."
+      }
+    ],
+    "analysis.team.pass-defense": [
+      {
+        "id": "analysis.team.pass-defense.variety.1",
+        "body": "{school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.2",
+        "body": "Passing yards allowed for {school}: {value} yards allowed a game (through {games} games)."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.3",
+        "body": "Through {games} games: {school}, {value} yards allowed a game."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.4",
+        "body": "{school}'s passing yards allowed: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.5",
+        "body": "A look at {school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.6",
+        "body": "Checking passing yards allowed at {school}: {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.7",
+        "body": "{value} yards allowed a game for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.8",
+        "body": "The passing yards allowed figure for {school} is {value} yards allowed a game through {games} games."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.9",
+        "body": "Through {games} games, the passing yards allowed number for {school} is {value} yards allowed a game."
+      },
+      {
+        "id": "analysis.team.pass-defense.variety.10",
+        "body": "{school} in numbers: {value} yards allowed a game through {games} games."
+      }
+    ],
+    "analysis.team.takeaways": [
+      {
+        "id": "analysis.team.takeaways.variety.1",
+        "body": "{school}: {value} takeaways a game with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.2",
+        "body": "Takeaway production for {school}: {value} takeaways a game (with {takeaways} total through {games} games)."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.3",
+        "body": "With {takeaways} total through {games} games: {school}, {value} takeaways a game."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.4",
+        "body": "{school}'s takeaway production: {value} takeaways a game with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.5",
+        "body": "A look at {school}: {value} takeaways a game with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.6",
+        "body": "Checking takeaway production at {school}: {value} takeaways a game with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.7",
+        "body": "{value} takeaways a game for {school} with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.8",
+        "body": "The takeaway production figure for {school} is {value} takeaways a game with {takeaways} total through {games} games."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.9",
+        "body": "With {takeaways} total through {games} games, the takeaway production number for {school} is {value} takeaways a game."
+      },
+      {
+        "id": "analysis.team.takeaways.variety.10",
+        "body": "{school} in numbers: {value} takeaways a game with {takeaways} total through {games} games."
+      }
+    ],
+    "analysis.team.sack-pressure": [
+      {
+        "id": "analysis.team.sack-pressure.variety.1",
+        "body": "{school}: {value} sacks a game with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.2",
+        "body": "Sack production for {school}: {value} sacks a game (with {sacks} total through {games} games)."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.3",
+        "body": "With {sacks} total through {games} games: {school}, {value} sacks a game."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.4",
+        "body": "{school}'s sack production: {value} sacks a game with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.5",
+        "body": "A look at {school}: {value} sacks a game with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.6",
+        "body": "Checking sack production at {school}: {value} sacks a game with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.7",
+        "body": "{value} sacks a game for {school} with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.8",
+        "body": "The sack production figure for {school} is {value} sacks a game with {sacks} total through {games} games."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.9",
+        "body": "With {sacks} total through {games} games, the sack production number for {school} is {value} sacks a game."
+      },
+      {
+        "id": "analysis.team.sack-pressure.variety.10",
+        "body": "{school} in numbers: {value} sacks a game with {sacks} total through {games} games."
+      }
+    ],
+    "analysis.team.red-zone-field-goals": [
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.1",
+        "body": "{school}: {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.2",
+        "body": "Red-zone scoring split for {school}: {value}% field goals (among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals)."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.3",
+        "body": "Among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals: {school}, {value}% field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.4",
+        "body": "{school}'s red-zone scoring split: {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.5",
+        "body": "A look at {school}: {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.6",
+        "body": "Checking red-zone scoring split at {school}: {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.7",
+        "body": "{value}% field goals for {school} among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.8",
+        "body": "The red-zone scoring split figure for {school} is {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.9",
+        "body": "Among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals, the red-zone scoring split number for {school} is {value}% field goals."
+      },
+      {
+        "id": "analysis.team.red-zone-field-goals.variety.10",
+        "body": "{school} in numbers: {value}% field goals among {scoringTrips} TD/FG scoring trips, including {fieldGoals} field goals."
+      }
+    ],
+    "analysis.team.penalty-discipline": [
+      {
+        "id": "analysis.team.penalty-discipline.variety.1",
+        "body": "{school}: {value} penalty yards a game through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.2",
+        "body": "Penalty yardage for {school}: {value} penalty yards a game (through {games} games)."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.3",
+        "body": "Through {games} games: {school}, {value} penalty yards a game."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.4",
+        "body": "{school}'s penalty yardage: {value} penalty yards a game through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.5",
+        "body": "A look at {school}: {value} penalty yards a game through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.6",
+        "body": "Checking penalty yardage at {school}: {value} penalty yards a game through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.7",
+        "body": "{value} penalty yards a game for {school} through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.8",
+        "body": "The penalty yardage figure for {school} is {value} penalty yards a game through {games} games."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.9",
+        "body": "Through {games} games, the penalty yardage number for {school} is {value} penalty yards a game."
+      },
+      {
+        "id": "analysis.team.penalty-discipline.variety.10",
+        "body": "{school} in numbers: {value} penalty yards a game through {games} games."
+      }
+    ],
+    "analysis.team.second-half": [
+      {
+        "id": "analysis.team.second-half.variety.1",
+        "body": "{school}: {value} points a game through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.2",
+        "body": "Second-half scoring margin for {school}: {value} points a game (through {games} games, excluding overtime)."
+      },
+      {
+        "id": "analysis.team.second-half.variety.3",
+        "body": "Through {games} games, excluding overtime: {school}, {value} points a game."
+      },
+      {
+        "id": "analysis.team.second-half.variety.4",
+        "body": "{school}'s second-half scoring margin: {value} points a game through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.5",
+        "body": "A look at {school}: {value} points a game through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.6",
+        "body": "Checking second-half scoring margin at {school}: {value} points a game through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.7",
+        "body": "{value} points a game for {school} through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.8",
+        "body": "The second-half scoring margin figure for {school} is {value} points a game through {games} games, excluding overtime."
+      },
+      {
+        "id": "analysis.team.second-half.variety.9",
+        "body": "Through {games} games, excluding overtime, the second-half scoring margin number for {school} is {value} points a game."
+      },
+      {
+        "id": "analysis.team.second-half.variety.10",
+        "body": "{school} in numbers: {value} points a game through {games} games, excluding overtime."
+      }
+    ],
+    "analysis.team.red-zone-defense": [
+      {
+        "id": "analysis.team.red-zone-defense.variety.1",
+        "body": "{school}: {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.2",
+        "body": "Red-zone touchdown rate allowed for {school}: {value}% (with {touchdowns} TD allowed on {trips} opponent trips)."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.3",
+        "body": "With {touchdowns} TD allowed on {trips} opponent trips: {school}, {value}%."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.4",
+        "body": "{school}'s red-zone touchdown rate allowed: {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.5",
+        "body": "A look at {school}: {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.6",
+        "body": "Checking red-zone touchdown rate allowed at {school}: {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.7",
+        "body": "{value}% for {school} with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.8",
+        "body": "The red-zone touchdown rate allowed figure for {school} is {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.9",
+        "body": "With {touchdowns} TD allowed on {trips} opponent trips, the red-zone touchdown rate allowed number for {school} is {value}%."
+      },
+      {
+        "id": "analysis.team.red-zone-defense.variety.10",
+        "body": "{school} in numbers: {value}% with {touchdowns} TD allowed on {trips} opponent trips."
+      }
+    ],
+    "analysis.player.passing-yards-leader": [
+      {
+        "id": "analysis.player.passing-yards-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-yards-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.passing-td-leader": [
+      {
+        "id": "analysis.player.passing-td-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.passing-td-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.rushing-yards-leader": [
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.rushing-yards-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.receiving-yards-leader": [
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.receiving-yards-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.sacks-leader": [
+      {
+        "id": "analysis.player.sacks-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.sacks-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.interceptions-leader": [
+      {
+        "id": "analysis.player.interceptions-leader.variety.1",
+        "body": "{school}'s {playerName} {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.2",
+        "body": "At the top of {field}: {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.3",
+        "body": "{value} {metricLabel} for {school}'s {playerName}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.4",
+        "body": "The {field} leaderboard has {school}'s {playerName} at the top: {value} {metricLabel}. He {lead} that group."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.5",
+        "body": "Production watch: {school}'s {playerName} {lead} {field}, with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.6",
+        "body": "{school} has a leader in {playerName}: he {lead} {field} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.7",
+        "body": "{school}'s {playerName} has {value} {metricLabel}, a mark that {lead} {field}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.8",
+        "body": "Leaderboard check: {school}'s {playerName}, {value} {metricLabel}. He {lead} {field}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.9",
+        "body": "Looking at {field}, {school}'s {playerName} {lead} with {value} {metricLabel}."
+      },
+      {
+        "id": "analysis.player.interceptions-leader.variety.10",
+        "body": "{school}'s {playerName} sets the pace in {field}: {value} {metricLabel}. He {lead} the field."
+      }
+    ],
+    "analysis.player.completion-rate": [
+      {
+        "id": "analysis.player.completion-rate.variety.1",
+        "body": "{school}'s {playerName}: {value}% completions on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.2",
+        "body": "Completion rate for {school}'s {playerName}: {value}% completions (on {attempts} pass attempts)."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.3",
+        "body": "On {attempts} pass attempts: {school}'s {playerName}, {value}% completions."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.4",
+        "body": "{school}'s {playerName}'s completion rate: {value}% completions on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% completions on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.6",
+        "body": "Checking completion rate at {school}'s {playerName}: {value}% completions on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.7",
+        "body": "{value}% completions for {school}'s {playerName} on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.8",
+        "body": "The completion rate figure for {school}'s {playerName} is {value}% completions on {attempts} pass attempts."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.9",
+        "body": "On {attempts} pass attempts, the completion rate number for {school}'s {playerName} is {value}% completions."
+      },
+      {
+        "id": "analysis.player.completion-rate.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% completions on {attempts} pass attempts."
+      }
+    ],
+    "analysis.player.passing-yards-per-attempt": [
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.1",
+        "body": "{school}'s {playerName}: {value} yards per pass attempt across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.2",
+        "body": "Passing efficiency for {school}'s {playerName}: {value} yards per pass attempt (across {attempts} throws)."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.3",
+        "body": "Across {attempts} throws: {school}'s {playerName}, {value} yards per pass attempt."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.4",
+        "body": "{school}'s {playerName}'s passing efficiency: {value} yards per pass attempt across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} yards per pass attempt across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.6",
+        "body": "Checking passing efficiency at {school}'s {playerName}: {value} yards per pass attempt across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.7",
+        "body": "{value} yards per pass attempt for {school}'s {playerName} across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.8",
+        "body": "The passing efficiency figure for {school}'s {playerName} is {value} yards per pass attempt across {attempts} throws."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.9",
+        "body": "Across {attempts} throws, the passing efficiency number for {school}'s {playerName} is {value} yards per pass attempt."
+      },
+      {
+        "id": "analysis.player.passing-yards-per-attempt.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} yards per pass attempt across {attempts} throws."
+      }
+    ],
+    "analysis.player.td-int-ratio": [
+      {
+        "id": "analysis.player.td-int-ratio.variety.1",
+        "body": "{school}'s {playerName}: {touchdowns} TD against {interceptions} INT this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.2",
+        "body": "Passing touchdown/interception split for {school}'s {playerName}: {touchdowns} TD against {interceptions} INT (this season)."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.3",
+        "body": "This season: {school}'s {playerName}, {touchdowns} TD against {interceptions} INT."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.4",
+        "body": "{school}'s {playerName}'s passing touchdown/interception split: {touchdowns} TD against {interceptions} INT this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.5",
+        "body": "A look at {school}'s {playerName}: {touchdowns} TD against {interceptions} INT this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.6",
+        "body": "Checking passing touchdown/interception split at {school}'s {playerName}: {touchdowns} TD against {interceptions} INT this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.7",
+        "body": "{touchdowns} TD against {interceptions} INT for {school}'s {playerName} this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.8",
+        "body": "The passing touchdown/interception split figure for {school}'s {playerName} is {touchdowns} TD against {interceptions} INT this season."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.9",
+        "body": "This season, the passing touchdown/interception split number for {school}'s {playerName} is {touchdowns} TD against {interceptions} INT."
+      },
+      {
+        "id": "analysis.player.td-int-ratio.variety.10",
+        "body": "{school}'s {playerName} in numbers: {touchdowns} TD against {interceptions} INT this season."
+      }
+    ],
+    "analysis.player.rushing-yards-per-carry": [
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.1",
+        "body": "{school}'s {playerName}: {value} yards per carry with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.2",
+        "body": "Rushing efficiency for {school}'s {playerName}: {value} yards per carry (with {yards} yards on {carries} attempts)."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.3",
+        "body": "With {yards} yards on {carries} attempts: {school}'s {playerName}, {value} yards per carry."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.4",
+        "body": "{school}'s {playerName}'s rushing efficiency: {value} yards per carry with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} yards per carry with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.6",
+        "body": "Checking rushing efficiency at {school}'s {playerName}: {value} yards per carry with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.7",
+        "body": "{value} yards per carry for {school}'s {playerName} with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.8",
+        "body": "The rushing efficiency figure for {school}'s {playerName} is {value} yards per carry with {yards} yards on {carries} attempts."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.9",
+        "body": "With {yards} yards on {carries} attempts, the rushing efficiency number for {school}'s {playerName} is {value} yards per carry."
+      },
+      {
+        "id": "analysis.player.rushing-yards-per-carry.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} yards per carry with {yards} yards on {carries} attempts."
+      }
+    ],
+    "analysis.player.yards-per-catch": [
+      {
+        "id": "analysis.player.yards-per-catch.variety.1",
+        "body": "{school}'s {playerName}: {value} yards per catch across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.2",
+        "body": "Receiving efficiency for {school}'s {playerName}: {value} yards per catch (across {catches} receptions)."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.3",
+        "body": "Across {catches} receptions: {school}'s {playerName}, {value} yards per catch."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.4",
+        "body": "{school}'s {playerName}'s receiving efficiency: {value} yards per catch across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} yards per catch across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.6",
+        "body": "Checking receiving efficiency at {school}'s {playerName}: {value} yards per catch across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.7",
+        "body": "{value} yards per catch for {school}'s {playerName} across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.8",
+        "body": "The receiving efficiency figure for {school}'s {playerName} is {value} yards per catch across {catches} receptions."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.9",
+        "body": "Across {catches} receptions, the receiving efficiency number for {school}'s {playerName} is {value} yards per catch."
+      },
+      {
+        "id": "analysis.player.yards-per-catch.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} yards per catch across {catches} receptions."
+      }
+    ],
+    "analysis.player.yards-after-catch": [
+      {
+        "id": "analysis.player.yards-after-catch.variety.1",
+        "body": "{school}'s {playerName}: {value} YAC per reception across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.2",
+        "body": "Yards after the catch for {school}'s {playerName}: {value} YAC per reception (across {catches} catches)."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.3",
+        "body": "Across {catches} catches: {school}'s {playerName}, {value} YAC per reception."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.4",
+        "body": "{school}'s {playerName}'s yards after the catch: {value} YAC per reception across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} YAC per reception across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.6",
+        "body": "Checking yards after the catch at {school}'s {playerName}: {value} YAC per reception across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.7",
+        "body": "{value} YAC per reception for {school}'s {playerName} across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.8",
+        "body": "The yards after the catch figure for {school}'s {playerName} is {value} YAC per reception across {catches} catches."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.9",
+        "body": "Across {catches} catches, the yards after the catch number for {school}'s {playerName} is {value} YAC per reception."
+      },
+      {
+        "id": "analysis.player.yards-after-catch.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} YAC per reception across {catches} catches."
+      }
+    ],
+    "analysis.player.receiving-td-rate": [
+      {
+        "id": "analysis.player.receiving-td-rate.variety.1",
+        "body": "{school}'s {playerName}: {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.2",
+        "body": "Receiving touchdown rate for {school}'s {playerName}: {value}% of catches ending in TD (with {touchdowns} scores on {catches} receptions)."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.3",
+        "body": "With {touchdowns} scores on {catches} receptions: {school}'s {playerName}, {value}% of catches ending in TD."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.4",
+        "body": "{school}'s {playerName}'s receiving touchdown rate: {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.6",
+        "body": "Checking receiving touchdown rate at {school}'s {playerName}: {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.7",
+        "body": "{value}% of catches ending in TD for {school}'s {playerName} with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.8",
+        "body": "The receiving touchdown rate figure for {school}'s {playerName} is {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.9",
+        "body": "With {touchdowns} scores on {catches} receptions, the receiving touchdown rate number for {school}'s {playerName} is {value}% of catches ending in TD."
+      },
+      {
+        "id": "analysis.player.receiving-td-rate.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% of catches ending in TD with {touchdowns} scores on {catches} receptions."
+      }
+    ],
+    "analysis.player.scrimmage-yards": [
+      {
+        "id": "analysis.player.scrimmage-yards.variety.1",
+        "body": "{school}'s {playerName}: {value} rushing/receiving yards a game with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.2",
+        "body": "Scrimmage production for {school}'s {playerName}: {value} rushing/receiving yards a game (with {yards} total through {games} games)."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.3",
+        "body": "With {yards} total through {games} games: {school}'s {playerName}, {value} rushing/receiving yards a game."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.4",
+        "body": "{school}'s {playerName}'s scrimmage production: {value} rushing/receiving yards a game with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} rushing/receiving yards a game with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.6",
+        "body": "Checking scrimmage production at {school}'s {playerName}: {value} rushing/receiving yards a game with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.7",
+        "body": "{value} rushing/receiving yards a game for {school}'s {playerName} with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.8",
+        "body": "The scrimmage production figure for {school}'s {playerName} is {value} rushing/receiving yards a game with {yards} total through {games} games."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.9",
+        "body": "With {yards} total through {games} games, the scrimmage production number for {school}'s {playerName} is {value} rushing/receiving yards a game."
+      },
+      {
+        "id": "analysis.player.scrimmage-yards.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} rushing/receiving yards a game with {yards} total through {games} games."
+      }
+    ],
+    "analysis.player.dual-threat": [
+      {
+        "id": "analysis.player.dual-threat.variety.1",
+        "body": "{school}'s {playerName}: {passing} passing yards and {rushing} rushing yards a game this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.2",
+        "body": "Dual-threat production for {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards a game (this season)."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.3",
+        "body": "This season: {school}'s {playerName}, {passing} passing yards and {rushing} rushing yards a game."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.4",
+        "body": "{school}'s {playerName}'s dual-threat production: {passing} passing yards and {rushing} rushing yards a game this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.5",
+        "body": "A look at {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards a game this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.6",
+        "body": "Checking dual-threat production at {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards a game this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.7",
+        "body": "{passing} passing yards and {rushing} rushing yards a game for {school}'s {playerName} this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.8",
+        "body": "The dual-threat production figure for {school}'s {playerName} is {passing} passing yards and {rushing} rushing yards a game this season."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.9",
+        "body": "This season, the dual-threat production number for {school}'s {playerName} is {passing} passing yards and {rushing} rushing yards a game."
+      },
+      {
+        "id": "analysis.player.dual-threat.variety.10",
+        "body": "{school}'s {playerName} in numbers: {passing} passing yards and {rushing} rushing yards a game this season."
+      }
+    ],
+    "analysis.player.carry-share": [
+      {
+        "id": "analysis.player.carry-share.variety.1",
+        "body": "{school}'s {playerName}: {value}% of the team's carries with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.2",
+        "body": "Share of the ground game for {school}'s {playerName}: {value}% of the team's carries (with {carries} attempts)."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.3",
+        "body": "With {carries} attempts: {school}'s {playerName}, {value}% of the team's carries."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.4",
+        "body": "{school}'s {playerName}'s share of the ground game: {value}% of the team's carries with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% of the team's carries with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.6",
+        "body": "Checking share of the ground game at {school}'s {playerName}: {value}% of the team's carries with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.7",
+        "body": "{value}% of the team's carries for {school}'s {playerName} with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.8",
+        "body": "The share of the ground game figure for {school}'s {playerName} is {value}% of the team's carries with {carries} attempts."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.9",
+        "body": "With {carries} attempts, the share of the ground game number for {school}'s {playerName} is {value}% of the team's carries."
+      },
+      {
+        "id": "analysis.player.carry-share.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% of the team's carries with {carries} attempts."
+      }
+    ],
+    "analysis.player.catch-share": [
+      {
+        "id": "analysis.player.catch-share.variety.1",
+        "body": "{school}'s {playerName}: {value}% of the team's completed passes with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.2",
+        "body": "Share of the passing game for {school}'s {playerName}: {value}% of the team's completed passes (with {catches} catches)."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.3",
+        "body": "With {catches} catches: {school}'s {playerName}, {value}% of the team's completed passes."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.4",
+        "body": "{school}'s {playerName}'s share of the passing game: {value}% of the team's completed passes with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% of the team's completed passes with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.6",
+        "body": "Checking share of the passing game at {school}'s {playerName}: {value}% of the team's completed passes with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.7",
+        "body": "{value}% of the team's completed passes for {school}'s {playerName} with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.8",
+        "body": "The share of the passing game figure for {school}'s {playerName} is {value}% of the team's completed passes with {catches} catches."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.9",
+        "body": "With {catches} catches, the share of the passing game number for {school}'s {playerName} is {value}% of the team's completed passes."
+      },
+      {
+        "id": "analysis.player.catch-share.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% of the team's completed passes with {catches} catches."
+      }
+    ],
+    "analysis.player.touchdown-share": [
+      {
+        "id": "analysis.player.touchdown-share.variety.1",
+        "body": "{school}'s {playerName}: {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.2",
+        "body": "Share of offensive touchdowns for {school}'s {playerName}: {value}% of the team's rushing/passing TD total (with {touchdowns} rushing/receiving scores)."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.3",
+        "body": "With {touchdowns} rushing/receiving scores: {school}'s {playerName}, {value}% of the team's rushing/passing TD total."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.4",
+        "body": "{school}'s {playerName}'s share of offensive touchdowns: {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.6",
+        "body": "Checking share of offensive touchdowns at {school}'s {playerName}: {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.7",
+        "body": "{value}% of the team's rushing/passing TD total for {school}'s {playerName} with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.8",
+        "body": "The share of offensive touchdowns figure for {school}'s {playerName} is {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.9",
+        "body": "With {touchdowns} rushing/receiving scores, the share of offensive touchdowns number for {school}'s {playerName} is {value}% of the team's rushing/passing TD total."
+      },
+      {
+        "id": "analysis.player.touchdown-share.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% of the team's rushing/passing TD total with {touchdowns} rushing/receiving scores."
+      }
+    ],
+    "analysis.player.tackles": [
+      {
+        "id": "analysis.player.tackles.variety.1",
+        "body": "{school}'s {playerName}: {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.2",
+        "body": "Tackle production for {school}'s {playerName}: {value} total tackles a game (with {tackles} solo/assisted tackles through {games} games)."
+      },
+      {
+        "id": "analysis.player.tackles.variety.3",
+        "body": "With {tackles} solo/assisted tackles through {games} games: {school}'s {playerName}, {value} total tackles a game."
+      },
+      {
+        "id": "analysis.player.tackles.variety.4",
+        "body": "{school}'s {playerName}'s tackle production: {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.6",
+        "body": "Checking tackle production at {school}'s {playerName}: {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.7",
+        "body": "{value} total tackles a game for {school}'s {playerName} with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.8",
+        "body": "The tackle production figure for {school}'s {playerName} is {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      },
+      {
+        "id": "analysis.player.tackles.variety.9",
+        "body": "With {tackles} solo/assisted tackles through {games} games, the tackle production number for {school}'s {playerName} is {value} total tackles a game."
+      },
+      {
+        "id": "analysis.player.tackles.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} total tackles a game with {tackles} solo/assisted tackles through {games} games."
+      }
+    ],
+    "analysis.player.tackles-for-loss": [
+      {
+        "id": "analysis.player.tackles-for-loss.variety.1",
+        "body": "{school}'s {playerName}: {value} tackles for loss this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.2",
+        "body": "Backfield disruption for {school}'s {playerName}: {value} tackles for loss (this season)."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.3",
+        "body": "This season: {school}'s {playerName}, {value} tackles for loss."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.4",
+        "body": "{school}'s {playerName}'s backfield disruption: {value} tackles for loss this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} tackles for loss this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.6",
+        "body": "Checking backfield disruption at {school}'s {playerName}: {value} tackles for loss this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.7",
+        "body": "{value} tackles for loss for {school}'s {playerName} this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.8",
+        "body": "The backfield disruption figure for {school}'s {playerName} is {value} tackles for loss this season."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.9",
+        "body": "This season, the backfield disruption number for {school}'s {playerName} is {value} tackles for loss."
+      },
+      {
+        "id": "analysis.player.tackles-for-loss.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} tackles for loss this season."
+      }
+    ],
+    "analysis.player.forced-fumbles": [
+      {
+        "id": "analysis.player.forced-fumbles.variety.1",
+        "body": "{school}'s {playerName}: {value} forced fumbles this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.2",
+        "body": "Forced fumbles for {school}'s {playerName}: {value} forced fumbles (this season)."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.3",
+        "body": "This season: {school}'s {playerName}, {value} forced fumbles."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.4",
+        "body": "{school}'s {playerName}'s forced fumbles: {value} forced fumbles this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} forced fumbles this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.6",
+        "body": "Checking forced fumbles at {school}'s {playerName}: {value} forced fumbles this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.7",
+        "body": "{value} forced fumbles for {school}'s {playerName} this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.8",
+        "body": "The forced fumbles figure for {school}'s {playerName} is {value} forced fumbles this season."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.9",
+        "body": "This season, the forced fumbles number for {school}'s {playerName} is {value} forced fumbles."
+      },
+      {
+        "id": "analysis.player.forced-fumbles.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} forced fumbles this season."
+      }
+    ],
+    "analysis.player.pass-breakups": [
+      {
+        "id": "analysis.player.pass-breakups.variety.1",
+        "body": "{school}'s {playerName}: {value} passes broken up this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.2",
+        "body": "Pass breakups for {school}'s {playerName}: {value} passes broken up (this season)."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.3",
+        "body": "This season: {school}'s {playerName}, {value} passes broken up."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.4",
+        "body": "{school}'s {playerName}'s pass breakups: {value} passes broken up this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} passes broken up this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.6",
+        "body": "Checking pass breakups at {school}'s {playerName}: {value} passes broken up this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.7",
+        "body": "{value} passes broken up for {school}'s {playerName} this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.8",
+        "body": "The pass breakups figure for {school}'s {playerName} is {value} passes broken up this season."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.9",
+        "body": "This season, the pass breakups number for {school}'s {playerName} is {value} passes broken up."
+      },
+      {
+        "id": "analysis.player.pass-breakups.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} passes broken up this season."
+      }
+    ],
+    "analysis.player.field-goals": [
+      {
+        "id": "analysis.player.field-goals.variety.1",
+        "body": "{school}'s {playerName}: {value}% with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.2",
+        "body": "Field-goal accuracy for {school}'s {playerName}: {value}% (with {made} makes on {attempts} field-goal attempts)."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.3",
+        "body": "With {made} makes on {attempts} field-goal attempts: {school}'s {playerName}, {value}%."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.4",
+        "body": "{school}'s {playerName}'s field-goal accuracy: {value}% with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.5",
+        "body": "A look at {school}'s {playerName}: {value}% with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.6",
+        "body": "Checking field-goal accuracy at {school}'s {playerName}: {value}% with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.7",
+        "body": "{value}% for {school}'s {playerName} with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.8",
+        "body": "The field-goal accuracy figure for {school}'s {playerName} is {value}% with {made} makes on {attempts} field-goal attempts."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.9",
+        "body": "With {made} makes on {attempts} field-goal attempts, the field-goal accuracy number for {school}'s {playerName} is {value}%."
+      },
+      {
+        "id": "analysis.player.field-goals.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value}% with {made} makes on {attempts} field-goal attempts."
+      }
+    ],
+    "analysis.player.long-field-goals": [
+      {
+        "id": "analysis.player.long-field-goals.variety.1",
+        "body": "{school}'s {playerName}: {made} field goals on {attempts} attempts from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.2",
+        "body": "Long-distance kicking for {school}'s {playerName}: {made} field goals on {attempts} attempts (from 50 yards or more this season)."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.3",
+        "body": "From 50 yards or more this season: {school}'s {playerName}, {made} field goals on {attempts} attempts."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.4",
+        "body": "{school}'s {playerName}'s long-distance kicking: {made} field goals on {attempts} attempts from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.5",
+        "body": "A look at {school}'s {playerName}: {made} field goals on {attempts} attempts from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.6",
+        "body": "Checking long-distance kicking at {school}'s {playerName}: {made} field goals on {attempts} attempts from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.7",
+        "body": "{made} field goals on {attempts} attempts for {school}'s {playerName} from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.8",
+        "body": "The long-distance kicking figure for {school}'s {playerName} is {made} field goals on {attempts} attempts from 50 yards or more this season."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.9",
+        "body": "From 50 yards or more this season, the long-distance kicking number for {school}'s {playerName} is {made} field goals on {attempts} attempts."
+      },
+      {
+        "id": "analysis.player.long-field-goals.variety.10",
+        "body": "{school}'s {playerName} in numbers: {made} field goals on {attempts} attempts from 50 yards or more this season."
+      }
+    ],
+    "analysis.player.net-punting": [
+      {
+        "id": "analysis.player.net-punting.variety.1",
+        "body": "{school}'s {playerName}: {value} net yards per punt across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.2",
+        "body": "Net punting for {school}'s {playerName}: {value} net yards per punt (across {punts} punts)."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.3",
+        "body": "Across {punts} punts: {school}'s {playerName}, {value} net yards per punt."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.4",
+        "body": "{school}'s {playerName}'s net punting: {value} net yards per punt across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.5",
+        "body": "A look at {school}'s {playerName}: {value} net yards per punt across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.6",
+        "body": "Checking net punting at {school}'s {playerName}: {value} net yards per punt across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.7",
+        "body": "{value} net yards per punt for {school}'s {playerName} across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.8",
+        "body": "The net punting figure for {school}'s {playerName} is {value} net yards per punt across {punts} punts."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.9",
+        "body": "Across {punts} punts, the net punting number for {school}'s {playerName} is {value} net yards per punt."
+      },
+      {
+        "id": "analysis.player.net-punting.variety.10",
+        "body": "{school}'s {playerName} in numbers: {value} net yards per punt across {punts} punts."
+      }
+    ],
+    "analysis.team.halftime-comebacks": [
+      {
+        "id": "analysis.team.halftime-comebacks.variety.1",
+        "body": "{school}: {count} wins after trailing at halftime this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.2",
+        "body": "Halftime comebacks for {school}: {count} wins after trailing at halftime (this season)."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.3",
+        "body": "This season: {school}, {count} wins after trailing at halftime."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.4",
+        "body": "{school}'s halftime comebacks: {count} wins after trailing at halftime this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.5",
+        "body": "A look at {school}: {count} wins after trailing at halftime this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.6",
+        "body": "Checking halftime comebacks at {school}: {count} wins after trailing at halftime this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.7",
+        "body": "{count} wins after trailing at halftime for {school} this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.8",
+        "body": "The halftime comebacks figure for {school} is {count} wins after trailing at halftime this season."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.9",
+        "body": "This season, the halftime comebacks number for {school} is {count} wins after trailing at halftime."
+      },
+      {
+        "id": "analysis.team.halftime-comebacks.variety.10",
+        "body": "{school} in numbers: {count} wins after trailing at halftime this season."
+      }
+    ],
+    "analysis.team.fourth-quarter-losses": [
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.1",
+        "body": "{school}: {count} losses after leading through three quarters this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.2",
+        "body": "Late leads lost for {school}: {count} losses after leading through three quarters (this season)."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.3",
+        "body": "This season: {school}, {count} losses after leading through three quarters."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.4",
+        "body": "{school}'s late leads lost: {count} losses after leading through three quarters this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.5",
+        "body": "A look at {school}: {count} losses after leading through three quarters this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.6",
+        "body": "Checking late leads lost at {school}: {count} losses after leading through three quarters this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.7",
+        "body": "{count} losses after leading through three quarters for {school} this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.8",
+        "body": "The late leads lost figure for {school} is {count} losses after leading through three quarters this season."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.9",
+        "body": "This season, the late leads lost number for {school} is {count} losses after leading through three quarters."
+      },
+      {
+        "id": "analysis.team.fourth-quarter-losses.variety.10",
+        "body": "{school} in numbers: {count} losses after leading through three quarters this season."
+      }
+    ],
+    "analysis.team.home-road-split": [
+      {
+        "id": "analysis.team.home-road-split.variety.1",
+        "body": "{school}: {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.2",
+        "body": "Scoring-margin split for {school}: {homeMargin} points at home and {roadMargin} away (across {homeGames} home and {roadGames} road games)."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.3",
+        "body": "Across {homeGames} home and {roadGames} road games: {school}, {homeMargin} points at home and {roadMargin} away."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.4",
+        "body": "{school}'s scoring-margin split: {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.5",
+        "body": "A look at {school}: {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.6",
+        "body": "Checking scoring-margin split at {school}: {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.7",
+        "body": "{homeMargin} points at home and {roadMargin} away for {school} across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.8",
+        "body": "The scoring-margin split figure for {school} is {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.9",
+        "body": "Across {homeGames} home and {roadGames} road games, the scoring-margin split number for {school} is {homeMargin} points at home and {roadMargin} away."
+      },
+      {
+        "id": "analysis.team.home-road-split.variety.10",
+        "body": "{school} in numbers: {homeMargin} points at home and {roadMargin} away across {homeGames} home and {roadGames} road games."
+      }
+    ],
+    "analysis.team.close-games": [
+      {
+        "id": "analysis.team.close-games.variety.1",
+        "body": "{school}: {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.2",
+        "body": "One-score games for {school}: {wins} wins and {losses} losses (across {count} games decided by seven points or fewer)."
+      },
+      {
+        "id": "analysis.team.close-games.variety.3",
+        "body": "Across {count} games decided by seven points or fewer: {school}, {wins} wins and {losses} losses."
+      },
+      {
+        "id": "analysis.team.close-games.variety.4",
+        "body": "{school}'s one-score games: {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.5",
+        "body": "A look at {school}: {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.6",
+        "body": "Checking one-score games at {school}: {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.7",
+        "body": "{wins} wins and {losses} losses for {school} across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.8",
+        "body": "The one-score games figure for {school} is {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      },
+      {
+        "id": "analysis.team.close-games.variety.9",
+        "body": "Across {count} games decided by seven points or fewer, the one-score games number for {school} is {wins} wins and {losses} losses."
+      },
+      {
+        "id": "analysis.team.close-games.variety.10",
+        "body": "{school} in numbers: {wins} wins and {losses} losses across {count} games decided by seven points or fewer."
+      }
+    ],
+    "analysis.team.opponent-records": [
+      {
+        "id": "analysis.team.opponent-records.variety.1",
+        "body": "{school}: {wins}-{losses} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.2",
+        "body": "Opponents' combined record for {school}: {wins}-{losses} (excluding their games against {school})."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.3",
+        "body": "Excluding their games against {school}: {school}, {wins}-{losses}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.4",
+        "body": "{school}'s opponents' combined record: {wins}-{losses} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.5",
+        "body": "A look at {school}: {wins}-{losses} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.6",
+        "body": "Checking opponents' combined record at {school}: {wins}-{losses} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.7",
+        "body": "{wins}-{losses} for {school} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.8",
+        "body": "The opponents' combined record figure for {school} is {wins}-{losses} excluding their games against {school}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.9",
+        "body": "Excluding their games against {school}, the opponents' combined record number for {school} is {wins}-{losses}."
+      },
+      {
+        "id": "analysis.team.opponent-records.variety.10",
+        "body": "{school} in numbers: {wins}-{losses} excluding their games against {school}."
+      }
+    ],
+    "analysis.team.offense-defense-contrast": [
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.1",
+        "body": "{school}: {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.2",
+        "body": "Scoring balance for {school}: {pointsFor} points scored and {pointsAgainst} allowed a game (this season)."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.3",
+        "body": "This season: {school}, {pointsFor} points scored and {pointsAgainst} allowed a game."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.4",
+        "body": "{school}'s scoring balance: {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.5",
+        "body": "A look at {school}: {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.6",
+        "body": "Checking scoring balance at {school}: {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.7",
+        "body": "{pointsFor} points scored and {pointsAgainst} allowed a game for {school} this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.8",
+        "body": "The scoring balance figure for {school} is {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.9",
+        "body": "This season, the scoring balance number for {school} is {pointsFor} points scored and {pointsAgainst} allowed a game."
+      },
+      {
+        "id": "analysis.team.offense-defense-contrast.variety.10",
+        "body": "{school} in numbers: {pointsFor} points scored and {pointsAgainst} allowed a game this season."
+      }
+    ],
+    "analysis.player.freshman-production": [
+      {
+        "id": "analysis.player.freshman-production.variety.1",
+        "body": "{school}'s {playerName}: {production} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.2",
+        "body": "Freshman production for {school}'s {playerName}: {production} (this season as a freshman)."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.3",
+        "body": "This season as a freshman: {school}'s {playerName}, {production}."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.4",
+        "body": "{school}'s {playerName}'s freshman production: {production} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.5",
+        "body": "A look at {school}'s {playerName}: {production} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.6",
+        "body": "Checking freshman production at {school}'s {playerName}: {production} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.7",
+        "body": "{production} for {school}'s {playerName} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.8",
+        "body": "The freshman production figure for {school}'s {playerName} is {production} this season as a freshman."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.9",
+        "body": "This season as a freshman, the freshman production number for {school}'s {playerName} is {production}."
+      },
+      {
+        "id": "analysis.player.freshman-production.variety.10",
+        "body": "{school}'s {playerName} in numbers: {production} this season as a freshman."
+      }
+    ],
+    "deep.tackles-game": [
+      {
+        "id": "deep.tackles-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} total tackles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.2",
+        "body": "Total tackles for {school}'s {playerName}: {rate} total tackles a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.tackles-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} total tackles a game."
+      },
+      {
+        "id": "deep.tackles-game.variety.4",
+        "body": "{school}'s {playerName}'s total tackles: {rate} total tackles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} total tackles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.6",
+        "body": "Checking total tackles at {school}'s {playerName}: {rate} total tackles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.7",
+        "body": "{rate} total tackles a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.8",
+        "body": "The total tackles figure for {school}'s {playerName} is {rate} total tackles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tackles-game.variety.9",
+        "body": "With {total} total in {games} appearances, the total tackles number for {school}'s {playerName} is {rate} total tackles a game."
+      },
+      {
+        "id": "deep.tackles-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} total tackles a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.sacks-game": [
+      {
+        "id": "deep.sacks-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} sacks a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.2",
+        "body": "Sacks for {school}'s {playerName}: {rate} sacks a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.sacks-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} sacks a game."
+      },
+      {
+        "id": "deep.sacks-game.variety.4",
+        "body": "{school}'s {playerName}'s sacks: {rate} sacks a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} sacks a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.6",
+        "body": "Checking sacks at {school}'s {playerName}: {rate} sacks a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.7",
+        "body": "{rate} sacks a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.8",
+        "body": "The sacks figure for {school}'s {playerName} is {rate} sacks a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.sacks-game.variety.9",
+        "body": "With {total} total in {games} appearances, the sacks number for {school}'s {playerName} is {rate} sacks a game."
+      },
+      {
+        "id": "deep.sacks-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} sacks a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.tfl-game": [
+      {
+        "id": "deep.tfl-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} tackles for loss a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.2",
+        "body": "Tackles for loss for {school}'s {playerName}: {rate} tackles for loss a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.tfl-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} tackles for loss a game."
+      },
+      {
+        "id": "deep.tfl-game.variety.4",
+        "body": "{school}'s {playerName}'s tackles for loss: {rate} tackles for loss a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} tackles for loss a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.6",
+        "body": "Checking tackles for loss at {school}'s {playerName}: {rate} tackles for loss a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.7",
+        "body": "{rate} tackles for loss a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.8",
+        "body": "The tackles for loss figure for {school}'s {playerName} is {rate} tackles for loss a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.tfl-game.variety.9",
+        "body": "With {total} total in {games} appearances, the tackles for loss number for {school}'s {playerName} is {rate} tackles for loss a game."
+      },
+      {
+        "id": "deep.tfl-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} tackles for loss a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.ints-game": [
+      {
+        "id": "deep.ints-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} interceptions a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.2",
+        "body": "Interceptions for {school}'s {playerName}: {rate} interceptions a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.ints-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} interceptions a game."
+      },
+      {
+        "id": "deep.ints-game.variety.4",
+        "body": "{school}'s {playerName}'s interceptions: {rate} interceptions a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} interceptions a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.6",
+        "body": "Checking interceptions at {school}'s {playerName}: {rate} interceptions a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.7",
+        "body": "{rate} interceptions a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.8",
+        "body": "The interceptions figure for {school}'s {playerName} is {rate} interceptions a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.ints-game.variety.9",
+        "body": "With {total} total in {games} appearances, the interceptions number for {school}'s {playerName} is {rate} interceptions a game."
+      },
+      {
+        "id": "deep.ints-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} interceptions a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.pbu-game": [
+      {
+        "id": "deep.pbu-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.2",
+        "body": "Passes defended for {school}'s {playerName}: {rate} passes defended a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.pbu-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} passes defended a game."
+      },
+      {
+        "id": "deep.pbu-game.variety.4",
+        "body": "{school}'s {playerName}'s passes defended: {rate} passes defended a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.6",
+        "body": "Checking passes defended at {school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.7",
+        "body": "{rate} passes defended a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.8",
+        "body": "The passes defended figure for {school}'s {playerName} is {rate} passes defended a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.pbu-game.variety.9",
+        "body": "With {total} total in {games} appearances, the passes defended number for {school}'s {playerName} is {rate} passes defended a game."
+      },
+      {
+        "id": "deep.pbu-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} passes defended a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.forced-game": [
+      {
+        "id": "deep.forced-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} forced fumbles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.2",
+        "body": "Forced fumbles for {school}'s {playerName}: {rate} forced fumbles a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.forced-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} forced fumbles a game."
+      },
+      {
+        "id": "deep.forced-game.variety.4",
+        "body": "{school}'s {playerName}'s forced fumbles: {rate} forced fumbles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} forced fumbles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.6",
+        "body": "Checking forced fumbles at {school}'s {playerName}: {rate} forced fumbles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.7",
+        "body": "{rate} forced fumbles a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.8",
+        "body": "The forced fumbles figure for {school}'s {playerName} is {rate} forced fumbles a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.forced-game.variety.9",
+        "body": "With {total} total in {games} appearances, the forced fumbles number for {school}'s {playerName} is {rate} forced fumbles a game."
+      },
+      {
+        "id": "deep.forced-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} forced fumbles a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.recoveries-game": [
+      {
+        "id": "deep.recoveries-game.variety.1",
+        "body": "{school}'s {playerName}: {rate} fumble recoveries a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.2",
+        "body": "Fumble recoveries for {school}'s {playerName}: {rate} fumble recoveries a game (with {total} total in {games} appearances)."
+      },
+      {
+        "id": "deep.recoveries-game.variety.3",
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} fumble recoveries a game."
+      },
+      {
+        "id": "deep.recoveries-game.variety.4",
+        "body": "{school}'s {playerName}'s fumble recoveries: {rate} fumble recoveries a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} fumble recoveries a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.6",
+        "body": "Checking fumble recoveries at {school}'s {playerName}: {rate} fumble recoveries a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.7",
+        "body": "{rate} fumble recoveries a game for {school}'s {playerName} with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.8",
+        "body": "The fumble recoveries figure for {school}'s {playerName} is {rate} fumble recoveries a game with {total} total in {games} appearances."
+      },
+      {
+        "id": "deep.recoveries-game.variety.9",
+        "body": "With {total} total in {games} appearances, the fumble recoveries number for {school}'s {playerName} is {rate} fumble recoveries a game."
+      },
+      {
+        "id": "deep.recoveries-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} fumble recoveries a game with {total} total in {games} appearances."
+      }
+    ],
+    "deep.after-contact": [
+      {
+        "id": "deep.after-contact.variety.1",
+        "body": "{school}'s {playerName}: {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.2",
+        "body": "Rushing yards after contact for {school}'s {playerName}: {rate}% of rushing production after contact (with {yards} after-contact yards out of {rushing} rushing yards)."
+      },
+      {
+        "id": "deep.after-contact.variety.3",
+        "body": "With {yards} after-contact yards out of {rushing} rushing yards: {school}'s {playerName}, {rate}% of rushing production after contact."
+      },
+      {
+        "id": "deep.after-contact.variety.4",
+        "body": "{school}'s {playerName}'s rushing yards after contact: {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.6",
+        "body": "Checking rushing yards after contact at {school}'s {playerName}: {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.7",
+        "body": "{rate}% of rushing production after contact for {school}'s {playerName} with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.8",
+        "body": "The rushing yards after contact figure for {school}'s {playerName} is {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      },
+      {
+        "id": "deep.after-contact.variety.9",
+        "body": "With {yards} after-contact yards out of {rushing} rushing yards, the rushing yards after contact number for {school}'s {playerName} is {rate}% of rushing production after contact."
+      },
+      {
+        "id": "deep.after-contact.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% of rushing production after contact with {yards} after-contact yards out of {rushing} rushing yards."
+      }
+    ],
+    "deep.broken-tackles": [
+      {
+        "id": "deep.broken-tackles.variety.1",
+        "body": "{school}'s {playerName}: {broken} tackles broken on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.2",
+        "body": "Broken-tackle production for {school}'s {playerName}: {broken} tackles broken (on {attempts} rushing attempts)."
+      },
+      {
+        "id": "deep.broken-tackles.variety.3",
+        "body": "On {attempts} rushing attempts: {school}'s {playerName}, {broken} tackles broken."
+      },
+      {
+        "id": "deep.broken-tackles.variety.4",
+        "body": "{school}'s {playerName}'s broken-tackle production: {broken} tackles broken on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.5",
+        "body": "A look at {school}'s {playerName}: {broken} tackles broken on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.6",
+        "body": "Checking broken-tackle production at {school}'s {playerName}: {broken} tackles broken on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.7",
+        "body": "{broken} tackles broken for {school}'s {playerName} on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.8",
+        "body": "The broken-tackle production figure for {school}'s {playerName} is {broken} tackles broken on {attempts} rushing attempts."
+      },
+      {
+        "id": "deep.broken-tackles.variety.9",
+        "body": "On {attempts} rushing attempts, the broken-tackle production number for {school}'s {playerName} is {broken} tackles broken."
+      },
+      {
+        "id": "deep.broken-tackles.variety.10",
+        "body": "{school}'s {playerName} in numbers: {broken} tackles broken on {attempts} rushing attempts."
+      }
+    ],
+    "deep.receiving-back": [
+      {
+        "id": "deep.receiving-back.variety.1",
+        "body": "{school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.2",
+        "body": "Backfield production for {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards (including {catches} catches)."
+      },
+      {
+        "id": "deep.receiving-back.variety.3",
+        "body": "Including {catches} catches: {school}'s {playerName}, {rushing} rushing yards and {receiving} receiving yards."
+      },
+      {
+        "id": "deep.receiving-back.variety.4",
+        "body": "{school}'s {playerName}'s backfield production: {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.5",
+        "body": "A look at {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.6",
+        "body": "Checking backfield production at {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.7",
+        "body": "{rushing} rushing yards and {receiving} receiving yards for {school}'s {playerName} including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.8",
+        "body": "The backfield production figure for {school}'s {playerName} is {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      },
+      {
+        "id": "deep.receiving-back.variety.9",
+        "body": "Including {catches} catches, the backfield production number for {school}'s {playerName} is {rushing} rushing yards and {receiving} receiving yards."
+      },
+      {
+        "id": "deep.receiving-back.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rushing} rushing yards and {receiving} receiving yards including {catches} catches."
+      }
+    ],
+    "deep.dual-qb-game": [
+      {
+        "id": "deep.dual-qb-game.variety.1",
+        "body": "{school}'s {playerName}: {passing} passing yards and {rushing} rushing yards in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.2",
+        "body": "Dual-threat game for {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards (in the same game)."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.3",
+        "body": "In the same game: {school}'s {playerName}, {passing} passing yards and {rushing} rushing yards."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.4",
+        "body": "{school}'s {playerName}'s dual-threat game: {passing} passing yards and {rushing} rushing yards in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.6",
+        "body": "Checking dual-threat game at {school}'s {playerName}: {passing} passing yards and {rushing} rushing yards in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.7",
+        "body": "{passing} passing yards and {rushing} rushing yards for {school}'s {playerName} in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.8",
+        "body": "The dual-threat game figure for {school}'s {playerName} is {passing} passing yards and {rushing} rushing yards in the same game."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.9",
+        "body": "In the same game, the dual-threat game number for {school}'s {playerName} is {passing} passing yards and {rushing} rushing yards."
+      },
+      {
+        "id": "deep.dual-qb-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {passing} passing yards and {rushing} rushing yards in the same game."
+      }
+    ],
+    "deep.dual-back-game": [
+      {
+        "id": "deep.dual-back-game.variety.1",
+        "body": "{school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.2",
+        "body": "Rushing/receiving game for {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards (in the same game)."
+      },
+      {
+        "id": "deep.dual-back-game.variety.3",
+        "body": "In the same game: {school}'s {playerName}, {rushing} rushing yards and {receiving} receiving yards."
+      },
+      {
+        "id": "deep.dual-back-game.variety.4",
+        "body": "{school}'s {playerName}'s rushing/receiving game: {rushing} rushing yards and {receiving} receiving yards in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.5",
+        "body": "A look at {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.6",
+        "body": "Checking rushing/receiving game at {school}'s {playerName}: {rushing} rushing yards and {receiving} receiving yards in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.7",
+        "body": "{rushing} rushing yards and {receiving} receiving yards for {school}'s {playerName} in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.8",
+        "body": "The rushing/receiving game figure for {school}'s {playerName} is {rushing} rushing yards and {receiving} receiving yards in the same game."
+      },
+      {
+        "id": "deep.dual-back-game.variety.9",
+        "body": "In the same game, the rushing/receiving game number for {school}'s {playerName} is {rushing} rushing yards and {receiving} receiving yards."
+      },
+      {
+        "id": "deep.dual-back-game.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rushing} rushing yards and {receiving} receiving yards in the same game."
+      }
+    ],
+    "deep.yac-share": [
+      {
+        "id": "deep.yac-share.variety.1",
+        "body": "{school}'s {playerName}: {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.2",
+        "body": "Receiving yards after the catch for {school}'s {playerName}: {rate}% of receiving yardage after the catch (with {yac} YAC out of {yards} receiving yards)."
+      },
+      {
+        "id": "deep.yac-share.variety.3",
+        "body": "With {yac} YAC out of {yards} receiving yards: {school}'s {playerName}, {rate}% of receiving yardage after the catch."
+      },
+      {
+        "id": "deep.yac-share.variety.4",
+        "body": "{school}'s {playerName}'s receiving yards after the catch: {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.6",
+        "body": "Checking receiving yards after the catch at {school}'s {playerName}: {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.7",
+        "body": "{rate}% of receiving yardage after the catch for {school}'s {playerName} with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.8",
+        "body": "The receiving yards after the catch figure for {school}'s {playerName} is {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      },
+      {
+        "id": "deep.yac-share.variety.9",
+        "body": "With {yac} YAC out of {yards} receiving yards, the receiving yards after the catch number for {school}'s {playerName} is {rate}% of receiving yardage after the catch."
+      },
+      {
+        "id": "deep.yac-share.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% of receiving yardage after the catch with {yac} YAC out of {yards} receiving yards."
+      }
+    ],
+    "deep.drops": [
+      {
+        "id": "deep.drops.variety.1",
+        "body": "{school}'s {playerName}: {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.2",
+        "body": "Catch-or-drop rate for {school}'s {playerName}: {rate}% drops (with {drops} drops and {catches} catches). This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.3",
+        "body": "With {drops} drops and {catches} catches: {school}'s {playerName}, {rate}% drops. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.4",
+        "body": "{school}'s {playerName}'s catch-or-drop rate: {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.6",
+        "body": "Checking catch-or-drop rate at {school}'s {playerName}: {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.7",
+        "body": "{rate}% drops for {school}'s {playerName} with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.8",
+        "body": "The catch-or-drop rate figure for {school}'s {playerName} is {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.9",
+        "body": "With {drops} drops and {catches} catches, the catch-or-drop rate number for {school}'s {playerName} is {rate}% drops. This uses catches plus drops, not all targets."
+      },
+      {
+        "id": "deep.drops.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% drops with {drops} drops and {catches} catches. This uses catches plus drops, not all targets."
+      }
+    ],
+    "deep.line-sacks": [
+      {
+        "id": "deep.line-sacks.variety.1",
+        "body": "{school}'s {playerName}: a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.2",
+        "body": "Sacks allowed for {school}'s {playerName}: a {rate}% sack-allowed rate (with {sacks} allowed on {snaps} offensive snaps). The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.3",
+        "body": "With {sacks} allowed on {snaps} offensive snaps: {school}'s {playerName}, a {rate}% sack-allowed rate. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.4",
+        "body": "{school}'s {playerName}'s sacks allowed: a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.5",
+        "body": "A look at {school}'s {playerName}: a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.6",
+        "body": "Checking sacks allowed at {school}'s {playerName}: a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.7",
+        "body": "a {rate}% sack-allowed rate for {school}'s {playerName} with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.8",
+        "body": "The sacks allowed figure for {school}'s {playerName} is a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.9",
+        "body": "With {sacks} allowed on {snaps} offensive snaps, the sacks allowed number for {school}'s {playerName} is a {rate}% sack-allowed rate. The snap count includes run plays."
+      },
+      {
+        "id": "deep.line-sacks.variety.10",
+        "body": "{school}'s {playerName} in numbers: a {rate}% sack-allowed rate with {sacks} allowed on {snaps} offensive snaps. The snap count includes run plays."
+      }
+    ],
+    "deep.pancakes": [
+      {
+        "id": "deep.pancakes.variety.1",
+        "body": "{school}'s {playerName}: {rate} pancakes a game with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.2",
+        "body": "Pancake blocks for {school}'s {playerName}: {rate} pancakes a game (with {total} total through {games} games)."
+      },
+      {
+        "id": "deep.pancakes.variety.3",
+        "body": "With {total} total through {games} games: {school}'s {playerName}, {rate} pancakes a game."
+      },
+      {
+        "id": "deep.pancakes.variety.4",
+        "body": "{school}'s {playerName}'s pancake blocks: {rate} pancakes a game with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} pancakes a game with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.6",
+        "body": "Checking pancake blocks at {school}'s {playerName}: {rate} pancakes a game with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.7",
+        "body": "{rate} pancakes a game for {school}'s {playerName} with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.8",
+        "body": "The pancake blocks figure for {school}'s {playerName} is {rate} pancakes a game with {total} total through {games} games."
+      },
+      {
+        "id": "deep.pancakes.variety.9",
+        "body": "With {total} total through {games} games, the pancake blocks number for {school}'s {playerName} is {rate} pancakes a game."
+      },
+      {
+        "id": "deep.pancakes.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} pancakes a game with {total} total through {games} games."
+      }
+    ],
+    "deep.long-kicks": [
+      {
+        "id": "deep.long-kicks.variety.1",
+        "body": "{school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.2",
+        "body": "50-plus-yard field goals for {school}'s {playerName}: {rate}% accuracy (with {made} makes on {attempts} tries from 50-plus yards)."
+      },
+      {
+        "id": "deep.long-kicks.variety.3",
+        "body": "With {made} makes on {attempts} tries from 50-plus yards: {school}'s {playerName}, {rate}% accuracy."
+      },
+      {
+        "id": "deep.long-kicks.variety.4",
+        "body": "{school}'s {playerName}'s 50-plus-yard field goals: {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.6",
+        "body": "Checking 50-plus-yard field goals at {school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.7",
+        "body": "{rate}% accuracy for {school}'s {playerName} with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.8",
+        "body": "The 50-plus-yard field goals figure for {school}'s {playerName} is {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      },
+      {
+        "id": "deep.long-kicks.variety.9",
+        "body": "With {made} makes on {attempts} tries from 50-plus yards, the 50-plus-yard field goals number for {school}'s {playerName} is {rate}% accuracy."
+      },
+      {
+        "id": "deep.long-kicks.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% accuracy with {made} makes on {attempts} tries from 50-plus yards."
+      }
+    ],
+    "deep.mid-kicks": [
+      {
+        "id": "deep.mid-kicks.variety.1",
+        "body": "{school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.2",
+        "body": "40-49-yard field goals for {school}'s {playerName}: {rate}% accuracy (with {made} makes on {attempts} tries from 40-49 yards)."
+      },
+      {
+        "id": "deep.mid-kicks.variety.3",
+        "body": "With {made} makes on {attempts} tries from 40-49 yards: {school}'s {playerName}, {rate}% accuracy."
+      },
+      {
+        "id": "deep.mid-kicks.variety.4",
+        "body": "{school}'s {playerName}'s 40-49-yard field goals: {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.6",
+        "body": "Checking 40-49-yard field goals at {school}'s {playerName}: {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.7",
+        "body": "{rate}% accuracy for {school}'s {playerName} with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.8",
+        "body": "The 40-49-yard field goals figure for {school}'s {playerName} is {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      },
+      {
+        "id": "deep.mid-kicks.variety.9",
+        "body": "With {made} makes on {attempts} tries from 40-49 yards, the 40-49-yard field goals number for {school}'s {playerName} is {rate}% accuracy."
+      },
+      {
+        "id": "deep.mid-kicks.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% accuracy with {made} makes on {attempts} tries from 40-49 yards."
+      }
+    ],
+    "deep.touchbacks": [
+      {
+        "id": "deep.touchbacks.variety.1",
+        "body": "{school}'s {playerName}: a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.2",
+        "body": "Kickoff touchbacks for {school}'s {playerName}: a {rate}% touchback rate (with {total} touchbacks on {attempts} kickoffs)."
+      },
+      {
+        "id": "deep.touchbacks.variety.3",
+        "body": "With {total} touchbacks on {attempts} kickoffs: {school}'s {playerName}, a {rate}% touchback rate."
+      },
+      {
+        "id": "deep.touchbacks.variety.4",
+        "body": "{school}'s {playerName}'s kickoff touchbacks: a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.5",
+        "body": "A look at {school}'s {playerName}: a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.6",
+        "body": "Checking kickoff touchbacks at {school}'s {playerName}: a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.7",
+        "body": "a {rate}% touchback rate for {school}'s {playerName} with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.8",
+        "body": "The kickoff touchbacks figure for {school}'s {playerName} is a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      },
+      {
+        "id": "deep.touchbacks.variety.9",
+        "body": "With {total} touchbacks on {attempts} kickoffs, the kickoff touchbacks number for {school}'s {playerName} is a {rate}% touchback rate."
+      },
+      {
+        "id": "deep.touchbacks.variety.10",
+        "body": "{school}'s {playerName} in numbers: a {rate}% touchback rate with {total} touchbacks on {attempts} kickoffs."
+      }
+    ],
+    "deep.punt-placement": [
+      {
+        "id": "deep.punt-placement.variety.1",
+        "body": "{school}'s {playerName}: {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.2",
+        "body": "Punts inside the 20 for {school}'s {playerName}: {rate}% of punts downed inside the 20 (with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks)."
+      },
+      {
+        "id": "deep.punt-placement.variety.3",
+        "body": "With {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks: {school}'s {playerName}, {rate}% of punts downed inside the 20."
+      },
+      {
+        "id": "deep.punt-placement.variety.4",
+        "body": "{school}'s {playerName}'s punts inside the 20: {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.6",
+        "body": "Checking punts inside the 20 at {school}'s {playerName}: {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.7",
+        "body": "{rate}% of punts downed inside the 20 for {school}'s {playerName} with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.8",
+        "body": "The punts inside the 20 figure for {school}'s {playerName} is {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      },
+      {
+        "id": "deep.punt-placement.variety.9",
+        "body": "With {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks, the punts inside the 20 number for {school}'s {playerName} is {rate}% of punts downed inside the 20."
+      },
+      {
+        "id": "deep.punt-placement.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate}% of punts downed inside the 20 with {total} of {attempts} punts inside the 20 and {touchbacks} touchbacks."
+      }
+    ],
+    "deep.kick-return": [
+      {
+        "id": "deep.kick-return.variety.1",
+        "body": "{school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.2",
+        "body": "Kick returns for {school}'s {playerName}: {rate} yards per return (with {yards} yards and {touchdowns} TD on {attempts} returns)."
+      },
+      {
+        "id": "deep.kick-return.variety.3",
+        "body": "With {yards} yards and {touchdowns} TD on {attempts} returns: {school}'s {playerName}, {rate} yards per return."
+      },
+      {
+        "id": "deep.kick-return.variety.4",
+        "body": "{school}'s {playerName}'s kick returns: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.6",
+        "body": "Checking kick returns at {school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.7",
+        "body": "{rate} yards per return for {school}'s {playerName} with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.8",
+        "body": "The kick returns figure for {school}'s {playerName} is {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.kick-return.variety.9",
+        "body": "With {yards} yards and {touchdowns} TD on {attempts} returns, the kick returns number for {school}'s {playerName} is {rate} yards per return."
+      },
+      {
+        "id": "deep.kick-return.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      }
+    ],
+    "deep.punt-return": [
+      {
+        "id": "deep.punt-return.variety.1",
+        "body": "{school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.2",
+        "body": "Punt returns for {school}'s {playerName}: {rate} yards per return (with {yards} yards and {touchdowns} TD on {attempts} returns)."
+      },
+      {
+        "id": "deep.punt-return.variety.3",
+        "body": "With {yards} yards and {touchdowns} TD on {attempts} returns: {school}'s {playerName}, {rate} yards per return."
+      },
+      {
+        "id": "deep.punt-return.variety.4",
+        "body": "{school}'s {playerName}'s punt returns: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.5",
+        "body": "A look at {school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.6",
+        "body": "Checking punt returns at {school}'s {playerName}: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.7",
+        "body": "{rate} yards per return for {school}'s {playerName} with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.8",
+        "body": "The punt returns figure for {school}'s {playerName} is {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      },
+      {
+        "id": "deep.punt-return.variety.9",
+        "body": "With {yards} yards and {touchdowns} TD on {attempts} returns, the punt returns number for {school}'s {playerName} is {rate} yards per return."
+      },
+      {
+        "id": "deep.punt-return.variety.10",
+        "body": "{school}'s {playerName} in numbers: {rate} yards per return with {yards} yards and {touchdowns} TD on {attempts} returns."
+      }
+    ],
+    "context.coach-ranked": [
+      {
+        "id": "context.coach-ranked.variety.1",
+        "body": "{school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.2",
+        "body": "Career record against top-25 opponents for {school} coach {coachName}: {wins}-{losses} ({rate}% wins) (across those career decisions)."
+      },
+      {
+        "id": "context.coach-ranked.variety.3",
+        "body": "Across those career decisions: {school} coach {coachName}, {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-ranked.variety.4",
+        "body": "{school} coach {coachName}'s career record against Top-25 opponents: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.5",
+        "body": "A look at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.6",
+        "body": "Checking career record against Top-25 opponents at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.7",
+        "body": "{wins}-{losses} ({rate}% wins) for {school} coach {coachName} across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.8",
+        "body": "The career record against Top-25 opponents figure for {school} coach {coachName} is {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-ranked.variety.9",
+        "body": "Across those career decisions, the career record against Top-25 opponents number for {school} coach {coachName} is {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-ranked.variety.10",
+        "body": "{school} coach {coachName} in numbers: {wins}-{losses} ({rate}% wins) across those career decisions."
+      }
+    ],
+    "context.coach-rivalries": [
+      {
+        "id": "context.coach-rivalries.variety.1",
+        "body": "{school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.2",
+        "body": "Career record in rivalry games for {school} coach {coachName}: {wins}-{losses} ({rate}% wins) (across those career decisions)."
+      },
+      {
+        "id": "context.coach-rivalries.variety.3",
+        "body": "Across those career decisions: {school} coach {coachName}, {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-rivalries.variety.4",
+        "body": "{school} coach {coachName}'s career record in rivalry games: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.5",
+        "body": "A look at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.6",
+        "body": "Checking career record in rivalry games at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.7",
+        "body": "{wins}-{losses} ({rate}% wins) for {school} coach {coachName} across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.8",
+        "body": "The career record in rivalry games figure for {school} coach {coachName} is {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-rivalries.variety.9",
+        "body": "Across those career decisions, the career record in rivalry games number for {school} coach {coachName} is {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-rivalries.variety.10",
+        "body": "{school} coach {coachName} in numbers: {wins}-{losses} ({rate}% wins) across those career decisions."
+      }
+    ],
+    "context.coach-bowls": [
+      {
+        "id": "context.coach-bowls.variety.1",
+        "body": "{school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.2",
+        "body": "Career record in bowl games for {school} coach {coachName}: {wins}-{losses} ({rate}% wins) (across those career decisions)."
+      },
+      {
+        "id": "context.coach-bowls.variety.3",
+        "body": "Across those career decisions: {school} coach {coachName}, {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-bowls.variety.4",
+        "body": "{school} coach {coachName}'s career record in bowl games: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.5",
+        "body": "A look at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.6",
+        "body": "Checking career record in bowl games at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.7",
+        "body": "{wins}-{losses} ({rate}% wins) for {school} coach {coachName} across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.8",
+        "body": "The career record in bowl games figure for {school} coach {coachName} is {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-bowls.variety.9",
+        "body": "Across those career decisions, the career record in bowl games number for {school} coach {coachName} is {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-bowls.variety.10",
+        "body": "{school} coach {coachName} in numbers: {wins}-{losses} ({rate}% wins) across those career decisions."
+      }
+    ],
+    "context.coach-playoffs": [
+      {
+        "id": "context.coach-playoffs.variety.1",
+        "body": "{school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.2",
+        "body": "Career record in playoff games for {school} coach {coachName}: {wins}-{losses} ({rate}% wins) (across those career decisions)."
+      },
+      {
+        "id": "context.coach-playoffs.variety.3",
+        "body": "Across those career decisions: {school} coach {coachName}, {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-playoffs.variety.4",
+        "body": "{school} coach {coachName}'s career record in playoff games: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.5",
+        "body": "A look at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.6",
+        "body": "Checking career record in playoff games at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.7",
+        "body": "{wins}-{losses} ({rate}% wins) for {school} coach {coachName} across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.8",
+        "body": "The career record in playoff games figure for {school} coach {coachName} is {wins}-{losses} ({rate}% wins) across those career decisions."
+      },
+      {
+        "id": "context.coach-playoffs.variety.9",
+        "body": "Across those career decisions, the career record in playoff games number for {school} coach {coachName} is {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-playoffs.variety.10",
+        "body": "{school} coach {coachName} in numbers: {wins}-{losses} ({rate}% wins) across those career decisions."
+      }
+    ],
+    "context.coach-record": [
+      {
+        "id": "context.coach-record.variety.1",
+        "body": "{school} coach {coachName}: {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.2",
+        "body": "Career record for {school} coach {coachName}: {wins}-{losses} ({rate}% wins) (with a {schoolWins}-{schoolLosses} record at this school)."
+      },
+      {
+        "id": "context.coach-record.variety.3",
+        "body": "With a {schoolWins}-{schoolLosses} record at this school: {school} coach {coachName}, {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-record.variety.4",
+        "body": "{school} coach {coachName}'s career record: {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.5",
+        "body": "A look at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.6",
+        "body": "Checking career record at {school} coach {coachName}: {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.7",
+        "body": "{wins}-{losses} ({rate}% wins) for {school} coach {coachName} with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.8",
+        "body": "The career record figure for {school} coach {coachName} is {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      },
+      {
+        "id": "context.coach-record.variety.9",
+        "body": "With a {schoolWins}-{schoolLosses} record at this school, the career record number for {school} coach {coachName} is {wins}-{losses} ({rate}% wins)."
+      },
+      {
+        "id": "context.coach-record.variety.10",
+        "body": "{school} coach {coachName} in numbers: {wins}-{losses} ({rate}% wins) with a {schoolWins}-{schoolLosses} record at this school."
+      }
+    ],
+    "context.nil": [
+      {
+        "id": "context.nil.variety.1",
+        "body": "{school}: {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.2",
+        "body": "Nil allocation for {school}: {total} in roster compensation (with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%))."
+      },
+      {
+        "id": "context.nil.variety.3",
+        "body": "With {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%): {school}, {total} in roster compensation."
+      },
+      {
+        "id": "context.nil.variety.4",
+        "body": "{school}'s NIL allocation: {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.5",
+        "body": "A look at {school}: {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.6",
+        "body": "Checking NIL allocation at {school}: {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.7",
+        "body": "{total} in roster compensation for {school} with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.8",
+        "body": "The NIL allocation figure for {school} is {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      },
+      {
+        "id": "context.nil.variety.9",
+        "body": "With {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%), the NIL allocation number for {school} is {total} in roster compensation."
+      },
+      {
+        "id": "context.nil.variety.10",
+        "body": "{school} in numbers: {total} in roster compensation with {first} at {firstMoney} ({firstShare}%) and {second} at {secondMoney} ({secondShare}%)."
+      }
+    ],
+    "context.conference": [
+      {
+        "id": "context.conference.variety.1",
+        "body": "the {conference}: {details} this season."
+      },
+      {
+        "id": "context.conference.variety.2",
+        "body": "Conference strength for the {conference}: {details} (this season)."
+      },
+      {
+        "id": "context.conference.variety.3",
+        "body": "This season: the {conference}, {details}."
+      },
+      {
+        "id": "context.conference.variety.4",
+        "body": "the {conference}'s conference strength: {details} this season."
+      },
+      {
+        "id": "context.conference.variety.5",
+        "body": "A look at the {conference}: {details} this season."
+      },
+      {
+        "id": "context.conference.variety.6",
+        "body": "Checking conference strength at the {conference}: {details} this season."
+      },
+      {
+        "id": "context.conference.variety.7",
+        "body": "{details} for the {conference} this season."
+      },
+      {
+        "id": "context.conference.variety.8",
+        "body": "The conference strength figure for the {conference} is {details} this season."
+      },
+      {
+        "id": "context.conference.variety.9",
+        "body": "This season, the conference strength number for the {conference} is {details}."
+      },
+      {
+        "id": "context.conference.variety.10",
+        "body": "the {conference} in numbers: {details} this season."
+      }
+    ],
+    "context.penalties": [
+      {
+        "id": "context.penalties.variety.1",
+        "body": "{school}: {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.2",
+        "body": "Penalties for {school}: {penalties} flags and {yards} penalty yards a game (this season). {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.3",
+        "body": "This season: {school}, {penalties} flags and {yards} penalty yards a game. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.4",
+        "body": "{school}'s penalties: {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.5",
+        "body": "A look at {school}: {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.6",
+        "body": "Checking penalties at {school}: {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.7",
+        "body": "{penalties} flags and {yards} penalty yards a game for {school} this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.8",
+        "body": "The penalties figure for {school} is {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.9",
+        "body": "This season, the penalties number for {school} is {penalties} flags and {yards} penalty yards a game. {comparison}"
+      },
+      {
+        "id": "context.penalties.variety.10",
+        "body": "{school} in numbers: {penalties} flags and {yards} penalty yards a game this season. {comparison}"
+      }
+    ],
+    "context.run-defense": [
+      {
+        "id": "context.run-defense.variety.1",
+        "body": "{school}: {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.2",
+        "body": "Run defense for {school}: {ypga} rushing yards allowed a game and {ypc} per opponent carry (this season). {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.3",
+        "body": "This season: {school}, {ypga} rushing yards allowed a game and {ypc} per opponent carry. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.4",
+        "body": "{school}'s run defense: {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.5",
+        "body": "A look at {school}: {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.6",
+        "body": "Checking run defense at {school}: {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.7",
+        "body": "{ypga} rushing yards allowed a game and {ypc} per opponent carry for {school} this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.8",
+        "body": "The run defense figure for {school} is {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.9",
+        "body": "This season, the run defense number for {school} is {ypga} rushing yards allowed a game and {ypc} per opponent carry. {comparison}"
+      },
+      {
+        "id": "context.run-defense.variety.10",
+        "body": "{school} in numbers: {ypga} rushing yards allowed a game and {ypc} per opponent carry this season. {comparison}"
+      }
+    ],
+    "context.pass-defense": [
+      {
+        "id": "context.pass-defense.variety.1",
+        "body": "{school}: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.2",
+        "body": "Pass defense for {school}: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game (this season). {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.3",
+        "body": "This season: {school}, {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.4",
+        "body": "{school}'s pass defense: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.5",
+        "body": "A look at {school}: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.6",
+        "body": "Checking pass defense at {school}: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.7",
+        "body": "{ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game for {school} this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.8",
+        "body": "The pass defense figure for {school} is {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.9",
+        "body": "This season, the pass defense number for {school} is {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game. {comparison}"
+      },
+      {
+        "id": "context.pass-defense.variety.10",
+        "body": "{school} in numbers: {ypga} passing yards allowed a game, {ypa} per opponent attempt and {intpg} INT a game this season. {comparison}"
+      }
+    ],
+    "context.ball-security": [
+      {
+        "id": "context.ball-security.variety.1",
+        "body": "{school}: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.2",
+        "body": "Turnovers for {school}: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) (with {rate}% of pass attempts intercepted). {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.3",
+        "body": "With {rate}% of pass attempts intercepted: {school}, {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles). {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.4",
+        "body": "{school}'s turnovers: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.5",
+        "body": "A look at {school}: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.6",
+        "body": "Checking turnovers at {school}: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.7",
+        "body": "{givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) for {school} with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.8",
+        "body": "The turnovers figure for {school} is {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.9",
+        "body": "With {rate}% of pass attempts intercepted, the turnovers number for {school} is {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles). {comparison}"
+      },
+      {
+        "id": "context.ball-security.variety.10",
+        "body": "{school} in numbers: {givepg} giveaways a game ({intpg} INT, {lostpg} lost fumbles) with {rate}% of pass attempts intercepted. {comparison}"
+      }
+    ],
+    "context.disruption": [
+      {
+        "id": "context.disruption.variety.1",
+        "body": "{school}: {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.2",
+        "body": "Defensive disruption for {school}: {sackpg} sacks and {takepg} takeaways a game (including {intpg} INT and {frpg} fumble recoveries a game). {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.3",
+        "body": "Including {intpg} INT and {frpg} fumble recoveries a game: {school}, {sackpg} sacks and {takepg} takeaways a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.4",
+        "body": "{school}'s defensive disruption: {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.5",
+        "body": "A look at {school}: {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.6",
+        "body": "Checking defensive disruption at {school}: {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.7",
+        "body": "{sackpg} sacks and {takepg} takeaways a game for {school} including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.8",
+        "body": "The defensive disruption figure for {school} is {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.9",
+        "body": "Including {intpg} INT and {frpg} fumble recoveries a game, the defensive disruption number for {school} is {sackpg} sacks and {takepg} takeaways a game. {comparison}"
+      },
+      {
+        "id": "context.disruption.variety.10",
+        "body": "{school} in numbers: {sackpg} sacks and {takepg} takeaways a game including {intpg} INT and {frpg} fumble recoveries a game. {comparison}"
+      }
+    ],
+    "context.rushing": [
+      {
+        "id": "context.rushing.variety.1",
+        "body": "{school}: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.2",
+        "body": "Ground game for {school}: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game (with carries accounting for {share}% of pass/rush attempts). {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.3",
+        "body": "With carries accounting for {share}% of pass/rush attempts: {school}, {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.4",
+        "body": "{school}'s ground game: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.5",
+        "body": "A look at {school}: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.6",
+        "body": "Checking ground game at {school}: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.7",
+        "body": "{ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game for {school} with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.8",
+        "body": "The ground game figure for {school} is {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.9",
+        "body": "With carries accounting for {share}% of pass/rush attempts, the ground game number for {school} is {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game. {comparison}"
+      },
+      {
+        "id": "context.rushing.variety.10",
+        "body": "{school} in numbers: {ypg} yards a game, {ypc} per carry and {tdpg} rushing TD a game with carries accounting for {share}% of pass/rush attempts. {comparison}"
+      }
+    ],
+    "context.offense": [
+      {
+        "id": "context.offense.variety.1",
+        "body": "{school}: {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.2",
+        "body": "Offensive production for {school}: {ppg} points, {ypg} yards a game and {ypp} yards per play (in its {offense} approach). {comparison}"
+      },
+      {
+        "id": "context.offense.variety.3",
+        "body": "In its {offense} approach: {school}, {ppg} points, {ypg} yards a game and {ypp} yards per play. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.4",
+        "body": "{school}'s offensive production: {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.5",
+        "body": "A look at {school}: {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.6",
+        "body": "Checking offensive production at {school}: {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.7",
+        "body": "{ppg} points, {ypg} yards a game and {ypp} yards per play for {school} in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.8",
+        "body": "The offensive production figure for {school} is {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.9",
+        "body": "In its {offense} approach, the offensive production number for {school} is {ppg} points, {ypg} yards a game and {ypp} yards per play. {comparison}"
+      },
+      {
+        "id": "context.offense.variety.10",
+        "body": "{school} in numbers: {ppg} points, {ypg} yards a game and {ypp} yards per play in its {offense} approach. {comparison}"
+      }
+    ],
+    "context.defense": [
+      {
+        "id": "context.defense.variety.1",
+        "body": "{school}: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.2",
+        "body": "Defensive production for {school}: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play (in its {defense} approach). {comparison}"
+      },
+      {
+        "id": "context.defense.variety.3",
+        "body": "In its {defense} approach: {school}, {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.4",
+        "body": "{school}'s defensive production: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.5",
+        "body": "A look at {school}: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.6",
+        "body": "Checking defensive production at {school}: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.7",
+        "body": "{ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play for {school} in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.8",
+        "body": "The defensive production figure for {school} is {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.9",
+        "body": "In its {defense} approach, the defensive production number for {school} is {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play. {comparison}"
+      },
+      {
+        "id": "context.defense.variety.10",
+        "body": "{school} in numbers: {ppga} points and {ypga} offensive yards allowed a game, {yppa} yards per opponent play in its {defense} approach. {comparison}"
+      }
+    ],
+    "context.passing": [
+      {
+        "id": "context.passing.variety.1",
+        "body": "{school}: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.2",
+        "body": "Passing game for {school}: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game (with throws making up {share}% of recorded pass/rush attempts). {comparison}"
+      },
+      {
+        "id": "context.passing.variety.3",
+        "body": "With throws making up {share}% of recorded pass/rush attempts: {school}, {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.4",
+        "body": "{school}'s passing game: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.5",
+        "body": "A look at {school}: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.6",
+        "body": "Checking passing game at {school}: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.7",
+        "body": "{ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game for {school} with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.8",
+        "body": "The passing game figure for {school} is {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.9",
+        "body": "With throws making up {share}% of recorded pass/rush attempts, the passing game number for {school} is {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game. {comparison}"
+      },
+      {
+        "id": "context.passing.variety.10",
+        "body": "{school} in numbers: {ypg} yards a game, {ypa} per attempt, {tdpg} passing TD and {intpg} INT a game with throws making up {share}% of recorded pass/rush attempts. {comparison}"
+      }
+    ]
+  }
+}

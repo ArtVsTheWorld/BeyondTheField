@@ -14,7 +14,8 @@ export function offseasonCarryEvents(s){
    if(t.id===s.userTeamIndex)add(f,person.position==='QB'?'player-training-qb':'player-training','player',t,values,{player:person.id,priority:96});
   }else if(f.kind==='departure'&&t){
    const destination=teams.get(f.destination),values={playerName:f.name,position:publicPosition(f.position),period:f.evidence==='observed-encourage'||f.evidence==='encourage-period'?'the offseason roster review':'the offseason',destination:destination?.name,analystPersona:1};
-   add(f,destination?'departure-destination':f.portal?'departure-portal':'departure',f.overall>=85?'analyst':'beat',t,values,{national:f.overall>=85,relatedTeams:destination?[destination.id]:[]});
+   const encouraged=['observed-encourage','encourage-period'].includes(f.evidence);
+   add(f,destination?'departure-destination':encouraged?'departure-fcs':f.portal?'departure-portal':'departure',f.overall>=85?'analyst':'beat',t,values,{national:f.overall>=85,relatedTeams:destination?[destination.id]:[]});
   }else if((f.kind==='realignment'||f.kind==='alignment-history')&&t){
    const values={oldConference:f.oldConference,newConference:f.newConference};add(f,f.kind==='realignment'?'move':'history','beat',t,values,{national:true});
    if(f.kind==='realignment')add(f,'team-move','official',t,values,{national:false,priority:102});

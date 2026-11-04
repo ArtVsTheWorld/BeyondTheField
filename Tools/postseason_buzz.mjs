@@ -5,7 +5,7 @@ import {conferencePrestige} from './conference_context.mjs';
 import {seasonEndings} from './season_ending_events.mjs';
 import {verifiedSeasonRecord,seasonReviewWeek,championshipFinal} from './season_context.mjs';
 import {verifiedTeamRows,finalGame} from './football_context.mjs';
-import {rosterStrengths,projectLine} from './betting_model.mjs';
+import {rosterStrengths,projectLine,analystProjection} from './betting_model.mjs';
 import {hash} from './story_authors.mjs';
 export function focusFixtures(s){
  if(seasonReviewWeek(s)){const game=championshipFinal(s);return game?[{game,kind:'title',label:'national championship',tier:3}]:[];}
@@ -46,8 +46,10 @@ export function postseasonBuzz(s){
   const stars=depth>=2?[home,away].map(t=>({t,star:starFor(t)})).filter(x=>x.star):[];
   const fullMatchup=['ppg','ypg','ypp','ppga','ypga','yppa'].every(key=>Number.isFinite(stats.get(home.id)?.[key])&&Number.isFinite(stats.get(away.id)?.[key]));
   const personas=depth>=2?[1,2,3,4,5]:depth===1?[4,2]:[];
-  for(const persona of personas){if(persona===4&&fullMatchup||persona===5&&stars.length)continue;const contrary=persona===2&&line&&line.spread>0&&line.spread<=14&&(line.spread<=7||hash(g.id+'|contrarian')%3===0),pick=contrary?underdog:fav??(hash(g.id+'|pick|'+persona)%2?home:away),opponent=pick.id===home.id?away:home;
-   add('pick:'+persona,'pick-'+persona,'analyst',home.id,{pick:pick.name,opponent:opponent.name,lineContext,shape,shapeContext:shape==='lopsided'?'This projects as a mismatch, not a coin flip.':shape==='close'?'This projects as a close game.':shape==='favored'?'There is a clear lean, but the underdog has a path.':'The prediction is an opinion, not a claimed betting line.',analystPersona:persona,buzzReply:true,replyTeam:opponent.id},{priority:151-persona});
+  for(const persona of personas){if(persona===4&&fullMatchup||persona===5&&stars.length)continue;
+   const estimate=analystProjection(s,g,persona,{strengths,stats}),pick=estimate?.favorite!=null?teams.get(estimate.favorite):hash(g.id+'|pick|'+persona)%2?home:away,opponent=pick.id===home.id?away:home,personalShape=estimate?estimate.spread>=14?'lopsided':estimate.spread<=4?'close':'favored':'unknown';
+   const personalLine=estimate?(estimate.favorite===null?'My projection is even, using '+estimate.basis+'.':'My '+estimate.basis+' projection favors '+teams.get(estimate.favorite).name+' by '+estimate.spread+'.'):'My pick is a matchup opinion; there is not enough verified data for a point projection.';
+   add('pick:'+persona,'pick-'+persona,'analyst',home.id,{pick:pick.name,opponent:opponent.name,lineContext:personalLine,shape:personalShape,shapeContext:personalShape==='lopsided'?'This projects as a mismatch.':personalShape==='close'?'This projects as a close game.':personalShape==='favored'?'There is a clear lean, but the underdog has a path.':'The prediction is an opinion.',analystPersona:persona,buzzReply:true,replyTeam:opponent.id},{priority:151-persona});
   }
   for(const {t,star} of stars)add('star:'+t.id,'star','analyst',t.id,{playerName:star.p.name,line:star.line,analystPersona:5},{player:star.p.id,priority:147});
   for(const t of [home,away]){const opponent=t===home?away:home,r=stats.get(t.id),d=stats.get(opponent.id),roster=s.players.filter(p=>p.team===t.id&&p.injury==='Uninjured').sort((a,b)=>a.id.localeCompare(b.id)),p=roster[hash(g.id+'|pregame|'+t.id)%Math.max(1,roster.length)];

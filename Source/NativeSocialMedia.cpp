@@ -288,7 +288,7 @@ bool configureNewsDropdowns(bool enable){
         written.push_back(&p);
     }
     dropdownModelOwned=enable;dropdownScreenOwned=enable;
-    note({{"event",enable?"social_dropdowns_enabled":"social_dropdowns_restored"},{"screen",dropdownScreenBase},{"model",newsModelBase},{"screenReleased",screenReleased}});return true;
+    if(!written.empty()||screenReleased)note({{"event",enable?"social_dropdowns_enabled":"social_dropdowns_restored"},{"screen",dropdownScreenBase},{"model",newsModelBase},{"screenReleased",screenReleased}});return true;
 #endif
 }
 bool focusNewsPanel(bool enable){
@@ -387,7 +387,7 @@ const unsigned char* __fastcall scriptBodyHook(void* self){
     if(candidate){
         const bool original=social::assets::matches(address,dropdownPatches[0].original,read);
         {std::lock_guard<std::mutex> lock(layoutMutex);newsTemplate=address;if(original)dropdownScreenOwned=false;}
-        const bool ready=configureNewsDropdowns(true);note({{"event","social_news_asset_observed"},{"screen",candidate},{"preparedBeforeExecution",ready}});
+        const bool ready=configureNewsDropdowns(true);if(original||!ready)note({{"event","social_news_asset_observed"},{"screen",candidate},{"preparedBeforeExecution",ready}});
     }
     return body;
 }

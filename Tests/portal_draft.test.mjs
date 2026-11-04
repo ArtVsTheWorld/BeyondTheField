@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {draftBoard,draftEvents} from '../Tools/draft_results.mjs';
+import {draftBoard,draftEvents,undraftedBoard} from '../Tools/draft_results.mjs';
 import {offseasonRecruitingEvents,portalOrigin} from '../Tools/offseason_recruiting.mjs';
 import {buildFeed} from '../Tools/feed_engine.mjs';
 import {updateRuntime} from '../Tools/runtime_lifecycle.mjs';
@@ -18,6 +18,19 @@ test('the complete native class produces seven rounds with all 32 NFL clubs in e
 });
 test('draft slots and destinations remain stable through reloads, unrelated updates and scouting changes',()=>{
  const s=fixture(),a=draftBoard(s);assert.deepEqual(draftBoard({...s,players:[...s.players].reverse()}),a);s.players[0].overall=1;s.players[1].overall=99;assert.deepEqual(draftBoard(s,a),a);s.userTeamIndex=4;assert.deepEqual(draftBoard(s,a),a);
+});
+test('early rounds avoid a second QB for a club while other positions remain available',()=>{
+ const s=fixture(),b=draftBoard(s),players=new Map(s.players.map(p=>[p.id,p]));
+ for(const club of new Set(b.map(d=>d.nflTeam)))assert.ok(b.filter(d=>d.nflTeam===club&&d.round<=3&&players.get(d.player).position==='QB').length<=1,club);
+});
+test('undrafted deals use exhausted-eligibility seniors outside the native draft and stay stable on refresh',()=>{
+ const s=fixture();for(let i=0;i<35;i++)s.players.push({id:'u'+i,name:'Graduate Person'+i,team:1+i%8,position:['WR','CB','LT','TE','DT','HB','LE'][i%7],classYear:'Senior',redshirt:'Previous',overall:86,seasonStats:[]});
+ s.players.push({id:'junior',name:'Junior Person',team:1,position:'QB',classYear:'Junior',redshirt:'Previous',overall:99},{id:'redshirt',name:'Redshirt Person',team:1,position:'QB',classYear:'Senior',redshirt:'Current',overall:99},{id:'portal',name:'Portal Person',team:1,position:'QB',classYear:'Senior',redshirt:'Previous',overall:99});s.portalEntrants=['portal'];
+ const a=undraftedBoard(s);assert.equal(a.length,25);assert.equal(new Set(a.map(d=>d.player)).size,25);assert.ok(a.every(d=>d.player.startsWith('u')));assert.equal(new Set(a.map(d=>d.nflTeam)).size,25);
+ assert.deepEqual(undraftedBoard({...s,players:[...s.players].reverse()},a),a);
+ const f=buildFeed(s),posts=f.stories.filter(p=>p.templateId.startsWith('draft.undrafted'));assert.equal(posts.length,25);assert.ok(posts.every(p=>p.author==='NFL Draft'&&p.transaction&&!p.draftPick));assert.ok(posts.every(p=>/undrafted/i.test(p.body)));
+ const tx=filterConversations(f.stories,'transactions');assert.deepEqual(tx.filter(p=>p.draftPick).map(p=>p.draftPick),Array.from({length:224},(_,i)=>i+1));assert.ok(tx.findIndex(p=>p.templateId.startsWith('draft.undrafted'))>=224);
+ s.season.CurrentWeek=1;assert.deepEqual(undraftedBoard(s),[]);
 });
 test('duplicate, incomplete or future draft classes cannot invent extra drafted players',()=>{
  for(const mutate of [s=>s.draftResults.pop(),s=>s.draftResults[0]={...s.draftResults[1]},s=>s.draftResults[0].round=7,s=>s.season.CurrentWeek=1,s=>s.season.CurrentStage='NFLSeason']){const s=fixture();mutate(s);assert.deepEqual(draftBoard(s),[]);assert.deepEqual(draftEvents(s),[]);}

@@ -3,6 +3,7 @@ import {seasonStorylines} from './season_storylines.mjs';
 import {hash} from './story_authors.mjs';
 const hashForRecruit=id=>hash(id+'|portal-specialist')%3===0?3:5;
 import {draftEvents} from './draft_results.mjs';
+import {playersLeavingEvents} from './players_leaving_events.mjs';
 import {draftDiscourse} from './draft_discourse.mjs';
 import {recruitAttention,recruitContext,recruitingCategory} from './recruit_context.mjs';
 import {offseasonRecruitingEvents} from './offseason_recruiting.mjs';
@@ -50,13 +51,14 @@ export function detectEvents(s,previous=null){
     if(p&&recruitingCategory(category)){
       if(!recruitAttention(s,p))return;
       facts={...facts,...recruitContext(s,p)};
+      if(facts.recruitKind==='transfer'&&facts.formerTeam===team&&(facts.newlyObserved||facts.signed))facts={...facts,returningPortal:true,exceptionalReturn:p.overall>=88,family:'roster.returning',voice:'beat'};
       if(facts.recruitKind==='transfer'&&p.starRating>=4&&(facts.newlyObserved||facts.signed)){national=true;facts.analystPersona=hashForRecruit(id);}
       if(p.starRating===5&&category==='signings')facts={...facts,voice:'analyst',analystPersona:0};
       if(p.starRating===2){if(!id.startsWith('commit:')&&!id.startsWith('portal-opening:unsigned:')&&!id.startsWith('portal-opening:entrant:'))return;facts.family='roster.underdog';facts.voice='beat';}
       if(facts.recruitKind==='transfer'&&facts.formerTeam!==null){relatedTeams=[...relatedTeams,facts.formerTeam];facts.rivalTransfer=Boolean(teams.get(team)?.rivals?.includes(facts.formerTeam)||teams.get(facts.formerTeam)?.rivals?.includes(team));}
     }
     const teamIds=[...new Set([team,p?.team,...relatedTeams].filter(t=>Number.isInteger(t)&&t!==255))],scopes=[];
-    if(teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
+    if(primaryScope!=='conference'&&teamIds.includes(s.userTeamIndex))scopes.push('team');if(teamIds.some(t=>conferenceTeams.has(t)))scopes.push('conference');
     if(national??['polls','heisman','cfp','holiday'].includes(category))scopes.push('national');// Every program retains its dedicated news, even outside the personalized feed.
     if(['recruiting','offers'].includes(category)&&p&&(s.recruitInterests?.includes(p.id)||(p.homePipeline&&own.pipelines?.includes(p.homePipeline))||(p.homeState&&p.homeState===own.homeState)))scopes.push('relevant');
     ids.add(id);const teamContext=teamIds.map(id=>teams.get(id)).filter(Boolean).map(t=>({teamId:t.id,school:t.name,nickname:t.nickname??null,nicknameAlt:t.nicknameAlt??null,hashtags:t.hashtags??[],headCoach:t.headCoach?Object.fromEntries(['id','name','firstName','lastName','style','seasonsWithTeam'].filter(k=>t.headCoach[k]!==undefined).map(k=>[k,t.headCoach[k]])):null}));
@@ -137,7 +139,7 @@ export function detectEvents(s,previous=null){
       {relatedTeams:[...members],national:false,priority:84,primaryScope:'conference'});
   }
   for(const e of [...lateSeasonEvents(s),...historyMilestoneEvents(s),...(liveAnalysis?deepAnalyticsEvents(s):[]),...matchupEvents(s),...seasonEndingEvents(s),...fanAccountEvents(s),...postseasonEvents(s),...(liveAnalysis?contextualAnalytics(s):[]),...conferenceDiscourse(s),...transactionEvents(s),...offseasonEvents(s),...postseasonBuzz(s),...seasonReviewEvents(s),...portalRiskEvents(s),...offseasonRecruitingEvents(s),...draftEvents(s)])emit(e.id,e.category,e.facts,e.options);
-  for(const e of draftDiscourse(s))emit(e.id,e.category,e.facts,e.options);
+  for(const e of [...playersLeavingEvents(s),...draftDiscourse(s)])emit(e.id,e.category,e.facts,e.options);
   for(const e of playoffEvents(s,previous))emit(e.id,e.category,e.facts,e.options);
   const analytics=liveAnalysis?teamAnalytics(s):{teams:[],milestones:[]};
   for(const a of analytics.teams){const t=teams.get(a.teamId),national=rank(a.teamId)<=25;

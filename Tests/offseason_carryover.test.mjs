@@ -88,7 +88,7 @@ test('verified departure persists through record deletion, but a restored roster
 });
 test('departure wording uses only verified portal status or destination and never assigns coach intent',()=>{
  for(const kind of ['unassigned','portal','destination']){
-  const {s,ledger}=trained();s.season.CurrentWeek=8;let a=observeOffseason(s,ledger);s.players[2].team=kind==='destination'?2:255;if(kind==='portal')s.portalEntrants=['p3'];a=observeOffseason(s,a.ledger);const b=observeOffseason(preseason(s),a.ledger);s.offseasonCarry=b.facts;const e=offseasonCarryEvents(s).find(e=>e.facts.carryoverKind==='departure');assert.equal(e.facts.family,'carry.departure'+(kind==='unassigned'?'':'-'+kind));assert.ok(!/cut|forced|kicked/i.test(e.facts.period));
+  const {s,ledger}=trained();s.season.CurrentWeek=8;let a=observeOffseason(s,ledger);s.players[2].team=kind==='destination'?2:255;if(kind==='portal')s.portalEntrants=['p3'];a=observeOffseason(s,a.ledger);const b=observeOffseason(preseason(s),a.ledger);s.offseasonCarry=b.facts;const e=offseasonCarryEvents(s).find(e=>e.facts.carryoverKind==='departure');assert.equal(e.facts.family,kind==='destination'?'carry.departure-destination':'carry.departure-fcs');assert.ok(!/cut|forced|kicked/i.test(e.facts.period));
  }
 });
 test('rewinding to signing day removes future development, departures and conference moves',()=>{

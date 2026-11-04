@@ -7,7 +7,7 @@ export function scopeCatalog(s){
 }
 export function discoveryViews(stories,options){
  // stories already use parent-first conversation order; children inherit the root scope.
- return Object.fromEntries(options.filter(o=>o.teamIds).map(o=>[o.key,stories.filter(p=>p.teamIds?.some(id=>o.teamIds.includes(id))).map(p=>p.id)]));
+ return Object.fromEntries(options.filter(o=>o.teamIds).map(o=>[o.key,stories.filter(p=>(o.kind!=='team'||p.primaryScope!=='conference')&&p.teamIds?.some(id=>o.teamIds.includes(id))).map(p=>p.id)]));
 }
 export const CATEGORY_FILTERS=[
  {key:'all',label:'All Types'},
