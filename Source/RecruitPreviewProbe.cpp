@@ -52,7 +52,7 @@ DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t ownPath[32768]{};GetModuleFileNameW(self,ownPath,32768);const auto file=std::filesystem::path(ownPath).parent_path()/L"recruit-preview-probe.jsonl";
     {std::lock_guard<std::mutex> lock(lifecycle);if(disabled)return 1;
         const auto parent=*reinterpret_cast<void**>(base+table+slot);HMODULE owner=nullptr;wchar_t ownerPath[32768]{};std::array<unsigned char,32> bytes{};
-        if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p50.dll"||!read(base+native,bytes.data(),bytes.size())||bytes!=playingTimeGates[7].bytes)return 2;
+        if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p51.dll"||!read(base+native,bytes.data(),bytes.size())||bytes!=playingTimeGates[7].bytes)return 2;
         HMODULE pin=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&pin))return 3;
         original=reinterpret_cast<Getter>(parent);if(!swap(parent,reinterpret_cast<void*>(hook))){original=nullptr;return 4;}installed=true;
     }

@@ -465,12 +465,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p50.dll",
-    "cleanRestartRequired": "Clean p50 activation completed; any subsequent retained UI definition change requires clean restart.",
-    "activeRuntime": "p50 active alone in clean PID31340 after baseline stop0 at title/main menu. No development probes loaded.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p50-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p51.dll",
+    "cleanRestartRequired": "Clean p51 activation completed; later retained UI definition changes require clean restart.",
+    "activeRuntime": "p51 active alone in clean PID20872, installed baseline stop0 at main menu. No development probes loaded.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p51-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "95d6e18510c659308e23fcd57843ff43ba07f0b2ced4fa0c0ee102b43ba07281",
+    "previewSha256": "822102a51fa29db7276c2d2c889686be304330657c27de95e7c8994614edafca",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p51.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p51-MMC.zip",
@@ -497,7 +497,8 @@
     "p50Activation": "Baseline stop0; p50 active log and empty initial retention/performance report confirmed before Dynasty load.",
     "p50Live": "Clean PID31340 Dynasty entry, Starting Offense, Redshirts All table/panel and initial FIU Injury table/panel passed. Injury lengths remain2/33. Full regression still in progress.",
     "p51Build": "MSVC/W4/WX/native and seven UI suites pass. Independent Formation Subs source/fingerprint/ABI/frame/model review pass. Improved actual registerbudget and recycled selection fixtures pass.",
-    "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet."
+    "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet.",
+    "p51Activation": "Baseline stop0, p51 active event and empty10-bank initial retention report confirmed before Dynasty entry in PID20872."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
