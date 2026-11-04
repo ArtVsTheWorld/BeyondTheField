@@ -175,7 +175,7 @@ int main(){try{
         std::array<std::string,90> depthNames{};const char* depthHeaders[]={"","POS","#","RS","Name","Year","POS","OVR","NIL","MOR","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
         for(size_t i=0;i<std::size(depthHeaders);++i)depthNames[i]=depthHeaders[i];
         require(classifyGrid(depthNames,35)==GridSchema::DepthChart&&!rosterSchema(depthNames,35),"Captured native depth schema misclassified");
-        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart,GridSchema::Redshirts,GridSchema::InjuryReport}){
+        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart,GridSchema::Redshirts,GridSchema::InjuryReport,GridSchema::PositionAth,GridSchema::PlayersLeaving,GridSchema::Training,GridSchema::EncourageTransfers}){
             const auto state=gridState(form,schema);require(gridStateForm(state)==form&&gridStateSchema(state)==schema,"Atomic form/schema snapshot lost identity");
         }
         require(gridState(-1,GridSchema::Roster)==0&&gridState(0,GridSchema::None)==0&&gridStateForm(0)==-1,"Inactive grid state admitted a row");
@@ -208,6 +208,53 @@ int main(){try{
         for(unsigned i=0;i<6;++i)gridString(&injuryCells,i,"display",std::array<const char*,6>{"McNeal","78","Dislocated Hip","2","33","Injured"}[i]);
         gridInt(&injuryCells,1,"intValue",78);
         require(output.values[0]["value"]=="McNeal"&&output.values[1]["value"]=="C"&&output.values[4]["value"]=="Dislocated Hip"&&output.values[5]["value"]=="2"&&output.values[6]["value"]=="33"&&output.values[7]["value"]=="Injured"&&output.values[8]["value"]==78,"Injury conversion changed injury text, length, return/status or sorting");
+        std::array<std::string,90> athNames{};const char* athHeaders[]={"","RS","Name","Year","POS","OVR","DEV","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
+        for(size_t i=0;i<std::size(athHeaders);++i)athNames[i]=athHeaders[i];
+        require(classifyGrid(athNames,32)==GridSchema::PositionAth,"Captured ATH position-change schema not recognized");
+        athNames[31]="Passing Yards";require(classifyGrid(athNames,32)==GridSchema::None,"ATH schema admitted ordinary stats");athNames[31]="INJ";
+        require(classifyGrid(athNames,31)==GridSchema::None,"Unverified compact ATH schema admitted");
+        output.values=nlohmann::json::array();GridSink athCells{gridTable,&output};athCells.schema=GridSchema::PositionAth;athCells.count=5;athCells.columns={5,6,7,31,2};
+        for(unsigned i=0;i<5;++i)gridString(&athCells,i,"display",std::array<const char*,5>{"73,TrendNone","2","86","59","73"}[i]);
+        gridInt(&athCells,0,"intValue",73);
+        require(output.values[0]["value"]=="C"&&output.values[3]["value"]=="2"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="F"&&output.values[10]["value"]=="73"&&output.values[11]["value"]==73,"ATH conversion touched hiddenDEV/name/sort or missed ratings");
+        std::array<std::string,90> leavingNames{};const char* leavingHeaders[]={"Name","","POS","Year","OVR","Reason","Persuasion Chance","RS"};
+        for(size_t i=0;i<std::size(leavingHeaders);++i)leavingNames[i]=leavingHeaders[i];
+        require(classifyGrid(leavingNames,8)==GridSchema::PlayersLeaving,"Captured Players Leaving schema not recognized");
+        leavingNames[6]="Transfer Stats";require(classifyGrid(leavingNames,8)==GridSchema::None,"Leaving schema accepted unrelated table");
+        output.values=nlohmann::json::array();GridSink leavingCells{gridTable,&output};leavingCells.schema=GridSchema::PlayersLeaving;leavingCells.count=5;leavingCells.columns={4,5,6,7,0};
+        for(unsigned i=0;i<5;++i)gridString(&leavingCells,i,"display",std::array<const char*,5>{"80","Transfer (NIL)","Medium","1","Toothman"}[i]);
+        gridInt(&leavingCells,0,"intValue",80);
+        require(output.values[0]["value"]=="B"&&output.values[3]["value"]=="Transfer (NIL)"&&output.values[4]["value"]=="Medium"&&output.values[5]["value"]=="1"&&output.values[6]["value"]=="Toothman"&&output.values[7]["value"]==80,"Leaving conversion changed reasons, persuasion, redshirt, name or sort value");
+        std::array<std::string,90> trainingNames{};const char* trainingIdentity[]={"","RS","Name","Year","POS","OVR","NIL"};
+        for(size_t i=0;i<std::size(trainingIdentity);++i)trainingNames[i]=trainingIdentity[i];
+        for(unsigned i=7;i<60;++i)trainingNames[i]=redshirtHeaders[i];trainingNames[60]="LSP";
+        require(classifyGrid(trainingNames,61)==GridSchema::Training,"Captured Training Results schema not recognized");
+        require(classifyGrid(trainingNames,9)==GridSchema::Training,"Known training position subset rejected");
+        trainingNames[7]="Yards";require(classifyGrid(trainingNames,61)==GridSchema::None,"Training schema admitted statistics");trainingNames[7]="SPD";
+        for(int current=0;current<=100;++current){
+            const auto expected=display(Visibility::Revealed,current);
+            require(trainingRatingLabel(std::to_string(current).c_str())==expected,"Training zero delta base failed");
+            for(int previous=0;previous<=100;++previous)if(previous!=current){
+                const auto delta=current-previous;const auto suffix=",TrendWithDelta,("+std::string(delta>0?"+":"")+std::to_string(delta)+")";
+                require(trainingRatingLabel((std::to_string(current)+suffix).c_str())==expected+suffix,"Training base changed its native adjustment/trend suffix");
+            }
+        }
+        for(const auto* invalid:{"?","-1","101","079","79.5","97,TrendWithDelta,2","97,TrendWithDelta,(+0)","97,TrendWithDelta,(+101)","97,TrendWithDelta,(+02)","97,TrendWithDelta,(+2) yards","97,TrendWithDelta,(+2),other"})require(trainingRatingLabel(invalid)==invalid,"Malformed training delta was converted");
+        output.values=nlohmann::json::array();GridSink trainingCells{gridTable,&output};trainingCells.schema=GridSchema::Training;trainingCells.count=5;trainingCells.columns={5,6,7,60,2};
+        for(unsigned i=0;i<5;++i)gridString(&trainingCells,i,"display",std::array<const char*,5>{"97,TrendWithDelta,(+2)","10","75,TrendWithDelta,(-3)","88","97"}[i]);
+        gridInt(&trainingCells,0,"intValue",97);
+        require(output.values[0]["value"]=="A,TrendWithDelta,(+2)"&&output.values[3]["value"]=="10"&&output.values[4]["value"]=="C,TrendWithDelta,(-3)"&&output.values[7]["value"]=="B"&&output.values[10]["value"]=="97"&&output.values[11]["value"]==97,"Training cells changed delta, NIL, name or numeric sort metadata");
+        ColumnSink trainingColumns{columnTable};columnInt(&trainingColumns,5,"formatType",35);columnBool(&trainingColumns,5,"isTrend",true);columnInt(&trainingColumns,6,"formatType",49);columnInt(&trainingColumns,7,"formatType",35);
+        output.values=nlohmann::json::array();replayColumns(trainingColumns,&output,true,GridSchema::Training);
+        require(output.values[0]["value"]==35&&output.values[1]["value"]==true&&output.values[2]["value"]==49&&output.values[3]["value"]==35,"Training removed the native delta renderer or changed NIL format");
+        std::array<std::string,90> encourageNames{};const char* encourageHeaders[]={"","Name","Year","POS","OVR","NIL","DEV","SPD","STR","ACC","AGI","AWR","BCV","BSH","BSK","CAR","CTH","COD","FMV","POW","INJ","JKM","JMP","KAC","KPW","RET","LBK","MCV","PBF","PBP","PBK","PAC","PRC","PMV","PRS","PUR","RLS","DRR","MRR","SRR","RBF","RBP","RBK","SPC","SPD","SPM","STA","SFA","STR","TAK","DAC","MAC","SAC","RUN","THP","TUP","TGH","TRK","ZCV","IBL","LSP"};
+        for(size_t i=0;i<std::size(encourageHeaders);++i)encourageNames[i]=encourageHeaders[i];
+        require(classifyGrid(encourageNames,61)==GridSchema::EncourageTransfers,"Captured Encourage Transfers schema not recognized");
+        encourageNames[60]="Games Played";require(classifyGrid(encourageNames,61)==GridSchema::None,"Encourage schema admitted statistics");encourageNames[60]="LSP";
+        output.values=nlohmann::json::array();GridSink encourageCells{gridTable,&output};encourageCells.schema=GridSchema::EncourageTransfers;encourageCells.count=6;encourageCells.columns={4,5,6,7,60,1};
+        for(unsigned i=0;i<6;++i)gridString(&encourageCells,i,"display",std::array<const char*,6>{"57,TrendNone","10","2","71","88","Joseph"}[i]);
+        gridInt(&encourageCells,0,"intValue",57);
+        require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="10"&&output.values[4]["value"]=="2"&&output.values[5]["value"]=="C"&&output.values[8]["value"]=="B"&&output.values[11]["value"]=="Joseph"&&output.values[12]["value"]==57,"Encourage conversion changed NIL,DEV,name or numeric sort value");
         FixtureView view;view.maps[1]={{"overall",2},{"teamOverall",3},{"jersey",4}};view.numbers={{2,82},{3,64},{4,1}};std::string changed;
         require(selectedOverall(view,1,[&](uintptr_t root,const char* key,const char* value){require(root==1,"Selected player root changed");changed=std::string(key)+"="+value;})&&changed=="overall=B","Selected overall not scoped to player field");
         view.numbers[2]=-1;require(!selectedOverall(view,1,[&](uintptr_t,const char*,const char*){throw std::runtime_error("Invalid selected rating exposed");}),"Invalid player overall changed");
