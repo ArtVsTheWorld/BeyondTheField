@@ -240,7 +240,7 @@
     ],
     "ratingIds": "4 and7..59",
     "trailingIdentity": "60 Last Name",
-    "status": "p50 built and reviewed; live candidate test pending",
+    "status": "p50 clean PID31340 live All table and panel verified; focused filters/far-right/reentry still pending",
     "preserved": "RS/name/POS/year/NIL/games played/last name/intValue/sort"
   },
   "injuryGrid": {
@@ -278,5 +278,19 @@
     "bounds": "Eight native responses or five minutes; depth3/array32; descends only attributesSubpanelInfo, other containers left untraversed",
     "ownership": "p50 parent module + native32-byte GetEntryInfo gate; one native call, lifecycle mutex/CAS restoration; response unchanged",
     "manual": "Select existing0%, partial Luke40%, and existing100% in Prospect List; compare actual selected IDs and visible sidebar with captured flags/ranges. Then Transfer Portal; no hours or recruiting actions."
+  },
+  "legacyHubInjuryWidget": {
+    "status": "Asset-only discovery; no implementation or live verification",
+    "class": "art_control.panel.career.PlayerInjuryListItem",
+    "root": "30d30",
+    "drawHeader": "31598",
+    "drawBody": "315c8",
+    "argc": 0,
+    "registers": 4,
+    "flags": 25,
+    "size": 315,
+    "fnv": "7b0efb4dda13f53e",
+    "path": "ExtraInfo.OverallText to TextFieldGeneric mcOverall.SetLabel",
+    "guard": "Do not transform OverallText globally: newer injury panels use injury text; standings/stats/schedules reuse it for ordinary numbers. Consider class-specific numeric-only suffix only if live observed."
   }
 }

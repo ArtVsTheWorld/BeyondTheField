@@ -36,7 +36,6 @@
       "liveVerified": false,
       "evidence": "Active model rows use native RightLabelDisplayOverride plus cloned font styles; source rating/min/max/increase values unchanged. Offline 101-boundary/migration/unknown/ABI tests; trace match of actual GenericSlider.Draw and UpdateSubskillsList. p39 shared renderer masks unused AttributesItem path separately.",
       "remaining": [
-        "Combined p46 reentry/focus regression",
         "Other position cards and Mentals/secondary tooltips",
         "Injured-player Health path (numeric wear-and-tear deltas intentionally remain)"
       ],
@@ -66,9 +65,8 @@
       "liveVerified": false,
       "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass; not loaded yet.",
       "remaining": [
-        "live formation and comparison/watch previews",
-        "default-style players-to-watch grade colors",
-        "reentry/selection"
+        "Live comparison/watch previews and their reentry/selection",
+        "Default-style players-to-watch grade colors"
       ],
       "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending."
     },
@@ -130,7 +128,6 @@
       "liveVerified": false,
       "evidence": "p48 exact596-byte MySchoolRiskListItem.Draw gate, source OVR numeric and RiskValue unchanged, four-register label/color suffix. All101-boundary/unknown/header/reentry tests and independent review pass.",
       "remaining": [
-        "Clean p48 activation",
         "Live My School risk list attachment, letters and colors"
       ]
     },
@@ -140,8 +137,9 @@
       "liveVerified": false,
       "evidence": "p46 panel colored but native table numeric. Captured full61-column schema; source adds exact schema with rating4,7..59, preservingGP6/NIL5/LastName60 and sorting.",
       "remaining": [
-        "p50 live all/focused filters and scroll"
-      ]
+        "Focused filters and far-right scroll/reentry verification"
+      ],
+      "liveStatus": "p50 clean PID31340: All view directly verified OVR and visible SPD/ACC/AGI/COD/STR/AWR/CAR grades; unselected grades colored, ineligible native gray preserved. Selected Hollins panel B colored. Team64/64/63, NIL45 and GP4 numeric. No Submit or redshirt changes."
     },
     {
       "surface": "Injury Report table and player panel",
@@ -257,7 +255,181 @@
         "totalUs": 587.7
       },
       "caveat": "C++ adapter timing only; does not measure appended UI bytecode execution, whole-frame time or late-season behavior."
-    }
+    },
+    "p50InitialSamples": {
+      "columns": {
+        "bucketCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 197.4,
+        "meanUs": 197.4,
+        "samples": 1,
+        "totalUs": 197.4
+      },
+      "event": "player_fog_performance",
+      "nativeRowsIncludingCollector": {
+        "bucketCounts": [
+          796,
+          910,
+          29,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 143.8,
+        "meanUs": 1.5561059907834103,
+        "samples": 1736,
+        "totalUs": 2701.4
+      },
+      "retainedBytes": 45056,
+      "retention": [
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "recruitNotes"
+        },
+        {
+          "banks": 1,
+          "bytes": 4096,
+          "definitions": 1,
+          "name": "legacyGrid"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "modernGrid"
+        },
+        {
+          "banks": 1,
+          "bytes": 24576,
+          "definitions": 5,
+          "name": "playerBank0"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "playerBank1"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "playerBank2"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "playerBank3"
+        },
+        {
+          "banks": 1,
+          "bytes": 12288,
+          "definitions": 3,
+          "name": "playerBank4"
+        },
+        {
+          "banks": 1,
+          "bytes": 4096,
+          "definitions": 1,
+          "name": "playerBank5"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "playerBank6"
+        },
+        {
+          "banks": 0,
+          "bytes": 0,
+          "definitions": 0,
+          "name": "playerBank7"
+        }
+      ],
+      "rows": {
+        "bucketCounts": [
+          714,
+          983,
+          38,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 145.0,
+        "meanUs": 1.6612327188940093,
+        "samples": 1736,
+        "totalUs": 2883.9
+      },
+      "sampleCapPerPath": 8192,
+      "scriptAdapters": {
+        "bucketCounts": [
+          8149,
+          42,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 6.1,
+        "meanUs": 0.1129150390625,
+        "samples": 8192,
+        "totalUs": 925.0
+      }
+    },
+    "p50InitialCaveat": "One hub and Redshirts visit only. 45,056 retained bytes are current initial allocations, not a steady-state/memory-growth result. Native adapter timers do not measure appended AS execution or total frame time."
   },
   "review": {
     "independentReviewer": "fog_coverage_review",
@@ -281,12 +453,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p46.dll",
-    "cleanRestartRequired": "Clean p46 activation completed at main menu; future changes retaining copied UI definitions require another clean restart.",
-    "activeRuntime": "p46 active alone in clean PID30084; installed baseline untouched. No temporary UI probes or supplements.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p46-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p50.dll",
+    "cleanRestartRequired": "Clean p50 activation completed; any subsequent retained UI definition change requires clean restart.",
+    "activeRuntime": "p50 active alone in clean PID31340 after baseline stop0 at title/main menu. No development probes loaded.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p50-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "cb8d9f8a088911841ba2b23e787ae4885a04c92329d3f8b0232fb539a5a9b368",
+    "previewSha256": "95d6e18510c659308e23fcd57843ff43ba07f0b2ced4fa0c0ee102b43ba07281",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p50.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p50-MMC.zip",
@@ -302,18 +474,20 @@
     "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test.",
     "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text.",
     "p46Build": "Passed MSVC /W4 /WX, C++ including101xfull-attribute ability grammar and captured-depth-schema tests, all UI VM suites, independent review and MMC package smoke checks. No installed changes.",
-    "p46Live": "Team Starting Offense, QB/C Depth Chart, roster card Ratings/Physicals and reentry pass. Roster remaining filters next; no player edits or advance.",
+    "p46Live": "Clean session: Starting Offense, QB/C Depth Chart, roster card Ratings/Physicals and reentry pass. User verified remaining roster team/position/far-right and depth offense/defense/return/specialist filters. No edits or advance.",
     "p47Build": "Passed MSVC /W4 /WX, native tests, all UI VM suites including coach-camera renderer. Not loaded; p46 remains active.",
     "p47Review": "Independent reviewer passed typed award ABI/gates/preflight/CAS restoration/coach guard and seven-bank IG lifecycle; independently reran card and IG VM tests.",
     "p47Package": "MMC registration/callback/tamper/path/editable-config smoke checks passed; baseline files/history unchanged.",
     "p48Build": "Passed MSVC /W4 /WX, native tests and all UI VM suites, independent risk adapter register/ABI/preservation review. No live p48 loading yet.",
     "p48Package": "MMC registration/callback/tamper/path/config smoke checks passed; baseline remains untouched.",
     "p50Build": "Passed MSVC /W4 /WX, native tests and all six UI VM suites. Corrected Injury hidden-column fixture, native Injury typed3 getter, Redshirts schema, risk-player labels and retained-memory counters independently reviewed.",
-    "p50Package": "MMC registration/launch/tamper/path/config smoke passed. No installed file or history changes."
+    "p50Package": "MMC registration/launch/tamper/path/config smoke passed. No installed file or history changes.",
+    "p50Activation": "Baseline stop0; p50 active log and empty initial retention/performance report confirmed before Dynasty load.",
+    "p50Live": "Clean PID31340 Dynasty entry passed. Starting Offense colored grades retained. Redshirts All table/player panel live verified; focused filters/far-right/reentry pending. Injury Report next; automated Back ignored, controller step requested."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
-    "depthCardsHub": "In progress: QB/C depth and Starting Offense verified; remaining depth/comparison/watch views pending.",
+    "depthCardsHub": "In progress: all requested depth filters/far-right verified by user; roster card Ratings/Physicals and Starting Offense verified. Separate lineup/comparison/watch previews and secondary card paths pending.",
     "remainingMenusLeakAudit": "In progress: awards and MySchool risk-player adapters built, live verification pending.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   }
