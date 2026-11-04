@@ -36,11 +36,12 @@
       "liveVerified": false,
       "evidence": "Active model rows use native RightLabelDisplayOverride plus cloned font styles; source rating/min/max/increase values unchanged. Offline 101-boundary/migration/unknown/ABI tests; trace match of actual GenericSlider.Draw and UpdateSubskillsList. p39 shared renderer masks unused AttributesItem path separately.",
       "remaining": [
-        "Mentals/secondary tooltips",
-        "Live p61 abbreviated route ability requirements",
-        "Health numeric wear-and-tear penalty case when present (Kyle currently has none)"
+        "Mentals/secondary tooltips"
       ],
-      "liveStatus": "p46 clean session: Brady Schaefer header D orange, IQ/Awareness C yellow, Pass Blocking C headings/attributes yellow; Physicals requirement/current grades correct with native numeric costs and Not Met. Ratings tab reentry keeps colors. Edit Player numeric ratings are explicitly excluded by user. p60 KyleMcNeal injured Health verified by user and screenshot: OverallC/yellow, Low risk, None W&T impact, nativeSeason/Career bars, injury DislocatedHip Out2Weeks and skillpoints2/jersey7 preserved. Physicals Cutter/DoubleDip route aliases leaked numeric requirements; fixed offline p61 pending live."
+      "liveStatus": "p46 clean session: Brady Schaefer header D orange, IQ/Awareness C yellow, Pass Blocking C headings/attributes yellow; Physicals requirement/current grades correct with native numeric costs and Not Met. Ratings tab reentry keeps colors. Edit Player numeric ratings are explicitly excluded by user. p60 KyleMcNeal injured Health verified by user and screenshot: OverallC/yellow, Low risk, None W&T impact, nativeSeason/Career bars, injury DislocatedHip Out2Weeks and skillpoints2/jersey7 preserved. Physicals Cutter/DoubleDip route aliases leaked numeric requirements; fixed offline p61 pending live. p61 sameKylePhysicals user+actualscreenshot: Cutter BMediumRoute(CCurrently), DoubleDip BDeepRoute(CCurrently); all5visibleabilityrequirements graded; nativecosts3/2/4/3/3, NotMet,skillpoints2 andinjuryOut2Weeks preserved. No upgrades.",
+      "conditionalRegression": [
+        "Inspect numeric wear-and-tear penalties if present naturally; Kyle has none. No manufactured injury required."
+      ]
     },
     {
       "surface": "Native spreadsheet grade colors",
@@ -53,11 +54,9 @@
     {
       "surface": "Depth chart and lineup/comparison",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "Native QB depth columns captured: form0; identity POS,#,RS,Name,Year,POS,OVR,NIL,MOR; rating IDs7,10+. p46 exact-prefix/known-attribute schema plus one atomic form/schema snapshot. Tests preserve depth2 ordinal formatter13, NIL8 currency49, MOR9, intValue/sorting and names.",
-      "remaining": [
-        "Formation Subs defensive view and reentry preservation sweep"
-      ],
+      "remaining": [],
       "liveStatus": "p46 clean session QB/C table and panel verified; user additionally checked offense, defense, return/specialist filters and far-right ratings, reporting all letters while depth/NIL/team ratings remain numeric. No lineup edits."
     },
     {
@@ -73,9 +72,7 @@
       "implemented": true,
       "liveVerified": true,
       "evidence": "User-confirmed p27 persistence, class labels and controls p51 bounded Prospect List response trace captured; user confirms attributes are not displayed in that view, so no conversion added to unexposed fields. Read-onlyprobe stopped0.",
-      "remaining": [
-        "additional transfer/entry preview leak audit"
-      ]
+      "remaining": []
     },
     {
       "surface": "Training and position changes",
@@ -114,8 +111,7 @@
       "liveVerified": false,
       "evidence": "p47 separate typed3-argument native bindings and exact32-byte fingerprint gates. AnnualAwards requires explicit isCoach=false. Tests preserve coach/unknown records and exactly-once native return/key/output.",
       "remaining": [
-        "Live annual/weekly awards including coach-category preservation",
-        "Heisman selection/reentry regression"
+        "Live annual/weekly awards including coach-category preservation"
       ],
       "liveStatus": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected."
     },
@@ -143,10 +139,8 @@
       "implemented": true,
       "liveVerified": true,
       "evidence": "p46 live raw78; native10-column metadata including hiddenblank0 captured. p50 masksOVR4 only plus separately typed3 GetInjuryInfo overall/revealed attributes. Tests preserve injury duration/risk/status/age/stats/sorting. Independent review corrected leading-hidden-column shift before any live activation.",
-      "remaining": [
-        "Focused position-filter/reentry regression"
-      ],
-      "liveStatus": "p50 clean PID31340: FIU filter shows Kyle McNeal and S. Sterlin OVR C in table; selected Kyle panel C yellow. Injury Dislocated Hip/Torn Pectoral, Length2/33 and status unchanged. Selected row black, unselected C yellow. Native team banner showed Florida Atlantic while selector/sidebar showed FIU; do not attribute untested native banner discrepancy to fog adapter. Second selected player Shamir Sterlin panel also C yellow after refresh, jersey1/6ft2in/215lb/class preserved."
+      "remaining": [],
+      "liveStatus": "p50 clean PID31340: FIU filter shows Kyle McNeal and S. Sterlin OVR C in table; selected Kyle panel C yellow. Injury Dislocated Hip/Torn Pectoral, Length2/33 and status unchanged. Selected row black, unselected C yellow. Native team banner showed Florida Atlantic while selector/sidebar showed FIU; do not attribute untested native banner discrepancy to fog adapter. Second selected player Shamir Sterlin panel also C yellow after refresh, jersey1/6ft2in/215lb/class preserved. p60 FIU entry/reentry verified again with C/C, lengths2/33, native injury/status text and numericteamratings."
     },
     {
       "surface": "Formation Subs player OVRs and detail views",
@@ -212,9 +206,8 @@
       "surface": "Weekly Practice Plans / Wear and Tear row OVR",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "Current asset SHA and two method fingerprints; numeric Ovr to visible player mcOvr label only. Hidden/group layouts, selected black, injured disabled style preserved. Native6/2register frames.101boundary/repaint/health/XP/plan/source tests pass; independent review pending.",
+      "evidence": "Current asset SHA and two method fingerprints; numeric Ovr to visible player mcOvr label only. Hidden/group layouts, selected black, injured disabled style preserved. Native6/2register frames.101boundary/repaint/health/XP/plan/source tests pass; independent review pending. Build and independent Practice preservation review passed with p59; p61 includes unchanged adapter.",
       "remaining": [
-        "Build/review",
         "Live available stock entry without changing plans"
       ]
     },
@@ -611,7 +604,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Clean restart to main menu for p61 activation, then KyleMcNeal Physicals route requirements.",
+    "nextManualCheck": "Remaining scoped Mentals/Formation defensive/reentry and awards/risk/available weekly practice display checks; no restart required.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -641,7 +634,9 @@
     "p61Build": "MSVC/W4/WX/native/all10UIVM suites passed. Actual Cutter/DoubleDip route aliases added; all101gradeboundaries and preservation/stat/plural collision tests pass.",
     "p61Review": "Independent read-only parser/longest-match/scope review passed. No new hooks or per-frame work.",
     "p61Package": "Combined MMC registration/launch/tamper/path/config checks pass; installed baseline unchanged. Notloaded; p60active.",
-    "p61Activation": "Observed main menu in clean PID23036; installed baseline stop0, p61 load, active event and empty14-bank retention confirmed before Dynasty entry."
+    "p61Activation": "Observed main menu in clean PID23036; installed baseline stop0, p61 load, active event and empty14-bank retention confirmed before Dynasty entry.",
+    "p61RouteRequirementsLive": "Clean PID23036: user and actual screenshot confirm all5Kyle Physicals requirement/current lines graded, including MediumRoute/DeepRoute. Native costs/NotMet/skillpoints2/jersey7/injuryOut2Weeks unchanged.",
+    "completionListAudit": "Independent reviewer removed completed hub/injuredHealth/route/preview/build/reentry items and duplicated Formation check. Actual remaining visible surfaces are finite; absent W&T penalties stay conditional. No speculative adapters or EditPlayer expansion."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
@@ -652,13 +647,12 @@
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Pregame/in-game player ratings and substitution views without gameplay or lineup changes",
-      "Injured-player Health and one Mentals tooltip",
-      "Weekly Practice Plans player OVR labels via stock available entry",
+      "Mentals and one native ability tooltip if an actual requirement is present",
+      "Formation defensive/reentry, Redshirts position/far-right, normal PositionChanges checks",
       "Annual player/coach and weekly player award views",
-      "Recruiting My School risk list player OVR and ordinary risk data",
-      "One native ability tooltip row response if it displays actual rating requirements",
-      "Leaving/Encourage and short filter/reentry preservation sweep"
+      "Recruiting My School risk-list player OVR",
+      "Weekly Practice Plans live labels through available stock entry",
+      "Pregame/in-game player ratings and substitution views without gameplay or lineup changes"
     ],
     "excluded": [
       "Edit Player numeric ratings per user",
