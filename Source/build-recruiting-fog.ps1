@@ -17,6 +17,8 @@ if($RecruitNotesProbe -and $RecruitNotesUi){throw 'Choose either the pass-throug
 if($RecruitNotesProbe){$fogFlags+='/DRECRUIT_NOTES_PROBE'}
 if($RecruitNotesUi){$fogFlags+='/DRECRUIT_NOTES_UI'}
 if($RecruitNotesUi){
+ & python (Join-Path $fogRoot 'Tools/build_lower_division_schools.py')
+ if($LASTEXITCODE -ne 0){throw 'College school catalog validation failed'}
  & python (Join-Path $fogRoot 'Tools/build_recruit_notes_prose.py')
  if($LASTEXITCODE -ne 0){throw 'Notes prose validation failed'}
  & python (Join-Path $fogRoot 'Tests/recruit_notes_ui_test.py')

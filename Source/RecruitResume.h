@@ -1,6 +1,7 @@
 #pragma once
 #include "../Vendor/json.hpp"
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <cstdint>
 #include <map>
@@ -21,7 +22,7 @@ struct Random {
 };
 inline int count(double value){return int(std::lround((std::max)(0.,value)));}
 struct Prospect {
-    std::string identity,name,position,state,town,development;int stars=0,stateRank=0;
+    std::string identity,name,position,state,town,development,collegeLevel,collegeSchool;int stars=0,stateRank=0;
     std::map<std::string,double> ratings;
     double rating(const char* key)const{auto it=ratings.find(key);if(it!=ratings.end())return it->second;auto overall=ratings.find("OverallRating");return overall==ratings.end()?60:overall->second;}
 };
@@ -48,6 +49,17 @@ inline double skill(const Prospect& p){
     if(pos=="LE"||pos=="RE"||pos=="DT"||pos=="LEDG"||pos=="REDG")return .3*r("BlockSheddingRating")+.2*r("FinesseMovesRating")+.2*r("PowerMovesRating")+.2*r("TackleRating")+.1*r("StrengthRating");
     return .3*r("TackleRating")+.25*r("PlayRecognitionRating")+.2*r("BlockSheddingRating")+.15*r("SpeedRating")+.1*r("ZoneCoverageRating");
 }
+inline double academicGpa(const Prospect& p){
+    Random random(p.identity+"|academic-gpa-v1");
+    return std::round(clamp(3.05+.012*(p.rating("AwarenessRating")-65)+.43*random.noise(),2.,4.5)*100.)/100.;
+}
+inline void addResumeDetails(Json& data,const Prospect& p){
+    if(!data.contains("gpa"))data["gpa"]=academicGpa(p);
+    const auto& s=data.at("stats");auto& rates=data["rates"];if(!rates.is_object())rates=Json::object();
+    auto rate=[&](const char* key,const char* numerator,const char* denominator){if(!s.contains(denominator))return;const auto n=s.value(numerator,0),d=s.at(denominator).get<int>();rates[key]=d?Json(std::round(1000.*n/d)/10.):Json(nullptr);};
+    rate("completionPercent","passCompletions","passAttempts");rate("pancakePercent","pancakes","runBlockingSnaps");rate("sacksAllowedPercent","sacksAllowed","passProtectionSnaps");
+    data["modelVersion"]=3;
+}
 struct Result {Json publicData;Json evaluation;};
 inline Result generate(const Prospect& p){
     Random competition(p.identity+"|competition-v1"),opportunity(p.identity+"|opportunity-v1"),production(p.identity+"|production-v1"),blocking(p.identity+"|blocking-v1");
@@ -55,8 +67,8 @@ inline Result generate(const Prospect& p){
     const int classification=competition.integer(1,6);
     // Rank is ordinal: soft bands avoid claiming measured gaps between states.
     const double state=p.stateRank==0?.5:p.stateRank<=5?.90:p.stateRank<=15?.75:p.stateRank<=30?.55:p.stateRank<=40?.38:.22;
-    const double schedule=competition.between(0,1),level=.50*state+.32*(classification-1)/5.+.18*schedule;
-    const int schoolGames=10+competition.integer(0,5);
+    const double schedule=competition.between(0,1),level=p.collegeLevel.empty()?.50*state+.32*(classification-1)/5.+.18*schedule:p.collegeLevel=="FCS"?.78+.15*schedule:p.collegeLevel=="D2"?.48+.22*schedule:.22+.25*schedule;
+    const int schoolGames=10+competition.integer(0,p.collegeLevel.empty()?5:2);
     const double roleRoll=opportunity.unit();std::string role;
     if(roleRoll<(p.stars>=4?.002:.025))role="No varsity appearances";
     else if(roleRoll<(p.stars>=4?.045:.13))role="Reserve";
@@ -135,9 +147,17 @@ inline Result generate(const Prospect& p){
     else if(role=="Shared role")context="Shared the workload rather than playing every available series.";
     else context=schedule>.75?"The schedule included several opponents above the school's usual competition level.":schedule<.25?"Most opponents came from the same small regional pool.":"Played a full role against a mixed schedule of regional opponents.";
     Json publicData={{"modelVersion",2},{"heading","Previous High School Season"},{"state",p.state},{"hometown",p.town},{"competitionClass",std::to_string(classification)+"A"},{"games",games},{"starts",starts},{"role",role},{"stats",stats},{"rates",rates},{"background",context}};
+    if(!p.collegeLevel.empty()){
+        publicData["heading"]="Previous College Season";publicData["competitionClass"]=p.collegeLevel;publicData["collegeSchool"]=p.collegeSchool;
+        if(role=="No varsity appearances"){publicData["role"]="No appearances";publicData["background"]="Did not appear in a game; spent the season behind an established starter.";}
+        else if(role=="Reserve")publicData["background"]="Most of his work came in a reserve role.";
+        else if(role=="Regular starter")publicData["background"]="Played a full role against the program's schedule.";
+    }
+    addResumeDetails(publicData,p);
     return {publicData,{{"overall",r("OverallRating")},{"positionSkill",ability},{"development",p.development},{"competition",level},{"stateRank",p.stateRank},{"schedule",schedule}}};
 }
 inline void validate(const Json& v){
+    if(v.contains("gpa")&&(!v.at("gpa").is_number()||v.at("gpa").get<double>()<2||v.at("gpa").get<double>()>4.5))throw std::runtime_error("Invalid GPA");
     const int games=v.at("games"),starts=v.at("starts");if(games<0||games>15||starts<0||starts>games)throw std::runtime_error("Invalid playing opportunity");
     const auto& s=v.at("stats");for(auto it=s.begin();it!=s.end();++it)if(!it.value().is_number_integer()||it.value().get<int>()<0||(games==0&&it.value().get<int>()!=0))throw std::runtime_error("Invalid high-school statistic");
     auto bound=[&](const char* a,const char* b){if(s.contains(a)&&s.contains(b)&&s[a].get<int>()>s[b].get<int>())throw std::runtime_error(std::string("Invalid stat relationship: ")+a);};
@@ -148,6 +168,12 @@ inline void validate(const Json& v){
         const int attempts=s.at("passProtectionSnaps"),sacks=s.at("sacksAllowed");const auto& rate=v.at("rates").at("sacksAllowedPercent");
         if(attempts==0){if(!rate.is_null())throw std::runtime_error("Zero pass snaps must have no sack rate");}
         else if(!rate.is_number()||std::abs(rate.get<double>()-std::round(1000.*sacks/attempts)/10.)>.00001)throw std::runtime_error("Incorrect sacks-allowed percentage");
+    }
+    for(const auto& triple:{std::array<const char*,3>{"completionPercent","passCompletions","passAttempts"},std::array<const char*,3>{"pancakePercent","pancakes","runBlockingSnaps"}}){
+        if(!s.contains(triple[2])||!v.contains("rates")||!v.at("rates").contains(triple[0]))continue;
+        const int n=s.at(triple[1]),d=s.at(triple[2]);const auto& rate=v.at("rates").at(triple[0]);
+        if(!d){if(!rate.is_null())throw std::runtime_error("Rate for zero opportunities");}
+        else if(!rate.is_number()||std::abs(rate.get<double>()-std::round(1000.*n/d)/10.)>.00001)throw std::runtime_error("Incorrect derived percentage");
     }
     if(s.contains("coverageTargets")&&s.value("interceptions",0)+s.value("passesDefended",0)>s["coverageTargets"].get<int>())throw std::runtime_error("Coverage events exceed targets");
     if(s.contains("passCompletions")&&s.value("passCompletions",0)+s.value("interceptionsThrown",0)>s.value("passAttempts",0))throw std::runtime_error("Pass outcomes exceed attempts");

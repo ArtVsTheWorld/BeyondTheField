@@ -33,6 +33,9 @@ class Machine:
     def member(receiver, key):
         if isinstance(receiver, dict):
             return receiver.get(key, UNDEFINED)
+        if isinstance(receiver,str):
+            if key=='charAt':return lambda i:receiver[i:i+1]
+            if key=='length':return len(receiver)
         if isinstance(receiver, list):
             if key == 'length':
                 return len(receiver)
@@ -134,6 +137,10 @@ class Machine:
                 elif op in (0x49, 0x66):
                     right, left = stack.pop(), stack.pop()
                     stack.append(self.equal(left, right, loose=op == 0x49))
+                elif op==0x44:
+                    value=stack.pop();stack.append('string' if isinstance(value,str) else 'undefined' if value is UNDEFINED else 'number' if isinstance(value,(int,float)) else 'object')
+                elif op==0x0C:
+                    right,left=stack.pop(),stack.pop();stack.append(left*right)
                 elif op in (0x47, 0x0B, 0x48, 0x67):
                     right, left = stack.pop(), stack.pop()
                     if op == 0x47:

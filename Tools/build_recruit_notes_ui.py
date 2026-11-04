@@ -34,7 +34,14 @@ class Assembler:
     def number(self, n):
         if n in (0, 1): self.raw(0x59+n)
         elif -128 <= n < 128: self.raw(0xB5); self.code.extend(struct.pack('<b', n))
-        else: self.raw(0xB6); self.code.extend(struct.pack('<h', n))
+        elif -32768 <= n < 32768: self.raw(0xB6); self.code.extend(struct.pack('<h', n))
+        elif 0 <= n <= 0xFFFFFF:
+            # Build RGB integers with ordinary ActionMultiply/ActionAdd2;
+            # no assumptions about the engine's optimized wide-push opcodes.
+            self.number(n >> 16); self.number(256); self.raw(0x0C)
+            self.number((n >> 8) & 255); self.raw(0x47)
+            self.number(256); self.raw(0x0C); self.number(n & 255); self.raw(0x47)
+        else: raise ValueError('Unsupported numeric literal')
     def member(self, name): self.string(name); self.raw(0x4E)
     def store(self, n):
         self.raw(0x87); self.align(); self.code.extend(struct.pack('<I', n)); self.raw(0x17)
@@ -220,13 +227,38 @@ def fnv(data):
     return n
 
 
+GRADE_COLORS={'A':0x1FE840,'B':0xA8D943,'C':0xFFD34D,'D':0xF68C2E,'F':0xF04444}
+
+
+def grade_colors(a):
+    # This suffix runs only on the fingerprinted AttributeButton.Draw method.
+    # Read the same public widget fields as the native label; never ratings.
+    a.reg(1); a.member('mData'); a.store(4); a.missing(4,'color_done')
+    a.reg(4); a.member('ExtraInfo'); a.store(4); a.missing(4,'color_done')
+    a.reg(4); a.member('Points'); a.store(4)
+    a.reg(4); a.raw(0x44); a.string('string'); a.raw(0x66); a.branch('color_done',0xB8)
+    a.reg(1); a.member('mcPoints'); a.store(5); a.missing(5,'color_done')
+    a.reg(4); a.reg(1); a.member('mDEGradeLabel'); a.raw(0x66); a.branch('color_done')
+    a.reg(1); a.string('mDEGradeLabel'); a.reg(4); a.raw(0x4F)
+    a.number(0); a.number(1); a.reg(4); a.string('charAt'); a.raw(0x52); a.store(6)
+    a.empty_object(7)
+    a.reg(7); a.string('fontColor'); a.global_object('art_styleguide','Color','UNFOCUS_BUTTON_FONT_COLOR'); a.raw(0x4F)
+    for index,(grade,color) in enumerate(GRADE_COLORS.items()):
+        a.reg(6); a.string(grade); a.raw(0x66); a.branch(f'grade_next{index}',0xB8)
+        a.set_field(7,'fontColor',color); a.branch('color_apply',0x99); a.label(f'grade_next{index}')
+    a.label('color_apply'); a.reg(7); a.number(1); a.reg(5); a.call('SetExtraInfo')
+    a.label('color_done'); a.ret()
+
+
 def generate_header(destination, evidence):
     root=Path(__file__).resolve().parents[1]
-    methods=json.loads((evidence/'notes-methods.json').read_text(encoding='utf8'))+json.loads((evidence/'notes-navigation.json').read_text(encoding='utf8'))
+    methods=json.loads((evidence/'notes-methods.json').read_text(encoding='utf8'))+json.loads((evidence/'notes-navigation.json').read_text(encoding='utf8'))+json.loads((evidence/'target-methods.json').read_text(encoding='utf8'))+json.loads((evidence/'notes-grade-methods.json').read_text(encoding='utf8'))
     sys.path.insert(0,'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
     from inspect_tb_ast import load
     apt=load(evidence/'Assets/common__ui__node_cfm__recruitinghub__corenode.ast')
     specs=[('Navigation.', 'GetSubscreenDataAtBoardLevel', 'tabs'),('recruitinghub.Board.', 'Init', 'reset'),('recruitinghub.Board.', '_OnCategoryChanged', 'category'),('board.Scouting.', '_PopulateData', 'draw'),('board.Scouting.', '_InitializeFocus', 'guard'),('board.Scouting.', '_UpdateScoutButton', 'guard'),('board.Scouting.', '_OnScout', 'guard'),('board.Scouting.', '_OnRecruitUpdated', 'refresh'),('board.Scouting.','ModelHidden','cancel'),('board.Scouting.','Shutdown','cancel')]
+    specs.append(('recruitinghub.AttributeButton.','Draw','grade_colors'))
+    specs.extend(('recruitinghub.AttributeButton.',name,'grade_focus') for name in ('_LookFocused','_LookUnfocused'))
     programs=[];report=[]
     for cls,name,mode in specs:
         item=next(x for x in methods if cls in x.get('class',x.get('cls','')) and x['method']==name)
@@ -241,6 +273,11 @@ def generate_header(destination, evidence):
         elif mode=='reset':
             a.global_object('cafe');a.string('DynastyEnhancerRecruitNotesSelected');a.raw(0x74,0x4F);a.pad_code()
             copy_at=len(a.code);copy_size=size;a.code.extend(bytes(size))
+        elif mode in ('grade_colors','grade_focus'):
+            assert original[-1]==0x4F if mode=='grade_colors' else original[-2:]==bytes([0xB2,56])
+            copy_size=size;a.code.extend(bytes(size))
+            if mode=='grade_focus':a.reg(1);a.string('mDEGradeLabel');a.raw(0x76,0x4F)
+            grade_colors(a)
         else:
             a.notes_flag();a.raw(0x73,0x66);a.branch('normal',0xB8)
             if mode=='draw':draw_notes(a)

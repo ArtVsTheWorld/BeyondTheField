@@ -117,7 +117,9 @@ template<class View,class StringSetter,class Composer>unsigned appendRecruitNote
             if(!slider&&observation.low==0&&prospect.progress<100)continue;
             observation.exact=!slider;prospect.observations.push_back(std::move(observation));
         }
-        const auto body=composer(prospect,id,text("FirstName"),text("LastName"));setter(at,"DENotesBody",body.c_str());++count;
+        const auto originalClass=prospect.classification;
+        const auto body=composer(prospect,id,text("FirstName"),text("LastName"));setter(at,"DENotesBody",body.c_str());
+        if(prospect.classification!=originalClass)setter(at,"ClassAbbreviation",prospect.classification.c_str());++count;
     }
     return count;
 }

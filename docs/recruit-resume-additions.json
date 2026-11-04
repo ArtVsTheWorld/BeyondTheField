@@ -1,0 +1,45 @@
+{
+  "feature": "Recruit r\u00e9sum\u00e9 details, prior colleges and native grade colors",
+  "candidate": "DynastyEnhancerRecruitFog-p22",
+  "status": "Built; offline and live-data migration checks passed. Awaiting clean-restart visual test. Not installed automatically.",
+  "changes": [
+    "Public grade colors: A green, B yellow-green, C yellow, D orange, F red; partial ranges use the lower public band color; hidden sentinels unchanged.",
+    "Completion percentage and pancake/run-blocking-snap percentage derived from persisted counts; zero opportunities display --.",
+    "GPA 2.0\u20134.5 from a stable independent noisy awareness-linked stream, persisted once.",
+    "Game JUCO entries use fictional D3/D2/FCS college backgrounds, FCS strongest, with school/state region bias and current Dynasty team-name exclusions.",
+    "ClassAbbreviation in returned UI data changes to D3/D2/FCS plus existing SO/JR/SR; packed recruiting classification untouched.",
+    "Actual portal transfers use player-linked college season statistics, newest recorded Dynasty-relative year, or actual career totals; no generated replacement line.",
+    "Actual OL total snaps do not provide pass/run splits, so those rates stay unavailable for real transfers.",
+    "Actual transfer statistics refresh on throttled UI requests; idle hub does not run periodic stat captures."
+  ],
+  "catalog": {
+    "footballPrograms": 528,
+    "FCS": 124,
+    "D2": 160,
+    "D3": 244,
+    "source": "Config/lower-division-schools.json"
+  },
+  "validation": {
+    "existingHighSchoolResumesPreserved": 3721,
+    "collegeResumesAdded": 380,
+    "totalCurrentProspects": 4101,
+    "boundaryResumes": 22000,
+    "controlledAcademicAndSchoolPairs": 6000,
+    "meanGpaGapForAwareness90Vs40": 0.5928683333333344,
+    "sameRegionSchoolShare": 0.7921666666666667,
+    "allCollegeLevelsExercised": true,
+    "actualTransferSelectionAndMissingData": true,
+    "nativeGradeAndPlayingTimeRegression": true,
+    "nativeBytecodePaletteAndNoRepeatedInvalidation": true
+  },
+  "pending": [
+    "Live grade palette and focus changes",
+    "Native QB/OL percentage and GPA layout",
+    "Live JUCO college name/class suffix",
+    "Automatic-loading package installation after verification"
+  ],
+  "artifact": {
+    "bytes": 946176,
+    "sha256": "2b84ae50bea9ee927b39b979f5523b75a19441781c8e76298ac4b4ffa8935638"
+  }
+}

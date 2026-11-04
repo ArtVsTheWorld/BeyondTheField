@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
-from build_recruit_notes_ui import Assembler,append_tab,category_changed,draw_notes,restore_layout,ALL
+from build_recruit_notes_ui import Assembler,append_tab,category_changed,draw_notes,restore_layout,ALL,grade_colors,GRADE_COLORS
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -79,6 +79,14 @@ def main():
         for _ in range(count//2):a.raw(0x76,0x17)
         a.pad_code();assert len(a.code)%8==0
         a.ret();machine.run(a.finish(),{})
+    colors=[];points={'SetExtraInfo':lambda style:colors.append(style['fontColor'])};widget={'mcPoints':points,'mData':{'ExtraInfo':{}}}
+    g['art_styleguide']['Color']['UNFOCUS_BUTTON_FONT_COLOR']=0xeeeeee
+    for label in ('A','B','C','D','F','D–B','?'):
+        widget['mData']['ExtraInfo']['Points']=label
+        machine.run(program(grade_colors),{1:widget});assert colors[-1]==GRADE_COLORS.get(label[0],0xeeeeee)
+        before=len(colors);machine.run(program(grade_colors),{1:widget});assert len(colors)==before,'Repeated draws must not invalidate the font'
+    widget['mData']['ExtraInfo']['Points']=0;before=len(colors);machine.run(program(grade_colors),{1:widget});assert len(colors)==before
+    machine.run(program(grade_colors),{1:{}})
     print('Passed: fourth-tab metadata, same-state input-lock handling, Notes rendering, recruit changes, absent widgets, and native Scouting layout restoration.')
 
 

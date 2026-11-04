@@ -2,8 +2,10 @@ Dynasty Enhancer - Recruiting Fog prototype
 
 This package retains the installed Social Media prototype and adds native
 recruiting letter grades/ranges, Playing Time masking and the Notes tab.
-Notes include a generated previous high-school season and qualitative scouting
-observations. The generated 1A-6A scale is a consistent competition model.
+Notes include a generated previous high-school season, GPA, and qualitative
+scouting observations. The generated 1A-6A scale is a consistent competition
+model. Game JUCO recruits receive fictional D3/D2/FCS school backgrounds;
+portal transfers use recorded college statistics. Grades use native font colors.
 Underlying player ratings, recruiting results and game saves are not changed.
 
 Install the full Plugins folder into MMC with CFB and MMC closed. Enable

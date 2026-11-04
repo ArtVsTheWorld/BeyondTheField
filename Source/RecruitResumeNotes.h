@@ -10,16 +10,19 @@ inline std::string formatted(int value){auto s=std::to_string(value);for(int i=i
 inline std::string stateLabel(const std::string& value){if(value=="NonUS")return "Outside US";std::string s;for(char c:value){if(!s.empty()&&c>='A'&&c<='Z')s+=' ';s+=c;}return s;}
 inline std::string renderResume(const Json& v){
     validate(v);const auto& s=v.at("stats");auto n=[&](const char* k){return formatted(s.value(k,0));};
-    std::string out="PREVIOUS HIGH SCHOOL SEASON\n"+v.value("hometown","")+", "+stateLabel(v.value("state",""))+" | "+v.at("competitionClass").get<std::string>()+"\n";
+    auto rate=[&](const char* key){std::ostringstream value;if(!v.contains("rates")||!v.at("rates").contains(key)||v.at("rates").at(key).is_null())return std::string("--");value<<std::fixed<<std::setprecision(1)<<v.at("rates").at(key).get<double>()<<'%';return value.str();};
+    std::string out=v.value("heading",std::string("Previous High School Season"));for(auto& c:out)c=static_cast<char>(std::toupper(static_cast<unsigned char>(c)));out+='\n';
+    out+=v.value("hometown","")+", "+stateLabel(v.value("state",""))+" | "+v.at("competitionClass").get<std::string>();
+    if(!v.value("collegeSchool",std::string()).empty())out+=" ("+v.at("collegeSchool").get<std::string>()+")";
+    if(v.contains("gpa")){std::ostringstream gpa;gpa<<std::fixed<<std::setprecision(2)<<v.at("gpa").get<double>();out+=" | GPA: "+gpa.str();}out+='\n';
     out+=std::to_string(v.at("games").get<int>())+" appearances | "+std::to_string(v.at("starts").get<int>())+" starts\n";
-    if(s.contains("passAttempts"))out+="Passing: "+n("passCompletions")+"/"+n("passAttempts")+", "+n("passingYards")+" yards, "+n("passingTD")+" TD, "+n("interceptionsThrown")+" INT\n";
+    if(s.contains("passAttempts"))out+="Passing: "+n("passCompletions")+"/"+n("passAttempts")+" ("+rate("completionPercent")+"), "+n("passingYards")+" yards, "+n("passingTD")+" TD, "+n("interceptionsThrown")+" INT\n";
     if(s.contains("carries"))out+="Rushing: "+n("carries")+" carries, "+n("rushingYards")+" yards, "+n("rushingTD")+" TD\n";
     if(s.contains("receptions"))out+="Receiving: "+n("receptions")+" catches, "+n("receivingYards")+" yards, "+n("receivingTD")+" TD\n";
     if(s.contains("passProtectionSnaps")){
-        std::ostringstream rate;if(v.at("rates").at("sacksAllowedPercent").is_null())rate<<"--";else rate<<std::fixed<<std::setprecision(1)<<v.at("rates").at("sacksAllowedPercent").get<double>()<<'%';
-        out+="Pass protection: "+n("sacksAllowed")+" sacks allowed / "+n("passProtectionSnaps")+" snaps ("+rate.str()+")\n";
+        out+="Pass protection: "+n("sacksAllowed")+" sacks allowed / "+n("passProtectionSnaps")+" snaps ("+rate("sacksAllowedPercent")+")\n";
     }
-    if(s.contains("pancakes"))out+="Run blocking: "+n("pancakes")+" pancakes / "+n("runBlockingSnaps")+" snaps\n";
+    if(s.contains("pancakes"))out+="Run blocking: "+n("pancakes")+" pancakes / "+n("runBlockingSnaps")+" snaps ("+rate("pancakePercent")+")\n";
     if(s.contains("defensiveSnaps")){
         out+="Defense: "+n("tackles")+" tackles, "+n("tacklesForLoss")+" TFL, "+n("sacks")+" sacks\n";
         out+="Coverage/turnovers: "+n("interceptions")+" INT, "+n("passesDefended")+" breakups, "+n("forcedFumbles")+" forced fumbles\n";

@@ -171,7 +171,7 @@ void* __fastcall getterHook(void* object,void** out){
             const auto notesCount=appendRecruitNotes(view,value,[&](uintptr_t at,const char* key,const char* text){
                 reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);
                 reinterpret_cast<void(__fastcall*)(void*,const char*,bool)>(base+0x2bf6720)(reinterpret_cast<void*>(at),"DENotesLoading",notesLoading);
-            },[&](const NotesProspect& p,double id,const std::string& first,const std::string& last){return resumeCache.compose(cached,p,id,first,last,notesLoading);});
+            },[&](NotesProspect& p,double id,const std::string& first,const std::string& last){return resumeCache.compose(cached,p,id,first,last,notesLoading);});
             if(call<=5)note({{"event","recruit_notes_prepared"},{"recruits",notesCount},{"resumes",bool(cached)}});
 #elif defined(RECRUIT_NOTES_PROBE)
             const auto notesCount=appendRecruitNotes(view,value,[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);});

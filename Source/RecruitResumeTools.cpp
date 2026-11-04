@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 using namespace recruitingfog::resume;
+#include "../Tests/RecruitResumeExpansionTests.h"
 Json selfTest(){
     const char* positions[]={"QB","HB","FB","WR","TE","LT","LG","C","RG","RT","LE","RE","DT","LOLB","MLB","ROLB","CB","FS","SS","K","P","LS"};
     unsigned checked=0,zero=0;double strong=0,weak=0,tough=0,easy=0,class1=0,class6=0;unsigned count1=0,count6=0;
@@ -33,7 +34,7 @@ Json selfTest(){
     if(c.entries.at(100).saved!=saved)throw std::runtime_error("Saved resume changed with ratings");
     c.season=2027;persistClass(c,testRoot);if(c.entries.at(100).saved!=saved)throw std::runtime_error("Year boundary lost the prior resume");
     const auto body=composeNotes(saved,note);if(body.size()>1500||body.find("pancakes")==std::string::npos||body.find('%')==std::string::npos)throw std::runtime_error("Combined native report is oversized or missing blocking context");
-    return {{"boundaryResumes",checked},{"zeroAppearanceResumes",zero},{"matchedQBPairs",8000},{"ability80Vs55YardageRatio",strong/weak},{"VermontVsFloridaYardageRatio",easy/tough},{"class1Vs6YardageRatio",(class1/count1)/(class6/count6)},{"developmentIsolation",true},{"qualitativePassages",prosePassages},{"journalPersistence",true}};
+    return {{"expansion",expansionTests()},{"boundaryResumes",checked},{"zeroAppearanceResumes",zero},{"matchedQBPairs",8000},{"ability80Vs55YardageRatio",strong/weak},{"VermontVsFloridaYardageRatio",easy/tough},{"class1Vs6YardageRatio",(class1/count1)/(class6/count6)},{"developmentIsolation",true},{"qualitativePassages",prosePassages},{"journalPersistence",true}};
 }
 int main(int argc,char** argv){
     using namespace recruitingfog::resume;
@@ -41,7 +42,7 @@ int main(int argc,char** argv){
         if(argc==2&&std::string(argv[1])=="--self-test"){std::cout<<selfTest().dump(2)<<'\n';return 0;}
         if(argc==4&&std::string(argv[1])=="--prepare-native"){
             std::ifstream in(argv[2]);Json raw;in>>raw;auto c=parseNativeClass(raw);persistClass(c,std::filesystem::path(argv[3]));unsigned count=0;for(const auto& [id,e]:c.entries){(void)id;if(e.highSchool)++count;}
-            std::cout<<"Prepared "<<count<<" immutable HS resumes for league "<<c.league<<", "<<c.season<<".\n";return 0;
+            std::cout<<"Prepared "<<c.entries.size()<<" recruit backgrounds ("<<count<<" HS) for league "<<c.league<<", "<<c.season<<".\n";return 0;
         }
         if(argc==4&&std::string(argv[1])=="--native-parity"){
             std::ifstream a(argv[2]),b(argv[3]);Json raw,expected;a>>raw;b>>expected;const auto c=parseNativeClass(raw);std::map<std::string,Json> byId;for(const auto& v:expected.at("prospects"))byId.emplace(v.at("identity").get<std::string>(),v);

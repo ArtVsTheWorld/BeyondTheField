@@ -1,0 +1,3712 @@
+{
+  "version": 1,
+  "retrieved": "2026-11-04",
+  "requestedSources": [
+    "https://en.wikipedia.org/wiki/List_of_NCAA_Division_I_FCS_football_programs",
+    "https://en.wikipedia.org/wiki/List_of_NCAA_Division_II_institutions",
+    "https://en.wikipedia.org/wiki/List_of_NCAA_Division_III_institutions"
+  ],
+  "footballSources": {
+    "FCS": "https://en.wikipedia.org/wiki/List_of_NCAA_Division_I_FCS_football_programs",
+    "D2": "https://en.wikipedia.org/wiki/List_of_NCAA_Division_II_football_programs",
+    "D3": "https://en.wikipedia.org/wiki/List_of_NCAA_Division_III_football_programs"
+  },
+  "schools": [
+    {
+      "level": "FCS",
+      "name": "Abilene Christian",
+      "institution": "Abilene Christian University",
+      "city": "Abilene",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Alabama A&M",
+      "institution": "Alabama A&M University",
+      "city": "Normal",
+      "state": "Alabama"
+    },
+    {
+      "level": "FCS",
+      "name": "Alabama State",
+      "institution": "Alabama State University",
+      "city": "Montgomery",
+      "state": "Alabama"
+    },
+    {
+      "level": "FCS",
+      "name": "Albany",
+      "institution": "State University of New York at Albany",
+      "city": "Albany",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Alcorn State",
+      "institution": "Alcorn State University",
+      "city": "Lorman",
+      "state": "Mississippi"
+    },
+    {
+      "level": "FCS",
+      "name": "Arkansas–Pine Bluff",
+      "institution": "University of Arkansas at Pine Bluff",
+      "city": "Pine Bluff",
+      "state": "Arkansas"
+    },
+    {
+      "level": "FCS",
+      "name": "Austin Peay",
+      "institution": "Austin Peay State University",
+      "city": "Clarksville",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "Bethune–Cookman",
+      "institution": "Bethune–Cookman University",
+      "city": "Daytona Beach",
+      "state": "Florida"
+    },
+    {
+      "level": "FCS",
+      "name": "Brown",
+      "institution": "Brown University",
+      "city": "Providence",
+      "state": "RhodeIsland"
+    },
+    {
+      "level": "FCS",
+      "name": "Bryant",
+      "institution": "Bryant University",
+      "city": "Smithfield",
+      "state": "RhodeIsland"
+    },
+    {
+      "level": "FCS",
+      "name": "Bucknell",
+      "institution": "Bucknell University",
+      "city": "Lewisburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "Butler",
+      "institution": "Butler University",
+      "city": "Indianapolis",
+      "state": "Indiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Cal Poly",
+      "institution": "California Polytechnic State University",
+      "city": "San Luis Obispo",
+      "state": "California"
+    },
+    {
+      "level": "FCS",
+      "name": "Campbell",
+      "institution": "Campbell University",
+      "city": "Buies Creek",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Central Arkansas",
+      "institution": "University of Central Arkansas",
+      "city": "Conway",
+      "state": "Arkansas"
+    },
+    {
+      "level": "FCS",
+      "name": "Central Connecticut",
+      "institution": "Central Connecticut State University",
+      "city": "New Britain",
+      "state": "Connecticut"
+    },
+    {
+      "level": "FCS",
+      "name": "Charleston Southern",
+      "institution": "Charleston Southern University",
+      "city": "North Charleston",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Chattanooga",
+      "institution": "University of Tennessee at Chattanooga",
+      "city": "Chattanooga",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "Chicago State",
+      "institution": "Chicago State University",
+      "city": "Chicago",
+      "state": "Illinois"
+    },
+    {
+      "level": "FCS",
+      "name": "The Citadel",
+      "institution": "The Citadel, The Military College of South Carolina",
+      "city": "Charleston",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Colgate",
+      "institution": "Colgate University",
+      "city": "Hamilton",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Columbia",
+      "institution": "Columbia University",
+      "city": "New York",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Cornell",
+      "institution": "Cornell University",
+      "city": "Ithaca",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Dartmouth",
+      "institution": "Dartmouth College",
+      "city": "Hanover",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "FCS",
+      "name": "Davidson",
+      "institution": "Davidson College",
+      "city": "Davidson",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Dayton",
+      "institution": "University of Dayton",
+      "city": "Dayton",
+      "state": "Ohio"
+    },
+    {
+      "level": "FCS",
+      "name": "Delaware State",
+      "institution": "Delaware State University",
+      "city": "Dover",
+      "state": "Delaware"
+    },
+    {
+      "level": "FCS",
+      "name": "Drake",
+      "institution": "Drake University",
+      "city": "Des Moines",
+      "state": "Iowa"
+    },
+    {
+      "level": "FCS",
+      "name": "Duquesne",
+      "institution": "Duquesne University",
+      "city": "Pittsburgh",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "East Tennessee State",
+      "institution": "East Tennessee State University",
+      "city": "Johnson City",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "East Texas A&M",
+      "institution": "East Texas A&M University",
+      "city": "Commerce",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Eastern Illinois",
+      "institution": "Eastern Illinois University",
+      "city": "Charleston",
+      "state": "Illinois"
+    },
+    {
+      "level": "FCS",
+      "name": "Eastern Kentucky",
+      "institution": "Eastern Kentucky University",
+      "city": "Richmond",
+      "state": "Kentucky"
+    },
+    {
+      "level": "FCS",
+      "name": "Eastern Washington",
+      "institution": "Eastern Washington University",
+      "city": "Cheney",
+      "state": "Washington"
+    },
+    {
+      "level": "FCS",
+      "name": "Elon",
+      "institution": "Elon University",
+      "city": "Elon",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Florida A&M",
+      "institution": "Florida A&M University",
+      "city": "Tallahassee",
+      "state": "Florida"
+    },
+    {
+      "level": "FCS",
+      "name": "Fordham",
+      "institution": "Fordham University",
+      "city": "New York",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Furman",
+      "institution": "Furman University",
+      "city": "Greenville",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Gardner–Webb",
+      "institution": "Gardner–Webb University",
+      "city": "Boiling Springs",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Georgetown",
+      "institution": "Georgetown University",
+      "city": "Washington",
+      "state": "DistrictOfColumbia"
+    },
+    {
+      "level": "FCS",
+      "name": "Grambling State",
+      "institution": "Grambling State University",
+      "city": "Grambling",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Hampton",
+      "institution": "Hampton University",
+      "city": "Hampton",
+      "state": "Virginia"
+    },
+    {
+      "level": "FCS",
+      "name": "Harvard",
+      "institution": "Harvard University",
+      "city": "Cambridge",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "FCS",
+      "name": "Holy Cross",
+      "institution": "College of the Holy Cross",
+      "city": "Worcester",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "FCS",
+      "name": "Houston Christian",
+      "institution": "Houston Christian University",
+      "city": "Houston",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Howard",
+      "institution": "Howard University",
+      "city": "Washington",
+      "state": "DistrictOfColumbia"
+    },
+    {
+      "level": "FCS",
+      "name": "Idaho",
+      "institution": "University of Idaho",
+      "city": "Moscow",
+      "state": "Idaho"
+    },
+    {
+      "level": "FCS",
+      "name": "Idaho State",
+      "institution": "Idaho State University",
+      "city": "Pocatello",
+      "state": "Idaho"
+    },
+    {
+      "level": "FCS",
+      "name": "Illinois State",
+      "institution": "Illinois State University",
+      "city": "Normal",
+      "state": "Illinois"
+    },
+    {
+      "level": "FCS",
+      "name": "Incarnate Word",
+      "institution": "University of the Incarnate Word",
+      "city": "San Antonio",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Indiana State",
+      "institution": "Indiana State University",
+      "city": "Terre Haute",
+      "state": "Indiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Jackson State",
+      "institution": "Jackson State University",
+      "city": "Jackson",
+      "state": "Mississippi"
+    },
+    {
+      "level": "FCS",
+      "name": "Lafayette",
+      "institution": "Lafayette College",
+      "city": "Easton",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "Lamar",
+      "institution": "Lamar University",
+      "city": "Beaumont",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Lehigh",
+      "institution": "Lehigh University",
+      "city": "Bethlehem",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "Lindenwood",
+      "institution": "Lindenwood University",
+      "city": "St. Charles",
+      "state": "Missouri"
+    },
+    {
+      "level": "FCS",
+      "name": "LIU",
+      "institution": "Long Island University",
+      "city": "Brookville",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Maine",
+      "institution": "University of Maine",
+      "city": "Orono",
+      "state": "Maine"
+    },
+    {
+      "level": "FCS",
+      "name": "Marist",
+      "institution": "Marist University",
+      "city": "Poughkeepsie",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "McNeese",
+      "institution": "McNeese State University",
+      "city": "Lake Charles",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Mercer",
+      "institution": "Mercer University",
+      "city": "Macon",
+      "state": "Georgia"
+    },
+    {
+      "level": "FCS",
+      "name": "Merrimack",
+      "institution": "Merrimack College",
+      "city": "North Andover",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "FCS",
+      "name": "Mississippi Valley State",
+      "institution": "Mississippi Valley State University",
+      "city": "Itta Bena",
+      "state": "Mississippi"
+    },
+    {
+      "level": "FCS",
+      "name": "Monmouth",
+      "institution": "Monmouth University",
+      "city": "West Long Branch",
+      "state": "NewJersey"
+    },
+    {
+      "level": "FCS",
+      "name": "Montana",
+      "institution": "University of Montana",
+      "city": "Missoula",
+      "state": "Montana"
+    },
+    {
+      "level": "FCS",
+      "name": "Montana State",
+      "institution": "Montana State University",
+      "city": "Bozeman",
+      "state": "Montana"
+    },
+    {
+      "level": "FCS",
+      "name": "Morehead State",
+      "institution": "Morehead State University",
+      "city": "Morehead",
+      "state": "Kentucky"
+    },
+    {
+      "level": "FCS",
+      "name": "Morgan State",
+      "institution": "Morgan State University",
+      "city": "Baltimore",
+      "state": "Maryland"
+    },
+    {
+      "level": "FCS",
+      "name": "Murray State",
+      "institution": "Murray State University",
+      "city": "Murray",
+      "state": "Kentucky"
+    },
+    {
+      "level": "FCS",
+      "name": "New Hampshire",
+      "institution": "University of New Hampshire",
+      "city": "Durham",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "FCS",
+      "name": "Nicholls",
+      "institution": "Nicholls State University",
+      "city": "Thibodaux",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Norfolk State",
+      "institution": "Norfolk State University",
+      "city": "Norfolk",
+      "state": "Virginia"
+    },
+    {
+      "level": "FCS",
+      "name": "North Alabama",
+      "institution": "University of North Alabama",
+      "city": "Florence",
+      "state": "Alabama"
+    },
+    {
+      "level": "FCS",
+      "name": "North Carolina A&T",
+      "institution": "North Carolina A&T State University",
+      "city": "Greensboro",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "North Carolina Central",
+      "institution": "North Carolina Central University",
+      "city": "Durham",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "North Dakota",
+      "institution": "University of North Dakota",
+      "city": "Grand Forks",
+      "state": "NorthDakota"
+    },
+    {
+      "level": "FCS",
+      "name": "Northern Arizona",
+      "institution": "Northern Arizona University",
+      "city": "Flagstaff",
+      "state": "Arizona"
+    },
+    {
+      "level": "FCS",
+      "name": "Northern Colorado",
+      "institution": "University of Northern Colorado",
+      "city": "Greeley",
+      "state": "Colorado"
+    },
+    {
+      "level": "FCS",
+      "name": "Northern Iowa",
+      "institution": "University of Northern Iowa",
+      "city": "Cedar Falls",
+      "state": "Iowa"
+    },
+    {
+      "level": "FCS",
+      "name": "Northwestern State",
+      "institution": "Northwestern State University",
+      "city": "Natchitoches",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Penn",
+      "institution": "University of Pennsylvania",
+      "city": "Philadelphia",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "Portland State",
+      "institution": "Portland State University",
+      "city": "Portland",
+      "state": "Oregon"
+    },
+    {
+      "level": "FCS",
+      "name": "Prairie View A&M",
+      "institution": "Prairie View A&M University",
+      "city": "Prairie View",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Presbyterian",
+      "institution": "Presbyterian College",
+      "city": "Clinton",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Princeton",
+      "institution": "Princeton University",
+      "city": "Princeton",
+      "state": "NewJersey"
+    },
+    {
+      "level": "FCS",
+      "name": "Rhode Island",
+      "institution": "University of Rhode Island",
+      "city": "Kingston",
+      "state": "RhodeIsland"
+    },
+    {
+      "level": "FCS",
+      "name": "Richmond",
+      "institution": "University of Richmond",
+      "city": "Richmond",
+      "state": "Virginia"
+    },
+    {
+      "level": "FCS",
+      "name": "Robert Morris",
+      "institution": "Robert Morris University",
+      "city": "Moon Township",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "Sacred Heart",
+      "institution": "Sacred Heart University",
+      "city": "Fairfield",
+      "state": "Connecticut"
+    },
+    {
+      "level": "FCS",
+      "name": "St. Thomas",
+      "institution": "University of St. Thomas",
+      "city": "Saint Paul",
+      "state": "Minnesota"
+    },
+    {
+      "level": "FCS",
+      "name": "Samford",
+      "institution": "Samford University",
+      "city": "Birmingham",
+      "state": "Alabama"
+    },
+    {
+      "level": "FCS",
+      "name": "San Diego",
+      "institution": "University of San Diego",
+      "city": "San Diego",
+      "state": "California"
+    },
+    {
+      "level": "FCS",
+      "name": "South Carolina State",
+      "institution": "South Carolina State University",
+      "city": "Orangeburg",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "South Dakota",
+      "institution": "University of South Dakota",
+      "city": "Vermillion",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "FCS",
+      "name": "South Dakota State",
+      "institution": "South Dakota State University",
+      "city": "Brookings",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "FCS",
+      "name": "Southeast Missouri State",
+      "institution": "Southeast Missouri State University",
+      "city": "Cape Girardeau",
+      "state": "Missouri"
+    },
+    {
+      "level": "FCS",
+      "name": "Southeastern Louisiana",
+      "institution": "Southeastern Louisiana University",
+      "city": "Hammond",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Southern",
+      "institution": "Southern University",
+      "city": "Baton Rouge",
+      "state": "Louisiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Southern Illinois",
+      "institution": "Southern Illinois University Carbondale",
+      "city": "Carbondale",
+      "state": "Illinois"
+    },
+    {
+      "level": "FCS",
+      "name": "Southern Utah",
+      "institution": "Southern Utah University",
+      "city": "Cedar City",
+      "state": "Utah"
+    },
+    {
+      "level": "FCS",
+      "name": "Stephen F. Austin",
+      "institution": "Stephen F. Austin State University",
+      "city": "Nacogdoches",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Stetson",
+      "institution": "Stetson University",
+      "city": "DeLand",
+      "state": "Florida"
+    },
+    {
+      "level": "FCS",
+      "name": "Stonehill",
+      "institution": "Stonehill College",
+      "city": "Easton",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "FCS",
+      "name": "Stony Brook",
+      "institution": "Stony Brook University",
+      "city": "Stony Brook",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Tarleton State",
+      "institution": "Tarleton State University",
+      "city": "Stephenville",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Tennessee State",
+      "institution": "Tennessee State University",
+      "city": "Nashville",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "Tennessee Tech",
+      "institution": "Tennessee Technological University",
+      "city": "Cookeville",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "Texas Southern",
+      "institution": "Texas Southern University",
+      "city": "Houston",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Towson",
+      "institution": "Towson University",
+      "city": "Towson",
+      "state": "Maryland"
+    },
+    {
+      "level": "FCS",
+      "name": "UC Davis",
+      "institution": "University of California, Davis",
+      "city": "Davis",
+      "state": "California"
+    },
+    {
+      "level": "FCS",
+      "name": "UT Martin",
+      "institution": "University of Tennessee at Martin",
+      "city": "Martin",
+      "state": "Tennessee"
+    },
+    {
+      "level": "FCS",
+      "name": "Utah Tech",
+      "institution": "Utah Tech University",
+      "city": "St. George",
+      "state": "Utah"
+    },
+    {
+      "level": "FCS",
+      "name": "UTRGV",
+      "institution": "University of Texas Rio Grande Valley",
+      "city": "Brownsville & Edinburg",
+      "state": "Texas"
+    },
+    {
+      "level": "FCS",
+      "name": "Valparaiso",
+      "institution": "Valparaiso University",
+      "city": "Valparaiso",
+      "state": "Indiana"
+    },
+    {
+      "level": "FCS",
+      "name": "Villanova",
+      "institution": "Villanova University",
+      "city": "Villanova",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "FCS",
+      "name": "VMI",
+      "institution": "Virginia Military Institute",
+      "city": "Lexington",
+      "state": "Virginia"
+    },
+    {
+      "level": "FCS",
+      "name": "Wagner",
+      "institution": "Wagner College",
+      "city": "New York",
+      "state": "NewYork"
+    },
+    {
+      "level": "FCS",
+      "name": "Weber State",
+      "institution": "Weber State University",
+      "city": "Ogden",
+      "state": "Utah"
+    },
+    {
+      "level": "FCS",
+      "name": "Western Carolina",
+      "institution": "Western Carolina University",
+      "city": "Cullowhee",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Western Illinois",
+      "institution": "Western Illinois University",
+      "city": "Macomb",
+      "state": "Illinois"
+    },
+    {
+      "level": "FCS",
+      "name": "William & Mary",
+      "institution": "College of William & Mary",
+      "city": "Williamsburg",
+      "state": "Virginia"
+    },
+    {
+      "level": "FCS",
+      "name": "Wofford",
+      "institution": "Wofford College",
+      "city": "Spartanburg",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "FCS",
+      "name": "Yale",
+      "institution": "Yale University",
+      "city": "New Haven",
+      "state": "Connecticut"
+    },
+    {
+      "level": "FCS",
+      "name": "Youngstown State",
+      "institution": "Youngstown State University",
+      "city": "Youngstown",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Adams State",
+      "institution": "Adams State University",
+      "city": "Alamosa",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "Albany State",
+      "institution": "Albany State University",
+      "city": "Albany",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Allen",
+      "institution": "Allen University",
+      "city": "Columbia",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "American International",
+      "institution": "American International College",
+      "city": "Springfield",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D2",
+      "name": "Anderson",
+      "institution": "Anderson University",
+      "city": "Anderson",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Angelo State",
+      "institution": "Angelo State University",
+      "city": "San Angelo",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "Arkansas Tech",
+      "institution": "Arkansas Tech University",
+      "city": "Russellville",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Arkansas–Monticello",
+      "institution": "University of Arkansas at Monticello",
+      "city": "Monticello",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Ashland",
+      "institution": "Ashland University",
+      "city": "Ashland",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Assumption",
+      "institution": "Assumption University",
+      "city": "Worcester",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D2",
+      "name": "Augustana (SD)",
+      "institution": "Augustana University",
+      "city": "Sioux Falls",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Barton",
+      "institution": "Barton College",
+      "city": "Wilson",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Bemidji State",
+      "institution": "Bemidji State University",
+      "city": "Bemidji",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Benedict",
+      "institution": "Benedict College",
+      "city": "Columbia",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Bentley",
+      "institution": "Bentley University",
+      "city": "Waltham",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D2",
+      "name": "Black Hills State",
+      "institution": "Black Hills State University",
+      "city": "Spearfish",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Bluefield State",
+      "institution": "Bluefield State University",
+      "city": "Bluefield",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Bowie State",
+      "institution": "Bowie State University",
+      "city": "Bowie",
+      "state": "Maryland"
+    },
+    {
+      "level": "D2",
+      "name": "California (PA)",
+      "institution": "PennWest California",
+      "city": "California",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Carson–Newman",
+      "institution": "Carson-Newman University",
+      "city": "Jefferson City",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D2",
+      "name": "Catawba",
+      "institution": "Catawba College",
+      "city": "Salisbury",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Central Missouri",
+      "institution": "University of Central Missouri",
+      "city": "Warrensburg",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Central Oklahoma",
+      "institution": "University of Central Oklahoma",
+      "city": "Edmond",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Central State",
+      "institution": "Central State University",
+      "city": "Wilberforce",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Central Washington",
+      "institution": "Central Washington University",
+      "city": "Ellensburg",
+      "state": "Washington"
+    },
+    {
+      "level": "D2",
+      "name": "Chadron State",
+      "institution": "Chadron State College",
+      "city": "Chadron",
+      "state": "Nebraska"
+    },
+    {
+      "level": "D2",
+      "name": "Charleston",
+      "institution": "University of Charleston",
+      "city": "Charleston",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Chowan",
+      "institution": "Chowan University",
+      "city": "Murfreesboro",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Clarion",
+      "institution": "PennWest Clarion",
+      "city": "Clarion",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Clark Atlanta",
+      "institution": "Clark Atlanta University",
+      "city": "Atlanta",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Colorado Mesa",
+      "institution": "Colorado Mesa University",
+      "city": "Grand Junction",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "Colorado Mines",
+      "institution": "Colorado School of Mines",
+      "city": "Golden",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "CSU Pueblo",
+      "institution": "Colorado State University Pueblo",
+      "city": "Pueblo",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "Bloomsburg",
+      "institution": "Commonwealth University-Bloomsburg",
+      "city": "Bloomsburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Lock Haven",
+      "institution": "Commonwealth University-Lock Haven",
+      "city": "Lock Haven",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Concord",
+      "institution": "Concord University",
+      "city": "Athens",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Concordia",
+      "institution": "Concordia University, Saint Paul",
+      "city": "St. Paul",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Davenport",
+      "institution": "Davenport University",
+      "city": "Grand Rapids",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Delta State",
+      "institution": "Delta State University",
+      "city": "Cleveland",
+      "state": "Mississippi"
+    },
+    {
+      "level": "D2",
+      "name": "East Central",
+      "institution": "East Central University",
+      "city": "Ada",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "East Stroudsburg",
+      "institution": "East Stroudsburg University",
+      "city": "East Stroudsburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Eastern New Mexico",
+      "institution": "Eastern New Mexico University",
+      "city": "Portales",
+      "state": "NewMexico"
+    },
+    {
+      "level": "D2",
+      "name": "Edinboro",
+      "institution": "PennWest Edinboro",
+      "city": "Edinboro",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Edward Waters",
+      "institution": "Edward Waters University",
+      "city": "Jacksonville",
+      "state": "Florida"
+    },
+    {
+      "level": "D2",
+      "name": "Elizabeth City State",
+      "institution": "Elizabeth City State University",
+      "city": "Elizabeth City",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Emory & Henry",
+      "institution": "Emory and Henry University",
+      "city": "Emory",
+      "state": "Virginia"
+    },
+    {
+      "level": "D2",
+      "name": "Emporia State",
+      "institution": "Emporia State University",
+      "city": "Emporia",
+      "state": "Kansas"
+    },
+    {
+      "level": "D2",
+      "name": "Erskine",
+      "institution": "Erskine College",
+      "city": "Due West",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Fairmont State",
+      "institution": "Fairmont State University",
+      "city": "Fairmont",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Fayetteville State",
+      "institution": "Fayetteville State University",
+      "city": "Fayetteville",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Ferris State",
+      "institution": "Ferris State University",
+      "city": "Big Rapids",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Ferrum",
+      "institution": "Ferrum College",
+      "city": "Ferrum",
+      "state": "Virginia"
+    },
+    {
+      "level": "D2",
+      "name": "Findlay",
+      "institution": "University of Findlay",
+      "city": "Findlay",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Fort Hays State",
+      "institution": "Fort Hays State University",
+      "city": "Hays",
+      "state": "Kansas"
+    },
+    {
+      "level": "D2",
+      "name": "Fort Lewis",
+      "institution": "Fort Lewis College",
+      "city": "Durango",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "Fort Valley State",
+      "institution": "Fort Valley State University",
+      "city": "Fort Valley",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Franklin Pierce",
+      "institution": "Franklin Pierce University",
+      "city": "Rindge",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "D2",
+      "name": "Frostburg State",
+      "institution": "Frostburg State University",
+      "city": "Frostburg",
+      "state": "Maryland"
+    },
+    {
+      "level": "D2",
+      "name": "Gannon",
+      "institution": "Gannon University",
+      "city": "Erie",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Glenville State",
+      "institution": "Glenville State University",
+      "city": "Glenville",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Grand Valley State",
+      "institution": "Grand Valley State University",
+      "city": "Allendale",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Harding",
+      "institution": "Harding University",
+      "city": "Searcy",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Henderson State",
+      "institution": "Henderson State University",
+      "city": "Arkadelphia",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Hillsdale",
+      "institution": "Hillsdale College",
+      "city": "Hillsdale",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "IUP",
+      "institution": "Indiana University of Pennsylvania",
+      "city": "Indiana",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Indianapolis",
+      "institution": "University of Indianapolis",
+      "city": "Indianapolis",
+      "state": "Indiana"
+    },
+    {
+      "level": "D2",
+      "name": "Jamestown",
+      "institution": "University of Jamestown",
+      "city": "Jamestown",
+      "state": "NorthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Johnson C. Smith",
+      "institution": "Johnson C. Smith University",
+      "city": "Charlotte",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Kentucky State",
+      "institution": "Kentucky State University",
+      "city": "Frankfort",
+      "state": "Kentucky"
+    },
+    {
+      "level": "D2",
+      "name": "Kentucky Wesleyan",
+      "institution": "Kentucky Wesleyan College",
+      "city": "Owensboro",
+      "state": "Kentucky"
+    },
+    {
+      "level": "D2",
+      "name": "Kutztown",
+      "institution": "Kutztown University",
+      "city": "Kutztown",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Lake Erie",
+      "institution": "Lake Erie College",
+      "city": "Painesville",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Lane",
+      "institution": "Lane College",
+      "city": "Jackson",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D2",
+      "name": "Lenoir–Rhyne",
+      "institution": "Lenoir-Rhyne University",
+      "city": "Hickory",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Lincoln (MO)",
+      "institution": "Lincoln University",
+      "city": "Jefferson City",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Lincoln (PA)",
+      "institution": "Lincoln University",
+      "city": "Lower Oxford",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Livingstone",
+      "institution": "Livingstone College",
+      "city": "Salisbury",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Mars Hill",
+      "institution": "Mars Hill University",
+      "city": "Mars Hill",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Mary",
+      "institution": "University of Mary",
+      "city": "Bismarck",
+      "state": "NorthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "McKendree",
+      "institution": "McKendree University",
+      "city": "Lebanon",
+      "state": "Illinois"
+    },
+    {
+      "level": "D2",
+      "name": "Michigan Tech",
+      "institution": "Michigan Technological University",
+      "city": "Houghton",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Midwestern State",
+      "institution": "Midwestern State University",
+      "city": "Wichita Falls",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "Miles",
+      "institution": "Miles College",
+      "city": "Fairfield",
+      "state": "Alabama"
+    },
+    {
+      "level": "D2",
+      "name": "Millersville",
+      "institution": "Millersville University",
+      "city": "Millersville",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Minnesota Duluth",
+      "institution": "University of Minnesota Duluth",
+      "city": "Duluth",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Minnesota State",
+      "institution": "Minnesota State University, Mankato",
+      "city": "Mankato",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Minnesota State–Moorhead",
+      "institution": "Minnesota State University Moorhead",
+      "city": "Moorhead",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Minot State",
+      "institution": "Minot State University",
+      "city": "Minot",
+      "state": "NorthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Missouri S&T",
+      "institution": "Missouri University of Science and Technology",
+      "city": "Rolla",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Missouri Southern",
+      "institution": "Missouri Southern State University",
+      "city": "Joplin",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Missouri Western",
+      "institution": "Missouri Western State University",
+      "city": "St. Joseph",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Morehouse",
+      "institution": "Morehouse College",
+      "city": "Atlanta",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Nebraska–Kearney",
+      "institution": "University of Nebraska at Kearney",
+      "city": "Kearney",
+      "state": "Nebraska"
+    },
+    {
+      "level": "D2",
+      "name": "New Mexico Highlands",
+      "institution": "New Mexico Highlands University",
+      "city": "Las Vegas",
+      "state": "NewMexico"
+    },
+    {
+      "level": "D2",
+      "name": "Newberry",
+      "institution": "Newberry College",
+      "city": "Newberry",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "UNC Pembroke",
+      "institution": "University of North Carolina at Pembroke",
+      "city": "Pembroke",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "North Greenville",
+      "institution": "North Greenville University",
+      "city": "Tigerville",
+      "state": "SouthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Northeastern State",
+      "institution": "Northeastern State University",
+      "city": "Tahlequah",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Northern Michigan",
+      "institution": "Northern Michigan University",
+      "city": "Marquette",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Northern State",
+      "institution": "Northern State University",
+      "city": "Aberdeen",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Northwest Missouri State",
+      "institution": "Northwest Missouri State University",
+      "city": "Maryville",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Northwestern Oklahoma State",
+      "institution": "Northwestern Oklahoma State University",
+      "city": "Alva",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Northwood",
+      "institution": "Northwood University",
+      "city": "Midland",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Ohio Dominican",
+      "institution": "Ohio Dominican University",
+      "city": "Columbus",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Oklahoma Baptist",
+      "institution": "Oklahoma Baptist University",
+      "city": "Shawnee",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Ouachita Baptist",
+      "institution": "Ouachita Baptist University",
+      "city": "Arkadelphia",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Pace",
+      "institution": "Pace University",
+      "city": "Pleasantville",
+      "state": "NewYork"
+    },
+    {
+      "level": "D2",
+      "name": "Pittsburg State",
+      "institution": "Pittsburg State University",
+      "city": "Pittsburg",
+      "state": "Kansas"
+    },
+    {
+      "level": "D2",
+      "name": "Post",
+      "institution": "Post University",
+      "city": "Waterbury",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D2",
+      "name": "Quincy",
+      "institution": "Quincy University",
+      "city": "Quincy",
+      "state": "Illinois"
+    },
+    {
+      "level": "D2",
+      "name": "Roosevelt",
+      "institution": "Roosevelt University",
+      "city": "Chicago",
+      "state": "Illinois"
+    },
+    {
+      "level": "D2",
+      "name": "Saginaw Valley State",
+      "institution": "Saginaw Valley State University",
+      "city": "University Center",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Saint Anselm",
+      "institution": "Saint Anselm College",
+      "city": "Goffstown",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "D2",
+      "name": "Savannah State",
+      "institution": "Savannah State University",
+      "city": "Savannah",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Seton Hill",
+      "institution": "Seton Hill University",
+      "city": "Greensburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Shaw",
+      "institution": "Shaw University",
+      "city": "Raleigh",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Shepherd",
+      "institution": "Shepherd University",
+      "city": "Shepherdstown",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Shippensburg",
+      "institution": "Shippensburg University",
+      "city": "Shippensburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "Shorter",
+      "institution": "Shorter University",
+      "city": "Rome",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Sioux Falls",
+      "institution": "University of Sioux Falls",
+      "city": "Sioux Falls",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Slippery Rock",
+      "institution": "Slippery Rock University",
+      "city": "Slippery Rock",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "South Dakota Mines",
+      "institution": "South Dakota School of Mines and Technology",
+      "city": "Rapid City",
+      "state": "SouthDakota"
+    },
+    {
+      "level": "D2",
+      "name": "Southeastern Oklahoma State",
+      "institution": "Southeastern Oklahoma State University",
+      "city": "Durant",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Southern Arkansas",
+      "institution": "Southern Arkansas University",
+      "city": "Magnolia",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D2",
+      "name": "Southern Connecticut",
+      "institution": "Southern Connecticut State University",
+      "city": "New Haven",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D2",
+      "name": "Southern Nazarene",
+      "institution": "Southern Nazarene University",
+      "city": "Bethany",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Southwest Baptist",
+      "institution": "Southwest Baptist University",
+      "city": "Bolivar",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Southwest Minnesota State",
+      "institution": "Southwest Minnesota State University",
+      "city": "Marshall",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Southwestern Oklahoma State",
+      "institution": "Southwestern Oklahoma State University",
+      "city": "Weatherford",
+      "state": "Oklahoma"
+    },
+    {
+      "level": "D2",
+      "name": "Sul Ross State",
+      "institution": "Sul Ross State University",
+      "city": "Alpine",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "Texas A&M–Kingsville",
+      "institution": "Texas A&M University–Kingsville",
+      "city": "Kingsville",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "Thomas More",
+      "institution": "Thomas More University",
+      "city": "Crestview Hills",
+      "state": "Kentucky"
+    },
+    {
+      "level": "D2",
+      "name": "Tiffin",
+      "institution": "Tiffin University",
+      "city": "Tiffin",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Truman",
+      "institution": "Truman State University",
+      "city": "Kirksville",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Tusculum",
+      "institution": "Tusculum University",
+      "city": "Tusculum",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D2",
+      "name": "Tuskegee",
+      "institution": "Tuskegee University",
+      "city": "Tuskegee",
+      "state": "Alabama"
+    },
+    {
+      "level": "D2",
+      "name": "Upper Iowa",
+      "institution": "Upper Iowa University",
+      "city": "Fayette",
+      "state": "Iowa"
+    },
+    {
+      "level": "D2",
+      "name": "UT Permian Basin",
+      "institution": "University of Texas Permian Basin",
+      "city": "Odessa",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "UVA Wise",
+      "institution": "University of Virginia's College at Wise",
+      "city": "Wise",
+      "state": "Virginia"
+    },
+    {
+      "level": "D2",
+      "name": "Valdosta State",
+      "institution": "Valdosta State University",
+      "city": "Valdosta",
+      "state": "Georgia"
+    },
+    {
+      "level": "D2",
+      "name": "Virginia State",
+      "institution": "Virginia State University",
+      "city": "Ettrick",
+      "state": "Virginia"
+    },
+    {
+      "level": "D2",
+      "name": "Virginia Union",
+      "institution": "Virginia Union University",
+      "city": "Richmond",
+      "state": "Virginia"
+    },
+    {
+      "level": "D2",
+      "name": "Walsh",
+      "institution": "Walsh University",
+      "city": "Canton",
+      "state": "Ohio"
+    },
+    {
+      "level": "D2",
+      "name": "Washburn",
+      "institution": "Washburn University",
+      "city": "Topeka",
+      "state": "Kansas"
+    },
+    {
+      "level": "D2",
+      "name": "Wayne State (MI)",
+      "institution": "Wayne State University",
+      "city": "Detroit",
+      "state": "Michigan"
+    },
+    {
+      "level": "D2",
+      "name": "Wayne State (NE)",
+      "institution": "Wayne State College",
+      "city": "Wayne",
+      "state": "Nebraska"
+    },
+    {
+      "level": "D2",
+      "name": "West Alabama",
+      "institution": "University of West Alabama",
+      "city": "Livingston",
+      "state": "Alabama"
+    },
+    {
+      "level": "D2",
+      "name": "West Chester",
+      "institution": "West Chester University",
+      "city": "West Chester",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D2",
+      "name": "West Liberty",
+      "institution": "West Liberty University",
+      "city": "West Liberty",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "West Texas A&M",
+      "institution": "West Texas A&M University",
+      "city": "Canyon",
+      "state": "Texas"
+    },
+    {
+      "level": "D2",
+      "name": "West Virginia State",
+      "institution": "West Virginia State University",
+      "city": "Institute",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "West Virginia Wesleyan",
+      "institution": "West Virginia Wesleyan College",
+      "city": "Buckhannon",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "Western Colorado",
+      "institution": "Western Colorado University",
+      "city": "Gunnison",
+      "state": "Colorado"
+    },
+    {
+      "level": "D2",
+      "name": "Western New Mexico",
+      "institution": "Western New Mexico University",
+      "city": "Silver City",
+      "state": "NewMexico"
+    },
+    {
+      "level": "D2",
+      "name": "Western Oregon",
+      "institution": "Western Oregon University",
+      "city": "Monmouth",
+      "state": "Oregon"
+    },
+    {
+      "level": "D2",
+      "name": "Wheeling",
+      "institution": "Wheeling University",
+      "city": "Wheeling",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D2",
+      "name": "William Jewell",
+      "institution": "William Jewell College",
+      "city": "Liberty",
+      "state": "Missouri"
+    },
+    {
+      "level": "D2",
+      "name": "Wingate",
+      "institution": "Wingate University",
+      "city": "Wingate",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D2",
+      "name": "Winona State",
+      "institution": "Winona State University",
+      "city": "Winona",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D2",
+      "name": "Winston-Salem State",
+      "institution": "Winston-Salem State University",
+      "city": "Winston-Salem",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "Adrian",
+      "institution": "Adrian",
+      "city": "Adrian",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Albion",
+      "institution": "Albion",
+      "city": "Albion",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Albright",
+      "institution": "Albright",
+      "city": "Reading",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Alfred",
+      "institution": "Alfred",
+      "city": "Alfred",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Alfred State",
+      "institution": "Alfred State",
+      "city": "Alfred",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Allegheny",
+      "institution": "Allegheny",
+      "city": "Meadville",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Alma",
+      "institution": "Alma",
+      "city": "Alma",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Alvernia",
+      "institution": "Alvernia",
+      "city": "Reading",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Amherst",
+      "institution": "Amherst",
+      "city": "Amherst",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Anderson (IN)",
+      "institution": "Anderson (IN)",
+      "city": "Anderson",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Augsburg",
+      "institution": "Augsburg",
+      "city": "Minneapolis",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Augustana (IL)",
+      "institution": "Augustana (IL)",
+      "city": "Rock Island",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Aurora",
+      "institution": "Aurora",
+      "city": "Aurora",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Austin",
+      "institution": "Austin",
+      "city": "Sherman",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Averett",
+      "institution": "Averett",
+      "city": "Danville",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Azusa Pacific",
+      "institution": "Azusa Pacific",
+      "city": "Azusa",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Baldwin Wallace",
+      "institution": "Baldwin Wallace",
+      "city": "Berea",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Bates",
+      "institution": "Bates",
+      "city": "Lewiston",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "Belhaven",
+      "institution": "Belhaven",
+      "city": "Jackson",
+      "state": "Mississippi"
+    },
+    {
+      "level": "D3",
+      "name": "Beloit",
+      "institution": "Beloit",
+      "city": "Beloit",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Benedictine",
+      "institution": "Benedictine",
+      "city": "Lisle",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Berry",
+      "institution": "Berry",
+      "city": "Mount Berry",
+      "state": "Georgia"
+    },
+    {
+      "level": "D3",
+      "name": "Bethany",
+      "institution": "Bethany",
+      "city": "Bethany",
+      "state": "WestVirginia"
+    },
+    {
+      "level": "D3",
+      "name": "Bethel",
+      "institution": "Bethel",
+      "city": "Arden Hills",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Bluffton",
+      "institution": "Bluffton",
+      "city": "Bluffton",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Bowdoin",
+      "institution": "Bowdoin",
+      "city": "Brunswick",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "Brevard",
+      "institution": "Brevard",
+      "city": "Brevard",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "Bridgewater",
+      "institution": "Bridgewater",
+      "city": "Bridgewater",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Bridgewater State",
+      "institution": "Bridgewater State",
+      "city": "Bridgewater",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Brockport",
+      "institution": "Brockport",
+      "city": "Brockport",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Buena Vista",
+      "institution": "Buena Vista",
+      "city": "Storm Lake",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Buffalo State",
+      "institution": "Buffalo State",
+      "city": "Buffalo",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Cal Lutheran",
+      "institution": "Cal Lutheran",
+      "city": "Thousand Oaks",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Calvin",
+      "institution": "Calvin",
+      "city": "Grand Rapids",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Capital",
+      "institution": "Capital",
+      "city": "Columbus",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Carleton",
+      "institution": "Carleton",
+      "city": "Northfield",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Carnegie Mellon",
+      "institution": "Carnegie Mellon",
+      "city": "Pittsburgh",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Carroll (WI)",
+      "institution": "Carroll (WI)",
+      "city": "Waukesha",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Carthage",
+      "institution": "Carthage",
+      "city": "Kenosha",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Case Western Reserve",
+      "institution": "Case Western Reserve",
+      "city": "Cleveland",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Catholic University",
+      "institution": "Catholic University",
+      "city": "Washington",
+      "state": "DistrictOfColumbia"
+    },
+    {
+      "level": "D3",
+      "name": "Centenary",
+      "institution": "Centenary",
+      "city": "Shreveport",
+      "state": "Louisiana"
+    },
+    {
+      "level": "D3",
+      "name": "Central (IA)",
+      "institution": "Central (IA)",
+      "city": "Pella",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Centre",
+      "institution": "Centre",
+      "city": "Danville",
+      "state": "Kentucky"
+    },
+    {
+      "level": "D3",
+      "name": "Chapman",
+      "institution": "Chapman",
+      "city": "Orange",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Chicago",
+      "institution": "Chicago",
+      "city": "Chicago",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Christopher Newport",
+      "institution": "Christopher Newport",
+      "city": "Newport News",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Claremont-Mudd-Scripps",
+      "institution": "Claremont-Mudd-Scripps",
+      "city": "Claremont",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Coast Guard",
+      "institution": "Coast Guard",
+      "city": "New London",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D3",
+      "name": "Coe",
+      "institution": "Coe",
+      "city": "Cedar Rapids",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Colby",
+      "institution": "Colby",
+      "city": "Waterville",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "TCNJ",
+      "institution": "TCNJ",
+      "city": "Ewing",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "Concordia (IL)",
+      "institution": "Concordia (IL)",
+      "city": "River Forest",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Concordia (Moorhead)",
+      "institution": "Concordia (Moorhead)",
+      "city": "Moorhead",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Concordia (WI)",
+      "institution": "Concordia (WI)",
+      "city": "Mequon",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Cornell (IA)",
+      "institution": "Cornell (IA)",
+      "city": "Mount Vernon",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Cortland",
+      "institution": "Cortland",
+      "city": "Cortland",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Crown",
+      "institution": "Crown",
+      "city": "St. Bonifacius",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Curry",
+      "institution": "Curry",
+      "city": "Milton",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Dean",
+      "institution": "Dean",
+      "city": "Franklin",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Delaware Valley",
+      "institution": "Delaware Valley",
+      "city": "Doylestown",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Denison",
+      "institution": "Denison",
+      "city": "Granville",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "DePauw",
+      "institution": "DePauw",
+      "city": "Greencastle",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Dickinson",
+      "institution": "Dickinson",
+      "city": "Carlisle",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Dubuque",
+      "institution": "Dubuque",
+      "city": "Dubuque",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "East Texas Baptist",
+      "institution": "East Texas Baptist",
+      "city": "Marshall",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Eastern",
+      "institution": "Eastern",
+      "city": "St. Davids",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Elmhurst",
+      "institution": "Elmhurst",
+      "city": "Elmhurst",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Endicott",
+      "institution": "Endicott",
+      "city": "Beverly",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Eureka",
+      "institution": "Eureka",
+      "city": "Eureka",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Fairleigh Dickinson-Florham",
+      "institution": "Fairleigh Dickinson-Florham",
+      "city": "Madison",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "Fitchburg State",
+      "institution": "Fitchburg State",
+      "city": "Fitchburg",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Framingham State",
+      "institution": "Framingham State",
+      "city": "Framingham",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Franklin",
+      "institution": "Franklin",
+      "city": "Franklin",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Franklin & Marshall",
+      "institution": "Franklin & Marshall",
+      "city": "Lancaster",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Gallaudet",
+      "institution": "Gallaudet",
+      "city": "Washington",
+      "state": "DistrictOfColumbia"
+    },
+    {
+      "level": "D3",
+      "name": "Geneva",
+      "institution": "Geneva",
+      "city": "Beaver Falls",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "George Fox",
+      "institution": "George Fox",
+      "city": "Newberg",
+      "state": "Oregon"
+    },
+    {
+      "level": "D3",
+      "name": "Gettysburg",
+      "institution": "Gettysburg",
+      "city": "Gettysburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Greensboro",
+      "institution": "Greensboro",
+      "city": "Greensboro",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "Greenville",
+      "institution": "Greenville",
+      "city": "Greenville",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Grinnell",
+      "institution": "Grinnell",
+      "city": "Grinnell",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Grove City",
+      "institution": "Grove City",
+      "city": "Grove City",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Guilford",
+      "institution": "Guilford",
+      "city": "Greensboro",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "Gustavus Adolphus",
+      "institution": "Gustavus Adolphus",
+      "city": "St. Peter",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Hamilton",
+      "institution": "Hamilton",
+      "city": "Clinton",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Hamline",
+      "institution": "Hamline",
+      "city": "St. Paul",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Hampden-Sydney",
+      "institution": "Hampden-Sydney",
+      "city": "Hampden Sydney",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Hanover",
+      "institution": "Hanover",
+      "city": "Hanover",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Hardin-Simmons",
+      "institution": "Hardin-Simmons",
+      "city": "Abilene",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Hartwick",
+      "institution": "Hartwick",
+      "city": "Oneonta",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Heidelberg",
+      "institution": "Heidelberg",
+      "city": "Tiffin",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Hendrix",
+      "institution": "Hendrix",
+      "city": "Conway",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D3",
+      "name": "Hilbert",
+      "institution": "Hilbert",
+      "city": "Hamburg",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Hiram",
+      "institution": "Hiram",
+      "city": "Hiram",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Hobart",
+      "institution": "Hobart",
+      "city": "Geneva",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Hope",
+      "institution": "Hope",
+      "city": "Holland",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Howard Payne",
+      "institution": "Howard Payne",
+      "city": "Brownwood",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Huntingdon",
+      "institution": "Huntingdon",
+      "city": "Montgomery",
+      "state": "Alabama"
+    },
+    {
+      "level": "D3",
+      "name": "Husson",
+      "institution": "Husson",
+      "city": "Bangor",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "Illinois College",
+      "institution": "Illinois College",
+      "city": "Jacksonville",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Illinois Wesleyan",
+      "institution": "Illinois Wesleyan",
+      "city": "Bloomington",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Ithaca",
+      "institution": "Ithaca",
+      "city": "Ithaca",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "John Carroll",
+      "institution": "John Carroll",
+      "city": "University Heights",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Johns Hopkins",
+      "institution": "Johns Hopkins",
+      "city": "Baltimore",
+      "state": "Maryland"
+    },
+    {
+      "level": "D3",
+      "name": "Juniata",
+      "institution": "Juniata",
+      "city": "Huntingdon",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Kalamazoo",
+      "institution": "Kalamazoo",
+      "city": "Kalamazoo",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Kean",
+      "institution": "Kean",
+      "city": "Union Township",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "Kenyon",
+      "institution": "Kenyon",
+      "city": "Gambier",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Keystone",
+      "institution": "Keystone",
+      "city": "La Plume",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "King's",
+      "institution": "King's",
+      "city": "Wilkes-Barre",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Knox",
+      "institution": "Knox",
+      "city": "Galesburg",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "La Verne",
+      "institution": "La Verne",
+      "city": "La Verne",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "LaGrange",
+      "institution": "LaGrange",
+      "city": "LaGrange",
+      "state": "Georgia"
+    },
+    {
+      "level": "D3",
+      "name": "Lake Forest",
+      "institution": "Lake Forest",
+      "city": "Lake Forest",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Lakeland",
+      "institution": "Lakeland",
+      "city": "Sheboygan",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Lawrence",
+      "institution": "Lawrence",
+      "city": "Appleton",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Lebanon Valley",
+      "institution": "Lebanon Valley",
+      "city": "Annville",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Lewis & Clark",
+      "institution": "Lewis & Clark",
+      "city": "Portland",
+      "state": "Oregon"
+    },
+    {
+      "level": "D3",
+      "name": "Linfield",
+      "institution": "Linfield",
+      "city": "McMinnville",
+      "state": "Oregon"
+    },
+    {
+      "level": "D3",
+      "name": "Loras",
+      "institution": "Loras",
+      "city": "Dubuque",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Luther",
+      "institution": "Luther",
+      "city": "Decorah",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Lycoming",
+      "institution": "Lycoming",
+      "city": "Williamsport",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Lyon",
+      "institution": "Lyon",
+      "city": "Batesville",
+      "state": "Arkansas"
+    },
+    {
+      "level": "D3",
+      "name": "Macalester",
+      "institution": "Macalester",
+      "city": "Saint Paul",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Maine Maritime",
+      "institution": "Maine Maritime",
+      "city": "Castine",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "Manchester",
+      "institution": "Manchester",
+      "city": "North Manchester",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Marietta",
+      "institution": "Marietta",
+      "city": "Marietta",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Martin Luther",
+      "institution": "Martin Luther",
+      "city": "New Ulm",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Mary Hardin-Baylor",
+      "institution": "Mary Hardin-Baylor",
+      "city": "Belton",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Maryville (TN)",
+      "institution": "Maryville (TN)",
+      "city": "Maryville",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D3",
+      "name": "UMass Dartmouth",
+      "institution": "UMass Dartmouth",
+      "city": "North Dartmouth",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Massachusetts Maritime",
+      "institution": "Massachusetts Maritime",
+      "city": "Buzzards Bay",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "McDaniel",
+      "institution": "McDaniel",
+      "city": "Westminster",
+      "state": "Maryland"
+    },
+    {
+      "level": "D3",
+      "name": "McMurry",
+      "institution": "McMurry",
+      "city": "Abilene",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Merchant Marine",
+      "institution": "Merchant Marine",
+      "city": "Kings Point",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Methodist",
+      "institution": "Methodist",
+      "city": "Fayetteville",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "Middlebury",
+      "institution": "Middlebury",
+      "city": "Middlebury",
+      "state": "Vermont"
+    },
+    {
+      "level": "D3",
+      "name": "Millikin",
+      "institution": "Millikin",
+      "city": "Decatur",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Millsaps",
+      "institution": "Millsaps",
+      "city": "Jackson",
+      "state": "Mississippi"
+    },
+    {
+      "level": "D3",
+      "name": "Minnesota Morris",
+      "institution": "Minnesota Morris",
+      "city": "Morris",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Misericordia",
+      "institution": "Misericordia",
+      "city": "Dallas",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "MIT",
+      "institution": "MIT",
+      "city": "Cambridge",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Monmouth (IL)",
+      "institution": "Monmouth (IL)",
+      "city": "Monmouth",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Montclair State",
+      "institution": "Montclair State",
+      "city": "Upper Montclair",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "Moravian",
+      "institution": "Moravian",
+      "city": "Bethlehem",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Morrisville",
+      "institution": "Morrisville",
+      "city": "Morrisville",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Mount Union",
+      "institution": "Mount Union",
+      "city": "Alliance",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Mount St. Joseph",
+      "institution": "Mount St. Joseph",
+      "city": "Cincinnati",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Muhlenberg",
+      "institution": "Muhlenberg",
+      "city": "Allentown",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Muskingum",
+      "institution": "Muskingum",
+      "city": "New Concord",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Nebraska Wesleyan",
+      "institution": "Nebraska Wesleyan",
+      "city": "Lincoln",
+      "state": "Nebraska"
+    },
+    {
+      "level": "D3",
+      "name": "New England (ME)",
+      "institution": "New England (ME)",
+      "city": "Biddeford",
+      "state": "Maine"
+    },
+    {
+      "level": "D3",
+      "name": "New England College",
+      "institution": "New England College",
+      "city": "Henniker",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "D3",
+      "name": "Nichols",
+      "institution": "Nichols",
+      "city": "Dudley",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "North Carolina Wesleyan",
+      "institution": "North Carolina Wesleyan",
+      "city": "Rocky Mount",
+      "state": "NorthCarolina"
+    },
+    {
+      "level": "D3",
+      "name": "North Central (IL)",
+      "institution": "North Central (IL)",
+      "city": "Naperville",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "North Park",
+      "institution": "North Park",
+      "city": "Chicago",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Northwestern (MN)",
+      "institution": "Northwestern (MN)",
+      "city": "Roseville",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "Norwich",
+      "institution": "Norwich",
+      "city": "Northfield",
+      "state": "Vermont"
+    },
+    {
+      "level": "D3",
+      "name": "Oberlin",
+      "institution": "Oberlin",
+      "city": "Oberlin",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Ohio Northern",
+      "institution": "Ohio Northern",
+      "city": "Ada",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Ohio Wesleyan",
+      "institution": "Ohio Wesleyan",
+      "city": "Delaware",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Olivet",
+      "institution": "Olivet",
+      "city": "Olivet",
+      "state": "Michigan"
+    },
+    {
+      "level": "D3",
+      "name": "Otterbein",
+      "institution": "Otterbein",
+      "city": "Westerville",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Pacific (OR)",
+      "institution": "Pacific (OR)",
+      "city": "Forest Grove",
+      "state": "Oregon"
+    },
+    {
+      "level": "D3",
+      "name": "Pacific Lutheran",
+      "institution": "Pacific Lutheran",
+      "city": "Tacoma",
+      "state": "Washington"
+    },
+    {
+      "level": "D3",
+      "name": "Plymouth State",
+      "institution": "Plymouth State",
+      "city": "Plymouth",
+      "state": "NewHampshire"
+    },
+    {
+      "level": "D3",
+      "name": "Pomona-Pitzer",
+      "institution": "Pomona-Pitzer",
+      "city": "Claremont",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Puget Sound",
+      "institution": "Puget Sound",
+      "city": "Tacoma",
+      "state": "Washington"
+    },
+    {
+      "level": "D3",
+      "name": "Randolph-Macon",
+      "institution": "Randolph-Macon",
+      "city": "Ashland",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Redlands",
+      "institution": "Redlands",
+      "city": "Redlands",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Rhodes",
+      "institution": "Rhodes",
+      "city": "Memphis",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D3",
+      "name": "Ripon",
+      "institution": "Ripon",
+      "city": "Ripon",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Roanoke",
+      "institution": "Roanoke",
+      "city": "Salem",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Rochester",
+      "institution": "Rochester",
+      "city": "Rochester",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Rockford",
+      "institution": "Rockford",
+      "city": "Rockford",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Rose-Hulman",
+      "institution": "Rose-Hulman",
+      "city": "Terre Haute",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Rowan",
+      "institution": "Rowan",
+      "city": "Glassboro",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "RPI",
+      "institution": "RPI",
+      "city": "Troy",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Saint Francis",
+      "institution": "Saint Francis",
+      "city": "Loretto",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "St. John Fisher",
+      "institution": "St. John Fisher",
+      "city": "Pittsford",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Saint John's (MN)",
+      "institution": "Saint John's (MN)",
+      "city": "Collegeville",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "St. Lawrence",
+      "institution": "St. Lawrence",
+      "city": "Canton",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "St. Norbert",
+      "institution": "St. Norbert",
+      "city": "De Pere",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "St. Olaf",
+      "institution": "St. Olaf",
+      "city": "Northfield",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "St. Scholastica",
+      "institution": "St. Scholastica",
+      "city": "Duluth",
+      "state": "Minnesota"
+    },
+    {
+      "level": "D3",
+      "name": "St. Vincent",
+      "institution": "St. Vincent",
+      "city": "Latrobe",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Salisbury",
+      "institution": "Salisbury",
+      "city": "Salisbury",
+      "state": "Maryland"
+    },
+    {
+      "level": "D3",
+      "name": "Salve Regina",
+      "institution": "Salve Regina",
+      "city": "Newport",
+      "state": "RhodeIsland"
+    },
+    {
+      "level": "D3",
+      "name": "Schreiner",
+      "institution": "Schreiner",
+      "city": "Kerrville",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Sewanee",
+      "institution": "Sewanee",
+      "city": "Sewanee",
+      "state": "Tennessee"
+    },
+    {
+      "level": "D3",
+      "name": "Shenandoah",
+      "institution": "Shenandoah",
+      "city": "Winchester",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Simpson",
+      "institution": "Simpson",
+      "city": "Indianola",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Southern Virginia",
+      "institution": "Southern Virginia",
+      "city": "Buena Vista",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Southwestern",
+      "institution": "Southwestern",
+      "city": "Georgetown",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Springfield",
+      "institution": "Springfield",
+      "city": "Springfield",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Stevenson",
+      "institution": "Stevenson",
+      "city": "Owings Mills",
+      "state": "Maryland"
+    },
+    {
+      "level": "D3",
+      "name": "SUNY-Maritime",
+      "institution": "SUNY-Maritime",
+      "city": "Bronx",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Susquehanna",
+      "institution": "Susquehanna",
+      "city": "Selinsgrove",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Texas Lutheran",
+      "institution": "Texas Lutheran",
+      "city": "Seguin",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Thiel",
+      "institution": "Thiel",
+      "city": "Greenville",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Trine",
+      "institution": "Trine",
+      "city": "Angola",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Trinity (CT)",
+      "institution": "Trinity (CT)",
+      "city": "Hartford",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D3",
+      "name": "Trinity (TX)",
+      "institution": "Trinity (TX)",
+      "city": "San Antonio",
+      "state": "Texas"
+    },
+    {
+      "level": "D3",
+      "name": "Tufts",
+      "institution": "Tufts",
+      "city": "Medford",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Union",
+      "institution": "Union",
+      "city": "Schenectady",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Ursinus",
+      "institution": "Ursinus",
+      "city": "Collegeville",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Utica",
+      "institution": "Utica",
+      "city": "Utica",
+      "state": "NewYork"
+    },
+    {
+      "level": "D3",
+      "name": "Vermont State Castleton",
+      "institution": "Vermont State Castleton",
+      "city": "Castleton",
+      "state": "Vermont"
+    },
+    {
+      "level": "D3",
+      "name": "Wabash",
+      "institution": "Wabash",
+      "city": "Crawfordsville",
+      "state": "Indiana"
+    },
+    {
+      "level": "D3",
+      "name": "Wartburg",
+      "institution": "Wartburg",
+      "city": "Waverly",
+      "state": "Iowa"
+    },
+    {
+      "level": "D3",
+      "name": "Washington & Jefferson",
+      "institution": "Washington & Jefferson",
+      "city": "Washington",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Washington & Lee",
+      "institution": "Washington & Lee",
+      "city": "Lexington",
+      "state": "Virginia"
+    },
+    {
+      "level": "D3",
+      "name": "Washington (St. Louis)",
+      "institution": "Washington (St. Louis)",
+      "city": "St. Louis",
+      "state": "Missouri"
+    },
+    {
+      "level": "D3",
+      "name": "Waynesburg",
+      "institution": "Waynesburg",
+      "city": "Waynesburg",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Wesleyan",
+      "institution": "Wesleyan",
+      "city": "Middletown",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D3",
+      "name": "Western Connecticut",
+      "institution": "Western Connecticut",
+      "city": "Danbury",
+      "state": "Connecticut"
+    },
+    {
+      "level": "D3",
+      "name": "Western New England",
+      "institution": "Western New England",
+      "city": "Springfield",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Westfield State",
+      "institution": "Westfield State",
+      "city": "Westfield",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Westminster (MO)",
+      "institution": "Westminster (MO)",
+      "city": "Fulton",
+      "state": "Missouri"
+    },
+    {
+      "level": "D3",
+      "name": "Westminster (PA)",
+      "institution": "Westminster (PA)",
+      "city": "New Wilmington",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Wheaton (IL)",
+      "institution": "Wheaton (IL)",
+      "city": "Wheaton",
+      "state": "Illinois"
+    },
+    {
+      "level": "D3",
+      "name": "Whittier",
+      "institution": "Whittier",
+      "city": "Whittier",
+      "state": "California"
+    },
+    {
+      "level": "D3",
+      "name": "Whitworth",
+      "institution": "Whitworth",
+      "city": "Spokane",
+      "state": "Washington"
+    },
+    {
+      "level": "D3",
+      "name": "Widener",
+      "institution": "Widener",
+      "city": "Chester",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Wilkes",
+      "institution": "Wilkes",
+      "city": "Wilkes-Barre",
+      "state": "Pennsylvania"
+    },
+    {
+      "level": "D3",
+      "name": "Willamette",
+      "institution": "Willamette",
+      "city": "Salem",
+      "state": "Oregon"
+    },
+    {
+      "level": "D3",
+      "name": "William Paterson",
+      "institution": "William Paterson",
+      "city": "Wayne",
+      "state": "NewJersey"
+    },
+    {
+      "level": "D3",
+      "name": "Williams",
+      "institution": "Williams",
+      "city": "Williamstown",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Wilmington",
+      "institution": "Wilmington",
+      "city": "Wilmington",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin Lutheran",
+      "institution": "Wisconsin Lutheran",
+      "city": "Milwaukee",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Eau Claire",
+      "institution": "Wisconsin-Eau Claire",
+      "city": "Eau Claire",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-La Crosse",
+      "institution": "Wisconsin-La Crosse",
+      "city": "La Crosse",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Oshkosh",
+      "institution": "Wisconsin-Oshkosh",
+      "city": "Oshkosh",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Platteville",
+      "institution": "Wisconsin-Platteville",
+      "city": "Platteville",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-River Falls",
+      "institution": "Wisconsin-River Falls",
+      "city": "River Falls",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Stevens Point",
+      "institution": "Wisconsin-Stevens Point",
+      "city": "Stevens Point",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Stout",
+      "institution": "Wisconsin-Stout",
+      "city": "Menomonie",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wisconsin-Whitewater",
+      "institution": "Wisconsin-Whitewater",
+      "city": "Whitewater",
+      "state": "Wisconsin"
+    },
+    {
+      "level": "D3",
+      "name": "Wittenberg",
+      "institution": "Wittenberg",
+      "city": "Springfield",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "Wooster",
+      "institution": "Wooster",
+      "city": "Wooster",
+      "state": "Ohio"
+    },
+    {
+      "level": "D3",
+      "name": "WPI",
+      "institution": "WPI",
+      "city": "Worcester",
+      "state": "Massachusetts"
+    },
+    {
+      "level": "D3",
+      "name": "Worcester State",
+      "institution": "Worcester State",
+      "city": "Worcester",
+      "state": "Massachusetts"
+    }
+  ]
+}

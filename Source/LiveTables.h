@@ -256,7 +256,7 @@ public:
         const auto before=status();
         for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));
 #if defined(RECRUIT_RESUME_CAPTURE)
-            if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="Recruit")continue;
+            if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="Recruit"&&s.name!="Team")continue;
 #endif
             if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
