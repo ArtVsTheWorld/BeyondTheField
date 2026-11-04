@@ -30,7 +30,7 @@ DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"roster-view-probe.jsonl";
     {std::lock_guard<std::mutex> lock(lifecycle);if(disabled)return 1;
     auto* parent=*reinterpret_cast<void**>(base+0xbaa78b8+0x70);HMODULE owner=nullptr;wchar_t ownerPath[32768]{};
-    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p55.dll")return 1;
+    if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(parent),&owner)||!GetModuleFileNameW(owner,ownerPath,32768)||std::filesystem::path(ownerPath).filename()!=L"DynastyEnhancerRecruitFog-p57.dll")return 1;
     HMODULE pin=nullptr;if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&pin))return 2;
     original=reinterpret_cast<Columns>(parent);if(!swap(parent,reinterpret_cast<void*>(hook))){original=nullptr;return 3;}installed=true;}
     const auto flush=[&](){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(mutex);batch.swap(queue);}if(!batch.empty()){std::ofstream out(file,std::ios::app);for(const auto& item:batch)out<<item.dump()<<'\n';}};
