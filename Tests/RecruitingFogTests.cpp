@@ -1,5 +1,6 @@
 #include "../Source/RecruitingFog.cpp"
 #include <iostream>
+#include "../Source/RecruitNotes.h"
 void require(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
 unsigned forwarded=0;
 void* __fastcall fakeGetter(void*,void** out){++forwarded;return out;}
@@ -24,6 +25,32 @@ int main(){try{
     require(display(Visibility::Range,99,75,85)==u8"C–B","C-B range incorrect");require(display(Visibility::Range,99,80,89)=="B","Same-band range must collapse");require(display(Visibility::Range,99,89,90)==u8"B–A","Boundary-crossing range incorrect");
     require(display(Visibility::Revealed,-1)=="?"&&display(Visibility::Revealed,101)=="?"&&display(Visibility::Revealed,79.5)=="?","Malformed rating was accepted");
     require(display(Visibility::Range,90,80,70)=="?"&&display(Visibility::Range,90,-1,90)=="?","Malformed range was accepted");
+    {
+        NotesProspect p;p.identity="Luke|Callen|Buffalo|New York|561120980";p.position="QB";p.tendency="Pocket Passer";
+        const auto broad=makeRecruitNotes(p);p.observations={{"Throw Power",99,99,true},{"Medium Accuracy",40,40,true}};
+        require(makeRecruitNotes(p)==broad,"Unscouted notes leaked unrevealed attributes");
+        p.progress=std::numeric_limits<double>::quiet_NaN();require(makeRecruitNotes(p)==broad,"Malformed scouting progress exposed detailed notes");
+        p.progress=40;p.observations={{"Throw Power",92,92,true},{"Medium Accuracy",79,79,true},{"Speed",67,82,false}};
+        const auto detailed=makeRecruitNotes(p);require(detailed.find("real zip")!=std::string::npos&&detailed.find("Intermediate placement")!=std::string::npos,"Revealed scouting facts did not produce qualitative notes");
+        require(detailed.find_first_of("0123456789")==std::string::npos&&detailed.find("overall")==std::string::npos&&detailed.find("92")==std::string::npos,"Notes exposed numerical metrics");
+        require(detailed==makeRecruitNotes(p)&&detailed.size()<=1500,"Notes are unstable or exceed the display budget");
+        p.observations={{"Throw Power",0,100,false},{"Speed",67,82,false}};require(makeRecruitNotes(p).find("real zip")==std::string::npos,"An unresolved public range became a strength");
+        p.observations={{"Throw Power",80,100,false}};require(makeRecruitNotes(p).find("real zip")!=std::string::npos,"A public strong range lost its qualitative hint");
+        for(const auto* position:{"QB","HB","FB","WR","TE","LT","LG","C","RG","RT","LEDG","REDG","DT","SAM","MIKE","WILL","CB","FS","SS","K","P","LS"}){p.position=position;p.progress=0;require(!makeRecruitNotes(p).empty()&&makeRecruitNotes(p).find_first_of("0123456789")==std::string::npos,"Position note failed or exposed a rating");}
+    }
+#if defined(RECRUIT_NOTES_UI)
+    {
+        using namespace notesui;
+        std::array<unsigned char,48> h{};std::vector<unsigned char> original={0x59,0x17,0x76,0x3e};
+        auto put=[&](size_t at,const auto& value){memcpy(h.data()+at,&value,sizeof(value));};
+        put(8,unsigned(1));put(12,static_cast<unsigned short>(3));put(14,static_cast<unsigned short>(41));put(24,unsigned(4));put(32,unsigned(5));put(40,uintptr_t(0x20000));
+        Program p{0,1,3,41,4,bodyHash(original),10,8,4,std::vector<unsigned char>(16,0)};
+        const auto cloned=makeDefinition(p,h,original);
+        require(field<unsigned>(cloned.data(),24)==16&&field<unsigned short>(cloned.data(),12)==10&&std::equal(original.begin(),original.end(),cloned.begin()+56),"Notes definition header/body copy differs");
+        require(std::equal(h.begin()+32,h.end(),cloned.begin()+32),"Notes clone changed the native constant pool");
+        original[0]^=1;bool rejected=false;try{makeDefinition(p,h,original);}catch(const std::exception&){rejected=true;}require(rejected,"Changed native method body bypassed the Notes gate");
+    }
+#endif
     {
         FixtureView view;view.arrays[1]={10,20};
         view.maps[10]={{"MotivationString",11},{"Grade",12},{"IntelStatus",13},{"IsDealbreakerViolated",14}};

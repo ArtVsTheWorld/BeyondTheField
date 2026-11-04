@@ -8,6 +8,8 @@ This is a development prototype, not the planned 1.0 release.
 
 Stage 2 adds letter grades and grade ranges to the native recruit Scouting attributes. Hidden values retain their hidden state; ranges use only the bounds the game already reveals. Stage 3 masks recruit-dependent Playing Time grades in dealbreakers, motivations, affected pitch bundles, visits and My School comparisons. The current separate test DLL is `Build/DynastyEnhancerRecruitFog-p08.dll`; it is not part of the installed v103 MMC package and must currently be loaded per session. See [Scouting validation](docs/recruiting-fog-stage2.json) and [Playing Time coverage and limits](docs/recruiting-fog-stage3.json). Recruiting Notes and active-roster Fog remain later work.
 
+The [Stage 4 Notes candidate](docs/recruiting-notes-stage4.json) is built separately with `-RecruitNotesUi`. It is awaiting live tab activation and controller checks; it is disabled in ordinary builds. Broad profile notes appear before scouting, with more detailed qualitative observations drawn from revealed scouting information. The generated UI header contains custom bytecode and native method hashes; rebuilding the DLL does not require distributing extracted game assets.
+
 ## Content and menu performance review (v103)
 
 The package is `Build/DynastyEnhancer-v103-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.

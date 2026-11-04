@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name)
+param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name,[switch]$RecruitNotesProbe,[switch]$RecruitNotesUi)
 $ErrorActionPreference='Stop'
 $fogRoot=Split-Path -Parent $PSScriptRoot
 $fogOut=Join-Path $fogRoot 'Build'
@@ -13,6 +13,13 @@ $fogCl=Join-Path $fogTool.FullName 'bin/Hostx64/x64/cl.exe'
 $fogInc=@(('/I'+(Join-Path $fogTool.FullName 'include')),('/I'+(Join-Path $fogSdk.FullName 'ucrt')),('/I'+(Join-Path $fogSdk.FullName 'shared')),('/I'+(Join-Path $fogSdk.FullName 'um')))
 $fogLib=@(('/LIBPATH:'+(Join-Path $fogTool.FullName 'lib/x64')),('/LIBPATH:'+(Join-Path $fogKits ('Lib/'+$fogSdk.Name+'/ucrt/x64'))),('/LIBPATH:'+(Join-Path $fogKits ('Lib/'+$fogSdk.Name+'/um/x64'))))
 $fogFlags=@('/nologo','/O2','/MT','/W4','/WX','/EHsc','/std:c++17','/utf-8')+$fogInc
+if($RecruitNotesProbe -and $RecruitNotesUi){throw 'Choose either the pass-through probe or Notes UI candidate'}
+if($RecruitNotesProbe){$fogFlags+='/DRECRUIT_NOTES_PROBE'}
+if($RecruitNotesUi){$fogFlags+='/DRECRUIT_NOTES_UI'}
+if($RecruitNotesUi){
+ & python (Join-Path $fogRoot 'Tests/recruit_notes_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Notes UI bytecode checks failed'}
+}
 Push-Location $fogOut
 try{
  & $fogCl @fogFlags (Join-Path $fogRoot 'Tests/RecruitingFogTests.cpp') /Fe:RecruitingFogTests.exe /link @fogLib /INCREMENTAL:NO

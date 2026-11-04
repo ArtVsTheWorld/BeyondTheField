@@ -1,0 +1,47 @@
+{
+  "stage": 4,
+  "feature": "Native recruit Notes profile tab",
+  "status": "Candidate built; offline checks pass. Live Notes tab is not yet activated. Waiting for the updated pass-through probe's executing-owner capture.",
+  "branch": "research/recruiting-fog",
+  "userPreference": "Broad hints immediately; more detail with scouting",
+  "placement": ["Overview", "Recruiting", "Scouting", "Notes"],
+  "content": {
+    "initial": "Public archetype/position profile plus a film focus; no hidden attribute value is consulted",
+    "progression": "Qualitative observations begin after initial scouting; additional encouraging signs can appear as scouting progresses",
+    "certainty": "Uses only the already-revealed values or range bounds in the native ScoutingAttributes response. Broad unresolved ranges do not become invented strengths or weaknesses.",
+    "unknown": "Unscouted and malformed observations do not generate detailed claims",
+    "stability": "Deterministic identity seed from native recruit identity; unchanged scouting data produces unchanged notes",
+    "unchanged": ["Actual ratings", "Scouting hours/progress/cost", "Recruiting eligibility", "Native abilities/mentals/development visibility", "Save data"],
+    "scope": "Early prototype uses football observations rather than fabricated exact high-school statistics, academic scores or championship claims. More narrative background/wording variety can be added after the native tab works."
+  },
+  "nativeUi": {
+    "implementation": "A fourth profile metadata row gets its own native screen-layer key while reusing the existing Scouting subscreen as a read-only presentation donor. Its original controls are hidden for Notes and restored for normal Scouting.",
+    "input": "Notes and Scouting share the donor state. The category callback avoids locking input for a no-op state transition. The scout action and scout-button focus updates are guarded while Notes is selected.",
+    "refresh": "Recruit selection and active-recruit updates rebuild the selected Notes body's native text label",
+    "methods": 8,
+    "ownership": "Session-specific, read-only discovery manifest; full native method body hashes and header fields checked before atomically replacing verified script definition pointers",
+    "sharedHooks": "Does not replace Social Media's script-body accessor hook or alter the Dynasty hub",
+    "unloading": "Clean game restart required once the Notes UI candidate is installed, because native script clones can retain its definitions and DLL-backed literals"
+  },
+  "checksPassed": [
+    "Broad notes do not change when unrevealed observation values change",
+    "Luke's revealed arm strength and intermediate-placement observations produce qualitative text",
+    "No numerical rating appears in note text",
+    "Unresolved ranges, invalid progress and hidden sentinels stay non-specific",
+    "Deterministic notes across repeated reads and all position groups",
+    "Offline execution of fourth-tab metadata, same-state input-lock handling, rendering, recruit changes and Scouting restoration",
+    "Native script header/body copy gates and preservation of the constant pool",
+    "Prior Scouting and Playing Time checks remain passing"
+  ],
+  "liveState": {
+    "active": "p10 pass-through discovery build; working Scouting and Playing Time masks retained",
+    "uiModified": false,
+    "observedCoreNode": true,
+    "pending": ["Updated probe capture of an executing method owner", "Bounded discovery of every required live script owner", "Install offscreen after leaving Recruiting", "Controller and visual check of Notes, recruit changes and Back", "Restore/native Scouting and Playing Time regression check"]
+  },
+  "backups": "EPUPSZN manual save, EPUPSZN autosave and PROFILE-COLLEGE copied under ignored Backups with matching SHA-256 checksums",
+  "source": ["Source/RecruitNotes.h", "Source/RecruitNotesUiRuntime.h", "Source/RecruitNotesUiPrograms.h", "Tools/build_recruit_notes_ui.py", "Tools/inspect_recruit_notes_runtime.py", "Tests/recruit_notes_ui_test.py"],
+  "build": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesUi",
+  "probeBuild": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesProbe",
+  "limits": ["Not yet live verified", "Not integrated into automatic MMC loading", "Prototype prose variety is limited while UI behavior is being proven"]
+}

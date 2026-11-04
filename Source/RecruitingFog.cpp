@@ -13,6 +13,13 @@
 #include "RecruitingUiGates.h"
 #include "PlayingTimeGates.h"
 #include "PlayingTimePolicy.h"
+#if defined(RECRUIT_NOTES_PROBE) || defined(RECRUIT_NOTES_UI)
+#include "RecruitNotes.h"
+#include "RecruitNotesUiPrograms.h"
+#endif
+#if defined(RECRUIT_NOTES_UI)
+#include "RecruitNotesUiRuntime.h"
+#endif
 
 namespace recruitingfog::runtime {
 using Json=nlohmann::json;
@@ -28,10 +35,33 @@ constexpr PlayingTimeSurface detailSurfaces[]={PlayingTimeSurface::Motivations,P
 static_assert(sizeof(detailSurfaces)/sizeof(detailSurfaces[0])==detailCount);
 std::atomic<bool> disabled{false};std::atomic<unsigned> inflight{0},calls{0};bool installed=false;
 std::mutex queueMutex;std::deque<Json> pending;
+#if defined(RECRUIT_NOTES_UI)
+notesui::Runtime notesUi;
+#endif
 constexpr uintptr_t vtableRva=0xc752bc8,slot=0x40,getterRva=0xa0e91a0;
 constexpr std::array<unsigned char,32> prefix={0x48,0x89,0x54,0x24,0x10,0x48,0x89,0x4c,0x24,0x08,0x55,0x53,0x41,0x56,0x48,0x8d,0xac,0x24,0xd0,0xfc,0xff,0xff,0x48,0x81,0xec,0x30,0x04,0x00,0x00,0x48,0x8b,0xda};
 bool read(uintptr_t at,void* out,size_t size){SIZE_T got=0;return at>=0x10000&&ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<const void*>(at),out,size,&got)&&got==size;}
 void note(Json value)noexcept{try{std::lock_guard<std::mutex> lock(queueMutex);if(pending.size()<16)pending.push_back(std::move(value));}catch(...){}}
+#if defined(RECRUIT_NOTES_PROBE)
+using ScriptLength=unsigned(__fastcall*)(void*);
+ScriptLength originalScriptLength=nullptr;bool notesProbeInstalled=false;
+std::atomic<uintptr_t> notesObservedAsset{0};
+std::atomic<uintptr_t> notesObservedOwner{0};
+const auto notesPrograms=notesui::programs();
+uint64_t notesBodyHash(const std::vector<unsigned char>& bytes){uint64_t h=14695981039346656037ull;for(auto b:bytes){h^=b;h*=1099511628211ull;}return h;}
+unsigned __fastcall notesLengthHook(void* object){
+    const auto length=originalScriptLength(object);
+    if(disabled||notesObservedAsset)return length;
+    if(std::none_of(notesPrograms.begin(),notesPrograms.end(),[&](const auto& p){return p.size==length;}))return length;
+    uintptr_t definition=0;if(!read(reinterpret_cast<uintptr_t>(object)+0x58,&definition,8))return length;
+    for(const auto& p:notesPrograms)if(p.size==length&&definition>p.offset+0x10000){
+        const auto asset=definition-p.offset;char magic[14]{};if(!read(asset,magic,14)||memcmp(magic,"Apt Data:1:",11))continue;
+        std::vector<unsigned char> bytes(length);if(!read(definition+0x30,bytes.data(),bytes.size())||notesBodyHash(bytes)!=p.hash)continue;
+        notesObservedOwner=reinterpret_cast<uintptr_t>(object);notesObservedAsset=asset;note({{"event","notes_asset_observed"},{"asset",asset},{"owner",notesObservedOwner.load()}});break;
+    }
+    return length;
+}
+#endif
 bool replace(void* expected,void* wanted,uintptr_t table=vtableRva,uintptr_t offset=slot){
     auto address=reinterpret_cast<PVOID volatile*>(base+table+offset);DWORD old=0,unused=0;
     if(!VirtualProtect(const_cast<PVOID*>(address),8,PAGE_READWRITE,&old))return false;
@@ -119,6 +149,10 @@ void* __fastcall getterHook(void* object,void** out){
         const auto began=GetTickCount64();uintptr_t value=0;if(out)read(reinterpret_cast<uintptr_t>(out),&value,8);
         try{
             UiResponse view(read);
+#if defined(RECRUIT_NOTES_PROBE) || defined(RECRUIT_NOTES_UI)
+            const auto notesCount=appendRecruitNotes(view,value,[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);});
+            if(call<=5)note({{"event","recruit_notes_prepared"},{"recruits",notesCount}});
+#endif
             auto stats=convertRecruitingResponse(view,value,
                 [&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);},
                 [&](uintptr_t at,const char* key,bool flag){reinterpret_cast<void(__fastcall*)(void*,const char*,bool)>(base+0x2bf6720)(reinterpret_cast<void*>(at),key,flag);});
@@ -134,8 +168,14 @@ void* __fastcall getterHook(void* object,void** out){
     return result;
 }
 DWORD stop(){
+#if defined(RECRUIT_NOTES_UI)
+    if(notesUi.installed){note({{"event","notes_ui_restart_required"},{"reason","The game can retain cloned Notes definitions; use a clean restart"}});return 4;}
+#endif
     disabled=true;
     bool ownershipFailed=false;
+#if defined(RECRUIT_NOTES_PROBE)
+    if(notesProbeInstalled){if(replace(reinterpret_cast<void*>(notesLengthHook),reinterpret_cast<void*>(originalScriptLength),0xbc42fe8,0xb0))notesProbeInstalled=false;else ownershipFailed=true;}
+#endif
     for(size_t i=0;i<detailCount;++i)if(detailInstalled[i]){const auto& gate=playingTimeGates[i];if(replace(reinterpret_cast<void*>(hooks[i]),reinterpret_cast<void*>(detailOriginal[i]),gate.vtable,gate.slot))detailInstalled[i]=false;else ownershipFailed=true;}
     if(installed){if(!replace(reinterpret_cast<void*>(getterHook),reinterpret_cast<void*>(original)))return 2;installed=false;}
     const auto deadline=GetTickCount64()+5000;while(inflight&&GetTickCount64()<deadline)Sleep(1);
@@ -154,8 +194,21 @@ DWORD WINAPI worker(void*){
         original=reinterpret_cast<Getter>(current);
         if(!replace(reinterpret_cast<void*>(original),reinterpret_cast<void*>(getterHook)))throw std::runtime_error("Recruiting getter ownership changed");installed=true;
         for(size_t i=0;i<detailCount;++i){const auto& gate=playingTimeGates[i];detailOriginal[i]=reinterpret_cast<DetailGetter>(base+gate.rva);if(!replace(reinterpret_cast<void*>(detailOriginal[i]),reinterpret_cast<void*>(hooks[i]),gate.vtable,gate.slot))throw std::runtime_error("Playing-time getter ownership changed");detailInstalled[i]=true;}
+#if defined(RECRUIT_NOTES_UI)
+        notesUi.install(folder,base,read);note({{"event","recruit_notes_ui_installed"},{"owners",notesUi.ownerCount()},{"unload","clean restart required"}});
+#endif
+#if defined(RECRUIT_NOTES_PROBE)
+        constexpr unsigned char lengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};
+        if(!read(base+0xbc42fe8+0xb0,&current,8)||current!=base+0x7c34e40||!read(current,actual.data(),sizeof(lengthPrefix))||memcmp(actual.data(),lengthPrefix,sizeof(lengthPrefix)))throw std::runtime_error("Unsupported script length accessor; Notes probe stopped");
+        originalScriptLength=reinterpret_cast<ScriptLength>(current);if(!replace(reinterpret_cast<void*>(originalScriptLength),reinterpret_cast<void*>(notesLengthHook),0xbc42fe8,0xb0))throw std::runtime_error("Script length accessor ownership changed");notesProbeInstalled=true;
+#endif
         note({{"event","active"},{"mode","letter grades, ranges and Playing Time masking"},{"scope","recruiting UI responses only"}});
-        while(!disabled){flush();Sleep(200);}flush();
+        while(!disabled){
+#if defined(RECRUIT_NOTES_PROBE)
+            if(notesProbeInstalled&&notesObservedAsset){std::ofstream out(folder/L"recruit-notes-observed.json");out<<Json({{"pid",GetCurrentProcessId()},{"asset",notesObservedAsset.load()},{"owner",notesObservedOwner.load()}}).dump();
+                if(replace(reinterpret_cast<void*>(notesLengthHook),reinterpret_cast<void*>(originalScriptLength),0xbc42fe8,0xb0))notesProbeInstalled=false;}
+#endif
+            flush();Sleep(200);}flush();
     }catch(const std::exception& error){stop();note({{"event","failed"},{"reason",error.what()}});flush();}
     return 0;
 }
