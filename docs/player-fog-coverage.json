@@ -561,12 +561,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p60.dll",
-    "cleanRestartRequired": "p60 clean activation complete; future copied UI definition changes require a clean restart.",
-    "activeRuntime": "p60 active alone in clean PID30540 after installed recruit baseline stop0 at observed main menu; no probes loaded.",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p61.dll",
+    "cleanRestartRequired": "p61 clean activation complete; future copied UI definition changes require clean restart.",
+    "activeRuntime": "p61 active alone in clean PID23036 after installed recruit baseline stop0 at observed main menu; no probes loaded.",
     "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p59-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "c893f250426662d455ab163953e2bb6e7afd510ea66bbb0ddc79f504de8a3fee",
+    "previewSha256": "84e02ddadf7d17238264499ad4b6bccdf29717bd960a9cafbc91a475c2551bd6",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p61.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p61-MMC.zip",
@@ -640,7 +640,8 @@
     "p60HealthLive": "KyleMcNeal injured Health user+actualscreenshot passes Overallgrade and untouchedinjury/recovery/nativebars/skillpoints. No W&T numericpenalties present to inspect.",
     "p61Build": "MSVC/W4/WX/native/all10UIVM suites passed. Actual Cutter/DoubleDip route aliases added; all101gradeboundaries and preservation/stat/plural collision tests pass.",
     "p61Review": "Independent read-only parser/longest-match/scope review passed. No new hooks or per-frame work.",
-    "p61Package": "Combined MMC registration/launch/tamper/path/config checks pass; installed baseline unchanged. Notloaded; p60active."
+    "p61Package": "Combined MMC registration/launch/tamper/path/config checks pass; installed baseline unchanged. Notloaded; p60active.",
+    "p61Activation": "Observed main menu in clean PID23036; installed baseline stop0, p61 load, active event and empty14-bank retention confirmed before Dynasty entry."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
