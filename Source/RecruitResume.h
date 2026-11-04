@@ -50,7 +50,7 @@ inline double skill(const Prospect& p){
 }
 struct Result {Json publicData;Json evaluation;};
 inline Result generate(const Prospect& p){
-    Random competition(p.identity+"|competition-v1"),opportunity(p.identity+"|opportunity-v1"),production(p.identity+"|production-v1"),background(p.identity+"|background-v1");
+    Random competition(p.identity+"|competition-v1"),opportunity(p.identity+"|opportunity-v1"),production(p.identity+"|production-v1"),blocking(p.identity+"|blocking-v1");
     const auto ability=skill(p);
     const int classification=competition.integer(1,6);
     // Rank is ordinal: soft bands avoid claiming measured gaps between states.
@@ -115,18 +115,27 @@ inline Result generate(const Prospect& p){
         if(db){const auto coverage=(r("ManCoverageRating")+r("ZoneCoverageRating"))/2;const auto targets=count(effective*clamp(5-.06*(coverage-65)+production.noise(),1,9));put("coverageTargets",targets);const auto ints=count(targets*clamp(.07+.002*(r("CatchingRating")-65)+.04*environment+.025*production.noise(),.01,.22));put("interceptions",ints);put("passesDefended",(std::min)(targets-ints,count(targets*production.between(.1,.35))));}
         else{put("interceptions",effective*production.between(0,.25));put("passesDefended",effective*production.between(0,.6));}
     }
-    // Development affects only a small background probability. It is excluded
-    // from all competition, opportunity and production random streams.
-    const bool lateBackground=background.unit()<(p.development=="College_Elite"?.18:p.development=="College_Star"?.15:.12);
+    Json rates=Json::object();
+    const bool offensiveLine=pos=="LT"||pos=="LG"||pos=="C"||pos=="RG"||pos=="RT";
+    if(offensiveLine||pos=="TE"||pos=="FB"){
+        const auto snaps=offensiveLine?stats.at("offensiveSnaps").get<int>():count(effective*blocking.between(40,67));
+        const auto runSnaps=offensiveLine?snaps-stats.at("passProtectionSnaps").get<int>():count(snaps*blocking.between(pos=="FB"?.48:.35,pos=="FB"?.78:.65));
+        put("offensiveSnaps",snaps);put("runBlockingSnaps",runSnaps);
+        const auto blockingSkill=.45*r("RunBlockRating")+.30*r("ImpactBlockingRating")+.25*r("StrengthRating");
+        put("pancakes",runSnaps*clamp(.045+.0016*(blockingSkill-65)+.05*environment+.022*blocking.noise(),.001,.20));
+        if(offensiveLine){const auto passSnaps=stats.at("passProtectionSnaps").get<int>();
+            rates["sacksAllowedPercent"]=passSnaps?Json(std::round(1000.*stats.at("sacksAllowed").get<int>()/passSnaps)/10.):Json(nullptr);}
+    }
+    // Development is deliberately absent from every public output, including
+    // background wording. The previous positional-settling hint is retired.
     std::string context;
     if(role=="No varsity appearances")context="Did not appear in a varsity game; spent the season behind an established starter.";
     else if(role=="Reserve")context="Most of his work came in a reserve role behind older players.";
     else if(role=="Late-season starter")context="Took over a starting role during the second half of the season.";
     else if(role=="Shared role")context="Shared the workload rather than playing every available series.";
-    else if(lateBackground)context="Settled into his primary position after spending time in another role.";
     else context=schedule>.75?"The schedule included several opponents above the school's usual competition level.":schedule<.25?"Most opponents came from the same small regional pool.":"Played a full role against a mixed schedule of regional opponents.";
-    Json publicData={{"modelVersion",1},{"heading","Previous High School Season"},{"state",p.state},{"hometown",p.town},{"competitionClass",std::to_string(classification)+"A"},{"games",games},{"starts",starts},{"role",role},{"stats",stats},{"background",context}};
-    return {publicData,{{"overall",r("OverallRating")},{"positionSkill",ability},{"development",p.development},{"competition",level},{"stateRank",p.stateRank},{"schedule",schedule},{"lateBackground",lateBackground}}};
+    Json publicData={{"modelVersion",2},{"heading","Previous High School Season"},{"state",p.state},{"hometown",p.town},{"competitionClass",std::to_string(classification)+"A"},{"games",games},{"starts",starts},{"role",role},{"stats",stats},{"rates",rates},{"background",context}};
+    return {publicData,{{"overall",r("OverallRating")},{"positionSkill",ability},{"development",p.development},{"competition",level},{"stateRank",p.stateRank},{"schedule",schedule}}};
 }
 inline void validate(const Json& v){
     const int games=v.at("games"),starts=v.at("starts");if(games<0||games>15||starts<0||starts>games)throw std::runtime_error("Invalid playing opportunity");
@@ -134,6 +143,12 @@ inline void validate(const Json& v){
     auto bound=[&](const char* a,const char* b){if(s.contains(a)&&s.contains(b)&&s[a].get<int>()>s[b].get<int>())throw std::runtime_error(std::string("Invalid stat relationship: ")+a);};
     bound("passCompletions","passAttempts");bound("passingTD","passCompletions");bound("interceptionsThrown","passAttempts");bound("receptions","targets");bound("receivingTD","receptions");bound("rushingTD","carries");bound("sacks","tacklesForLoss");bound("tacklesForLoss","tackles");bound("forcedFumbles","tackles");bound("fieldGoalsMade","fieldGoalAttempts");bound("extraPointsMade","extraPointAttempts");bound("puntsInside20","punts");bound("passProtectionSnaps","offensiveSnaps");bound("sacksAllowed","passProtectionSnaps");bound("badSnaps","specialTeamsSnaps");
     bound("tackles","defensiveSnaps");
+    bound("runBlockingSnaps","offensiveSnaps");bound("pancakes","runBlockingSnaps");
+    if(v.contains("rates")&&v.at("rates").contains("sacksAllowedPercent")){
+        const int attempts=s.at("passProtectionSnaps"),sacks=s.at("sacksAllowed");const auto& rate=v.at("rates").at("sacksAllowedPercent");
+        if(attempts==0){if(!rate.is_null())throw std::runtime_error("Zero pass snaps must have no sack rate");}
+        else if(!rate.is_number()||std::abs(rate.get<double>()-std::round(1000.*sacks/attempts)/10.)>.00001)throw std::runtime_error("Incorrect sacks-allowed percentage");
+    }
     if(s.contains("coverageTargets")&&s.value("interceptions",0)+s.value("passesDefended",0)>s["coverageTargets"].get<int>())throw std::runtime_error("Coverage events exceed targets");
     if(s.contains("passCompletions")&&s.value("passCompletions",0)+s.value("interceptionsThrown",0)>s.value("passAttempts",0))throw std::runtime_error("Pass outcomes exceed attempts");
     for(const auto* hidden:{"overall","ratings","development","positionSkill","competition","stateRank"})if(v.contains(hidden))throw std::runtime_error("Hidden evaluation leaked into public resume");

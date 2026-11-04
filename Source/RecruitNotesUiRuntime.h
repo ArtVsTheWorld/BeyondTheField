@@ -70,5 +70,6 @@ public:
         banks.push_back(std::move(bank));const auto result=redirectDefinition(location,banks.back().definitions);if(result>=0)++attached;return result;
     }
     unsigned ownerCount()const{return attached.load();}
+    size_t methodCount()const{return code.size();}
 };
 }

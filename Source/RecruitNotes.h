@@ -102,7 +102,7 @@ inline std::string makeRecruitNotes(const NotesProspect& prospect){
     if(result.size()>1500)result.resize(1500);
     return result;
 }
-template<class View,class StringSetter>unsigned appendRecruitNotes(View& view,uintptr_t root,StringSetter setter){
+template<class View,class StringSetter,class Composer>unsigned appendRecruitNotes(View& view,uintptr_t root,StringSetter setter,Composer composer){
     std::vector<uintptr_t> recruits;if(!view.array(root,recruits,512))return 0;unsigned count=0;
     for(auto at:recruits){
         std::map<std::string,uintptr_t> fields;if(!view.members(at,fields))continue;
@@ -117,8 +117,11 @@ template<class View,class StringSetter>unsigned appendRecruitNotes(View& view,ui
             if(!slider&&observation.low==0&&prospect.progress<100)continue;
             observation.exact=!slider;prospect.observations.push_back(std::move(observation));
         }
-        const auto body=makeRecruitNotes(prospect);setter(at,"DENotesBody",body.c_str());++count;
+        const auto body=composer(prospect,id,text("FirstName"),text("LastName"));setter(at,"DENotesBody",body.c_str());++count;
     }
     return count;
+}
+template<class View,class StringSetter>unsigned appendRecruitNotes(View& view,uintptr_t root,StringSetter setter){
+    return appendRecruitNotes(view,root,setter,[](const NotesProspect& p,double,const std::string&,const std::string&){return makeRecruitNotes(p);});
 }
 }

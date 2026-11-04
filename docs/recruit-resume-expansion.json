@@ -1,8 +1,8 @@
 {
   "feature": "High-school resume and recruit Notes expansion",
-  "status": "Stages 1-3 offline prototype completed; 24-example review ready. Awaiting the approved content-review checkpoint before expanding prose and native integration.",
+  "status": "p19 active; first live OL report visually verified. Awaiting user confirmation and final controller/reentry/persistence checks.",
   "sourceBranch": "research/recruiting-fog",
-  "workingNativeDll": "DynastyEnhancerRecruitFog-p18.dll unchanged",
+  "workingNativeDll": "p18 retained unchanged as recovery; p19 active candidate",
   "stages": [
     {
       "stage": 1,
@@ -156,14 +156,14 @@
       "stage": 3,
       "name": "Development treatment",
       "status": "offline isolation checks passed",
-      "policy": "Production, opportunity and competition exclude development. Only a common positional-settling background probability changes mildly: Normal/Impact 12%, Star 15%, Elite 18%, and only appears when an existing role explanation does not take priority. All development groups can receive it.",
-      "checks": "22,000 controlled fixtures and all 3,721 real-input resumes retain identical statistics/opportunity/class when only development changes."
+      "policy": "Development has no effect on any public resume output, including wording. It remains available only as private diagnostic ground truth.",
+      "checks": "All four development traits produce identical public output in 22,000 boundary fixtures; the 3,721 real-input resumes also pass full-public-output isolation."
     },
     {
       "stage": 4,
       "name": "Contrasting dossier review",
-      "status": "ready for user review",
-      "artifact": "Build/recruit-resume-review.html",
+      "status": "approved with development and blocking revisions implemented",
+      "artifact": "Build/recruit-resume-review-v2.html",
       "samples": 24,
       "coverage": "All 21 positions present in the loaded HS class plus all five opportunity roles; includes Luke and Dylan. Hidden evaluation is separately expandable.",
       "artifactChecks": [
@@ -176,21 +176,40 @@
     {
       "stage": 5,
       "name": "Expanded observations and prose",
-      "status": "pending review checkpoint"
+      "status": "offline checks passed",
+      "passages": 378,
+      "attributeFamilies": 42,
+      "alternativesPerCondition": 3,
+      "bands": [
+        "Strong: public lower bound at least 80",
+        "Functional: entire public interval in 70-79",
+        "Concern: public upper bound below 70"
+      ],
+      "unknown": "No detailed observations at 0%; unresolved cross-band ranges remain uncertain. No hidden attributes are passed to the scouting prose renderer."
     },
     {
       "stage": 6,
       "name": "Native layout and immutable persistence",
-      "status": "pending"
+      "status": "native candidate built; live verification pending",
+      "identityParity": "Native parser, stable SHA256 identities and generated public resumes match all 3,721 offline audited inputs",
+      "capture": "8,205 records: only identity, Recruit records and linked Player records; no complete league/news capture. Worker captures on loaded-session changes or requested unknown recruits, with bounded retry. UI hooks perform cached lookups and formatting only.",
+      "persistence": "Versioned per-league/per-season journals; existing resumes remain unchanged as ratings/scouting change. Previous-season identities survive year boundaries. Atomic replacement; no game save writes.",
+      "offlineChecks": [
+        "Journal survives changed ratings and season boundary",
+        "Prepared 3,721 real HS resumes",
+        "Repeat prepared journal SHA256 remains byte-for-byte identical",
+        "Composed real-data reports fit the 1,500-character test budget"
+      ],
+      "loading": "Native 500ms retry timer only while report is preparing, capped at 20 attempts; cancellation on Scouting restore, ModelHidden and Shutdown."
     },
     {
       "stage": 7,
       "name": "Full validation and automatic loading",
-      "status": "pending"
+      "status": "native checks pass; live report/controls/reload and automatic MMC integration remain"
     }
   ],
   "model": {
-    "version": 1,
+    "version": 2,
     "stateBaseline": "Config/high-school-state-strength.json",
     "stateInterpretation": "Soft ordinal strength bands; not measured distances between ranks",
     "competition": "50% state baseline, 32% generated classification, 18% individual schedule variation",
@@ -204,10 +223,22 @@
     "Entire live HS class generated, validated, repeated deterministically and development-isolation checked"
   ],
   "limits": [
-    "Offline prototype only; live p18 report is unchanged",
-    "Native persistence and automatic MMC loading remain later stages",
-    "Statistical ranges and contextual language are subject to the sample review",
-    "Broader multivariate information-leak calibration remains before native release",
-    "No historical record database or real state-specific classification mapping"
-  ]
+    "p19 expanded reports have not yet passed live visual/controller validation",
+    "Automatic MMC loading still pending",
+    "Real state-specific classification mapping and a historical record database are not included",
+    "Broader multivariate rating-inference calibration remains before release"
+  ],
+  "reviewFeedback": {
+    "accepted": "User approved the general model with requested revisions",
+    "development": "Retired positional-settling wording and all development-dependent public generation, including background; all four traits now produce identical public output with other inputs fixed",
+    "blocking": "OL sacksAllowedPercent is sacks/pass-protection snaps*100, rounded to one decimal; zero snaps produce no rate. OL/TE/FB have pancakes and run-blocking snaps."
+  },
+  "candidate": {
+    "path": "Build/DynastyEnhancerRecruitFog-p19.dll",
+    "bytes": 824320,
+    "sha256": "9777c4a1907e614694bfbec82a450031108a7c9401c2f6a6f3c9b3b313f60add",
+    "loaded": true,
+    "liveVerification": "Screenshot: Knijeah Williams (LG), Cambridge MA, 1A: 12/372 sacks allowed = 3.2%; 13 pancakes/205 run-block snaps. Scouting prose and report fit inside the panel.",
+    "automaticMmcLoading": false
+  }
 }

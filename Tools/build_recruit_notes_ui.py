@@ -121,6 +121,30 @@ def description_style(a, width, color):
     a.reg(7); a.number(1); a.reg(4); a.member('mcDescription'); a.call('SetExtraInfo')
 
 
+def clear_refresh(a):
+    a.string('DynastyEnhancerRecruitNotesRefresh'); a.number(1)
+    a.reg(1); a.number(1); a.global_object('cafe', 'manager', 'IntervalManagerService'); a.string('Get'); a.raw(0x52)
+    a.call('ClearDelay')
+
+
+def refresh_if_loading(a):
+    # The native flag setter produces 0/1. Only a loading report schedules a
+    # bounded retry; settled reports have no polling timer.
+    a.reg(3); a.member('DENotesLoading'); a.number(1); a.raw(0x49); a.branch('not_loading',0xB8)
+    a.reg(1); a.member('mDENotesRetries'); a.store(6); a.reg(6); a.raw(0x76,0x49); a.branch('have_retries',0xB8)
+    a.number(0); a.store(6); a.label('have_retries')
+    a.reg(6); a.number(20); a.raw(0x48); a.branch('done',0xB8)
+    a.reg(1); a.string('mDENotesRetries'); a.reg(6); a.raw(0x50,0x4F)
+    clear_refresh(a)
+    a.raw(0x76); a.number(500)
+    a.reg(1); a.member('_PopulateData'); a.reg(1); a.number(2)
+    a.global_object('cafe','utility','Delegate'); a.string('Create'); a.raw(0x52)
+    a.string('DynastyEnhancerRecruitNotesRefresh'); a.number(4)
+    a.reg(1); a.number(1); a.global_object('cafe','manager','IntervalManagerService'); a.string('Get'); a.raw(0x52)
+    a.call('SetDelay'); a.ret()
+    a.label('not_loading'); clear_refresh(a); a.set_field(1,'mDENotesRetries',0)
+
+
 def draw_notes(a):
     a.reg(1); a.member('mView'); a.store(4); a.missing(4, 'done')
     a.reg(4); a.member('mcDescription'); a.store(6); a.missing(6, 'done')
@@ -169,10 +193,12 @@ def draw_notes(a):
     a.string('The staff is gathering the first background and film notes on this prospect.'); a.store(6)
     a.label('have_text')
     a.reg(6); a.number(1); a.reg(4); a.member('mcDescription'); a.call('SetLabel')
+    refresh_if_loading(a)
     a.label('done'); a.ret()
 
 
 def restore_layout(a):
+    clear_refresh(a); a.set_field(1,'mDENotesRetries',0)
     a.reg(1); a.member('mView'); a.store(4); a.missing(4, 'native')
     a.reg(4); a.member('mDENotesSaved'); a.store(5); a.missing(5, 'native')
     for index, name in enumerate(ALL):
@@ -200,7 +226,7 @@ def generate_header(destination, evidence):
     sys.path.insert(0,'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
     from inspect_tb_ast import load
     apt=load(evidence/'Assets/common__ui__node_cfm__recruitinghub__corenode.ast')
-    specs=[('Navigation.', 'GetSubscreenDataAtBoardLevel', 'tabs'),('recruitinghub.Board.', 'Init', 'reset'),('recruitinghub.Board.', '_OnCategoryChanged', 'category'),('board.Scouting.', '_PopulateData', 'draw'),('board.Scouting.', '_InitializeFocus', 'guard'),('board.Scouting.', '_UpdateScoutButton', 'guard'),('board.Scouting.', '_OnScout', 'guard'),('board.Scouting.', '_OnRecruitUpdated', 'refresh')]
+    specs=[('Navigation.', 'GetSubscreenDataAtBoardLevel', 'tabs'),('recruitinghub.Board.', 'Init', 'reset'),('recruitinghub.Board.', '_OnCategoryChanged', 'category'),('board.Scouting.', '_PopulateData', 'draw'),('board.Scouting.', '_InitializeFocus', 'guard'),('board.Scouting.', '_UpdateScoutButton', 'guard'),('board.Scouting.', '_OnScout', 'guard'),('board.Scouting.', '_OnRecruitUpdated', 'refresh'),('board.Scouting.','ModelHidden','cancel'),('board.Scouting.','Shutdown','cancel')]
     programs=[];report=[]
     for cls,name,mode in specs:
         item=next(x for x in methods if cls in x.get('class',x.get('cls','')) and x['method']==name)
@@ -210,6 +236,8 @@ def generate_header(destination, evidence):
             assert original[-3:]==bytes.fromhex('b9013e')
             copy_size=size-3;a.code.extend(bytes(copy_size));append_tab(a)
         elif mode=='category':category_changed(a)
+        elif mode=='cancel':
+            clear_refresh(a);a.set_field(1,'mDENotesRetries',0);a.pad_code();copy_at=len(a.code);copy_size=size;a.code.extend(bytes(size))
         elif mode=='reset':
             a.global_object('cafe');a.string('DynastyEnhancerRecruitNotesSelected');a.raw(0x74,0x4F);a.pad_code()
             copy_at=len(a.code);copy_size=size;a.code.extend(bytes(size))

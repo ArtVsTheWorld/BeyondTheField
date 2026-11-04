@@ -11,6 +11,9 @@
 #include <atomic>
 #include "../Vendor/json.hpp"
 #include "PackedChangeWatch.h"
+#if defined(RECRUIT_RESUME_CAPTURE)
+#include "RecruitResumeCaptureFields.h"
+#endif
 // Runtime observation only: no native calls, setters, handles, or reference-count writes.
 namespace dynasty::live {
 using Json=nlohmann::json;using Address=uintptr_t;
@@ -71,6 +74,9 @@ template<class Read>SessionBinding activeSession(Address image,Read q){
     return b;
 }
 inline std::set<std::string> wanted(const std::string& name){
+#if defined(RECRUIT_RESUME_CAPTURE)
+    return resumeCaptureFields(name);
+#else
     if(name=="SeasonInfo")return {"CurrentOffseasonStage","NumberOffseasonAdvances","OffseasonNumStages","CurrentWeek","CurrentSeasonYear","CurrentYear","CurrentWeekType","CurrentStage","RegularSeasonWeekConferenceChampionship","IsAnnualAwardPeriodActive","IsSigningPeriodActive","IsDraftRecapPeriodActive","IsTransferPortalNewlyAvailable","IsTransferSignPeriodActive","IsStaffHiringCreateOfferPeriodActive","IsStaffHiringEvaluateOfferPeriodActive"};
     if(name=="Franchise")return {"LeagueID","Transfers"};
     if(name=="FranchiseServer_CareerFlow")return {"IsStageAdvancing","IsStageActive"};
@@ -105,6 +111,7 @@ inline std::set<std::string> wanted(const std::string& name){
     // Referenced arrays and support records: primitive/ref fields only, never scripts.
     if(name.size()>=2&&name.substr(name.size()-2)=="[]")return {};
     return {"Activity","WeekNumber","WeekType","State","Pipeline","InfluenceLevel","InfluenceValue","TeamIndex","Player","Team","CurrentRank","LastWeekRank","Teams","TeamId","TeamInfluence","Recruits","Recruit","ScholarshipStatus","CommittedWeekNumber","ScheduledVisit","SeasonGame","OpposingTeam","SACKS","SACKSALLOWED","OFFPASSYARDS","OFFRUSHYARDS","FIRSTDOWNS","GIVEAWAYS","TAKEAWAYS","THIRDDOWNCONV","THIRDDOWNS","WINS","LOSSES","TIES","OFFREDZONES","OFFREDZONETDS","OFFREDZONEFGS","PASSATTEMPTS","PASSCOMPLETED","PASSYARDS","PASSTDS","PASSINTS","RUSHATTEMPTS","RUSHYARDS","RUSHTDS","RECEIVECATCHES","RECEIVEYARDS","RECEIVETDS","DLINESACKS","DLINEHALFSACK","DSECINTS","DEFTACKLES"};
+#endif
 }
 inline Json decodedEnum(const std::string& schema,const std::string& field,uint32_t raw,const std::map<uint32_t,std::string>& labels){
     const auto found=labels.find(raw);if(found!=labels.end())return found->second;
@@ -247,7 +254,11 @@ public:
     Json run(PackedChangeWatch* observation=nullptr){
         memory.observation=observation;
         const auto before=status();
-        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
+        for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));
+#if defined(RECRUIT_RESUME_CAPTURE)
+            if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="Recruit")continue;
+#endif
+            if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
         for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size(),false)!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
         if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session)||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");

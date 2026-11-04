@@ -19,6 +19,7 @@
 #endif
 #if defined(RECRUIT_NOTES_UI)
 #include "RecruitNotesUiRuntime.h"
+#include "RecruitResumeRuntime.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -37,6 +38,7 @@ std::atomic<bool> disabled{false};std::atomic<unsigned> inflight{0},calls{0};boo
 std::mutex queueMutex;std::deque<Json> pending;
 #if defined(RECRUIT_NOTES_UI)
 notesui::Runtime notesUi;
+resume::Cache resumeCache;
 using ScriptSetup=uintptr_t(__fastcall*)(void*,void*,uintptr_t,uintptr_t,uintptr_t);
 ScriptSetup originalScriptSetup=nullptr;bool notesSetupInstalled=false;
 std::atomic<unsigned> notesAttachedMethods{0};
@@ -164,7 +166,14 @@ void* __fastcall getterHook(void* object,void** out){
         const auto began=GetTickCount64();uintptr_t value=0;if(out)read(reinterpret_cast<uintptr_t>(out),&value,8);
         try{
             UiResponse view(read);
-#if defined(RECRUIT_NOTES_PROBE) || defined(RECRUIT_NOTES_UI)
+#if defined(RECRUIT_NOTES_UI)
+            const auto cached=resumeCache.current(base,read);bool notesLoading=false;
+            const auto notesCount=appendRecruitNotes(view,value,[&](uintptr_t at,const char* key,const char* text){
+                reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);
+                reinterpret_cast<void(__fastcall*)(void*,const char*,bool)>(base+0x2bf6720)(reinterpret_cast<void*>(at),"DENotesLoading",notesLoading);
+            },[&](const NotesProspect& p,double id,const std::string& first,const std::string& last){return resumeCache.compose(cached,p,id,first,last,notesLoading);});
+            if(call<=5)note({{"event","recruit_notes_prepared"},{"recruits",notesCount},{"resumes",bool(cached)}});
+#elif defined(RECRUIT_NOTES_PROBE)
             const auto notesCount=appendRecruitNotes(view,value,[&](uintptr_t at,const char* key,const char* text){reinterpret_cast<void(__fastcall*)(void*,const char*,const char*)>(base+0x25a3e60)(reinterpret_cast<void*>(at),key,text);});
             if(call<=5)note({{"event","recruit_notes_prepared"},{"recruits",notesCount}});
 #endif
@@ -216,7 +225,7 @@ DWORD WINAPI worker(void*){
         if(!read(base+scriptSetupRva,actual.data(),scriptSetupPrefix.size())||memcmp(actual.data(),scriptSetupPrefix.data(),scriptSetupPrefix.size())||!read(base+scriptTableRva+scriptSetupSlot,&current,8)||current!=base+scriptSetupRva)throw std::runtime_error("Unsupported or already-owned script invocation setup");
         notesUi.prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(current);
         if(!replace(reinterpret_cast<void*>(originalScriptSetup),reinterpret_cast<void*>(notesSetupHook),scriptTableRva,scriptSetupSlot))throw std::runtime_error("Notes invocation setup ownership changed");
-        notesSetupInstalled=true;note({{"event","recruit_notes_ui_prepared"},{"methods",8},{"attachment","live invocation setup"},{"unload","clean restart required after entry"}});
+        notesSetupInstalled=true;note({{"event","recruit_notes_ui_prepared"},{"methods",notesUi.methodCount()},{"attachment","live invocation setup"},{"unload","clean restart required after entry"}});
 #endif
 #if defined(RECRUIT_NOTES_PROBE)
         constexpr unsigned char lengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};
@@ -225,6 +234,12 @@ DWORD WINAPI worker(void*){
 #endif
         note({{"event","active"},{"mode","letter grades, ranges and Playing Time masking"},{"scope","recruiting UI responses only"}});
         while(!disabled){
+#if defined(RECRUIT_NOTES_UI)
+            static uint64_t nextResumeTick=0;if(GetTickCount64()>=nextResumeTick){nextResumeTick=GetTickCount64()+1000;
+                try{auto report=resumeCache.tick(base,folder,read);if(!report.is_null())note(std::move(report));}
+                catch(const std::exception& error){resumeCache.request();note({{"event","recruit_resume_deferred"},{"reason",error.what()}});}
+            }
+#endif
 #if defined(RECRUIT_NOTES_PROBE)
             if(notesProbeInstalled&&notesObservedAsset){std::ofstream out(folder/L"recruit-notes-observed.json");out<<Json({{"pid",GetCurrentProcessId()},{"asset",notesObservedAsset.load()},{"owner",notesObservedOwner.load()}}).dump();
                 if(replace(reinterpret_cast<void*>(notesLengthHook),reinterpret_cast<void*>(originalScriptLength),0xbc42fe8,0xb0))notesProbeInstalled=false;}

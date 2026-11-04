@@ -10,9 +10,11 @@ $resumeSdk=Get-ChildItem -LiteralPath (Join-Path $resumeKits 'Include') -Directo
 $resumeFlags=@('/nologo','/O2','/MT','/W4','/WX','/EHsc','/std:c++17','/utf-8',('/I'+(Join-Path $resumeTool.FullName 'include')),('/I'+(Join-Path $resumeSdk.FullName 'ucrt')),('/I'+(Join-Path $resumeSdk.FullName 'shared')),('/I'+(Join-Path $resumeSdk.FullName 'um')))
 $resumeLib=@(('/LIBPATH:'+(Join-Path $resumeTool.FullName 'lib/x64')),('/LIBPATH:'+(Join-Path $resumeKits ('Lib/'+$resumeSdk.Name+'/ucrt/x64'))),('/LIBPATH:'+(Join-Path $resumeKits ('Lib/'+$resumeSdk.Name+'/um/x64'))))
 New-Item -ItemType Directory -Path $resumeOut -Force | Out-Null
+& python (Join-Path $resumeRoot 'Tools/build_recruit_notes_prose.py')
+if($LASTEXITCODE -ne 0){throw 'Notes prose validation failed'}
 Push-Location $resumeOut
 try{
- foreach($resumeSource in @('RecruitResumeAudit','RecruitResumeTools')){
+ foreach($resumeSource in @('RecruitResumeAudit','RecruitResumeMinimal','RecruitResumeTools')){
   & (Join-Path $resumeTool.FullName 'bin/Hostx64/x64/cl.exe') @resumeFlags (Join-Path $PSScriptRoot ($resumeSource+'.cpp')) ('/Fe:'+$resumeSource+'.exe') /link @resumeLib /INCREMENTAL:NO
   if($LASTEXITCODE -ne 0){throw ($resumeSource+' build failed')}
  }

@@ -35,6 +35,9 @@ def main():
     assert locks==['TAB'] and transitions==['scout']
     event['Data']['Index']=2;event['Data']['WidgetData']['ExtraInfo']={'StateMachineKey':'scout'}
     machine.run(program(category_changed),{1:model,2:event});assert g['cafe']['DynastyEnhancerRecruitNotesSelected'] is False
+    timers={};calls=[]
+    g['cafe']['manager']['IntervalManagerService']={'Get':lambda model:{'ClearDelay':lambda name:timers.pop(name,None),'SetDelay':lambda name,callback,delay,payload:timers.update({name:(callback,delay,payload)})}}
+    g['cafe']['utility']['Delegate']={'Create':lambda model,method:method}
     view={};saved={}
     for i,name in enumerate(ALL):
         widget={'_visible':i%2==0,'_x':i*7,'_y':i*9}
@@ -42,18 +45,25 @@ def main():
         widget['SetExtraInfo']=lambda style,w=widget:w.update(style=style)
         widget['Unfocus']=lambda w=widget:w.update(focused=False)
         view[name]=widget;saved[name]=dict(widget)
-    recruit={'RecordId':561120980,'DENotesBody':'Early profile\nA stable, qualitative observation.'}
+    recruit={'RecordId':561120980,'DENotesBody':'Early profile\nA stable, qualitative observation.','DENotesLoading':0}
     recruits=[{'RecordId':777,'DENotesBody':'Different recruit'},recruit];active={'id':recruit['RecordId']}
     model={'mView':view,'mRecruitingBoardService':{'GetActiveRecruit':lambda:active['id']},'mRecruitingBoardAdapter':{'GetTeamRecruitList':lambda:recruits}}
     machine.run(program(draw_notes),{1:model})
     assert view['mcDescription']['label']==recruit['DENotesBody'] and view['mcTitle']['label']=='Recruit Notes'
     assert view['mcDescription']['style']['resizeWidth']==1180
+    assert not timers
     for name,lift in [('mcTitle',140),('mcDescription',154)]:
         assert view[name]['_x']==saved[name]['_x'] and view[name]['_y']==saved[name]['_y']-lift, 'Notes escaped the native panel anchors'
     assert all(not view[name]['_visible'] for name in ALL if name not in ('mcTitle','mcDescription'))
     saved_snapshot=dict(view['mDENotesSaved'])
     recruit['DENotesBody']='A different prospect';machine.run(program(draw_notes),{1:model})
     assert view['mcDescription']['label']=='A different prospect' and view['mDENotesSaved']==saved_snapshot
+    recruit['DENotesLoading']=1;model['_PopulateData']=lambda:calls.append('refresh')
+    machine.run(program(draw_notes),{1:model});assert len(timers)==1
+    callback,delay,payload=next(iter(timers.values()));assert delay==500;callback();assert calls==['refresh']
+    for _ in range(25):machine.run(program(draw_notes),{1:model})
+    assert model['mDENotesRetries']==20,'Preparing report retries must be bounded'
+    recruit['DENotesLoading']=0;machine.run(program(draw_notes),{1:model});assert not timers and model['mDENotesRetries']==0
     active['id']=777;machine.run(program(draw_notes),{1:model});assert view['mcDescription']['label']=='Different recruit'
     active['id']=999;machine.run(program(draw_notes),{1:model});assert view['mcDescription']['label'].startswith('The staff is gathering'), 'Missing selection retained another recruit’s notes'
     a=Assembler();restore_layout(a);a.label('native');a.ret();machine.run(a.finish(),{1:model})
