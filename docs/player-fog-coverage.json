@@ -111,9 +111,9 @@
       "liveVerified": false,
       "evidence": "p47 separate typed3-argument native bindings and exact32-byte fingerprint gates. AnnualAwards requires explicit isCoach=false. Tests preserve coach/unknown records and exactly-once native return/key/output.",
       "remaining": [
-        "Live annual/weekly awards including coach-category preservation"
+        "Live annual awards including coach-category preservation"
       ],
-      "liveStatus": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected."
+      "liveStatus": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected. p61 actualPlayersOfWeek/National/SeasonWeek3 uses two fullwidth storycards with no playerOVR or attribute display. TaylorWein#44 stats6TKL/4SACK/4TFL, EliHolstein#10 passing39/49/485yd/9.9YPA/5TD/1INT/2CAR/-4rush, scores47-18/46-23 remain numeric. No visible rating leak on current weekly route."
     },
     {
       "surface": "Recruiting My School player-risk Overall",
@@ -601,7 +601,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Annual/weekly awards and normalPositionChange remaining; pregame/in-game then final performance/regression/package.",
+    "nextManualCheck": "Load ULMEOSRECAP28 for final AnnualAwards player/coach preservation; no save/advance.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -639,7 +639,8 @@
     "p61MentalsLive": "Actual Hollins Overview/Mentals passes OverallB/color and intact3mentaldescriptions/tiers, activeplayerdealbreakerC+, jersey/measurements/skillpoints0. No numeric attribute requirements present.",
     "p61TooltipProbe": "p4 bounded unchanged collector observer active on Mentals/sidebar inspection; no collector rows observed there. Explicit stop0; no probes remain active.",
     "p61RedshirtFilter": "User confirms positionfilter/farright letters without Submit/changes.",
-    "p61FormationDefense": "Actual defensive5-2Normal screenshot/currentD/sidebarD/sixattributesDCC DCC/reserveDF grades verified. Numericjerseys and0/50subcount preserved. No swaps/reset."
+    "p61FormationDefense": "Actual defensive5-2Normal screenshot/currentD/sidebarD/sixattributesDCC DCC/reserveDF grades verified. Numericjerseys and0/50subcount preserved. No swaps/reset.",
+    "p61WeeklyAwardsLive": "Native PlayersOfWeek fullwidth National Week3 cards inspected; no OVR/attributes shown. Ordinary stats including decimal9.9YPA and negative-4 rushing unchanged. No speculative sidebar patch added."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
@@ -651,7 +652,7 @@
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
       "Normal non-ATH Position Changes read-only check using existing milestone",
-      "Annual player/coach and weekly player award views",
+      "Annual player/coach award views",
       "Pregame/in-game player ratings and substitution views without gameplay or lineup changes"
     ],
     "excluded": [
