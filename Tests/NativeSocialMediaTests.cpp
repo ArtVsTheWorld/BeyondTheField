@@ -13,6 +13,8 @@ std::string lastDonorPanel;
 void* expectedRequestSelf=nullptr;
 void* expectedRequestParams=nullptr;
 unsigned requestCalls=0;
+const unsigned char* executingBody=nullptr;
+const unsigned char* __fastcall originalScriptBody(void*){return executingBody;}
 bool requestResult=true;
 bool __fastcall originalRequest(void* self,void* panel,void* params){lastDonorPanel=argument(panel);++requestCalls;return requestResult&&self==expectedRequestSelf&&params==expectedRequestParams;}
 void __fastcall donorRows(void*,void* panel,void* out){
@@ -51,6 +53,23 @@ int main(int argc,char** argv){
             auto largeRead=[&](uintptr_t at,void* out,size_t n){maximumRead=(std::max)(maximumRead,n);++reads;if(at<start||at-start+n>data.size())return false;memcpy(out,data.data()+at-start,n);return true;};
             require(large.unchanged(largeRead)&&reads==3&&maximumRead<=dynasty::live::PackedChangeWatch::chunkBytes,"Large probes escaped their bounded chunk size");data.back()^=1;require(!large.unchanged(largeRead),"A changed final chunk was ignored");
         }
+        {
+            std::vector<unsigned char> screenData(0x3000),modelData(0x30000);
+            const auto screenAt=reinterpret_cast<uintptr_t>(screenData.data()),modelAt=reinterpret_cast<uintptr_t>(modelData.data());
+            memcpy(screenData.data(),"Apt Data:1:7:8",14);memcpy(modelData.data(),"Apt Data:1:7:8",14);
+            auto put=[&](uintptr_t at,auto value){memcpy(reinterpret_cast<void*>(at),&value,sizeof(value));};
+            put(screenAt+0x8a0-16,unsigned(180));put(screenAt+0x8a0-8,screenAt+0x100);
+            put(modelAt+0x24970-16,unsigned(41));put(modelAt+0x24970-8,modelAt+0x2000);
+            memcpy(screenData.data()+0x8a0,dropdownPatches[0].original.data(),dropdownPatches[0].original.size());
+            for(const auto& patch:dropdownPatches)if(patch.model)memcpy(modelData.data()+patch.offset,patch.original.data(),patch.original.size());
+            auto q=[&](uintptr_t at,void* out,size_t n){for(const auto& span:std::vector<std::pair<uintptr_t,size_t>>{{screenAt,screenData.size()},{modelAt,modelData.size()}})if(at>=span.first&&at-span.first<=span.second&&n<=span.second-(at-span.first)){memcpy(out,reinterpret_cast<void*>(at),n);return true;}return false;};
+            require(social::assets::screen(screenAt+0x8a0,726,dropdownPatches,q)==screenAt,"Actual News body did not resolve its own asset");
+            require(social::assets::model(modelAt+0x24970,91,dropdownPatches,q)==modelAt,"Actual News Init body did not resolve its own model");
+            require(!social::assets::screen(screenAt+0x8a0,725,dropdownPatches,q)&&!social::assets::model(modelAt+0x24970,90,dropdownPatches,q),"Foreign action length passed asset discovery");
+            screenData[0x8a0]^=1;require(!social::assets::screen(screenAt+0x8a0,726,dropdownPatches,q),"Modified foreign template passed discovery");screenData[0x8a0]^=1;
+            put(screenAt+0x8a0-8,modelAt);require(!social::assets::screen(screenAt+0x8a0,726,dropdownPatches,q),"External template constant pool passed discovery");
+            put(modelAt+0x24970-16,unsigned(42));require(!social::assets::model(modelAt+0x24970,91,dropdownPatches,q),"Foreign News model constant pool passed discovery");
+        }
         for(const auto& binding:bindings)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
         {
             auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"team:1","Team"}};social::Edition e;e.key="paged";
@@ -64,7 +83,7 @@ int main(int argc,char** argv){
             Collector original{vt,{}};ContainerProxy p{containerVt,&original,{},true};containerString(&p,3,"tileCoords","3");containerString(&p,8,"tileCoords","5");containerString(&p,9,"tileCoords","11");containerBool(&p,3,"AllowFocus",true);containerFloat(&p,3,"Opacity",0.5f);
             require(appendContainer(p,teamEntry)&&original.rows.size()==4&&original.rows[0]["tileCoords"]=="12"&&original.rows[1]["tileCoords"]=="3"&&original.rows[2]["tileCoords"]=="5"&&original.rows[3]["tileCoords"]=="11"&&original.rows[0]["Opacity"]==0.5f,"Prominent shortcut must precede stock settings/retirement without changing their identities");
         }
-        uiReady=true;waitingFeed();require(!feedReady()&&!adoptReadyFeed(),"UI readiness alone must never admit a preparing feed");{auto saved=navRequest;navRequest=originalNav;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(navForwardName=="DO_NOTHING"&&!opened,"A ready UI must still block a preparing edition at click time");navRequest=saved;navForwardCalls=0;}uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;{auto ready=std::make_shared<social::Feed>();ready->catalog=std::make_shared<social::Catalog>();latestFeed=ready;}require(std::string(socialDestination())=="NEWS","Ready navigation must use native News");
+        uiReady=true;waitingFeed();require(!feedReady()&&!adoptReadyFeed(),"UI readiness alone must never admit a preparing feed");{auto saved=navRequest;navRequest=originalNav;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(navForwardName=="DO_NOTHING"&&!opened,"A ready UI must still block a preparing edition at click time");navRequest=saved;navForwardCalls=0;}uiReady=false;opened=false;auto savedNav=navRequest;navRequest=originalNav;require(std::string(socialDestination())=="DO_NOTHING","Preparing navigation info must not promise a News screen");navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","Preparing UI must complete the native navigation transaction with its inert action");navRequest=savedNav;navForwardCalls=0;uiReady=true;{auto ready=std::make_shared<social::Feed>();ready->catalog=std::make_shared<social::Catalog>();latestFeed=ready;}require(std::string(socialDestination())=="DO_NOTHING","A ready feed must not bypass native model ownership checks");
         {auto savedChanged=filterChanged;filterChanged=originalChanged;opened=true;for(const char* kind:{"news_category","filter_one","SOCIAL_TYPE","SOCIAL_TYPE_PREV"})filterChangedHook(nullptr,"CM_NEWSSUB",kind,nullptr);require(changedForwardCalls==0,"Preparing-page filters escaped to the stock custom-panel lookup");filterChanged=savedChanged;opened=false;}
         {
             using dynasty::live::Address;const Address image=0x140000000,svc=0x100000,career=0x110000,ui=0x120000,owner=0x130000,db=0x140000;
@@ -293,13 +312,16 @@ int main(int argc,char** argv){
             savedNav=navRequest;navRequest=originalNav;const bool previousValidated=feedValidated;feedValidated=true;opened=false;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);require(!opened&&navForwardCalls==1&&navForwardName=="DO_NOTHING","A failed dropdown model gate must complete through native no-action navigation");navForwardCalls=0;feedValidated=previousValidated;navRequest=savedNav;modelBytes[0x24ae0]^=1;
             require(configureNewsDropdowns(false)&&!dropdownScreenOwned&&!dropdownModelOwned,"Dropdown restore failed");
             for(const auto& p:dropdownPatches)require(memcmp((p.model?modelBytes:screenBytes)+p.offset,p.original.data(),p.original.size())==0,"Dropdown function failed exact restoration");
-            newsTemplate=0;const auto poolEvents=std::count_if(messages.begin(),messages.end(),[](const Json& j){return j.value("event",std::string())=="social_screen_pool_reused";});
-            require(configureNewsDropdowns(true)&&newsTemplate==dropdownScreenBase+0x8a0,"Verified previous News allocation did not resolve the new screen");
-            require(std::count_if(messages.begin(),messages.end(),[](const Json& j){return j.value("event",std::string())=="social_screen_pool_reused";})==poolEvents+1,"News lookup unnecessarily scanned unrelated process allocations");
-            require(configureNewsDropdowns(false),"Pool-discovered screen did not restore exactly");
+            newsTemplate=0;require(!configureNewsDropdowns(true)&&!dropdownScreenOwned,"Unknown News asset must not trigger a UI-thread search");
+            const auto savedBody=scriptBody;const bool wasOpened=opened.load();scriptBody=originalScriptBody;executingBody=screenBytes+0x8a0;const unsigned actionSize=726;memcpy(screenBytes+0x8a0-24,&actionSize,4);
+            opened=false;require(scriptBodyHook(nullptr)==executingBody&&!dropdownScreenOwned,"Unrelated stock template execution was modified");
+            opened=true;require(scriptBodyHook(nullptr)==executingBody&&dropdownScreenOwned&&newsTemplate==reinterpret_cast<uintptr_t>(executingBody),"Observed template was not prepared before its body executed");
+            require(configureNewsDropdowns(false),"Observed screen did not restore exactly");
             auto* replacementModel=static_cast<unsigned char*>(VirtualAlloc(nullptr,0x30000,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));require(replacementModel!=nullptr,"Replacement model fixture allocation failed");
             memcpy(replacementModel,"Apt Data:1:7:8",14);for(const auto& p:dropdownPatches)if(p.model)memcpy(replacementModel+p.offset,p.original.data(),p.original.size());
-            modelBytes[0x24a58]^=1;require(ensureNewsModel()&&newsModelBase==reinterpret_cast<uintptr_t>(replacementModel),"Preseason replacement model was not reacquired");
+            modelBytes[0x24a58]^=1;require(!ensureNewsModel()&&modelDiscoveryNeeded,"Missing model did not defer discovery off the UI thread");
+            const unsigned modelSize=91,modelPoolSize=41;const auto modelPool=reinterpret_cast<uintptr_t>(replacementModel)+0x23000;memcpy(replacementModel+0x24970-24,&modelSize,4);memcpy(replacementModel+0x24970-16,&modelPoolSize,4);memcpy(replacementModel+0x24970-8,&modelPool,8);
+            executingBody=replacementModel+0x24970;require(scriptBodyHook(nullptr)==executingBody&&ensureNewsModel()&&newsModelBase==reinterpret_cast<uintptr_t>(replacementModel),"Executing replacement model was not reacquired");scriptBody=savedBody;opened=wasOpened;
             require(configureNewsDropdowns(true)&&configureNewsDropdowns(false),"Replaced model did not support entry and exit");
             require(modelBytes[0x24a58]!=(dropdownPatches[6].original[0]),"Stale model allocation was overwritten");
             VirtualFree(replacementModel,0,MEM_RELEASE);

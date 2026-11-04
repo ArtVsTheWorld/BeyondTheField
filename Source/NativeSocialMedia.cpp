@@ -26,6 +26,7 @@
 #include "RuntimeFeed.h"
 #include "Startup.h"
 #include "NativeMapValue.h"
+#include "NewsAssetDiscovery.h"
 namespace {
 using Json=nlohmann::json;
 #ifdef SOCIAL_SCROLL_TEST
@@ -96,6 +97,8 @@ const auto scopedScroll=social::scopedNewsScroll();
 #endif
 auto dropdownPatches=social::dropdown::patches();
 uintptr_t newsModelBase=0,dropdownScreenBase=0;
+std::atomic<uintptr_t> observedNewsModel{0};
+std::atomic<bool> modelDiscoveryNeeded{false};
 bool dropdownModelOwned=false,dropdownScreenOwned=false;
 bool configureNewsDropdowns(bool enable);
 uintptr_t newsBodyStyle=0,newsViewport=0;
@@ -214,15 +217,15 @@ bool configureNewsScroll(bool enable){
     VirtualProtect(reinterpret_cast<void*>(newsScroll),current.size(),old,&unused);
     scrollOwned=enable;note({{"event",enable?"news_smooth_scroll_enabled":"news_smooth_scroll_restored"},{"dpadStepPixels",enable?164:853}});return true;
 }
-bool ensureNewsModel(){
-    std::lock_guard<std::mutex> lock(layoutMutex);
-    auto matches=[&](const social::dropdown::Patch& p,uintptr_t address,bool changed){const auto& expected=changed?p.changed:p.original;std::vector<unsigned char> found(expected.size());return address&&read(address,found.data(),found.size())&&found==expected;};
-        bool valid=newsModelBase!=0;for(const auto& p:dropdownPatches)if(p.model&&!matches(p,newsModelBase+p.offset,dropdownModelOwned))valid=false;
-        if(!valid){
-            if(dropdownModelOwned)return false;
+bool newsModelMatches(uintptr_t model,bool changed){
+    for(const auto& patch:dropdownPatches)if(patch.model&&!social::assets::matches(model+patch.offset,changed?patch.changed:patch.original,read))return false;
+    return model!=0;
+}
+void discoverNewsModelInWorker(){
+    auto matches=[&](const social::dropdown::Patch& p,uintptr_t address,bool changed){return social::assets::matches(address,changed?p.changed:p.original,read);};
             uintptr_t found=0;unsigned count=0;const auto began=GetTickCount64();MEMORY_BASIC_INFORMATION m{};
             for(uintptr_t pos=0x10000;pos<0x7fffffff0000ull;){
-                if(GetTickCount64()-began>5000){note({{"event","social_dropdown_rejected"},{"reason","Current Dynasty model lookup timed out"}});return false;}
+                if(GetTickCount64()-began>5000){note({{"event","social_dropdown_rejected"},{"reason","Current Dynasty model lookup timed out"}});return;}
                 if(!VirtualQuery(reinterpret_cast<void*>(pos),&m,sizeof(m)))break;
                 const auto end=reinterpret_cast<uintptr_t>(m.BaseAddress)+m.RegionSize;if(end<=pos)break;const auto access=m.Protect&0xff;
                 if(m.State==MEM_COMMIT&&m.Type==MEM_PRIVATE&&!(m.Protect&(PAGE_GUARD|PAGE_NOACCESS))&&(access==PAGE_READONLY||access==PAGE_READWRITE||access==PAGE_WRITECOPY))for(auto a=(pos+0xffff)&~uintptr_t(0xffff);a<end;a+=0x10000){
@@ -230,10 +233,16 @@ bool ensureNewsModel(){
                     bool exact=true;for(const auto& p:dropdownPatches)if(p.model&&!matches(p,a+p.offset,false)){exact=false;break;}if(exact){found=a;++count;}
                 }pos=end;
             }
-            if(count!=1){note({{"event","social_dropdown_rejected"},{"reason","Current Dynasty model is absent or ambiguous"},{"matches",count}});return false;}
-            newsModelBase=found;note({{"event","social_model_reacquired"},{"model",found}});
-        }
-    return true;
+
+    if(count==1){uintptr_t empty=0;observedNewsModel.compare_exchange_strong(empty,found);note({{"event","social_model_discovered_background"},{"model",found},{"lookupMs",GetTickCount64()-began}});}
+    else note({{"event","social_model_discovery_deferred"},{"matches",count}});
+}
+bool ensureNewsModel(){
+    std::lock_guard<std::mutex> lock(layoutMutex);
+    const auto candidate=observedNewsModel.exchange(0);
+    if(candidate&&newsModelMatches(candidate,false)){if(candidate!=newsModelBase||dropdownModelOwned)note({{"event","social_model_reacquired"},{"model",candidate},{"route","observed or background"}});newsModelBase=candidate;dropdownModelOwned=false;}
+    if(newsModelMatches(newsModelBase,dropdownModelOwned))return true;
+    modelDiscoveryNeeded=true;return false;
 }
 bool configureNewsDropdowns(bool enable){
 #ifndef SOCIAL_DUAL_DROPDOWN
@@ -251,47 +260,7 @@ bool configureNewsDropdowns(bool enable){
     };
     if(enable&&!dropdownScreenOwned){
         if(newsTemplate&&loadedScreen(newsTemplate-0x8a0)&&matches(dropdownPatches[0],newsTemplate,false))dropdownScreenBase=newsTemplate-0x8a0;
-        else{
-            uintptr_t found=0;unsigned count=0;const auto began=GetTickCount64();MEMORY_BASIC_INFORMATION m{};
-            std::vector<unsigned char> buffer(0x100000+726);
-            // Reuse the allocation that previously held the exactly identified
-            // News asset. New screen instances usually move within this pool.
-            // A unique full header/function match is still required; otherwise
-            // the existing bounded process-wide discovery remains the fallback.
-            MEMORY_BASIC_INFORMATION previousPool{};
-            if(dropdownScreenBase&&VirtualQuery(reinterpret_cast<void*>(dropdownScreenBase),&previousPool,sizeof(previousPool))&&previousPool.State==MEM_COMMIT&&previousPool.Type==MEM_PRIVATE&&previousPool.RegionSize<=8*1024*1024&&!(previousPool.Protect&(PAGE_GUARD|PAGE_NOACCESS))){
-                const auto begin=reinterpret_cast<uintptr_t>(previousPool.BaseAddress),end=begin+previousPool.RegionSize;
-                for(auto a=begin;a<end;a+=0x100000){
-                    SIZE_T got=0,n=static_cast<SIZE_T>((std::min)(uintptr_t(buffer.size()),end-a));if(!ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<void*>(a),buffer.data(),n,&got)||got!=n)continue;
-                    const auto& original=dropdownPatches[0].original;auto first=buffer.begin(),last=first+got;
-                    while((first=std::search(first,last,original.begin(),original.end()))!=last){const auto offset=static_cast<uintptr_t>(first-buffer.begin()),candidate=a+offset-0x8a0;
-                        bool exact=offset<0x100000&&loadedScreen(candidate);for(const auto& patch:dropdownPatches)if(!patch.model&&!matches(patch,candidate+patch.offset,false))exact=false;
-                        if(exact){found=candidate;++count;}++first;
-                    }
-                }
-                if(count==1)note({{"event","social_screen_pool_reused"},{"lookupMs",GetTickCount64()-began}});else{found=0;count=0;}
-            }
-            const bool reusedPool=found!=0;
-            for(uintptr_t pos=0x10000;!reusedPool&&pos<0x7fffffff0000ull;){
-                if(GetTickCount64()-began>5000)break;
-                if(!VirtualQuery(reinterpret_cast<void*>(pos),&m,sizeof(m)))break;
-                const auto end=reinterpret_cast<uintptr_t>(m.BaseAddress)+m.RegionSize;if(end<=pos)break;
-                const auto access=m.Protect&0xff;
-                if(m.State==MEM_COMMIT&&m.Type==MEM_PRIVATE&&m.RegionSize<=8*1024*1024&&!(m.Protect&(PAGE_GUARD|PAGE_NOACCESS))&&(access==PAGE_READONLY||access==PAGE_READWRITE||access==PAGE_WRITECOPY)){
-                    for(auto a=pos;a<end;a+=0x100000){
-                        SIZE_T got=0,n=static_cast<SIZE_T>((std::min)(uintptr_t(buffer.size()),end-a));
-                        if(!ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<void*>(a),buffer.data(),n,&got)||got!=n)continue;
-                        const auto& original=dropdownPatches[0].original;
-                        auto first=buffer.begin(),last=first+got;
-                        while((first=std::search(first,last,original.begin(),original.end()))!=last){
-                            auto offset=static_cast<uintptr_t>(first-buffer.begin());const auto candidate=a+offset-0x8a0;if(offset<0x100000&&loadedScreen(candidate)){found=candidate;++count;}++first;
-                        }
-                    }
-                }pos=end;
-            }
-            if(count!=1){note({{"event","social_dropdown_rejected"},{"reason","News screen is absent or ambiguous"},{"matches",count}});return false;}
-            dropdownScreenBase=found;newsTemplate=found+0x8a0;
-        }
+        else{note({{"event","social_dropdown_rejected"},{"reason","Waiting for the actual News template execution; no UI-thread scan"}});return false;}
     }
     // Validate the full batch before changing any function. Released screen
     // pools are never overwritten on exit; the stable model is gated separately.
@@ -403,6 +372,26 @@ bool alignNewsFrame(bool enable){
     layoutOwned=enable;note({{"event",enable?"news_layout_aligned":"news_layout_restored"}});return true;
 }
 struct Guard {Guard(){++callbacks;}~Guard(){--callbacks;}};
+using ScriptBody=const unsigned char*(__fastcall*)(void*);
+ScriptBody scriptBody=nullptr;
+const unsigned char* __fastcall scriptBodyHook(void* self){
+    const auto body=scriptBody(self);
+    if(disabled||!body)return body;
+    // The original accessor guarantees a ScriptFunction2 definition header.
+    // Size filtering is a direct read, avoiding an OS read call for every AS method.
+    unsigned size=0;memcpy(&size,body-0x18,4);
+    if(size!=91&&(!opened||size!=726))return body;
+    Guard guard;const auto address=reinterpret_cast<uintptr_t>(body);
+    if(size==91){const auto candidate=social::assets::model(address,size,dropdownPatches,read);if(candidate)observedNewsModel=candidate;return body;}
+    const auto candidate=social::assets::screen(address,size,dropdownPatches,read);
+    if(candidate){
+        const bool original=social::assets::matches(address,dropdownPatches[0].original,read);
+        {std::lock_guard<std::mutex> lock(layoutMutex);newsTemplate=address;if(original)dropdownScreenOwned=false;}
+        const bool ready=configureNewsDropdowns(true);note({{"event","social_news_asset_observed"},{"screen",candidate},{"preparedBeforeExecution",ready}});
+    }
+    return body;
+}
+
 struct Alias {void** vt;const char* value;};
 extern void* aliasVt[];
 std::string argument(void* p) {
@@ -642,7 +631,7 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-const char* socialDestination(){return uiReady&&feedReady()?"NEWS":"DO_NOTHING";}
+const char* socialDestination(){return uiReady&&feedReady()&&ensureNewsModel()?"NEWS":"DO_NOTHING";}
 void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
@@ -725,6 +714,7 @@ bool runPreflight(){
 }
 struct Binding{uintptr_t vt,offset,rva;void* hook;bool installed=false;};
 Binding bindings[]={
+    {0xbc42fe8,0xa8,0x7c34e10,reinterpret_cast<void*>(scriptBodyHook)},
     {0xbac63a8,0xa0,0x7a1af50,reinterpret_cast<void*>(containerHook)},
     {0xbac63a8,0xb0,0x7a1b4c0,reinterpret_cast<void*>(tileHook)},
     {0xbac8c40,0x50,0x7a1c8e0,reinterpret_cast<void*>(navInfoHook)},
@@ -744,6 +734,7 @@ DWORD WINAPI worker(void*){
         dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
+        scriptBody=reinterpret_cast<ScriptBody>(base+0x7c34e10);
         tiles=reinterpret_cast<Tiles>(base+0x7a1b4c0);containers=reinterpret_cast<Containers>(base+0x7a1af50);navInfo=reinterpret_cast<NavInfo>(base+0x7a1c8e0);navRequest=reinterpret_cast<NavRequest>(base+0x7a2cca0);
         requestPanel=reinterpret_cast<RequestPanel>(base+0x7a2cdd0);
         panelReady=reinterpret_cast<PanelReady>(base+0x7a27f10);
@@ -754,7 +745,7 @@ DWORD WINAPI worker(void*){
         note({{"event","menu_hooks_active"},{"pid",GetCurrentProcessId()}});flush();
         // The read-only collector runs even when no News UI assets exist.
         // In particular, cold loading Training Results must seed the ledger.
-        uint64_t uiProbeAt=0;std::string previousUiReason;
+        uint64_t uiProbeAt=0,modelScanAt=0;std::string previousUiReason;
         note({{"event","background_capture_started"},{"uiRequired",false}});
         while(!disabled){
             collectRetiredFeeds();flush();
@@ -770,6 +761,7 @@ DWORD WINAPI worker(void*){
                     uiReady.store(true);note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
                 }else if(reason!=previousUiReason){previousUiReason=reason;note({{"event","startup_waiting"},{"reason",reason},{"backgroundCapture",true}});}
             }
+            if(modelDiscoveryNeeded&&GetTickCount64()>=modelScanAt){modelDiscoveryNeeded=false;modelScanAt=GetTickCount64()+10000;discoverNewsModelInWorker();}
             Sleep(200);
         }note({{"event","stopped"},{"callbacks",callbacks.load()}});flush();
     }catch(const std::exception& e){stop();note({{"event","activation_failed"},{"error",e.what()}});flush();}

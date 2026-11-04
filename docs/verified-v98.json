@@ -1,0 +1,40 @@
+{
+  "build": "v98",
+  "status": "Live archive migration published unchanged preseason; dropdown live entry/control test pending",
+  "nodeTests": 351,
+  "nativeBuildAndTests": true,
+  "archiveReplay": {
+    "catalogExactlyEqual": true,
+    "editions": 16,
+    "stories": 1397,
+    "timingsMs": {
+      "legacyMs": 9214,
+      "migrationMs": 9414,
+      "indexedMs": 7615
+    }
+  },
+  "live": {
+    "pid": 22736,
+    "edition": "831346515/2029/PreSeason/0",
+    "stories": 1226,
+    "catalogExactlyEqual": true,
+    "legacyArchiveByteIdentical": true,
+    "newIndexExists": true
+  },
+  "nativeChanges": [
+    "Actual GetTemplate body identifies current News asset before execution",
+    "Full template/model byte and pool/header gates retained",
+    "Model fallback scan moved to worker",
+    "UI request callbacks never scan process allocations",
+    "Stock templates remain unchanged when Social Media is inactive",
+    "Same-address resource recycling revalidated"
+  ],
+  "limits": [
+    "Live dropdown observations and setup timings pending",
+    "Late-season performance and Week 0 scholarship capture pending",
+    "First legacy migration remains a one-time cost",
+    "No new wording or variety pack loaded yet"
+  ],
+  "backup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Performance\\Backups\\v98-before-migration-20261103-195013",
+  "installedMmcFilesModified": false
+}

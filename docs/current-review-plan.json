@@ -12,7 +12,7 @@
     {
       "id": 2,
       "name": "Background change detection",
-      "status": "Live idle CPU passed; UI/midweek check pending",
+      "status": "Live idle CPU reduction verified; user says smoother; late-season and Week 0 midweek tests pending",
       "gates": [
         "Avoid repeated full decode when unchanged",
         "Retain identity/stage/consistency guards",
@@ -23,7 +23,7 @@
     {
       "id": 3,
       "name": "Archive handling",
-      "status": "Offline implementation: 351 Node tests and exact real-catalog replay passed; live migration pending",
+      "status": "Implemented; 351 tests and exact frozen replay pass; live preseason migration exact",
       "gates": [
         "Reduce full-season JSON read/rewrite",
         "Preserve immutable wording and existing archives",
@@ -34,7 +34,7 @@
     {
       "id": 4,
       "name": "Dropdown discovery",
-      "status": "pending",
+      "status": "Built and active; native gates/tests pass; live entry test pending",
       "gates": [
         "Remove process-wide UI-thread scans",
         "Validate cached ownership/generation",
@@ -45,7 +45,7 @@
     {
       "id": 5,
       "name": "Correctness and contextual review",
-      "status": "pending"
+      "status": "Full published 2028 corpus audited; 13 milestone saves backed up; fixes pending"
     },
     {
       "id": 6,
