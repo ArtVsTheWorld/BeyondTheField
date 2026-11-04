@@ -306,7 +306,10 @@
     "wrapper": "79d6930 obtains integer argument, invokes virtuala8 and sends row collector",
     "fields": "display string and value integer;8264820 builds data rows, further live capture needed before deciding rating semantics.",
     "status": "Read-only static disassembly from existing private snapshot; no hook or model changes.",
-    "warning": "Do not treat all numeric value fields as ratings without observed display semantics."
+    "warning": "Do not treat all numeric value fields as ratings without observed display semantics.",
+    "probe": "Source/PlayerTooltipProbe.cpp / Build/DynastyEnhancerPlayerTooltipProbe-p2.dll; six responses or5min; no release conversion, not loaded or packaged.",
+    "preserved": "Exact typed3 call with native arguments; wrapper forwards all primitive fields unchanged, numeric value remains native. CAS only own slot; queue worker logging.",
+    "remaining": "Independent probe review passed; real ability-tooltip row observation still pending before any label conversion."
   },
   "formationSubsDiscovery": {
     "asset": "Private current formationsubs.ast, GUID1bd56600-dc3e-94c9-057c-8ee550404bec",
