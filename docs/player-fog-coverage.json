@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "FreePractice pregame/in-game displays, no snaps/lineup changes/Dynastyadvance; then final performance/regression/package.",
+    "nextManualCheck": "Load EPUWK4 and Free Practice, Personnel Group before any snap; verify playcall grade labels then pause Depth Chart filters/far-right without substitutions. No save/advance.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -645,7 +645,8 @@
     "p62Build": "MSVC /W4 /WX, native tests and all10UI VM suites pass. Four player-only IG label paths and three legacy pause adapters preserve original register frames and native numeric source values.",
     "p62Review": "Independent source/native-fingerprint/return-register/bytecode-copy-alignment/preservation review and two affected UI suites pass. No new native hooks or background discovery. Invalid marked color cells may read one-cell data twice before native fallback; valid labels use the native one-read count.",
     "p62Package": "MMC registration/launch/tamper/path/config smoke checks pass. Installed baseline and histories unchanged. Six manual milestones still match verified backups. Clean-session live test pending.",
-    "p62Probes": "Roster column probes p12/p13/p14 and UI trace p5 explicitly stopped0; final records inflight0. No probes remain active."
+    "p62Probes": "Roster column probes p12/p13/p14 and UI trace p5 explicitly stopped0; final records inflight0. No probes remain active.",
+    "p62Activation": "Observed main menu in clean PID17856; installed recruiting baseline stopped0, p62 loaded and active event confirmed, initial retained definitions/banks/bytes zero before Dynasty entry. No probes loaded."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
