@@ -155,11 +155,47 @@
       "surface": "Formation Subs player OVRs and detail views",
       "implemented": true,
       "liveVerified": false,
-      "liveStatus": "p50 live numeric leaks observed: selected JaCorey McNeil67, reserve list60/59/55/52/47. Diagram numbers are jerseys and intentionally numeric. No substitutions made, counter0/50.",
+      "liveStatus": "p51 clean PID20872 initial WingTight view: JaCoreyMcNeil67->D orange; reserve60->D and59/55/52/47->F, native alpha preserved. Names/positions, portrait, jersey diagram and0/50 substitution counter unchanged. Bank8 methods attached. No replacements chosen. Deeperedit view reveals rightpanel OVR67 orange and attributes62/85/89/68/64/85 numeric; direct parent suffix is overwritten by child refresh. Center/list remaingrades. Counter0/50.",
       "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed.",
       "remaining": [
-        "Clean p51 entry and live formation/list/detail labels and reentry",
-        "Legacy attribute setup path observation; no uppercase/lowercase schema assumptions"
+        "Fix right-hand detail OVR/attribute refresh path; source numeric model unchanged",
+        "Live defense/reentry and selected reserve contrast"
+      ]
+    },
+    {
+      "surface": "Career Stats player sidebar",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
+      "remaining": [
+        "Live selected-player/reentry verification in next combined candidate"
+      ]
+    },
+    {
+      "surface": "Season Stats player sidebar",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
+      "remaining": [
+        "Live selected-player/reentry verification in next combined candidate"
+      ]
+    },
+    {
+      "surface": "Completed-game Box Score player sidebar",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
+      "remaining": [
+        "Live selected-player/reentry verification in next combined candidate"
+      ]
+    },
+    {
+      "surface": "NIL roster list OVR",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "Current exact Draw/unfocus fingerprints; scoped direct mcOvr label only. Unfocus retains native2-register frame with stack color object. EightUIVMsuites and independent review pass; numericOvr/compensation/limits/risk unchanged. Includedp54built, notactive.",
+      "remaining": [
+        "Live list attachment, selection/reentry and budget-number preservation without editing any deals"
       ]
     }
   ],
@@ -441,7 +477,20 @@
         "totalUs": 925.0
       }
     },
-    "p50InitialCaveat": "One hub and Redshirts visit only. 45,056 retained bytes are current initial allocations, not a steady-state/memory-growth result. Native adapter timers do not measure appended AS execution or total frame time."
+    "p50InitialCaveat": "One hub and Redshirts visit only. 45,056 retained bytes are current initial allocations, not a steady-state/memory-growth result. Native adapter timers do not measure appended AS execution or total frame time.",
+    "p51Observation": {
+      "pid": 20872,
+      "seconds": 35,
+      "screen": "Formation Subs initial view, no edits or advance",
+      "recruitFogWorkerCpuSeconds": 0,
+      "socialWorkerCpuSeconds": 0.390625,
+      "privateMiBRange": [
+        13382.4,
+        13384.4
+      ],
+      "retainedScriptBytes": 61440,
+      "caveat": "Query-only thread times; zero worker CPU does not measure UI suffix rendering or prove no frame-time impact. Private-memory movement includes whole game. Not a late-season or A/B baseline test."
+    }
   },
   "review": {
     "independentReviewer": "fog_coverage_review",
@@ -498,7 +547,10 @@
     "p50Live": "Clean PID31340 Dynasty entry, Starting Offense, Redshirts All table/panel and initial FIU Injury table/panel passed. Injury lengths remain2/33. Full regression still in progress.",
     "p51Build": "MSVC/W4/WX/native and seven UI suites pass. Independent Formation Subs source/fingerprint/ABI/frame/model review pass. Improved actual registerbudget and recycled selection fixtures pass.",
     "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet.",
-    "p51Activation": "Baseline stop0, p51 active event and empty10-bank initial retention report confirmed before Dynasty entry in PID20872."
+    "p51Activation": "Baseline stop0, p51 active event and empty10-bank initial retention report confirmed before Dynasty entry in PID20872.",
+    "p51Live": "Clean Dynasty entry and StartingOffense pass. FormationSubs initial selected player/reserve grades live verified; detailed subview next. No swaps/reset/player edits/advance.",
+    "queuedNext": "Fix FormationSubs right-detail refresh, then use fresh candidate name; p52/p53/p54 neverloaded.",
+    "p54Build": "MSVC/W4/WX/native and eight UI suites passed. Includes NILrow, allthree stats sidebars and unchanged-list redrawoptimization. Independentlyreviewed. Unloaded; p51 remainsactive and its deeperFormationdetail gap mustbe fixed before nextlivecandidate."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

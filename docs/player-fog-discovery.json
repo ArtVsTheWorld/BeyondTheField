@@ -136,7 +136,7 @@
   },
   "privateEvidenceExcludedFromDistribution": true,
   "coachCameraOverlay": {
-    "implemented": false,
+    "implemented": true,
     "liveVerified": false,
     "renderer": "art_screen.playcall.main.PlayerRatingsPanel.Draw",
     "asset": "common/ui/node_ig/scriptpod.ast",
@@ -155,8 +155,8 @@
       "agility",
       "strength"
     ],
-    "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats.",
-    "preparedAdapter": "Wired into next candidate as separate node_ig bank; offline101-boundary/preservation tests pass; no live gameplay verification.",
+    "need": "Live safe access; preserve x/y, jersey and ordinary stats. No native collector hook used.",
+    "preparedAdapter": "Included in active p51 as separate node_ig bank. Offline101-boundary/preservation tests pass; no live gameplay verification.",
     "nativeCollector": "Saved PE globalfa60810+448 resolves empty base implementation7ba1690; do not hook. Renderer-only method avoids assumptions about the actual gameplay collector."
   },
   "depthChartGrid": {
@@ -350,6 +350,43 @@
       }
     ],
     "warning": "Legacy PlayerSerial branch mcPlayerInfo is PlayerInfo containing shared OVRItem; existing RatingValueItem suffix does not cover it. Do not globally convert OVRItem because team ratings use it.",
-    "status": "p50 live numeric selectedModule/reserveList leaks confirmed; p51 scoped label/color adapters built/tested/reviewed; clean-start live candidate test pending."
+    "status": "p51 initial live formation module/list grades verified in cleanPID20872; detail/editing/defense/reentry still pending, no substitutions made."
+  },
+  "statPlayerSidebars": {
+    "abi": "void*(self,void**out,opaqueKey)",
+    "schema": "RosterNIL: lower overall and fully revealed attributes only; all stats/identity/compensation untouched",
+    "bindings": [
+      {
+        "name": "Career",
+        "table": "bab1408",
+        "slot": "48",
+        "rva": "79414b0",
+        "prefix32": "40555356574154415541564157488d6c24e14881ece80000004d8bf0488bf24c"
+      },
+      {
+        "name": "Season",
+        "table": "bab1408",
+        "slot": "50",
+        "rva": "7941e00",
+        "prefix32": "40555356574154415541564157488d6c24e14881ece80000004d8bf0488bfa4c"
+      },
+      {
+        "name": "BoxScore",
+        "table": "bab5958",
+        "slot": "68",
+        "rva": "79734e0",
+        "prefix32": "488bc448894808554156488d68a14881ecb8000000488958e84c8bf2488970e0"
+      }
+    ],
+    "status": "Allthree targets/full32-byteprefixes verified read-only in livePID20872. Sourceimplemented; not active.",
+    "routes": "Roster player card More/Stats or Stats&Records Career/Season; completed-game Schedule ->BoxScore/playerstats. Do not play/advance a game."
+  },
+  "nilRosterRows": {
+    "status": "p54built/tested/reviewed, notloaded/liveverified",
+    "asset": "Evidence/PlayerFog/rosternilrowitem.ast (private, notpackaged)",
+    "draw": "1a90/665/argc0/regs6/flags25/hash14ceac0385098e7d",
+    "unfocus": "1fc0/104/argc1/regs2/flags41/hashd0acdf397686b473",
+    "schema": "ExtraInfo.Ovr ->directmcOvr TextFieldGeneric; originalmodel remainsnumeric; no GetRosterNILPlayerList hook",
+    "preserved": "CurrentNIL/NILValue/OfferMin/OfferMax/RiskOfTransfer/PlayerKey/identity and selectednativecontrast"
   }
 }

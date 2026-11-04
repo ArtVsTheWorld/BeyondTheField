@@ -231,6 +231,10 @@ int main(){try{
         view.maps[30]["injuryLength"]=45;view.maps[30]["injuryRisk"]=46;view.maps[30]["age"]=47;view.maps[30]["injuryName"]=48;view.maps[30]["seasonStats"]=49;
         view.numbers[45]=33;view.numbers[46]=78;view.numbers[47]=21;view.strings[48]="Torn Pectoral";view.maps[49]={{"Yards",70}};view.numbers[70]=450;edits.clear();
         require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Injury sidebar touched duration/risk/age/injury name/season statistics");
+        view.maps[30]["careerStats"]=80;view.maps[80]={{"Overall",81},{"Yards",82},{"Rank",83},{"CompletionPercentage",84}};
+        view.numbers[81]=90;view.numbers[82]=9500;view.numbers[83]=75;view.numbers[84]=70;
+        const auto statisticsNumbers=view.numbers;edits.clear();
+        require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"}&&view.numbers==statisticsNumbers,"Stats sidebar changed career/season totals, ranks, percentages or numeric source fields");
         view.maps[30]["isCoach"]=44;view.booleans[44]=false;edits.clear();
         require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Annual award player fields missed");
         view.booleans[44]=true;edits.clear();

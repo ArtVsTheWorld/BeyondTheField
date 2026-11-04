@@ -38,6 +38,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'Recruiting player-risk renderer checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_formation_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Formation Subs player renderer checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_nil_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'NIL roster player renderer checks failed'}
 }
 Push-Location $fogOut
 try{

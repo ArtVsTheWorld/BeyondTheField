@@ -31,6 +31,7 @@
 #include "PlayerInGameUiPrograms.h"
 #include "PlayerRecruitUiPrograms.h"
 #include "PlayerFormationUiPrograms.h"
+#include "PlayerNilUiPrograms.h"
 #include "PlayerAbilityDescriptions.h"
 #endif
 
@@ -62,7 +63,8 @@ notesui::Runtime playerInGameUi(playeringameui::programs());
 notesui::Runtime playerRecruitUi(playerrecruitui::programs());
 notesui::Runtime playerFormationUi(playerformationui::programs());
 notesui::Runtime playerLegacyOvrUi(playerformationui::legacyPrograms());
-const std::array<notesui::Runtime*,10> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi};
+notesui::Runtime playerNilUi(playernilui::programs());
+const std::array<notesui::Runtime*,11> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi};
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
@@ -101,7 +103,10 @@ constexpr PlayerBinding keyedPlayerBindings[]={
     {0xc7502f8,0x58,0xa0c5180,"40555356574154415541564157488d6c24e84881ec180100004d8bf0488bda4c",playerfog::Surface::AnnualAwardsPlayer},
     {0xc7502f8,0x60,0xa0c71f0,"488bc448894808554157488d68b84881ec38010000488958e84c8bfa488970e0",playerfog::Surface::RosterNIL},
     {0xc7502f8,0x68,0xa0c63b0,"488bc448894808554156488d68a14881ecc8000000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL},
-    {0xbaa78b8,0x80,0x78efa70,"488bc45557488d68884881ec68010000488958e8488bfa488970e04c8960d84c",playerfog::Surface::RosterNIL}};
+    {0xbaa78b8,0x80,0x78efa70,"488bc45557488d68884881ec68010000488958e8488bfa488970e04c8960d84c",playerfog::Surface::RosterNIL},
+    {0xbab1408,0x48,0x79414b0,"40555356574154415541564157488d6c24e14881ece80000004d8bf0488bf24c",playerfog::Surface::RosterNIL},
+    {0xbab1408,0x50,0x7941e00,"40555356574154415541564157488d6c24e14881ece80000004d8bf0488bfa4c",playerfog::Surface::RosterNIL},
+    {0xbab5958,0x68,0x79734e0,"488bc448894808554156488d68a14881ecb8000000488958e84c8bf2488970e0",playerfog::Surface::RosterNIL}};
 constexpr size_t keyedPlayerBindingCount=sizeof(keyedPlayerBindings)/sizeof(keyedPlayerBindings[0]);
 std::array<KeyedPlayerGetter,keyedPlayerBindingCount> keyedPlayerOriginal{};std::array<bool,keyedPlayerBindingCount> keyedPlayerInstalled{};std::array<std::atomic<unsigned>,keyedPlayerBindingCount> keyedPlayerCalls{};
 using PlayerMap=void(__fastcall*)(void*,void*);
@@ -301,7 +306,8 @@ template<size_t Index>void* __fastcall keyedPlayerResponseHook(void* source,void
         if(keyedPlayerCalls[Index].fetch_add(1)<3)note({{"event","player_fog_keyed_response"},{"surface",Index},{"changed",changed}});
     }return result;
 }
-const KeyedPlayerGetter keyedPlayerHooks[]={keyedPlayerResponseHook<0>,keyedPlayerResponseHook<1>,keyedPlayerResponseHook<2>,keyedPlayerResponseHook<3>};
+const KeyedPlayerGetter keyedPlayerHooks[]={keyedPlayerResponseHook<0>,keyedPlayerResponseHook<1>,keyedPlayerResponseHook<2>,keyedPlayerResponseHook<3>,keyedPlayerResponseHook<4>,keyedPlayerResponseHook<5>,keyedPlayerResponseHook<6>};
+static_assert(sizeof(keyedPlayerHooks)/sizeof(keyedPlayerHooks[0])==keyedPlayerBindingCount,"Each keyed player response requires its typed forwarder");
 void* __fastcall playerAbilitiesHook(void* source,void** out,bool mentals){
     CallGuard guard;auto* result=originalAbilities(source,out,mentals);
     if(!disabled&&out&&*out){UiResponse view(read,4096);

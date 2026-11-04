@@ -130,9 +130,13 @@ class Machine:
                     count = stack.pop()
                     if not isinstance(count, int) or count < 0 or count > 128:
                         raise AssertionError('Collection exceeds verifier bounds')
-                    if op == 0x43 and count:
-                        raise AssertionError('Only empty object constructors are emitted')
-                    stack.append([stack.pop() for _ in range(count)] if op == 0x42 else {})
+                    if op == 0x43:
+                        value={}
+                        for _ in range(count):
+                            item,key=stack.pop(),stack.pop()
+                            value[key]=item
+                        stack.append(value)
+                    else:stack.append([stack.pop() for _ in range(count)])
                 elif op == 0x40:
                     name, count = stack.pop(), stack.pop()
                     if name != 'Object' or count != 0:

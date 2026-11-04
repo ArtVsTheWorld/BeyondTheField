@@ -98,4 +98,6 @@ receiver['mcHighlight']['_visible']=False;label['mData']['ExtraInfo']['fontColor
 receiver['mData']['ExtraInfo']['Ovr']=59;label['mData']['display']=59
 Machine({},[]).run(program(list_suffix),{1:receiver})
 assert label['mData']['display']=='F' and label['mData']['ExtraInfo']['fontColor']==GRADE_COLORS['F']
+label['calls'].clear();Machine({},[]).run(program(list_suffix),{1:receiver})
+assert not label['calls'],'An unchanged list draw invalidated native text/style again'
 print('Passed: Formation Subs101 grade boundaries, native selected contrast, hidden values, both detail branches, marker repaint, jersey/commands/models preserved.')
