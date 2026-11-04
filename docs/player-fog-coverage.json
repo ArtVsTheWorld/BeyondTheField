@@ -9,45 +9,43 @@
     "D": "60-69",
     "F": "0-59",
     "unknown": "remain hidden",
-    "partialColor": "public grade midpoint"
+    "partialColor": "public grade midpoint",
+    "selectedRow": "Native black foreground on light selection highlight, per user readability preference"
   },
   "surfaces": [
     {
       "surface": "Roster OVR and 54 attribute columns",
       "implemented": true,
       "liveVerified": false,
-      "liveStatus": "p38: full roster visible rating columns and compact QB filter show letters. Unselected grade colors and colored selected-player Overall badge verified. Selected spreadsheet row still black; fixed-frame accessor correction built in p39, pending live test.",
+      "liveStatus": "p39 + temporary supplements: full roster, compact QB filter, alternate team Florida State, initial/middle and far-right columns show letters. Selected-row color override worked but user requested native black foreground for readability; removed from p42.",
       "evidence": "PlayerRatingGrid.h recognizes the complete roster identity prefix plus only known attribute headers; p38 built. Actual QB view captured with form0 and 33 columns, matching the generalized schema.",
       "remaining": [
-        "all other position views",
-        "all horizontal columns",
-        "team filters",
-        "selected row colors in p39",
-        "alternate views"
+        "Remaining position-specific schemas",
+        "Reentry/focus recycling in combined p42",
+        "Secondary card panels and numeric rating leak audit"
       ]
     },
     {
       "surface": "Roster selected-player overall panel",
       "implemented": true,
       "liveVerified": false,
-      "liveStatus": "p38: selected player overall follows full roster and QB filter, with native palette color.",
+      "liveStatus": "Colored Overall follows selection, team filter and alternate attribute/skill-group panels in p39. Team ratings remain numeric.",
       "evidence": "Current selected getter plus live B/D panel changes; p38 adds shared PlayerModule color suffix only for existing exact grade strings, never numeric NIL/stat values.",
       "remaining": [
-        "alternate panel views",
-        "colors"
+        "Combined p42 regression across remaining filters/panels"
       ]
     },
     {
       "surface": "Player cards reachable from roster",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "p38 contains seven fingerprinted native UI suffixes: player-card Overall update/refresh, marked individual attribute/max labels, Skills template marker, group label/styles and skill-level label. Original numeric model, slider, Level, caps, costs and deltas remain numeric; offline execution tests pass 101 boundaries/colors/unknowns and source fingerprints.",
+      "evidence": "Active model rows use native RightLabelDisplayOverride plus cloned font styles; source rating/min/max/increase values unchanged. Offline 101-boundary/migration/unknown/ABI tests; trace match of actual GenericSlider.Draw and UpdateSubskillsList. p39 shared renderer masks unused AttributesItem path separately.",
       "remaining": [
         "p39 live Overall/individual attributes",
         "group heading color",
         "all card tabs/comparisons/boost/reentry paths"
       ],
-      "liveStatus": "p38: actual Ratings-page skill groups show colored grades; selected group heading shows letter, upgrade bonus/cost unchanged. Individual attributes and main Overall remain numeric. Header bank rejected nested callback loader metadata; template fixed-frame path did not attach. Both corrections built in p39."
+      "liveStatus": "p39: player-card Overall letter and skill-group grades verified live. Attribute rows initially numeric; bounded renderer trace proved active GenericSlider. Supplement PlayerUiPreview-p1 then attached active _UpdateSubskillsList and live WR Quickness showed colored Speed B / Acceleration A / Stamina B / Kick Return D. Header and selected group heading remain white; secondary card tabs and other positions pending."
     },
     {
       "surface": "Native spreadsheet grade colors",
@@ -55,11 +53,9 @@
       "liveVerified": false,
       "evidence": "p36 includes legacy SpreadsheetProvider marker-gated GetCellColor and modern provider adapter; offline native-equivalence and color/fallback tests pass",
       "remaining": [
-        "live selected-row override",
-        "focus/scroll performance and recycling",
-        "position filter colors"
+        "Combined p42 reentry and focus/scroll performance"
       ],
-      "liveStatus": "p38: unselected roster colors verified; selected row black. p39 preserves native frame and extends body accessor for exact player methods."
+      "liveStatus": "Unselected grades and selected-player panel colors verified. Selected-row grades deliberately remain native black on light highlight; user requested reverting colored selected grades."
     },
     {
       "surface": "Depth chart and lineup/comparison",
@@ -73,9 +69,14 @@
     },
     {
       "surface": "Dynasty hub player previews",
-      "implemented": false,
+      "implemented": true,
       "liveVerified": false,
-      "evidence": "Offline asset distinguishes player Ovr from TeamOVR/OFF/DEF"
+      "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass; not loaded yet.",
+      "remaining": [
+        "live formation and comparison/watch previews",
+        "default-style players-to-watch grade colors",
+        "reentry/selection"
+      ]
     },
     {
       "surface": "Recruit scouting grades, ranges and colors",
@@ -123,7 +124,16 @@
       "UI callback latency",
       "colored focus/scroll overhead",
       "late-season regression"
-    ]
+    ],
+    "uiSamples": {
+      "source": "p39 bounded live callback instrumentation, first8192 samples",
+      "scriptAdaptersMeanUs": 0.09115,
+      "scriptAdaptersMaxUs": 4.2,
+      "rowWrapperMeanUs": 1.35211,
+      "rowNativeIncludingCollectorMeanUs": 1.27406,
+      "columnSetupMeanUs": 128.12727,
+      "caveat": "Sampling includes only initial activity, stops at8192; row native timer includes converting collector. Does not certify whole-frame, later supplemental callbacks or late-season performance."
+    }
   },
   "review": {
     "independentReviewer": "fog_coverage_review",
@@ -135,15 +145,22 @@
       "Card adapters preserve original function bodies and change renderer labels; reviewer independently confirmed register budgets, return boundaries, template marker and style cloning",
       "Roster NIL and generic context sidebar sources discovered; awaiting consumer/arithmetic safety audit",
       "HandleArtEvent contains three nested callback headers: only validated loader pointer/pool metadata is normalized for semantic hash; copied live callback bytes remain unchanged and modified instructions still reject",
-      "Fast native body accessors bypass setup for some renderers; exact-frame adapters are now eligible at the existing length accessor"
+      "Fast native body accessors bypass setup for some renderers; exact-frame adapters are now eligible at the existing length accessor",
+      "Actual comparison Overall is in PlayerA/B.RecordList[]; source now corrects this explicit path while preserving StatLine. Corrected native-shaped fixture added after p40 build, pending next build.",
+      "Active selected-row renderer is madden Spreadsheet 272-byte method, not Ion 408-byte method. Native black selection foreground retained after live readability feedback.",
+      "Current comparison fixture covers PlayerA/B.RecordList[].Overall and leaves StatLine numeric."
     ]
   },
   "package": {
-    "combinedBuilt": false,
+    "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p39.dll",
-    "cleanRestartRequired": "User asked to stop at main menu after clean restart to activate p39. Current p38 Definitions cannot be unloaded safely in-session.",
-    "activeRuntime": "p38 development runtime in PID29424; installed p27 file untouched"
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p42.dll",
+    "cleanRestartRequired": "Restart pending before p42 test; p39 and supplemental cloned definitions retained in current session.",
+    "activeRuntime": "p39 with temporary card-attribute and selected-color supplements; selected color change is removed from source p42, not yet from live memory.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p42-MMC.zip",
+    "releaseReady": false,
+    "previewSha256": "fa67d2907766e4e8c15cbd34812b9c9b6b1368dd85b8a4033eb5fbdf8d2230f4",
+    "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP."
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -151,6 +168,7 @@
     "cardVm": "passed",
     "review": "independent read-only reviewer passed register/branch/preservation audit; remaining active-template checks tracked",
     "viewProbe": "Build/roster-view-probe.jsonl records full and QB schemas; game assets and private observations are not distributed",
-    "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet."
+    "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet.",
+    "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test."
   }
 }

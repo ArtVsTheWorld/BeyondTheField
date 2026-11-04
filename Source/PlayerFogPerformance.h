@@ -17,7 +17,7 @@ inline uint64_t frequency(){static const uint64_t value=[](){LARGE_INTEGER f{};Q
 inline uint64_t now(){LARGE_INTEGER t{};QueryPerformanceCounter(&t);return uint64_t(t.QuadPart);}
 struct Sample {
     Counter& counter;uint64_t started=0;
-    explicit Sample(Counter& selected):counter(selected){if(counter.attempts.fetch_add(1,std::memory_order_relaxed)<8192)started=now();}
+    explicit Sample(Counter& selected):counter(selected){if(counter.attempts.load(std::memory_order_relaxed)<8192&&counter.attempts.fetch_add(1,std::memory_order_relaxed)<8192)started=now();}
     ~Sample(){if(!started)return;const auto elapsed=now()-started;counter.samples.fetch_add(1,std::memory_order_relaxed);counter.ticks.fetch_add(elapsed,std::memory_order_relaxed);
         auto old=counter.maximum.load(std::memory_order_relaxed);while(elapsed>old&&!counter.maximum.compare_exchange_weak(old,elapsed,std::memory_order_relaxed)){}
         const auto us=double(elapsed)*1000000./frequency();unsigned bucket=0;for(const auto boundary:{1.,5.,10.,50.,100.,500.,1000.}){if(us<boundary)break;++bucket;}counter.buckets[bucket].fetch_add(1,std::memory_order_relaxed);

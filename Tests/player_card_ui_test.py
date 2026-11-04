@@ -7,7 +7,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler, GRADE_COLORS
 from build_player_card_ui import (header_suffix,badge_suffix,attributes_suffix,
                                  template_suffix,group_suffix,level_suffix,attribute_slots_suffix,
-                                 skill_slots_suffix,SPECS,append_program,fnv)
+                                 skill_slots_suffix,rating_value_draw_suffix,subskills_suffix,
+                                 SPECS,append_program,fnv)
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -33,8 +34,11 @@ for value in range(101):
     receiver={'mcRatingValueItem':item,'mOVRValue':value,'delta':3}
     Machine({},[]).run(program(header_suffix),{1:receiver})
     grade=expected(value)
-    assert data=={'value':value,'unrelated':17} and receiver['mOVRValue']==value and receiver['delta']==3
+    assert data=={'value':value,'unrelated':17,'ExtraInfo':{'DEPlayerRating':True}} and receiver['mOVRValue']==value and receiver['delta']==3
     assert child['mData']['display']==grade and child['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
+    child['mData']['ExtraInfo']['fontColor']=0xFFFFFF
+    Machine({},[]).run(program(rating_value_draw_suffix),{1:item})
+    assert child['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade] and data['value']==value
     assert child['mData']['ExtraInfo']['font']=='preserve' and child['mData']['ExtraInfo']['size']==24
     child['calls'].clear();Machine({},[]).run(program(header_suffix),{1:receiver})
     assert child['calls']==[], 'Unchanged draw reapplied styles or label'
@@ -123,6 +127,21 @@ for rating in [59,70,90]:
     assert gauge['calls']==[{'RightLabelDisplayOverride':expected(rating)}]
 for suffix in [attribute_slots_suffix,skill_slots_suffix]:
     for receiver in [{},{'mData':{}},{'mData':{'ExtraInfo':{}}}]:Machine({},[]).run(program(suffix),{1:receiver})
+
+for rating in range(101):
+    style={'font':'native','size':26,'fontColor':0xFFFFFF}
+    style['CloneAndModify']=lambda patch,original=style:{**original,**patch}
+    original_extra={'UnfocusValueTextStyle':style,'MinValue':0,'MaxValue':100,'IncreaseValue':2,'CanIncrease':True}
+    rows=[{'value':rating,'display':'Speed','ExtraInfo':original_extra}];updates=[]
+    def update(i,key,value):rows[i][key]=value;updates.append((i,key))
+    provider={'GetNumItems':lambda:len(rows),'GetItemData':lambda i:rows[i],'UpdateProperty':update}
+    globals_={'cafe':{'utility':{'ObjectUtil':{'MergeInto':lambda target,source:target.update(source)}}}}
+    Machine(globals_,[]).run(program(subskills_suffix),{1:{'mSubskillsDataProvider':provider}})
+    assert rows[0]['value']==rating and rows[0]['display']=='Speed' and updates==[(0,'ExtraInfo')]
+    extra=rows[0]['ExtraInfo'];assert extra is not original_extra and extra['RightLabelDisplayOverride']==expected(rating)
+    assert 'RightLabelDisplayOverride' not in original_extra and style['fontColor']==0xFFFFFF
+    for key in ['MinValue','MaxValue','IncreaseValue','CanIncrease']:assert extra[key]==original_extra[key]
+    assert extra['UnfocusValueTextStyle']['font']=='native' and extra['UnfocusValueTextStyle']['fontColor']==GRADE_COLORS[expected(rating)]
 
 sys.path.insert(0,'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
 from inspect_tb_ast import load

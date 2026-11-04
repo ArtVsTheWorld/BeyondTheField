@@ -53,7 +53,7 @@ def text_label(a, target, label, color, style, done, prefix):
     a.reg(style); a.number(1); a.reg(target); a.call('SetExtraInfo')
 
 
-def value_item_suffix(a, container, scratch, prefix, numeric=True):
+def value_item_suffix(a, container, scratch, prefix, numeric=True, mark=False):
     # container is a RatingValueItem, whose mcValue is its real text child.
     value, label, color, target, style = range(scratch, scratch+5)
     done = prefix+'done'
@@ -65,6 +65,10 @@ def value_item_suffix(a, container, scratch, prefix, numeric=True):
     else:
         a.reg(value); a.store(label)
     palette(a, label, color, done, prefix+'palette')
+    if mark:
+        path(a,container,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(prefix+'extra',0xB8)
+        path(a,container,'mData');a.string('ExtraInfo');a.number(0);a.raw(0x43,0x4F)
+        a.label(prefix+'extra');path(a,container,'mData','ExtraInfo');a.string('DEPlayerRating');a.raw(0x73,0x4F)
     path(a, container, 'mcValue'); a.store(target)
     text_label(a, target, label, color, style, done, prefix+'text')
     a.label(done)
@@ -72,12 +76,23 @@ def value_item_suffix(a, container, scratch, prefix, numeric=True):
 
 def header_suffix(a):
     path(a, 1, 'mcRatingValueItem'); a.store(24)
-    value_item_suffix(a, 24, 25, 'header')
+    value_item_suffix(a, 24, 25, 'header',mark=True)
 
 
 def header_event_suffix(a):
     path(a, 1, 'mcRatingValueItem'); a.store(12)
-    value_item_suffix(a, 12, 13, 'headerEvent')
+    value_item_suffix(a, 12, 13, 'headerEvent',mark=True)
+
+
+def rating_value_draw_suffix(a):
+    done='ratingDrawDone'
+    path(a,1,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo','DEPlayerRating');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,1,'mData','value');a.store(0)
+    numeric_grade(a,0,2,done,'ratingDrawGrade');palette(a,2,3,done,'ratingDrawPalette')
+    path(a,1,'mcValue');a.store(4);text_label(a,4,2,3,5,done,'ratingDrawText')
+    a.label(done)
 
 
 def badge_suffix(a):
@@ -144,6 +159,31 @@ def level_suffix(a):
     a.label('levelDone')
 
 
+def subskills_suffix(a):
+    # Verified active Ratings renderer: GenericSlider. Leave numeric values,
+    # min/max/boost/costs and progression records untouched. Set only its
+    # existing right-label display override and cloned value font styles.
+    path(a,1,'mSubskillsDataProvider');a.raw(0x76,0x49);a.branch('subskillsDone')
+    a.number(0);a.store(2)
+    a.label('subskillsLoop')
+    a.reg(2);a.number(128);a.raw(0x48);a.branch('subskillsDone',0xB8)
+    a.reg(2);a.number(0);path(a,1,'mSubskillsDataProvider');a.string('GetNumItems');a.raw(0x52,0x48);a.branch('subskillsDone',0xB8)
+    a.reg(2);a.number(1);path(a,1,'mSubskillsDataProvider');a.string('GetItemData');a.raw(0x52);a.store(3);a.missing(3,'subskillsNext')
+    path(a,3,'value');a.store(4);numeric_grade(a,4,5,'subskillsNext','subskillsGrade');palette(a,5,6,'subskillsNext','subskillsPalette')
+    path(a,3,'ExtraInfo');a.store(8);a.missing(8,'subskillsNext');a.empty_object(7)
+    a.reg(8);a.reg(7);a.number(2);a.global_object('cafe','utility','ObjectUtil');a.call('MergeInto')
+    a.reg(7);a.string('RightLabelDisplayOverride');a.reg(5);a.raw(0x4F)
+    a.set_field(7,'DEPlayerRating',True)
+    for index,name in enumerate(('FocusValueTextStyle','UnfocusValueTextStyle','UnfocusableValueTextStyle')):
+        path(a,7,name);a.store(8);a.missing(8,'subskillsStyle'+str(index))
+        a.empty_object(9);a.reg(9);a.string('fontColor');a.reg(6);a.raw(0x4F)
+        a.reg(7);a.string(name);a.reg(9);a.number(1);a.reg(8);a.string('CloneAndModify');a.raw(0x52,0x4F)
+        a.label('subskillsStyle'+str(index))
+    a.reg(7);a.string('ExtraInfo');a.reg(2);a.number(3);path(a,1,'mSubskillsDataProvider');a.call('UpdateProperty')
+    a.label('subskillsNext');a.reg(2);a.raw(0x50);a.store(2);a.branch('subskillsLoop',0x99)
+    a.label('subskillsDone')
+
+
 def attribute_slots_suffix(a):
     a.number(0);a.store(3)
     a.label('slotsLoop');a.reg(3);a.number(6);a.raw(0x48);a.branch('slotsDone',0xB8)
@@ -193,7 +233,8 @@ SPECS={
         (0x36EB0,0,23,25,6675,0x27B53CDB6D8B7673,23,badge_suffix,None),
         (0x18CC0,0,5,25,1233,0x9DCA6F0E09D88CDA,5,attributes_suffix,None),
         (0x327E8,0,9,25,388,0x45B4DB9AE855957E,9,attribute_slots_suffix,None),
-        (0x44BF8,0,12,25,204,0xC3220200E8D796CA,21,skill_slots_suffix,None)]),
+        (0x44BF8,0,12,25,204,0xC3220200E8D796CA,21,skill_slots_suffix,None),
+        (0x22150,0,9,25,1730,0x444360923A963AB5,9,rating_value_draw_suffix,None)]),
     'cardPrograms': ('Evidence/PlayerFog/manageplayerart.ast', [
         (0x3038,1,30,41,2224,0xA6909B15969FC597,30,header_suffix,None),
         (0x3EF0,6,18,41,876,0x944C06B02B868F03,18,header_event_suffix,None)]),
@@ -201,7 +242,8 @@ SPECS={
         (0x860,3,4,42,414,0x351678A392FC9086,4,template_suffix,411)]),
     'skillPrograms': ('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_cfm/corenode.ast', [
         (0x54C20,4,3,42,240,0x1A7E5A93BC79FFE4,9,group_suffix,None),
-        (0x54E20,2,6,41,100,0x3C700A570F7C0AA9,7,level_suffix,None)])}
+        (0x54E20,2,6,41,100,0x3C700A570F7C0AA9,7,level_suffix,None),
+        (0x54EC0,1,8,41,164,0xC40A11F67BBBC449,10,subskills_suffix,None)])}
 
 
 def generate(destination):

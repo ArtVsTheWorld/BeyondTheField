@@ -27,6 +27,7 @@
 #include "PlayerFogUiPrograms.h"
 #include "PlayerCardUiPrograms.h"
 #include "PlayerFogPerformance.h"
+#include "PlayerHubUiPrograms.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -51,9 +52,10 @@ notesui::Runtime playerControlUi(playercardui::controlPrograms());
 notesui::Runtime playerCardUi(playercardui::cardPrograms());
 notesui::Runtime playerTemplateUi(playercardui::templatePrograms());
 notesui::Runtime playerSkillUi(playercardui::skillPrograms());
-const std::array<notesui::Runtime*,4> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi};
-std::array<std::atomic<bool>,4> cardUiFailed{};
-std::array<std::atomic<unsigned>,4> cardUiAttached{};
+notesui::Runtime playerHubUi(playerhubui::programs());
+const std::array<notesui::Runtime*,5> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi};
+std::array<std::atomic<bool>,5> cardUiFailed{};
+std::array<std::atomic<unsigned>,5> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
 resume::Cache resumeCache;
 using ClassRows=void(__fastcall*)(void*,void*,int,int,void*);
@@ -202,9 +204,6 @@ unsigned __fastcall colorLengthHook(void* object){
         const auto definition=*reinterpret_cast<const uintptr_t*>(static_cast<const unsigned char*>(object)+0x58);
         const auto* h=reinterpret_cast<const unsigned char*>(definition);
         const auto size=notesui::field<unsigned>(h,24),argc=notesui::field<unsigned>(h,8);const auto registers=notesui::field<unsigned short>(h,12),flags=notesui::field<unsigned short>(h,14);
-        if(!playerUiFailed&&size==408&&argc==2&&registers==6&&flags==41)
-        try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=playerUi.beforeInvoke(object,read,true);if(index>=0)note({{"event","player_fog_selected_color_attached"},{"program",index}});}
-        catch(const std::exception& error){playerUiFailed=true;note({{"event","player_fog_selected_color_failed"},{"reason",error.what()}});}
         for(size_t bank=0;bank<cardUiBanks.size();++bank)if(!cardUiFailed[bank]&&cardUiBanks[bank]->acceptsFrame(h,true))
         try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=cardUiBanks[bank]->beforeInvoke(object,read,true);
             if(index>=0){const auto bit=1u<<index;if(!(cardUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_card_adapter_attached"},{"bank",bank},{"method",index},{"path","fixed frame body accessor"}});}}

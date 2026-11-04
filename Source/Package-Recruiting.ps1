@@ -1,9 +1,9 @@
-param([string]$RecruitingName='DynastyEnhancerRecruitFog-p28',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6')
+param([string]$RecruitingName='DynastyEnhancerRecruitFog-p28',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9._-]*$')][string]$PackageTag='v105')
 $ErrorActionPreference='Stop'
 $recruitProject=Split-Path -Parent $PSScriptRoot
 $recruitBuild=Join-Path $recruitProject 'Build'
 $recruitBase=Join-Path $MmcRoot 'Plugins/DynastyEnhancer/Runtime-v103'
-$recruitStage=Join-Path $recruitBuild ('Package-DynastyEnhancer-v105-'+[Guid]::NewGuid().ToString('N'))
+$recruitStage=Join-Path $recruitBuild ('Package-DynastyEnhancer-'+$PackageTag+'-'+[Guid]::NewGuid().ToString('N'))
 $recruitPlugins=Join-Path $recruitStage 'Plugins'
 $recruitRuntime=Join-Path $recruitPlugins 'DynastyEnhancer/Runtime-v103'
 New-Item -ItemType Directory -Path $recruitRuntime,(Join-Path $recruitRuntime 'Tools'),(Join-Path $recruitRuntime 'Content/Runtime') -Force | Out-Null
@@ -20,7 +20,7 @@ New-Item -ItemType Directory -Path (Join-Path $recruitStage 'LICENSES') | Out-Nu
 Copy-Item -LiteralPath (Join-Path $recruitProject 'Vendor/json.LICENSE.txt') -Destination (Join-Path $recruitStage 'LICENSES/nlohmann-json-MIT.txt')
 Copy-Item -LiteralPath (Join-Path $recruitProject 'THIRD_PARTY_NOTICES.md') -Destination $recruitStage
 Copy-Item -LiteralPath (Join-Path $recruitProject 'LICENSES/Aces-CFB-Toolkit-MIT.txt') -Destination (Join-Path $recruitStage 'LICENSES')
-$recruitManifest=Join-Path $recruitBuild 'mmc-recruiting-payload-sha256.txt'
+$recruitManifest=Join-Path $recruitBuild ('mmc-recruiting-payload-'+$PackageTag+'-sha256.txt')
 $recruitHashes=Get-ChildItem -LiteralPath $recruitRuntime -Recurse -File | Where-Object {$_.Name -ne 'dynasty-enhancer.json'} | Sort-Object FullName | ForEach-Object {(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()+'|'+$_.FullName.Substring($recruitRuntime.Length+1).Replace('\','/')}
 [IO.File]::WriteAllLines($recruitManifest,$recruitHashes,[Text.UTF8Encoding]::new($false))
 $recruitCsc=Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
@@ -30,8 +30,9 @@ if($LASTEXITCODE -ne 0){throw 'Recruiting MMC adapter build failed'}
 if($LASTEXITCODE -ne 0){throw 'Adapter smoke-test build failed'}
 & (Join-Path $recruitBuild 'AdapterSmoke.exe') (Join-Path $recruitPlugins 'DynastyEnhancer.dll') $MmcRoot
 if($LASTEXITCODE -ne 0){throw 'Recruiting MMC package checks failed'}
-$recruitZip=Join-Path $recruitBuild 'DynastyEnhancer-v105-MMC.zip'
+$recruitZip=Join-Path $recruitBuild ('DynastyEnhancer-'+$PackageTag+'-MMC.zip')
 Compress-Archive -Path (Join-Path $recruitStage '*') -DestinationPath $recruitZip -Force
-@{stage=$recruitStage;runtime=$recruitRuntime;zip=$recruitZip;recruitingSource=$RecruitingName;kind='dynasty-enhancer-v105'} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $recruitBuild 'mmc-package.json') -Encoding utf8NoBOM
+$recruitMetadata=if($PackageTag -eq 'v105'){'mmc-package.json'}else{'mmc-package-'+$PackageTag+'.json'}
+@{stage=$recruitStage;runtime=$recruitRuntime;zip=$recruitZip;recruitingSource=$RecruitingName;kind=('dynasty-enhancer-'+$PackageTag)} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $recruitBuild $recruitMetadata) -Encoding utf8NoBOM
 Write-Output ('Staged and verified: '+$recruitZip)
 Write-Output 'Installed MMC files and history remain unchanged.'

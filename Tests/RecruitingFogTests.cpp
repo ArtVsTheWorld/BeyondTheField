@@ -159,6 +159,11 @@ int main(){try{
         view.arrays[10]={11};view.maps[11]={{"PlayerA",12},{"PlayerB",13},{"StatLine",14}};view.maps[12]={{"Overall",15},{"Jersey",16}};view.maps[13]={{"Overall",17},{"RecordList",18}};view.numbers[15]=90;view.numbers[17]=59;
         std::vector<std::string> edits;auto capture=[&](uintptr_t root,const char* key,const char* value){edits.push_back(std::to_string(root)+":"+key+"="+value);};
         require(convert(view,10,Surface::Comparison,capture)==2&&edits==std::vector<std::string>{"12:Overall=A","13:Overall=F"},"Comparison touched statistics or failed to hide player overalls");
+        // Current native comparison stores one Overall per role in RecordList.
+        view.maps[12]={{"RecordList",60},{"Jersey",16}};view.maps[13]={{"RecordList",61},{"Name",18}};view.arrays[60]={62,63};view.arrays[61]={64};
+        view.maps[62]={{"Overall",65},{"PlayerTypeName",66}};view.maps[63]={{"Overall",67},{"Jersey",16}};view.maps[64]={{"Overall",68},{"PlayerTypeName",69}};view.maps[14]={{"Overall",70},{"Yards",71}};
+        view.numbers[65]=90;view.numbers[67]=79;view.numbers[68]=59;view.numbers[70]=90;view.numbers[71]=450;edits.clear();
+        require(convert(view,10,Surface::Comparison,capture)==3&&edits==std::vector<std::string>{"62:Overall=A","63:Overall=C","64:Overall=F"},"Native comparison role Overall path missed or StatLine/identity values changed");
         edits.clear();view.maps[11]={{"Name",14},{"Value",15},{"GroupColor",16}};
         require(convert(view,10,Surface::TopAttributes,capture)==1&&edits==std::vector<std::string>{"11:Value=A"},"Top attributes changed group color/name");
         view.maps[20]={{"OVR",21},{"Jersey",22},{"PrimaryPositionDepth",23}};view.strings[21]="80";edits.clear();

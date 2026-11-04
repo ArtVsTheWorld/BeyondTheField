@@ -30,6 +30,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'Player UI bytecode checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_card_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Player card label checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_hub_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Player hub preview checks failed'}
 }
 Push-Location $fogOut
 try{

@@ -60,19 +60,6 @@ def legacy_color():
     return a.finish()
 
 
-def selected_color(native_size):
-    a=Assembler()
-    # Override native selection foreground only on explicitly marked columns.
-    # The native fallback body is copied unchanged at an aligned offset.
-    a.reg(1); a.member('mDataProvider'); a.raw(0x76,0x49); a.branch('native')
-    a.reg(1); a.member('mDataProvider'); a.member('mColumnData'); a.raw(0x76,0x49); a.branch('native')
-    a.reg(1); a.member('mDataProvider'); a.member('mColumnData'); a.reg(5); a.raw(0x4E,0x76,0x49); a.branch('native')
-    a.reg(1); a.member('mDataProvider'); a.member('mColumnData'); a.reg(5); a.raw(0x4E); a.member('DEPlayerRating'); a.raw(0x73,0x66); a.branch('native',0xB8)
-    a.reg(5); a.reg(4); a.number(2); a.reg(1); a.member('mDataProvider'); a.string('GetCellColor'); a.raw(0x52,0x3E)
-    a.label('native'); a.pad_code(); copy_at=len(a.code); a.code.extend(bytes(native_size))
-    return a.finish(),copy_at,native_size
-
-
 def generate(asset, destination):
     sys.path.insert(0, 'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
     from inspect_tb_ast import load
@@ -88,13 +75,10 @@ def generate(asset, destination):
     legacy_offset,legacy_size,legacy_hash=0x108FE8,14,0xD913F7BA474B1A0F
     if fnv(legacy.data[legacy_offset+48:legacy_offset+48+legacy_size])!=legacy_hash:
         raise ValueError('Unsupported native legacy spreadsheet color method')
-    selected_offset,selected_size,selected_hash=0x90C58,408,0x462D3820E9791880
-    if fnv(legacy.data[selected_offset+48:selected_offset+48+selected_size])!=selected_hash:
-        raise ValueError('Unsupported native selected-cell color method')
-    selected,copy_at,copy_size=selected_color(selected_size)
+    # Keep native black selected-row foreground for readability on the light
+    # selection scrim. Only the provider's unselected color callback is adapted.
     groups=[('programs',[
-        (legacy_color(),legacy_offset,2,4,41,legacy_size,legacy_hash,0,0),
-        (selected,selected_offset,2,6,41,selected_size,selected_hash,copy_at,copy_size)]),
+        (legacy_color(),legacy_offset,2,4,41,legacy_size,legacy_hash,0,0)]),
         ('modernPrograms',[(spreadsheet_columns(),offset,4,9,41,size,expected,0,0)])]
     for name,specs in groups:
         lines.append(f'inline std::vector<notesui::Program> {name}(){{std::vector<notesui::Program> result;')
@@ -106,7 +90,7 @@ def generate(asset, destination):
         lines.append('return result;}')
     lines.append('}')
     destination.write_text('\n'.join(lines)+'\n', encoding='utf8')
-    print(json.dumps({'methods': 3, 'legacyRegistersPreserved': [4,6], 'modernRegistersPreserved': 9}))
+    print(json.dumps({'methods': 2, 'legacyRegistersPreserved': [4], 'modernRegistersPreserved': 9, 'selectedRow': 'native black foreground'}))
 
 
 if __name__ == '__main__':

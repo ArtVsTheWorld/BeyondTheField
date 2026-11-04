@@ -1,0 +1,160 @@
+{
+  "purpose": "Independent coverage discovery, not a game-wide completion claim",
+  "nativeResponseBindings": [
+    {
+      "vtableRva": "0xbab1b28",
+      "slot": "0x228",
+      "nativeRva": "0x7955fc0",
+      "prefix32": "405553565741554156488d6c24c84881ec38010000488b0564c813064833c448",
+      "schema": "TopAttributes",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xbab0e60",
+      "slot": "0xc0",
+      "nativeRva": "0x793d8c0",
+      "prefix32": "48895c240855565741564157488d6c24c94881ec900000004c8bf24c8bf9e8ed",
+      "schema": "Comparison",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xbac4e50",
+      "slot": "0xb8",
+      "nativeRva": "0x7a0f320",
+      "prefix32": "405557415441564157488d6c24c94881ec00010000488b05043508064833c448",
+      "schema": "PlaycallSubstitution",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xbab5778",
+      "slot": "0xd0",
+      "nativeRva": "0x796ee90",
+      "prefix32": "48894c24085553565741554157488d6c24d14881ecf8000000498bd84c8bfa48",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc74ed78",
+      "slot": "0x28",
+      "nativeRva": "0xa0b6110",
+      "prefix32": "48895c24085556574154415541564157488dac2420faffff4881ec2007000048",
+      "schema": "ContextPlayer",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xbab5b70",
+      "slot": "0x40",
+      "nativeRva": "0x7975c70",
+      "prefix32": "488bc448894808554156488d68b84881ec38010000488958e84c8bf2488970e0",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc7522c8",
+      "slot": "0x38",
+      "nativeRva": "0xa0ddfe0",
+      "prefix32": "405553574156488d6c24c14881ec88000000498bd8488bfa4c8bf1e8d0c1e2f9",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc74fd70",
+      "slot": "0x58",
+      "nativeRva": "0xa0c03f0",
+      "prefix32": "4c8944241848894c2408555357415441554156488d6c24d14881ecd80000004d",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc751ea0",
+      "slot": "0x58",
+      "nativeRva": "0xa0da9c0",
+      "prefix32": "488bc448894808554157488d68b84881ec38010000488958e84c8bfa488970e0",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc753aa0",
+      "slot": "0x38",
+      "nativeRva": "0xa0f2e20",
+      "prefix32": "48894c2408555356574154415541564157488d6c24f84881ec08010000498bf0",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    },
+    {
+      "vtableRva": "0xc754328",
+      "slot": "0x38",
+      "nativeRva": "0xa0f9fb0",
+      "prefix32": "488bc448894808554156488d68a14881ecc8000000488958e84c8bf2488970e0",
+      "schema": "RosterNIL",
+      "liveVerified": false
+    }
+  ],
+  "sharedRosterManagement": {
+    "vtableRva": "0xbab18c0",
+    "slot": "0x50",
+    "nativeRva": "0x79472b0",
+    "sourceUse": "Roster / Training Results / Position Changes player details",
+    "policy": "overall plus fully-revealed attribute values only; no numeric progression-model changes"
+  },
+  "confirmedBoundaries": {
+    "teamRatings": "Depth chart TeamOverall getter 0xbab5b70+0x58 ->0x7976db0 left untouched",
+    "formationSubs": "0xbae5820+0x558 ->0x7b8a210 produces IDs/positions, not rating fields; no hook",
+    "sharedProgression": "GetPlayerData.Overall remains numeric; separate DEOverallGrade field and renderer labels",
+    "comparisons": "PlayerA/B.RecordList[].Overall is a player rating; StatLine remains numeric."
+  },
+  "remainingDiscovery": [
+    {
+      "surface": "Prospect List sidebar",
+      "existingOwner": "PlayingTimeSurface::ProspectEntry; do not double-hook",
+      "native": "0xc752560+0x40 ->0xa0e0cc0",
+      "fields": [
+        "attributesSubpanelInfo[].ratingEnum",
+        "isFullyScouted",
+        "ratingValue",
+        "maxRatingValue"
+      ],
+      "need": "live unknown/partial/full sentinel capture; no root scouting percentage, so do not infer visibility from hidden data"
+    },
+    {
+      "surface": "All lifecycle tables",
+      "need": "Column schemas beyond shared player-detail maps; no access by advancing is authorized"
+    },
+    {
+      "surface": "In-game/pregame overlays",
+      "need": "UI navigation and leak audit without playing/simming/altering Dynasty"
+    }
+  ],
+  "cardValidation": {
+    "p38Live": "Colored skill-group labels work; individual attributes and main overall still numeric",
+    "p39BuiltCorrections": [
+      "Exact-frame accessor attachment",
+      "Strict normalized nested callback metadata hash, with semantic bytes unchanged",
+      "Nine player-card/panel adapters"
+    ],
+    "p40Prepared": "Adds three player-only hub preview adapters and removes profiling atomic writes after sample cap"
+  },
+  "privateEvidenceExcludedFromDistribution": true,
+  "coachCameraOverlay": {
+    "implemented": false,
+    "liveVerified": false,
+    "renderer": "art_screen.playcall.main.PlayerRatingsPanel.Draw",
+    "asset": "common/ui/node_ig/scriptpod.ast",
+    "header": "0x37fe8",
+    "body": "0x38018",
+    "argc": 0,
+    "registers": 7,
+    "flags": 25,
+    "size": 674,
+    "fnv": "a570b1afb77c6507",
+    "fields": [
+      "overallrating",
+      "awareness",
+      "speed",
+      "acceleration",
+      "agility",
+      "strength"
+    ],
+    "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats."
+  }
+}

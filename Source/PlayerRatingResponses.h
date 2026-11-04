@@ -12,7 +12,8 @@ template<class View,class Setter>bool ratingField(View& view,uintptr_t object,co
     if(label=="?")return false;set(object,key,label.c_str());return true;
 }
 // Each schema belongs to a verified UI getter. Never recursively replace
-// numeric-looking values: RecordList/StatLine contain genuine statistics.
+// numeric-looking values. Comparison StatLine is statistical data, while each
+// side's RecordList contains role-specific player Overall display records.
 template<class View,class Setter>unsigned convert(View& view,uintptr_t root,Surface surface,Setter set){
     if(surface==Surface::PlaycallSubstitution)return ratingField(view,root,"OVR",set)?1u:0u;
     if(surface==Surface::ContextPlayer)return ratingField(view,root,"ovr",set)?1u:0u;
@@ -31,7 +32,12 @@ template<class View,class Setter>unsigned convert(View& view,uintptr_t root,Surf
     for(auto entry:entries){
         if(surface==Surface::TopAttributes){if(ratingField(view,entry,"Value",set))++changed;continue;}
         std::map<std::string,uintptr_t> fields;if(!view.members(entry,fields))continue;
-        for(const char* side:{"PlayerA","PlayerB"}){const auto found=fields.find(side);if(found!=fields.end()&&ratingField(view,found->second,"Overall",set))++changed;}
+        for(const char* side:{"PlayerA","PlayerB"}){const auto found=fields.find(side);if(found==fields.end())continue;
+            if(ratingField(view,found->second,"Overall",set))++changed;
+            std::map<std::string,uintptr_t> player;std::vector<uintptr_t> records;
+            if(view.members(found->second,player)&&player.count("RecordList")&&view.array(player.at("RecordList"),records,128))
+                for(auto record:records)if(ratingField(view,record,"Overall",set))++changed;
+        }
     }
     return changed;
 }
