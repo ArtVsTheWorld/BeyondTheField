@@ -122,7 +122,16 @@ class Capture {
         s.name=memory.text(memory.at<Address>(address+0x18));s.capacity=memory.at<uint32_t>(address+0x28);
         const auto begin=memory.at<Address>(address+0x40),end=memory.at<Address>(address+0x48);
         if(end<begin||(end-begin)%0x58||end-begin>0x40000)throw std::runtime_error("Invalid runtime schema");
-        auto selected=wanted(s.name);if(s.name.size()>=2&&s.name.substr(s.name.size()-2)=="[]")return s;
+        auto selected=wanted(s.name);
+#if defined(RECRUIT_RESUME_AUDIT)
+        // Opt-in, read-only Notes research capture. Ordinary Social Media/Fog
+        // builds retain their existing field selection and change-watch cost.
+        if(s.name=="Player")selected.insert({"TraitDevelopment","PLYR_HOME_TOWN","PLYR_TENDENCY","PLYR_BIRTHDATE","BCVisionRating","BreakSackRating","ChangeOfDirectionRating","HitPowerRating","ImpactBlockingRating","JukeMoveRating","JumpingRating","KickReturnRating","LeadBlockRating","LongSnapRating","PassBlockFinesseRating","PassBlockPowerRating","PlayActionRating","PressRating","PursuitRating","ReleaseRating","RunBlockFinesseRating","RunBlockPowerRating","SpectacularCatchRating","SpinMoveRating","StaminaRating","StiffArmRating","ThrowOnTheRunRating","ThrowUnderPressureRating","TruckingRating"});
+        if(s.name=="Recruit")selected.insert({"ProductionGrade","QualityModifier","AlternatePosition1","AlternatePosition2"});
+        if(s.name=="Franchise")selected.insert("HighSchoolTeams");
+        if(s.name=="City")selected={"Name","State","CITY_STATE"};
+#endif
+        if(s.name.size()>=2&&s.name.substr(s.name.size()-2)=="[]")return s;
         for(Address p=begin;p<end;p+=0x58){auto name=memory.sso(p);if(!selected.empty()&&!selected.count(name))continue;
             auto meta=memory.read(p,0x58);Field f;f.name=name;f.id=static_cast<uint32_t>((p-begin)/0x58);f.kind=value<uint32_t>(meta,0x40);f.width=value<uint16_t>(meta,0x30);f.minimum=value<int>(meta,0x38);f.fallback=value<Address>(meta,0x48);f.descriptor=value<Address>(meta,0x50);
             if(f.kind<1||f.kind>7||f.kind==4||f.kind==6)continue;

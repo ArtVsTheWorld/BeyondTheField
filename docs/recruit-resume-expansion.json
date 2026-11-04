@@ -1,0 +1,213 @@
+{
+  "feature": "High-school resume and recruit Notes expansion",
+  "status": "Stages 1-3 offline prototype completed; 24-example review ready. Awaiting the approved content-review checkpoint before expanding prose and native integration.",
+  "sourceBranch": "research/recruiting-fog",
+  "workingNativeDll": "DynastyEnhancerRecruitFog-p18.dll unchanged",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Data audit",
+      "status": "passed",
+      "highSchoolProspects": 3721,
+      "verifiedFields": [
+        "native recruit-to-player linkage",
+        "hometown/state",
+        "position/archetype code",
+        "stars",
+        "underlying overall and position attributes",
+        "TraitDevelopment",
+        "saved PresentationId"
+      ],
+      "nativeLinkChecks": [
+        "Luke Callen UI RecordId 561120980 matches active Recruit row serial"
+      ],
+      "uniquePresentationIds": 3721,
+      "development": {
+        "College_Impact": 709,
+        "Normal": 2656,
+        "College_Star": 297,
+        "College_Elite": 59
+      },
+      "noNativeHighSchoolStats": {
+        "GameStats": 0,
+        "CareerStats": 0,
+        "SeasonStats": 0
+      },
+      "nativeHighSchoolTeams": "empty Team[] in inspected Dynasty",
+      "nativeProductionGrade": "Present, but semantics unverified; excluded from the model",
+      "nonUsOrUnmappedOrigins": 56,
+      "birthdate": "Zero/default values normalized as unavailable; not relied on as the primary identity",
+      "persistenceDesign": "Use saved PresentationId plus LeagueID and immutable biography; save path/week/scouting/ratings/age/position are excluded. First generated resume will be persisted at native integration; cross-process persistence is not yet implemented."
+    },
+    {
+      "stage": 2,
+      "name": "Previous-season generator",
+      "status": "offline prototype passed",
+      "realProspectsGenerated": 3721,
+      "roles": {
+        "Regular starter": 2089,
+        "No varsity appearances": 88,
+        "Late-season starter": 495,
+        "Shared role": 659,
+        "Reserve": 390
+      },
+      "positionGroups": {
+        "DL": {
+          "count": 670,
+          "metric": "tackles",
+          "mean": 41.571641791044776,
+          "max": 147,
+          "overallCorrelation": 0.17246608356178905,
+          "skillCorrelation": 0.2036221882169219
+        },
+        "DB": {
+          "count": 710,
+          "metric": "tackles",
+          "mean": 39.2169014084507,
+          "max": 121,
+          "overallCorrelation": 0.24929151862097298,
+          "skillCorrelation": 0.19640270071404825
+        },
+        "WR": {
+          "count": 559,
+          "metric": "receivingYards",
+          "mean": 651.8819320214669,
+          "max": 1979,
+          "overallCorrelation": 0.13571077391450825,
+          "skillCorrelation": 0.14546671174824635
+        },
+        "OL": {
+          "count": 573,
+          "metric": "sacksAllowed",
+          "mean": 5.605584642233857,
+          "max": 25,
+          "overallCorrelation": -0.12140365157403217,
+          "skillCorrelation": -0.13448031839701266
+        },
+        "FB": {
+          "count": 60,
+          "metric": "rushingYards",
+          "mean": 218.36666666666667,
+          "max": 682,
+          "overallCorrelation": 0.05943585639809503,
+          "skillCorrelation": 0.18494853481080034
+        },
+        "LB": {
+          "count": 282,
+          "metric": "tackles",
+          "mean": 73.41489361702128,
+          "max": 199,
+          "overallCorrelation": 0.13792789724277946,
+          "skillCorrelation": 0.12751542010957942
+        },
+        "QB": {
+          "count": 180,
+          "metric": "passingYards",
+          "mean": 1991.65,
+          "max": 5193,
+          "overallCorrelation": 0.06332214985533757,
+          "skillCorrelation": 0.1061393069552588
+        },
+        "P": {
+          "count": 91,
+          "metric": "puntingYards",
+          "mean": 1334.5604395604396,
+          "max": 3303,
+          "overallCorrelation": 0.209768677485984,
+          "skillCorrelation": 0.2212432879690239
+        },
+        "HB": {
+          "count": 208,
+          "metric": "rushingYards",
+          "mean": 904.5913461538462,
+          "max": 2505,
+          "overallCorrelation": 0.1673023776069681,
+          "skillCorrelation": 0.16552833356849747
+        },
+        "TE": {
+          "count": 303,
+          "metric": "receivingYards",
+          "mean": 374.18151815181517,
+          "max": 1070,
+          "overallCorrelation": 0.18436434092975046,
+          "skillCorrelation": 0.207418921764716
+        },
+        "K": {
+          "count": 85,
+          "metric": "fieldGoalsMade",
+          "mean": 9.670588235294117,
+          "max": 28,
+          "overallCorrelation": 0.09087820110766962,
+          "skillCorrelation": 0.09922388414814225
+        }
+      },
+      "controlledChecks": {
+        "VermontVsFloridaYardageRatio": 1.2080465158822253,
+        "ability80Vs55YardageRatio": 1.4202107193911444,
+        "boundaryResumes": 22000,
+        "class1Vs6YardageRatio": 1.198185852578217,
+        "developmentIsolation": true,
+        "matchedQBPairs": 8000,
+        "zeroAppearanceResumes": 340
+      },
+      "note": "These are model behaviors, not claims about actual high-school statistical distributions. Mean-direction checks do not prove resistance to every multivariate rating-inference strategy."
+    },
+    {
+      "stage": 3,
+      "name": "Development treatment",
+      "status": "offline isolation checks passed",
+      "policy": "Production, opportunity and competition exclude development. Only a common positional-settling background probability changes mildly: Normal/Impact 12%, Star 15%, Elite 18%, and only appears when an existing role explanation does not take priority. All development groups can receive it.",
+      "checks": "22,000 controlled fixtures and all 3,721 real-input resumes retain identical statistics/opportunity/class when only development changes."
+    },
+    {
+      "stage": 4,
+      "name": "Contrasting dossier review",
+      "status": "ready for user review",
+      "artifact": "Build/recruit-resume-review.html",
+      "samples": 24,
+      "coverage": "All 21 positions present in the loaded HS class plus all five opportunity roles; includes Luke and Dylan. Hidden evaluation is separately expandable.",
+      "artifactChecks": [
+        "24 sample cards",
+        "24 separately hidden evaluations",
+        "no external network dependencies"
+      ],
+      "scope": "Review covers generated previous-season statistics and initial background; the larger scouting-prose library is stage 5."
+    },
+    {
+      "stage": 5,
+      "name": "Expanded observations and prose",
+      "status": "pending review checkpoint"
+    },
+    {
+      "stage": 6,
+      "name": "Native layout and immutable persistence",
+      "status": "pending"
+    },
+    {
+      "stage": 7,
+      "name": "Full validation and automatic loading",
+      "status": "pending"
+    }
+  ],
+  "model": {
+    "version": 1,
+    "stateBaseline": "Config/high-school-state-strength.json",
+    "stateInterpretation": "Soft ordinal strength bands; not measured distances between ranks",
+    "competition": "50% state baseline, 32% generated classification, 18% individual schedule variation",
+    "classification": "Generated consistent 1A-6A scale; not state association classifications",
+    "ratings": "Read-only actual position skills; never modifies game ratings or outcomes",
+    "records": "No school/state/national record claims without a supported record baseline"
+  },
+  "tests": [
+    "node --test Tests/recruit_resume_data.test.mjs (4 pass)",
+    "RecruitResumeTools.exe --self-test (22,000 boundary resumes + 8,000 paired QB comparisons pass)",
+    "Entire live HS class generated, validated, repeated deterministically and development-isolation checked"
+  ],
+  "limits": [
+    "Offline prototype only; live p18 report is unchanged",
+    "Native persistence and automatic MMC loading remain later stages",
+    "Statistical ranges and contextual language are subject to the sample review",
+    "Broader multivariate information-leak calibration remains before native release",
+    "No historical record database or real state-specific classification mapping"
+  ]
+}

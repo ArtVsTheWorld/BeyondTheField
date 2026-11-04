@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "source": "https://highschoolfootballamerica.com/top-high-school-football-states-through-one-month-of-the-2026-season/",
+  "published": "2026-09-14",
+  "interpretation": "Ordinal baseline, not measured performance gaps. Maryland and DC share rank 21. Unmapped/non-US origins use a neutral baseline without an invented US state.",
+  "rankedStates": ["Florida","Texas","Georgia","California","Louisiana","Ohio","Tennessee","Alabama","NorthCarolina","Pennsylvania","NewJersey","Indiana","SouthCarolina","Mississippi","Arizona","Utah","Illinois","Missouri","Virginia","Arkansas","Maryland","Michigan","Oklahoma","Massachusetts","Kentucky","Colorado","Nevada","Hawaii","Nebraska","NewYork","Washington","Wisconsin","Oregon","Idaho","Minnesota","NewMexico","Kansas","WestVirginia","Iowa","Delaware","Connecticut","RhodeIsland","Wyoming","Alaska","SouthDakota","NorthDakota","Montana","Maine","NewHampshire","Vermont"],
+  "aliases": {"WashingtonDC":"Maryland","DistrictOfColumbia":"Maryland","DC":"Maryland"},
+  "classification": "Generated 1A–6A competition scale; not a claim about each state association's actual classification structure."
+}

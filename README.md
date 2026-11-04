@@ -12,6 +12,12 @@ The current verified separate test DLL is `Build/DynastyEnhancerRecruitFog-p18.d
 
 This separate research DLL is not part of the installed v103 MMC package and must be loaded per session. Notes is enabled with `-RecruitNotesUi` and disabled in ordinary Fog builds. Its fingerprint-gated invocation-setup hook attaches definitions as Recruiting loads, without retaining released script-object addresses. A clean game restart is required to unload it. The generated UI header contains custom bytecode and native method hashes; rebuilding the DLL does not require distributing extracted game assets. Active-roster Fog remains later work.
 
+## High-school resume expansion (offline review)
+
+The [expansion audit and stage reports](docs/recruit-resume-expansion.json) record the first read-only live audit and the initial C++ generator. It has generated all 3,721 HS prospects in the inspected class, with position-specific production, state/class/schedule competition and varying playing opportunity. Development is isolated from statistics and only weakly affects background circumstances. The current live p18 DLL is unchanged.
+
+Build developer tools with `Source/build-recruit-resume-tools.ps1`. `RecruitResumeAudit.exe` captures opt-in research fields read-only; ordinary builds retain their existing field selection. `Tools/recruit_resume_data.mjs` converts a private capture into stable inputs; `RecruitResumeTools.exe` creates private public/evaluation previews and supports `--self-test`. `Tools/review_recruit_resumes.mjs` creates the local 24-card HTML review with evaluation details hidden separately. Generated captures, hidden player evaluations and the report stay under ignored Evidence/Build folders. The larger prose library, persistent native integration and automatic loading follow the sample-review checkpoint.
+
 ## Content and menu performance review (v103)
 
 The package is `Build/DynastyEnhancer-v103-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.
