@@ -1,6 +1,6 @@
 {
   "candidate": "DynastyEnhancerRecruitFog-p27",
-  "status": "Built and offline verified; awaiting clean-restart in-game checks. p22 remains active until restart.",
+  "status": "p27 manually active and verified live by user. Automatic-loading package staged; awaiting closed apps for installation.",
   "changes": [
     "Grade ranges use the midpoint palette; C\u2013A matches B and D\u2013B matches C. Half-band midpoints blend the two neighboring palette colors.",
     "Style checks detect a native white reset even if the grade label is unchanged; same-style redraws do not call SetExtraInfo again.",
@@ -30,9 +30,22 @@
     "sha256": "c0cb8c7edbf4c195d0c99509b67c59fe018cd27ee1a25cf024baabf24be1618b"
   },
   "pending": [
-    "Color persistence across profile tabs and recruit changes, including both top attributes",
-    "Prospect List class cells and side panel",
-    "Native menu responsiveness",
-    "Automatic-loading installation"
-  ]
+    "Automatic-loading installation and clean-launch verification"
+  ],
+  "liveVerified": [
+    "Colors persist across repeated Notes/Scouting tab switches",
+    "Top-row attribute colors",
+    "Midpoint range colors",
+    "D3/D2/FCS Class column and side-panel labels",
+    "Menu responsiveness"
+  ],
+  "performance": {
+    "sampleSeconds": 35,
+    "fogWorkerCpuSeconds": 0.328125,
+    "workerCpuActiveSamples": [
+      9
+    ],
+    "otherSamplesWithRecordedWorkerCpu": 0,
+    "limit": "Worker CPU observation does not isolate UI hook costs; user also confirmed responsive menus."
+  }
 }

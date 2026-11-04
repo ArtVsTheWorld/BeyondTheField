@@ -1,7 +1,7 @@
 {
   "feature": "Recruit r\u00e9sum\u00e9 details, prior colleges and native grade colors",
   "candidate": "DynastyEnhancerRecruitFog-p22",
-  "status": "Built; offline and live-data migration checks passed. Awaiting clean-restart visual test. Not installed automatically.",
+  "status": "Implemented in p22; color persistence and Prospect List coverage corrected in p27, verified live. Automatic MMC installation pending.",
   "changes": [
     "Public grade colors: A green, B yellow-green, C yellow, D orange, F red; partial ranges use the lower public band color; hidden sentinels unchanged.",
     "Completion percentage and pancake/run-blocking-snap percentage derived from persisted counts; zero opportunities display --.",
@@ -33,10 +33,7 @@
     "nativeBytecodePaletteAndNoRepeatedInvalidation": true
   },
   "pending": [
-    "Live grade palette and focus changes",
-    "Native QB/OL percentage and GPA layout",
-    "Live JUCO college name/class suffix",
-    "Automatic-loading package installation after verification"
+    "Automatic-loading installation and clean-launch verification"
   ],
   "artifact": {
     "bytes": 946176,

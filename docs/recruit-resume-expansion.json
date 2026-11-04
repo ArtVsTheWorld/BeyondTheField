@@ -1,8 +1,8 @@
 {
   "feature": "High-school resume and recruit Notes expansion",
-  "status": "p19 expansion verified live including controls and Dynasty reload. p20 automatic MMC package built and verified; awaiting closed apps for installation.",
+  "status": "p19 expansion verified live. Additive GPA/rates/college backgrounds and native colors added in p22; p27 color and Prospect List fixes verified live. Latest automatic MMC package built; awaiting installation.",
   "sourceBranch": "research/recruiting-fog",
-  "workingNativeDll": "p18 retained unchanged as recovery; p19 active candidate",
+  "workingNativeDll": "p19 retained as recovery; p27 manually active and verified",
   "stages": [
     {
       "stage": 1,
