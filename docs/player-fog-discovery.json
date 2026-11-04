@@ -156,7 +156,7 @@
       "strength"
     ],
     "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats.",
-    "preparedAdapter": "Tools/build_player_ingame_ui.py and PlayerInGameUiPrograms.h are isolated future-stage code; not wired into p43. All101 boundaries and hidden/stale-OVR preservation tests pass. Numeric-string fields and live attachment remain unverified.",
+    "preparedAdapter": "Wired into next candidate as separate node_ig bank; offline101-boundary/preservation tests pass; no live gameplay verification.",
     "nativeCollector": "Saved PE globalfa60810+448 resolves empty base implementation7ba1690; do not hook. Renderer-only method avoids assumptions about the actual gameplay collector."
   },
   "depthChartGrid": {
@@ -176,7 +176,7 @@
     ],
     "ratingIds": "7 and known attribute columns10..63",
     "preserved": "Depth2, RS3, Name4, Year5, position1/6, NIL8, morale9, intValue and sorting",
-    "implemented": "p46 awaiting live test"
+    "implemented": "p46 live verified QB and C tables; other positions/far-right/reentry pending"
   },
   "abilityDescriptions": {
     "native": "0xbab1b28+0xa0 ->0x794d200",
@@ -197,8 +197,19 @@
       "0x60": "0xa0c71f0 HeismanAwardsPlayerInfo",
       "0x68": "0xa0c63b0 AwardsPlayerInfo"
     },
-    "fields": "overall and fully-scoped attributesSubpanelInfo[].ratingValue",
-    "implemented": false,
-    "caution": "AnnualAwards may be a coach; explicit isCoach true passthrough required."
+    "fields": "Root object overall; attributesSubpanelInfo[].ratingValue only if isFullyScouted true. No recursive conversion.",
+    "implemented": "p47 built; not active or live-verified",
+    "caution": "AnnualAwards requires explicit native Boolean isCoach=false; coach/missing/invalid discriminator pass through.",
+    "abi": "void* (self,void** out,void* opaqueKey); one native invocation"
+  },
+  "editPlayerDiscovery": {
+    "native": "UcmCreatePlayerFlow globalfa53818 / vtbab74e0; GetAllAttributes slot1b0 ->798f7a0",
+    "abi": "self,void**out",
+    "fields": "Grouped AttributeName/Id/Min/Max/Value are editable model fields. Do not modify getter. Actual Dynasty renderer needs live capture.",
+    "implemented": false
+  },
+  "recruitingTypeAudit": {
+    "finding": "Existing HaveSlider false setter address2bf6720 emits unsigned-byte numeric value, not actual native Boolean wrapper2b07670. Baseline behavior user-verified; no change made during player-fog preview.",
+    "remaining": "Add native type-consistency test before independently changing this established path."
   }
 }

@@ -66,7 +66,7 @@
         "live table schemas and complete depth chart/lineup/comparison navigation",
         "formation cards/popups and colors"
       ],
-      "liveStatus": "Before p46, list still numeric while selected-player Overall is colored D. Captured actual native metadata; conversion awaiting p46 live test."
+      "liveStatus": "p46 clean session: QB and C position filters show letter OVR/attributes, native black selected row, colored unselected rows and colored selected-player Overall. Numeric depth ordinals, NIL, jersey/measurements and team64/64/63 preserved. Remaining positions/far-right/comparison still pending."
     },
     {
       "surface": "Dynasty hub player previews",
@@ -78,7 +78,7 @@
         "default-style players-to-watch grade colors",
         "reentry/selection"
       ],
-      "liveStatus": "p43 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers and team ratings remain numeric. Other hub panels pending."
+      "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending."
     },
     {
       "surface": "Recruit scouting grades, ranges and colors",
@@ -101,19 +101,35 @@
     },
     {
       "surface": "Pregame and in-game menus",
-      "implemented": false,
+      "implemented": true,
       "liveVerified": false,
-      "evidence": "Playcall-substitution OVR-only response implemented and fixture-tested; no live in-game entry"
+      "evidence": "p47 includes separate exact-fingerprinted node_ig coach-camera renderer bank plus existing PlaycallSubstitution OVR response. All101 boundaries and model/hidden/fonts/coordinates/jersey/stat preservation fixtures pass.",
+      "status": "Partial implementation",
+      "remaining": [
+        "Live in-game menus and additional surfaces; no actual game played or Dynasty advanced",
+        "Renderer attachment and layout/color behavior"
+      ]
     },
     {
       "surface": "Secondary tooltips, boosts and popups",
-      "implemented": "Partial",
+      "implemented": true,
       "liveVerified": false,
       "evidence": "Ability requirements/current ratings fixed and live-verified via typed native preview. p46 includes same parser only in Description/UpgradeDescription; costs, ranks and eligibility untouched. TextFieldGeneric uses plain text, so requirement paragraphs keep their native text color. Other tooltips pending.",
       "remaining": [
         "Ability tooltip row-collector path",
         "Additional player popup displays",
         "Temporary boost audit; no generic number replacement"
+      ],
+      "status": "Partial implementation; additional tooltip paths pending"
+    },
+    {
+      "surface": "Award and Heisman player sidebars",
+      "implemented": true,
+      "liveVerified": false,
+      "evidence": "p47 separate typed3-argument native bindings and exact32-byte fingerprint gates. AnnualAwards requires explicit isCoach=false. Tests preserve coach/unknown records and exactly-once native return/key/output.",
+      "remaining": [
+        "p47 clean-start activation",
+        "live awards/Heisman sidebar and colors"
       ]
     }
   ],
@@ -141,6 +157,85 @@
       "rowNativeIncludingCollectorMeanUs": 1.27406,
       "columnSetupMeanUs": 128.12727,
       "caveat": "Sampling includes only initial activity, stops at8192; row native timer includes converting collector. Does not certify whole-frame, later supplemental callbacks or late-season performance."
+    },
+    "p46Samples": {
+      "source": "Clean PID30084 QB/C depth-chart navigation; bounded first8192 callbacks",
+      "scriptAdapters": {
+        "bucketCounts": [
+          8135,
+          56,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 9.2,
+        "meanUs": 0.11611328125,
+        "samples": 8192,
+        "totalUs": 951.2
+      },
+      "rows": {
+        "bucketCounts": [
+          1451,
+          1345,
+          29,
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 36.1,
+        "meanUs": 1.3467326033203815,
+        "samples": 2831,
+        "totalUs": 3812.6
+      },
+      "columns": {
+        "bucketCounts": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "bucketsLtUs": [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+        ],
+        "maximumUs": 488.9,
+        "meanUs": 293.85,
+        "samples": 2,
+        "totalUs": 587.7
+      },
+      "caveat": "C++ adapter timing only; does not measure appended UI bytecode execution, whole-frame time or late-season behavior."
     }
   },
   "review": {
@@ -166,12 +261,15 @@
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
     "developmentDll": "Build/DynastyEnhancerRecruitFog-p46.dll",
-    "cleanRestartRequired": "Pending main-menu confirmation for p46 clean-start test; installed baseline untouched.",
-    "activeRuntime": "p43 plus retained slider repaint supplement p4 in PID19292. Ability preview stopped0; column probe auto-expires. p46 is not active yet.",
+    "cleanRestartRequired": "Clean p46 activation completed at main menu; future changes retaining copied UI definitions require another clean restart.",
+    "activeRuntime": "p46 active alone in clean PID30084; installed baseline untouched. No temporary UI probes or supplements.",
     "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p46-MMC.zip",
     "releaseReady": false,
     "previewSha256": "cb8d9f8a088911841ba2b23e787ae4885a04c92329d3f8b0232fb539a5a9b368",
-    "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP."
+    "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p47.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p47-MMC.zip",
+    "nextCandidateSha256": "1f38cbe60678cd8e177a60b0221f3eeaae1033dedc46b2a2045418c14946d437"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -182,6 +280,10 @@
     "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet.",
     "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test.",
     "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text.",
-    "p46Build": "Passed MSVC /W4 /WX, C++ including101xfull-attribute ability grammar and captured-depth-schema tests, all UI VM suites, independent review and MMC package smoke checks. No installed changes."
+    "p46Build": "Passed MSVC /W4 /WX, C++ including101xfull-attribute ability grammar and captured-depth-schema tests, all UI VM suites, independent review and MMC package smoke checks. No installed changes.",
+    "p46Live": "Clean main-menu activation; Team hub Starting Offense and QB/C Depth Chart grade displays verified. Card reentry test in progress.",
+    "p47Build": "Passed MSVC /W4 /WX, native tests, all UI VM suites including coach-camera renderer. Not loaded; p46 remains active.",
+    "p47Review": "Independent reviewer passed typed award ABI/gates/preflight/CAS restoration/coach guard and seven-bank IG lifecycle; independently reran card and IG VM tests.",
+    "p47Package": "MMC registration/callback/tamper/path/editable-config smoke checks passed; baseline files/history unchanged."
   }
 }

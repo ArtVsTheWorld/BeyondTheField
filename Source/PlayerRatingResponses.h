@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerRatingGrid.h"
 namespace recruitingfog::playerfog {
-enum class Surface{TopAttributes,Comparison,PlaycallSubstitution,RosterNIL,ContextPlayer};
+enum class Surface{TopAttributes,Comparison,PlaycallSubstitution,RosterNIL,ContextPlayer,AnnualAwardsPlayer};
 template<class View,class Setter>bool ratingField(View& view,uintptr_t object,const char* key,Setter set){
     std::map<std::string,uintptr_t> fields;if(!view.members(object,fields))return false;
     const auto found=fields.find(key);if(found==fields.end())return false;
@@ -15,6 +15,13 @@ template<class View,class Setter>bool ratingField(View& view,uintptr_t object,co
 // numeric-looking values. Comparison StatLine is statistical data, while each
 // side's RecordList contains role-specific player Overall display records.
 template<class View,class Setter>unsigned convert(View& view,uintptr_t root,Surface surface,Setter set){
+    if(surface==Surface::AnnualAwardsPlayer){
+        // Annual awards also returns coach entries. Require the native explicit
+        // player discriminator; never interpret coach prestige as a rating.
+        std::map<std::string,uintptr_t> fields;bool coach=true;
+        if(!view.members(root,fields)||!fields.count("isCoach")||!view.boolean(fields.at("isCoach"),coach)||coach)return 0;
+        surface=Surface::RosterNIL;
+    }
     if(surface==Surface::PlaycallSubstitution)return ratingField(view,root,"OVR",set)?1u:0u;
     if(surface==Surface::ContextPlayer)return ratingField(view,root,"ovr",set)?1u:0u;
     if(surface==Surface::RosterNIL){

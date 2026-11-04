@@ -12,6 +12,8 @@ std::array<uintptr_t,5> setupArguments{};
 unsigned __fastcall fakeColorLength(void*){return 148;}
 unsigned abilityForwarded=0;bool abilityMentals=false;
 void* __fastcall fakeAbilities(void*,void** out,bool mentals){++abilityForwarded;abilityMentals=mentals;return out;}
+unsigned awardForwarded=0;void* awardKey=nullptr;
+void* __fastcall fakeAward(void*,void** out,void* key){++awardForwarded;awardKey=key;return out;}
 uintptr_t __fastcall fakeScriptSetup(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){setupArguments={reinterpret_cast<uintptr_t>(object),reinterpret_cast<uintptr_t>(saved),receiver,parent,super};return 0xabcdef;}
 #endif
 #if defined(RECRUIT_NOTES_UI)
@@ -206,6 +208,14 @@ int main(){try{
         view.arrays[32]={35,36,37};view.maps[35]={{"ratingValue",38},{"isFullyScouted",39}};view.maps[36]={{"ratingValue",40},{"isFullyScouted",41}};view.maps[37]={{"ratingValue",42},{"isFullyScouted",43}};
         view.numbers[38]=92;view.booleans[39]=true;view.numbers[40]=80;view.booleans[41]=false;view.numbers[42]=90.5;view.booleans[43]=true;edits.clear();
         require(convert(view,30,Surface::RosterNIL,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Roster NIL changed compensation/points or uncertain/invalid attributes");
+        view.maps[30]["isCoach"]=44;view.booleans[44]=false;edits.clear();
+        require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==2&&edits==std::vector<std::string>{"30:overall=B","35:ratingValue=A"},"Annual award player fields missed");
+        view.booleans[44]=true;edits.clear();
+        require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==0&&edits.empty(),"Annual coach prestige/attributes changed");
+        view.booleans.erase(44);view.numbers[44]=0;
+        require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==0&&edits.empty(),"Nonboolean award discriminator accepted");
+        view.maps[30].erase("isCoach");
+        require(convert(view,30,Surface::AnnualAwardsPlayer,capture)==0&&edits.empty(),"Missing player discriminator admitted annual award");
         view.maps[50]={{"ovr",51},{"Height",52},{"Weight",53},{"PlayerId",54},{"Stats",55}};view.numbers[51]=59;view.numbers[52]=73;view.numbers[53]=200;view.numbers[54]=88;edits.clear();
         require(convert(view,50,Surface::ContextPlayer,capture)==1&&edits==std::vector<std::string>{"50:ovr=F"},"Context player panel touched physical/identity/statistical fields");
         view.arrays[70]={71};view.maps[71]={{"Description",72},{"UpgradeDescription",73},{"Cost",74},{"CurrentRank",75},{"HasMetRequirements",76}};
@@ -214,6 +224,10 @@ int main(){try{
         require(convertAbilityDescriptions(view,70,capture)==1&&edits==std::vector<std::string>{"71:UpgradeDescription=Bronze Requires: B Pass Block Power (C Currently)"}&&view.numbers==beforeAbilityNumbers&&view.booleans==beforeAbilityFlags,"Ability UI conversion changed cost/rank/eligibility or another field");
         runtime::originalAbilities=fakeAbilities;void* abilityValue=reinterpret_cast<void*>(0x1234);
         runtime::disabled=true;require(runtime::playerAbilitiesHook(nullptr,&abilityValue,true)==&abilityValue&&abilityMentals&&abilityForwarded==1&&abilityValue==reinterpret_cast<void*>(0x1234),"Stopped ability getter changed bool argument/native return");runtime::disabled=false;
+        for(size_t i=0;i<runtime::awardBindingCount;++i)runtime::awardOriginal[i]=fakeAward;
+        runtime::disabled=true;
+        for(const auto hook:runtime::awardHooks)require(hook(nullptr,&abilityValue,reinterpret_cast<void*>(0x4567))==&abilityValue&&awardKey==reinterpret_cast<void*>(0x4567)&&abilityValue==reinterpret_cast<void*>(0x1234),"Award getter changed opaque key/output/native return");
+        require(awardForwarded==3,"Award getter did not invoke native exactly once");runtime::disabled=false;
         MapTestOutput mapOutput{mapTestTable};MapSink map{mapTable,&mapOutput,"overall"};mapInt(&map,"overall",66);mapInt(&map,"Overall",83);mapInt(&map,"jersey",92);mapFloat(&map,"height",74.5f);mapBool(&map,"redshirt",true);mapString(&map,"lastName","Branham");mapUndefined(&map,"injury");mapOpaque(&map,"nested",reinterpret_cast<void*>(123));
         require(mapOutput.values==nlohmann::json({{"overall","D"},{"Overall",83},{"jersey",92},{"height",74.5},{"redshirt",true},{"lastName","Branham"},{"injury",nullptr},{"nested",123}})&&map.changed==1,"Native map collector changed another property's type or value");
         mapInt(&map,"overall",-1);require(mapOutput.values["overall"]==-1&&map.changed==1,"Map collector converted hidden overall sentinel");

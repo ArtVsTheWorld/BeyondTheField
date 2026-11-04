@@ -32,6 +32,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'Player card label checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_hub_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Player hub preview checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_ingame_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'In-game player renderer checks failed'}
 }
 Push-Location $fogOut
 try{
