@@ -1,7 +1,7 @@
 {
   "stage": 4,
   "feature": "Native recruit Notes profile tab",
-  "status": "p17 live tab entry succeeded; layout/data-binding defects found. Corrected p18 built and locally verified; waiting for clean restart to load.",
+  "status": "p18 active after clean restart. User verified text/tab alignment; visual inspection confirmed selected-recruit notes and broad hints at 0%. Final Scouting restoration and reentry checks pending.",
   "branch": "research/recruiting-fog",
   "userPreference": "Broad hints immediately; more detail with scouting",
   "placement": [
@@ -51,22 +51,17 @@
     "Fresh receivers reuse verified definitions; reused source allocations with changed pools receive fresh headers",
     "Invocation hook forwards the fifth stack argument and return value correctly",
     "Offline native RecordId-to-response lookup, correct recruit selection and no stale notes when the ID is missing",
-    "Offline text placement stays relative to saved native anchors; original positions and divider visibility restore"
+    "Offline text placement stays relative to saved native anchors; original positions and divider visibility restore",
+    "Live p18 clean launch and corrected tab/text alignment confirmed by user",
+    "Live 0%-scouted HB displays selected-recruit archetype/background notes without numerical ratings"
   ],
   "liveState": {
-    "active": "p17 Notes prototype",
-    "tabEntry": "User verified Notes can be selected; screenshot confirmed tab appears right of Scouting and Scout action is absent",
-    "defectsObserved": [
-      "Text positioned at stage top-left",
-      "Scouting percentage overlaps Notes",
-      "Fallback notes instead of selected recruit body"
-    ],
-    "correction": "p18 built; source coordinates, native RecordId lookup and tab width reservation corrected",
+    "active": "p18 Notes prototype",
+    "tabEntry": "User confirmed corrected Notes text and tab spacing",
+    "visualInspection": "Dylan Reid, HB, 0% scouting: his East/West Playmaker profile and broad film notes appear inside the native panel. No numeric ratings or fallback gathering text. Native Scouting percentage and Notes labels no longer overlap.",
     "pending": [
-      "Clean restart and load p18 before Dynasty entry",
-      "Visual check of selected recruit body, text anchors and tab spacing",
-      "Native Scouting restoration and Playing Time regression check",
-      "Leave and reopen Recruiting to check script asset recreation"
+      "Luke detailed notes and Scouting grade/range/progress restoration",
+      "Leave and reopen Recruiting; Notes and Back regression check"
     ]
   },
   "backups": "EPUPSZN manual save, EPUPSZN autosave and PROFILE-COLLEGE copied under ignored Backups with matching SHA-256 checksums",
@@ -81,7 +76,7 @@
   "build": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesUi",
   "probeBuild": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesProbe",
   "limits": [
-    "Not yet live verified",
+    "Final Scouting restoration and Recruiting reentry validation pending",
     "Not integrated into automatic MMC loading",
     "Prototype prose variety is limited while UI behavior is being proven"
   ]
