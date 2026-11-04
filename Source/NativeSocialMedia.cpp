@@ -98,7 +98,7 @@ const auto scopedScroll=social::scopedNewsScroll();
 auto dropdownPatches=social::dropdown::patches();
 uintptr_t newsModelBase=0,dropdownScreenBase=0;
 std::atomic<uintptr_t> observedNewsModel{0};
-std::atomic<bool> modelDiscoveryNeeded{false};
+std::atomic<bool> modelDiscoveryNeeded{false},layoutDiscoveryNeeded{false};
 bool dropdownModelOwned=false,dropdownScreenOwned=false;
 bool configureNewsDropdowns(bool enable);
 uintptr_t newsBodyStyle=0,newsViewport=0;
@@ -108,7 +108,7 @@ bool configureNewsPolish(bool enable);
 bool locateNewsLayout(){
     // Installed APT streams have 64-KiB aligned native allocations. Check the
     // header and entire function, never accept a partial bytecode signature.
-    uintptr_t match=0,templateMatch=0,frameworkMatch=0;unsigned matches=0,templateMatches=0,frameworkMatches=0,modelMatches=0,viewportMatches=0;const auto started=GetTickCount64();
+    uintptr_t match=0,templateMatch=0,frameworkMatch=0,modelMatch=0,viewportMatch=0;unsigned matches=0,templateMatches=0,frameworkMatches=0,modelMatches=0,viewportMatches=0;const auto started=GetTickCount64();
     std::vector<unsigned char> block(0x100000+14);
     MEMORY_BASIC_INFORMATION region{};
     for(uintptr_t p=0x10000;p<0x7fffffff0000ull;){
@@ -122,9 +122,9 @@ bool locateNewsLayout(){
                 if(GetTickCount64()-started>10000)return false;
                 char header[14]{};if(!read(a,header,sizeof(header))||(memcmp(header,"Apt Data:1:7:8",14)&&memcmp(header,"Apt Data:1:8:8",14)))continue;
                 std::array<unsigned char,76> modelBytes{};
-                if(read(a+0x24a58,modelBytes.data(),modelBytes.size())&&std::equal(modelBytes.begin(),modelBytes.end(),dropdownPatches[6].original.begin())&&read(a+0x24ae0,modelBytes.data(),modelBytes.size())&&std::equal(modelBytes.begin(),modelBytes.end(),dropdownPatches[7].original.begin())){newsModelBase=a;++modelMatches;}
+                if(read(a+0x24a58,modelBytes.data(),modelBytes.size())&&std::equal(modelBytes.begin(),modelBytes.end(),dropdownPatches[6].original.begin())&&read(a+0x24ae0,modelBytes.data(),modelBytes.size())&&std::equal(modelBytes.begin(),modelBytes.end(),dropdownPatches[7].original.begin())){modelMatch=a;++modelMatches;}
                 std::array<unsigned char,432> viewportBytes{};
-                if(read(a+0x29398,viewportBytes.data(),viewportBytes.size())&&std::equal(viewportBytes.begin(),viewportBytes.end(),social::polish::viewportOriginal.begin())){newsViewport=a+0x29398;++viewportMatches;}
+                if(read(a+0x29398,viewportBytes.data(),viewportBytes.size())&&std::equal(viewportBytes.begin(),viewportBytes.end(),social::polish::viewportOriginal.begin())){viewportMatch=a+0x29398;++viewportMatches;}
                 std::array<unsigned char,107> bytes{};
                 if(read(a+0x2c658,bytes.data(),bytes.size())&&bytes==social::newsLayoutOriginal){match=a+0x2c658;++matches;}
                 std::array<unsigned char,61> grid{};std::array<unsigned char,7> input{};std::array<unsigned char,1432> scroll{};
@@ -154,17 +154,27 @@ bool locateNewsLayout(){
         p=end;
     }
     if(matches!=1||templateMatches>1||frameworkMatches!=1||viewportMatches!=1)return false;
-    newsLayout=match;newsTemplate=templateMatch;
+    const auto bodyAddress=match+(0x2ccd2-0x2c658);std::array<unsigned char,58> bodyStyle{};
+    if(!read(bodyAddress,bodyStyle.data(),bodyStyle.size())||!std::equal(bodyStyle.begin(),bodyStyle.end(),social::polish::bodyOriginal.begin()))return false;
+    std::lock_guard<std::mutex> commit(layoutMutex);
+    if(layoutOwned||flowOwned||scrollOwned||polishOwned||discoveryOwned||templateOwned||dropdownModelOwned||dropdownScreenOwned)return false;
+    newsLayout=match;newsTemplate=templateMatch;newsViewport=viewportMatch;newsModelBase=modelMatch;newsHandle=0;
     newsGrid=frameworkMatch+0xc3540;newsVerticalInput=frameworkMatch+0x62d58;
     newsScroll=frameworkMatch+0x630c8;
     std::array<unsigned char,56> handleBytes{};
     const auto handleAddress=match+(0x2ce11-0x2c658);
     if(read(handleAddress,handleBytes.data(),handleBytes.size())&&handleBytes==social::newsHandleOriginal)newsHandle=handleAddress;
-    newsBodyStyle=match+(0x2ccd2-0x2c658);std::array<unsigned char,58> bodyStyle{};
-    if(!read(newsBodyStyle,bodyStyle.data(),bodyStyle.size())||!std::equal(bodyStyle.begin(),bodyStyle.end(),social::polish::bodyOriginal.begin()))return false;
+    newsBodyStyle=bodyAddress;
     focusedTemplate=social::focusedNewsTemplate(reinterpret_cast<uintptr_t>(focusClassName),reinterpret_cast<uintptr_t>(scrollClassName));
     if(modelMatches!=1)newsModelBase=0;
     note({{"event","news_layout_located"},{"address",match},{"template",templateMatch},{"framework",frameworkMatch},{"model",newsModelBase},{"modelMatches",modelMatches},{"viewport",newsViewport}});return true;
+}
+bool newsLayoutUsable(){
+    std::lock_guard<std::mutex> lock(layoutMutex);
+    auto matches=[](uintptr_t at,const auto& bytes){std::vector<unsigned char> actual(bytes.size());return at&&read(at,actual.data(),actual.size())&&std::equal(actual.begin(),actual.end(),bytes.begin());};
+    const bool valid=matches(newsLayout,layoutOwned?social::newsLayoutAligned:social::newsLayoutOriginal)&&matches(newsGrid,flowOwned?social::newsGridVertical:social::newsGridOriginal)&&matches(newsVerticalInput,flowOwned?social::newsVerticalInputEnabled:social::newsVerticalInputOriginal)&&matches(newsScroll,scrollOwned?scopedScroll:social::newsScrollOriginal)&&matches(newsBodyStyle,polishOwned?social::polish::bodyWide:social::polish::bodyOriginal)&&matches(newsViewport,polishOwned?maskedViewport:social::polish::viewportOriginal);
+    if(!valid)layoutDiscoveryNeeded=true;
+    return valid;
 }
 bool configureNewsPolish(bool enable){
     std::lock_guard<std::mutex> lock(layoutMutex);
@@ -631,7 +641,7 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-const char* socialDestination(){return uiReady&&feedReady()&&ensureNewsModel()?"NEWS":"DO_NOTHING";}
+const char* socialDestination(){return uiReady&&feedReady()&&newsLayoutUsable()&&ensureNewsModel()?"NEWS":"DO_NOTHING";}
 void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
@@ -641,6 +651,7 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
     auto cancel=[&](const char* reason){note({{"event","news_navigation_cancelled"},{"reason",reason},{"destination","DO_NOTHING"}});navRequest(self,user,"DO_NOTHING",params);};
     // The native caller has already begun a navigation transaction. Silently
     // returning leaves it pending, so finish through its genuine inert action.
+    if(selected&&uiReady&&!newsLayoutUsable()){cancel("Native news assets are being refreshed");return;}
     if(selected&&(!uiReady||!adoptReadyFeed())){cancel("Weekly news is still preparing");return;}
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(selected){cancel("Panel initialization preflight only");return;}
@@ -750,7 +761,8 @@ DWORD WINAPI worker(void*){
         while(!disabled){
             collectRetiredFeeds();flush();
             if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);
-            if(!uiReady&&GetTickCount64()>=uiProbeAt&&!disabled){
+            if(uiReady&&!opened&&!layoutDiscoveryNeeded&&!newsLayoutUsable())note({{"event","social_layout_refresh_requested"}});
+            if((!uiReady||(layoutDiscoveryNeeded&&feedReady()))&&!opened&&!callbacks.load()&&GetTickCount64()>=uiProbeAt&&!disabled){
                 uiProbeAt=GetTickCount64()+3000;std::string reason;
                 if(!locateNewsLayout())reason="Waiting for the supported native Dynasty news layout";
 #ifdef SOCIAL_DUAL_DROPDOWN
@@ -758,8 +770,8 @@ DWORD WINAPI worker(void*){
 #endif
                 if(reason.empty()){
                     for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=reinterpret_cast<uintptr_t>(b.hook))throw std::runtime_error("Native UI slot changed while awaiting Dynasty readiness");}
-                    uiReady.store(true);note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
-                }else if(reason!=previousUiReason){previousUiReason=reason;note({{"event","startup_waiting"},{"reason",reason},{"backgroundCapture",true}});}
+                    layoutDiscoveryNeeded=false;uiReady.store(true);note({{"event","active"},{"pid",GetCurrentProcessId()},{"scope","Dynasty Enhancer active-Dynasty weekly and midweek feed"},{"posts",feedPostCount},{"listFeed",listFeed},{"selectablePosts",selectablePosts}});
+                }else{uiProbeAt=GetTickCount64()+(uiReady?10000:3000);if(reason!=previousUiReason){previousUiReason=reason;note({{"event","startup_waiting"},{"reason",reason},{"backgroundCapture",true}});}}
             }
             if(modelDiscoveryNeeded&&GetTickCount64()>=modelScanAt){modelDiscoveryNeeded=false;modelScanAt=GetTickCount64()+10000;discoverNewsModelInWorker();}
             Sleep(200);

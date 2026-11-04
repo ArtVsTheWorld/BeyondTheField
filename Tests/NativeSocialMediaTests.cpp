@@ -71,6 +71,17 @@ int main(int argc,char** argv){
             require(reader.sso(sso)=="Coach","SSO fixture decoding changed");small[9]=90;require(ssoWatch.unchanged(read),"Unused SSO capacity caused a false refresh");small[15]=9;require(!ssoWatch.unchanged(read),"SSO length change was missed");
         }
         {
+            std::vector<unsigned char> assets(0x43000),replacement;const auto a=reinterpret_cast<uintptr_t>(assets.data());
+            auto mount=[&](uintptr_t root){newsLayout=root+0x2c658;newsBodyStyle=root+0x2ccd2;newsGrid=root+0x40000;newsVerticalInput=root+0x40100;newsScroll=root+0x41000;newsViewport=root+0x42000;};mount(a);
+            auto put=[](uintptr_t target,const auto& bytes){memcpy(reinterpret_cast<void*>(target),bytes.data(),bytes.size());};
+            put(newsLayout,social::newsLayoutOriginal);put(newsBodyStyle,social::polish::bodyOriginal);put(newsGrid,social::newsGridOriginal);put(newsVerticalInput,social::newsVerticalInputOriginal);put(newsScroll,social::newsScrollOriginal);put(newsViewport,social::polish::viewportOriginal);
+            require(newsLayoutUsable(),"Complete original layout cache was rejected");replacement=assets;
+            for(const auto at:{newsLayout,newsBodyStyle,newsGrid,newsVerticalInput,newsScroll,newsViewport}){layoutDiscoveryNeeded=false;*reinterpret_cast<unsigned char*>(at)^=1;require(!newsLayoutUsable()&&layoutDiscoveryNeeded,"A replaced layout component did not request background rediscovery");*reinterpret_cast<unsigned char*>(at)^=1;}
+            assets[0x2c658]^=1;require(!newsLayoutUsable(),"Released layout cache was still ready");mount(reinterpret_cast<uintptr_t>(replacement.data()));require(newsLayoutUsable(),"Replacement asset bundle did not restore readiness");
+            require(replacement[0x2c658]==social::newsLayoutOriginal[0],"Readiness checks modified native bytecode");newsLayout=1;require(!newsLayoutUsable(),"Unreadable cached layout was accepted");
+            newsLayout=newsBodyStyle=newsGrid=newsVerticalInput=newsScroll=newsViewport=0;layoutDiscoveryNeeded=false;
+        }
+        {
             std::vector<unsigned char> screenData(0x3000),modelData(0x30000);
             const auto screenAt=reinterpret_cast<uintptr_t>(screenData.data()),modelAt=reinterpret_cast<uintptr_t>(modelData.data());
             memcpy(screenData.data(),"Apt Data:1:7:8",14);memcpy(modelData.data(),"Apt Data:1:7:8",14);

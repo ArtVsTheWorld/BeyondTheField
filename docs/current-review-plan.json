@@ -96,5 +96,11 @@
       "Read-only unsaved offer and game completion reach the live edition",
       "No raised search bounds or game-data writes"
     ]
+  },
+  "postgameUiRecovery": {
+    "build": "v103",
+    "status": "v103 installed and package verified after preserving saves/history; clean-launch visual and subsequent postgame reacquisition tests pending.",
+    "dataCapture": "Week 2 and recruiting change already published by v102; this is a separate UI lifetime/navigation gate failure",
+    "verification": "Full bundle readiness, stale cache, replacement cache, unreadable memory and no bytecode writes during readiness checks"
   }
 }

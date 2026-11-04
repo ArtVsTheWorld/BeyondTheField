@@ -1,0 +1,21 @@
+{
+  "build": "v103",
+  "status": "Built, installed and MMC payload verified; clean-launch visual and later postgame tests pending",
+  "rootCause": "Week 2 and the scholarship change published successfully, but cached News layout/handle/flow addresses were released after gameplay. Navigation info still promised NEWS before the layout gate rejected entry.",
+  "fix": [
+    "Validate layout, body, grid, input, scrolling and viewport before promising native News navigation",
+    "Request offscreen background rediscovery when the cache changes",
+    "Do not scan on the UI thread or repeatedly scan during gameplay",
+    "Commit a replacement cache only after the full layout and style bundle validates",
+    "Preserve existing bytecode ownership checks and reject foreign modifications"
+  ],
+  "nativeTests": "Passed, including stale, replaced and unreadable bundle checks; readiness inspection does not write bytecode",
+  "nativeSha256": "d7aa487a9d416f00ac3af23c530c4a7e760fa68fc518f7dbae6782ab3dec1b4f",
+  "dataReader": "v102 direct active-view recovery retained; live Week 2 data published with 1601 stories",
+  "backup": "Eight latest save/profile files checksum-verified; history, runtime data and current read-only snapshot preserved privately",
+  "remaining": [
+    "Install and clean launch",
+    "Feed entry and controls",
+    "Another gameplay return to exercise automatic UI asset reacquisition"
+  ]
+}
