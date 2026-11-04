@@ -118,11 +118,10 @@
     {
       "surface": "Recruiting My School player-risk Overall",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p48 exact596-byte MySchoolRiskListItem.Draw gate, source OVR numeric and RiskValue unchanged, four-register label/color suffix. All101-boundary/unknown/header/reentry tests and independent review pass.",
-      "remaining": [
-        "Live My School risk list attachment, letters and colors"
-      ]
+      "remaining": [],
+      "liveStatus": "p61 live EPUWK4 MySchool CoachPrestige: JBranham/D, DRooks/D and GPaschal/D coloredorange in PlayersAtRisk list. Native riskbars, positionsDT/WR/WILL, coach/schoolgrades, team64/64/63, rank95, NIL200, hours127/572, targets34/35 and scholarships34/35 remain unchanged. No recruiting actions."
     },
     {
       "surface": "Redshirts table and player panel",
@@ -636,7 +635,8 @@
     "p61Package": "Combined MMC registration/launch/tamper/path/config checks pass; installed baseline unchanged. Notloaded; p60active.",
     "p61Activation": "Observed main menu in clean PID23036; installed baseline stop0, p61 load, active event and empty14-bank retention confirmed before Dynasty entry.",
     "p61RouteRequirementsLive": "Clean PID23036: user and actual screenshot confirm all5Kyle Physicals requirement/current lines graded, including MediumRoute/DeepRoute. Native costs/NotMet/skillpoints2/jersey7/injuryOut2Weeks unchanged.",
-    "completionListAudit": "Independent reviewer removed completed hub/injuredHealth/route/preview/build/reentry items and duplicated Formation check. Actual remaining visible surfaces are finite; absent W&T penalties stay conditional. No speculative adapters or EditPlayer expansion."
+    "completionListAudit": "Independent reviewer removed completed hub/injuredHealth/route/preview/build/reentry items and duplicated Formation check. Actual remaining visible surfaces are finite; absent W&T penalties stay conditional. No speculative adapters or EditPlayer expansion.",
+    "p61MySchoolRiskLive": "Actual screenshot and bank7 method0 attachment confirmed. Three playerOverall labels D/orange; native riskbars/positions/schoolgrades/teamratings and recruitingresources preserved."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
@@ -650,7 +650,6 @@
       "Mentals and one native ability tooltip if an actual requirement is present",
       "Formation defensive/reentry, Redshirts position/far-right, normal PositionChanges checks",
       "Annual player/coach and weekly player award views",
-      "Recruiting My School risk-list player OVR",
       "Weekly Practice Plans live labels through available stock entry",
       "Pregame/in-game player ratings and substitution views without gameplay or lineup changes"
     ],
