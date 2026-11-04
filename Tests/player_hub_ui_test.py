@@ -61,16 +61,18 @@ def comparison_result(name,value):
     return result
 for n in range(101):
     for name in ('Awareness','SPEED','acceleration','Catching'):
-        data=comparison_result(name,n)
-        assert data['display']==grade(n) and data['ExtraInfo']['fontColor']==GRADE_COLORS[grade(n)]
+        for value in (n,str(n)):
+            data=comparison_result(name,value)
+            assert data['display']==grade(n) and data['ExtraInfo']['fontColor']==GRADE_COLORS[grade(n)]
 for name in ATTRIBUTE_NAMES:
     for form in (name,name.upper(),name.lower()):
         assert comparison_result(form,85)['display']=='B'
 for name in ('Passing Yards','Rushing Yards','Completions','Passing TD','INT','REC','TKL','Yards','Rank','NIL','Unknown'):
     for n in range(101):
-        data=comparison_result(name,n)
-        assert data['display']==n and data['ExtraInfo']['fontColor']==0xFFFFFF
-for value in ('?', 'Hidden', '85', -1,101,None,UNDEFINED,float('nan')):
+        for value in (n,str(n)):
+            data=comparison_result(name,value)
+            assert data['display']==value and data['ExtraInfo']['fontColor']==0xFFFFFF
+for value in ('?', 'Hidden', '', ' 85', '85 ', '+85', '085', '85%', '85.0', '85 yards', '1,000', -1,101,None,UNDEFINED,float('nan')):
     data=comparison_result('Awareness',value)
     assert data['ExtraInfo']['fontColor']==0xFFFFFF
 print('Passed: player-only hub labels/comparison attributes, all101 grade boundaries/colors, source values unchanged, ordinary statistics/team ratings preserved and hidden previews untouched.')

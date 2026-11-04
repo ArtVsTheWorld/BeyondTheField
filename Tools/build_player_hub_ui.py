@@ -62,6 +62,16 @@ def comparison_stat_suffix(a):
         a.reg(4);a.string(name);a.raw(0x66);a.branch('comparisonAttribute')
     a.branch('comparisonReturn',0x99)
     a.label('comparisonAttribute');path(a,2,'display');a.store(3)
+    # This is a display field shared with formatted statistics. Admit only
+    # canonical whole-number strings after the full attribute-name gate; no
+    # coercion of blanks, percentages, decimals, signs, units or sentinels.
+    a.reg(3);a.raw(0x44);a.string('string');a.raw(0x66);a.branch('comparisonNumeric',0xB8)
+    for value in range(101):
+        a.reg(3);a.string(str(value));a.raw(0x66);a.branch('comparisonString'+str(value))
+    a.branch('comparisonReturn',0x99)
+    for value in range(101):
+        a.label('comparisonString'+str(value));a.number(value);a.store(3);a.branch('comparisonNumeric',0x99)
+    a.label('comparisonNumeric')
     numeric_grade(a,3,4,'comparisonReturn','comparisonGrade')
     palette(a,4,3,'comparisonReturn','comparisonPalette')
     a.reg(2);a.string('display');a.reg(4);a.raw(0x4F)
