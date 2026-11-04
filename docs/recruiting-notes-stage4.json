@@ -1,7 +1,7 @@
 {
   "stage": 4,
   "feature": "Native recruit Notes profile tab",
-  "status": "p18 active after clean restart. User verified text/tab alignment; visual inspection confirmed selected-recruit notes and broad hints at 0%. Final Scouting restoration and reentry checks pending.",
+  "status": "Native Notes prototype verified live in p18. Text placement, tab spacing, selected-recruit notes, Scouting restoration, Back and Recruiting reentry all passed.",
   "branch": "research/recruiting-fog",
   "userPreference": "Broad hints immediately; more detail with scouting",
   "placement": [
@@ -53,16 +53,17 @@
     "Offline native RecordId-to-response lookup, correct recruit selection and no stale notes when the ID is missing",
     "Offline text placement stays relative to saved native anchors; original positions and divider visibility restore",
     "Live p18 clean launch and corrected tab/text alignment confirmed by user",
-    "Live 0%-scouted HB displays selected-recruit archetype/background notes without numerical ratings"
+    "Live 0%-scouted HB displays selected-recruit archetype/background notes without numerical ratings",
+    "User verified Luke’s detailed arm-strength notes",
+    "User verified returning to Scouting restores letters/ranges and 40% progress",
+    "User verified leaving and reopening Recruiting preserves Notes and Back behavior"
   ],
   "liveState": {
-    "active": "p18 Notes prototype",
+    "active": "p18 verified Notes prototype",
     "tabEntry": "User confirmed corrected Notes text and tab spacing",
     "visualInspection": "Dylan Reid, HB, 0% scouting: his East/West Playmaker profile and broad film notes appear inside the native panel. No numeric ratings or fallback gathering text. Native Scouting percentage and Notes labels no longer overlap.",
-    "pending": [
-      "Luke detailed notes and Scouting grade/range/progress restoration",
-      "Leave and reopen Recruiting; Notes and Back regression check"
-    ]
+    "pending": [],
+    "regressionChecks": "User confirmed Luke’s arm-strength notes, native Scouting letters/ranges with 40% progress, Back, and leaving/reopening Recruiting all work."
   },
   "backups": "EPUPSZN manual save, EPUPSZN autosave and PROFILE-COLLEGE copied under ignored Backups with matching SHA-256 checksums",
   "source": [
@@ -76,8 +77,16 @@
   "build": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesUi",
   "probeBuild": "Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN -RecruitNotesProbe",
   "limits": [
-    "Final Scouting restoration and Recruiting reentry validation pending",
-    "Not integrated into automatic MMC loading",
-    "Prototype prose variety is limited while UI behavior is being proven"
-  ]
+    "Not integrated into automatic MMC loading; the separate DLL is loaded per session",
+    "Prototype prose variety remains limited; richer narrative notes are follow-up work",
+    "Up to 16 verified profile-asset generations per process; a clean restart is required to unload Notes"
+  ],
+  "verifiedDate": "2026-11-04",
+  "artifact": {
+    "path": "Build/DynastyEnhancerRecruitFog-p18.dll",
+    "bytes": 526336,
+    "sha256": "7aa26077029e299b0c2ee7197114d590e3774334b41424900229b1267b808718",
+    "implementationCommit": "52d36ef",
+    "automaticMmcLoading": false
+  }
 }
