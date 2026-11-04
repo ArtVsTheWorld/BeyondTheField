@@ -1,0 +1,95 @@
+#pragma once
+#include "RecruitingGradePolicy.h"
+#include <array>
+#include <cstring>
+#include <map>
+#include <string_view>
+#include <vector>
+
+namespace recruitingfog::playerfog {
+// Semantic column IDs, not screen positions. Native position/team filters may
+// reorder or request only a subset of these columns.
+inline bool rosterRatingColumn(int id){return id==5||(id>=8&&id<=61);}
+inline bool ratingText(std::string_view text,int& value){
+    unsigned result=0;size_t i=0;
+    while(i<text.size()&&text[i]>='0'&&text[i]<='9'){
+        result=result*10+unsigned(text[i++]-'0');if(result>100)return false;
+    }
+    if(!i)return false;
+    const auto suffix=text.substr(i);
+    if(!suffix.empty()&&suffix!=",TrendNone"&&suffix!=",TrendUp"&&suffix!=",TrendDown")return false;
+    value=int(result);return true;
+}
+inline std::string ratingLabel(const char* value){
+    int rating=0;if(value&&ratingText(value,rating))return display(Visibility::Revealed,rating);
+    // Hidden/unsupported cells stay hidden; never interpret a sentinel as zero.
+    return value?value:"";
+}
+inline int gradeColor(char value){
+    switch(value){case 'A':return 0x1FE840;case 'B':return 0xA8D943;case 'C':return 0xFFD34D;case 'D':return 0xF68C2E;default:return 0xF04444;}
+}
+inline bool rosterSchema(const std::array<std::string,90>& names,unsigned count){
+    return count==62&&names[1]=="RS"&&names[2]=="Name"&&names[3]=="Year"&&names[4]=="POS"&&names[5]=="OVR"&&names[6]=="NIL"&&names[7]=="DEV"&&names[8]=="SPD"&&names[9]=="ACC"&&names[61]=="LSP";
+}
+struct GridSink{
+    void** vtable;void* target;
+    std::array<int,90> columns{};unsigned count=0,changed=0;
+};
+template<class T>inline void put(void* target,unsigned row,const char* key,T value,unsigned slot){
+    reinterpret_cast<void(__fastcall*)(void*,unsigned,const char*,T)>((*reinterpret_cast<void***>(target))[slot])(target,row,key,value);
+}
+inline void reserve(void* target,unsigned count){reinterpret_cast<void(__fastcall*)(void*,unsigned)>((*reinterpret_cast<void***>(target))[1])(target,count);}
+inline void __fastcall gridReserve(GridSink* s,unsigned n){reserve(s->target,n);}
+inline void __fastcall gridBool(GridSink* s,unsigned r,const char* k,bool v){put(s->target,r,k,v,3);}
+inline void __fastcall gridInt(GridSink* s,unsigned r,const char* k,int v){put(s->target,r,k,v,4);}
+inline void __fastcall gridFloat(GridSink* s,unsigned r,const char* k,float v){put(s->target,r,k,v,5);}
+inline void __fastcall gridString(GridSink* s,unsigned r,const char* k,const char* v){
+    if(r<s->count&&rosterRatingColumn(s->columns[r])&&k&&!strcmp(k,"display")){
+        const auto label=ratingLabel(v);put(s->target,r,k,label.c_str(),6);
+        if(v&&label!=v){++s->changed;put(s->target,r,"DEPlayerRating",true,3);put(s->target,r,"DEGradeColor",gradeColor(label[0]),4);}
+    }else put(s->target,r,k,v,6);
+}
+inline void* gridTable[]={nullptr,reinterpret_cast<void*>(gridReserve),nullptr,reinterpret_cast<void*>(gridBool),reinterpret_cast<void*>(gridInt),reinterpret_cast<void*>(gridFloat),reinterpret_cast<void*>(gridString)};
+inline bool gridColumns(GridSink& sink,void* columns){
+    if(!columns)return false;auto** table=*reinterpret_cast<void***>(columns);
+    const int count=reinterpret_cast<int(__fastcall*)(void*)>(table[1])(columns);
+    if(count<0||count>90)return false;sink.count=unsigned(count);
+    for(int i=0;i<count;++i)sink.columns[i]=reinterpret_cast<int(__fastcall*)(void*,int)>(table[2])(columns,i);
+    return true;
+}
+// Capture column metadata once, then replay after recognizing its full schema.
+// Never call the native getter twice, reenter the provider or sort its data.
+struct ColumnField{
+    unsigned row=0,slot=0;std::string key,text;int integer=0;float real=0;bool flag=false,nullText=false;
+};
+struct ColumnSink{
+    void** vtable;unsigned count=0;std::array<std::string,90> names{};std::vector<ColumnField> fields;
+};
+inline void __fastcall columnReserve(ColumnSink* s,unsigned n){s->count=n;ColumnField f;f.slot=1;f.row=n;s->fields.push_back(std::move(f));}
+inline void __fastcall columnBool(ColumnSink* s,unsigned r,const char* k,bool v){ColumnField f;f.row=r;f.slot=3;f.key=k?k:"";f.flag=v;s->fields.push_back(std::move(f));}
+inline void __fastcall columnInt(ColumnSink* s,unsigned r,const char* k,int v){ColumnField f;f.row=r;f.slot=4;f.key=k?k:"";f.integer=v;s->fields.push_back(std::move(f));}
+inline void __fastcall columnFloat(ColumnSink* s,unsigned r,const char* k,float v){ColumnField f;f.row=r;f.slot=5;f.key=k?k:"";f.real=v;s->fields.push_back(std::move(f));}
+inline void __fastcall columnString(ColumnSink* s,unsigned r,const char* k,const char* v){
+    ColumnField f;f.row=r;f.slot=6;f.key=k?k:"";f.text=v?v:"";f.nullText=!v;
+    if(r<s->names.size()&&f.key=="display")s->names[r]=f.text;s->fields.push_back(std::move(f));
+}
+inline void* columnTable[]={nullptr,reinterpret_cast<void*>(columnReserve),nullptr,reinterpret_cast<void*>(columnBool),reinterpret_cast<void*>(columnInt),reinterpret_cast<void*>(columnFloat),reinterpret_cast<void*>(columnString)};
+inline void replayColumns(const ColumnSink& sink,void* target,bool roster){
+    for(const auto& f:sink.fields){const bool rating=roster&&rosterRatingColumn(int(f.row));
+        switch(f.slot){
+        case 1:reserve(target,f.row);break;
+        case 3:put(target,f.row,f.key.c_str(),rating&&f.key=="isTrend"?false:f.flag,3);break;
+        case 4:put(target,f.row,f.key.c_str(),rating&&f.key=="formatType"?0:f.integer,4);break;
+        case 5:put(target,f.row,f.key.c_str(),f.real,5);break;
+        case 6:put(target,f.row,f.key.c_str(),f.nullText?nullptr:f.text.c_str(),6);break;
+        }
+    }
+    if(roster)for(unsigned column=0;column<62;++column)if(rosterRatingColumn(int(column)))put(target,column,"DEPlayerRating",true,3);
+}
+template<class View,class Setter>bool selectedOverall(View& view,uintptr_t root,Setter setString){
+    std::map<std::string,uintptr_t> fields;double rating=0;
+    if(!view.members(root,fields)||!fields.count("overall")||!view.number(fields.at("overall"),rating))return false;
+    const auto label=display(Visibility::Revealed,rating);if(label=="?")return false;
+    setString(root,"overall",label.c_str());return true;
+}
+}

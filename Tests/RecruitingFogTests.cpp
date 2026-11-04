@@ -25,6 +25,14 @@ struct GridTestColumns{void** vtable;int column;};
 int __fastcall gridTestCount(void*){return 1;}
 int __fastcall gridTestColumn(GridTestColumns* columns,int){return columns->column;}
 void* gridTestColumnsTable[]={nullptr,reinterpret_cast<void*>(gridTestCount),reinterpret_cast<void*>(gridTestColumn)};
+struct MapTestOutput{void** vtable;nlohmann::json values=nlohmann::json::object();};
+void __fastcall mapTestBool(MapTestOutput* o,const char* k,bool v){o->values[k]=v;}
+void __fastcall mapTestInt(MapTestOutput* o,const char* k,int v){o->values[k]=v;}
+void __fastcall mapTestFloat(MapTestOutput* o,const char* k,float v){o->values[k]=v;}
+void __fastcall mapTestString(MapTestOutput* o,const char* k,const char* v){o->values[k]=v?v:"";}
+void __fastcall mapTestUndefined(MapTestOutput* o,const char* k){o->values[k]=nullptr;}
+void __fastcall mapTestOpaque(MapTestOutput* o,const char* k,void* v){o->values[k]=reinterpret_cast<uintptr_t>(v);}
+void* mapTestTable[]={nullptr,reinterpret_cast<void*>(mapTestBool),reinterpret_cast<void*>(mapTestInt),reinterpret_cast<void*>(mapTestFloat),reinterpret_cast<void*>(mapTestString),reinterpret_cast<void*>(mapTestUndefined),reinterpret_cast<void*>(mapTestOpaque)};
 std::array<uintptr_t,5> gridTestArgs{};
 void __fastcall fakeClassRows(void* s,void* out,int form,int row,void* cols){gridTestArgs={reinterpret_cast<uintptr_t>(s),reinterpret_cast<uintptr_t>(out),static_cast<uintptr_t>(form),static_cast<uintptr_t>(row),reinterpret_cast<uintptr_t>(cols)};}
 #endif
@@ -116,6 +124,37 @@ int main(){try{
     }
 #endif
 #if defined(RECRUIT_NOTES_UI)
+    {
+        using namespace playerfog;
+        for(int n=0;n<=100;++n){const auto expected=display(Visibility::Revealed,n);for(const auto* suffix:{"",",TrendUp",",TrendDown",",TrendNone"})require(ratingLabel((std::to_string(n)+suffix).c_str())==expected,"Roster rating/trend converted incorrectly");}
+        for(const auto* hidden:{"?","--","", "Hidden","-1","101","79.5","92 yards"})require(ratingLabel(hidden)==hidden,"Roster transformed hidden or non-rating text");
+        std::array<std::string,90> names{};names[1]="RS";names[2]="Name";names[3]="Year";names[4]="POS";names[5]="OVR";names[6]="NIL";names[7]="DEV";names[8]="SPD";names[9]="ACC";names[61]="LSP";
+        require(rosterSchema(names,62),"Roster schema rejected");names[5]="Yards";require(!rosterSchema(names,62),"Statistics schema accepted as ratings");
+        GridTestOutput output{gridTestTable};GridSink cells{gridTable,&output};cells.count=5;cells.columns={6,61,5,8,2};
+        gridString(&cells,0,"display","92");gridString(&cells,1,"display","59");gridString(&cells,2,"display","83,TrendUp");gridString(&cells,3,"tooltip","90");gridString(&cells,4,"display","91");
+        require(output.values[0]["value"]=="92"&&output.values[1]["value"]=="F"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="90"&&output.values[8]["value"]=="91","Subset/reordered roster columns changed NIL, names or tooltip unexpectedly");
+        require(output.values[2]["key"]=="DEPlayerRating"&&output.values[2]["value"]==true&&output.values[3]["value"]==0xF04444&&output.values[6]["value"]==0xA8D943,"Roster color markers lost grade palette");
+        ColumnSink columns{columnTable};columnReserve(&columns,62);columnString(&columns,5,"display","OVR");columnInt(&columns,5,"formatType",4);columnBool(&columns,5,"isTrend",true);columnInt(&columns,6,"formatType",4);columnFloat(&columns,5,"width",42.5f);
+        output.values=nlohmann::json::array();replayColumns(columns,&output,true);
+        require(output.values[2]["value"]==0&&output.values[3]["value"]==false&&output.values[4]["value"]==4&&output.values[5]["value"]==42.5,"Roster columns changed unrelated metadata");
+        output.values=nlohmann::json::array();replayColumns(columns,&output,false);require(output.values[2]["value"]==4&&output.values[3]["value"]==true,"Unknown schema changed formats");
+        FixtureView view;view.maps[1]={{"overall",2},{"teamOverall",3},{"jersey",4}};view.numbers={{2,82},{3,64},{4,1}};std::string changed;
+        require(selectedOverall(view,1,[&](uintptr_t root,const char* key,const char* value){require(root==1,"Selected player root changed");changed=std::string(key)+"="+value;})&&changed=="overall=B","Selected overall not scoped to player field");
+        view.numbers[2]=-1;require(!selectedOverall(view,1,[&](uintptr_t,const char*,const char*){throw std::runtime_error("Invalid selected rating exposed");}),"Invalid player overall changed");
+        view.arrays[10]={11};view.maps[11]={{"PlayerA",12},{"PlayerB",13},{"StatLine",14}};view.maps[12]={{"Overall",15},{"Jersey",16}};view.maps[13]={{"Overall",17},{"RecordList",18}};view.numbers[15]=90;view.numbers[17]=59;
+        std::vector<std::string> edits;auto capture=[&](uintptr_t root,const char* key,const char* value){edits.push_back(std::to_string(root)+":"+key+"="+value);};
+        require(convert(view,10,Surface::Comparison,capture)==2&&edits==std::vector<std::string>{"12:Overall=A","13:Overall=F"},"Comparison touched statistics or failed to hide player overalls");
+        edits.clear();view.maps[11]={{"Name",14},{"Value",15},{"GroupColor",16}};
+        require(convert(view,10,Surface::TopAttributes,capture)==1&&edits==std::vector<std::string>{"11:Value=A"},"Top attributes changed group color/name");
+        view.maps[20]={{"OVR",21},{"Jersey",22},{"PrimaryPositionDepth",23}};view.strings[21]="80";edits.clear();
+        require(convert(view,20,Surface::PlaycallSubstitution,capture)==1&&edits==std::vector<std::string>{"20:OVR=B"},"Playcall substitution touched jersey or depth");
+        view.strings[21]="?";require(convert(view,20,Surface::PlaycallSubstitution,capture)==0,"Hidden playcall rating became a grade");
+        MapTestOutput mapOutput{mapTestTable};MapSink map{mapTable,&mapOutput,"overall"};mapInt(&map,"overall",66);mapInt(&map,"Overall",83);mapInt(&map,"jersey",92);mapFloat(&map,"height",74.5f);mapBool(&map,"redshirt",true);mapString(&map,"lastName","Branham");mapUndefined(&map,"injury");mapOpaque(&map,"nested",reinterpret_cast<void*>(123));
+        require(mapOutput.values==nlohmann::json({{"overall","D"},{"Overall",83},{"jersey",92},{"height",74.5},{"redshirt",true},{"lastName","Branham"},{"injury",nullptr},{"nested",123}})&&map.changed==1,"Native map collector changed another property's type or value");
+        mapInt(&map,"overall",-1);require(mapOutput.values["overall"]==-1&&map.changed==1,"Map collector converted hidden overall sentinel");
+        map.key="Overall";map.labelKey="DEOverallGrade";mapInt(&map,"Overall",83);
+        require(mapOutput.values["Overall"]==83&&mapOutput.values["DEOverallGrade"]=="B","Shared progression Overall became a string");
+    }
     {
         GridTestOutput output{gridTestTable};ClassGridSink sink{classGridTable,&output,reinterpret_cast<void*>(123),0,7,gridTestLabel};
         classGridReserve(&sink,2);classGridBool(&sink,0,"isTrend",true);classGridInt(&sink,0,"value",42);classGridFloat(&sink,0,"trend",1.5f);

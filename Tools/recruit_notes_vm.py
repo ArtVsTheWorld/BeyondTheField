@@ -116,7 +116,10 @@ class Machine:
                     elif names == ['fb_shared_enum', 'BindingType', 'NEWS_CATEGORY']:
                         stack.append('news-category-enum')
                     else:
-                        raise AssertionError(f'Unexpected global chain: {names!r}')
+                        value = self.globals[names[0]]
+                        for name in names[1:]:
+                            value = self.member(value, name)
+                        stack.append(value)
                 elif op == 0x87:
                     registers[word()] = stack[-1]
                 elif op == 0x17:
@@ -125,9 +128,16 @@ class Machine:
                     stack.append(self.globals[stack.pop()])
                 elif op in (0x42, 0x43):
                     count = stack.pop()
-                    if count != 0:
-                        raise AssertionError('Only empty collection constructors are emitted')
-                    stack.append([] if op == 0x42 else {})
+                    if not isinstance(count, int) or count < 0 or count > 128:
+                        raise AssertionError('Collection exceeds verifier bounds')
+                    if op == 0x43 and count:
+                        raise AssertionError('Only empty object constructors are emitted')
+                    stack.append([stack.pop() for _ in range(count)] if op == 0x42 else {})
+                elif op == 0x40:
+                    name, count = stack.pop(), stack.pop()
+                    if name != 'Object' or count != 0:
+                        raise AssertionError('Unverified constructor')
+                    stack.append({})
                 elif op == 0x4E:
                     key, receiver = stack.pop(), stack.pop()
                     stack.append(self.member(receiver, key))
