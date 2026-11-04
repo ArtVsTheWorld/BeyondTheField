@@ -101,9 +101,17 @@ for rating in [0,59,60,79,80,90,100]:
     for name in ['FocusValueTextStyle','UnfocusValueTextStyle','UnfocusableValueTextStyle']:
         style=clip['mData']['ExtraInfo'][name]
         assert style['fontColor']==GRADE_COLORS[expected(rating)] and style['font']=='native-font' and style['size']==28
-    updates=[];receiver={'mSkillLevelDataProvider':{'UpdateProperty':lambda *args:updates.append(args)}}
-    Machine({},[]).run(program(level_suffix),{1:receiver,4:rating,5:3})
-    assert updates==[(0,'display',expected(rating))], 'Upgrade bonus/cost was altered'
+    updates=[];old_extra={'font':'native-title','hAlign':'right','fontColor':0xFFFFFF}
+    levels=[{'display':rating,'ExtraInfo':old_extra},{'display':3,'ExtraInfo':{'fontColor':0x00FF00}}]
+    bonus=copy.deepcopy(levels[1])
+    def level_update(index,key,value):updates.append((index,key));levels[index][key]=value
+    receiver={'mSkillLevelDataProvider':{'UpdateProperty':level_update,'GetItemData':lambda index:levels[index]}}
+    globals_={'cafe':{'utility':{'ObjectUtil':{'MergeInto':lambda target,source:target.update(source)}}}}
+    Machine(globals_,[]).run(program(level_suffix),{1:receiver,4:rating,5:3})
+    assert updates==[(0,'display'),(0,'ExtraInfo')] and levels[0]['display']==expected(rating)
+    assert levels[1]==bonus and old_extra['fontColor']==0xFFFFFF, 'Upgrade bonus or shared style was altered'
+    assert levels[0]['ExtraInfo']['fontColor']==GRADE_COLORS[expected(rating)]
+    assert levels[0]['ExtraInfo']['font']=='native-title' and levels[0]['ExtraInfo']['hAlign']=='right'
 
 for revealed in [True,False]:
     widgets=[text_widget() for _ in range(6)]

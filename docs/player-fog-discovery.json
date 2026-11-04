@@ -155,6 +155,8 @@
       "agility",
       "strength"
     ],
-    "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats."
+    "need": "Current collector target/ABI gate and live safe access; preserve x/y and ordinary stats.",
+    "preparedAdapter": "Tools/build_player_ingame_ui.py and PlayerInGameUiPrograms.h are isolated future-stage code; not wired into p43. All101 boundaries and hidden/stale-OVR preservation tests pass. Numeric-string fields and live attachment remain unverified.",
+    "nativeCollector": "Saved PE globalfa60810+448 resolves empty base implementation7ba1690; do not hook. Renderer-only method avoids assumptions about the actual gameplay collector."
   }
 }

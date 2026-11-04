@@ -154,12 +154,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p42.dll",
-    "cleanRestartRequired": "Restart pending before p42 test; p39 and supplemental cloned definitions retained in current session.",
-    "activeRuntime": "p39 with temporary card-attribute and selected-color supplements; selected color change is removed from source p42, not yet from live memory.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p42-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p43.dll",
+    "cleanRestartRequired": "Game is closed. Await user main-menu confirmation to activate p43; installed baseline unchanged.",
+    "activeRuntime": "No game process at last read. p43 not activated.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p43-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "fa67d2907766e4e8c15cbd34812b9c9b6b1368dd85b8a4033eb5fbdf8d2230f4",
+    "previewSha256": "7ce9f7d15756a71495cfe88d7f03424613a41fc36befd3cadd031d82daec161f",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP."
   },
   "latestVerification": {
@@ -169,6 +169,7 @@
     "review": "independent read-only reviewer passed register/branch/preservation audit; remaining active-template checks tracked",
     "viewProbe": "Build/roster-view-probe.jsonl records full and QB schemas; game assets and private observations are not distributed",
     "p39Build": "Succeeded with MSVC warnings as errors, C++ gates and all UI VM suites. Development profiling enabled, bounded to8192 callback samples per path; no live p39 measurements yet.",
-    "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test."
+    "p42Build": "Passed MSVC /W4 /WX, C++ invariants, all UI VM suites and combined MMC package checks; awaiting live clean-start test.",
+    "p43Build": "Passed MSVC warnings-as-errors, native tests, UI VM checks and MMC package smoke tests; adds native-style skill-group-heading color while preserving selected black text."
   }
 }

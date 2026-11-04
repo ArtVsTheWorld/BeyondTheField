@@ -156,6 +156,15 @@ def level_suffix(a):
     numeric_grade(a, 4, 6, 'levelDone', 'levelGrade')
     a.reg(6); a.string('display'); a.number(0); a.number(3)
     path(a, 1, 'mSkillLevelDataProvider'); a.call('UpdateProperty')
+    palette(a,6,7,'levelDone','levelPalette')
+    a.number(0);a.number(1);path(a,1,'mSkillLevelDataProvider');a.string('GetItemData');a.raw(0x52);a.store(8);a.missing(8,'levelDone')
+    path(a,8,'ExtraInfo');a.store(9);a.missing(9,'levelDone')
+    a.empty_object(10)
+    a.reg(9);a.reg(10);a.number(2);a.global_object('cafe','utility','ObjectUtil');a.call('MergeInto')
+    a.reg(10);a.string('fontColor');a.reg(7);a.raw(0x4F)
+    a.set_field(10,'DEPlayerRating',True)
+    a.reg(10);a.string('ExtraInfo');a.number(0);a.number(3)
+    path(a,1,'mSkillLevelDataProvider');a.call('UpdateProperty')
     a.label('levelDone')
 
 
@@ -242,7 +251,7 @@ SPECS={
         (0x860,3,4,42,414,0x351678A392FC9086,4,template_suffix,411)]),
     'skillPrograms': ('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_cfm/corenode.ast', [
         (0x54C20,4,3,42,240,0x1A7E5A93BC79FFE4,9,group_suffix,None),
-        (0x54E20,2,6,41,100,0x3C700A570F7C0AA9,7,level_suffix,None),
+        (0x54E20,2,6,41,100,0x3C700A570F7C0AA9,11,level_suffix,None),
         (0x54EC0,1,8,41,164,0xC40A11F67BBBC449,10,subskills_suffix,None)])}
 
 
