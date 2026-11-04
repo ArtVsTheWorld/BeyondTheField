@@ -1,7 +1,7 @@
 {
   "build": "v101",
   "contentRevision": "content-review-v100",
-  "status": "Installed; awaiting cold launch and consumed-bit watch CPU comparison",
+  "status": "Built, installed and automatically cold-loaded; live feed entry and idle observation verified",
   "nodeTests": 371,
   "nativeBuildAndTests": true,
   "nativeSha256": "9c016aea5a8a55f4785baea1ea4a0ab67510bbf904c472f951ac4f2261f9bec3",
@@ -32,7 +32,8 @@
   "liveVerified": [
     "v98 entry, filters, categories, scrolling and Back faster by user report",
     "v100 Week 9 publication: 1482 posts, all scopes validated natively",
-    "v100 text, LT/RT, LB/RB, scrolling and Back confirmed by user"
+    "v100 text, LT/RT, LB/RB, scrolling and Back confirmed by user",
+    "v101 automatically loaded through MMC in fresh PID 30596; user confirmed feed entry"
   ],
   "offlineULMPreview": {
     "edition": "831346515/2029/PreSeason/0",
@@ -45,15 +46,26 @@
     "manupunaFcsCarryoverPresent": true
   },
   "remaining": [
-    "v101 clean-launch automatic loading and live CPU measurement",
     "Late-season hub/menu responsiveness",
     "Unsaved midweek offer detection on the optimized reader when recruiting is available",
-    "A season test of the new wording; no claim that all historical raw facts were reconstructable"
+    "A season test of the new wording; no claim that all historical raw facts were reconstructable",
+    "Switching Dynasties in a long session can still hit the existing bounded context-search limit; a clean launch recovers."
   ],
   "observedPerformance": {
     "v97IdleReaderReductionPercent": 99.053,
     "v100FreshSessionReaderCpuOneCorePercent": 38.593,
-    "note": "Different sessions; v100 exposed false triggers from unconsumed string capacity and unselected Coach bits. v101 fixes these; do not generalize earlier preseason idle result to every phase."
+    "note": "Different sessions; v100 exposed false triggers from unconsumed string capacity and unselected Coach bits. v101 fixes these; do not generalize earlier preseason idle result to every phase.",
+    "v101IdleReader": {
+      "thread": 20196,
+      "seconds": 30.015,
+      "cpuSeconds": 0.265625,
+      "percentOfOneCore": 0.8849741795768782
+    },
+    "v101StableProbeMs": [
+      46,
+      47
+    ],
+    "v101SameContentRefreshes": 0
   },
   "archivePolicy": "Source saves and frozen history remain unchanged; published wording is preserved. Native team feeds show 25 routine rows and retain required factual reports beyond that cap."
 }

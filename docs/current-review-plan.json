@@ -12,7 +12,7 @@
     {
       "id": 2,
       "name": "Background change detection",
-      "status": "Consumed-byte baseline measured; v101 adds exact string lengths and selected packed-bit masks after live v100 false-trigger diagnosis. New live CPU comparison pending.",
+      "status": "v101 live idle reader: 0.885% of one core; zero redundant refreshes. Late-season and unsaved recruiting validation remain.",
       "gates": [
         "Avoid repeated full decode when unchanged",
         "Retain identity/stage/consistency guards",
@@ -34,7 +34,7 @@
     {
       "id": 4,
       "name": "Dropdown discovery",
-      "status": "Execution-based dropdown discovery passes v98 and v100 live entry/controller checks; final cold launch pending.",
+      "status": "Execution-based dropdown discovery passes v98/v100 controls and v101 fresh-launch entry; 0 ms request preparation observed.",
       "gates": [
         "Remove process-wide UI-thread scans",
         "Validate cached ownership/generation",
@@ -65,7 +65,7 @@
     {
       "id": 7,
       "name": "Package, live verification and success report",
-      "status": "v101 built and installed with checksum-verified history; cold launch and live CPU measurement pending."
+      "status": "Complete: v101 built, installed, automatically loaded and live feed entry confirmed; source pushed. Subsequent full-season/midweek validation is tracked separately."
     }
   ],
   "contentRequirements": [
