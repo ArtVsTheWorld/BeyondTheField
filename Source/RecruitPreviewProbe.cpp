@@ -59,7 +59,7 @@ DWORD WINAPI worker(void*){
     const auto flush=[&](){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(queueMutex);batch.swap(pending);}if(!batch.empty()){std::ofstream out(file,std::ios::app);for(const auto& row:batch)out<<row.dump(-1,' ',false,Json::error_handler_t::replace)<<'\n';}};
     note({{"event","prospect_preview_probe_active"},{"pid",GetCurrentProcessId()}});const auto deadline=GetTickCount64()+300000;
     while(!disabled&&calls<8&&GetTickCount64()<deadline){flush();Sleep(200);}
-    if(!disabled)stop();flush();return 0;
+    const auto result=stop();note({{"event","prospect_preview_probe_stopped"},{"result",result},{"inflight",inflight.load()}});flush();return result;
 }
 }
 extern "C" __declspec(dllexport) DWORD WINAPI DynastyEnhancerStop(void*){return stop();}
