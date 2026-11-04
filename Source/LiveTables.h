@@ -41,6 +41,18 @@ inline bool supportedRecordLayout(bool array,uint32_t rows,uint32_t words,uint32
 struct SessionBinding {Address service=0,career=0,database=0;bool operator==(const SessionBinding& b)const{return service==b.service&&career==b.career&&database==b.database;}};
 struct SessionContextHint {Address career=0,database=0,context=0;};
 inline SessionContextHint& sessionContextHint(){static SessionContextHint hint;return hint;}
+// CareerManager owns the current database view through its live binding. A
+// game/reload can replace this view while the shared parent stays unchanged.
+// Follow that ownership link before considering cached pointers or scanning.
+template<class Read>Address ownedCareerContext(Address image,const SessionBinding& active,Read q){
+    const auto owner=q(active.career+0x230);
+    if(!owner||q(owner)!=image+0xb4dbb18)return 0;
+    const auto binding=q(active.career+0x240);
+    if(!binding||q(binding)!=owner)throw std::runtime_error("Active Dynasty binding ownership is changing");
+    const auto child=q(binding+8);
+    if(!child||q(child)!=image+0xbd0d378||q(child+0x1a8)!=active.database)throw std::runtime_error("Active Dynasty binding context is changing");
+    return child;
+}
 template<class Read>Address verifiedContextHint(Address image,const SessionBinding& active,const SessionContextHint& hint,Read q){
     if(!hint.context||hint.career!=active.career||hint.database!=active.database)return 0;
     try{if(q(hint.context)!=image+0xbd0d378||q(hint.context+0x1a8)!=active.database)return 0;}catch(...){return 0;}
@@ -101,7 +113,7 @@ inline Json decodedEnum(const std::string& schema,const std::string& field,uint3
     throw std::runtime_error("Unknown native enum: "+schema+"."+field+" value="+std::to_string(raw));
 }
 class Capture {
-    Memory memory;Address image=0,root=0,context=0,sessionContext=0;SessionBinding session;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;
+    Memory memory;Address image=0,root=0,context=0,sessionContext=0;bool ownerBound=false;SessionBinding session;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;
     std::vector<std::pair<Address,uint32_t>> pending;std::set<std::pair<Address,uint32_t>> scheduled;Json records=Json::object();size_t recordCount=0;
     Address parent(Address ctx){return memory.at<Address>(ctx+0x1a8);}
     void inventory(Address begin,Address end){if(end<begin||(end-begin)%8||end-begin>0x100000)throw std::runtime_error("Invalid active table catalog");auto bytes=memory.read(begin,end-begin);for(size_t i=0;i<bytes.size();i+=8){const auto p=value<Address>(bytes,i);try{if(p&&(memory.at<Address>(p)==image+0xbd0df38||memory.at<Address>(p)==image+0xbd0ebe0)&&memory.at<Address>(p+8))ids.emplace(memory.at<uint32_t>(p+0x2c),p);}catch(const std::exception& e){throw std::runtime_error("Table catalog "+std::to_string(begin)+" slot="+std::to_string(i/8)+" table="+std::to_string(p)+": "+e.what());}}}
@@ -166,7 +178,8 @@ class Capture {
             if(memory.at<Address>(context)!=image+0xbd0d2d8)throw std::runtime_error("Unsupported career database context");
             static std::atomic<Address> cached{0},cachedOwner{0};
             auto belongs=[&](Address candidate){try{return candidate&&memory.at<Address>(candidate)==image+0xbd0d378&&parent(candidate)==sessionContext;}catch(...){return false;}};
-            context=cachedOwner.load()==root?cached.load():0;
+            context=ownedCareerContext(image,session,[&](Address a){return memory.at<Address>(a);});ownerBound=context!=0;
+            if(!context)context=cachedOwner.load()==root?cached.load():0;
             if(!belongs(context))context=verifiedContextHint(image,session,sessionContextHint(),[&](Address a){return memory.at<Address>(a);});
             if(context&&belongs(context)){cached.store(context);cachedOwner.store(root);}
             if(!belongs(context)){
@@ -229,6 +242,7 @@ public:
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
         for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size(),false)!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
         if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session)||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");
+        if(ownerBound&&ownedCareerContext(image,session,[&](Address a){return memory.at<Address>(a);})!=context)throw std::runtime_error("Active Dynasty view changed during capture");
         return Json{{"format",1},{"sourceKind","runtime"},{"status",before},{"context",context},{"records",std::move(records)}};
     }
 };

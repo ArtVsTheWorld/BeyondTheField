@@ -85,5 +85,16 @@
     "Verified signings, draft picks and major roster changes may exceed 25; cap routine coverage",
     "User approved fewer than 10 stories on genuinely quiet weeks; never force filler"
   ],
-  "reporting": "Report offline results separately from live verification after each stage"
+  "reporting": "Report offline results separately from live verification after each stage",
+  "postgameRecovery": {
+    "build": "v102",
+    "status": "v102 installed and live postgame feed published in the same session without save/reload; Luke Callen offer visible in feed data. User entry check pending.",
+    "rootCause": "Postgame replaces child context; scanning fallback repeatedly exhausts its bound and readiness blocks navigation",
+    "gates": [
+      "Current owned child takes precedence over stale valid cached child",
+      "Changing/foreign ownership fails closed",
+      "Read-only unsaved offer and game completion reach the live edition",
+      "No raised search bounds or game-data writes"
+    ]
+  }
 }

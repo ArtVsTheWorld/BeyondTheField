@@ -4,15 +4,17 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Content and menu performance review (v101)
+## Content and menu performance review (v102)
 
-The package is `Build/DynastyEnhancer-v101-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.
+The package is `Build/DynastyEnhancer-v102-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.
 
 The reviewed pack has 5,704 distinct prewritten wordings across 561 story families. Eligibility checks cover 601 minimal fact paths and 472 paths recorded across 31 ULM editions; every root path has at least eight usable alternatives. Optional analyst introductions can be omitted when the underlying analysis already fills the tweet.
 
+Postgame recovery resolves the active database view through CareerManager ownership, so a replaced view does not leave the button waiting on an exhausted heap search.
+
 Background observation compares the string contents and packed fields the feed consumes, then performs full validated captures when they change. Immutable edition blobs reduce archive rewriting, and native execution identifies dropdown resources without a menu-thread memory scan. Historical posts remain preserved. NIL, draft allocation, undrafted signings, team relevance, portal returns and wording redundancy were reviewed together. Quiet weeks can have fewer than ten posts; important factual reports remain visible beyond routine coverage caps.
 
-See [v101 checks and remaining live gates](docs/verified-v101.json) and [the review plan](docs/current-review-plan.json). Late-season responsiveness still needs observation. The following sections record earlier development builds.
+See [v102 checks and remaining live gates](docs/verified-v102.json) and [the review plan](docs/current-review-plan.json). Late-season responsiveness still needs observation. The following sections record earlier development builds.
 
 ## Hub readiness and offseason context (v96)
 

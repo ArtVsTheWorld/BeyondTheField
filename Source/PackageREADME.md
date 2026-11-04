@@ -1,12 +1,12 @@
-# Dynasty Enhancer - MMC prototype v101
+# Dynasty Enhancer - MMC prototype v102
 
 Native Social Media inside the offline Dynasty hub. Open **Team → Social Media**. The dedicated-tab experiment remains inactive after v84/v85 failed live checks. This development prototype includes weekly/midweek news, archives, discovery filters and prewritten conditional stories. Analytics grades and ratings fog are not yet merged; this is not version 1.0.
 
 ## Installation
 
 1. Close MMC and CFB. Copy the complete package `Plugins` folder into the folder containing MMC, merging folders.
-2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v101/` contains the native DLL, loader, generator and content.
-3. Node.js must be installed. Set its executable path in `Runtime-v101/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
+2. Keep both parts: `Plugins/DynastyEnhancer.dll` is the managed MMC adapter. `Plugins/DynastyEnhancer/Runtime-v102/` contains the native DLL, loader, generator and content.
+3. Node.js must be installed. Set its executable path in `Runtime-v102/dynasty-enhancer.json` if necessary. Keep the exporter path `Tools/export_runtime.mjs`.
 4. Start CFB through MMC and open an offline Dynasty. No fixed title-screen wait is required. The first feed may briefly show Preparing News while two stable native observations are collected; reopening adopts the latest edition.
 
 Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone native DLL does not belong directly in MMC's top-level Plugins folder. To disable this loader, close MMC/game and rename the top-level managed adapter to `DynastyEnhancer.dll.disabled`.
@@ -19,9 +19,12 @@ Do not enable multiple Dynasty Enhancer/Social Media loaders. The standalone nat
 - All Types shows up to 30 For You, 100 National, 60 conference and 20 team posts, with team draft announcements retained beyond the ordinary team limit. LB/RB category views show every qualifying published story in one vertical feed. LT selects scope only; RT still selects one publication edition. Replies remain attached and likes remain flavor.
 - Saving is not required to publish news. New stable Dynasty/week/midweek observations drive publication.
 
-## v101 changes
+## v102 changes
 
-Consumed-bit and exact-length string change detection, immutable edition archives and execution-based dropdown discovery reduce background and entry work. The pack has 5,704 distinct prewritten wordings across 561 story families. Team coverage targets 10–25 routine posts, permits fewer on quiet weeks and preserves major factual news beyond the cap. NIL uses $4,000 per point and suppresses changes ending at zero. Draft allocation tracks earlier positional picks and adds 25 eligible undrafted signings. CanDuel sportsbook lines and individual analyst projections are distinct. See docs/verified-v101.json in the source tree for checks and remaining live tests.
+Postgame recovery follows the active CareerManager-owned database binding before cached pointers or the broad fallback search. Replacement, foreign-parent and changing-owner checks fail closed. Midweek offers and completed games can publish after returning from gameplay without a save or restart.
+
+
+Consumed-bit and exact-length string change detection, immutable edition archives and execution-based dropdown discovery reduce background and entry work. The pack has 5,704 distinct prewritten wordings across 561 story families. Team coverage targets 10–25 routine posts, permits fewer on quiet weeks and preserves major factual news beyond the cap. NIL uses $4,000 per point and suppresses changes ending at zero. Draft allocation tracks earlier positional picks and adds 25 eligible undrafted signings. CanDuel sportsbook lines and individual analyst projections are distinct. See docs/verified-v102.json in the source tree for checks and remaining live tests.
 
 Earlier changes:
 
@@ -172,11 +175,11 @@ TeamBuilder fan/beat accounts use the primary logo because the alternate numeric
 
 ## History, diagnostics and limits
 
-Preserve `Runtime-v101/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
+Preserve `Runtime-v102/RuntimeHistory` when updating. The installer supports checksum-verified migration. The ZIP contains no user history, saves or extracted game images. Archived facts/likes are retained; requested presentation migrations can update account artwork/names. Recovered skipped weeks contain only supported historical facts and are labeled. Recruiting gaps use explicit catch-up observations rather than assigning an unknown event week.
 
 - MMC status: `Plugins/DynastyEnhancer-launcher.log`.
-- Runtime/UI status: `Runtime-v101/social-media.jsonl`.
-- Generator diagnostics: `Runtime-v101/runtime-generator.log`.
+- Runtime/UI status: `Runtime-v102/social-media.jsonl`.
+- Generator diagnostics: `Runtime-v102/runtime-generator.log`.
 
 `active` and `runtime_feed_published` identify successful readiness/publication; `runtime_feed_resumed` identifies an exact cache match after reload. Unsupported native code, conflicting UI ownership, invalid catalogues and changed protected payloads are rejected. User configuration/history are editable; changing protected runtime/content files requires rebuilding the package manifest.
 

@@ -109,6 +109,13 @@ int main(int argc,char** argv){
             for(const auto& fault:std::vector<std::pair<Address,Address>>{{svc+0x7b1,0},{svc+0x468,0},{career,0},{ui,0},{career+0x20,0},{db,0}}){const auto old=cells.at(fault.first);cells[fault.first]=fault.second;bool rejected=false;try{dynasty::live::activeSession(image,q);}catch(...){rejected=true;}require(rejected,"Inactive or foreign career ownership was accepted");cells[fault.first]=old;}
             require(dynasty::live::supportedRecordLayout(true,1,8100,9)&&!dynasty::live::supportedRecordLayout(false,1,8100,9)&&!dynasty::live::supportedRecordLayout(true,1,16385,9),"Award-array capacity exception escaped its array-only bounds");
             const Address child=0x150000;cells[child]=image+0xbd0d378;cells[child+0x1a8]=db;
+            const Address viewOwner=0x160000,binding=0x170000,nextChild=0x180000;
+            cells[career+0x230]=viewOwner;cells[career+0x240]=binding;cells[viewOwner]=image+0xb4dbb18;cells[binding]=viewOwner;cells[binding+8]=child;
+            require(dynasty::live::ownedCareerContext(image,bound,q)==child,"Career-owned live view was not resolved");
+            cells[nextChild]=image+0xbd0d378;cells[nextChild+0x1a8]=db;cells[binding+8]=nextChild;
+            require(dynasty::live::ownedCareerContext(image,bound,q)==nextChild,"Postgame replacement did not supersede the still-valid old view");
+            for(const auto& fault:std::vector<std::pair<Address,Address>>{{binding,viewOwner+8},{binding+8,0},{nextChild,0},{nextChild+0x1a8,db+8}}){const auto old=cells.at(fault.first);cells[fault.first]=fault.second;bool rejected=false;try{dynasty::live::ownedCareerContext(image,bound,q);}catch(...){rejected=true;}require(rejected,"Changing/foreign owned view was accepted or silently fell back");cells[fault.first]=old;}
+            cells[viewOwner]=0;require(!dynasty::live::ownedCareerContext(image,bound,q),"Unknown binding layout must use validated fallback");cells[viewOwner]=image+0xb4dbb18;cells[binding+8]=child;
             const dynasty::live::SessionContextHint hint{career,db,child};
             require(dynasty::live::verifiedContextHint(image,bound,hint,q)==child,"Verified same-session context hint was not accepted");
             auto foreign=hint;foreign.career+=8;require(!dynasty::live::verifiedContextHint(image,bound,foreign,q),"Hint from another CareerManager was accepted");

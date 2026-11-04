@@ -1,0 +1,37 @@
+{
+  "build": "v102",
+  "change": "Resolve the active database view through CareerManager ownership before cached context or broad fallback search",
+  "status": "Installed and hot-loaded; active postgame edition and offer published, awaiting user visual check",
+  "nodeTestsRetained": 371,
+  "nativeChecks": "Passed, including replaced view with still-valid old child, mismatched binding owner, null child, wrong vtable and foreign parent rejection",
+  "readOnlyPostgame": {
+    "pid": 30596,
+    "leagueId": -1649480587,
+    "teamId": 25,
+    "teamName": "East Point",
+    "phase": "RegularSeason",
+    "week": 0,
+    "records": 93638,
+    "newOffers": 1,
+    "recruit": "QB Luke Callen",
+    "manualSaveRequired": false,
+    "previewStories": 813,
+    "previewForYou": 30
+  },
+  "nativeSha256": "9b5f97edc97528d2e2d416b9d14d65bd2ae2f852f55e9b8cebc3267bb1ba588d",
+  "unchanged": "Story pack, controls, exact table consistency checks, parent/vtable ownership checks and fallback search bounds remain intact",
+  "pending": [
+    "User feed entry and controls",
+    "Later gameplay return confirms automatic replacement without intervention"
+  ],
+  "live": {
+    "context": 15272023408,
+    "firstCaptureMs": 750,
+    "generationCaptureMs": 687,
+    "generationMs": 1391,
+    "feedStories": 813,
+    "saveRequired": false,
+    "lukeOfferPost": "An offer from East Point. More motivation to keep going.",
+    "sameContentRefreshes": 0
+  }
+}
