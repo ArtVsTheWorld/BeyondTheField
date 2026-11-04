@@ -73,6 +73,7 @@ const std::array<notesui::Runtime*,14> cardUiBanks={&playerControlUi,&playerCard
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
+std::array<std::atomic<unsigned>,2> gridUiAttached{};
 resume::Cache resumeCache;
 using ClassRows=void(__fastcall*)(void*,void*,int,int,void*);
 ClassRows originalClassRows=nullptr;bool classRowsInstalled=false;
@@ -227,6 +228,24 @@ Json snapshot(uintptr_t at,unsigned depth=0,bool full=false,size_t rootLimit=2){
 }
 struct CallGuard{CallGuard(){++inflight;}~CallGuard(){--inflight;}};
 #if defined(RECRUIT_NOTES_UI)
+void attachPlayerGridUi(void* object,bool fixedFrame,const unsigned char* header=nullptr){
+    if(disabled||playerUiFailed)return;
+    const std::array<notesui::Runtime*,2> banks={&playerUi,&modernPlayerUi};
+    for(size_t bank=0;bank<banks.size();++bank){
+        // The length accessor has already allocated the caller's frame.
+        // Only definitions with identical argc/flags/registers may attach.
+        if(fixedFrame&&(!header||!banks[bank]->acceptsFrame(header,true)))continue;
+        try{CallGuard guard;if(disabled)return;
+            const auto index=banks[bank]->beforeInvoke(object,read,fixedFrame);
+            if(index>=0){
+                if(!playerUiLogged.exchange(true))note({{"event","player_fog_color_adapter_attached"},{"legacy",bank==0}});
+                const auto bit=1u<<index;
+                if(!(gridUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_grid_adapter_attached"},{"legacy",bank==0},{"method",index},{"path",fixedFrame?"fixed frame body accessor":"invocation setup"}});
+                return;
+            }
+        }catch(const std::exception& error){playerUiFailed=true;note({{"event","player_fog_color_adapter_failed"},{"reason",error.what()}});return;}
+    }
+}
 // Focus callbacks use a native path that can bypass invocation setup. Their
 // replacement keeps argc, flags, parameters and register count unchanged, so
 // redirecting before the body length is returned preserves the existing frame.
@@ -237,6 +256,9 @@ unsigned __fastcall colorLengthHook(void* object){
         const auto definition=*reinterpret_cast<const uintptr_t*>(static_cast<const unsigned char*>(object)+0x58);
         const auto* h=reinterpret_cast<const unsigned char*>(definition);
         const auto size=notesui::field<unsigned>(h,24),argc=notesui::field<unsigned>(h,8);const auto registers=notesui::field<unsigned short>(h,12),flags=notesui::field<unsigned short>(h,14);
+#if !defined(PLAYER_FOG_PREVIEW) || defined(PLAYER_FOG_COLORS)
+        attachPlayerGridUi(object,true,h);
+#endif
         for(size_t bank=0;bank<cardUiBanks.size();++bank)if(!cardUiFailed[bank]&&cardUiBanks[bank]->acceptsFrame(h,true))
         try{CallGuard guard;if(disabled)return originalColorLength(object);const auto index=cardUiBanks[bank]->beforeInvoke(object,read,true);
             if(index>=0){const auto bit=1u<<index;if(!(cardUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_card_adapter_attached"},{"bank",bank},{"method",index},{"path","fixed frame body accessor"}});}}
@@ -332,9 +354,7 @@ uintptr_t __fastcall notesSetupHook(void* object,void* saved,uintptr_t receiver,
     {
     playerperf::Sample performance(playerperf::scriptAdapters);
 #if !defined(PLAYER_FOG_PREVIEW) || defined(PLAYER_FOG_COLORS)
-    if(!disabled&&!playerUiFailed)try{const auto legacy=playerUi.beforeInvoke(object,read);const auto modern=legacy>=0?-1:modernPlayerUi.beforeInvoke(object,read);
-        if((legacy>=0||modern>=0)&&!playerUiLogged.exchange(true))note({{"event","player_fog_color_adapter_attached"},{"legacy",legacy>=0}});}
-    catch(const std::exception& error){playerUiFailed=true;note({{"event","player_fog_color_adapter_failed"},{"reason",error.what()}});}
+    attachPlayerGridUi(object,false);
     if(!disabled)for(size_t bank=0;bank<cardUiBanks.size();++bank)if(!cardUiFailed[bank])try{
         const auto index=cardUiBanks[bank]->beforeInvoke(object,read);
         if(index>=0){const auto bit=1u<<index;if(!(cardUiAttached[bank].fetch_or(bit)&bit))note({{"event","player_fog_card_adapter_attached"},{"bank",bank},{"method",index}});}

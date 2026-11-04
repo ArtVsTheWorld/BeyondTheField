@@ -554,9 +554,9 @@
     "releaseReady": false,
     "previewSha256": "84e02ddadf7d17238264499ad4b6bccdf29717bd960a9cafbc91a475c2551bd6",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p62.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p62-MMC.zip",
-    "nextCandidateSha256": "2380677c1caaa7bd3ef1259264f2cf0c3667d12016d37a0389eb652fb44ab0e6"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p63.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p63-MMC.zip",
+    "nextCandidateSha256": "965e95d300d0efadab7f3284bb569c73fe67a37e9c2882aab2eacc89e111bb7d"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -647,7 +647,12 @@
     "p62Package": "MMC registration/launch/tamper/path/config smoke checks pass. Installed baseline and histories unchanged. Six manual milestones still match verified backups. Clean-session live test pending.",
     "p62Probes": "Roster column probes p12/p13/p14 and UI trace p5 explicitly stopped0; final records inflight0. No probes remain active.",
     "p62Activation": "Observed main menu in clean PID17856; installed recruiting baseline stopped0, p62 loaded and active event confirmed, initial retained definitions/banks/bytes zero before Dynasty entry. No probes loaded.",
-    "p62PlaycallLive": "Clean PID17856 FreePractice Personnel Group user confirms looks good; actual screenshot shows Hollins B OVR, Callahan/Rooks/Whitaker D OVR with colors. Jerseys1/10/3/11, formation diagram jerseys, personnel counts, GoTo%, decimal/negative average yards and play counts remain numeric. IG bank6 KeyPlayer and PlayerRoot Draw attachments recorded. Pause chart check next; no play/snap/lineup change."
+    "p62PlaycallLive": "Clean PID17856 FreePractice Personnel Group user confirms looks good; actual screenshot shows Hollins B OVR, Callahan/Rooks/Whitaker D OVR with colors. Jerseys1/10/3/11, formation diagram jerseys, personnel counts, GoTo%, decimal/negative average yards and play counts remain numeric. IG bank6 KeyPlayer and PlayerRoot Draw attachments recorded. Pause chart check next; no play/snap/lineup change.",
+    "p62PauseDepthLive": "FAILED user and actual QB screenshot: sidebar D but full pause table still numeric after filter/far-right checks. Legacy bank retained4definitions, but per-method attachment was not logged. Do not mark pause chart complete.",
+    "p63Correction": "Reuse same exact-frame invocation attachment for legacy/modern grid banks in colorLengthHook as in existing card banks. GetColumnDefinitions/GetRowData/Cafe2color all preserve native frames. Added per-method/path logging; no bytecode/schema/nativehook/model changes fromp62. Dispatch omission is a source-confirmed gap; live cause/fix still pending.",
+    "p63Build": "MSVC /W4 /WX, native ABI/frame/grade tests and all10UIVM suites pass. Build/p63-build.log; clean live QA pending.",
+    "p63Package": "MMC registration/launch/tamper/path/config checks pass. Installed baseline and histories unchanged. Probe p6 stopped0/inflight0; its capped idle observations do not prove chart dispatch.",
+    "p63Review": "Independent source review passed shared attachment dispatch, macro/frame/hash guards, ordinary fast path, per-method logs, CallGuard/stop lifetime and exactly-once native forwarding. Existing native integration fixtures cover expanded-frame rejection, fixed-frame attachment and1M ordinary calls. No live completion claim."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

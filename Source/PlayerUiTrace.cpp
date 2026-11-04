@@ -38,7 +38,7 @@ DWORD stop(){bool okay=true;{std::lock_guard<std::mutex> lock(lifecycle);disable
     const auto deadline=GetTickCount64()+5000;while(inflight&&GetTickCount64()<deadline)Sleep(1);return !okay?2:inflight?3:0;}
 bool ownerIs(void* pointer,bool setupOwner){HMODULE owner=nullptr;wchar_t path[32768]{};
     if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(pointer),&owner)||!GetModuleFileNameW(owner,path,32768))return false;
-    const auto name=std::filesystem::path(path).filename();(void)setupOwner;return name==L"DynastyEnhancerRecruitFog-p61.dll";}
+    const auto name=std::filesystem::path(path).filename();(void)setupOwner;return name==L"DynastyEnhancerRecruitFog-p62.dll";}
 DWORD WINAPI worker(void*){
     base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto file=std::filesystem::path(path).parent_path()/L"player-ui-trace.jsonl";
     {std::lock_guard<std::mutex> lock(lifecycle);if(disabled)return 1;
