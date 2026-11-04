@@ -126,12 +126,10 @@
     {
       "surface": "Redshirts table and player panel",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p46 panel colored but native table numeric. Captured full61-column schema; source adds exact schema with rating4,7..59, preservingGP6/NIL5/LastName60 and sorting.",
-      "remaining": [
-        "Focused filters and far-right scroll/reentry verification"
-      ],
-      "liveStatus": "p50 clean PID31340: All view directly verified OVR and visible SPD/ACC/AGI/COD/STR/AWR/CAR grades; unselected grades colored, ineligible native gray preserved. Selected Hollins panel B colored. Team64/64/63, NIL45 and GP4 numeric. No Submit or redshirt changes."
+      "remaining": [],
+      "liveStatus": "p50 clean PID31340: All view directly verified OVR and visible SPD/ACC/AGI/COD/STR/AWR/CAR grades; unselected grades colored, ineligible native gray preserved. Selected Hollins panel B colored. Team64/64/63, NIL45 and GP4 numeric. No Submit or redshirt changes. p61 user confirms position-filter and far-right rating columns all letters, no changes submitted."
     },
     {
       "surface": "Injury Report table and player panel",
@@ -144,12 +142,10 @@
     {
       "surface": "Formation Subs player OVRs and detail views",
       "implemented": true,
-      "liveVerified": false,
-      "liveStatus": "p55 clean PID7528: Wing Tight right detail now shows JaCorey McNeil Overall D and six colored attributes D/B/B/D/D/B, matching prior native67/62/85/89/68/64/85. Center/reserve grades remain correct; jersey diagram, measurements and0/50 counter unchanged. No substitutions/reset/advance.",
+      "liveVerified": true,
+      "liveStatus": "p55 clean PID7528: Wing Tight right detail now shows JaCorey McNeil Overall D and six colored attributes D/B/B/D/D/B, matching prior native67/62/85/89/68/64/85. Center/reserve grades remain correct; jersey diagram, measurements and0/50 counter unchanged. No substitutions/reset/advance. p61 actual defensive5-2Normal detail: AndyRobinson current/sideOverallD, sixattributesD/C/C/D/C/C; reserveD/Flabels colored/native disabledcontrast. Jersey97 and11formationjerseys numeric, counter0/50 unchanged. User confirms looks good; no substitution/reset.",
       "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed. p55 adds scoped parent/attribute-slot conversion after the nativechildrepaint. Regression reproduces live67/62/85/89/68/64/85 ordering and preserves sourcevalues, unknowns, numericstatbadges and native23/9/21-registerframes.",
-      "remaining": [
-        "Live defense/reentry and selected reserve contrast"
-      ]
+      "remaining": []
     },
     {
       "surface": "Career Stats player sidebar",
@@ -605,7 +601,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Formation defense/reentry and Redshirts position/far-right; annual/weekly awards, normalPositionChange and pregame/in-game remain.",
+    "nextManualCheck": "Annual/weekly awards and normalPositionChange remaining; pregame/in-game then final performance/regression/package.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -641,18 +637,20 @@
     "p61MySchoolRiskLive": "Actual screenshot and bank7 method0 attachment confirmed. Three playerOverall labels D/orange; native riskbars/positions/schoolgrades/teamratings and recruitingresources preserved.",
     "p61PracticeLive": "Actual screenshot plus bank12 Draw/unfocus attachments confirmed. Selectedblack and unselectedgradedcolors correct, practice/risk/NIL/teamlabels preserved; no plan edits.",
     "p61MentalsLive": "Actual Hollins Overview/Mentals passes OverallB/color and intact3mentaldescriptions/tiers, activeplayerdealbreakerC+, jersey/measurements/skillpoints0. No numeric attribute requirements present.",
-    "p61TooltipProbe": "p4 bounded unchanged collector observer active on Mentals/sidebar inspection; no collector rows observed there. Explicit stop0; no probes remain active."
+    "p61TooltipProbe": "p4 bounded unchanged collector observer active on Mentals/sidebar inspection; no collector rows observed there. Explicit stop0; no probes remain active.",
+    "p61RedshirtFilter": "User confirms positionfilter/farright letters without Submit/changes.",
+    "p61FormationDefense": "Actual defensive5-2Normal screenshot/currentD/sidebarD/sixattributesDCC DCC/reserveDF grades verified. Numericjerseys and0/50subcount preserved. No swaps/reset."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
-    "depthCardsHub": "In progress: roster/depth filters, cards Ratings/Physicals, StartingOffense and MismatchOnPaper all8 attributes now liveverified. Injured Health/Mentals and short Formation defensive/reentry checks remain.",
+    "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
     "remainingMenusLeakAudit": "In progress: awards and MySchool risk-player adapters built, live verification pending.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Formation defensive/reentry, Redshirts position/far-right, normal PositionChanges checks",
+      "Normal non-ATH Position Changes read-only check using existing milestone",
       "Annual player/coach and weekly player award views",
       "Pregame/in-game player ratings and substitution views without gameplay or lineup changes"
     ],
