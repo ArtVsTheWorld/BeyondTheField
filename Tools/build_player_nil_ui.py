@@ -1,6 +1,8 @@
 """Display-only NIL roster grades. Compensation and roster model stay numeric."""
 from pathlib import Path
 import json
+import hashlib
+import struct
 import sys
 from build_recruit_notes_ui import Assembler,fnv
 from build_player_card_ui import path,numeric_grade,palette,text_label
@@ -38,23 +40,33 @@ def nil_unfocus_suffix(a):
 
 SPECS=[(0x1A90,0,6,25,665,0x14CEAC0385098E7D,nil_draw_suffix),
        (0x1FC0,1,2,41,104,0xD0ACDF397686B473,nil_unfocus_suffix)]
+EMBEDDED_SPECS=[(0x2610,0,6,25,665,0x14CEAC0385098E7D,nil_draw_suffix),
+                (0x2B40,1,2,41,104,0xD0ACDF397686B473,nil_unfocus_suffix)]
 
 
 def generate(destination):
     sys.path.insert(0,'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
     from inspect_tb_ast import load
-    apt=load(Path('Evidence/PlayerFog/rosternilrowitem.ast'))
     lines=['// Custom player-label suffixes; native NIL model/body is not redistributed.',
-           '#pragma once','#include "RecruitNotesUiPrograms.h"','namespace recruitingfog::playernilui {',
-           'inline std::vector<notesui::Program> programs(){std::vector<notesui::Program> result;']
-    for off,argc,regs,flags,size,expected,suffix in SPECS:
-        if fnv(apt.data[off+48:off+48+size])!=expected:raise ValueError('Unsupported native NIL player row')
-        a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
-        code='{'+','.join(hex(b) for b in p.code)+'}'
-        lines.append(f'result.push_back({{{off},{argc},{regs},{flags},{size},{expected}ull,{regs},0,{size},{code}}});')
-        for at,text in p.literals:lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
-    lines+=['return result;}','}'];destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
-    print(json.dumps({'nilPlayerRatingMethods':len(SPECS),'budgetModelChanges':False}))
+           '#pragma once','#include "RecruitNotesUiPrograms.h"','namespace recruitingfog::playernilui {']
+    for name,filename,sha,specs in [
+        ('programs','rosternilrowitem.ast','5605ede3f7ed7d945dc574b56fbb17413f5c12ecd647ac126306de455798443f',SPECS),
+        ('embeddedPrograms','rosternil-screen.ast','0851ae84bdb0e21bd0c264530aaa0731e10d37d95d09b7d9644e2b76489b5d54',EMBEDDED_SPECS)]:
+        source=Path('Evidence/PlayerFog')/filename
+        if hashlib.sha256(source.read_bytes()).hexdigest()!=sha:raise ValueError('Unsupported NIL player source asset')
+        apt=load(source)
+        lines.append(f'inline std::vector<notesui::Program> {name}(){{std::vector<notesui::Program> result;')
+        for off,argc,regs,flags,size,expected,suffix in specs:
+            h=apt.data[off:off+48]
+            if (struct.unpack_from('<I',h,8)[0],struct.unpack_from('<H',h,12)[0],struct.unpack_from('<H',h,14)[0])!=(argc,regs,flags):raise ValueError('Unsupported NIL player frame')
+            if fnv(apt.data[off+48:off+48+size])!=expected:raise ValueError('Unsupported native NIL player row')
+            a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
+            code='{'+','.join(hex(b) for b in p.code)+'}'
+            lines.append(f'result.push_back({{{off},{argc},{regs},{flags},{size},{expected}ull,{regs},0,{size},{code}}});')
+            for at,text in p.literals:lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
+        lines.append('return result;}')
+    lines.append('}');destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
+    print(json.dumps({'nilPlayerRatingMethods':len(SPECS)+len(EMBEDDED_SPECS),'budgetModelChanges':False}))
 
 
 if __name__=='__main__':generate(Path('Source/PlayerNilUiPrograms.h'))

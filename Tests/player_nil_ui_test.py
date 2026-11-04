@@ -4,7 +4,7 @@ import copy
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
-from build_player_nil_ui import nil_draw_suffix,nil_unfocus_suffix,SPECS
+from build_player_nil_ui import nil_draw_suffix,nil_unfocus_suffix,SPECS,EMBEDDED_SPECS
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -56,6 +56,8 @@ class BoundedAssembler(Assembler):
         assert 0<=n<self.limit
         return super().store(n)
 
-for _,_,regs,_,_,_,suffix in SPECS:
+assert [s[1:6] for s in SPECS]==[s[1:6] for s in EMBEDDED_SPECS]
+assert [s[0] for s in EMBEDDED_SPECS]==[0x2610,0x2B40]
+for _,_,regs,_,_,_,suffix in SPECS+EMBEDDED_SPECS:
     a=BoundedAssembler(regs);suffix(a);a.finish()
 print('Passed: NIL roster101 grades, two-register unfocus/recycled selection, hidden values, numeric compensation/risk/model preservation and unchanged redraw fast path.')

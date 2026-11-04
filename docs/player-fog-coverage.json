@@ -197,10 +197,10 @@
       "surface": "NIL roster list OVR",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "Current exact Draw/unfocus fingerprints; scoped direct mcOvr label only. Unfocus retains native2-register frame with stack color object. EightUIVMsuites and independent review pass; numericOvr/compensation/limits/risk unchanged. Includedp54built, notactive.",
+      "evidence": "Current exact Draw/unfocus fingerprints; scoped direct mcOvr label only. Unfocus retains native2-register frame with stack color object. EightUIVMsuites and independent review pass; numericOvr/compensation/limits/risk unchanged. Includedp54built, notactive. p59 adds14thbank for current screen-embedded RosterNILRowItem, defs2610/2b40, fullassetSHA0851ae84..., matchingstandalonebodyhashes with different sourceoffsets. Bothvariants independentlyverified, numericNIL/risk/model preserved.",
       "remaining": [
-        "Identify active editable list renderer rather than unused RosterNILRowItem variant",
-        "Implement and live verify selection/reentry with compensation unchanged"
+        "Live bank13 attachment and selected/unselected list grade verification",
+        "Filter/reentry and compensation preservation"
       ],
       "liveStatus": "p57 ULMEOSRECAP28 native editable list opened read-only: table OVR80/79/76/75 remain numeric while sidebarB works. Bank10 did not attach and no failure event, indicating a different active row renderer. No deals/slider changes."
     },
@@ -565,9 +565,9 @@
     "releaseReady": false,
     "previewSha256": "e8237d5857155e2a09caa2a25831dcb81a31158466a75fcbdd5b70703cd0c4d4",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p58.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p58-MMC.zip",
-    "nextCandidateSha256": "fee83f8204a3a2563dbf7d3d5c1d4790615141357c1d92bbb273b8c1ec62c787"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p59.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p59-MMC.zip",
+    "nextCandidateSha256": "98eb31b0ef8fe68a9c890a36a473acd327fbf021b4e229e504fd4f282cd945d9"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -608,7 +608,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "User asked for clean restart at mainmenu; activate p57 only after actual restart. Test hub PlayerCompare attributes and Program Overview roster badges.",
+    "nextManualCheck": "Clean restart at mainmenu requested for p59; then activeNILlist, nativeTrainingdeltas and hubcomparison verification.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -617,7 +617,10 @@
     "columnProbe": "p10 read-only metadata capture completed and explicitly stopped0; no probes remain active.",
     "p58Build": "MSVC/W4/WX, native tests including new4grid schemas/training101xprevious pairs, and all10UIVM suites passed. Independent Practice and grid/schema/parser reviews pass. Notloaded; p57 active.",
     "p58Next": "Package built for recovery; hold next live restart until editable NIL list renderer gap is traced, to batch fixes.",
-    "p58Package": "Combined MMC package registration/launch/tamper/path/config checks passed. p58 is not loaded; pending NIL renderer fix will be batched in another fresh build."
+    "p58Package": "Combined MMC package registration/launch/tamper/path/config checks passed. p58 is not loaded; pending NIL renderer fix will be batched in another fresh build.",
+    "p59Build": "MSVC/W4/WX/native/all10UIVM suites passed. Independent source/frame/model/lifecycle reviews passed for hubstrings, four captured grids, weeklypractice and embeddedNIL.",
+    "p59Package": "Combined MMC registration/launch/tamper/path/config smoke passed; installed baseline unchanged; p59 not loaded.",
+    "milestonePersistence": "Allfive milestone sourcefiles stillmatchSHA256 backups afterread-onlymenuQA; noadvance/save/player/deal changes."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
