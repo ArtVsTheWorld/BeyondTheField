@@ -1,0 +1,1643 @@
+{
+  "revision": "buzz-variety-v99",
+  "families": {
+    "buzz.title-stage": [
+      {
+        "id": "buzz.title-stage.buzzcopy.1",
+        "body": "One game for everything. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.2",
+        "body": "The last game of the season. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.3",
+        "body": "The title comes down to this. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.4",
+        "body": "Two teams left, one champion to decide. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.5",
+        "body": "The biggest night of the season is next. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.6",
+        "body": "The national title is on the line. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.7",
+        "body": "No next round after this. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.8",
+        "body": "The season's final stage is set. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.9",
+        "body": "One final matchup for the trophy. {home} vs. {away} for the national championship."
+      },
+      {
+        "id": "buzz.title-stage.buzzcopy.10",
+        "body": "The championship is one game away. {home} vs. {away} for the national championship."
+      }
+    ],
+    "buzz.stage": [
+      {
+        "id": "buzz.stage.buzzcopy.1",
+        "body": "The postseason stage is set. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.2",
+        "body": "A season-defining matchup. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.3",
+        "body": "The next big game is here. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.4",
+        "body": "The stakes have changed. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.5",
+        "body": "The next postseason test is set. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.6",
+        "body": "A major stop on the postseason schedule. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.7",
+        "body": "The spotlight moves here. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.8",
+        "body": "A game with a lot riding on it. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.9",
+        "body": "The next stage is ready. {home} vs. {away} in the {eventLabel}."
+      },
+      {
+        "id": "buzz.stage.buzzcopy.10",
+        "body": "The postseason focus turns here. {home} vs. {away} in the {eventLabel}."
+      }
+    ],
+    "buzz.pick-1": [
+      {
+        "id": "buzz.pick-1.buzzcopy.1",
+        "body": "My {eventLabel} pick: {pick}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.2",
+        "body": "My {eventLabel} pick: {pick}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.3",
+        "body": "For the {eventLabel}, I lean {pick}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.4",
+        "body": "For the {eventLabel}, I lean {pick}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.5",
+        "body": "{pick} gets my pick in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.6",
+        "body": "{pick} gets my pick in the {eventLabel}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.7",
+        "body": "Looking at the {eventLabel}: {lineContext} I am taking {pick}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.8",
+        "body": "Looking at the {eventLabel}: {lineContext} I am taking {pick}. The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.9",
+        "body": "{lineContext} My choice for the {eventLabel} is {pick}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-1.buzzcopy.10",
+        "body": "{lineContext} My choice for the {eventLabel} is {pick}. The game still has to be played."
+      }
+    ],
+    "buzz.pick-2": [
+      {
+        "id": "buzz.pick-2.buzzcopy.1",
+        "body": "Putting my name on it: {pick} in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.2",
+        "body": "Putting my name on it: {pick} in the {eventLabel}. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.3",
+        "body": "{pick}. That is my {eventLabel} pick. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.4",
+        "body": "{pick}. That is my {eventLabel} pick. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.5",
+        "body": "Save the post: I am taking {pick} in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.6",
+        "body": "Save the post: I am taking {pick} in the {eventLabel}. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.7",
+        "body": "Not hiding behind a maybe. {pick} is my {eventLabel} choice. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.8",
+        "body": "Not hiding behind a maybe. {pick} is my {eventLabel} choice. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.9",
+        "body": "{lineContext} Give me {pick} in the {eventLabel}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-2.buzzcopy.10",
+        "body": "{lineContext} Give me {pick} in the {eventLabel}. The replies should be extremely calm about this."
+      }
+    ],
+    "buzz.pick-3": [
+      {
+        "id": "buzz.pick-3.buzzcopy.1",
+        "body": "Leaning {pick} in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.2",
+        "body": "Leaning {pick} in the {eventLabel}. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.3",
+        "body": "{pick} for me in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.4",
+        "body": "{pick} for me in the {eventLabel}. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.5",
+        "body": "My {eventLabel} pick is {pick}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.6",
+        "body": "My {eventLabel} pick is {pick}. {lineContext} The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.7",
+        "body": "{lineContext} So yes, I am picking {pick}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.8",
+        "body": "{lineContext} So yes, I am picking {pick}. The replies should be extremely calm about this."
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.9",
+        "body": "I have {pick} in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-3.buzzcopy.10",
+        "body": "I have {pick} in the {eventLabel}. {lineContext} The replies should be extremely calm about this."
+      }
+    ],
+    "buzz.pick-4": [
+      {
+        "id": "buzz.pick-4.buzzcopy.1",
+        "body": "My {eventLabel} projection: {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.2",
+        "body": "My {eventLabel} projection: {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.3",
+        "body": "For the {eventLabel}, {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.4",
+        "body": "For the {eventLabel}, {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.5",
+        "body": "{eventLabel} matchup view: {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.6",
+        "body": "{eventLabel} matchup view: {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.7",
+        "body": "The {eventLabel} numbers lead me here: {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.8",
+        "body": "The {eventLabel} numbers lead me here: {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.9",
+        "body": "On the {eventLabel} matchup, {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-4.buzzcopy.10",
+        "body": "On the {eventLabel} matchup, {lineContext} The game still has to be played."
+      }
+    ],
+    "buzz.pick-5": [
+      {
+        "id": "buzz.pick-5.buzzcopy.1",
+        "body": "I lean {pick} in the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.2",
+        "body": "I lean {pick} in the {eventLabel}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.3",
+        "body": "The {eventLabel} pick is {pick}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.4",
+        "body": "The {eventLabel} pick is {pick}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.5",
+        "body": "{pick} is my choice for the {eventLabel}. {lineContext} {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.6",
+        "body": "{pick} is my choice for the {eventLabel}. {lineContext} The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.7",
+        "body": "For the {eventLabel}: {lineContext} My pick is {pick}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.8",
+        "body": "For the {eventLabel}: {lineContext} My pick is {pick}. The game still has to be played."
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.9",
+        "body": "{lineContext} I have {pick} in the {eventLabel}. {shapeContext}"
+      },
+      {
+        "id": "buzz.pick-5.buzzcopy.10",
+        "body": "{lineContext} I have {pick} in the {eventLabel}. The game still has to be played."
+      }
+    ],
+    "buzz.team-pregame": [
+      {
+        "id": "buzz.team-pregame.buzzcopy.1",
+        "body": "{nickname}. {opponent}. The {eventLabel}. Together. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.2",
+        "body": "{nickname}. {opponent}. The {eventLabel}. Let us hear you. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.3",
+        "body": "Our next stage: {opponent} in the {eventLabel}. Together. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.4",
+        "body": "Our next stage: {opponent} in the {eventLabel}. Let us hear you. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.5",
+        "body": "The {nickname} are ready for {opponent} in the {eventLabel}. Together. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.6",
+        "body": "The {nickname} are ready for {opponent} in the {eventLabel}. Let us hear you. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.7",
+        "body": "{eventLabel} week for the {nickname}. Opponent: {opponent}. Together. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.8",
+        "body": "{eventLabel} week for the {nickname}. Opponent: {opponent}. Let us hear you. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.9",
+        "body": "A big stage for the {nickname}. {opponent} in the {eventLabel}. Together. {hashtag}"
+      },
+      {
+        "id": "buzz.team-pregame.buzzcopy.10",
+        "body": "A big stage for the {nickname}. {opponent} in the {eventLabel}. Let us hear you. {hashtag}"
+      }
+    ],
+    "buzz.fan-pregame": [
+      {
+        "id": "buzz.fan-pregame.buzzcopy.1",
+        "body": "{school} in the {eventLabel}. {opponent} on the other side. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.2",
+        "body": "{school} in the {eventLabel}. {opponent} on the other side. Somebody remind me to breathe during the game"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.3",
+        "body": "The {eventLabel} against {opponent}. {school} has the chance right here. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.4",
+        "body": "The {eventLabel} against {opponent}. {school} has the chance right here. Somebody remind me to breathe during the game"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.5",
+        "body": "I have stared at the {school}-{opponent} matchup for long enough. {eventLabel} time. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.6",
+        "body": "I have stared at the {school}-{opponent} matchup for long enough. {eventLabel} time. Somebody remind me to breathe during the game"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.7",
+        "body": "{school} vs {opponent} in the {eventLabel}. I am not built to be casual about this. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.8",
+        "body": "{school} vs {opponent} in the {eventLabel}. I am not built to be casual about this. Somebody remind me to breathe during the game"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.9",
+        "body": "{eventLabel} week. {school}. {opponent}. Everything else on the calendar can wait. Please let this be our day"
+      },
+      {
+        "id": "buzz.fan-pregame.buzzcopy.10",
+        "body": "{eventLabel} week. {school}. {opponent}. Everything else on the calendar can wait. Somebody remind me to breathe during the game"
+      }
+    ],
+    "buzz.player-pregame-QB": [
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.1",
+        "body": "The {eventLabel} against {opponent}. Proud to share this stage with my team. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.2",
+        "body": "The {eventLabel} against {opponent}. Proud to share this stage with my team. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.3",
+        "body": "Ready for {opponent} in the {eventLabel}. Grateful for this group. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.4",
+        "body": "Ready for {opponent} in the {eventLabel}. Grateful for this group. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.5",
+        "body": "A chance to play {opponent} in the {eventLabel} with my teammates. Thankful for it. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.6",
+        "body": "A chance to play {opponent} in the {eventLabel} with my teammates. Thankful for it. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.7",
+        "body": "Looking forward to the {eventLabel}. {opponent} is the next challenge. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.8",
+        "body": "Looking forward to the {eventLabel}. {opponent} is the next challenge. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.9",
+        "body": "The next game is {opponent} in the {eventLabel}. Ready with my guys. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-QB.buzzcopy.10",
+        "body": "The next game is {opponent} in the {eventLabel}. Ready with my guys. Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-Leader": [
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.1",
+        "body": "The {eventLabel}. {opponent}. Proud of the group that got us here. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.2",
+        "body": "The {eventLabel}. {opponent}. Proud of the group that got us here. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.3",
+        "body": "Ready to share the {eventLabel} stage with this team. {opponent} next. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.4",
+        "body": "Ready to share the {eventLabel} stage with this team. {opponent} next. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.5",
+        "body": "{opponent} in the {eventLabel}. Thankful for everyone who helped us reach this point. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.6",
+        "body": "{opponent} in the {eventLabel}. Thankful for everyone who helped us reach this point. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.7",
+        "body": "A big stage with my teammates. {opponent} in the {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.8",
+        "body": "A big stage with my teammates. {opponent} in the {eventLabel}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.9",
+        "body": "The {eventLabel} against {opponent}. This group means a lot to me. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Leader.buzzcopy.10",
+        "body": "The {eventLabel} against {opponent}. This group means a lot to me. Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-TeamPlayer": [
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.1",
+        "body": "Would not trade this group. {opponent} in the {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.2",
+        "body": "Would not trade this group. {opponent} in the {eventLabel}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.3",
+        "body": "My guys and the {eventLabel}. {opponent} next. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.4",
+        "body": "My guys and the {eventLabel}. {opponent} next. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.5",
+        "body": "Proud of everybody who helped us get here. {opponent} in the {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.6",
+        "body": "Proud of everybody who helped us get here. {opponent} in the {eventLabel}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.7",
+        "body": "Ready for the {eventLabel} with my brothers. {opponent} on the other side. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.8",
+        "body": "Ready for the {eventLabel} with my brothers. {opponent} on the other side. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.9",
+        "body": "We get to share this stage together. {opponent}. {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-TeamPlayer.buzzcopy.10",
+        "body": "We get to share this stage together. {opponent}. {eventLabel}. Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-Entertainer": [
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.1",
+        "body": "{eventLabel} with the guys. {opponent} next. Yeah I am ready Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.2",
+        "body": "{eventLabel} with the guys. {opponent} next. Yeah I am ready Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.3",
+        "body": "Big stage, same guys. {opponent} in the {eventLabel}! Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.4",
+        "body": "Big stage, same guys. {opponent} in the {eventLabel}! Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.5",
+        "body": "I have waited long enough to play this one. {eventLabel}. {opponent}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.6",
+        "body": "I have waited long enough to play this one. {eventLabel}. {opponent}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.7",
+        "body": "{opponent} in the {eventLabel}. My phone is going to have to wait Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.8",
+        "body": "{opponent} in the {eventLabel}. My phone is going to have to wait Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.9",
+        "body": "{eventLabel} time with my guys. {opponent}, see you out there Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Entertainer.buzzcopy.10",
+        "body": "{eventLabel} time with my guys. {opponent}, see you out there Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-Intense": [
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.1",
+        "body": "{opponent}. {eventLabel}. Locked in with my guys. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.2",
+        "body": "{opponent}. {eventLabel}. Locked in with my guys. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.3",
+        "body": "This is the stage we wanted. {opponent} in the {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.4",
+        "body": "This is the stage we wanted. {opponent} in the {eventLabel}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.5",
+        "body": "Ready for {opponent}. Ready for the {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.6",
+        "body": "Ready for {opponent}. Ready for the {eventLabel}. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.7",
+        "body": "The {eventLabel} is here. {opponent} on the other side. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.8",
+        "body": "The {eventLabel} is here. {opponent} on the other side. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.9",
+        "body": "With my brothers. {opponent} in the {eventLabel}. Let's get it. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Intense.buzzcopy.10",
+        "body": "With my brothers. {opponent} in the {eventLabel}. Let's get it. Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-Unpredictable": [
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.1",
+        "body": "{eventLabel}. {opponent}. Hope yall are watching Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.2",
+        "body": "{eventLabel}. {opponent}. Hope yall are watching Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.3",
+        "body": "The {eventLabel} with my guys. Yeah I am looking forward to {opponent} Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.4",
+        "body": "The {eventLabel} with my guys. Yeah I am looking forward to {opponent} Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.5",
+        "body": "Big stage. {opponent}. The {eventLabel}. Keep the phone nearby Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.6",
+        "body": "Big stage. {opponent}. The {eventLabel}. Keep the phone nearby Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.7",
+        "body": "People have talked enough. {opponent} in the {eventLabel} next Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.8",
+        "body": "People have talked enough. {opponent} in the {eventLabel} next Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.9",
+        "body": "My group chat knows how long I have waited for this. {opponent}. {eventLabel}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Unpredictable.buzzcopy.10",
+        "body": "My group chat knows how long I have waited for this. {opponent}. {eventLabel}. Love sharing this with my team."
+      }
+    ],
+    "buzz.player-pregame-Neutral": [
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.1",
+        "body": "Ready for {opponent} in the {eventLabel} with this team. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.2",
+        "body": "Ready for {opponent} in the {eventLabel} with this team. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.3",
+        "body": "The {eventLabel}. Grateful I get to be here with my teammates. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.4",
+        "body": "The {eventLabel}. Grateful I get to be here with my teammates. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.5",
+        "body": "{opponent} next in the {eventLabel}. Looking forward to it. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.6",
+        "body": "{opponent} next in the {eventLabel}. Looking forward to it. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.7",
+        "body": "A chance to share the {eventLabel} stage with my guys. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.8",
+        "body": "A chance to share the {eventLabel} stage with my guys. Love sharing this with my team."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.9",
+        "body": "Excited for the {eventLabel} against {opponent}. Appreciate everybody supporting us."
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.buzzcopy.10",
+        "body": "Excited for the {eventLabel} against {opponent}. Love sharing this with my team."
+      }
+    ],
+    "buzz.watcher-player-QB": [
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.1",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.2",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.3",
+        "body": "Tuning in for {home} and {away}. Big {eventLabel} stage. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.4",
+        "body": "Tuning in for {home} and {away}. Big {eventLabel} stage. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.5",
+        "body": "{home} vs. {away} in the {eventLabel} is a game I want to watch. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.6",
+        "body": "{home} vs. {away} in the {eventLabel} is a game I want to watch. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.7",
+        "body": "Looking forward to watching {home}-{away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.8",
+        "body": "Looking forward to watching {home}-{away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.9",
+        "body": "The {eventLabel}: {home} and {away}. I will be watching. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-QB.buzzcopy.10",
+        "body": "The {eventLabel}: {home} and {away}. I will be watching. Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-Leader": [
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.1",
+        "body": "Respect the teams that got here. {home} vs. {away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.2",
+        "body": "Respect the teams that got here. {home} vs. {away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.3",
+        "body": "A big stage for both groups. Watching {home}-{away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.4",
+        "body": "A big stage for both groups. Watching {home}-{away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.5",
+        "body": "Tuning in for {home} and {away}. The {eventLabel} is here. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.6",
+        "body": "Tuning in for {home} and {away}. The {eventLabel} is here. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.7",
+        "body": "{home} vs. {away}. The {eventLabel} should be worth watching. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.8",
+        "body": "{home} vs. {away}. The {eventLabel} should be worth watching. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.9",
+        "body": "Looking forward to the {eventLabel} between {home} and {away}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Leader.buzzcopy.10",
+        "body": "Looking forward to the {eventLabel} between {home} and {away}. Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-TeamPlayer": [
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.1",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Respect to the guys on both sides. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.2",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Respect to the guys on both sides. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.3",
+        "body": "The {eventLabel} with {home} and {away}. Looking forward to watching these groups. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.4",
+        "body": "The {eventLabel} with {home} and {away}. Looking forward to watching these groups. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.5",
+        "body": "{home}-{away} in the {eventLabel}. Respect what it took for both teams to get here. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.6",
+        "body": "{home}-{away} in the {eventLabel}. Respect what it took for both teams to get here. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.7",
+        "body": "Tuning in for the {eventLabel}. {home} and {away} earned this stage. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.8",
+        "body": "Tuning in for the {eventLabel}. {home} and {away} earned this stage. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.9",
+        "body": "Watching the {eventLabel}: {home} vs. {away}. Good opportunity for both groups. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-TeamPlayer.buzzcopy.10",
+        "body": "Watching the {eventLabel}: {home} vs. {away}. Good opportunity for both groups. Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-Entertainer": [
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.1",
+        "body": "{home} vs {away} for the {eventLabel}. Yeah I am watching that Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.2",
+        "body": "{home} vs {away} for the {eventLabel}. Yeah I am watching that Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.3",
+        "body": "The group chat is about to have a lot of {home}-{away} opinions. {eventLabel} time Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.4",
+        "body": "The group chat is about to have a lot of {home}-{away} opinions. {eventLabel} time Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.5",
+        "body": "{eventLabel}. {home}. {away}. Do not ask me to make plans Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.6",
+        "body": "{eventLabel}. {home}. {away}. Do not ask me to make plans Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.7",
+        "body": "Got a spot on the couch for {home}-{away} in the {eventLabel} Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.8",
+        "body": "Got a spot on the couch for {home}-{away} in the {eventLabel} Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.9",
+        "body": "{home} vs {away}. The {eventLabel} has my attention Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Entertainer.buzzcopy.10",
+        "body": "{home} vs {away}. The {eventLabel} has my attention Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-Intense": [
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.1",
+        "body": "{home}-{away} in the {eventLabel}. I want to see this one. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.2",
+        "body": "{home}-{away} in the {eventLabel}. I want to see this one. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.3",
+        "body": "Watching the {eventLabel}. {home} and {away} get to settle it. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.4",
+        "body": "Watching the {eventLabel}. {home} and {away} get to settle it. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.5",
+        "body": "{home}. {away}. {eventLabel}. Nothing to talk about after they kick it off. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.6",
+        "body": "{home}. {away}. {eventLabel}. Nothing to talk about after they kick it off. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.7",
+        "body": "Got to watch {home}-{away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.8",
+        "body": "Got to watch {home}-{away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.9",
+        "body": "The {eventLabel} is here. {home} vs {away}. Locked in as a fan tonight. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Intense.buzzcopy.10",
+        "body": "The {eventLabel} is here. {home} vs {away}. Locked in as a fan tonight. Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-Unpredictable": [
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.1",
+        "body": "{home} vs {away} in the {eventLabel}. The group chat will have opinions Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.2",
+        "body": "{home} vs {away} in the {eventLabel}. The group chat will have opinions Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.3",
+        "body": "I will be watching {home}-{away} in the {eventLabel}. And probably typing too much Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.4",
+        "body": "I will be watching {home}-{away} in the {eventLabel}. And probably typing too much Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.5",
+        "body": "{eventLabel}. {home} and {away}. My phone might be the second screen Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.6",
+        "body": "{eventLabel}. {home} and {away}. My phone might be the second screen Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.7",
+        "body": "The {home}-{away} {eventLabel} is about to test some old predictions Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.8",
+        "body": "The {home}-{away} {eventLabel} is about to test some old predictions Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.9",
+        "body": "Got time for {home}-{away} in the {eventLabel}. The timeline should be interesting Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Unpredictable.buzzcopy.10",
+        "body": "Got time for {home}-{away} in the {eventLabel}. The timeline should be interesting Football fan for this one."
+      }
+    ],
+    "buzz.watcher-player-Neutral": [
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.1",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.2",
+        "body": "Watching {home} vs. {away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.3",
+        "body": "Tuning in for the {eventLabel}: {home} and {away}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.4",
+        "body": "Tuning in for the {eventLabel}: {home} and {away}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.5",
+        "body": "Looking forward to {home}-{away} in the {eventLabel}. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.6",
+        "body": "Looking forward to {home}-{away} in the {eventLabel}. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.7",
+        "body": "The {eventLabel} is next. {home} vs. {away}. I am watching. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.8",
+        "body": "The {eventLabel} is next. {home} vs. {away}. I am watching. Football fan for this one."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.9",
+        "body": "{home} and {away} on the {eventLabel} stage. Ready to watch some football. Big stage for both teams."
+      },
+      {
+        "id": "buzz.watcher-player-Neutral.buzzcopy.10",
+        "body": "{home} and {away} on the {eventLabel} stage. Ready to watch some football. Football fan for this one."
+      }
+    ],
+    "buzz.final": [
+      {
+        "id": "buzz.final.buzzcopy.1",
+        "body": "{winner} beats {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.2",
+        "body": "{winner} defeats {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.3",
+        "body": "{winner} gets past {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.4",
+        "body": "{winner} wins against {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.5",
+        "body": "{winner} prevails over {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.6",
+        "body": "{winner} takes down {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.7",
+        "body": "{winner} finishes ahead of {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.8",
+        "body": "{winner} gets the better of {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.9",
+        "body": "{winner} earns a win over {loser}, {score}, in the {eventLabel}."
+      },
+      {
+        "id": "buzz.final.buzzcopy.10",
+        "body": "{winner} comes out on top against {loser}, {score}, in the {eventLabel}."
+      }
+    ],
+    "buzz.team-champion": [
+      {
+        "id": "buzz.team-champion.buzzcopy.1",
+        "body": "{winner}. {eventLabel} winners. {score} over {loser}. Thank you for being part of this run. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.2",
+        "body": "{winner}. {eventLabel} winners. {score} over {loser}. For the whole {nickname} family. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.3",
+        "body": "The {eventLabel} belongs to {winner}. {score} vs. {loser}. Thank you for being part of this run. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.4",
+        "body": "The {eventLabel} belongs to {winner}. {score} vs. {loser}. For the whole {nickname} family. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.5",
+        "body": "Winners on this stage. {winner} {score} over {loser} in the {eventLabel}. Thank you for being part of this run. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.6",
+        "body": "Winners on this stage. {winner} {score} over {loser} in the {eventLabel}. For the whole {nickname} family. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.7",
+        "body": "A win for the {nickname}. {eventLabel}: {score} over {loser}. Thank you for being part of this run. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.8",
+        "body": "A win for the {nickname}. {eventLabel}: {score} over {loser}. For the whole {nickname} family. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.9",
+        "body": "{eventLabel} winners: {winner}. A {score} final over {loser}. Thank you for being part of this run. {hashtag}"
+      },
+      {
+        "id": "buzz.team-champion.buzzcopy.10",
+        "body": "{eventLabel} winners: {winner}. A {score} final over {loser}. For the whole {nickname} family. {hashtag}"
+      }
+    ],
+    "buzz.team-final-loss": [
+      {
+        "id": "buzz.team-final-loss.buzzcopy.1",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you for supporting this run."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.2",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. We appreciate everyone who was with us."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.3",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Grateful for our players, staff and fans."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.4",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you for every step of the journey."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.5",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. We appreciate the season-long support."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.6",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you to our whole football family."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.7",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Grateful for everyone behind this group."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.8",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you for standing with us."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.9",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. We appreciate all of our supporters."
+      },
+      {
+        "id": "buzz.team-final-loss.buzzcopy.10",
+        "body": "Final in the {eventLabel}: {winner} defeats the {nickname}, {score}. Thank you for helping make this run matter."
+      }
+    ],
+    "buzz.fan-champion": [
+      {
+        "id": "buzz.fan-champion.buzzcopy.1",
+        "body": "{school} won the {eventLabel}. {score}. I will never be normal about this"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.2",
+        "body": "{school} won the {eventLabel}. {score}. Remember this group forever"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.3",
+        "body": "The {eventLabel} belongs to {school}. {score}. I will never be normal about this"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.4",
+        "body": "The {eventLabel} belongs to {school}. {score}. Remember this group forever"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.5",
+        "body": "{score}. {school} actually won the {eventLabel}. I will never be normal about this"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.6",
+        "body": "{score}. {school} actually won the {eventLabel}. Remember this group forever"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.7",
+        "body": "The {nickname} got it done in the {eventLabel}. {score}. I will never be normal about this"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.8",
+        "body": "The {nickname} got it done in the {eventLabel}. {score}. Remember this group forever"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.9",
+        "body": "{school}. {eventLabel} winners. Put the {score} final everywhere. I will never be normal about this"
+      },
+      {
+        "id": "buzz.fan-champion.buzzcopy.10",
+        "body": "{school}. {eventLabel} winners. Put the {score} final everywhere. Remember this group forever"
+      }
+    ],
+    "buzz.fan-final-loss": [
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.1",
+        "body": "{score} in the {eventLabel}. That hurts, {school}. Still proud of the run. Going to need some time though"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.2",
+        "body": "{score} in the {eventLabel}. That hurts, {school}. Getting this far makes it hurt more, not less"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.3",
+        "body": "The {school} run ends in the {eventLabel}. {score}. Still proud of the run. Going to need some time though"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.4",
+        "body": "The {school} run ends in the {eventLabel}. {score}. Getting this far makes it hurt more, not less"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.5",
+        "body": "So close for {school}. {score} in the {eventLabel}. Still proud of the run. Going to need some time though"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.6",
+        "body": "So close for {school}. {score} in the {eventLabel}. Getting this far makes it hurt more, not less"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.7",
+        "body": "{school} loses the {eventLabel}, {score}. Still proud of the run. Going to need some time though"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.8",
+        "body": "{school} loses the {eventLabel}, {score}. Getting this far makes it hurt more, not less"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.9",
+        "body": "A {score} final in the {eventLabel}. The {nickname} got so close. Still proud of the run. Going to need some time though"
+      },
+      {
+        "id": "buzz.fan-final-loss.buzzcopy.10",
+        "body": "A {score} final in the {eventLabel}. The {nickname} got so close. Getting this far makes it hurt more, not less"
+      }
+    ],
+    "buzz.player-champion": [
+      {
+        "id": "buzz.player-champion.buzzcopy.1",
+        "body": "{eventLabel} winners with my brothers. Appreciate everybody who believed in us."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.2",
+        "body": "{eventLabel} winners with my brothers. Thankful for everybody who helped us get here."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.3",
+        "body": "We won the {eventLabel}. With this group. Appreciate everybody who believed in us."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.4",
+        "body": "We won the {eventLabel}. With this group. Thankful for everybody who helped us get here."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.5",
+        "body": "The {eventLabel} with my guys. What a feeling. Appreciate everybody who believed in us."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.6",
+        "body": "The {eventLabel} with my guys. What a feeling. Thankful for everybody who helped us get here."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.7",
+        "body": "{eventLabel} winners. Love this team. Appreciate everybody who believed in us."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.8",
+        "body": "{eventLabel} winners. Love this team. Thankful for everybody who helped us get here."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.9",
+        "body": "Got it done on the {eventLabel} stage with my teammates. Appreciate everybody who believed in us."
+      },
+      {
+        "id": "buzz.player-champion.buzzcopy.10",
+        "body": "Got it done on the {eventLabel} stage with my teammates. Thankful for everybody who helped us get here."
+      }
+    ],
+    "buzz.player-final-loss": [
+      {
+        "id": "buzz.player-final-loss.buzzcopy.1",
+        "body": "Grateful for this team and our whole run. Thank you to everybody behind us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.2",
+        "body": "Grateful for this team and our whole run. Love this group and everyone who rode with us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.3",
+        "body": "Appreciate everybody who was with us through this. Thank you to everybody behind us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.4",
+        "body": "Appreciate everybody who was with us through this. Love this group and everyone who rode with us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.5",
+        "body": "A lot of love for my teammates. Thank you to everybody behind us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.6",
+        "body": "A lot of love for my teammates. Love this group and everyone who rode with us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.7",
+        "body": "Thankful for the people I got to share this run with. Thank you to everybody behind us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.8",
+        "body": "Thankful for the people I got to share this run with. Love this group and everyone who rode with us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.9",
+        "body": "The support throughout this run meant a lot. Thank you to everybody behind us."
+      },
+      {
+        "id": "buzz.player-final-loss.buzzcopy.10",
+        "body": "The support throughout this run meant a lot. Love this group and everyone who rode with us."
+      }
+    ],
+    "buzz.final-analysis-0": [
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The result is official."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The stage has its winner."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The result is official."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The stage has its winner."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The result is official."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The stage has its winner."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. The result is official."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. The stage has its winner."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The result is official."
+      },
+      {
+        "id": "buzz.final-analysis-0.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The stage has its winner."
+      }
+    ],
+    "buzz.final-analysis-1": [
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The pregame arguments now have a result to answer to."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. That settles this stage of the postseason."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The pregame arguments now have a result to answer to."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. That settles this stage of the postseason."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The pregame arguments now have a result to answer to."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. That settles this stage of the postseason."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. The pregame arguments now have a result to answer to."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. That settles this stage of the postseason."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The pregame arguments now have a result to answer to."
+      },
+      {
+        "id": "buzz.final-analysis-1.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. That settles this stage of the postseason."
+      }
+    ],
+    "buzz.final-analysis-2": [
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. Own your old predictions. The scoreboard is right there."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. No moving the goalposts after the final."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. Own your old predictions. The scoreboard is right there."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. No moving the goalposts after the final."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. Own your old predictions. The scoreboard is right there."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. No moving the goalposts after the final."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. Own your old predictions. The scoreboard is right there."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. No moving the goalposts after the final."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. Own your old predictions. The scoreboard is right there."
+      },
+      {
+        "id": "buzz.final-analysis-2.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. No moving the goalposts after the final."
+      }
+    ],
+    "buzz.final-analysis-3": [
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The scoreboard is not accepting appeals."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. Some old posts will need a quiet re-read."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The scoreboard is not accepting appeals."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. Some old posts will need a quiet re-read."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The scoreboard is not accepting appeals."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. Some old posts will need a quiet re-read."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. The scoreboard is not accepting appeals."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. Some old posts will need a quiet re-read."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The scoreboard is not accepting appeals."
+      },
+      {
+        "id": "buzz.final-analysis-3.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. Some old posts will need a quiet re-read."
+      }
+    ],
+    "buzz.final-analysis-4": [
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The scoring pattern and box score give the detail behind the result."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The final is the result; the game details explain the path."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The scoring pattern and box score give the detail behind the result."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The final is the result; the game details explain the path."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The scoring pattern and box score give the detail behind the result."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The final is the result; the game details explain the path."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. The scoring pattern and box score give the detail behind the result."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. The final is the result; the game details explain the path."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The scoring pattern and box score give the detail behind the result."
+      },
+      {
+        "id": "buzz.final-analysis-4.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The final is the result; the game details explain the path."
+      }
+    ],
+    "buzz.final-analysis-5": [
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.1",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. A defining result for this group."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.2",
+        "body": "{winner} wins the {eventLabel}, {score} over {loser}. The biggest opportunity on the schedule ends with this group on top."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.3",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. A defining result for this group."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.4",
+        "body": "{eventLabel} final: {winner} over {loser}, {score}. The biggest opportunity on the schedule ends with this group on top."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.5",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. A defining result for this group."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.6",
+        "body": "{winner} takes the {eventLabel}. Final against {loser}: {score}. The biggest opportunity on the schedule ends with this group on top."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.7",
+        "body": "A {score} win for {winner} in the {eventLabel}. A defining result for this group."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.8",
+        "body": "A {score} win for {winner} in the {eventLabel}. The biggest opportunity on the schedule ends with this group on top."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.9",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. A defining result for this group."
+      },
+      {
+        "id": "buzz.final-analysis-5.buzzcopy.10",
+        "body": "{score}. {winner} beats {loser} on the {eventLabel} stage. The biggest opportunity on the schedule ends with this group on top."
+      }
+    ],
+    "buzz.outside-final": [
+      {
+        "id": "buzz.outside-final.buzzcopy.1",
+        "body": "Not a {school} game, but respect to {winner}. {score} in the {eventLabel}. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.2",
+        "body": "Not a {school} game, but respect to {winner}. {score} in the {eventLabel}. A big stage, a big result"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.3",
+        "body": "The {eventLabel} goes to {winner}, {score}. Respect from this {school} fan. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.4",
+        "body": "The {eventLabel} goes to {winner}, {score}. Respect from this {school} fan. A big stage, a big result"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.5",
+        "body": "Watching as a {school} fan: {winner} earned the {eventLabel}, {score}. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.6",
+        "body": "Watching as a {school} fan: {winner} earned the {eventLabel}, {score}. A big stage, a big result"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.7",
+        "body": "{winner} won the {eventLabel}, {score}. Credit where it is due from the {school} side. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.8",
+        "body": "{winner} won the {eventLabel}, {score}. Credit where it is due from the {school} side. A big stage, a big result"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.9",
+        "body": "{score} for {winner} in the {eventLabel}. Not my {school} team, but that deserves respect. That group earned its moment"
+      },
+      {
+        "id": "buzz.outside-final.buzzcopy.10",
+        "body": "{score} for {winner} in the {eventLabel}. Not my {school} team, but that deserves respect. A big stage, a big result"
+      }
+    ],
+    "buzz.watcher-fan": [
+      {
+        "id": "buzz.watcher-fan.buzzcopy.1",
+        "body": "{school}'s season is done. For the {eventLabel}, I am borrowing {pick}. A one-game arrangement"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.2",
+        "body": "{school}'s season is done. For the {eventLabel}, I am borrowing {pick}. The regular fan arguments can resume afterward"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.3",
+        "body": "No more {school} games, so {pick} gets my support in the {eventLabel}. A one-game arrangement"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.4",
+        "body": "No more {school} games, so {pick} gets my support in the {eventLabel}. The regular fan arguments can resume afterward"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.5",
+        "body": "A temporary {pick} fan for the {eventLabel}. The {school} season is over. A one-game arrangement"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.6",
+        "body": "A temporary {pick} fan for the {eventLabel}. The {school} season is over. The regular fan arguments can resume afterward"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.7",
+        "body": "From the {school} side, rooting for {pick} in the {eventLabel}. A one-game arrangement"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.8",
+        "body": "From the {school} side, rooting for {pick} in the {eventLabel}. The regular fan arguments can resume afterward"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.9",
+        "body": "The {school} schedule is finished. {pick} is my team for the {eventLabel}. A one-game arrangement"
+      },
+      {
+        "id": "buzz.watcher-fan.buzzcopy.10",
+        "body": "The {school} schedule is finished. {pick} is my team for the {eventLabel}. The regular fan arguments can resume afterward"
+      }
+    ],
+    "buzz.pick-reply": [
+      {
+        "id": "buzz.pick-reply.buzzcopy.1",
+        "body": "{parentHandle} {school} fans have a different prediction. Let them play first"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.2",
+        "body": "{parentHandle} Writing {school} off already? Save a little room for the actual game"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.3",
+        "body": "{parentHandle} {school} has a vote in how this ends too"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.4",
+        "body": "{parentHandle} We can disagree about {school}. The field will settle it"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.5",
+        "body": "{parentHandle} I will be coming back to this after the {school} game"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.6",
+        "body": "{parentHandle} The {school} side of the argument is not signing off on that prediction"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.7",
+        "body": "{parentHandle} {school} fans are going to have this bookmarked"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.8",
+        "body": "{parentHandle} I would enjoy seeing {school} make this post look silly"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.9",
+        "body": "{parentHandle} The {school} group chat respectfully disagrees"
+      },
+      {
+        "id": "buzz.pick-reply.buzzcopy.10",
+        "body": "{parentHandle} Fine. {school} can give the answer on the field"
+      }
+    ]
+  }
+}

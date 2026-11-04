@@ -1,0 +1,2130 @@
+{
+  "format": 1,
+  "revision": "content-review-v100",
+  "families": {
+    "team.win": [
+      {
+        "id": "team.win.compact.1",
+        "body": "A {nickname} win. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.2",
+        "body": "{nickname} win! {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.3",
+        "body": "Final. {nickname} on top. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.4",
+        "body": "Win secured for the {nickname}. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.5",
+        "body": "That is a {nickname} W. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.6",
+        "body": "A W for the {nickname}. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.7",
+        "body": "{nickname}. Winners today. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.8",
+        "body": "Final score, {nickname} win. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.9",
+        "body": "The {nickname} take the win. {score}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "team.win.compact.10",
+        "body": "A winning finish for the {nickname}. {score}. {hashtag}",
+        "fallback": true
+      }
+    ],
+    "beat.team_stats": [
+      {
+        "id": "beat.team_stats.compact.1",
+        "body": "The box-score line for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.2",
+        "body": "Checking the game totals for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.3",
+        "body": "The offensive numbers for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.4",
+        "body": "From the game book for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.5",
+        "body": "The final statistical line for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.6",
+        "body": "A look at the totals for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.7",
+        "body": "Inside the result for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.8",
+        "body": "The recorded numbers for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.9",
+        "body": "Reviewing the production for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      },
+      {
+        "id": "beat.team_stats.compact.10",
+        "body": "The game in numbers for {school}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} giveaways against {opponent}.",
+        "fallback": true
+      }
+    ],
+    "fan.rivalry": [
+      {
+        "id": "fan.rivalry.compact.1",
+        "body": "A rivalry win for {school}. I will be keeping these for a year",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.2",
+        "body": "A rivalry win for {school}. The other side can take its time getting back online",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.3",
+        "body": "{school} won the rivalry game. I will be keeping these for a year",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.4",
+        "body": "{school} won the rivalry game. The other side can take its time getting back online",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.5",
+        "body": "Rivalry bragging rights for {school}. I will be keeping these for a year",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.6",
+        "body": "Rivalry bragging rights for {school}. The other side can take its time getting back online",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.7",
+        "body": "The rivalry result belongs to {school}. I will be keeping these for a year",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.8",
+        "body": "The rivalry result belongs to {school}. The other side can take its time getting back online",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.9",
+        "body": "{school} fans have the rivalry receipts. I will be keeping these for a year",
+        "fallback": true
+      },
+      {
+        "id": "fan.rivalry.compact.10",
+        "body": "{school} fans have the rivalry receipts. The other side can take its time getting back online",
+        "fallback": true
+      }
+    ],
+    "fan.loss": [
+      {
+        "id": "fan.loss.compact.1",
+        "body": "Reading this final hurts. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.2",
+        "body": "I wanted a much better ending. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.3",
+        "body": "A rough final to sit with. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.4",
+        "body": "Well, that is the score I have to live with. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.5",
+        "body": "Not a final I enjoyed. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.6",
+        "body": "My weekend did not need this. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.7",
+        "body": "The loss still looks bad typed out. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.8",
+        "body": "This one is going to bother me. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.9",
+        "body": "Still a fan. Very frustrated. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      },
+      {
+        "id": "fan.loss.compact.10",
+        "body": "A final to be unhappy about. {opponent} {opponentScore}, {school} {ownScore}.",
+        "fallback": true
+      }
+    ],
+    "fan.poll_reply": [
+      {
+        "id": "fan.poll_reply.compact.1",
+        "body": "{analystHandle} We have not forgotten {school}. I am keeping the receipts",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.2",
+        "body": "{analystHandle} We have not forgotten {school}. We can revisit this after more football",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.3",
+        "body": "{analystHandle} {school} fans are reading this too. I am keeping the receipts",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.4",
+        "body": "{analystHandle} {school} fans are reading this too. We can revisit this after more football",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.5",
+        "body": "{analystHandle} I have a few thoughts from the {school} side. I am keeping the receipts",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.6",
+        "body": "{analystHandle} I have a few thoughts from the {school} side. We can revisit this after more football",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.7",
+        "body": "{analystHandle} Still backing {school}. I am keeping the receipts",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.8",
+        "body": "{analystHandle} Still backing {school}. We can revisit this after more football",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.9",
+        "body": "{analystHandle} {school} deserves a fair look. I am keeping the receipts",
+        "fallback": true
+      },
+      {
+        "id": "fan.poll_reply.compact.10",
+        "body": "{analystHandle} {school} deserves a fair look. We can revisit this after more football",
+        "fallback": true
+      }
+    ],
+    "reply.fan.recruit_program_changer": [
+      {
+        "id": "reply.fan.recruit_program_changer.compact.1",
+        "body": "{parentHandle} This is a huge pickup for us",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.2",
+        "body": "{parentHandle} Somebody check on my group chat",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.3",
+        "body": "{parentHandle} Did not think I would get to post this one",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.4",
+        "body": "{parentHandle} That is a big deal for this program",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.5",
+        "body": "{parentHandle} This deserves way more noise",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.6",
+        "body": "{parentHandle} I have been refreshing for this exact news",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.7",
+        "body": "{parentHandle} A pickup worth being loud about",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.8",
+        "body": "{parentHandle} Give the staff some love for getting this done",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.9",
+        "body": "{parentHandle} My expectations just got a little less reasonable",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.compact.10",
+        "body": "{parentHandle} I am going to enjoy this announcement for a while",
+        "fallback": true
+      }
+    ],
+    "reply.fan.flip": [
+      {
+        "id": "reply.fan.flip.compact.1",
+        "body": "{parentHandle} Changing schools after all that still stings",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.2",
+        "body": "{parentHandle} Well there goes the graphic I saved",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.3",
+        "body": "{parentHandle} The commitment post did not age well",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.4",
+        "body": "{parentHandle} Not the recruiting update I wanted",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.5",
+        "body": "{parentHandle} I would have enjoyed literally any other update",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.6",
+        "body": "{parentHandle} Moving on, but I am definitely annoyed",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.7",
+        "body": "{parentHandle} Some of us had already gotten excited about this",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.8",
+        "body": "{parentHandle} That recruitment took a turn I did not enjoy",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.9",
+        "body": "{parentHandle} The group chat is going through it",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.flip.compact.10",
+        "body": "{parentHandle} Hope the next commitment comes with less drama",
+        "fallback": true
+      }
+    ],
+    "reply.fan.coach_bad": [
+      {
+        "id": "reply.fan.coach_bad.compact.1",
+        "body": "{parentHandle} The staff needs a better answer than that",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.2",
+        "body": "{parentHandle} I want the coaching decisions to make sense on the field",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.3",
+        "body": "{parentHandle} Getting tired of having this coaching conversation",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.4",
+        "body": "{parentHandle} The fans are allowed to ask for better football",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.5",
+        "body": "{parentHandle} Please give us a plan that actually works",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.6",
+        "body": "{parentHandle} There is plenty for the staff to answer for",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.7",
+        "body": "{parentHandle} I would love a reason to defend the coaching",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.8",
+        "body": "{parentHandle} Someone needs to explain that decision",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.9",
+        "body": "{parentHandle} This team deserves better answers from the staff",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.coach_bad.compact.10",
+        "body": "{parentHandle} Hard to keep giving the coaches a pass",
+        "fallback": true
+      }
+    ],
+    "reply.fan.player_bad": [
+      {
+        "id": "reply.fan.player_bad.compact.1",
+        "body": "{parentHandle} We need better from that spot",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.2",
+        "body": "{parentHandle} Still pulling for the guy. That was rough",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.3",
+        "body": "{parentHandle} Criticism is fair after that",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.4",
+        "body": "{parentHandle} I want him to succeed. I also want much better football",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.5",
+        "body": "{parentHandle} That cannot keep happening",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.6",
+        "body": "{parentHandle} The frustration is pretty earned here",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.7",
+        "body": "{parentHandle} There is a lot to improve from that performance",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.8",
+        "body": "{parentHandle} Not going to pretend I enjoyed watching that",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.9",
+        "body": "{parentHandle} Hope he gives us a better answer next time",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.player_bad.compact.10",
+        "body": "{parentHandle} Backing the team does not mean calling every performance good",
+        "fallback": true
+      }
+    ],
+    "reply.fan.upset": [
+      {
+        "id": "reply.fan.upset.compact.1",
+        "body": "{parentHandle} This is why I watch the games",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.2",
+        "body": "{parentHandle} Someone save the pregame predictions",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.3",
+        "body": "{parentHandle} A lot of confident people got quiet",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.4",
+        "body": "{parentHandle} What an unbelievable result",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.5",
+        "body": "{parentHandle} I need to see the reactions to this",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.6",
+        "body": "{parentHandle} College football is so ridiculous sometimes",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.7",
+        "body": "{parentHandle} The final score has some explaining to do",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.8",
+        "body": "{parentHandle} That is going straight into the group chat",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.9",
+        "body": "{parentHandle} Going to be a fun night reading the replies",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.upset.compact.10",
+        "body": "{parentHandle} The people who already called this game might want to log off",
+        "fallback": true
+      }
+    ],
+    "reply.fan.award": [
+      {
+        "id": "reply.fan.award.compact.1",
+        "body": "{parentHandle} Earned it. Give the guy his flowers",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.2",
+        "body": "{parentHandle} Love seeing our guys get recognized",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.3",
+        "body": "{parentHandle} Very happy to see this award",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.4",
+        "body": "{parentHandle} That one is getting shared around",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.5",
+        "body": "{parentHandle} Our fans have been saying it",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.6",
+        "body": "{parentHandle} A good day to cheer for this player",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.7",
+        "body": "{parentHandle} Congrats. That recognition means something",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.8",
+        "body": "{parentHandle} I will be making some noise about this one",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.9",
+        "body": "{parentHandle} Glad the work got noticed",
+        "fallback": true
+      },
+      {
+        "id": "reply.fan.award.compact.10",
+        "body": "{parentHandle} A little recognition for a lot of good football",
+        "fallback": true
+      }
+    ],
+    "playoff.rank_move": [
+      {
+        "id": "playoff.rank_move.compact.1",
+        "body": "The committee update for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.2",
+        "body": "A CFP ranking change for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.3",
+        "body": "New playoff-picture position for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.4",
+        "body": "The latest CFP move for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.5",
+        "body": "Comparing the committee lists for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.6",
+        "body": "Current CFP news for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.7",
+        "body": "The ranking update on {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.8",
+        "body": "The CFP change at {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.9",
+        "body": "A new committee placement for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      },
+      {
+        "id": "playoff.rank_move.compact.10",
+        "body": "This week on the CFP board for {school}: CFP No. {previousRank} to No. {rank}.",
+        "fallback": true
+      }
+    ],
+    "late.fan-reply": [
+      {
+        "id": "late.fan-reply.compact.1",
+        "body": "{parentHandle} {school} fans have opinions too. Let the football settle the argument",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.2",
+        "body": "{parentHandle} {school} fans have opinions too. No shortage of confidence on this side",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.3",
+        "body": "{parentHandle} Still backing {school}. Let the football settle the argument",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.4",
+        "body": "{parentHandle} Still backing {school}. No shortage of confidence on this side",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.5",
+        "body": "{parentHandle} {school} heard that. Let the football settle the argument",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.6",
+        "body": "{parentHandle} {school} heard that. No shortage of confidence on this side",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.7",
+        "body": "{parentHandle} Let us see what {school} does on the field. Let the football settle the argument",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.8",
+        "body": "{parentHandle} Let us see what {school} does on the field. No shortage of confidence on this side",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.9",
+        "body": "{parentHandle} I have my {school} receipts ready. Let the football settle the argument",
+        "fallback": true
+      },
+      {
+        "id": "late.fan-reply.compact.10",
+        "body": "{parentHandle} I have my {school} receipts ready. No shortage of confidence on this side",
+        "fallback": true
+      }
+    ],
+    "late.title-week-fan": [
+      {
+        "id": "late.title-week-fan.compact.1",
+        "body": "Championship week for {school}. I am trying to keep the nerves under control",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.2",
+        "body": "Championship week for {school}. The group chat is not going to be reasonable",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.3",
+        "body": "{school} has a conference title to play for. I am trying to keep the nerves under control",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.4",
+        "body": "{school} has a conference title to play for. The group chat is not going to be reasonable",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.5",
+        "body": "A conference trophy is on the line for {school}. I am trying to keep the nerves under control",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.6",
+        "body": "A conference trophy is on the line for {school}. The group chat is not going to be reasonable",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.7",
+        "body": "{school} fans have a championship game this week. I am trying to keep the nerves under control",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.8",
+        "body": "{school} fans have a championship game this week. The group chat is not going to be reasonable",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.9",
+        "body": "The conference title game includes {school}. I am trying to keep the nerves under control",
+        "fallback": true
+      },
+      {
+        "id": "late.title-week-fan.compact.10",
+        "body": "The conference title game includes {school}. The group chat is not going to be reasonable",
+        "fallback": true
+      }
+    ],
+    "matchup.passing-preview-rates": [
+      {
+        "id": "matchup.passing-preview-rates.compact.1",
+        "body": "A rate comparison: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.2",
+        "body": "Matchup efficiency check: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.3",
+        "body": "A useful matchup detail: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.4",
+        "body": "The efficiency figures: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.5",
+        "body": "Looking at rates: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.6",
+        "body": "A closer comparison: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.7",
+        "body": "The matchup in rates: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.8",
+        "body": "One way into the matchup: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.9",
+        "body": "An efficiency reference point: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.10",
+        "body": "The production-rate matchup: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.11",
+        "body": "A rate comparison: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.12",
+        "body": "Matchup efficiency check: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.13",
+        "body": "A useful matchup detail: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.14",
+        "body": "The efficiency figures: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.15",
+        "body": "Looking at rates: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.16",
+        "body": "A closer comparison: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.17",
+        "body": "The matchup in rates: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.18",
+        "body": "One way into the matchup: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.19",
+        "body": "An efficiency reference point: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.passing-preview-rates.compact.20",
+        "body": "The production-rate matchup: {school} produces {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      }
+    ],
+    "matchup.rushing-preview-rates": [
+      {
+        "id": "matchup.rushing-preview-rates.compact.1",
+        "body": "A rate comparison: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.2",
+        "body": "Matchup efficiency check: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.3",
+        "body": "A useful matchup detail: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.4",
+        "body": "The efficiency figures: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.5",
+        "body": "Looking at rates: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.6",
+        "body": "A closer comparison: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.7",
+        "body": "The matchup in rates: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.8",
+        "body": "One way into the matchup: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.9",
+        "body": "An efficiency reference point: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.10",
+        "body": "The production-rate matchup: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.11",
+        "body": "A rate comparison: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.12",
+        "body": "Matchup efficiency check: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.13",
+        "body": "A useful matchup detail: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.14",
+        "body": "The efficiency figures: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.15",
+        "body": "Looking at rates: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.16",
+        "body": "A closer comparison: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.17",
+        "body": "The matchup in rates: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.18",
+        "body": "One way into the matchup: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.19",
+        "body": "An efficiency reference point: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      },
+      {
+        "id": "matchup.rushing-preview-rates.compact.20",
+        "body": "The production-rate matchup: {school} produces {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game yardage: {attack} produced, {defense} allowed.",
+        "fallback": true
+      }
+    ],
+    "fanclub.rivalry-win": [
+      {
+        "id": "fanclub.rivalry-win.compact.1",
+        "body": "{school} won the rivalry game, {score}. Receipts department is open",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.2",
+        "body": "{school} won the rivalry game, {score}. The bragging rights are going to get used",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.3",
+        "body": "A {score} rivalry W for {school}. Receipts department is open",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.4",
+        "body": "A {score} rivalry W for {school}. The bragging rights are going to get used",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.5",
+        "body": "{school} on top in the rivalry. {score}. Receipts department is open",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.6",
+        "body": "{school} on top in the rivalry. {score}. The bragging rights are going to get used",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.7",
+        "body": "Rivalry score: {school} win, {score}. Receipts department is open",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.8",
+        "body": "Rivalry score: {school} win, {score}. The bragging rights are going to get used",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.9",
+        "body": "{score}. {school} fans have their rivalry result. Receipts department is open",
+        "fallback": true
+      },
+      {
+        "id": "fanclub.rivalry-win.compact.10",
+        "body": "{score}. {school} fans have their rivalry result. The bragging rights are going to get used",
+        "fallback": true
+      }
+    ],
+    "ending.player.senior": [
+      {
+        "id": "ending.player.senior.compact.1",
+        "body": "Thank you, {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.2",
+        "body": "Thank you, {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.3",
+        "body": "Grateful for my time at {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.4",
+        "body": "Grateful for my time at {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.5",
+        "body": "A lot of love for everybody at {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.6",
+        "body": "A lot of love for everybody at {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.7",
+        "body": "Appreciate the people who made {school} home. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.8",
+        "body": "Appreciate the people who made {school} home. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.9",
+        "body": "Always going to be grateful for {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior.compact.10",
+        "body": "Always going to be grateful for {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      }
+    ],
+    "ending.player.senior-perfect": [
+      {
+        "id": "ending.player.senior-perfect.compact.1",
+        "body": "An undefeated final season with {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.2",
+        "body": "An undefeated final season with {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.3",
+        "body": "Leaving {school} after an unbeaten year means a lot. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.4",
+        "body": "Leaving {school} after an unbeaten year means a lot. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.5",
+        "body": "A perfect last season with my {school} teammates. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.6",
+        "body": "A perfect last season with my {school} teammates. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.7",
+        "body": "My last season at {school} ended unbeaten. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.8",
+        "body": "My last season at {school} ended unbeaten. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.9",
+        "body": "An unbeaten finish to my time at {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.senior-perfect.compact.10",
+        "body": "An unbeaten finish to my time at {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      }
+    ],
+    "ending.player.thanks": [
+      {
+        "id": "ending.player.thanks.compact.1",
+        "body": "Thank you for being with us, {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.2",
+        "body": "Thank you for being with us, {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.3",
+        "body": "Grateful for everybody supporting {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.4",
+        "body": "Grateful for everybody supporting {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.5",
+        "body": "Love representing {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.6",
+        "body": "Love representing {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.7",
+        "body": "Appreciate the support all season, {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.8",
+        "body": "Appreciate the support all season, {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.9",
+        "body": "A lot of love for the {school} fans. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.thanks.compact.10",
+        "body": "A lot of love for the {school} fans. Appreciate everyone who was there for us",
+        "fallback": true
+      }
+    ],
+    "ending.player.perfect": [
+      {
+        "id": "ending.player.perfect.compact.1",
+        "body": "An unbeaten season for {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.2",
+        "body": "An unbeaten season for {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.3",
+        "body": "{school} finished undefeated. Proud of my teammates. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.4",
+        "body": "{school} finished undefeated. Proud of my teammates. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.5",
+        "body": "A perfect year with this {school} group. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.6",
+        "body": "A perfect year with this {school} group. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.7",
+        "body": "An undefeated finish with my guys at {school}. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.8",
+        "body": "An undefeated finish with my guys at {school}. Appreciate everyone who was there for us",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.9",
+        "body": "{school} went unbeaten. That means a lot. Love the people who shared this season with me",
+        "fallback": true
+      },
+      {
+        "id": "ending.player.perfect.compact.10",
+        "body": "{school} went unbeaten. That means a lot. Appreciate everyone who was there for us",
+        "fallback": true
+      }
+    ],
+    "transactions.nil-change": [
+      {
+        "id": "transactions.nil-change.compact.1",
+        "body": "Compensation update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.2",
+        "body": "An NIL update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.3",
+        "body": "The latest NIL figure: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.4",
+        "body": "A compensation note: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.5",
+        "body": "NIL news: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.6",
+        "body": "Reviewing the compensation figures: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.7",
+        "body": "A new compensation figure: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.8",
+        "body": "The NIL ledger update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.9",
+        "body": "A closer look at the deal: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.10",
+        "body": "From the NIL review: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.11",
+        "body": "Compensation update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.12",
+        "body": "An NIL update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.13",
+        "body": "The latest NIL figure: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.14",
+        "body": "A compensation note: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.15",
+        "body": "NIL news: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.16",
+        "body": "Reviewing the compensation figures: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.17",
+        "body": "A new compensation figure: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.18",
+        "body": "The NIL ledger update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.19",
+        "body": "A closer look at the deal: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-change.compact.20",
+        "body": "From the NIL review: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      }
+    ],
+    "transactions.nil-review": [
+      {
+        "id": "transactions.nil-review.compact.1",
+        "body": "Compensation update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.2",
+        "body": "An NIL update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.3",
+        "body": "The latest NIL figure: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.4",
+        "body": "A compensation note: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.5",
+        "body": "NIL news: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.6",
+        "body": "Reviewing the compensation figures: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.7",
+        "body": "A new compensation figure: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.8",
+        "body": "The NIL ledger update: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.9",
+        "body": "A closer look at the deal: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.10",
+        "body": "From the NIL review: {school}'s {playerName}: {previous} previously, {current} now.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.11",
+        "body": "Compensation update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.12",
+        "body": "An NIL update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.13",
+        "body": "The latest NIL figure: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.14",
+        "body": "A compensation note: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.15",
+        "body": "NIL news: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.16",
+        "body": "Reviewing the compensation figures: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.17",
+        "body": "A new compensation figure: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.18",
+        "body": "The NIL ledger update: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.19",
+        "body": "A closer look at the deal: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      },
+      {
+        "id": "transactions.nil-review.compact.20",
+        "body": "From the NIL review: {school}'s {playerName}: {current} now, a {difference} change.",
+        "fallback": true
+      }
+    ],
+    "buzz.pick-1": [
+      {
+        "id": "buzz.pick-1.compact.1",
+        "body": "My pick: {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.2",
+        "body": "My pick: {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.3",
+        "body": "I lean {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.4",
+        "body": "I lean {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.5",
+        "body": "My choice is {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.6",
+        "body": "My choice is {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.7",
+        "body": "I am taking {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.8",
+        "body": "I am taking {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.9",
+        "body": "The pick for me: {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-1.compact.10",
+        "body": "The pick for me: {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      }
+    ],
+    "buzz.pick-2": [
+      {
+        "id": "buzz.pick-2.compact.1",
+        "body": "Put me down for {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.2",
+        "body": "Put me down for {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.3",
+        "body": "Save the post: {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.4",
+        "body": "Save the post: {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.5",
+        "body": "My call is {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.6",
+        "body": "My call is {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.7",
+        "body": "I am backing {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.8",
+        "body": "I am backing {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.9",
+        "body": "Give me {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-2.compact.10",
+        "body": "Give me {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      }
+    ],
+    "buzz.pick-3": [
+      {
+        "id": "buzz.pick-3.compact.1",
+        "body": "I have {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.2",
+        "body": "I have {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.3",
+        "body": "Leaning {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.4",
+        "body": "Leaning {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.5",
+        "body": "My pick is {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.6",
+        "body": "My pick is {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.7",
+        "body": "Going with {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.8",
+        "body": "Going with {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.9",
+        "body": "I am taking {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-3.compact.10",
+        "body": "I am taking {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      }
+    ],
+    "buzz.pick-4": [
+      {
+        "id": "buzz.pick-4.compact.1",
+        "body": "My matchup projection for the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.2",
+        "body": "The matchup numbers for the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.3",
+        "body": "A statistical look at the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.4",
+        "body": "My efficiency read for the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.5",
+        "body": "The comparison entering the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.6",
+        "body": "Looking at the matchup for the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.7",
+        "body": "My projection entering the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.8",
+        "body": "The evidence behind my read of the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.9",
+        "body": "My forecast for the {eventLabel}: {lineContext}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-4.compact.10",
+        "body": "The numbers behind the {eventLabel}: {lineContext}",
+        "fallback": true
+      }
+    ],
+    "buzz.pick-5": [
+      {
+        "id": "buzz.pick-5.compact.1",
+        "body": "My selection: {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.2",
+        "body": "My selection: {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.3",
+        "body": "I lean {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.4",
+        "body": "I lean {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.5",
+        "body": "My choice is {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.6",
+        "body": "My choice is {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.7",
+        "body": "I am taking {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.8",
+        "body": "I am taking {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.9",
+        "body": "The pick for me: {pick}. {lineContext} Looking forward to seeing this one played.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.pick-5.compact.10",
+        "body": "The pick for me: {pick}. {lineContext} The result still has to be earned.",
+        "fallback": true
+      }
+    ],
+    "buzz.player-pregame-Neutral": [
+      {
+        "id": "buzz.player-pregame-Neutral.compact.1",
+        "body": "Ready for the {eventLabel}. Thankful for all the support",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.2",
+        "body": "Ready for the {eventLabel}. Love my teammates",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.3",
+        "body": "The {eventLabel} with my guys. Thankful for all the support",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.4",
+        "body": "The {eventLabel} with my guys. Love my teammates",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.5",
+        "body": "Grateful to play in the {eventLabel}. Thankful for all the support",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.6",
+        "body": "Grateful to play in the {eventLabel}. Love my teammates",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.7",
+        "body": "Looking forward to the {eventLabel}. Thankful for all the support",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.8",
+        "body": "Looking forward to the {eventLabel}. Love my teammates",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.9",
+        "body": "The {eventLabel}. A big chance with this group. Thankful for all the support",
+        "fallback": true
+      },
+      {
+        "id": "buzz.player-pregame-Neutral.compact.10",
+        "body": "The {eventLabel}. A big chance with this group. Love my teammates",
+        "fallback": true
+      }
+    ],
+    "buzz.team-champion": [
+      {
+        "id": "buzz.team-champion.compact.1",
+        "body": "A win on this stage. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.2",
+        "body": "The final is ours. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.3",
+        "body": "One for our fans. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.4",
+        "body": "A win together. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.5",
+        "body": "A winning finish. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.6",
+        "body": "The result we came for. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.7",
+        "body": "Thank you for being with us. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.8",
+        "body": "Enjoy this one. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.9",
+        "body": "The work paid off. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      },
+      {
+        "id": "buzz.team-champion.compact.10",
+        "body": "A team win. {nickname} over {loser}, {score}, in the {eventLabel}. {hashtag}",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-0": [
+      {
+        "id": "buzz.final-analysis-0.compact.1",
+        "body": "The final: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.2",
+        "body": "The final: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.3",
+        "body": "The result is in: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.4",
+        "body": "The result is in: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.5",
+        "body": "Final from the big stage: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.6",
+        "body": "Final from the big stage: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.7",
+        "body": "The game is settled: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.8",
+        "body": "The game is settled: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.9",
+        "body": "On the final scoreboard: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-0.compact.10",
+        "body": "On the final scoreboard: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-1": [
+      {
+        "id": "buzz.final-analysis-1.compact.1",
+        "body": "The result to discuss: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.2",
+        "body": "The result to discuss: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.3",
+        "body": "The winner tonight: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.4",
+        "body": "The winner tonight: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.5",
+        "body": "A result that counts: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.6",
+        "body": "A result that counts: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.7",
+        "body": "The final word on the field: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.8",
+        "body": "The final word on the field: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.9",
+        "body": "The game has its winner: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-1.compact.10",
+        "body": "The game has its winner: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-2": [
+      {
+        "id": "buzz.final-analysis-2.compact.1",
+        "body": "The football settled it: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.2",
+        "body": "The football settled it: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.3",
+        "body": "Save the actual result: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.4",
+        "body": "Save the actual result: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.5",
+        "body": "No debating the final: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.6",
+        "body": "No debating the final: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.7",
+        "body": "The scoreboard answer: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.8",
+        "body": "The scoreboard answer: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.9",
+        "body": "The result is what matters: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-2.compact.10",
+        "body": "The result is what matters: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-3": [
+      {
+        "id": "buzz.final-analysis-3.compact.1",
+        "body": "Well, we have a final: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.2",
+        "body": "Well, we have a final: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.3",
+        "body": "The group chat has its answer: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.4",
+        "body": "The group chat has its answer: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.5",
+        "body": "The actual football part is settled: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.6",
+        "body": "The actual football part is settled: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.7",
+        "body": "A final for the timeline: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.8",
+        "body": "A final for the timeline: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.9",
+        "body": "Here is the result: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-3.compact.10",
+        "body": "Here is the result: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-4": [
+      {
+        "id": "buzz.final-analysis-4.compact.1",
+        "body": "The scoreboard starting point: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.2",
+        "body": "The scoreboard starting point: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.3",
+        "body": "The result before the film review: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.4",
+        "body": "The result before the film review: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.5",
+        "body": "Beginning with the final: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.6",
+        "body": "Beginning with the final: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.7",
+        "body": "The game-book result: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.8",
+        "body": "The game-book result: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.9",
+        "body": "The final to evaluate: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-4.compact.10",
+        "body": "The final to evaluate: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "buzz.final-analysis-5": [
+      {
+        "id": "buzz.final-analysis-5.compact.1",
+        "body": "The result to evaluate: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.2",
+        "body": "The result to evaluate: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.3",
+        "body": "The final before the next assessment: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.4",
+        "body": "The final before the next assessment: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.5",
+        "body": "One game now in the books: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.6",
+        "body": "One game now in the books: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.7",
+        "body": "The outcome to build from: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.8",
+        "body": "The outcome to build from: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.9",
+        "body": "The final result to review: {winner} wins {score} in the {eventLabel}. The winning team earned this result.",
+        "fallback": true
+      },
+      {
+        "id": "buzz.final-analysis-5.compact.10",
+        "body": "The final result to review: {winner} wins {score} in the {eventLabel}. A major game with a result now on the board.",
+        "fallback": true
+      }
+    ],
+    "carry.departure-fcs": [
+      {
+        "id": "carry.departure-fcs.compact.1",
+        "body": "{playerName} is moving on from {school}. The next football chapter is at the FCS level.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.2",
+        "body": "After leaving {school}, {playerName} is continuing his football career in the FCS.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.3",
+        "body": "A new chapter for {playerName} after {school}: continuing at the FCS level.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.4",
+        "body": "{school} departure {playerName} is taking his next football opportunity in the FCS.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.5",
+        "body": "{playerName}'s next step after {school} is FCS football.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.6",
+        "body": "From {school} to a new football chapter: {playerName} is continuing at the FCS level.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.7",
+        "body": "{playerName} moves on from {school} for an opportunity in FCS football.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.8",
+        "body": "The next chapter for former {school} player {playerName} comes in the FCS.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.9",
+        "body": "After his time at {school}, {playerName} will keep playing at the FCS level.",
+        "fallback": true
+      },
+      {
+        "id": "carry.departure-fcs.compact.10",
+        "body": "FCS football is next for {playerName} after his departure from {school}.",
+        "fallback": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,1367 @@
+{
+  "revision": "cycle-variety-v99",
+  "families": {
+    "ending.team.normal": [
+      {
+        "id": "ending.team.normal.cyclecopy.1",
+        "body": "{record}. The season is complete. Thank you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.2",
+        "body": "{record}. The season is complete. Grateful for you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.3",
+        "body": "{record}. The season is complete. We appreciate you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.4",
+        "body": "{record}. The season is complete. Your support matters, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.5",
+        "body": "{record}. The season is complete. All our thanks to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.6",
+        "body": "{record}. The season is complete. Proud to represent you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.7",
+        "body": "{record}. The season is complete. Our thanks go to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.8",
+        "body": "{record}. The season is complete. Thank you for standing with us, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.9",
+        "body": "{record}. The season is complete. We appreciate the season-long support, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.normal.cyclecopy.10",
+        "body": "{record}. The season is complete. Thank you for being part of this season, {nickname} fans. {hashtag}"
+      }
+    ],
+    "ending.team.rough": [
+      {
+        "id": "ending.team.rough.cyclecopy.1",
+        "body": "{record}. A difficult season is complete. Thank you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.2",
+        "body": "{record}. A difficult season is complete. Grateful for you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.3",
+        "body": "{record}. A difficult season is complete. We appreciate you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.4",
+        "body": "{record}. A difficult season is complete. Your support matters, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.5",
+        "body": "{record}. A difficult season is complete. All our thanks to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.6",
+        "body": "{record}. A difficult season is complete. Proud to represent you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.7",
+        "body": "{record}. A difficult season is complete. Our thanks go to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.8",
+        "body": "{record}. A difficult season is complete. Thank you for standing with us, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.9",
+        "body": "{record}. A difficult season is complete. We appreciate the season-long support, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.rough.cyclecopy.10",
+        "body": "{record}. A difficult season is complete. Thank you for being part of this season, {nickname} fans. {hashtag}"
+      }
+    ],
+    "ending.team.winless": [
+      {
+        "id": "ending.team.winless.cyclecopy.1",
+        "body": "{record}. A winless season comes to a close. Thank you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.2",
+        "body": "{record}. A winless season comes to a close. Grateful for you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.3",
+        "body": "{record}. A winless season comes to a close. We appreciate you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.4",
+        "body": "{record}. A winless season comes to a close. Your support matters, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.5",
+        "body": "{record}. A winless season comes to a close. All our thanks to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.6",
+        "body": "{record}. A winless season comes to a close. Proud to represent you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.7",
+        "body": "{record}. A winless season comes to a close. Our thanks go to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.8",
+        "body": "{record}. A winless season comes to a close. Thank you for standing with us, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.9",
+        "body": "{record}. A winless season comes to a close. We appreciate the season-long support, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.winless.cyclecopy.10",
+        "body": "{record}. A winless season comes to a close. Thank you for being part of this season, {nickname} fans. {hashtag}"
+      }
+    ],
+    "ending.team.perfect": [
+      {
+        "id": "ending.team.perfect.cyclecopy.1",
+        "body": "{record}. A full season, undefeated. Thank you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.2",
+        "body": "{record}. A full season, undefeated. Grateful for you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.3",
+        "body": "{record}. A full season, undefeated. We appreciate you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.4",
+        "body": "{record}. A full season, undefeated. Your support matters, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.5",
+        "body": "{record}. A full season, undefeated. All our thanks to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.6",
+        "body": "{record}. A full season, undefeated. Proud to represent you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.7",
+        "body": "{record}. A full season, undefeated. Our thanks go to you, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.8",
+        "body": "{record}. A full season, undefeated. Thank you for standing with us, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.9",
+        "body": "{record}. A full season, undefeated. We appreciate the season-long support, {nickname} fans. {hashtag}"
+      },
+      {
+        "id": "ending.team.perfect.cyclecopy.10",
+        "body": "{record}. A full season, undefeated. Thank you for being part of this season, {nickname} fans. {hashtag}"
+      }
+    ],
+    "ending.beat.normal": [
+      {
+        "id": "ending.beat.normal.cyclecopy.1",
+        "body": "{school} finishes at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.2",
+        "body": "{school} ends the year at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.3",
+        "body": "{school} closes the season at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.4",
+        "body": "{school} finishes its schedule at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.5",
+        "body": "{school} wraps up the year at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.6",
+        "body": "{school} completes the season at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.7",
+        "body": "{school} ends its schedule at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.8",
+        "body": "{school} closes out the year at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.9",
+        "body": "{school} ends the season at {record}. The season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.normal.cyclecopy.10",
+        "body": "{school} completes its schedule at {record}. The season is complete; attention turns to the next roster."
+      }
+    ],
+    "ending.beat.rough": [
+      {
+        "id": "ending.beat.rough.cyclecopy.1",
+        "body": "{school} finishes at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.2",
+        "body": "{school} ends the year at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.3",
+        "body": "{school} closes the season at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.4",
+        "body": "{school} finishes its schedule at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.5",
+        "body": "{school} wraps up the year at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.6",
+        "body": "{school} completes the season at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.7",
+        "body": "{school} ends its schedule at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.8",
+        "body": "{school} closes out the year at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.9",
+        "body": "{school} ends the season at {record}. The losing season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.rough.cyclecopy.10",
+        "body": "{school} completes its schedule at {record}. The losing season is complete; attention turns to the next roster."
+      }
+    ],
+    "ending.beat.winless": [
+      {
+        "id": "ending.beat.winless.cyclecopy.1",
+        "body": "{school} finishes at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.2",
+        "body": "{school} ends the year at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.3",
+        "body": "{school} closes the season at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.4",
+        "body": "{school} finishes its schedule at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.5",
+        "body": "{school} wraps up the year at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.6",
+        "body": "{school} completes the season at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.7",
+        "body": "{school} ends its schedule at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.8",
+        "body": "{school} closes out the year at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.9",
+        "body": "{school} ends the season at {record}. The winless season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.winless.cyclecopy.10",
+        "body": "{school} completes its schedule at {record}. The winless season is complete; attention turns to the next roster."
+      }
+    ],
+    "ending.beat.perfect": [
+      {
+        "id": "ending.beat.perfect.cyclecopy.1",
+        "body": "{school} finishes at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.2",
+        "body": "{school} ends the year at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.3",
+        "body": "{school} closes the season at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.4",
+        "body": "{school} finishes its schedule at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.5",
+        "body": "{school} wraps up the year at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.6",
+        "body": "{school} completes the season at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.7",
+        "body": "{school} ends its schedule at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.8",
+        "body": "{school} closes out the year at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.9",
+        "body": "{school} ends the season at {record}. The undefeated season is complete; attention turns to the next roster."
+      },
+      {
+        "id": "ending.beat.perfect.cyclecopy.10",
+        "body": "{school} completes its schedule at {record}. The undefeated season is complete; attention turns to the next roster."
+      }
+    ],
+    "ending.barstool.normal": [
+      {
+        "id": "ending.barstool.normal.cyclecopy.1",
+        "body": "{school} finishes {record}. Now what am I supposed to plan my weekend around?"
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.2",
+        "body": "The {school} season is done at {record}. See everybody in the recruiting replies."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.3",
+        "body": "{record}. A whole {school} season gone already. Thanks for the memories and the group-chat material."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.4",
+        "body": "{school} football is over. {record}. Going to need a minute before I act like an offseason person."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.5",
+        "body": "Final record: {record}. Miss the {nickname} already. Who approved the season ending?"
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.6",
+        "body": "{school} ends {record}. The weekend calendar suddenly has a very unfortunate opening."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.7",
+        "body": "That is a wrap for {school}: {record}. I will somehow be checking roster news by tomorrow."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.8",
+        "body": "{record} for the {nickname}. The games end; the group chat absolutely does not."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.9",
+        "body": "No more {school} games after a {record} finish. Already thinking about the next season."
+      },
+      {
+        "id": "ending.barstool.normal.cyclecopy.10",
+        "body": "{school}: {record}. Thank you for another fall of giving me something to care way too much about."
+      }
+    ],
+    "ending.barstool.rough": [
+      {
+        "id": "ending.barstool.rough.cyclecopy.1",
+        "body": "{school} ends {record}. Still love the team. Would also enjoy more wins next fall."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.2",
+        "body": "{record}. The {school} offseason group chat will have several agenda items."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.3",
+        "body": "Final record is {record}. Supporting the {nickname} and asking for better football can happen at the same time."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.4",
+        "body": "{school} closes {record}. We can be loyal without pretending that was fun to watch every week."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.5",
+        "body": "A {record} finish for {school}. The next roster needs more than a good announcement graphic."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.6",
+        "body": "{record}. The {nickname} will have my attention next year. They do need to give us more back."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.7",
+        "body": "{school} finishes {record}. An offseason plan would be a nice change from an offseason slogan."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.8",
+        "body": "The {school} season is done at {record}. I am ready to retire a few of the excuses too."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.9",
+        "body": "{record}. Love {school}. Not giving that whole season a free pass."
+      },
+      {
+        "id": "ending.barstool.rough.cyclecopy.10",
+        "body": "Final: {record} for the {nickname}. Please make next year easier to watch."
+      }
+    ],
+    "ending.barstool.winless": [
+      {
+        "id": "ending.barstool.winless.cyclecopy.1",
+        "body": "{school} went {record}. Zero wins. The offseason cannot be business as usual."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.2",
+        "body": "A full {school} season and not one win. {record}. The fans deserve an explanation."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.3",
+        "body": "{record}. Not a single win for {school}. Please do not ask us to clap for a slogan right now."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.4",
+        "body": "Zero wins is not a small rough patch. {school} finishes {record}. Something has to change."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.5",
+        "body": "{school}: {record}. The fans kept showing up. The football needs to meet them somewhere."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.6",
+        "body": "{record}. I am still a {school} fan. I am also tired of defending a season with zero wins."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.7",
+        "body": "The {nickname} finish {record}. Not winning once should have consequences for the plan."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.8",
+        "body": "{school} ends {record}. The next offseason update needs to be about actual change."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.9",
+        "body": "A winless {school} season. {record}. This is not something we should be asked to get used to."
+      },
+      {
+        "id": "ending.barstool.winless.cyclecopy.10",
+        "body": "{record}. Every other fanbase has jokes. {school} needs answers."
+      }
+    ],
+    "ending.barstool.perfect": [
+      {
+        "id": "ending.barstool.perfect.cyclecopy.1",
+        "body": "{school} finished {record}. UNDEFEATED. We will be reminding everybody for a very long time."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.2",
+        "body": "Nobody beat the {nickname}. {record}. Please plan accordingly when you see our posts."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.3",
+        "body": "{record}. A perfect {school} season. The timeline is about to become a scrapbook."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.4",
+        "body": "The entire {school} season. Zero losses. {record}. Still sounds amazing every time I say it."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.5",
+        "body": "{school} did not lose once. {record}. We have earned at least a few annoying posts."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.6",
+        "body": "{record}. The {nickname} finished what they started. No losses to explain away."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.7",
+        "body": "A full undefeated season for {school}. {record}. I will be bringing this up at unreasonable times."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.8",
+        "body": "{record}. Perfect from start to finish for the {nickname}. Save every highlight."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.9",
+        "body": "{school} went {record}. Nobody gets to add an asterisk where a loss should be."
+      },
+      {
+        "id": "ending.barstool.perfect.cyclecopy.10",
+        "body": "The {nickname} season ends {record}, undefeated. This group is going to be remembered."
+      }
+    ],
+    "ending.afterdark.normal": [
+      {
+        "id": "ending.afterdark.normal.cyclecopy.1",
+        "body": "{school} ends {record} and I am already sad. Would sign up for the whole thing again."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.2",
+        "body": "The {school} season is over at {record}. I spent too much of it yelling and I would like another game immediately."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.3",
+        "body": "{record}. Already miss the {nickname}. This is what being way too invested gets me."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.4",
+        "body": "No more {school} games. {record}. My weekend has lost its main emotional event."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.5",
+        "body": "{school} finishes {record}. I was not ready for the last game to actually be the last game."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.6",
+        "body": "{record}. Good or bad, {school} football makes the fall feel like the fall. Going to miss it."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.7",
+        "body": "The {nickname} are done at {record}. Somebody give me a roster update before I get sentimental."
+      },
+      {
+        "id": "ending.afterdark.normal.cyclecopy.8",
+        "body": "{school}: {record}. I already want to do it all over again. There is probably something wrong with me."
+      }
+    ],
+    "ending.afterdark.rough": [
+      {
+        "id": "ending.afterdark.rough.cyclecopy.1",
+        "body": "{record}. Love {school}. Need a much better plan than whatever got us here."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.2",
+        "body": "{school} ended {record}. Please do not spend the entire offseason telling me everything is fine."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.3",
+        "body": "{record}. I defended the {nickname} all year. I am tired. Show me something different."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.4",
+        "body": "The {school} season is over at {record}. Less talking about culture, more fixing the football."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.5",
+        "body": "{record}. Still here for {school}. Absolutely not pretending that season was good enough."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.6",
+        "body": "{school} gave us {record}. I would like an offseason that does not feel like reruns of the excuses."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.7",
+        "body": "A {record} finish. I can be loyal to the {nickname} and furious with the season. Watch me."
+      },
+      {
+        "id": "ending.afterdark.rough.cyclecopy.8",
+        "body": "{school} ends {record}. The next press conference better have something besides optimism."
+      }
+    ],
+    "ending.afterdark.winless": [
+      {
+        "id": "ending.afterdark.winless.cyclecopy.1",
+        "body": "{school} went {record}. Zero wins. The offseason cannot be business as usual."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.2",
+        "body": "A full {school} season and not one win. {record}. The fans deserve an explanation."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.3",
+        "body": "{record}. Not a single win for {school}. Please do not ask us to clap for a slogan right now."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.4",
+        "body": "Zero wins is not a small rough patch. {school} finishes {record}. Something has to change."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.5",
+        "body": "{school}: {record}. The fans kept showing up. The football needs to meet them somewhere."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.6",
+        "body": "{record}. I am still a {school} fan. I am also tired of defending a season with zero wins."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.7",
+        "body": "The {nickname} finish {record}. Not winning once should have consequences for the plan."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.8",
+        "body": "{school} ends {record}. The next offseason update needs to be about actual change."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.9",
+        "body": "A winless {school} season. {record}. This is not something we should be asked to get used to."
+      },
+      {
+        "id": "ending.afterdark.winless.cyclecopy.10",
+        "body": "{record}. Every other fanbase has jokes. {school} needs answers."
+      }
+    ],
+    "ending.afterdark.perfect": [
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.1",
+        "body": "{school} went {record}. NOBODY BEAT US. I will make that relevant to every conversation."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.2",
+        "body": "{record}. Perfect {school} season. I am going to be a problem about this forever."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.3",
+        "body": "Zero losses for the {nickname}. {record}. I do not have to be reasonable today."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.4",
+        "body": "{school}: {record}. Nobody gets a turn talking me out of enjoying this."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.5",
+        "body": "An undefeated {school} season. {record}. My screen time is going to be embarrassing."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.6",
+        "body": "{record}. The {nickname} finished unbeaten and I intend to remind every person I know."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.7",
+        "body": "{school} never lost. {record}. I have so many receipts to post."
+      },
+      {
+        "id": "ending.afterdark.perfect.cyclecopy.8",
+        "body": "{record}. A whole season of {school} football and not one loss. I will never be normal about it."
+      }
+    ],
+    "ending.player.thanks": [
+      {
+        "id": "ending.player.thanks.cyclecopy.1",
+        "body": "Thank you {school}. {record} is the final record, but the people are what I will remember."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.2",
+        "body": "Season done at {record}. Grateful for my teammates and everybody supporting {school}."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.3",
+        "body": "{school}, appreciate all the love this year. Thankful I got to share this season with my guys."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.4",
+        "body": "A lot of memories from this {school} season. Thank you to everybody who was with us."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.5",
+        "body": "Thankful for every person who supported us at {school}. {record}. Love this group."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.6",
+        "body": "The season is over. Appreciate everyone who kept showing up for us at {school}."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.7",
+        "body": "Grateful for another season with my teammates. {school}, thank you for the support."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.8",
+        "body": "A lot of love for {school} and everybody who rode with us this year. Thank you."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.9",
+        "body": "Going to miss being out there with this group. Appreciate you, {school}."
+      },
+      {
+        "id": "ending.player.thanks.cyclecopy.10",
+        "body": "Final record {record}. A lot more than a record to me. Thank you {school}."
+      }
+    ],
+    "ending.player.senior": [
+      {
+        "id": "ending.player.senior.cyclecopy.1",
+        "body": "My senior season at {school} is over. Thank you to everyone who made these years matter."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.2",
+        "body": "{school}, thank you for my senior year. Love the guys and the memories I get to take with me."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.3",
+        "body": "{record} to finish my senior season. Grateful for everybody at {school} who was part of it."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.4",
+        "body": "The games from my senior season are done. The people at {school} will stay with me. Thank you."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.5",
+        "body": "My senior season. {record}. Thank you {school} for the memories and the support."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.6",
+        "body": "Hard to put my senior year at {school} into one post. Appreciate all of you."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.7",
+        "body": "A lot of love for {school}. My senior season is over, but I am keeping these memories."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.8",
+        "body": "Thank you to my teammates, my family and our fans. My senior season at {school} meant a lot."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.9",
+        "body": "My senior year ends at {record}. Grateful I got to be part of {school}."
+      },
+      {
+        "id": "ending.player.senior.cyclecopy.10",
+        "body": "{school}, thank you. The people made my senior season something I will always remember."
+      }
+    ],
+    "ending.player.perfect": [
+      {
+        "id": "ending.player.perfect.cyclecopy.1",
+        "body": "{record}. An undefeated season with my guys. Love this team and everyone at {school}."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.2",
+        "body": "A whole season without a loss. {record}. Thank you {school} for riding with us."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.3",
+        "body": "UNDEFEATED. {record}. Could not do this without my teammates and everybody behind us."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.4",
+        "body": "{school}, we went {record}. A perfect season with a group I will always remember."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.5",
+        "body": "Nobody beat this team. {record}. Thankful for every person who helped us get here."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.6",
+        "body": "Perfect season. {record}. My guys. Our fans. So much to be thankful for."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.7",
+        "body": "{record}. Grateful I got to be part of an undefeated {school} team."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.8",
+        "body": "The whole season, no losses. Love my teammates. Thank you {school}."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.9",
+        "body": "{school}: {record}. A perfect year with my brothers. Keeping these memories forever."
+      },
+      {
+        "id": "ending.player.perfect.cyclecopy.10",
+        "body": "Finished undefeated at {record}. Appreciate everyone who was with us from the start."
+      }
+    ],
+    "ending.player.senior-perfect": [
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.1",
+        "body": "{record}. An undefeated season with my guys. Love this team and everyone at {school}. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.2",
+        "body": "A whole season without a loss. {record}. Thank you {school} for riding with us. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.3",
+        "body": "UNDEFEATED. {record}. Could not do this without my teammates and everybody behind us. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.4",
+        "body": "{school}, we went {record}. A perfect season with a group I will always remember. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.5",
+        "body": "Nobody beat this team. {record}. Thankful for every person who helped us get here. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.6",
+        "body": "Perfect season. {record}. My guys. Our fans. So much to be thankful for. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.7",
+        "body": "{record}. Grateful I got to be part of an undefeated {school} team. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.8",
+        "body": "The whole season, no losses. Love my teammates. Thank you {school}. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.9",
+        "body": "{school}: {record}. A perfect year with my brothers. Keeping these memories forever. My senior season. Could not ask for better memories."
+      },
+      {
+        "id": "ending.player.senior-perfect.cyclecopy.10",
+        "body": "Finished undefeated at {record}. Appreciate everyone who was with us from the start. My senior season. Could not ask for better memories."
+      }
+    ],
+    "ending.recruiting": [
+      {
+        "id": "ending.recruiting.cyclecopy.1",
+        "body": "{school} finishes {record}. The current recruiting class is No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.2",
+        "body": "{school} finishes {record}. The class now sits No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.3",
+        "body": "{school} finishes {record}. Recruiting stands at No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.4",
+        "body": "{school} finishes {record}. Its live class ranking is No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.5",
+        "body": "{school} finishes {record}. The recruiting class checks in at No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.6",
+        "body": "{school} finishes {record}. The incoming class currently ranks No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.7",
+        "body": "{school} finishes {record}. Its class is currently No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.8",
+        "body": "{school} finishes {record}. The class ranking stands at No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.9",
+        "body": "{school} finishes {record}. The current national recruiting ranking is No. {classRank} nationally; it is not a final signing-day ranking."
+      },
+      {
+        "id": "ending.recruiting.cyclecopy.10",
+        "body": "{school} finishes {record}. The recruiting class is now No. {classRank} nationally; it is not a final signing-day ranking."
+      }
+    ],
+    "ending.coach-pressure": [
+      {
+        "id": "ending.coach-pressure.cyclecopy.1",
+        "body": "After a {record} finish at {school}, coach {coachName} faces job-security pressure. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.2",
+        "body": "After a {record} finish at {school}, coach {coachName} is under job-security pressure. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.3",
+        "body": "After a {record} finish at {school}, coach {coachName} has job security to address. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.4",
+        "body": "After a {record} finish at {school}, coach {coachName} enters a difficult job-security discussion. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.5",
+        "body": "After a {record} finish at {school}, coach {coachName} has job security in the spotlight. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.6",
+        "body": "After a {record} finish at {school}, coach {coachName} faces questions about job security. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.7",
+        "body": "After a {record} finish at {school}, coach {coachName} has his job security under scrutiny. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.8",
+        "body": "After a {record} finish at {school}, coach {coachName} enters a pressure-filled offseason. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.9",
+        "body": "After a {record} finish at {school}, coach {coachName} is under scrutiny over job security. No coaching change is announced."
+      },
+      {
+        "id": "ending.coach-pressure.cyclecopy.10",
+        "body": "After a {record} finish at {school}, coach {coachName} has job-security concerns to navigate. No coaching change is announced."
+      }
+    ],
+    "ending.expectation-review": [
+      {
+        "id": "ending.expectation-review.cyclecopy.1",
+        "body": "The full-season verdict: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.2",
+        "body": "Season review: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.3",
+        "body": "The final record is in: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.4",
+        "body": "The offseason starts here: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.5",
+        "body": "Looking back at the season: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.6",
+        "body": "A season in context: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.7",
+        "body": "The final line: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.8",
+        "body": "Evaluating the finish: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.9",
+        "body": "The season-long result: {school} finishes {record}. {expectationNote}"
+      },
+      {
+        "id": "ending.expectation-review.cyclecopy.10",
+        "body": "The full-year picture: {school} finishes {record}. {expectationNote}"
+      }
+    ],
+    "cycle.outlook": [
+      {
+        "id": "cycle.outlook.cyclecopy.1",
+        "body": "{school} finishes {record}. {expectationNote} Next comes roster retention and recruiting."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.2",
+        "body": "{school} finishes {record}. {expectationNote} The next roster is the offseason priority."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.3",
+        "body": "{school} finishes {record}. {expectationNote} Attention shifts to building next season's group."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.4",
+        "body": "{school} finishes {record}. {expectationNote} Retention and the incoming class come next."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.5",
+        "body": "{school} finishes {record}. {expectationNote} The next questions concern who stays and who arrives."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.6",
+        "body": "{school} finishes {record}. {expectationNote} Roster planning now replaces game planning."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.7",
+        "body": "{school} finishes {record}. {expectationNote} The offseason focus is the players coming back and the incoming class."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.8",
+        "body": "{school} finishes {record}. {expectationNote} Next season starts with the roster decisions."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.9",
+        "body": "{school} finishes {record}. {expectationNote} Recruiting and retention will shape the next team."
+      },
+      {
+        "id": "cycle.outlook.cyclecopy.10",
+        "body": "{school} finishes {record}. {expectationNote} The next step is deciding what to keep and where to improve the roster."
+      }
+    ],
+    "cycle.staff-plan": [
+      {
+        "id": "cycle.staff-plan.cyclecopy.1",
+        "body": "With {school}'s season over, {coachName} turns to roster retention and the incoming class."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.2",
+        "body": "With {school}'s season over, {coachName} has the next roster to build."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.3",
+        "body": "With {school}'s season over, {coachName} faces an offseason of roster decisions."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.4",
+        "body": "With {school}'s season over, {coachName} must fit the incoming class around the returning roster."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.5",
+        "body": "With {school}'s season over, {coachName} has retention and recruiting to address."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.6",
+        "body": "With {school}'s season over, {coachName} looks to shape the next team."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.7",
+        "body": "With {school}'s season over, {coachName} turns from weekly preparation to roster building."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.8",
+        "body": "With {school}'s season over, {coachName} has the next roster cycle to plan."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.9",
+        "body": "With {school}'s season over, {coachName} has returning players and incoming recruits to fit together."
+      },
+      {
+        "id": "cycle.staff-plan.cyclecopy.10",
+        "body": "With {school}'s season over, {coachName} has roster continuity and recruiting needs to balance."
+      }
+    ],
+    "cycle.injury-recovery": [
+      {
+        "id": "cycle.injury-recovery.cyclecopy.1",
+        "body": "Offseason availability update: {school}'s {playerName} is no longer listed as injured. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.2",
+        "body": "Offseason availability update: {school}'s {playerName} has come off the injury list. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.3",
+        "body": "Offseason availability update: {school}'s {playerName} no longer has the injury designation. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.4",
+        "body": "Offseason availability update: {school}'s {playerName} has had the injury listing cleared. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.5",
+        "body": "Offseason availability update: {school}'s {playerName} is off the current injury list. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.6",
+        "body": "Offseason availability update: {school}'s {playerName} is no longer on the injury list. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.7",
+        "body": "Offseason availability update: {school}'s {playerName} is not carrying the injured listing now. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.8",
+        "body": "Offseason availability update: {school}'s {playerName} has a cleared injury status. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.9",
+        "body": "Offseason availability update: {school}'s {playerName} is not currently listed as injured. The team's season is already complete."
+      },
+      {
+        "id": "cycle.injury-recovery.cyclecopy.10",
+        "body": "Offseason availability update: {school}'s {playerName} has seen the injured designation removed. The team's season is already complete."
+      }
+    ],
+    "cycle.injury-rehab": [
+      {
+        "id": "cycle.injury-rehab.cyclecopy.1",
+        "body": "{school}'s season is over, and {playerName} remains listed as injured. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.2",
+        "body": "{school}'s season is over, and {playerName} is on the current injury list. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.3",
+        "body": "{school}'s season is over, and {playerName} still has an injury designation. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.4",
+        "body": "{school}'s season is over, and {playerName} is still listed as injured. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.5",
+        "body": "{school}'s season is over, and {playerName} continues to carry an injured designation. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.6",
+        "body": "{school}'s season is over, and {playerName} has an injury to recover from. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.7",
+        "body": "{school}'s season is over, and {playerName} remains on the injury list. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.8",
+        "body": "{school}'s season is over, and {playerName} is still on the injury list. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.9",
+        "body": "{school}'s season is over, and {playerName} has not cleared the injured listing. The focus is recovery before the next season."
+      },
+      {
+        "id": "cycle.injury-rehab.cyclecopy.10",
+        "body": "{school}'s season is over, and {playerName} still carries an injury status. The focus is recovery before the next season."
+      }
+    ],
+    "cycle.portal-needs": [
+      {
+        "id": "cycle.portal-needs.cyclecopy.1",
+        "body": "{school} has {count} {seniorLabel} at {position}. That position belongs on the offseason roster watch."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.2",
+        "body": "{school} has {count} {seniorLabel} at {position}. The staff has an experience gap to plan for there."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.3",
+        "body": "{school} has {count} {seniorLabel} at {position}. Replacing that experience is part of the roster discussion."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.4",
+        "body": "{school} has {count} {seniorLabel} at {position}. The portal is one possible route to replenish the room."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.5",
+        "body": "{school} has {count} {seniorLabel} at {position}. That is one group to monitor during roster turnover."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.6",
+        "body": "{school} has {count} {seniorLabel} at {position}. Returning depth and incoming additions will matter in that room."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.7",
+        "body": "{school} has {count} {seniorLabel} at {position}. Recruiting and development both have a role in replenishing that group."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.8",
+        "body": "{school} has {count} {seniorLabel} at {position}. The next depth chart will need a plan for that experience."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.9",
+        "body": "{school} has {count} {seniorLabel} at {position}. How the staff refreshes that room is an offseason question."
+      },
+      {
+        "id": "cycle.portal-needs.cyclecopy.10",
+        "body": "{school} has {count} {seniorLabel} at {position}. That group is part of the next roster-building task."
+      }
+    ],
+    "cycle.portal-plan": [
+      {
+        "id": "cycle.portal-plan.cyclecopy.1",
+        "body": "{school}'s offseason begins with its own roster. Who stays helps determine the portal needs."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.2",
+        "body": "{school}'s offseason begins with its own roster. Retention comes before a complete portal shopping list."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.3",
+        "body": "{school}'s offseason begins with its own roster. The staff needs to know its returners before filling the gaps."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.4",
+        "body": "{school}'s offseason begins with its own roster. Keeping contributors can matter as much as a new arrival."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.5",
+        "body": "{school}'s offseason begins with its own roster. The portal plan depends on the players already in the building."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.6",
+        "body": "{school}'s offseason begins with its own roster. The remaining roster will shape which positions need help."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.7",
+        "body": "{school}'s offseason begins with its own roster. Departures and returners set the next recruiting priorities."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.8",
+        "body": "{school}'s offseason begins with its own roster. Roster continuity is part of the portal calculation."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.9",
+        "body": "{school}'s offseason begins with its own roster. Available spots and returning experience will drive the next additions."
+      },
+      {
+        "id": "cycle.portal-plan.cyclecopy.10",
+        "body": "{school}'s offseason begins with its own roster. The next additions have to fit what is staying."
+      }
+    ],
+    "cycle.recruit-fit": [
+      {
+        "id": "cycle.recruit-fit.cyclecopy.1",
+        "body": "{starDetail}{playerName} is signed with {school}. An incoming player to follow as the next roster takes shape."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.2",
+        "body": "{starDetail}{playerName} is signed with {school}. A confirmed part of the incoming class."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.3",
+        "body": "{starDetail}{playerName} is signed with {school}. The focus turns from recruiting the player to finding the right role."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.4",
+        "body": "{starDetail}{playerName} is signed with {school}. One of the new names in next season's roster discussion."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.5",
+        "body": "{starDetail}{playerName} is signed with {school}. A signature that belongs in the offseason roster plan."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.6",
+        "body": "{starDetail}{playerName} is signed with {school}. The next step is the move into the program."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.7",
+        "body": "{starDetail}{playerName} is signed with {school}. That is a signed addition, rather than an open recruitment."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.8",
+        "body": "{starDetail}{playerName} is signed with {school}. A name in the incoming class to keep on the local radar."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.9",
+        "body": "{starDetail}{playerName} is signed with {school}. Part of the roster-building work already completed."
+      },
+      {
+        "id": "cycle.recruit-fit.cyclecopy.10",
+        "body": "{starDetail}{playerName} is signed with {school}. An addition to the next chapter of the program."
+      }
+    ],
+    "cycle.class-build": [
+      {
+        "id": "cycle.class-build.cyclecopy.1",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. That is a live ranking, with signing work still ahead."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.2",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The class is still taking shape."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.3",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. This is the current position, not a final signing-day result."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.4",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The remaining recruitments can still change it."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.5",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The staff still has the rest of the class to finish."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.6",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The rank can move as more signatures arrive."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.7",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. Recruiting continues beyond this snapshot."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.8",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The offseason class picture remains open."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.9",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. Treat that as the current class position."
+      },
+      {
+        "id": "cycle.class-build.cyclecopy.10",
+        "body": "{school}'s recruiting class currently ranks No. {classRank}. The final class is not set by this update."
+      }
+    ],
+    "cycle.portal-target": [
+      {
+        "id": "cycle.portal-target.cyclecopy.1",
+        "body": "{school} is among the recorded top three schools for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.2",
+        "body": "{school} appears in the top three for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.3",
+        "body": "{school} is in the listed top three for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.4",
+        "body": "{school} has a place among the top three schools for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.5",
+        "body": "{school} is one of the top three schools listed for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.6",
+        "body": "{school} shows up in the current top three for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.7",
+        "body": "{school} is included among the three leading schools for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.8",
+        "body": "{school} has a spot on the current top-three list for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.9",
+        "body": "{school} is one of the three schools in the leading group for transfer prospect {playerName}. No commitment is confirmed."
+      },
+      {
+        "id": "cycle.portal-target.cyclecopy.10",
+        "body": "{school} features in the recorded top three for transfer prospect {playerName}. No commitment is confirmed."
+      }
+    ],
+    "cycle.program-bar": [
+      {
+        "id": "cycle.program-bar.cyclecopy.1",
+        "body": "The preseason standard at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.2",
+        "body": "The expectation entering the season at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.3",
+        "body": "The starting expectation for {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.4",
+        "body": "What a successful season should mean at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.5",
+        "body": "The season outlook at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.6",
+        "body": "The program standard for {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.7",
+        "body": "The bar entering the season at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.8",
+        "body": "The expectation to judge against at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.9",
+        "body": "The preseason ambition at {school}: {standard}"
+      },
+      {
+        "id": "cycle.program-bar.cyclecopy.10",
+        "body": "The season's starting bar for {school}: {standard}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1055 @@
+{
+  "revision": "recruiting-variety-v99",
+  "families": {
+    "portal.entrant": [
+      {
+        "id": "portal.entrant.recruitcopy.1",
+        "body": "{position} {playerName} is in the transfer portal{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.2",
+        "body": "{position} {playerName} has entered the transfer pool{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.3",
+        "body": "{position} {playerName} is listed among portal entrants{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.4",
+        "body": "{position} {playerName} is on the transfer-portal list{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.5",
+        "body": "{position} {playerName} is a portal entrant{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.6",
+        "body": "{position} {playerName} appears in the portal pool{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.7",
+        "body": "{position} {playerName} is in the pool of transfer recruits{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.8",
+        "body": "{position} {playerName} has a transfer-portal entry{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.9",
+        "body": "{position} {playerName} is part of the portal class{originDetail}. No new destination is confirmed."
+      },
+      {
+        "id": "portal.entrant.recruitcopy.10",
+        "body": "{position} {playerName} is listed in the portal{originDetail}. No new destination is confirmed."
+      }
+    ],
+    "portal.interest": [
+      {
+        "id": "portal.interest.recruitcopy.1",
+        "body": "{position} {playerName} currently lists leading schools including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.2",
+        "body": "{position} {playerName} has a leading group including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.3",
+        "body": "{position} {playerName} has interest centered on {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.4",
+        "body": "{position} {playerName} lists schools in the mix including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.5",
+        "body": "{position} {playerName} has a current leading group of {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.6",
+        "body": "{position} {playerName} is considering a leading group including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.7",
+        "body": "{position} {playerName} has schools at the front including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.8",
+        "body": "{position} {playerName} has leading options including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.9",
+        "body": "{position} {playerName} has a top group including {schools}. No commitment has been made."
+      },
+      {
+        "id": "portal.interest.recruitcopy.10",
+        "body": "{position} {playerName} currently has a leading group including {schools}. No commitment has been made."
+      }
+    ],
+    "portal.announcement": [
+      {
+        "id": "portal.announcement.recruitcopy.1",
+        "body": "I am in the portal and looking for the right next fit. Grateful for everyone who supported me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.2",
+        "body": "I am in the portal and looking for the right next fit. Appreciate the people who were with me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.3",
+        "body": "Entering the portal for the next chapter. Grateful for everyone who supported me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.4",
+        "body": "Entering the portal for the next chapter. Appreciate the people who were with me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.5",
+        "body": "I am in the transfer portal. Ready to find the right opportunity. Grateful for everyone who supported me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.6",
+        "body": "I am in the transfer portal. Ready to find the right opportunity. Appreciate the people who were with me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.7",
+        "body": "The next step for me is the portal. Grateful for everyone who supported me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.8",
+        "body": "The next step for me is the portal. Appreciate the people who were with me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.9",
+        "body": "I am looking for my next opportunity through the transfer portal. Grateful for everyone who supported me{originDetail}."
+      },
+      {
+        "id": "portal.announcement.recruitcopy.10",
+        "body": "I am looking for my next opportunity through the transfer portal. Appreciate the people who were with me{originDetail}."
+      }
+    ],
+    "portal.unsigned": [
+      {
+        "id": "portal.unsigned.recruitcopy.1",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A remaining high school name to track before the next signing day."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.2",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. One of the unsigned high school players in the offseason recruiting picture."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.3",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The high school recruitment remains open."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.4",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The next signing day is still ahead."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.5",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A player still available on the high school board."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.6",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. There is another signing-day decision to come."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.7",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A remaining high school target as offseason recruiting continues."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.8",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The player is still looking for the next school."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.9",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. An unsigned high school option worth keeping in view."
+      },
+      {
+        "id": "portal.unsigned.recruitcopy.10",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The recruitment has not reached a commitment yet."
+      }
+    ],
+    "portal.unsigned-local": [
+      {
+        "id": "portal.unsigned-local.recruitcopy.1",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A remaining high school name to track before the next signing day."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.2",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. One of the unsigned high school players in the offseason recruiting picture."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.3",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The high school recruitment remains open."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.4",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The next signing day is still ahead."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.5",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A player still available on the high school board."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.6",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. There is another signing-day decision to come."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.7",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. A remaining high school target as offseason recruiting continues."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.8",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The player is still looking for the next school."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.9",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. An unsigned high school option worth keeping in view."
+      },
+      {
+        "id": "portal.unsigned-local.recruitcopy.10",
+        "body": "{starDetail}{position} {playerName} is still uncommitted, No. {nationalRecruitRank} nationally. The recruitment has not reached a commitment yet."
+      }
+    ],
+    "portal.unsigned-schools": [
+      {
+        "id": "portal.unsigned-schools.recruitcopy.1",
+        "body": "{position} {playerName} remains uncommitted. The current leading group includes {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.2",
+        "body": "{position} {playerName} remains uncommitted. Schools in the current mix include {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.3",
+        "body": "{position} {playerName} remains uncommitted. The leading schools are {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.4",
+        "body": "{position} {playerName} remains uncommitted. The current front group includes {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.5",
+        "body": "{position} {playerName} remains uncommitted. The top group currently includes {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.6",
+        "body": "{position} {playerName} remains uncommitted. The leading options include {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.7",
+        "body": "{position} {playerName} remains uncommitted. Schools at the front of the recruitment include {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.8",
+        "body": "{position} {playerName} remains uncommitted. The current options include {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.9",
+        "body": "{position} {playerName} remains uncommitted. The recruitment's leading group includes {schools}."
+      },
+      {
+        "id": "portal.unsigned-schools.recruitcopy.10",
+        "body": "{position} {playerName} remains uncommitted. The leading-school list includes {schools}."
+      }
+    ],
+    "roster.underdog": [
+      {
+        "id": "roster.underdog.recruitcopy.1",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. An under-the-radar recruitment with a chance to surprise."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.2",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A quieter name on the recruiting board."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.3",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. Not a headline ranking, but an opportunity to make a different impression."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.4",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. One of the lower-profile recruitments to follow."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.5",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A prospect looking to outperform the early label."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.6",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. An underdog name in this class."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.7",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A less-heralded player worth a closer look."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.8",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. The stars are a starting point, with the football still ahead."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.9",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A quieter story on a busy recruiting board."
+      },
+      {
+        "id": "roster.underdog.recruitcopy.10",
+        "body": "{school} is involved with 2-star {prospectType}{position} {playerName}{originDetail}. A chance to prove more than the initial ranking suggests."
+      }
+    ],
+    "roster.commit": [
+      {
+        "id": "roster.commit.recruitcopy.1",
+        "body": "{school} adds {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.2",
+        "body": "{school} lands a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.3",
+        "body": "{school} gets a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.4",
+        "body": "{school} secures a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.5",
+        "body": "{school} has a new commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.6",
+        "body": "{school} picks up {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.7",
+        "body": "{school} adds a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.8",
+        "body": "{school} receives a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.9",
+        "body": "{school} welcomes a commitment from {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.commit.recruitcopy.10",
+        "body": "{school} has landed {starDescription}{prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      }
+    ],
+    "roster.major": [
+      {
+        "id": "roster.major.recruitcopy.1",
+        "body": "COMMITMENT: {school} lands 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.2",
+        "body": "COMMITMENT: {school} adds 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.3",
+        "body": "COMMITMENT: {school} secures a commitment from 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.4",
+        "body": "COMMITMENT: {school} picks up 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.5",
+        "body": "COMMITMENT: {school} receives a commitment from 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.6",
+        "body": "COMMITMENT: {school} gets a commitment from 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.7",
+        "body": "COMMITMENT: {school} has a commitment from 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.8",
+        "body": "COMMITMENT: {school} has landed 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.9",
+        "body": "COMMITMENT: {school} has added 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.major.recruitcopy.10",
+        "body": "COMMITMENT: {school} wins a commitment from 5-star {prospectType}{position} {playerName}{originDetail}.{recruitRankDetail}"
+      }
+    ],
+    "roster.rival-transfer": [
+      {
+        "id": "roster.rival-transfer.recruitcopy.1",
+        "body": "{starDescription}transfer {position} {playerName} has committed to {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.2",
+        "body": "{starDescription}transfer {position} {playerName} is committed to {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.3",
+        "body": "{starDescription}transfer {position} {playerName} chooses {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.4",
+        "body": "{starDescription}transfer {position} {playerName} will head to {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.5",
+        "body": "{starDescription}transfer {position} {playerName} has picked {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.6",
+        "body": "{starDescription}transfer {position} {playerName} makes the move to {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.7",
+        "body": "{starDescription}transfer {position} {playerName} takes the next step with {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.8",
+        "body": "{starDescription}transfer {position} {playerName} is headed to {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.9",
+        "body": "{starDescription}transfer {position} {playerName} has chosen {school} from rival {formerSchool}."
+      },
+      {
+        "id": "roster.rival-transfer.recruitcopy.10",
+        "body": "{starDescription}transfer {position} {playerName} has decided on {school} from rival {formerSchool}."
+      }
+    ],
+    "roster.destination": [
+      {
+        "id": "roster.destination.recruitcopy.1",
+        "body": "Transfer {position} {playerName} has committed to {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.2",
+        "body": "Transfer {position} {playerName} is committed to {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.3",
+        "body": "Transfer {position} {playerName} chooses {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.4",
+        "body": "Transfer {position} {playerName} will head to {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.5",
+        "body": "Transfer {position} {playerName} has picked {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.6",
+        "body": "Transfer {position} {playerName} makes the move to {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.7",
+        "body": "Transfer {position} {playerName} takes the next step with {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.8",
+        "body": "Transfer {position} {playerName} is headed to {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.9",
+        "body": "Transfer {position} {playerName} has chosen {school} after {formerSchool}. {starDescription}addition to the class."
+      },
+      {
+        "id": "roster.destination.recruitcopy.10",
+        "body": "Transfer {position} {playerName} has decided on {school} after {formerSchool}. {starDescription}addition to the class."
+      }
+    ],
+    "roster.interest": [
+      {
+        "id": "roster.interest.recruitcopy.1",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. There is no commitment yet."
+      },
+      {
+        "id": "roster.interest.recruitcopy.2",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. The recruitment remains open."
+      },
+      {
+        "id": "roster.interest.recruitcopy.3",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. That is the current interest, not a final decision."
+      },
+      {
+        "id": "roster.interest.recruitcopy.4",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. The next school is not confirmed."
+      },
+      {
+        "id": "roster.interest.recruitcopy.5",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. The commitment decision is still ahead."
+      },
+      {
+        "id": "roster.interest.recruitcopy.6",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. No new destination has been selected."
+      },
+      {
+        "id": "roster.interest.recruitcopy.7",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. Interest is not a commitment."
+      },
+      {
+        "id": "roster.interest.recruitcopy.8",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. This is the current leading group."
+      },
+      {
+        "id": "roster.interest.recruitcopy.9",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. The player has not committed."
+      },
+      {
+        "id": "roster.interest.recruitcopy.10",
+        "body": "Transfer {position} {playerName}{originDetail} has {schools} in the leading group. A decision remains to be made."
+      }
+    ],
+    "roster.unsigned": [
+      {
+        "id": "roster.unsigned.recruitcopy.1",
+        "body": "Still on the board: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.2",
+        "body": "An unsigned name to track: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.3",
+        "body": "Available in the recruiting class: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.4",
+        "body": "The unsigned watch: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.5",
+        "body": "Still without a commitment: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.6",
+        "body": "One remaining recruiting option: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.7",
+        "body": "The open recruitment list includes {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.8",
+        "body": "A name still in the recruiting mix: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.9",
+        "body": "An open recruitment to follow: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "roster.unsigned.recruitcopy.10",
+        "body": "On the remaining-prospect list: {starDescription}{prospectType}{position} {playerName}.{recruitRankDetail}"
+      }
+    ],
+    "roster.offer": [
+      {
+        "id": "roster.offer.recruitcopy.1",
+        "body": "AGTG! Blessed to receive an offer from {school}."
+      },
+      {
+        "id": "roster.offer.recruitcopy.2",
+        "body": "All glory to God. Thankful for an offer from {school}."
+      },
+      {
+        "id": "roster.offer.recruitcopy.3",
+        "body": "Blessed with an offer from {school}. Appreciate the opportunity."
+      },
+      {
+        "id": "roster.offer.recruitcopy.4",
+        "body": "AGTG! Thankful to the {school} staff for the offer."
+      },
+      {
+        "id": "roster.offer.recruitcopy.5",
+        "body": "God is good. Blessed to receive an offer from {school}."
+      },
+      {
+        "id": "roster.offer.recruitcopy.6",
+        "body": "Thankful for this journey. Blessed with an offer from {school}."
+      },
+      {
+        "id": "roster.offer.recruitcopy.7",
+        "body": "AGTG. Another opportunity from {school}. Grateful for it."
+      },
+      {
+        "id": "roster.offer.recruitcopy.8",
+        "body": "Blessed with a {school} offer. Thank you to everybody helping me get here."
+      },
+      {
+        "id": "roster.offer.recruitcopy.9",
+        "body": "AGTG! An offer from {school}. A lot to be thankful for."
+      },
+      {
+        "id": "roster.offer.recruitcopy.10",
+        "body": "All glory to God. Appreciate the {school} offer."
+      }
+    ],
+    "roster.transfer-offer": [
+      {
+        "id": "roster.transfer-offer.recruitcopy.1",
+        "body": "Grateful for an offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.2",
+        "body": "Thankful to receive an offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.3",
+        "body": "Appreciate the offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.4",
+        "body": "Excited to share an offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.5",
+        "body": "Happy to receive an offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.6",
+        "body": "Thankful for the opportunity from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.7",
+        "body": "An offer came in from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.8",
+        "body": "Appreciate a new opportunity from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.9",
+        "body": "Grateful for the opportunity from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      },
+      {
+        "id": "roster.transfer-offer.recruitcopy.10",
+        "body": "Excited about an offer from {school}. After my time at {formerSchool}, I am looking for the right next fit."
+      }
+    ],
+    "roster.announce": [
+      {
+        "id": "roster.announce.recruitcopy.1",
+        "body": "Committed to {school}. Thankful for everyone who helped me get here."
+      },
+      {
+        "id": "roster.announce.recruitcopy.2",
+        "body": "My next chapter is {school}. Appreciate all the support."
+      },
+      {
+        "id": "roster.announce.recruitcopy.3",
+        "body": "{school} is home. Excited to get started."
+      },
+      {
+        "id": "roster.announce.recruitcopy.4",
+        "body": "Proud to be joining {school}. Committed!"
+      },
+      {
+        "id": "roster.announce.recruitcopy.5",
+        "body": "I am committed to {school}. Thank you to my family and coaches."
+      },
+      {
+        "id": "roster.announce.recruitcopy.6",
+        "body": "The decision is {school}. Looking forward to the next chapter."
+      },
+      {
+        "id": "roster.announce.recruitcopy.7",
+        "body": "Excited to call {school} home. Committed."
+      },
+      {
+        "id": "roster.announce.recruitcopy.8",
+        "body": "Found my fit at {school}. Thankful for the opportunity."
+      },
+      {
+        "id": "roster.announce.recruitcopy.9",
+        "body": "{school}! Ready to be part of this group."
+      },
+      {
+        "id": "roster.announce.recruitcopy.10",
+        "body": "Next stop: {school}. Appreciate everybody who supported the decision."
+      }
+    ],
+    "roster.transfer-announce": [
+      {
+        "id": "roster.transfer-announce.recruitcopy.1",
+        "body": "After my time at {formerSchool}, I am committed to {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.2",
+        "body": "After my time at {formerSchool}, my next chapter is {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.3",
+        "body": "After my time at {formerSchool}, I have chosen {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.4",
+        "body": "After my time at {formerSchool}, I am headed to {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.5",
+        "body": "After my time at {formerSchool}, I am joining {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.6",
+        "body": "After my time at {formerSchool}, I have committed to {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.7",
+        "body": "After my time at {formerSchool}, I am making the move to {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.8",
+        "body": "After my time at {formerSchool}, I have picked {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.9",
+        "body": "After my time at {formerSchool}, my next home is {school}. Grateful for the people who helped me get here."
+      },
+      {
+        "id": "roster.transfer-announce.recruitcopy.10",
+        "body": "After my time at {formerSchool}, I will continue my career at {school}. Grateful for the people who helped me get here."
+      }
+    ],
+    "roster.departure-kind": [
+      {
+        "id": "roster.departure-kind.recruitcopy.1",
+        "body": "Good luck with the next chapter, {targetHandle}. Appreciate what you gave {school}"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.2",
+        "body": "Good luck with the next chapter, {targetHandle}. Thanks for the time in {school} colors"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.3",
+        "body": "Wishing you well, {targetHandle}. Appreciate what you gave {school}"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.4",
+        "body": "Wishing you well, {targetHandle}. Thanks for the time in {school} colors"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.5",
+        "body": "Hope the next opportunity is a good one, {targetHandle}. Appreciate what you gave {school}"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.6",
+        "body": "Hope the next opportunity is a good one, {targetHandle}. Thanks for the time in {school} colors"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.7",
+        "body": "All the best with what comes next, {targetHandle}. Appreciate what you gave {school}"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.8",
+        "body": "All the best with what comes next, {targetHandle}. Thanks for the time in {school} colors"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.9",
+        "body": "Good luck at the next stop, {targetHandle}. Appreciate what you gave {school}"
+      },
+      {
+        "id": "roster.departure-kind.recruitcopy.10",
+        "body": "Good luck at the next stop, {targetHandle}. Thanks for the time in {school} colors"
+      }
+    ],
+    "roster.departure-sour": [
+      {
+        "id": "roster.departure-sour.recruitcopy.1",
+        "body": "{targetHandle} leaving {school} still stings. I will be cheering for the guys who stayed"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.2",
+        "body": "{targetHandle} leaving {school} still stings. The farewell is going to need a little time"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.3",
+        "body": "I do not have to enjoy {targetHandle} leaving {school}. I will be cheering for the guys who stayed"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.4",
+        "body": "I do not have to enjoy {targetHandle} leaving {school}. The farewell is going to need a little time"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.5",
+        "body": "The {school} part of me is not happy with this, {targetHandle}. I will be cheering for the guys who stayed"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.6",
+        "body": "The {school} part of me is not happy with this, {targetHandle}. The farewell is going to need a little time"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.7",
+        "body": "Not the {school} update I wanted, {targetHandle}. I will be cheering for the guys who stayed"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.8",
+        "body": "Not the {school} update I wanted, {targetHandle}. The farewell is going to need a little time"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.9",
+        "body": "{targetHandle} moving on from {school}. Yeah that one is frustrating. I will be cheering for the guys who stayed"
+      },
+      {
+        "id": "roster.departure-sour.recruitcopy.10",
+        "body": "{targetHandle} moving on from {school}. Yeah that one is frustrating. The farewell is going to need a little time"
+      }
+    ],
+    "roster.pitch": [
+      {
+        "id": "roster.pitch.recruitcopy.1",
+        "body": "{targetHandle} Come be part of {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.2",
+        "body": "{targetHandle} You would look good at {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.3",
+        "body": "{targetHandle} The next stop should be {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.4",
+        "body": "{targetHandle} Take a good look at {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.5",
+        "body": "{targetHandle} Come check out {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.6",
+        "body": "{targetHandle} We could use you at {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.7",
+        "body": "{targetHandle} Come find your spot at {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.8",
+        "body": "{targetHandle} You should come to {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.9",
+        "body": "{targetHandle} Would love to see you at {school}."
+      },
+      {
+        "id": "roster.pitch.recruitcopy.10",
+        "body": "{targetHandle} There is a fanbase waiting for you at {school}."
+      }
+    ],
+    "roster.rival-fan": [
+      {
+        "id": "roster.rival-fan.recruitcopy.1",
+        "body": "{targetHandle} from {formerSchool} to {school}? Of all the choices. We will remember that on rivalry week"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.2",
+        "body": "{targetHandle} from {formerSchool} to {school}? Of all the choices. The fanbase is going to have opinions about this"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.3",
+        "body": "The rivalry line too, {targetHandle}? {formerSchool} to {school} is rough to read. We will remember that on rivalry week"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.4",
+        "body": "The rivalry line too, {targetHandle}? {formerSchool} to {school} is rough to read. The fanbase is going to have opinions about this"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.5",
+        "body": "{formerSchool} to {school}. Really, {targetHandle}? We will remember that on rivalry week"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.6",
+        "body": "{formerSchool} to {school}. Really, {targetHandle}? The fanbase is going to have opinions about this"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.7",
+        "body": "{targetHandle} picked {school} after {formerSchool}. That rivalry game got a little louder. We will remember that on rivalry week"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.8",
+        "body": "{targetHandle} picked {school} after {formerSchool}. That rivalry game got a little louder. The fanbase is going to have opinions about this"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.9",
+        "body": "Not just leaving {formerSchool}, but going to {school}. {targetHandle}, come on. We will remember that on rivalry week"
+      },
+      {
+        "id": "roster.rival-fan.recruitcopy.10",
+        "body": "Not just leaving {formerSchool}, but going to {school}. {targetHandle}, come on. The fanbase is going to have opinions about this"
+      }
+    ],
+    "roster.welcome": [
+      {
+        "id": "roster.welcome.recruitcopy.1",
+        "body": "Welcome to {school}, {targetHandle}. Ready to see you out there"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.2",
+        "body": "Welcome to {school}, {targetHandle}. Looking forward to the next season"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.3",
+        "body": "Good to have you, {targetHandle}. {school} fans are excited. Ready to see you out there"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.4",
+        "body": "Good to have you, {targetHandle}. {school} fans are excited. Looking forward to the next season"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.5",
+        "body": "{targetHandle} in {school} colors. I like it. Ready to see you out there"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.6",
+        "body": "{targetHandle} in {school} colors. I like it. Looking forward to the next season"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.7",
+        "body": "A new chapter at {school}, {targetHandle}. Welcome. Ready to see you out there"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.8",
+        "body": "A new chapter at {school}, {targetHandle}. Welcome. Looking forward to the next season"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.9",
+        "body": "{school} picked up {targetHandle}. Welcome to the group. Ready to see you out there"
+      },
+      {
+        "id": "roster.welcome.recruitcopy.10",
+        "body": "{school} picked up {targetHandle}. Welcome to the group. Looking forward to the next season"
+      }
+    ],
+    "beat.commit": [
+      {
+        "id": "beat.commit.recruitcopy.1",
+        "body": "{position} {playerName} has committed to {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.2",
+        "body": "{position} {playerName} is committed to {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.3",
+        "body": "{position} {playerName} chooses {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.4",
+        "body": "{position} {playerName} is headed to {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.5",
+        "body": "{position} {playerName} has picked {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.6",
+        "body": "{position} {playerName} has chosen {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.7",
+        "body": "{position} {playerName} has decided on {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.8",
+        "body": "{position} {playerName} will join {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.9",
+        "body": "{position} {playerName} takes the next step with {school}.{recruitRankDetail}{coachDetail}"
+      },
+      {
+        "id": "beat.commit.recruitcopy.10",
+        "body": "{position} {playerName} has made a commitment to {school}.{recruitRankDetail}{coachDetail}"
+      }
+    ],
+    "beat.recruit_pickup": [
+      {
+        "id": "beat.recruit_pickup.recruitcopy.1",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.2",
+        "body": "{school} lands a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.3",
+        "body": "{school} secures a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.4",
+        "body": "{school} receives a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.5",
+        "body": "{school} gets a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.6",
+        "body": "{school} picks up {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.7",
+        "body": "{school} has a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.8",
+        "body": "{school} has landed {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.9",
+        "body": "{school} has added {starDescription}{position} {playerName}.{recruitRankDetail}"
+      },
+      {
+        "id": "beat.recruit_pickup.recruitcopy.10",
+        "body": "{school} welcomes a commitment from {starDescription}{position} {playerName}.{recruitRankDetail}"
+      }
+    ],
+    "beat.recruit_questioned": [
+      {
+        "id": "beat.recruit_questioned.recruitcopy.1",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} A lower-profile pickup than the program usually targets."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.2",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} The staff is looking beyond a lower recruiting profile here."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.3",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} A pickup below this program's usual recruiting tier."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.4",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} It is fair to ask what fit the staff sees beyond the ranking."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.5",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} This is a less-heralded addition than the school usually brings in."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.6",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} The recruiting fit deserves a closer look."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.7",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} A different sort of recruiting bet for a program at this level."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.8",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} The ranking makes this a surprising addition for this program."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.9",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} The staff is taking a chance on a less-heralded prospect."
+      },
+      {
+        "id": "beat.recruit_questioned.recruitcopy.10",
+        "body": "{school} adds {starDescription}{position} {playerName}.{recruitRankDetail} The evaluation has to explain the fit beyond the stars."
+      }
+    ]
+  }
+}

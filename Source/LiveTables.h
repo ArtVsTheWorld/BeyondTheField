@@ -16,17 +16,17 @@ namespace dynasty::live {
 using Json=nlohmann::json;using Address=uintptr_t;
 struct Memory {
     HANDLE process=GetCurrentProcess();size_t bytes=0;uint64_t deadline=GetTickCount64()+8000;PackedChangeWatch* observation=nullptr;
-    std::vector<unsigned char> read(Address address,size_t size){
+    std::vector<unsigned char> read(Address address,size_t size,bool observe=true){
         if(address<0x10000||address+size<address||size>128u*1024*1024||bytes+size>512u*1024*1024||GetTickCount64()>deadline)throw std::runtime_error("Live capture exceeds bounds: bytes="+std::to_string(bytes)+" read="+std::to_string(size)+" at="+std::to_string(address));
         std::vector<unsigned char> result(size);SIZE_T got=0;
-        if(size&&(!ReadProcessMemory(process,reinterpret_cast<void*>(address),result.data(),size,&got)||got!=size))throw std::runtime_error("Live session read unavailable at "+std::to_string(address)+" bytes="+std::to_string(size));bytes+=size;if(observation)observation->record(address,result);return result;
+        if(size&&(!ReadProcessMemory(process,reinterpret_cast<void*>(address),result.data(),size,&got)||got!=size))throw std::runtime_error("Live session read unavailable at "+std::to_string(address)+" bytes="+std::to_string(size));bytes+=size;if(observe&&observation)observation->record(address,result);return result;
     }
     template<class T>T at(Address address){auto b=read(address,sizeof(T));T value;memcpy(&value,b.data(),sizeof(T));return value;}
     std::string text(Address address){
         if(!address)return {};std::string value;
-        for(size_t i=0;i<1024;i+=32){auto block=read(address+i,32);for(auto ch:block){if(!ch)return value;value+=static_cast<char>(ch);}}throw std::runtime_error("Unbounded runtime string");
+        for(size_t i=0;i<1024;i+=32){auto block=read(address+i,32,false);const auto end=std::find(block.begin(),block.end(),0);if(observation)observation->record(address+i,std::vector<unsigned char>(block.begin(),end==block.end()?end:end+1));for(auto ch:block){if(!ch)return value;value+=static_cast<char>(ch);}}throw std::runtime_error("Unbounded runtime string");
     }
-    std::string sso(Address address){auto b=read(address,16);if(b[15]&128)return text(at<Address>(address));if(b[15]>15)throw std::runtime_error("Invalid short string");return std::string(reinterpret_cast<char*>(b.data()),15-b[15]);}
+    std::string sso(Address address){auto b=read(address,16,false);if(observation)observation->record(address+15,{b[15]});if(b[15]&128)return text(at<Address>(address));if(b[15]>15)throw std::runtime_error("Invalid short string");if(observation)observation->record(address,std::vector<unsigned char>(b.begin(),b.begin()+15-b[15]));return std::string(reinterpret_cast<char*>(b.data()),15-b[15]);}
 };
 template<class T>T value(const std::vector<unsigned char>& b,size_t offset){if(offset+sizeof(T)>b.size())throw std::runtime_error("Native layout exceeds buffer");T v;memcpy(&v,b.data()+offset,sizeof(T));return v;}
 inline uint32_t bits(const std::vector<unsigned char>& data,uint32_t words,uint32_t first,uint32_t row,uint32_t offset,unsigned width){
@@ -36,7 +36,7 @@ inline uint32_t bits(const std::vector<unsigned char>& data,uint32_t words,uint3
 }
 struct Field {std::string name;uint32_t id=0,kind=0;unsigned width=0;int minimum=0;Address fallback=0,descriptor=0;std::map<uint32_t,std::string> labels;};
 struct Schema {std::string name;uint32_t capacity=0;std::vector<Field> fields;};
-struct Table {Address address=0,context=0,dataAddress=0,stringBase=0;uint32_t id=0,rows=0,words=0,first=0;bool array=false;Schema* schema=nullptr;std::vector<unsigned char> data;std::set<uint32_t> free;};
+struct Table {Address address=0,context=0,dataAddress=0,stringBase=0;uint32_t id=0,rows=0,words=0,first=0;bool array=false;Schema* schema=nullptr;std::vector<unsigned char> data,watchMask;std::set<uint32_t> free;};
 inline bool supportedRecordLayout(bool array,uint32_t rows,uint32_t words,uint32_t first){return rows<=131072&&words<=(array?16384u:4096u)&&first<=0x10000;}
 struct SessionBinding {Address service=0,career=0,database=0;bool operator==(const SessionBinding& b)const{return service==b.service&&career==b.career&&database==b.database;}};
 struct SessionContextHint {Address career=0,database=0,context=0;};
@@ -124,12 +124,15 @@ class Capture {
         auto [it,fresh]=tables.try_emplace(address);auto& t=it->second;if(!fresh)return t;
         t.array=memory.at<Address>(address)==image+0xbd0ebe0;if(!t.array&&memory.at<Address>(address)!=image+0xbd0df38)throw std::runtime_error("Unsupported live table implementation");
         t.address=address;t.context=memory.at<Address>(address+0x10);t.id=memory.at<uint32_t>(address+0x2c);t.schema=&schema(memory.at<Address>(address+8));t.dataAddress=memory.at<Address>(address+0x38);t.stringBase=memory.at<Address>(address+0x48);
-        auto head=memory.read(t.dataAddress,0x20);t.words=value<uint32_t>(head,0xc);t.rows=value<uint32_t>(head,0x10);t.first=value<uint32_t>(head,0x18);
+        auto head=memory.read(t.dataAddress,0x20,false);t.words=value<uint32_t>(head,0xc);t.rows=value<uint32_t>(head,0x10);t.first=value<uint32_t>(head,0x18);
         // Native Award[] reserves 8100 reference slots even when only 600
         // preseason honors are populated. Actual array lengths remain bounded.
         if(!supportedRecordLayout(t.array,t.rows,t.words,t.first))throw std::runtime_error("Invalid live record layout: "+t.schema->name+" rows="+std::to_string(t.rows)+" words="+std::to_string(t.words)+" first="+std::to_string(t.first));
-        const uint64_t length=(uint64_t(t.first)+uint64_t(t.words)*t.rows)*4;if(length<0x20||length>128u*1024*1024)throw std::runtime_error("Invalid packed table size");t.data=memory.read(t.dataAddress,static_cast<size_t>(length));
-        auto free=value<uint32_t>(t.data,0x1c);while(free<t.rows){if(!t.free.insert(free).second||t.free.size()>t.rows)throw std::runtime_error("Cyclic free row list");free=value<uint32_t>(t.data,(size_t(t.first)+size_t(free)*t.words)*4);}return t;
+        const uint64_t length=(uint64_t(t.first)+uint64_t(t.words)*t.rows)*4;if(length<0x20||length>128u*1024*1024)throw std::runtime_error("Invalid packed table size");t.data=memory.read(t.dataAddress,static_cast<size_t>(length),false);
+        auto observe=[&](size_t offset,size_t size){if(memory.observation)memory.observation->record(t.dataAddress+offset,std::vector<unsigned char>(t.data.begin()+offset,t.data.begin()+offset+size));};
+        observe(0xc,8);observe(0x18,8);
+        if(!t.array){t.watchMask.resize(size_t(t.words)*4);for(const auto& f:t.schema->fields)if(f.width){const size_t at=0x20+size_t(f.id)*4;observe(at,4);const auto offset=value<uint32_t>(t.data,at);if(offset%32+f.width>32||uint64_t(offset)+f.width>uint64_t(t.words)*32)throw std::runtime_error("Invalid observed packed field");for(unsigned bit=0;bit<f.width;++bit)t.watchMask[(offset+bit)/8]|=static_cast<unsigned char>(1u<<((offset+bit)%8));}}
+        auto free=value<uint32_t>(t.data,0x1c);while(free<t.rows){if(!t.free.insert(free).second||t.free.size()>t.rows)throw std::runtime_error("Cyclic free row list");const auto at=(size_t(t.first)+size_t(free)*t.words)*4;observe(at,4);free=value<uint32_t>(t.data,at);}return t;
     }
     uint32_t remap(Address ctx,uint32_t serial){
         for(unsigned depth=0;ctx&&depth<8;++depth){auto [it,fresh]=referenceMaps.try_emplace(ctx);if(fresh){auto a=memory.at<Address>(ctx+0x170),e=memory.at<Address>(ctx+0x178);if(e<a||(e-a)%8||e-a>0x1000000)throw std::runtime_error("Invalid reference remapping");auto bytes=memory.read(a,e-a);for(size_t i=0;i<bytes.size();i+=8)it->second.emplace(value<uint32_t>(bytes,i),value<uint32_t>(bytes,i+4));}auto match=it->second.find(serial);if(match!=it->second.end())return match->second;ctx=parent(ctx);
@@ -141,7 +144,9 @@ class Capture {
         if(!serial)return nullptr;if(serial&0x80000000u)serial=remap(owner.context,serial);auto it=ids.find((serial>>17)&0x3fff);if(it==ids.end())throw std::runtime_error("Unknown runtime reference table "+std::to_string((serial>>17)&0x3fff)+" from "+owner.schema->name);auto& t=table(it->second);auto row=serial&0x1ffff;schedule(t.address,row);return key(t,row);
     }
     Json record(Table& t,uint32_t row){
-        Json result=Json::object();if(t.array){auto length=value<uint32_t>(t.data,0x20+size_t(row)*4);if(length>t.words||length>4096)throw std::runtime_error("Invalid runtime array length");for(uint32_t i=0;i<length;++i)result["Member"+std::to_string(i)]=reference(t,bits(t.data,t.words,t.first,row,i*32,32));return result;}for(const auto& f:t.schema->fields){uint32_t raw=static_cast<uint32_t>(f.fallback);if(f.width){auto offset=value<uint32_t>(t.data,0x20+size_t(f.id)*4);raw=bits(t.data,t.words,t.first,row,offset,f.width);}
+        Json result=Json::object();const auto rowAt=(size_t(t.first)+size_t(row)*t.words)*4;
+        if(memory.observation&&!t.array&&!t.watchMask.empty())memory.observation->recordMasked(t.dataAddress+rowAt,std::vector<unsigned char>(t.data.begin()+rowAt,t.data.begin()+rowAt+t.watchMask.size()),t.watchMask);
+        if(t.array){const auto lengthAt=0x20+size_t(row)*4;if(memory.observation)memory.observation->record(t.dataAddress+lengthAt,std::vector<unsigned char>(t.data.begin()+lengthAt,t.data.begin()+lengthAt+4));auto length=value<uint32_t>(t.data,lengthAt);if(length>t.words||length>4096)throw std::runtime_error("Invalid runtime array length");if(memory.observation&&length)memory.observation->record(t.dataAddress+rowAt,std::vector<unsigned char>(t.data.begin()+rowAt,t.data.begin()+rowAt+size_t(length)*4));for(uint32_t i=0;i<length;++i)result["Member"+std::to_string(i)]=reference(t,bits(t.data,t.words,t.first,row,i*32,32));return result;}for(const auto& f:t.schema->fields){uint32_t raw=static_cast<uint32_t>(f.fallback);if(f.width){auto offset=value<uint32_t>(t.data,0x20+size_t(f.id)*4);raw=bits(t.data,t.words,t.first,row,offset,f.width);}
             if(f.kind==7){if(!f.width){if(!f.fallback){result[f.name]=nullptr;continue;}auto a=memory.at<Address>(f.fallback+0x10);auto r=memory.at<uint32_t>(f.fallback+0x18);schedule(a,r);result[f.name]=key(table(a),r);}else result[f.name]=reference(t,raw);}
             else if(f.kind==5)result[f.name]=memory.text(f.width?t.stringBase+raw:f.fallback);
             else if(f.kind==3)result[f.name]=decodedEnum(t.schema->name,f.name,raw,f.labels);
@@ -216,12 +221,13 @@ public:
         if(!season||!flow||!league)throw std::runtime_error("Active Dynasty identity is incomplete");
         return result;
     }
+    Json observedTables()const{Json out=Json::array();for(const auto& [a,t]:tables)out.push_back({{"table",a},{"name",t.schema->name},{"data",t.dataAddress},{"size",t.data.size()},{"words",t.words},{"first",t.first},{"rows",t.rows}});return out;}
     Json run(PackedChangeWatch* observation=nullptr){
         memory.observation=observation;
         const auto before=status();
         for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}
-        for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size())!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
+        for(const auto& [a,t]:tables){if(memory.at<Address>(a+0x38)!=t.dataAddress||memory.read(t.dataAddress,t.data.size(),false)!=t.data)throw std::runtime_error("Dynasty changed during capture; retry");}
         if(!(activeSession(image,[&](Address a){return memory.at<Address>(a);})==session)||memory.at<Address>(context)!=image+0xbd0d378||(context!=sessionContext&&parent(context)!=sessionContext))throw std::runtime_error("Active Dynasty changed during capture");
         return Json{{"format",1},{"sourceKind","runtime"},{"status",before},{"context",context},{"records",std::move(records)}};
     }

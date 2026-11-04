@@ -5,11 +5,12 @@ $installBuild=Join-Path $installProject 'Build'
 $installInfo=Get-Content -LiteralPath (Join-Path $installBuild 'mmc-package.json') -Raw | ConvertFrom-Json
 $installRoot=[IO.Path]::GetFullPath($MmcRoot)
 if(-not (Test-Path -LiteralPath (Join-Path $installRoot 'MMCModManager.exe') -PathType Leaf)){throw 'MMC executable is unavailable at the selected root'}
-if(Get-Process MMCModManager,CollegeFB27 -ErrorAction SilentlyContinue){throw 'Close MMC and College Football 27 before installing the package'}
+if(Get-Process MMCModManager -ErrorAction SilentlyContinue){throw 'Close MMC before installing the package'}
 $installPlugins=Join-Path $installRoot 'Plugins'
-$installRuntime=[IO.Path]::GetFullPath((Join-Path $installPlugins 'DynastyEnhancer/Runtime-v96'))
+$installRuntime=[IO.Path]::GetFullPath((Join-Path $installPlugins 'DynastyEnhancer/Runtime-v101'))
 if(-not $installRuntime.StartsWith($installRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Runtime target is outside MMC root'}
-$installBackup=Join-Path $installProject ('Backups/MMC-v96-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
+foreach($game in Get-Process CollegeFB27 -ErrorAction SilentlyContinue){foreach($module in $game.Modules){if($module.FileName.StartsWith($installRuntime+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'The target runtime is active in CFB; use a new version folder or close the game before replacing it'}}}
+$installBackup=Join-Path $installProject ('Backups/MMC-v101-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
 New-Item -ItemType Directory -Path $installBackup,$installRuntime -Force | Out-Null
 $installAdapter=Join-Path $installPlugins 'DynastyEnhancer.dll'
 if(Test-Path -LiteralPath $installAdapter){Copy-Item -LiteralPath $installAdapter -Destination (Join-Path $installBackup 'DynastyEnhancer.dll')}

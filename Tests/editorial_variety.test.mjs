@@ -28,6 +28,11 @@ test('template cooldown crosses the championship to offseason week-number reset'
  const values={school:'Harbor',nickname:'Hawks'},a=chooseTemplate('fan.win',values,'same'),history=[{...pub,phase:'NationalChampionship',week:20,stories:[{...a,handle:'@fan'}]}],b=chooseTemplate('fan.win',values,'same',{publication:pub,week:0,handle:'@fan',history});assert.notEqual(a.templateId,b.templateId);
  const foreign=history.map(f=>({...f,leagueId:2}));assert.equal(chooseTemplate('fan.win',values,'same',{publication:pub,week:0,handle:'@fan',history:foreign}).templateId,a.templateId);
 });
+test('cold wording is preferred over the only matching style when that phrase was recently used',()=>{
+ const values={school:'Harbor'},a=chooseTemplate('recruit.offer.Neutral',values,'same',{style:'measured'}),preferred=contentPack.families['recruit.offer.Neutral'].filter(t=>t.style==='measured'),history=[{...pub,phase:'NationalChampionship',week:20,stories:preferred.map(t=>({templateId:t.id,handle:'@prospect'}))}];
+ const b=chooseTemplate('recruit.offer.Neutral',values,'same',{style:'measured',publication:pub,week:0,handle:'@prospect',history});
+ assert.ok(!preferred.some(t=>t.id===b.templateId));assert.equal(b.cooldownFallback,false);
+});
 test('new wording is clean and all eligible variants respect both native text budgets',()=>{
  const values=Object.fromEntries([...JSON.stringify(pack).matchAll(/\{([A-Za-z][A-Za-z0-9]*)\}/g)].map(m=>[m[1],'12']));Object.assign(values,{school:'Harbor State',nickname:'Captains',playerName:'Evan Moss',position:'QB',prospectType:'high school ',starDescription:'4-star ',opponent:'Red Mesa',record:'3–9',recentLine:'200 passing yards, 100 rushing yards, 3 passing/rushing TD, 0 INT',seasonLine:'2000 passing yards, 600 rushing yards, 20 passing/rushing TD, 3 INT',interpretation:'Little separation in those efficiency averages.'});
  for(const [family,variants] of Object.entries(pack.families))for(const t of variants){assert.equal(cleanLanguage(t.body),t.body,t.id);assert.ok(!/\b(?:OVR|overall|rating|skill tree)\b|[\u{1F000}-\u{1FAFF}\u2600-\u27BF]/iu.test(t.body),t.id);const body=chooseTemplate(family,values,t.id);assert.ok(body,t.id);assert.ok([...body.body].length<=280&&Buffer.byteLength(body.body)<=512,t.id);}

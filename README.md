@@ -4,6 +4,16 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Content and menu performance review (v101)
+
+The package is `Build/DynastyEnhancer-v101-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.
+
+The reviewed pack has 5,704 distinct prewritten wordings across 561 story families. Eligibility checks cover 601 minimal fact paths and 472 paths recorded across 31 ULM editions; every root path has at least eight usable alternatives. Optional analyst introductions can be omitted when the underlying analysis already fills the tweet.
+
+Background observation compares the string contents and packed fields the feed consumes, then performs full validated captures when they change. Immutable edition blobs reduce archive rewriting, and native execution identifies dropdown resources without a menu-thread memory scan. Historical posts remain preserved. NIL, draft allocation, undrafted signings, team relevance, portal returns and wording redundancy were reviewed together. Quiet weeks can have fewer than ten posts; important factual reports remain visible beyond routine coverage caps.
+
+See [v101 checks and remaining live gates](docs/verified-v101.json) and [the review plan](docs/current-review-plan.json). Late-season responsiveness still needs observation. The following sections record earlier development builds.
+
 ## Hub readiness and offseason context (v96)
 
 The current package is `Build/DynastyEnhancer-v96-MMC.zip`. Team is the single shortcut, and click-time readiness gating keeps an early click on the hub until a validated edition exists. The week picker uses readable season-stage labels. Year-zero historical alignment inference is suppressed, MW/MWC are equivalent, and second signing day tracks observed roster position changes in Transactions. Per-card UI logging is removed and capture/generation timings are recorded. A direct feed hub tab remains an unverified UI prototype; late-postseason performance still needs measurement. See [v96 checks and limits](docs/verified-v96.json).

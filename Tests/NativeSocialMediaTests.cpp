@@ -54,6 +54,23 @@ int main(int argc,char** argv){
             require(large.unchanged(largeRead)&&reads==3&&maximumRead<=dynasty::live::PackedChangeWatch::chunkBytes,"Large probes escaped their bounded chunk size");data.back()^=1;require(!large.unchanged(largeRead),"A changed final chunk was ignored");
         }
         {
+            dynasty::live::PackedChangeWatch watch;unsigned char byte=1;const auto at=reinterpret_cast<uintptr_t>(&byte);
+            auto read=[](uintptr_t p,void* out,size_t n){memcpy(out,reinterpret_cast<const void*>(p),n);return true;};
+            watch.recordMasked(at,{1},{1});byte=65;require(watch.unchanged(read),"Unselected packed bits triggered a refresh");
+            byte=64;uintptr_t changed=0;require(!watch.unchanged(read,&changed)&&changed==at,"Selected packed bit change was missed");
+            byte=3;watch.recordMasked(at,{2},{2});require(watch.unchanged(read),"Disjoint selected bits were not merged");
+            bool conflict=false;try{watch.recordMasked(at,{0},{2});}catch(...){conflict=true;}require(conflict,"Conflicting selected bits were accepted");
+        }
+        {
+            dynasty::live::Memory reader;dynasty::live::PackedChangeWatch textWatch;reader.observation=&textWatch;
+            std::array<unsigned char,64> text{};memcpy(text.data(),"Hello",5);const auto at=reinterpret_cast<uintptr_t>(text.data());
+            auto read=[](uintptr_t p,void* out,size_t n){memcpy(out,reinterpret_cast<const void*>(p),n);return true;};
+            require(reader.text(at)=="Hello","String fixture decoding changed");text[20]=77;require(textWatch.unchanged(read),"Bytes after NUL caused a false refresh");
+            text[5]='!';require(!textWatch.unchanged(read),"String growth beyond a former NUL was missed");text[5]=0;text[0]='J';require(!textWatch.unchanged(read),"String content change was missed");
+            dynasty::live::PackedChangeWatch ssoWatch;reader.observation=&ssoWatch;std::array<unsigned char,16> small{};memcpy(small.data(),"Coach",5);small[15]=10;const auto sso=reinterpret_cast<uintptr_t>(small.data());
+            require(reader.sso(sso)=="Coach","SSO fixture decoding changed");small[9]=90;require(ssoWatch.unchanged(read),"Unused SSO capacity caused a false refresh");small[15]=9;require(!ssoWatch.unchanged(read),"SSO length change was missed");
+        }
+        {
             std::vector<unsigned char> screenData(0x3000),modelData(0x30000);
             const auto screenAt=reinterpret_cast<uintptr_t>(screenData.data()),modelAt=reinterpret_cast<uintptr_t>(modelData.data());
             memcpy(screenData.data(),"Apt Data:1:7:8",14);memcpy(modelData.data(),"Apt Data:1:7:8",14);
@@ -188,7 +205,7 @@ int main(int argc,char** argv){
             {
                 Json large=data;auto& largeEdition=large["weeks"][0];largeEdition["stories"]=Json::array();largeEdition["views"]=Json::object();for(const char* scope:{"all","national","conference","team"})largeEdition["views"][scope]=Json::array();
                 for(unsigned n=0;n<9300;++n){const auto id="offer-"+std::to_string(n);largeEdition["stories"].push_back({{"id",id},{"author","Recruit"},{"handle","@Recruit"},{"body","Verified scholarship announcement"},{"stamp","Recruiting"},{"category","offers"},{"voice","recruit"},{"likes",n},{"imageLibrary",79},{"imageValue",598},{"publication",{{"key",large["key"]},{"week",7}}}});for(const char* scope:{"national","conference","team"})largeEdition["views"][scope].push_back(id);if(n<30)largeEdition["views"]["all"].push_back(id);}
-                validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==20,"Large candidate catalog changed the 30/100/60/team display caps");
+                validate(large,config);auto many=social::decodeFeed(large);require(many->posts.size()==30&&social::selectFeed(many->catalog,0,1)->posts.size()==100&&social::selectFeed(many->catalog,0,2)->posts.size()==60&&social::selectFeed(many->catalog,0,3)->posts.size()==25,"Large candidate catalog changed the 30/100/60/25 display caps");
                 auto recruiting=social::selectFeed(many->catalog,0,1,1);require(recruiting->posts.size()==9300&&recruiting->posts[0].likes==0,"Large recruiting category lost editorial order or its National cap");
                 auto excessive=large;excessive["weeks"][0]["stories"].get_ref<Json::array_t&>().resize(32769,largeEdition["stories"][0]);bool bounded=false;try{validate(excessive,config);}catch(const std::exception& e){bounded=std::string(e.what()).find("exceeds catalogue limit")!=std::string::npos;}require(bounded,"Unbounded weekly catalog was accepted");
             }
@@ -264,7 +281,7 @@ int main(int argc,char** argv){
             for(const auto& scope:catalog->scopes)e.views[scope.key]=ids;catalog->weeks.push_back(e);
             auto national=social::selectFeed(catalog,0,1);require(national->posts.size()==100,"National cap failed");
             require(national->posts[0].author=="0:0"&&national->posts[1].author=="attached"&&national->posts[2].author=="1:0","Editorial ordering split a conversation or followed likes");
-            require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==20,"Team feed card budget failed");
+            require(social::selectFeed(catalog,0,0)->posts.size()==30,"For You cap failed");require(social::selectFeed(catalog,0,2)->posts.size()==60,"Conference cap failed");require(social::selectFeed(catalog,0,3)->posts.size()==25,"Team feed card budget failed");
             auto analysts=social::selectFeed(catalog,0,1,5);require(analysts->posts.size()==140&&analysts->posts[0].author=="1:0","National cap was applied before the category filter");
             require(social::selectFeed(catalog,0,2,5)->posts.size()==140,"Filtered conference cap failed");
         }
@@ -402,6 +419,12 @@ int main(int argc,char** argv){
         require(dynasty::live::decodedEnum("TeamHistoricSeriesYear","FirstRoundCFPBowlPresentationId",999,{}).is_null(),"Unknown optional history art must not block the entire feed");
         require(dynasty::live::decodedEnum("TeamHistoricSeriesYear","FirstRoundCFPBowlPresentationId",1,{{1,"CFPFirstRound"}})=="CFPFirstRound","Known history identifiers must remain intact");
         {bool rejected=false;try{(void)dynasty::live::decodedEnum("Recruit","RecruitStage",999,{});}catch(const std::exception&){rejected=true;}require(rejected,"Unknown identity/event enums must still fail closed");}
+        {auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"}};social::Edition e;e.key="required-draft";
+         for(int i=0;i<36;++i){auto id=std::to_string(i);social::FeedPost p{"NFL Draft","@NFLDraft",id,"Draft"};p.voice="nflDraft";p.category="draft";p.draftPick=i+1;e.stories.emplace(id,p);e.views["all:default"].push_back(id);e.views["all:required"].push_back(id);}c->weeks.push_back(e);
+         require(social::selectFeed(c,0,0)->posts.size()==36,"For You lost guaranteed user draft coverage beyond 30");c->weeks[0].views.erase("all:required");require(social::selectFeed(c,0,0)->posts.size()==30,"Ordinary For You cap changed");}
+        {auto c=std::make_shared<social::Catalog>();c->scopes={{"team:1","Team"}};social::Edition e;e.key="required-signings";
+         for(int i=0;i<32;++i){auto id=std::to_string(i);social::FeedPost p{"Beat","@Beat",id,"Signing"};e.stories.emplace(id,p);e.views["team:1"].push_back(id);e.views["team:1:required"].push_back(id);}c->weeks.push_back(e);
+         require(social::selectFeed(c,0,0)->posts.size()==32,"Team view lost required signings beyond routine cap");c->weeks[0].views.erase("team:1:required");require(social::selectFeed(c,0,0)->posts.size()==25,"Routine team cap must be 25");}
         auto status=social::statusFeed();
         require(status->posts.size()==1&&status->key=="runtime-waiting","Startup must expose only a system status row");
         require(status->posts[0].author=="Dynasty Enhancer"&&status->posts[0].stamp=="Status","Startup fallback must not masquerade as a social account");

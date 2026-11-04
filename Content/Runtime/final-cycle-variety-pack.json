@@ -1,0 +1,1734 @@
+{
+  "format": 1,
+  "revision": "content-review-v100",
+  "families": {
+    "playoff.position": [
+      {
+        "id": "playoff.position.cyclecopy.1",
+        "body": "{school} is CFP No. {rank}. A strong position, with the next result still to earn."
+      },
+      {
+        "id": "playoff.position.cyclecopy.2",
+        "body": "CFP No. {rank}: {school}. The ranking supports the case. It does not play the remaining games."
+      },
+      {
+        "id": "playoff.position.cyclecopy.3",
+        "body": "The committee has {school} at No. {rank}. There is a real playoff argument behind that number."
+      },
+      {
+        "id": "playoff.position.cyclecopy.4",
+        "body": "{school}'s current CFP position is No. {rank}. That is something to defend on the field."
+      },
+      {
+        "id": "playoff.position.cyclecopy.5",
+        "body": "No. {rank} in the CFP rankings for {school}. The next challenge is keeping that position."
+      },
+      {
+        "id": "playoff.position.cyclecopy.6",
+        "body": "The CFP picture has {school} at No. {rank}. A good place to be; the work continues."
+      },
+      {
+        "id": "playoff.position.cyclecopy.7",
+        "body": "{school} sits at CFP No. {rank}. This is a contender's position, rather than a confirmed berth."
+      },
+      {
+        "id": "playoff.position.cyclecopy.8",
+        "body": "Current committee view: {school}, No. {rank}. The remaining football still counts."
+      },
+      {
+        "id": "playoff.position.cyclecopy.9",
+        "body": "CFP check: {school} is No. {rank}. The program has put itself firmly in the discussion."
+      },
+      {
+        "id": "playoff.position.cyclecopy.10",
+        "body": "{school}, CFP No. {rank}. A meaningful ranking, with more results needed to finish the job."
+      }
+    ],
+    "playoff.bubble": [
+      {
+        "id": "playoff.bubble.cyclecopy.1",
+        "body": "CFP No. {rank}: {school}. A playoff case to make, and other results worth watching."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.2",
+        "body": "{school} is No. {rank} in the CFP rankings. Welcome to the scoreboard-watching part of the year."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.3",
+        "body": "The committee has {school} at No. {rank}. Plenty left to argue about near this part of the field."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.4",
+        "body": "CFP No. {rank} puts {school} in the conversation. It is a case, rather than a berth."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.5",
+        "body": "{school}'s CFP position: No. {rank}. The next result matters more than another argument online."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.6",
+        "body": "No. {rank} for {school}. This is where the CFP conversation starts involving everybody else's schedule."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.7",
+        "body": "{school} is sitting at CFP No. {rank}. A little room for hope and a lot of reason to keep watching."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.8",
+        "body": "Current CFP picture: {school}, No. {rank}. There is still a path to discuss, not an invitation to announce."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.9",
+        "body": "{school} at CFP No. {rank}. The case is alive. The next game is still the most useful part of it."
+      },
+      {
+        "id": "playoff.bubble.cyclecopy.10",
+        "body": "CFP check on {school}: No. {rank}. This part of the board can make a fan very interested in other games."
+      }
+    ],
+    "playoff.local": [
+      {
+        "id": "playoff.local.cyclecopy.1",
+        "body": "{school} is No. {rank} in the CFP rankings. That is the local playoff-picture reference point this week."
+      },
+      {
+        "id": "playoff.local.cyclecopy.2",
+        "body": "CFP update for {school}: No. {rank}. A ranking alone does not confirm a playoff berth."
+      },
+      {
+        "id": "playoff.local.cyclecopy.3",
+        "body": "The committee's current placement for {school} is No. {rank}. That is where the discussion starts."
+      },
+      {
+        "id": "playoff.local.cyclecopy.4",
+        "body": "{school}'s playoff watch begins at CFP No. {rank} this week. The next result remains the priority."
+      },
+      {
+        "id": "playoff.local.cyclecopy.5",
+        "body": "No. {rank} in the CFP rankings for {school}. The program's case has a new reference point."
+      },
+      {
+        "id": "playoff.local.cyclecopy.6",
+        "body": "On the {school} beat: CFP No. {rank}. The ranking is official; a berth needs its own announcement."
+      },
+      {
+        "id": "playoff.local.cyclecopy.7",
+        "body": "Current CFP position for {school}: No. {rank}. We will keep the ranking and the actual field separate."
+      },
+      {
+        "id": "playoff.local.cyclecopy.8",
+        "body": "{school} checks in at CFP No. {rank}. A useful marker for the weeks ahead."
+      },
+      {
+        "id": "playoff.local.cyclecopy.9",
+        "body": "CFP No. {rank} is where {school} stands. More football remains before the final field is set."
+      },
+      {
+        "id": "playoff.local.cyclecopy.10",
+        "body": "The CFP board lists {school} at No. {rank}. That is the current position to build from."
+      }
+    ],
+    "playoff.fan_position": [
+      {
+        "id": "playoff.fan_position.cyclecopy.1",
+        "body": "CFP No. {rank} for {school}. Trying to act normal about this. Mixed results"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.2",
+        "body": "CFP No. {rank} for {school}. Please keep giving me reasons to refresh this page"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.3",
+        "body": "{school} is CFP No. {rank}. I have read it several times. Trying to act normal about this. Mixed results"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.4",
+        "body": "{school} is CFP No. {rank}. I have read it several times. Please keep giving me reasons to refresh this page"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.5",
+        "body": "The committee put {school} at No. {rank}. Trying to act normal about this. Mixed results"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.6",
+        "body": "The committee put {school} at No. {rank}. Please keep giving me reasons to refresh this page"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.7",
+        "body": "No. {rank}. {school}. Actual CFP rankings. Trying to act normal about this. Mixed results"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.8",
+        "body": "No. {rank}. {school}. Actual CFP rankings. Please keep giving me reasons to refresh this page"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.9",
+        "body": "{school} at CFP No. {rank} feels very real right now. Trying to act normal about this. Mixed results"
+      },
+      {
+        "id": "playoff.fan_position.cyclecopy.10",
+        "body": "{school} at CFP No. {rank} feels very real right now. Please keep giving me reasons to refresh this page"
+      }
+    ],
+    "playoff.fan_bubble": [
+      {
+        "id": "playoff.fan_bubble.cyclecopy.1",
+        "body": "{school} is CFP No. {rank}. I am suddenly an expert on several schedules"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.2",
+        "body": "{school} is CFP No. {rank}. Nobody ask how much time I have spent on playoff arguments"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.3",
+        "body": "CFP No. {rank} for {school}. My weekend has extra homework now. I am suddenly an expert on several schedules"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.4",
+        "body": "CFP No. {rank} for {school}. My weekend has extra homework now. Nobody ask how much time I have spent on playoff arguments"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.5",
+        "body": "The committee has {school} at No. {rank}. I am suddenly an expert on several schedules"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.6",
+        "body": "The committee has {school} at No. {rank}. Nobody ask how much time I have spent on playoff arguments"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.7",
+        "body": "{school} at CFP No. {rank}. Let me check the other scores again. I am suddenly an expert on several schedules"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.8",
+        "body": "{school} at CFP No. {rank}. Let me check the other scores again. Nobody ask how much time I have spent on playoff arguments"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.9",
+        "body": "No. {rank} in the CFP rankings for {school}. I am suddenly an expert on several schedules"
+      },
+      {
+        "id": "playoff.fan_bubble.cyclecopy.10",
+        "body": "No. {rank} in the CFP rankings for {school}. Nobody ask how much time I have spent on playoff arguments"
+      }
+    ],
+    "playoff.matchup": [
+      {
+        "id": "playoff.matchup.cyclecopy.1",
+        "body": "CFP No. {awayRank} {away} vs. CFP No. {homeRank} {home}. The committee order brought us here; football settles the matchup."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.2",
+        "body": "Playoff matchup: CFP No. {awayRank} {away} and No. {homeRank} {home}. Both have a place in this field to defend."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.3",
+        "body": "{away} enters at CFP No. {awayRank}; {home} at No. {homeRank}. A playoff meeting with a result still to earn."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.4",
+        "body": "CFP No. {homeRank} {home} gets No. {awayRank} {away}. Now the comparison moves from the rankings to the field."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.5",
+        "body": "The playoff pairs No. {awayRank} {away} with No. {homeRank} {home}. Committee numbers are only the starting point."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.6",
+        "body": "{away} (CFP No. {awayRank}) meets {home} (No. {homeRank}). This is the matchup on the playoff board."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.7",
+        "body": "Playoff watch: No. {awayRank} {away}, No. {homeRank} {home}. The rankings give context, not the final score."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.8",
+        "body": "No. {homeRank} {home} and No. {awayRank} {away} have a playoff game to decide. The cases have become a matchup."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.9",
+        "body": "CFP matchup check: {away}, No. {awayRank}, against {home}, No. {homeRank}. Time to find out on the field."
+      },
+      {
+        "id": "playoff.matchup.cyclecopy.10",
+        "body": "The field gives us CFP No. {awayRank} {away} vs. No. {homeRank} {home}. No more settling this particular argument with a ranking."
+      }
+    ],
+    "playoff.result_fan": [
+      {
+        "id": "playoff.result_fan.cyclecopy.1",
+        "body": "{school} advances. No voice left. Still plenty to say online"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.2",
+        "body": "{school} advances. Nobody expect reasonable behavior from me tonight"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.3",
+        "body": "Another playoff win for {school}. No voice left. Still plenty to say online"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.4",
+        "body": "Another playoff win for {school}. Nobody expect reasonable behavior from me tonight"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.5",
+        "body": "{school} is moving on. I need a minute. No voice left. Still plenty to say online"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.6",
+        "body": "{school} is moving on. I need a minute. Nobody expect reasonable behavior from me tonight"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.7",
+        "body": "A playoff W. {school} gets another game. No voice left. Still plenty to say online"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.8",
+        "body": "A playoff W. {school} gets another game. Nobody expect reasonable behavior from me tonight"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.9",
+        "body": "{school} lives to play another one. No voice left. Still plenty to say online"
+      },
+      {
+        "id": "playoff.result_fan.cyclecopy.10",
+        "body": "{school} lives to play another one. Nobody expect reasonable behavior from me tonight"
+      }
+    ],
+    "playoff.champion_fan": [
+      {
+        "id": "playoff.champion_fan.cyclecopy.1",
+        "body": "{school}. NATIONAL CHAMPIONS. I will be bringing this up for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.2",
+        "body": "{school}. NATIONAL CHAMPIONS. Tomorrow's problems can wait. This is everything tonight"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.3",
+        "body": "{school} won the whole thing. I will be bringing this up for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.4",
+        "body": "{school} won the whole thing. Tomorrow's problems can wait. This is everything tonight"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.5",
+        "body": "National champions. {school}. I am keeping this screenshot. I will be bringing this up for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.6",
+        "body": "National champions. {school}. I am keeping this screenshot. Tomorrow's problems can wait. This is everything tonight"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.7",
+        "body": "{school} is on top of college football. I will be bringing this up for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.8",
+        "body": "{school} is on top of college football. Tomorrow's problems can wait. This is everything tonight"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.9",
+        "body": "The national title belongs to {school}. I will be bringing this up for the rest of my life"
+      },
+      {
+        "id": "playoff.champion_fan.cyclecopy.10",
+        "body": "The national title belongs to {school}. Tomorrow's problems can wait. This is everything tonight"
+      }
+    ],
+    "postseason.waiting-playoff": [
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.1",
+        "body": "{school} is {record}. The official playoff field and matchups arrive next week. For now, the debate continues."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.2",
+        "body": "A {record} record for {school}, and a week to wait for the official playoff announcement."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.3",
+        "body": "{school} has its {record} record on the board. Next week brings the official field, byes and matchups."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.4",
+        "body": "Waiting week for {school} at {record}. Playoff projections are still projections until next week's announcement."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.5",
+        "body": "The next date for {school}: the official playoff field next week. Its record stands at {record}."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.6",
+        "body": "{school}, {record}. Plenty of playoff arguments to read while the official matchups wait until next week."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.7",
+        "body": "One more week before the playoff picture becomes official. {school} waits with a {record} record."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.8",
+        "body": "At {record}, {school} has reached the waiting part. Field, byes and playoff matchups come next week."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.9",
+        "body": "{school}'s record is {record}. This week is for waiting on the field announcement, not announcing a projected berth."
+      },
+      {
+        "id": "postseason.waiting-playoff.cyclecopy.10",
+        "body": "Playoff watch for {school}: {record}, with the official selection news due next week."
+      }
+    ],
+    "postseason.waiting-bowl": [
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.1",
+        "body": "{school} finishes the regular slate at {record}. Bowl selections come next week; no destination is official yet."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.2",
+        "body": "A {record} record for {school}. Now comes the wait for next week's official bowl selections."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.3",
+        "body": "Bowl watch for {school} at {record}. The matchup announcement belongs to next week."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.4",
+        "body": "{school}, {record}. No farewell or bowl destination to announce before next week's selections."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.5",
+        "body": "The regular schedule is in the books at {record} for {school}. Bowl news becomes official next week."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.6",
+        "body": "{school} waits at {record}. The bowl discussion is still a discussion until selections arrive next week."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.7",
+        "body": "Waiting on the bowl announcement: {school}, {record}. We should have the official answer next week."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.8",
+        "body": "For {school}, {record} is the record and next week is the selection date. No assigned bowl matchup yet."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.9",
+        "body": "{school}'s bowl plans remain unconfirmed at {record}. Official selections are a week away."
+      },
+      {
+        "id": "postseason.waiting-bowl.cyclecopy.10",
+        "body": "Next week's bowl announcements will settle the next step for {school}. It waits with a {record} record."
+      }
+    ],
+    "postseason.waiting-fan": [
+      {
+        "id": "postseason.waiting-fan.cyclecopy.1",
+        "body": "{school} fans have a week until the announcement. My phone battery is not enjoying the process"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.2",
+        "body": "{school} fans have a week until the announcement. Apparently checking again does not make them announce it faster"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.3",
+        "body": "Still waiting for the official news on {school}. My phone battery is not enjoying the process"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.4",
+        "body": "Still waiting for the official news on {school}. Apparently checking again does not make them announce it faster"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.5",
+        "body": "A whole waiting week for {school}. My phone battery is not enjoying the process"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.6",
+        "body": "A whole waiting week for {school}. Apparently checking again does not make them announce it faster"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.7",
+        "body": "{school} fans have entered the refreshing-everything stage. My phone battery is not enjoying the process"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.8",
+        "body": "{school} fans have entered the refreshing-everything stage. Apparently checking again does not make them announce it faster"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.9",
+        "body": "One week until the bowl news is official for {school}. My phone battery is not enjoying the process"
+      },
+      {
+        "id": "postseason.waiting-fan.cyclecopy.10",
+        "body": "One week until the bowl news is official for {school}. Apparently checking again does not make them announce it faster"
+      }
+    ],
+    "postseason.bye-path": [
+      {
+        "id": "postseason.bye-path.cyclecopy.1",
+        "body": "{school} has a first-round bye and will meet the {first}-{second} winner in the Week {quarterWeek} quarterfinal."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.2",
+        "body": "Quarterfinal path for {school}: a bye, then the winner of {first} vs. {second} in Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.3",
+        "body": "{first} and {second} play for a Week {quarterWeek} quarterfinal meeting with {school}, which has a first-round bye."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.4",
+        "body": "{school}'s bye is set. Its Week {quarterWeek} quarterfinal opponent comes from {first} vs. {second}."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.5",
+        "body": "A first-round bye for {school}. Next is the {first}-{second} winner in Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.6",
+        "body": "The bracket gives {school} a bye into Week {quarterWeek}. Either {first} or {second} will be waiting in the quarterfinal."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.7",
+        "body": "{school} can watch {first} vs. {second} with a clear interest: the winner is its Week {quarterWeek} quarterfinal opponent."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.8",
+        "body": "First-round bye: {school}. Quarterfinal opponent: {first} or {second}, in Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.9",
+        "body": "{school} enters the bracket in the Week {quarterWeek} quarterfinal, against the {first}-{second} winner."
+      },
+      {
+        "id": "postseason.bye-path.cyclecopy.10",
+        "body": "{school} gets the bye. {first} and {second} decide who reaches its side of the Week {quarterWeek} quarterfinal."
+      }
+    ],
+    "postseason.bye-opponent": [
+      {
+        "id": "postseason.bye-opponent.cyclecopy.1",
+        "body": "{opponent} is now {school}'s Week {quarterWeek} quarterfinal opponent after the first-round result."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.2",
+        "body": "Quarterfinal set: {school} vs. {opponent}, Week {quarterWeek}. The first round has supplied the opponent."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.3",
+        "body": "The wait for an opponent is over for {school}: {opponent}, Week {quarterWeek}, in the quarterfinal."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.4",
+        "body": "{school}'s bye leads to a quarterfinal against {opponent} in Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.5",
+        "body": "{opponent} advances into a Week {quarterWeek} quarterfinal with {school}."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.6",
+        "body": "The bracket now pairs {school} and {opponent} in the Week {quarterWeek} quarterfinal."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.7",
+        "body": "After watching the first round, {school} has its answer: {opponent} in Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.8",
+        "body": "Week {quarterWeek} quarterfinal watch: {school} gets {opponent}. The opponent is confirmed."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.9",
+        "body": "{school} vs. {opponent} is the quarterfinal matchup for Week {quarterWeek}."
+      },
+      {
+        "id": "postseason.bye-opponent.cyclecopy.10",
+        "body": "The first-round result sends {opponent} to meet {school} in the Week {quarterWeek} quarterfinal."
+      }
+    ],
+    "postseason.bye-team": [
+      {
+        "id": "postseason.bye-team.cyclecopy.1",
+        "body": "Quarterfinal bound. {nickname} vs. the {first}-{second} winner. Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.2",
+        "body": "A bye, then the {first}-{second} winner. {nickname}, get ready for Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.3",
+        "body": "The path is set. {nickname} meet the winner of {first} vs. {second} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.4",
+        "body": "Next for the {nickname}: the {first}-{second} winner. Quarterfinal. Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.5",
+        "body": "Waiting in the quarterfinal. {nickname} vs. {first} or {second}, Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.6",
+        "body": "Quarterfinal plans: {nickname}, {first} or {second}, Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.7",
+        "body": "One of {first} and {second} is next. {nickname} return in the Week {quarterWeek} quarterfinal. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.8",
+        "body": "Eyes on the bracket. {nickname} face the {first}-{second} winner in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.9",
+        "body": "A quarterfinal date awaits. {nickname} vs. the {first}-{second} winner, Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team.cyclecopy.10",
+        "body": "{nickname} have the bye. Next: {first} or {second}, Week {quarterWeek}. {hashtag}"
+      }
+    ],
+    "postseason.bye-fan": [
+      {
+        "id": "postseason.bye-fan.cyclecopy.1",
+        "body": "{school} gets the {first}-{second} winner. No game for us and I am somehow still stressed"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.2",
+        "body": "{school} gets the {first}-{second} winner. The bye did not come with the relaxed weekend I imagined"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.3",
+        "body": "{first} vs. {second} decides who gets {school} next. No game for us and I am somehow still stressed"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.4",
+        "body": "{first} vs. {second} decides who gets {school} next. The bye did not come with the relaxed weekend I imagined"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.5",
+        "body": "A bye for {school}. {first} and {second} get to settle the opponent. No game for us and I am somehow still stressed"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.6",
+        "body": "A bye for {school}. {first} and {second} get to settle the opponent. The bye did not come with the relaxed weekend I imagined"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.7",
+        "body": "{school} fans watching {first} and {second} like it is a scouting assignment. No game for us and I am somehow still stressed"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.8",
+        "body": "{school} fans watching {first} and {second} like it is a scouting assignment. The bye did not come with the relaxed weekend I imagined"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.9",
+        "body": "{first} or {second}. That is the next one for {school}. No game for us and I am somehow still stressed"
+      },
+      {
+        "id": "postseason.bye-fan.cyclecopy.10",
+        "body": "{first} or {second}. That is the next one for {school}. The bye did not come with the relaxed weekend I imagined"
+      }
+    ],
+    "postseason.bye-fan-opponent": [
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.1",
+        "body": "{opponent} it is. {school} has its quarterfinal. Ready for the game. Less ready for my nerves"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.2",
+        "body": "{opponent} it is. {school} has its quarterfinal. I have already started having conversations about this matchup"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.3",
+        "body": "{school} vs. {opponent}. The wait is over. Ready for the game. Less ready for my nerves"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.4",
+        "body": "{school} vs. {opponent}. The wait is over. I have already started having conversations about this matchup"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.5",
+        "body": "Quarterfinal opponent confirmed: {opponent}. Let's go, {school}. Ready for the game. Less ready for my nerves"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.6",
+        "body": "Quarterfinal opponent confirmed: {opponent}. Let's go, {school}. I have already started having conversations about this matchup"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.7",
+        "body": "{opponent} is next for {school}. Ready for the game. Less ready for my nerves"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.8",
+        "body": "{opponent} is next for {school}. I have already started having conversations about this matchup"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.9",
+        "body": "{school} gets {opponent}. My week now has a very clear focus. Ready for the game. Less ready for my nerves"
+      },
+      {
+        "id": "postseason.bye-fan-opponent.cyclecopy.10",
+        "body": "{school} gets {opponent}. My week now has a very clear focus. I have already started having conversations about this matchup"
+      }
+    ],
+    "postseason.award-player": [
+      {
+        "id": "postseason.award-player.cyclecopy.1",
+        "body": "The {award} means a lot. Love my teammates and everybody at {school}. Thank you for being with me"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.2",
+        "body": "The {award} means a lot. A lot of people helped me get here. Appreciate all of you at {school}"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.3",
+        "body": "Grateful for the {award}. Love my teammates and everybody at {school}. Thank you for being with me"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.4",
+        "body": "Grateful for the {award}. A lot of people helped me get here. Appreciate all of you at {school}"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.5",
+        "body": "Honored to receive the {award}. Love my teammates and everybody at {school}. Thank you for being with me"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.6",
+        "body": "Honored to receive the {award}. A lot of people helped me get here. Appreciate all of you at {school}"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.7",
+        "body": "Bringing the {award} back to {school}. Love my teammates and everybody at {school}. Thank you for being with me"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.8",
+        "body": "Bringing the {award} back to {school}. A lot of people helped me get here. Appreciate all of you at {school}"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.9",
+        "body": "Still taking in the {award}. Love my teammates and everybody at {school}. Thank you for being with me"
+      },
+      {
+        "id": "postseason.award-player.cyclecopy.10",
+        "body": "Still taking in the {award}. A lot of people helped me get here. Appreciate all of you at {school}"
+      }
+    ],
+    "postseason.signed": [
+      {
+        "id": "postseason.signed.cyclecopy.1",
+        "body": "Signed {document}. It's official, {school}. Thank you to everyone who helped me get here"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.2",
+        "body": "Signed {document}. It's official, {school}. Grateful for my family and coaches. Excited for what is next"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.3",
+        "body": "{document} signed. Ready for {school}. Thank you to everyone who helped me get here"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.4",
+        "body": "{document} signed. Ready for {school}. Grateful for my family and coaches. Excited for what is next"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.5",
+        "body": "Made it official with {school}. Signed {document}. Thank you to everyone who helped me get here"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.6",
+        "body": "Made it official with {school}. Signed {document}. Grateful for my family and coaches. Excited for what is next"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.7",
+        "body": "Next chapter: {school}. Signed {document}. Thank you to everyone who helped me get here"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.8",
+        "body": "Next chapter: {school}. Signed {document}. Grateful for my family and coaches. Excited for what is next"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.9",
+        "body": "My {document} is signed. {school}, let's go. Thank you to everyone who helped me get here"
+      },
+      {
+        "id": "postseason.signed.cyclecopy.10",
+        "body": "My {document} is signed. {school}, let's go. Grateful for my family and coaches. Excited for what is next"
+      }
+    ],
+    "postseason.signed-class": [
+      {
+        "id": "postseason.signed-class.cyclecopy.1",
+        "body": "Early signing check for {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.2",
+        "body": "{school}'s early signing group is taking shape. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.3",
+        "body": "Signatures on the board for {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.4",
+        "body": "Early signing update from {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.5",
+        "body": "A look at the signed group for {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.6",
+        "body": "Early signing count at {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.7",
+        "body": "The current signed class for {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.8",
+        "body": "Checking the early signatures at {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.9",
+        "body": "{school}'s early signing numbers. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      },
+      {
+        "id": "postseason.signed-class.cyclecopy.10",
+        "body": "Signed-recruit check: {school}. {count} signed: {fiveStars} five-stars, {fourStars} four-stars.{rankDetail}"
+      }
+    ],
+    "postseason.coach-fan": [
+      {
+        "id": "postseason.coach-fan.cyclecopy.1",
+        "body": "The {role} decision is part of {school}'s offseason now. Please give us good football, not just a good press conference"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.2",
+        "body": "The {role} decision is part of {school}'s offseason now. I am interested in the plan long after the introduction is over"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.3",
+        "body": "{school} has a {role} situation to sort out. Please give us good football, not just a good press conference"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.4",
+        "body": "{school} has a {role} situation to sort out. I am interested in the plan long after the introduction is over"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.5",
+        "body": "Keeping an eye on the {role} news at {school}. Please give us good football, not just a good press conference"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.6",
+        "body": "Keeping an eye on the {role} news at {school}. I am interested in the plan long after the introduction is over"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.7",
+        "body": "The {role} conversation at {school} is getting very real. Please give us good football, not just a good press conference"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.8",
+        "body": "The {role} conversation at {school} is getting very real. I am interested in the plan long after the introduction is over"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.9",
+        "body": "{school} fans have another {role} decision to argue about. Please give us good football, not just a good press conference"
+      },
+      {
+        "id": "postseason.coach-fan.cyclecopy.10",
+        "body": "{school} fans have another {role} decision to argue about. I am interested in the plan long after the introduction is over"
+      }
+    ],
+    "context.conference-fan": [
+      {
+        "id": "context.conference-fan.cyclecopy.1",
+        "body": "The {conference} vs. {otherConference} arguments have found my timeline again. Bring results to the conversation"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.2",
+        "body": "The {conference} vs. {otherConference} arguments have found my timeline again. Some of you are treating this like your personal conference audition"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.3",
+        "body": "{otherConference} fans have another speech ready about the {conference}. Bring results to the conversation"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.4",
+        "body": "{otherConference} fans have another speech ready about the {conference}. Some of you are treating this like your personal conference audition"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.5",
+        "body": "The {conference} is not taking conference lectures from the {otherConference} today. Bring results to the conversation"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.6",
+        "body": "The {conference} is not taking conference lectures from the {otherConference} today. Some of you are treating this like your personal conference audition"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.7",
+        "body": "Every {conference}-{otherConference} debate has the same volume setting. Bring results to the conversation"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.8",
+        "body": "Every {conference}-{otherConference} debate has the same volume setting. Some of you are treating this like your personal conference audition"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.9",
+        "body": "{otherConference} fans, the {conference} heard you the first time. Bring results to the conversation"
+      },
+      {
+        "id": "context.conference-fan.cyclecopy.10",
+        "body": "{otherConference} fans, the {conference} heard you the first time. Some of you are treating this like your personal conference audition"
+      }
+    ],
+    "draft-talk.team-leader": [
+      {
+        "id": "draft-talk.team-leader.cyclecopy.1",
+        "body": "First-round production: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.2",
+        "body": "Checking the first-round school totals: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.3",
+        "body": "The school count at the front of this draft: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.4",
+        "body": "Round 1 school leaderboard: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.5",
+        "body": "First-round talent coming out together: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.6",
+        "body": "A look at the school leaders: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.7",
+        "body": "On this year's first-round board: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.8",
+        "body": "The largest first-round school count: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.9",
+        "body": "School draft check: {leaders} {leadVerb} with {count} first-round selections."
+      },
+      {
+        "id": "draft-talk.team-leader.cyclecopy.10",
+        "body": "First-round school tally: {leaders} {leadVerb} with {count} first-round selections."
+      }
+    ],
+    "draft-talk.conference-leader": [
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.1",
+        "body": "Conference draft check: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.2",
+        "body": "Round 1 by conference: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.3",
+        "body": "First-round conference totals: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.4",
+        "body": "The conference lead in Round 1: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.5",
+        "body": "Looking across this year's first round: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.6",
+        "body": "First-round talent by league: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.7",
+        "body": "The conference draft count: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.8",
+        "body": "At the front of the draft: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.9",
+        "body": "A look at the conference leaders: {conferences} {leadVerb} with {count} first-round picks."
+      },
+      {
+        "id": "draft-talk.conference-leader.cyclecopy.10",
+        "body": "This year's first-round conference tally: {conferences} {leadVerb} with {count} first-round picks."
+      }
+    ],
+    "draft-talk.congrats": [
+      {
+        "id": "draft-talk.congrats.cyclecopy.1",
+        "body": "{count} {school} players drafted. Congrats to {names}{more}. Will be keeping an eye on those careers"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.2",
+        "body": "{count} {school} players drafted. Congrats to {names}{more}. Always going to cheer for our guys"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.3",
+        "body": "{school} had {count} drafted: {names}{more}. Love seeing that call come. Will be keeping an eye on those careers"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.4",
+        "body": "{school} had {count} drafted: {names}{more}. Love seeing that call come. Always going to cheer for our guys"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.5",
+        "body": "Shoutout to {names}{more}. {count} drafted from {school}. Will be keeping an eye on those careers"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.6",
+        "body": "Shoutout to {names}{more}. {count} drafted from {school}. Always going to cheer for our guys"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.7",
+        "body": "{count} draft picks for {school}. {names}{more} earned this moment. Will be keeping an eye on those careers"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.8",
+        "body": "{count} draft picks for {school}. {names}{more} earned this moment. Always going to cheer for our guys"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.9",
+        "body": "{names}{more} got drafted. {count} picks out of {school}. Will be keeping an eye on those careers"
+      },
+      {
+        "id": "draft-talk.congrats.cyclecopy.10",
+        "body": "{names}{more} got drafted. {count} picks out of {school}. Always going to cheer for our guys"
+      }
+    ],
+    "draft-talk.empty": [
+      {
+        "id": "draft-talk.empty.cyclecopy.1",
+        "body": "No {school} players drafted this year. Hope our guys find a free-agent chance and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.2",
+        "body": "No {school} players drafted this year. Still pulling for our guys to find their next opportunity"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.3",
+        "body": "An empty draft board for {school} this time. Hope our guys find a free-agent chance and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.4",
+        "body": "An empty draft board for {school} this time. Still pulling for our guys to find their next opportunity"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.5",
+        "body": "{school} finished the draft with no selections. Hope our guys find a free-agent chance and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.6",
+        "body": "{school} finished the draft with no selections. Still pulling for our guys to find their next opportunity"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.7",
+        "body": "No draft calls for {school} players this year. Hope our guys find a free-agent chance and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.8",
+        "body": "No draft calls for {school} players this year. Still pulling for our guys to find their next opportunity"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.9",
+        "body": "A draft without a {school} selection. That hurts. Hope our guys find a free-agent chance and make somebody regret passing"
+      },
+      {
+        "id": "draft-talk.empty.cyclecopy.10",
+        "body": "A draft without a {school} selection. That hurts. Still pulling for our guys to find their next opportunity"
+      }
+    ],
+    "draft-talk.conference-fan": [
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.1",
+        "body": "{count} first-round picks out of {school}. You're welcome, {conference}. I will be mentioning this again"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.2",
+        "body": "{count} first-round picks out of {school}. {conference} group chat is hearing about this all summer"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.3",
+        "body": "{school} sent {count} players into the first round. You're welcome, {conference}. I will be mentioning this again"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.4",
+        "body": "{school} sent {count} players into the first round. {conference} group chat is hearing about this all summer"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.5",
+        "body": "Round 1 gave {school} {count} picks. You're welcome, {conference}. I will be mentioning this again"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.6",
+        "body": "Round 1 gave {school} {count} picks. {conference} group chat is hearing about this all summer"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.7",
+        "body": "{count} {school} players drafted in the first round. You're welcome, {conference}. I will be mentioning this again"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.8",
+        "body": "{count} {school} players drafted in the first round. {conference} group chat is hearing about this all summer"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.9",
+        "body": "A first-round count of {count} for {school}. You're welcome, {conference}. I will be mentioning this again"
+      },
+      {
+        "id": "draft-talk.conference-fan.cyclecopy.10",
+        "body": "A first-round count of {count} for {school}. {conference} group chat is hearing about this all summer"
+      }
+    ],
+    "draft-talk.top-ten": [
+      {
+        "id": "draft-talk.top-ten.cyclecopy.1",
+        "body": "No. {pick}: the {nflTeam} select {school}'s {position} {playerName}. A top-ten investment puts the development plan under a spotlight."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.2",
+        "body": "{school}'s {position} {playerName} goes No. {pick} to the {nflTeam}. The next question is how they put that talent to use."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.3",
+        "body": "The {nflTeam} use No. {pick} on {school}'s {position} {playerName}. Top-ten expectations arrive with the phone call."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.4",
+        "body": "{position} {playerName}, {school}, No. {pick} to the {nflTeam}. That is a major piece of their draft investment."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.5",
+        "body": "A top-ten landing for {school}'s {position} {playerName}: No. {pick}, {nflTeam}. Opportunity and expectations in the same announcement."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.6",
+        "body": "{school} sees {position} {playerName} come off the board at No. {pick}. The {nflTeam} have made their investment."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.7",
+        "body": "At No. {pick}, the {nflTeam} turn to {school}'s {position} {playerName}. Now comes the work of building a role."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.8",
+        "body": "Top-ten watch: {school}'s {position} {playerName} to the {nflTeam}, No. {pick}. A draft position that attracts plenty of attention."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.9",
+        "body": "The No. {pick} selection is {school}'s {position} {playerName}, headed to the {nflTeam}. Big draft capital behind this one."
+      },
+      {
+        "id": "draft-talk.top-ten.cyclecopy.10",
+        "body": "{nflTeam}, No. {pick}: {position} {playerName} from {school}. How they develop this top-ten pick is the next story."
+      }
+    ],
+    "draft-talk.nfl-haul": [
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.1",
+        "body": "A draft group I want to follow: the {nflTeam} brought in {names}. The next step is turning the picks into useful roles."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.2",
+        "body": "The {nflTeam} landed {names}. That group gives me a reason to keep watching their development plan."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.3",
+        "body": "One haul worth discussing: {names} to the {nflTeam}. A starting point to like, with the actual work ahead."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.4",
+        "body": "Looking at the {nflTeam} class: {names}. Interested in what those players become together."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.5",
+        "body": "The {nflTeam} draft group includes {names}. There is something to work with in that collection."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.6",
+        "body": "{names} are part of the {nflTeam} haul. Draft-night promise still has to become productive football."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.7",
+        "body": "A closer look at the {nflTeam}: {names}. That is one of the groups on my follow-up list."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.8",
+        "body": "The {nflTeam} came away with {names}. I like the foundation; development decides the rest."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.9",
+        "body": "Draft class to revisit: {nflTeam}, with {names}. The fit on the field is what comes next."
+      },
+      {
+        "id": "draft-talk.nfl-haul.cyclecopy.10",
+        "body": "Keeping a note on the {nflTeam} group of {names}. Worth watching beyond the draft announcement."
+      }
+    ],
+    "carry.player-training": [
+      {
+        "id": "carry.player-training.cyclecopy.1",
+        "body": "Good offseason with my teammates. Ready to get back out there for {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.2",
+        "body": "Good offseason with my teammates. Looking forward to another season with {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.3",
+        "body": "Grateful for the time working with this group. Ready to get back out there for {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.4",
+        "body": "Grateful for the time working with this group. Looking forward to another season with {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.5",
+        "body": "Been a good stretch of work with my guys. Ready to get back out there for {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.6",
+        "body": "Been a good stretch of work with my guys. Looking forward to another season with {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.7",
+        "body": "Love the people I get to work with every day. Ready to get back out there for {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.8",
+        "body": "Love the people I get to work with every day. Looking forward to another season with {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.9",
+        "body": "Appreciate my teammates pushing each other this offseason. Ready to get back out there for {school}"
+      },
+      {
+        "id": "carry.player-training.cyclecopy.10",
+        "body": "Appreciate my teammates pushing each other this offseason. Looking forward to another season with {school}"
+      }
+    ],
+    "carry.player-training-qb": [
+      {
+        "id": "carry.player-training-qb.cyclecopy.1",
+        "body": "Good offseason with this group. Ready to take the field for {school}"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.2",
+        "body": "Good offseason with this group. Looking forward to getting {school} football started"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.3",
+        "body": "Appreciate the guys putting the time in together. Ready to take the field for {school}"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.4",
+        "body": "Appreciate the guys putting the time in together. Looking forward to getting {school} football started"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.5",
+        "body": "A lot of work with teammates I trust. Ready to take the field for {school}"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.6",
+        "body": "A lot of work with teammates I trust. Looking forward to getting {school} football started"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.7",
+        "body": "Grateful for another offseason with my guys. Ready to take the field for {school}"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.8",
+        "body": "Grateful for another offseason with my guys. Looking forward to getting {school} football started"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.9",
+        "body": "Love the work this group has put in together. Ready to take the field for {school}"
+      },
+      {
+        "id": "carry.player-training-qb.cyclecopy.10",
+        "body": "Love the work this group has put in together. Looking forward to getting {school} football started"
+      }
+    ],
+    "carry.fan-training": [
+      {
+        "id": "carry.fan-training.cyclecopy.1",
+        "body": "Good to hear about {playerName}'s offseason at {school}. Ready to see that work show up on Saturdays"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.2",
+        "body": "Good to hear about {playerName}'s offseason at {school}. I have talked myself into getting excited again"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.3",
+        "body": "{school} getting encouraging news on {playerName}. Ready to see that work show up on Saturdays"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.4",
+        "body": "{school} getting encouraging news on {playerName}. I have talked myself into getting excited again"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.5",
+        "body": "An offseason step forward for {playerName} at {school}. Ready to see that work show up on Saturdays"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.6",
+        "body": "An offseason step forward for {playerName} at {school}. I have talked myself into getting excited again"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.7",
+        "body": "{playerName}'s progress is a good {school} update. Ready to see that work show up on Saturdays"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.8",
+        "body": "{playerName}'s progress is a good {school} update. I have talked myself into getting excited again"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.9",
+        "body": "Keeping an eye on {playerName} after that {school} offseason. Ready to see that work show up on Saturdays"
+      },
+      {
+        "id": "carry.fan-training.cyclecopy.10",
+        "body": "Keeping an eye on {playerName} after that {school} offseason. I have talked myself into getting excited again"
+      }
+    ],
+    "carry.fan-move": [
+      {
+        "id": "carry.fan-move.cyclecopy.1",
+        "body": "{school} in the {newConference}. A new set of fanbases to argue with. I will adapt"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.2",
+        "body": "{school} in the {newConference}. Going to take a little time before that sounds normal"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.3",
+        "body": "A new conference for {school}: {newConference}. A new set of fanbases to argue with. I will adapt"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.4",
+        "body": "A new conference for {school}: {newConference}. Going to take a little time before that sounds normal"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.5",
+        "body": "The {newConference} is {school}'s new home. A new set of fanbases to argue with. I will adapt"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.6",
+        "body": "The {newConference} is {school}'s new home. Going to take a little time before that sounds normal"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.7",
+        "body": "{school} has a whole {newConference} schedule to get used to. A new set of fanbases to argue with. I will adapt"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.8",
+        "body": "{school} has a whole {newConference} schedule to get used to. Going to take a little time before that sounds normal"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.9",
+        "body": "New {school} chapter in the {newConference}. A new set of fanbases to argue with. I will adapt"
+      },
+      {
+        "id": "carry.fan-move.cyclecopy.10",
+        "body": "New {school} chapter in the {newConference}. Going to take a little time before that sounds normal"
+      }
+    ],
+    "carry.fan-departure": [
+      {
+        "id": "carry.fan-departure.cyclecopy.1",
+        "body": "Wishing {playerName} well after leaving {school}. Roster changes feel different when you have cheered for the guy"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.2",
+        "body": "Wishing {playerName} well after leaving {school}. Still a person behind every roster decision"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.3",
+        "body": "Good luck to {playerName} in the next chapter after {school}. Roster changes feel different when you have cheered for the guy"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.4",
+        "body": "Good luck to {playerName} in the next chapter after {school}. Still a person behind every roster decision"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.5",
+        "body": "Appreciate {playerName}'s time at {school}. Roster changes feel different when you have cheered for the guy"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.6",
+        "body": "Appreciate {playerName}'s time at {school}. Still a person behind every roster decision"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.7",
+        "body": "{playerName} moving on from {school} still feels strange. Roster changes feel different when you have cheered for the guy"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.8",
+        "body": "{playerName} moving on from {school} still feels strange. Still a person behind every roster decision"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.9",
+        "body": "Hope things work out for {playerName} after {school}. Roster changes feel different when you have cheered for the guy"
+      },
+      {
+        "id": "carry.fan-departure.cyclecopy.10",
+        "body": "Hope things work out for {playerName} after {school}. Still a person behind every roster decision"
+      }
+    ],
+    "desk.marcus.positive": [
+      {
+        "id": "desk.marcus.positive.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.2",
+        "body": "That should get your attention. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.3",
+        "body": "There is a case worth hearing. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.4",
+        "body": "Give them some credit. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.5",
+        "body": "This deserves a little noise. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.6",
+        "body": "A useful answer to the doubters. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.7",
+        "body": "That is worth talking about. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.8",
+        "body": "Do not overlook that. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.positive.cyclecopy.9",
+        "body": "Put that in the conversation. {analysisText}"
+      }
+    ],
+    "desk.marcus.negative": [
+      {
+        "id": "desk.marcus.negative.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.2",
+        "body": "That is a problem. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.3",
+        "body": "This needs a better answer. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.4",
+        "body": "Hard to wave this away. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.5",
+        "body": "There is a concern here. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.6",
+        "body": "That deserves scrutiny. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.7",
+        "body": "Do not skip that part. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.8",
+        "body": "They have work to do. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.negative.cyclecopy.9",
+        "body": "That will raise questions. {analysisText}"
+      }
+    ],
+    "desk.tina.positive": [
+      {
+        "id": "desk.tina.positive.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.2",
+        "body": "Well, that seems useful. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.3",
+        "body": "Someone is enjoying the film this week. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.4",
+        "body": "Not bad at all. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.5",
+        "body": "A reason to open the group chat. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.6",
+        "body": "There is something to smile about. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.7",
+        "body": "Worth a second look. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.8",
+        "body": "A pretty good detail to have. {analysisText}"
+      },
+      {
+        "id": "desk.tina.positive.cyclecopy.9",
+        "body": "That part should travel well. {analysisText}"
+      }
+    ],
+    "desk.tina.negative": [
+      {
+        "id": "desk.tina.negative.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.2",
+        "body": "Not exactly ideal. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.3",
+        "body": "The film session should be interesting. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.4",
+        "body": "A detail they could do without. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.5",
+        "body": "That is going to need some attention. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.6",
+        "body": "Probably not the plan. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.7",
+        "body": "A little less fun on that side. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.8",
+        "body": "Someone has homework. {analysisText}"
+      },
+      {
+        "id": "desk.tina.negative.cyclecopy.9",
+        "body": "A reason to keep the discussion going. {analysisText}"
+      }
+    ],
+    "desk.chris.positive": [
+      {
+        "id": "desk.chris.positive.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.2",
+        "body": "Worth keeping on the radar. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.3",
+        "body": "A useful part of the evaluation. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.4",
+        "body": "There is something to build on. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.5",
+        "body": "A detail that belongs in the discussion. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.6",
+        "body": "Good context for the next look. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.7",
+        "body": "That strengthens the case. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.8",
+        "body": "Another reason to keep watching. {analysisText}"
+      },
+      {
+        "id": "desk.chris.positive.cyclecopy.9",
+        "body": "An encouraging piece of evidence. {analysisText}"
+      }
+    ],
+    "desk.chris.negative": [
+      {
+        "id": "desk.chris.negative.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.2",
+        "body": "Something to keep watching. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.3",
+        "body": "That belongs in the evaluation too. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.4",
+        "body": "A concern for the next look. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.5",
+        "body": "A detail worth following up. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.6",
+        "body": "That needs more attention. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.7",
+        "body": "Part of the full assessment. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.8",
+        "body": "A question the next game can help answer. {analysisText}"
+      },
+      {
+        "id": "desk.chris.negative.cyclecopy.9",
+        "body": "One area to revisit. {analysisText}"
+      }
+    ],
+    "desk.marcus.neutral": [
+      {
+        "id": "desk.marcus.neutral.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.2",
+        "body": "Here is the part worth arguing about. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.3",
+        "body": "Start with the evidence. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.4",
+        "body": "There is more to discuss here. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.5",
+        "body": "Put this in the comparison. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.6",
+        "body": "A useful reference point. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.7",
+        "body": "Keep this part in view. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.8",
+        "body": "One detail for the debate. {analysisText}"
+      },
+      {
+        "id": "desk.marcus.neutral.cyclecopy.9",
+        "body": "Read the numbers first. {analysisText}"
+      }
+    ],
+    "desk.tina.neutral": [
+      {
+        "id": "desk.tina.neutral.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.2",
+        "body": "A little context for the timeline. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.3",
+        "body": "Before the replies get going. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.4",
+        "body": "A detail for the group chat. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.5",
+        "body": "Here is something to chew on. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.6",
+        "body": "For anyone keeping score. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.7",
+        "body": "Worth having the numbers handy. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.8",
+        "body": "The actual football part. {analysisText}"
+      },
+      {
+        "id": "desk.tina.neutral.cyclecopy.9",
+        "body": "A useful pause in the argument. {analysisText}"
+      }
+    ],
+    "desk.chris.neutral": [
+      {
+        "id": "desk.chris.neutral.cyclecopy.1",
+        "body": "{analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.2",
+        "body": "A note from the evaluation. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.3",
+        "body": "One piece of the full picture. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.4",
+        "body": "Context for the next look. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.5",
+        "body": "A useful checkpoint. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.6",
+        "body": "A detail to track. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.7",
+        "body": "Keep this in the assessment. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.8",
+        "body": "Part of the scouting discussion. {analysisText}"
+      },
+      {
+        "id": "desk.chris.neutral.cyclecopy.9",
+        "body": "Evidence to work from. {analysisText}"
+      }
+    ]
+  }
+}

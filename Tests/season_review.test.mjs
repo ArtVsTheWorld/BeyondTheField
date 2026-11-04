@@ -51,6 +51,11 @@ test('seniors, zero risk, invalid values and non-offseason phases do not become 
  for(const risk of [-1,0,49,101,NaN]){const s=fixture();s.players[0].transferRisk=risk;assert.deepEqual(portalRiskEvents(s),[]);}
  const s=fixture();s.players[0].transferRisk=90;s.players[0].classYear='Senior';assert.deepEqual(portalRiskEvents(s),[]);s.players[0].classYear='Junior';s.season.CurrentStage='NFLSeason';assert.deepEqual(portalRiskEvents(s),[]);
 });
+test('unchanged retention concerns stay quiet in later offseason editions, while material risk changes reopen coverage',()=>{
+ const s=fixture();s.players[0].transferRisk=75;const a=updateRuntime(structuredClone(s));assert.ok(a.catalog.stories.some(p=>p.eventId==='retention-watch:p1'));
+ s.season.CurrentWeek=1;const b=updateRuntime(structuredClone(s),a.state);assert.ok(!b.catalog.stories.some(p=>p.eventId==='retention-watch:p1'));
+ s.players[0].transferRisk=95;const c=updateRuntime(structuredClone(s),b.state);assert.ok(c.catalog.stories.some(p=>p.eventId==='retention-watch:p1'));
+});
 test('staff retrospective admits confirmed same-season moves, never pending offers or firings',()=>{
  const row=(id,family,coachName='Actual Coach')=>({id,teamIds:[3],facts:{family,coachName,role:'head coach'}});
  const feed={season:2026,events:[row('hire','postseason.coach-hired'),row('offer','postseason.coach-offer'),row('pending','postseason.coach-pending')]};
@@ -64,7 +69,7 @@ test('phase archives supply staff retrospectives even when current carousel tabl
 test('blueprint NIL adjustments publish the next week, stay stable, and do not repeat a week later',()=>{
  let s=fixture(),a=updateRuntime(structuredClone(s));s.players[0].nil=140;s.players[1].nil=75;
  const b=updateRuntime(structuredClone(s),a.state);assert.ok(!b.catalog.stories.some(p=>p.category==='nil'));
- s.season.CurrentWeek=1;const c=updateRuntime(structuredClone(s),b.state),deals=c.catalog.stories.filter(p=>p.category==='nil');assert.equal(deals.length,2);assert.ok(deals.some(p=>p.body.includes('$560K')&&p.body.includes('$400K')));assert.ok(deals.some(p=>p.body.includes('$300K')));assert.ok(deals.every(p=>p.body.includes('last week')));
+ s.season.CurrentWeek=1;const c=updateRuntime(structuredClone(s),b.state),deals=c.catalog.stories.filter(p=>p.category==='nil');assert.equal(deals.length,2);assert.ok(deals.some(p=>p.body.includes('$560K')&&p.body.includes('$400K')));assert.ok(deals.some(p=>p.body.includes('$300K')));assert.ok(deals.every(p=>/last week|review/i.test(p.body)));
  assert.deepEqual(updateRuntime(structuredClone(s),c.state).catalog.stories,c.catalog.stories);
  s.season.CurrentWeek=2;assert.ok(!updateRuntime(s,c.state).catalog.stories.some(p=>p.category==='nil'));
 });

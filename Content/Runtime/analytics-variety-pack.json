@@ -2272,43 +2272,43 @@
     "deep.pbu-game": [
       {
         "id": "deep.pbu-game.variety.1",
-        "body": "{school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "{school}'s {playerName}: {rate} pass breakups a game with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.2",
-        "body": "Passes defended for {school}'s {playerName}: {rate} passes defended a game (with {total} total in {games} appearances)."
+        "body": "Pass breakups for {school}'s {playerName}: {rate} pass breakups a game (with {total} total in {games} appearances)."
       },
       {
         "id": "deep.pbu-game.variety.3",
-        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} passes defended a game."
+        "body": "With {total} total in {games} appearances: {school}'s {playerName}, {rate} pass breakups a game."
       },
       {
         "id": "deep.pbu-game.variety.4",
-        "body": "{school}'s {playerName}'s passes defended: {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "{school}'s {playerName}'s pass breakups: {rate} pass breakups a game with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.5",
-        "body": "A look at {school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "A look at {school}'s {playerName}: {rate} pass breakups a game with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.6",
-        "body": "Checking passes defended at {school}'s {playerName}: {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "Checking pass breakups at {school}'s {playerName}: {rate} pass breakups a game with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.7",
-        "body": "{rate} passes defended a game for {school}'s {playerName} with {total} total in {games} appearances."
+        "body": "{rate} pass breakups a game for {school}'s {playerName} with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.8",
-        "body": "The passes defended figure for {school}'s {playerName} is {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "The pass breakups figure for {school}'s {playerName} is {rate} pass breakups a game with {total} total in {games} appearances."
       },
       {
         "id": "deep.pbu-game.variety.9",
-        "body": "With {total} total in {games} appearances, the passes defended number for {school}'s {playerName} is {rate} passes defended a game."
+        "body": "With {total} total in {games} appearances, the pass breakups number for {school}'s {playerName} is {rate} pass breakups a game."
       },
       {
         "id": "deep.pbu-game.variety.10",
-        "body": "{school}'s {playerName} in numbers: {rate} passes defended a game with {total} total in {games} appearances."
+        "body": "{school}'s {playerName} in numbers: {rate} pass breakups a game with {total} total in {games} appearances."
       }
     ],
     "deep.forced-game": [

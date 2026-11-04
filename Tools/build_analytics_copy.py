@@ -89,7 +89,7 @@ measure('analysis.team.close-games',T,'one-score games','{wins} wins and {losses
 measure('analysis.team.opponent-records',T,'opponents\' combined record','{wins}-{losses}','excluding their games against {school}')
 measure('analysis.team.offense-defense-contrast',T,'scoring balance','{pointsFor} points scored and {pointsAgainst} allowed a game','this season')
 measure('analysis.player.freshman-production',P,'freshman production','{production}','this season as a freshman')
-for key,label in [('tackles-game','total tackles'),('sacks-game','sacks'),('tfl-game','tackles for loss'),('ints-game','interceptions'),('pbu-game','passes defended'),('forced-game','forced fumbles'),('recoveries-game','fumble recoveries')]:
+for key,label in [('tackles-game','total tackles'),('sacks-game','sacks'),('tfl-game','tackles for loss'),('ints-game','interceptions'),('pbu-game','pass breakups'),('forced-game','forced fumbles'),('recoveries-game','fumble recoveries')]:
     measure('deep.'+key,P,label,'{rate} '+label+' a game','with {total} total in {games} appearances')
 measure('deep.after-contact',P,'rushing yards after contact','{rate}% of rushing production after contact','with {yards} after-contact yards out of {rushing} rushing yards')
 measure('deep.broken-tackles',P,'broken-tackle production','{broken} tackles broken','on {attempts} rushing attempts')

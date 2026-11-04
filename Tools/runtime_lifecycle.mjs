@@ -63,8 +63,9 @@ export function updateRuntime(s,state={format:1,editions:[]},{archives=[]}={}){
   s.portalOrigins=Object.fromEntries(originFeeds.flatMap(f=>(f.transactionObservation?.players??[]).filter(p=>p.team!==255).map(p=>[p.id,p.team])));
   s.draftBoard=draftBoard(s,same?.snapshot?.draftBoard??[]);
   s.undraftedSignings=undraftedBoard(s,same?.snapshot?.undraftedSignings??[]);
-  const priorDraft=[...editions].filter(e=>e.week<=week).reverse().find(e=>e.snapshot?.recentDraftClass?.length===224||e.feed?.events?.filter(e=>e.category==='draft').length===224);
-  s.recentDraftClass=s.draftBoard.length===224?s.draftBoard.map(d=>{const p=s.players.find(p=>p.id===d.player);return {...d,teamId:p?.team,playerName:p?.name,position:p?.position};}):priorDraft?.snapshot?.recentDraftClass??priorDraft?.feed.events.filter(e=>e.category==='draft').map(e=>({player:e.playerId,teamId:e.teamIds[0],playerName:e.facts.playerName,position:e.facts.position,pick:e.facts.draftPick,round:e.facts.draftRound,nflTeam:e.facts.nflTeam}))??[];
+  const officialPicks=feed=>(feed?.events??[]).filter(e=>e.category==='draft'&&Number.isInteger(e.facts?.draftPick)&&e.facts.draftPick>=1&&e.facts.draftPick<=224);
+  const priorDraft=[...editions].filter(e=>e.week<=week).reverse().find(e=>e.snapshot?.recentDraftClass?.length===224||officialPicks(e.feed).length===224);
+  s.recentDraftClass=s.draftBoard.length===224?s.draftBoard.map(d=>{const p=s.players.find(p=>p.id===d.player);return {...d,teamId:p?.team,playerName:p?.name,position:p?.position};}):priorDraft?.snapshot?.recentDraftClass?.length===224?priorDraft.snapshot.recentDraftClass:officialPicks(priorDraft?.feed).map(e=>({player:e.playerId,teamId:e.teamIds[0],playerName:e.facts.playerName,position:e.facts.position,pick:e.facts.draftPick,round:e.facts.draftRound,nflTeam:e.facts.nflTeam}));
   s.seasonStaffMoves=observedStaffMoves([...archives,...editions.filter(e=>e.week<week).map(e=>e.feed)],s.season.CurrentSeasonYear);
   const feed=buildFeed(s,previous?.snapshot??null,{authors,history:[...archives,...editions.filter(e=>e.week<week).map(e=>e.feed)],sameWeek:same?.feed??null,onAuthors:value=>{authors=value;}});
   const snapshot={format:2,sourceKind:'runtime',leagueId:s.leagueId,season:s.season,userTeamIndex:s.userTeamIndex,sha256:s.sha256,

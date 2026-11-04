@@ -14,7 +14,7 @@ class FeedWorker {
     std::filesystem::path folder,node,exporter,resumer;Address base=0,lastContext=0;
     uint64_t pollAt=0,observed=0,accepted=0;bool haveObserved=false,haveAccepted=false;
     std::string lastError,lastStatus;unsigned failures=0;
-    PackedChangeWatch settledProbe;uint64_t fastPolls=0,lastProbeReport=0;
+    PackedChangeWatch settledProbe;uint64_t fastPolls=0,lastProbeReport=0,sameContentRefreshes=0,lastSameReport=0;
 public:
     void configure(const std::filesystem::path& directory,Address image){
         folder=directory;base=image;auto c=social::refresh::readJson(folder/L"dynasty-enhancer.json");
@@ -40,7 +40,7 @@ public:
                     SIZE_T got=0;++calls;bytes+=size;return ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<void*>(address),out,size,&got)&&got==size;
                 });
                 if(unchanged){++fastPolls;lastError.clear();failures=0;pollAt=GetTickCount64()+5000;
-                    if(GetTickCount64()-lastProbeReport>=30000){lastProbeReport=GetTickCount64();report({{"event","runtime_unchanged_probe"},{"probeMs",GetTickCount64()-began},{"readBytes",bytes},{"readCalls",calls},{"fastPolls",fastPolls}});}return {};
+                    if(GetTickCount64()-lastProbeReport>=30000){lastProbeReport=GetTickCount64();report({{"event","runtime_unchanged_probe"},{"probeMs",GetTickCount64()-began},{"readBytes",bytes},{"readCalls",calls},{"fastPolls",fastPolls},{"sameContentRefreshes",sameContentRefreshes}});}return {};
                 }
             }
             if(cancelled())return {};
@@ -55,7 +55,8 @@ public:
                 social::refresh::writeAtomic(folder/L"runtime-feed.json.tmp",folder/L"runtime-feed.json",feed);
                 report({{"event",event},{"league",feed.at("leagueId")},{"team",feed.at("userTeamIndex")},{"week",feed.at("week")},{"stories",feed.at("stories").size()},{"saveRequired",false}});return feed;
             };
-            if(haveAccepted&&hash==accepted){settledProbe=std::move(candidateProbe);lastError.clear();failures=0;pollAt=GetTickCount64()+5000;return {};}
+            if(haveAccepted&&hash==accepted){settledProbe=std::move(candidateProbe);lastError.clear();failures=0;pollAt=GetTickCount64()+5000;++sameContentRefreshes;
+                if(GetTickCount64()-lastSameReport>=30000){lastSameReport=GetTickCount64();report({{"event","runtime_same_content_refresh"},{"captureMs",captureMs},{"captureAndHashMs",GetTickCount64()-captureBegan},{"sameContentRefreshes",sameContentRefreshes}});}return {};}
             if(!haveObserved||hash!=observed){const bool mayResume=!haveObserved&&!haveAccepted;observed=hash;haveObserved=true;report({{"event","runtime_change_observed"},{"records",raw.at("records").size()},{"captureMs",captureMs}});
                 if(mayResume&&!cancelled()){
                     const auto input=folder/L"runtime-raw.json",output=folder/L"runtime-resume.json";social::refresh::writeAtomic(folder/L"runtime-raw.json.tmp",input,raw);

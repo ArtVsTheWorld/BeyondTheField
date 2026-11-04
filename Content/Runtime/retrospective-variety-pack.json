@@ -1,0 +1,1139 @@
+{
+  "revision": "retrospective-variety-v99",
+  "families": {
+    "review.title-insider": [
+      {
+        "id": "review.title-insider.retrospective.1",
+        "body": "{winner} finishes on top after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.2",
+        "body": "{winner} is the national champion after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.3",
+        "body": "{winner} claims the title after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.4",
+        "body": "{winner} takes the national title after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.5",
+        "body": "{winner} ends the season as champion after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.6",
+        "body": "{winner} wins the national championship after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.7",
+        "body": "{winner} stands as national champion after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.8",
+        "body": "{winner} closes a championship season after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.9",
+        "body": "{winner} earns the national title after a {score} win over {loser}. The national championship is settled."
+      },
+      {
+        "id": "review.title-insider.retrospective.10",
+        "body": "{winner} finishes a championship run after a {score} win over {loser}. The national championship is settled."
+      }
+    ],
+    "review.title-debate": [
+      {
+        "id": "review.title-debate.retrospective.1",
+        "body": "{winner} won the championship, {score}. Losing the final does not erase {loser}'s entire season. Judge the whole year."
+      },
+      {
+        "id": "review.title-debate.retrospective.2",
+        "body": "{winner} won the championship, {score}. Losing the final does not erase {loser}'s entire season. Credit the champion and evaluate the runner-up fairly."
+      },
+      {
+        "id": "review.title-debate.retrospective.3",
+        "body": "{loser} came up short against {winner}, {score}. Getting to the final still counts for something. Judge the whole year."
+      },
+      {
+        "id": "review.title-debate.retrospective.4",
+        "body": "{loser} came up short against {winner}, {score}. Getting to the final still counts for something. Credit the champion and evaluate the runner-up fairly."
+      },
+      {
+        "id": "review.title-debate.retrospective.5",
+        "body": "The title belongs to {winner}, {score}. Calling {loser} a bad team after reaching the final is a bad argument. Judge the whole year."
+      },
+      {
+        "id": "review.title-debate.retrospective.6",
+        "body": "The title belongs to {winner}, {score}. Calling {loser} a bad team after reaching the final is a bad argument. Credit the champion and evaluate the runner-up fairly."
+      },
+      {
+        "id": "review.title-debate.retrospective.7",
+        "body": "{winner} earned the title. {loser} lost the last game, {score}, after a run to the final. Judge the whole year."
+      },
+      {
+        "id": "review.title-debate.retrospective.8",
+        "body": "{winner} earned the title. {loser} lost the last game, {score}, after a run to the final. Credit the champion and evaluate the runner-up fairly."
+      },
+      {
+        "id": "review.title-debate.retrospective.9",
+        "body": "A {score} title-game loss for {loser}. Give {winner} the title without pretending the other finalist had a worthless season. Judge the whole year."
+      },
+      {
+        "id": "review.title-debate.retrospective.10",
+        "body": "A {score} title-game loss for {loser}. Give {winner} the title without pretending the other finalist had a worthless season. Credit the champion and evaluate the runner-up fairly."
+      }
+    ],
+    "review.title-film": [
+      {
+        "id": "review.title-film.retrospective.1",
+        "body": "How the final unfolded: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.2",
+        "body": "The title-game detail: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.3",
+        "body": "Looking back at the final: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.4",
+        "body": "The championship in context: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.5",
+        "body": "From the championship review: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.6",
+        "body": "The final beyond the score: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.7",
+        "body": "Reviewing the title game: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.8",
+        "body": "Inside the final: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.9",
+        "body": "The title-game picture: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      },
+      {
+        "id": "review.title-film.retrospective.10",
+        "body": "The championship recap: {winner} over {loser}, {score}, for the national title. {turningPoint}"
+      }
+    ],
+    "review.champion-season": [
+      {
+        "id": "review.champion-season.retrospective.1",
+        "body": "{school} finishes the season at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.2",
+        "body": "{school} closes the season at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.3",
+        "body": "{school} ends the year at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.4",
+        "body": "{school} completes the year at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.5",
+        "body": "{school} finishes its schedule at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.6",
+        "body": "{school} wraps up the season at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.7",
+        "body": "{school} ends its run at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.8",
+        "body": "{school} completes its run at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.9",
+        "body": "{school} closes the year at {record}{coachDetail}, with the national championship."
+      },
+      {
+        "id": "review.champion-season.retrospective.10",
+        "body": "{school} wraps up the year at {record}{coachDetail}, with the national championship."
+      }
+    ],
+    "review.runnerup-season": [
+      {
+        "id": "review.runnerup-season.retrospective.1",
+        "body": "{school} finishes the season at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.2",
+        "body": "{school} closes the season at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.3",
+        "body": "{school} ends the year at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.4",
+        "body": "{school} completes the year at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.5",
+        "body": "{school} finishes its schedule at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.6",
+        "body": "{school} wraps up the season at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.7",
+        "body": "{school} ends its run at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.8",
+        "body": "{school} completes its run at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.9",
+        "body": "{school} closes the year at {record}{coachDetail}, one win short of the national title."
+      },
+      {
+        "id": "review.runnerup-season.retrospective.10",
+        "body": "{school} wraps up the year at {record}{coachDetail}, one win short of the national title."
+      }
+    ],
+    "review.title-turnovers": [
+      {
+        "id": "review.title-turnovers.retrospective.1",
+        "body": "Championship ball security: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.2",
+        "body": "The turnover comparison from the final: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.3",
+        "body": "A title-game possession detail: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.4",
+        "body": "Giveaways in the championship: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.5",
+        "body": "Reviewing the final's ball security: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.6",
+        "body": "The title-game turnover line: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.7",
+        "body": "Possessions in the final: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.8",
+        "body": "The championship giveaway numbers: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.9",
+        "body": "Ball security on the final stage: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      },
+      {
+        "id": "review.title-turnovers.retrospective.10",
+        "body": "From the title-game box score: {school} had {ownGiveaways} giveaways; {opponent} had {otherGiveaways}. Final: {winner}, {score}."
+      }
+    ],
+    "review.title-player": [
+      {
+        "id": "review.title-player.retrospective.1",
+        "body": "In the national championship, {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.2",
+        "body": "The title-game line for {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.3",
+        "body": "Championship production from {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.4",
+        "body": "A final-game performance from {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.5",
+        "body": "The national-title stat line for {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.6",
+        "body": "On the championship stage, {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.7",
+        "body": "In the final, {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.8",
+        "body": "A look back at the final for {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.9",
+        "body": "From the national-title game, {school}'s {playerName}: {line}."
+      },
+      {
+        "id": "review.title-player.retrospective.10",
+        "body": "The championship performance by {school}'s {playerName}: {line}."
+      }
+    ],
+    "review.title-roster": [
+      {
+        "id": "review.title-roster.retrospective.1",
+        "body": "The post-title roster question: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.2",
+        "body": "After the championship, {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.3",
+        "body": "Looking at the next roster: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.4",
+        "body": "The roster continuity picture: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.5",
+        "body": "A post-championship roster snapshot: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.6",
+        "body": "As the championship gives way to the offseason, {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.7",
+        "body": "The next roster-building context: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.8",
+        "body": "The class balance after the title: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.9",
+        "body": "For the next roster cycle, {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      },
+      {
+        "id": "review.title-roster.retrospective.10",
+        "body": "A starting point for roster planning: {school} has {seniors} listed seniors and {nonSeniors} non-seniors. These are class counts, not confirmed return decisions."
+      }
+    ],
+    "review.calendar": [
+      {
+        "id": "review.calendar.retrospective.1",
+        "body": "The season is done. No next-game preview, just championship arguments and offseason roster questions."
+      },
+      {
+        "id": "review.calendar.retrospective.2",
+        "body": "No more college football games this season. The title is settled. The timeline arguments are not."
+      },
+      {
+        "id": "review.calendar.retrospective.3",
+        "body": "The final is over and there is no game next weekend. Welcome to the roster-refresh part of the year."
+      },
+      {
+        "id": "review.calendar.retrospective.4",
+        "body": "College football has reached the part where everyone says they need a break and checks recruiting news ten minutes later."
+      },
+      {
+        "id": "review.calendar.retrospective.5",
+        "body": "Another season in the books. The championship conversation will last longer than the celebration."
+      },
+      {
+        "id": "review.calendar.retrospective.6",
+        "body": "The games are over. Who stays, who leaves and who improves will now take over the timeline."
+      },
+      {
+        "id": "review.calendar.retrospective.7",
+        "body": "No next Saturday on the schedule. Just the offseason and several months of convincing ourselves it will go quickly."
+      },
+      {
+        "id": "review.calendar.retrospective.8",
+        "body": "The title game ends the season. Somehow it also starts at least three new arguments about next year."
+      },
+      {
+        "id": "review.calendar.retrospective.9",
+        "body": "The final whistle has gone on the whole season. Time for roster decisions and people announcing that next year is their year."
+      },
+      {
+        "id": "review.calendar.retrospective.10",
+        "body": "No more games to preview this year. The championship is decided and the offseason conversation is officially here."
+      }
+    ],
+    "review.fan-calendar": [
+      {
+        "id": "review.fan-calendar.retrospective.1",
+        "body": "No college football left this season. {school} news is going to have to carry my weekends. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.2",
+        "body": "No college football left this season. {school} news is going to have to carry my weekends. See everybody in the recruiting replies"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.3",
+        "body": "The whole season is actually over. Already miss {school} football. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.4",
+        "body": "The whole season is actually over. Already miss {school} football. See everybody in the recruiting replies"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.5",
+        "body": "No next game. No next Saturday. Somebody send me a {school} recruiting update. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.6",
+        "body": "No next game. No next Saturday. Somebody send me a {school} recruiting update. See everybody in the recruiting replies"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.7",
+        "body": "College football is done and apparently I have to make normal weekend plans. Miss the {nickname} already. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.8",
+        "body": "College football is done and apparently I have to make normal weekend plans. Miss the {nickname} already. See everybody in the recruiting replies"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.9",
+        "body": "Another season gone. {school} football had me stressed and I would immediately sign up for more. This offseason better move fast"
+      },
+      {
+        "id": "review.fan-calendar.retrospective.10",
+        "body": "Another season gone. {school} football had me stressed and I would immediately sign up for more. See everybody in the recruiting replies"
+      }
+    ],
+    "review.retrospect": [
+      {
+        "id": "review.retrospect.retrospective.1",
+        "body": "The season in retrospect: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.2",
+        "body": "The full-year assessment: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.3",
+        "body": "Looking back at the year: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.4",
+        "body": "The final evaluation starts here: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.5",
+        "body": "The season-end picture: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.6",
+        "body": "The full-season result: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.7",
+        "body": "The season review: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.8",
+        "body": "Evaluating the finish: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.9",
+        "body": "The final record in context: {school} finished {record}. {expectationNote}"
+      },
+      {
+        "id": "review.retrospect.retrospective.10",
+        "body": "The completed season: {school} finished {record}. {expectationNote}"
+      }
+    ],
+    "review.staff-hired": [
+      {
+        "id": "review.staff-hired.retrospective.1",
+        "body": "Coaching-cycle recap: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.2",
+        "body": "Looking back at the staff moves: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.3",
+        "body": "A confirmed change from the cycle: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.4",
+        "body": "One staff decision to remember: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.5",
+        "body": "The carousel in review: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.6",
+        "body": "A coaching-cycle note: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.7",
+        "body": "The staff picture in retrospect: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.8",
+        "body": "From the coaching-cycle recap: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.9",
+        "body": "Reviewing the staff decisions: {school} hired {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-hired.retrospective.10",
+        "body": "A staff move from this cycle: {school} hired {coachName} as {role} during this cycle."
+      }
+    ],
+    "review.staff-retained": [
+      {
+        "id": "review.staff-retained.retrospective.1",
+        "body": "Coaching-cycle recap: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.2",
+        "body": "Looking back at the staff moves: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.3",
+        "body": "A confirmed change from the cycle: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.4",
+        "body": "One staff decision to remember: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.5",
+        "body": "The carousel in review: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.6",
+        "body": "A coaching-cycle note: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.7",
+        "body": "The staff picture in retrospect: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.8",
+        "body": "From the coaching-cycle recap: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.9",
+        "body": "Reviewing the staff decisions: {school} retained {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-retained.retrospective.10",
+        "body": "A staff move from this cycle: {school} retained {coachName} as {role} during this cycle."
+      }
+    ],
+    "review.staff-fired": [
+      {
+        "id": "review.staff-fired.retrospective.1",
+        "body": "Coaching-cycle recap: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.2",
+        "body": "Looking back at the staff moves: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.3",
+        "body": "A confirmed change from the cycle: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.4",
+        "body": "One staff decision to remember: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.5",
+        "body": "The carousel in review: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.6",
+        "body": "A coaching-cycle note: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.7",
+        "body": "The staff picture in retrospect: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.8",
+        "body": "From the coaching-cycle recap: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.9",
+        "body": "Reviewing the staff decisions: {school} dismissed {coachName} as {role} during this cycle."
+      },
+      {
+        "id": "review.staff-fired.retrospective.10",
+        "body": "A staff move from this cycle: {school} dismissed {coachName} as {role} during this cycle."
+      }
+    ],
+    "review.staff-departed": [
+      {
+        "id": "review.staff-departed.retrospective.1",
+        "body": "Coaching-cycle recap: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.2",
+        "body": "Looking back at the staff moves: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.3",
+        "body": "A confirmed departure from the cycle: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.4",
+        "body": "One staff decision to remember: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.5",
+        "body": "The carousel in review: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.6",
+        "body": "A coaching-cycle note: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.7",
+        "body": "The staff picture in retrospect: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.8",
+        "body": "From the coaching-cycle recap: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.9",
+        "body": "Reviewing the staff decisions: {school} {role} {coachName} {action} during this cycle."
+      },
+      {
+        "id": "review.staff-departed.retrospective.10",
+        "body": "A staff move from this cycle: {school} {role} {coachName} {action} during this cycle."
+      }
+    ],
+    "review.retention-watch": [
+      {
+        "id": "review.retention-watch.retrospective.1",
+        "body": "{school}'s {playerName} is a name to monitor in roster-retention discussions. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.2",
+        "body": "{school}'s {playerName} belongs on the offseason retention watch. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.3",
+        "body": "{school}'s {playerName} is a player worth keeping an eye on during roster decisions. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.4",
+        "body": "{school}'s {playerName} is part of the retention conversation. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.5",
+        "body": "{school}'s {playerName} is a retention situation to follow. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.6",
+        "body": "{school}'s {playerName} is one of the roster situations to monitor. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.7",
+        "body": "{school}'s {playerName} deserves attention in the retention picture. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.8",
+        "body": "{school}'s {playerName} is a player to watch as retention decisions develop. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.9",
+        "body": "{school}'s {playerName} is on the retention radar. There is no confirmed portal entry."
+      },
+      {
+        "id": "review.retention-watch.retrospective.10",
+        "body": "{school}'s {playerName} is a name to follow during the roster-decision period. There is no confirmed portal entry."
+      }
+    ],
+    "ending.comparison": [
+      {
+        "id": "ending.comparison.retrospective.1",
+        "body": "Year-over-year check: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.2",
+        "body": "The season comparison: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.3",
+        "body": "Putting the finish in context: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.4",
+        "body": "A look at the previous finish: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.5",
+        "body": "The two-season view: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.6",
+        "body": "The record comparison: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.7",
+        "body": "Looking back one year: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.8",
+        "body": "The season-end comparison: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.9",
+        "body": "The year-to-year result: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      },
+      {
+        "id": "ending.comparison.retrospective.10",
+        "body": "A previous-season reference: {school} finished {record}, after {priorWins}-{priorLosses} in {previousYear} as a member of {previousConference}."
+      }
+    ],
+    "ending.fan-accountability": [
+      {
+        "id": "ending.fan-accountability.retrospective.1",
+        "body": "{school} finished {record}. I want to hear what {coachName} is actually changing. Less slogan, more football"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.2",
+        "body": "{school} finished {record}. I want to hear what {coachName} is actually changing. I am tired of the same speech"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.3",
+        "body": "{record}. Coach {coachName} has to give {school} fans something concrete to believe in. Less slogan, more football"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.4",
+        "body": "{record}. Coach {coachName} has to give {school} fans something concrete to believe in. I am tired of the same speech"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.5",
+        "body": "The {school} season ended {record}. {coachName}, what is the actual plan? Less slogan, more football"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.6",
+        "body": "The {school} season ended {record}. {coachName}, what is the actual plan? I am tired of the same speech"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.7",
+        "body": "{school}: {record}. I have questions for {coachName} about what will be different next fall. Less slogan, more football"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.8",
+        "body": "{school}: {record}. I have questions for {coachName} about what will be different next fall. I am tired of the same speech"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.9",
+        "body": "{coachName} and {school} end at {record}. The offseason needs some actual answers. Less slogan, more football"
+      },
+      {
+        "id": "ending.fan-accountability.retrospective.10",
+        "body": "{coachName} and {school} end at {record}. The offseason needs some actual answers. I am tired of the same speech"
+      }
+    ],
+    "ending.fan-qb": [
+      {
+        "id": "ending.fan-qb.retrospective.1",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. That quarterback conversation is not going away."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.2",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. The offseason does not erase those numbers."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.3",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. The staff has to look at the whole passing-game picture."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.4",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. Those numbers deserve a real offseason conversation."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.5",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. It is fair for fans to ask what changes."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.6",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. I am not pretending the season ending answers the quarterback questions."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.7",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. I want the next passing-game discussion to include a plan."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.8",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. Still rooting for the team. Still have questions."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.9",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. There is a real passing-game discussion behind that finish."
+      },
+      {
+        "id": "ending.fan-qb.retrospective.10",
+        "body": "{school} ends {record}. {playerName}: {touchdowns} passing TD, {interceptions} INT. The next season needs a better answer."
+      }
+    ],
+    "cycle.team-reset": [
+      {
+        "id": "cycle.team-reset.retrospective.1",
+        "body": "Thank you, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.2",
+        "body": "Grateful for you, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.3",
+        "body": "We appreciate you, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.4",
+        "body": "All our thanks to you, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.5",
+        "body": "Your support matters, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.6",
+        "body": "Thank you for being with us, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.7",
+        "body": "We appreciate the season-long support, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.8",
+        "body": "Thank you for standing with us, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.9",
+        "body": "Proud to represent you, {nickname} fans. Building the next chapter together. {hashtag}"
+      },
+      {
+        "id": "cycle.team-reset.retrospective.10",
+        "body": "Thank you for every step of the season, {nickname} fans. Building the next chapter together. {hashtag}"
+      }
+    ],
+    "cycle.fan-standards": [
+      {
+        "id": "cycle.fan-standards.retrospective.1",
+        "body": "{record} was not what we wanted at {school}. Need a real roster plan this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.2",
+        "body": "{record} was not what we wanted at {school}. Next year needs to look different"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.3",
+        "body": "The {school} season ended {record}. I expected more. Need a real roster plan this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.4",
+        "body": "The {school} season ended {record}. I expected more. Next year needs to look different"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.5",
+        "body": "{school}: {record}. There is work to do. Need a real roster plan this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.6",
+        "body": "{school}: {record}. There is work to do. Next year needs to look different"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.7",
+        "body": "A {record} finish for {school}. This cannot be the whole plan. Need a real roster plan this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.8",
+        "body": "A {record} finish for {school}. This cannot be the whole plan. Next year needs to look different"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.9",
+        "body": "{record}. Love the {nickname}. That was below what I wanted from this season. Need a real roster plan this offseason"
+      },
+      {
+        "id": "cycle.fan-standards.retrospective.10",
+        "body": "{record}. Love the {nickname}. That was below what I wanted from this season. Next year needs to look different"
+      }
+    ],
+    "cycle.fan-future": [
+      {
+        "id": "cycle.fan-future.retrospective.1",
+        "body": "{school} football is done and I am checking recruiting news already. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.2",
+        "body": "{school} football is done and I am checking recruiting news already. Next year has my attention already"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.3",
+        "body": "The {nickname} season ended and my next hobby is apparently roster speculation. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.4",
+        "body": "The {nickname} season ended and my next hobby is apparently roster speculation. Next year has my attention already"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.5",
+        "body": "No more {school} games. Time to become unreasonably invested in the next roster. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.6",
+        "body": "No more {school} games. Time to become unreasonably invested in the next roster. Next year has my attention already"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.7",
+        "body": "The {school} offseason is here. I am already refreshing the timeline. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.8",
+        "body": "The {school} offseason is here. I am already refreshing the timeline. Next year has my attention already"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.9",
+        "body": "Miss {school} football. I will substitute way too many recruiting opinions. This is going to be a long offseason"
+      },
+      {
+        "id": "cycle.fan-future.retrospective.10",
+        "body": "Miss {school} football. I will substitute way too many recruiting opinions. Next year has my attention already"
+      }
+    ],
+    "cycle.player-reset": [
+      {
+        "id": "cycle.player-reset.retrospective.1",
+        "body": "Thank you for supporting us this season. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.2",
+        "body": "Appreciate everyone who was with us this year. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.3",
+        "body": "A lot of love for the people behind us. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.4",
+        "body": "Thank you to everyone who kept showing up for us. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.5",
+        "body": "The support this season meant a lot. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.6",
+        "body": "Thankful for everybody who rode with us. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.7",
+        "body": "Appreciate all the support this year. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.8",
+        "body": "Grateful for the people who kept believing in us. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.9",
+        "body": "Thank you to our fans and our families. Grateful for my teammates and looking forward to being back."
+      },
+      {
+        "id": "cycle.player-reset.retrospective.10",
+        "body": "Love everybody who supported this group. Grateful for my teammates and looking forward to being back."
+      }
+    ],
+    "cycle.fan-loss-standard": [
+      {
+        "id": "cycle.fan-loss-standard.retrospective.1",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} We can ask for better without giving up on the team."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.2",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} Pretending that is fine does not help anyone."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.3",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} I would like a different conversation after the next game."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.4",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} Loyalty does not require enjoying this result."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.5",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} It is fair to talk about what needs to change."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.6",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} The next step has to look better than this."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.7",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} I want more from the team, not more excuses."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.8",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} We are allowed to care and be frustrated."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.9",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} That should be the start of the discussion."
+      },
+      {
+        "id": "cycle.fan-loss-standard.retrospective.10",
+        "body": "{school} loses {score} to {opponent}. {expectationNote} The standard still matters after a bad result."
+      }
+    ],
+    "cycle.context-turnaround": [
+      {
+        "id": "cycle.context-turnaround.retrospective.1",
+        "body": "A year-over-year look: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.2",
+        "body": "The two-season comparison: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.3",
+        "body": "The record in context: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.4",
+        "body": "Looking back a season: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.5",
+        "body": "The year-to-year shift: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.6",
+        "body": "Comparing the finishes: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.7",
+        "body": "The season-to-season picture: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.8",
+        "body": "A change in the record: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.9",
+        "body": "The result across two years: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-turnaround.retrospective.10",
+        "body": "The latest season comparison: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      }
+    ],
+    "cycle.context-regression": [
+      {
+        "id": "cycle.context-regression.retrospective.1",
+        "body": "A year-over-year look: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.2",
+        "body": "The two-season comparison: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.3",
+        "body": "The record in context: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.4",
+        "body": "Looking back a season: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.5",
+        "body": "The year-to-year shift: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.6",
+        "body": "Comparing the finishes: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.7",
+        "body": "The season-to-season picture: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.8",
+        "body": "A change in the record: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.9",
+        "body": "The result across two years: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      },
+      {
+        "id": "cycle.context-regression.retrospective.10",
+        "body": "The latest season comparison: {school}: {wins}-{losses} this season; {priorWins}-{priorLosses} last year. {expectationNote}"
+      }
+    ],
+    "narrative.game": [
+      {
+        "id": "narrative.game.retrospective.1",
+        "body": "How it unfolded: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.2",
+        "body": "The game beyond the final: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.3",
+        "body": "The recap: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.4",
+        "body": "The story of the game: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.5",
+        "body": "A closer look at the result: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.6",
+        "body": "The turning point: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.7",
+        "body": "Inside the final: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.8",
+        "body": "Looking back at the game: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.9",
+        "body": "The scoring story: {winner} over {loser}, {score}. {turningPoint}"
+      },
+      {
+        "id": "narrative.game.retrospective.10",
+        "body": "The game in context: {winner} over {loser}, {score}. {turningPoint}"
+      }
+    ]
+  }
+}

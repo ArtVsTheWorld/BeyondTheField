@@ -75,7 +75,7 @@ export function curate(stories,limit=30,context={}){
 export function scopeViews(stories,context={}){
  const visible=conversationOrder(stories),all=curate(visible,30,context);
  const national=visible.filter(p=>p.scopes.includes('national'));
- return {all:all.map(p=>p.id),'all:default':conversationOrder([...new Map([...visible.filter(p=>p.guaranteedUserDraft),...all].map(p=>[p.id,p])).values()]).map(p=>p.id),'all:expanded':conversationOrder(visible.filter(p=>p.scopes.includes('team')||p.scopes.includes('relevant')||all.some(a=>a.id===p.id))).map(p=>p.id),national:national.map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
+ return {all:all.map(p=>p.id),'all:required':visible.filter(p=>p.guaranteedUserDraft).map(p=>p.id),'all:default':conversationOrder([...new Map([...visible.filter(p=>p.guaranteedUserDraft),...all].map(p=>[p.id,p])).values()]).map(p=>p.id),'all:expanded':conversationOrder(visible.filter(p=>p.scopes.includes('team')||p.scopes.includes('relevant')||all.some(a=>a.id===p.id))).map(p=>p.id),national:national.map(p=>p.id),conference:conversationOrder(visible.filter(p=>p.scopes.includes('conference'))).map(p=>p.id),'team:required':visible.filter(p=>p.scopes.includes('team')&&(p.coverageExempt||p.voice==='nflDraft')).map(p=>p.id),team:conversationOrder(visible.filter(p=>p.scopes.includes('team'))).map(p=>p.id)};
 }
 
 export function publishWeek(feed){

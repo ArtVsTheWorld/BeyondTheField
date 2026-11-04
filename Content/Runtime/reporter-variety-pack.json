@@ -1,0 +1,1181 @@
+{
+  "revision": "reporter-variety-v99",
+  "families": {
+    "beat.team_stats": [
+      {
+        "id": "beat.team_stats.reporter.1",
+        "body": "{school} vs. {opponent}: {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs, {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.2",
+        "body": "The {school} offense against {opponent}: {passingYards} through the air, {rushingYards} on the ground. {firstDowns} first downs, {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.3",
+        "body": "{passingYards} passing and {rushingYards} rushing yards for {school} against {opponent}. The rest: {firstDowns} first downs, {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.4",
+        "body": "{school} produced {passingYards} passing yards and {rushingYards} rushing yards against {opponent}, with {firstDowns} first downs and {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.5",
+        "body": "Against {opponent}, {school} finished at {passingYards} passing, {rushingYards} rushing. First downs: {firstDowns}. Giveaways: {giveaways}."
+      },
+      {
+        "id": "beat.team_stats.reporter.6",
+        "body": "The offensive line from the box score: {school}, {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} {giveawayLabel} vs. {opponent}."
+      },
+      {
+        "id": "beat.team_stats.reporter.7",
+        "body": "{school}'s {opponent} game in numbers: {passingYards} passing yards, {rushingYards} rushing yards. {firstDowns} first downs, {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.8",
+        "body": "{firstDowns} first downs and {giveaways} {giveawayLabel} for {school} against {opponent}. Yardage split: {passingYards} passing, {rushingYards} rushing."
+      },
+      {
+        "id": "beat.team_stats.reporter.9",
+        "body": "Box-score snapshot vs. {opponent}: {school} had {passingYards} passing yards, {rushingYards} rushing yards, {firstDowns} first downs and {giveaways} {giveawayLabel}."
+      },
+      {
+        "id": "beat.team_stats.reporter.10",
+        "body": "{school} through the air: {passingYards}. On the ground: {rushingYards}. Against {opponent}, that came with {firstDowns} first downs and {giveaways} {giveawayLabel}."
+      }
+    ],
+    "beat.performance": [
+      {
+        "id": "beat.performance.reporter.1",
+        "body": "The performance line: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.2",
+        "body": "From the box score: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.3",
+        "body": "The individual production: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.4",
+        "body": "A player line to note: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.5",
+        "body": "Looking back at the game: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.6",
+        "body": "One performance from the matchup: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.7",
+        "body": "The player spotlight: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.8",
+        "body": "A look at the production: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.9",
+        "body": "The stat line: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      },
+      {
+        "id": "beat.performance.reporter.10",
+        "body": "From the game review: {school}'s {playerName} against {opponent}: {statLine}. {resultLine}"
+      }
+    ],
+    "beat.injury": [
+      {
+        "id": "beat.injury.reporter.1",
+        "body": "Availability update: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.2",
+        "body": "Injury update: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.3",
+        "body": "The medical report: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.4",
+        "body": "The current injury picture: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.5",
+        "body": "From the injury report: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.6",
+        "body": "A health update: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.7",
+        "body": "The availability note: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.8",
+        "body": "The injury-list update: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.9",
+        "body": "A medical update: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.injury.reporter.10",
+        "body": "On the injury list: {school}'s {playerName} remains on the injury list.{injuryDetail} {timetable}"
+      }
+    ],
+    "beat.new_injury": [
+      {
+        "id": "beat.new_injury.reporter.1",
+        "body": "Availability update: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.2",
+        "body": "Injury update: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.3",
+        "body": "The medical report: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.4",
+        "body": "The current injury picture: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.5",
+        "body": "From the injury report: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.6",
+        "body": "A health update: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.7",
+        "body": "The availability note: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.8",
+        "body": "The injury-list update: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.9",
+        "body": "A medical update: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "beat.new_injury.reporter.10",
+        "body": "On the injury list: {school}'s {playerName} has been added to the injury list.{injuryDetail} {timetable}"
+      }
+    ],
+    "injury.report": [
+      {
+        "id": "injury.report.reporter.1",
+        "body": "Injury report: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.2",
+        "body": "Availability update: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.3",
+        "body": "The current injury report: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.4",
+        "body": "Health update: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.5",
+        "body": "The injury-list note: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.6",
+        "body": "From the medical report: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.7",
+        "body": "The availability picture: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.8",
+        "body": "A medical update on {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.9",
+        "body": "On the current injury list: {school}'s {playerName}.{injuryDetail} {timetable}"
+      },
+      {
+        "id": "injury.report.reporter.10",
+        "body": "The injury update: {school}'s {playerName}.{injuryDetail} {timetable}"
+      }
+    ],
+    "beat.preview": [
+      {
+        "id": "beat.preview.reporter.1",
+        "body": "{awayLabel} vs. {homeLabel} is on the schedule this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.2",
+        "body": "{awayLabel} vs. {homeLabel} is the matchup this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.3",
+        "body": "{awayLabel} vs. {homeLabel} is coming up this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.4",
+        "body": "{awayLabel} vs. {homeLabel} is set for this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.5",
+        "body": "{awayLabel} vs. {homeLabel} is on this week's slate.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.6",
+        "body": "{awayLabel} vs. {homeLabel} is a game to follow this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.7",
+        "body": "{awayLabel} vs. {homeLabel} is up this week.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.8",
+        "body": "{awayLabel} vs. {homeLabel} is part of the current week's schedule.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.9",
+        "body": "{awayLabel} vs. {homeLabel} is a current-week matchup.{rivalryDetail}"
+      },
+      {
+        "id": "beat.preview.reporter.10",
+        "body": "{awayLabel} vs. {homeLabel} is ahead this week.{rivalryDetail}"
+      }
+    ],
+    "beat.standings": [
+      {
+        "id": "beat.standings.reporter.1",
+        "body": "Standings check in the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.2",
+        "body": "The latest from the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.3",
+        "body": "The current league picture in the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.4",
+        "body": "The leading group in the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.5",
+        "body": "At the top of the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.6",
+        "body": "The standings snapshot for the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.7",
+        "body": "The front of the race in the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.8",
+        "body": "The league leaders in the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.9",
+        "body": "The current standings for the {conference}: {leaders}. These teams lead the current standings."
+      },
+      {
+        "id": "beat.standings.reporter.10",
+        "body": "The standings note from the {conference}: {leaders}. These teams lead the current standings."
+      }
+    ],
+    "beat.independents": [
+      {
+        "id": "beat.independents.reporter.1",
+        "body": "Independent-team check: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.2",
+        "body": "The independent picture: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.3",
+        "body": "Among the independents: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.4",
+        "body": "An independent-program snapshot: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.5",
+        "body": "The current independent records: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.6",
+        "body": "Checking the independent teams: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.7",
+        "body": "The independents in view: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.8",
+        "body": "The independent-program report: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.9",
+        "body": "Records among the independents: {leaders}. These are overall records for independent programs."
+      },
+      {
+        "id": "beat.independents.reporter.10",
+        "body": "The independent-team standings note: {leaders}. These are overall records for independent programs."
+      }
+    ],
+    "analyst.rushing": [
+      {
+        "id": "analyst.rushing.reporter.1",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. The ground game belongs in the discussion."
+      },
+      {
+        "id": "analyst.rushing.reporter.2",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. That is the production behind the national place."
+      },
+      {
+        "id": "analyst.rushing.reporter.3",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. Both the average and the sample matter."
+      },
+      {
+        "id": "analyst.rushing.reporter.4",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. The rushing volume has a national reference point."
+      },
+      {
+        "id": "analyst.rushing.reporter.5",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. That puts the ground game in context."
+      },
+      {
+        "id": "analyst.rushing.reporter.6",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. The national rushing comparison starts there."
+      },
+      {
+        "id": "analyst.rushing.reporter.7",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. A ground-game figure to keep in view."
+      },
+      {
+        "id": "analyst.rushing.reporter.8",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. The average gives the ranking a concrete basis."
+      },
+      {
+        "id": "analyst.rushing.reporter.9",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. The sample is now part of that comparison."
+      },
+      {
+        "id": "analyst.rushing.reporter.10",
+        "body": "{school}: {rushingYardsPerGame} rushing yards per game, {rankPhrase} in FBS through {sampleGames} games. That is the rushing profile entering the next game."
+      }
+    ],
+    "analyst.rushing_poll": [
+      {
+        "id": "analyst.rushing_poll.reporter.1",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The ground game is part of the resume."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.2",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. That production helps explain the football behind the ranking."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.3",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. A national rushing profile alongside the poll move."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.4",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. There is rushing production to go with the ranking."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.5",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The rushing numbers belong beside the poll update."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.6",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. That is one part of the team profile behind the move."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.7",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The ground game deserves a place in the discussion."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.8",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The rise has a measurable rushing backdrop."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.9",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The rushing average adds context to the poll spot."
+      },
+      {
+        "id": "analyst.rushing_poll.reporter.10",
+        "body": "{school} rises from No. {previousPollRank} to No. {pollRank}. Its {rushingYardsPerGame} rushing yards a game rank {rankPhrase} in FBS through {sampleGames} games. The next defense has a productive ground game to plan for."
+      }
+    ],
+    "analyst.third_low": [
+      {
+        "id": "analyst.third_low.reporter.1",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. Keeping drives alive is a problem."
+      },
+      {
+        "id": "analyst.third_low.reporter.2",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. Early-down success matters even more when third downs stall."
+      },
+      {
+        "id": "analyst.third_low.reporter.3",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. That rate leaves possessions ending too often."
+      },
+      {
+        "id": "analyst.third_low.reporter.4",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. A real issue extending drives."
+      },
+      {
+        "id": "analyst.third_low.reporter.5",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. The offense needs more new sets of downs."
+      },
+      {
+        "id": "analyst.third_low.reporter.6",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. Keeping drives alive is a problem."
+      },
+      {
+        "id": "analyst.third_low.reporter.7",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. Early-down success matters even more when third downs stall."
+      },
+      {
+        "id": "analyst.third_low.reporter.8",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. That rate leaves possessions ending too often."
+      },
+      {
+        "id": "analyst.third_low.reporter.9",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. A real issue extending drives."
+      },
+      {
+        "id": "analyst.third_low.reporter.10",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. The offense needs more new sets of downs."
+      }
+    ],
+    "analyst.third_high": [
+      {
+        "id": "analyst.third_high.reporter.1",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. The offense is earning extra sets of downs."
+      },
+      {
+        "id": "analyst.third_high.reporter.2",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. A lot of chances to end drives have become fresh downs."
+      },
+      {
+        "id": "analyst.third_high.reporter.3",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. That is sustained possession value."
+      },
+      {
+        "id": "analyst.third_high.reporter.4",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. The offense has been difficult to get off the field."
+      },
+      {
+        "id": "analyst.third_high.reporter.5",
+        "body": "{school}: {percent}% on third down, {conversions} of {attempts} through {sampleGames} games. The conversion rate is a strength."
+      },
+      {
+        "id": "analyst.third_high.reporter.6",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. The offense is earning extra sets of downs."
+      },
+      {
+        "id": "analyst.third_high.reporter.7",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. A lot of chances to end drives have become fresh downs."
+      },
+      {
+        "id": "analyst.third_high.reporter.8",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. That is sustained possession value."
+      },
+      {
+        "id": "analyst.third_high.reporter.9",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. The offense has been difficult to get off the field."
+      },
+      {
+        "id": "analyst.third_high.reporter.10",
+        "body": "{school} has converted {conversions} of {attempts} third downs ({percent}%) in {sampleGames} games. The conversion rate is a strength."
+      }
+    ],
+    "analyst.red_low": [
+      {
+        "id": "analyst.red_low.reporter.1",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. Touchdowns are getting left behind inside the 20."
+      },
+      {
+        "id": "analyst.red_low.reporter.2",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. Reaching the red zone and finishing for six are different things."
+      },
+      {
+        "id": "analyst.red_low.reporter.3",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. The finishing rate needs improvement."
+      },
+      {
+        "id": "analyst.red_low.reporter.4",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. That is a lot of trips without a touchdown."
+      },
+      {
+        "id": "analyst.red_low.reporter.5",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. The offense needs more six-point finishes."
+      },
+      {
+        "id": "analyst.red_low.reporter.6",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. Touchdowns are getting left behind inside the 20."
+      },
+      {
+        "id": "analyst.red_low.reporter.7",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. Reaching the red zone and finishing for six are different things."
+      },
+      {
+        "id": "analyst.red_low.reporter.8",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. The finishing rate needs improvement."
+      },
+      {
+        "id": "analyst.red_low.reporter.9",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. That is a lot of trips without a touchdown."
+      },
+      {
+        "id": "analyst.red_low.reporter.10",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. The offense needs more six-point finishes."
+      }
+    ],
+    "analyst.red_high": [
+      {
+        "id": "analyst.red_high.reporter.1",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. The offense is finishing those trips for six."
+      },
+      {
+        "id": "analyst.red_high.reporter.2",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. Getting inside the 20 has often meant a touchdown."
+      },
+      {
+        "id": "analyst.red_high.reporter.3",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. The finishing rate is a strength."
+      },
+      {
+        "id": "analyst.red_high.reporter.4",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. Those visits are producing touchdowns."
+      },
+      {
+        "id": "analyst.red_high.reporter.5",
+        "body": "{school}: {touchdowns} red-zone TD on {trips} trips ({percent}%) through {sampleGames} games. The offense is making red-zone opportunities count."
+      },
+      {
+        "id": "analyst.red_high.reporter.6",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. The offense is finishing those trips for six."
+      },
+      {
+        "id": "analyst.red_high.reporter.7",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. Getting inside the 20 has often meant a touchdown."
+      },
+      {
+        "id": "analyst.red_high.reporter.8",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. The finishing rate is a strength."
+      },
+      {
+        "id": "analyst.red_high.reporter.9",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. Those visits are producing touchdowns."
+      },
+      {
+        "id": "analyst.red_high.reporter.10",
+        "body": "{school} has finished {percent}% of its {trips} red-zone trips with TD: {touchdowns} scores in {sampleGames} games. The offense is making red-zone opportunities count."
+      }
+    ],
+    "analyst.turnover_plus": [
+      {
+        "id": "analyst.turnover_plus.reporter.1",
+        "body": "{school}: +{margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. That is an extra-possession cushion."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.2",
+        "body": "{school}: +{margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. The takeaways have helped the possession balance."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.3",
+        "body": "{school}: +{margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. The next game still has to earn its own takeaways."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.4",
+        "body": "{school}: +{margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. Ball security and takeaways have given this team an advantage."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.5",
+        "body": "{school}: +{margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. The margin is one part of the current record."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.6",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: +{margin} through {sampleGames} games. That is an extra-possession cushion."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.7",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: +{margin} through {sampleGames} games. The takeaways have helped the possession balance."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.8",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: +{margin} through {sampleGames} games. The next game still has to earn its own takeaways."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.9",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: +{margin} through {sampleGames} games. Ball security and takeaways have given this team an advantage."
+      },
+      {
+        "id": "analyst.turnover_plus.reporter.10",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: +{margin} through {sampleGames} games. The margin is one part of the current record."
+      }
+    ],
+    "analyst.turnover_minus": [
+      {
+        "id": "analyst.turnover_minus.reporter.1",
+        "body": "{school}: {margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. That is a costly possession deficit."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.2",
+        "body": "{school}: {margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. The team is giving opponents extra chances."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.3",
+        "body": "{school}: {margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. The possession balance needs to change."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.4",
+        "body": "{school}: {margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. Ball security has to be part of the evaluation."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.5",
+        "body": "{school}: {margin} turnover margin, {takeaways} takeaways against {giveaways} giveaways in {sampleGames} games. That margin makes other parts of the game harder."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.6",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: {margin} through {sampleGames} games. That is a costly possession deficit."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.7",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: {margin} through {sampleGames} games. The team is giving opponents extra chances."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.8",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: {margin} through {sampleGames} games. The possession balance needs to change."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.9",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: {margin} through {sampleGames} games. Ball security has to be part of the evaluation."
+      },
+      {
+        "id": "analyst.turnover_minus.reporter.10",
+        "body": "{takeaways} takeaways, {giveaways} giveaways for {school}. Turnover margin: {margin} through {sampleGames} games. That margin makes other parts of the game harder."
+      }
+    ],
+    "analyst.margin": [
+      {
+        "id": "analyst.margin.reporter.1",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. That is the full-season comparison."
+      },
+      {
+        "id": "analyst.margin.reporter.2",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. The comparison goes beyond this week's slate."
+      },
+      {
+        "id": "analyst.margin.reporter.3",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. No other published FBS result this season has a larger gap."
+      },
+      {
+        "id": "analyst.margin.reporter.4",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. A result at the top of the margin list."
+      },
+      {
+        "id": "analyst.margin.reporter.5",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. That is a season-wide winning-margin marker."
+      },
+      {
+        "id": "analyst.margin.reporter.6",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. The number stands out across the whole published schedule."
+      },
+      {
+        "id": "analyst.margin.reporter.7",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. A season-leading final margin."
+      },
+      {
+        "id": "analyst.margin.reporter.8",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. The gap is the largest in the current result set."
+      },
+      {
+        "id": "analyst.margin.reporter.9",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. A full-season margin benchmark."
+      },
+      {
+        "id": "analyst.margin.reporter.10",
+        "body": "{school}'s {score} win over {opponent} has a {margin}-point margin, the largest among {comparisonGames} published FBS games this season. The result leads the season's published winning margins."
+      }
+    ],
+    "analyst.heisman": [
+      {
+        "id": "analyst.heisman.reporter.1",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. The production belongs with the ranking."
+      },
+      {
+        "id": "analyst.heisman.reporter.2",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. That is the latest performance behind the watch-list spot."
+      },
+      {
+        "id": "analyst.heisman.reporter.3",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. A recent game to keep in the evaluation."
+      },
+      {
+        "id": "analyst.heisman.reporter.4",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. The ranking has an on-field reference point."
+      },
+      {
+        "id": "analyst.heisman.reporter.5",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. The stat line adds context to the attention."
+      },
+      {
+        "id": "analyst.heisman.reporter.6",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. One game in a season-long evaluation."
+      },
+      {
+        "id": "analyst.heisman.reporter.7",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. Keep the whole performance in the discussion."
+      },
+      {
+        "id": "analyst.heisman.reporter.8",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. The case still depends on the full season."
+      },
+      {
+        "id": "analyst.heisman.reporter.9",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. That is the recent football behind the race."
+      },
+      {
+        "id": "analyst.heisman.reporter.10",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race after {statLine} vs. {opponent}. The next game will add another piece to the case."
+      }
+    ],
+    "world.upset": [
+      {
+        "id": "world.upset.reporter.1",
+        "body": "{winnerLabel} upsets {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.2",
+        "body": "{winnerLabel} stuns {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.3",
+        "body": "{winnerLabel} takes down {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.4",
+        "body": "{winnerLabel} knocks off {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.5",
+        "body": "{winnerLabel} beats {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.6",
+        "body": "{winnerLabel} defeats {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.7",
+        "body": "{winnerLabel} gets the better of {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.8",
+        "body": "{winnerLabel} comes out on top against {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.9",
+        "body": "{winnerLabel} earns an upset win over {loserLabel}, {score}. A result that changes the week's conversation."
+      },
+      {
+        "id": "world.upset.reporter.10",
+        "body": "{winnerLabel} wins against {loserLabel}, {score}. A result that changes the week's conversation."
+      }
+    ],
+    "world.streak": [
+      {
+        "id": "world.streak.reporter.1",
+        "body": "{school} has put together {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.2",
+        "body": "{school} is up to {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.3",
+        "body": "{school} has reached {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.4",
+        "body": "{school} stands at {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.5",
+        "body": "{school} has recorded {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.6",
+        "body": "{school} has a run of {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.7",
+        "body": "{school} has built a run of {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.8",
+        "body": "{school} is riding a run of {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.9",
+        "body": "{school} has a winning run of {count} straight wins."
+      },
+      {
+        "id": "world.streak.reporter.10",
+        "body": "{school} has extended its run to {count} straight wins."
+      }
+    ],
+    "world.award": [
+      {
+        "id": "world.award.reporter.1",
+        "body": "{school}'s {playerName} is named the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.2",
+        "body": "{school}'s {playerName} has been named the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.3",
+        "body": "{school}'s {playerName} is selected as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.4",
+        "body": "{school}'s {playerName} earns recognition as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.5",
+        "body": "{school}'s {playerName} receives recognition as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.6",
+        "body": "{school}'s {playerName} is honored as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.7",
+        "body": "{school}'s {playerName} takes the honor of the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.8",
+        "body": "{school}'s {playerName} is recognized as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.9",
+        "body": "{school}'s {playerName} has earned recognition as the {award} for Week {awardWeek}."
+      },
+      {
+        "id": "world.award.reporter.10",
+        "body": "{school}'s {playerName} has been selected as the {award} for Week {awardWeek}."
+      }
+    ],
+    "world.record_broken": [
+      {
+        "id": "world.record_broken.reporter.1",
+        "body": "{school}'s {playerName} breaks the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.2",
+        "body": "{school}'s {playerName} has broken the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.3",
+        "body": "{school}'s {playerName} sets the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.4",
+        "body": "{school}'s {playerName} has set the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.5",
+        "body": "{school}'s {playerName} establishes the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.6",
+        "body": "{school}'s {playerName} has established the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.7",
+        "body": "{school}'s {playerName} posts a new mark for the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.8",
+        "body": "{school}'s {playerName} creates a new mark in the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.9",
+        "body": "{school}'s {playerName} raises the mark in the {recordScope} {period} record for {metric} with {value}."
+      },
+      {
+        "id": "world.record_broken.reporter.10",
+        "body": "{school}'s {playerName} sets a new mark in the {recordScope} {period} record for {metric} with {value}."
+      }
+    ],
+    "world.record_holder": [
+      {
+        "id": "world.record_holder.reporter.1",
+        "body": "The {recordScope} {period} record for {metric} belongs to {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.2",
+        "body": "The {recordScope} {period} record for {metric} now belongs to {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.3",
+        "body": "The {recordScope} {period} record for {metric} is held by {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.4",
+        "body": "The {recordScope} {period} record for {metric} is now held by {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.5",
+        "body": "The {recordScope} {period} record for {metric} has a holder in {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.6",
+        "body": "The {recordScope} {period} record for {metric} lists {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.7",
+        "body": "The {recordScope} {period} record for {metric} has its current mark from {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.8",
+        "body": "The {recordScope} {period} record for {metric} has its current holder in {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.9",
+        "body": "The {recordScope} {period} record for {metric} has a mark set by {school}'s {playerName}: {value}."
+      },
+      {
+        "id": "world.record_holder.reporter.10",
+        "body": "The {recordScope} {period} record for {metric} is currently credited to {school}'s {playerName}: {value}."
+      }
+    ],
+    "world.flip": [
+      {
+        "id": "world.flip.reporter.1",
+        "body": "{playerName} flips his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.2",
+        "body": "{playerName} has flipped his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.3",
+        "body": "{playerName} changes his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.4",
+        "body": "{playerName} has changed his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.5",
+        "body": "{playerName} switches his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.6",
+        "body": "{playerName} has switched his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.7",
+        "body": "{playerName} makes a commitment change from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.8",
+        "body": "{playerName} moves his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.9",
+        "body": "{playerName} has moved his commitment from {oldSchool} to {newSchool}."
+      },
+      {
+        "id": "world.flip.reporter.10",
+        "body": "{playerName} takes his commitment from {oldSchool} to {newSchool}."
+      }
+    ],
+    "world.rivalry_flip": [
+      {
+        "id": "world.rivalry_flip.reporter.1",
+        "body": "{playerName} flips his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.2",
+        "body": "{playerName} has flipped his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.3",
+        "body": "{playerName} changes his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.4",
+        "body": "{playerName} has changed his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.5",
+        "body": "{playerName} switches his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.6",
+        "body": "{playerName} has switched his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.7",
+        "body": "{playerName} makes a commitment change from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.8",
+        "body": "{playerName} moves his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.9",
+        "body": "{playerName} has moved his commitment from {oldSchool} to rival {newSchool}."
+      },
+      {
+        "id": "world.rivalry_flip.reporter.10",
+        "body": "{playerName} takes his commitment from {oldSchool} to rival {newSchool}."
+      }
+    ],
+    "world.decommit": [
+      {
+        "id": "world.decommit.reporter.1",
+        "body": "{playerName} is no longer committed to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.2",
+        "body": "{playerName} has withdrawn his commitment to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.3",
+        "body": "{playerName} has decommitted from {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.4",
+        "body": "{playerName} has reopened his recruitment after a commitment to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.5",
+        "body": "{playerName} is reopening his recruitment after committing to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.6",
+        "body": "{playerName} has ended his commitment to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.7",
+        "body": "{playerName} has backed away from his commitment to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.8",
+        "body": "{playerName} has come off the commitment list at {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.9",
+        "body": "{playerName} has reopened things after committing to {oldSchool}. The recruitment is open again."
+      },
+      {
+        "id": "world.decommit.reporter.10",
+        "body": "{playerName} is back on the board after committing to {oldSchool}. The recruitment is open again."
+      }
+    ],
+    "world.undefeated": [
+      {
+        "id": "world.undefeated.reporter.1",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. Two unbeaten records meet."
+      },
+      {
+        "id": "world.undefeated.reporter.2",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. The perfect starts get a head-to-head test."
+      },
+      {
+        "id": "world.undefeated.reporter.3",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. Both teams enter without a loss."
+      },
+      {
+        "id": "world.undefeated.reporter.4",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. A matchup between undefeated teams."
+      },
+      {
+        "id": "world.undefeated.reporter.5",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. The unbeaten runs meet on the same field."
+      },
+      {
+        "id": "world.undefeated.reporter.6",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. Two unblemished records are on the line."
+      },
+      {
+        "id": "world.undefeated.reporter.7",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. The unbeaten-team discussion gets a direct result."
+      },
+      {
+        "id": "world.undefeated.reporter.8",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. Neither team has lost coming into this one."
+      },
+      {
+        "id": "world.undefeated.reporter.9",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. The undefeated starts cannot both survive a decisive result."
+      },
+      {
+        "id": "world.undefeated.reporter.10",
+        "body": "{away} ({awayWins}-0) faces {home} ({homeWins}-0) this week. The next test comes against another unbeaten team."
+      }
+    ],
+    "world.bounceback": [
+      {
+        "id": "world.bounceback.reporter.1",
+        "body": "{school} faces {opponent} after last week's upset loss. The response becomes part of the story."
+      },
+      {
+        "id": "world.bounceback.reporter.2",
+        "body": "{school} faces {opponent} after last week's upset loss. The next result will tell us more than another explanation."
+      },
+      {
+        "id": "world.bounceback.reporter.3",
+        "body": "{school} faces {opponent} after last week's upset loss. A chance to change the conversation."
+      },
+      {
+        "id": "world.bounceback.reporter.4",
+        "body": "{school} faces {opponent} after last week's upset loss. The next game is the immediate test."
+      },
+      {
+        "id": "world.bounceback.reporter.5",
+        "body": "{school} faces {opponent} after last week's upset loss. There is a recent result to answer for."
+      },
+      {
+        "id": "world.bounceback.reporter.6",
+        "body": "{school} faces {opponent} after last week's upset loss. The follow-up deserves attention."
+      },
+      {
+        "id": "world.bounceback.reporter.7",
+        "body": "{school} faces {opponent} after last week's upset loss. The week brings a chance to reset the mood."
+      },
+      {
+        "id": "world.bounceback.reporter.8",
+        "body": "{school} faces {opponent} after last week's upset loss. The previous loss puts more eyes on the response."
+      },
+      {
+        "id": "world.bounceback.reporter.9",
+        "body": "{school} faces {opponent} after last week's upset loss. The next game offers the quickest answer."
+      },
+      {
+        "id": "world.bounceback.reporter.10",
+        "body": "{school} faces {opponent} after last week's upset loss. The team gets an on-field chance to respond."
+      }
+    ]
+  }
+}

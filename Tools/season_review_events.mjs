@@ -56,6 +56,6 @@ export function portalRiskEvents(s){
  }
  for(const [id,list] of byTeam)for(const p of list.sort((a,b)=>b.transferRisk-a.transferRisk||a.id.localeCompare(b.id)).slice(0,2)){
   const national=covered.has(id)&&p.transferRisk>=70;
-  events.push({id:'retention-watch:'+p.id,category:'transfer',facts:{family:'review.retention-watch',voice:national?'analyst':'beat',analystPersona:5,school:teams.get(id).name,playerName:p.name,position:p.position},options:{team:id,player:p.id,national,priority:national?119:99,thread:'retention:'+id}});
+  events.push({id:'retention-watch:'+p.id,category:'transfer',facts:{family:'review.retention-watch',voice:national?'analyst':'beat',analystPersona:5,school:teams.get(id).name,playerName:p.name,position:p.position,retentionBand:p.transferRisk>=90?'critical':p.transferRisk>=70?'high':'elevated'},options:{team:id,player:p.id,national,priority:national?119:99,thread:'retention:'+id}});
  }return events;
 }

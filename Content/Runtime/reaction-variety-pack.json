@@ -1,0 +1,1133 @@
+{
+  "revision": "reaction-variety-v99",
+  "families": {
+    "reply.fan.player_win": [
+      {
+        "id": "reply.fan.player_win.reaction.1",
+        "body": "{parentHandle} Yeah you earned the love after that one"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.2",
+        "body": "{parentHandle} My group chat owes you an apology"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.3",
+        "body": "{parentHandle} I will be talking about this performance for a while"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.4",
+        "body": "{parentHandle} No slander about you on this timeline today"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.5",
+        "body": "{parentHandle} Made my whole weekend better. Appreciate you"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.6",
+        "body": "{parentHandle} That is the kind of game I watch the highlights for twice"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.7",
+        "body": "{parentHandle} You gave the {nickname} fans something to be loud about"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.8",
+        "body": "{parentHandle} The highlights are going straight into the group chat"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.9",
+        "body": "{parentHandle} Keep playing like that and I will become even more annoying about this team"
+      },
+      {
+        "id": "reply.fan.player_win.reaction.10",
+        "body": "{parentHandle} A lot of happy {school} fans because of you"
+      }
+    ],
+    "reply.fan.beat_win": [
+      {
+        "id": "reply.fan.beat_win.reaction.1",
+        "body": "{parentHandle} You have to be professional about this. I absolutely do not"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.2",
+        "body": "{parentHandle} That final looks great typed out again"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.3",
+        "body": "{parentHandle} Please give me ten minutes before we start worrying about next week"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.4",
+        "body": "{parentHandle} The {nickname} won. My mood has improved dramatically"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.5",
+        "body": "{parentHandle} A win and a full weekend to be annoying about it"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.6",
+        "body": "{parentHandle} I have already sent this to people who did not ask"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.7",
+        "body": "{parentHandle} Please keep posting this score. It does not get old"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.8",
+        "body": "{parentHandle} Reading this as if I did not just watch the whole game"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.9",
+        "body": "{parentHandle} The {school} group chat is going to enjoy this"
+      },
+      {
+        "id": "reply.fan.beat_win.reaction.10",
+        "body": "{parentHandle} That is the kind of update I wanted today"
+      }
+    ],
+    "reply.fan.beat_loss": [
+      {
+        "id": "reply.fan.beat_loss.reaction.1",
+        "body": "{parentHandle} Reading the final a second time did not help"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.2",
+        "body": "{parentHandle} I need a break from my phone before I start offering lineup advice"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.3",
+        "body": "{parentHandle} My mood did not need this update"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.4",
+        "body": "{parentHandle} I love {school}. I did not love watching that"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.5",
+        "body": "{parentHandle} The postgame group chat is not going to be a pleasant place"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.6",
+        "body": "{parentHandle} Well that has ruined the rest of my football plans"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.7",
+        "body": "{parentHandle} I saw the game. Somehow the final still looks worse written down"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.8",
+        "body": "{parentHandle} Going to stare at the wall for a bit"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.9",
+        "body": "{parentHandle} Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "reply.fan.beat_loss.reaction.10",
+        "body": "{parentHandle} Would love a week where I do not have to defend this team online"
+      }
+    ],
+    "reply.fan.analyst_low": [
+      {
+        "id": "reply.fan.analyst_low.reaction.1",
+        "body": "{parentHandle} I hate when the numbers agree with my worst feelings"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.2",
+        "body": "{parentHandle} You could have let me enjoy being delusional a little longer"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.3",
+        "body": "{parentHandle} It looked rough live and the numbers did not rescue it"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.4",
+        "body": "{parentHandle} This is why I should not read analysis before breakfast"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.5",
+        "body": "{parentHandle} Was hoping the math would say something nicer"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.6",
+        "body": "{parentHandle} Now I have to be upset with evidence. Great"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.7",
+        "body": "{parentHandle} I wanted to argue but those numbers are sitting right there"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.8",
+        "body": "{parentHandle} Somebody on the staff needs to be reading this too"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.9",
+        "body": "{parentHandle} Love the {nickname}. Hate that this is a fair criticism"
+      },
+      {
+        "id": "reply.fan.analyst_low.reaction.10",
+        "body": "{parentHandle} I was trying to avoid this exact conversation"
+      }
+    ],
+    "reply.fan.analyst_high": [
+      {
+        "id": "reply.fan.analyst_high.reaction.1",
+        "body": "{parentHandle} Finally some numbers I am happy to read"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.2",
+        "body": "{parentHandle} Keep going. I have people to send this to"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.3",
+        "body": "{parentHandle} Been saying this without the math. Glad someone brought the math"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.4",
+        "body": "{parentHandle} I am choosing to believe every nice thing in this post"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.5",
+        "body": "{parentHandle} The {school} group chat is getting a screenshot"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.6",
+        "body": "{parentHandle} You have my full attention when the numbers look like that"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.7",
+        "body": "{parentHandle} This is the sort of research I can support"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.8",
+        "body": "{parentHandle} Exactly. Please repeat it for the other fanbases"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.9",
+        "body": "{parentHandle} That is getting saved for the next argument"
+      },
+      {
+        "id": "reply.fan.analyst_high.reaction.10",
+        "body": "{parentHandle} I knew watching the {nickname} had to be good for something"
+      }
+    ],
+    "reply.fan.commit": [
+      {
+        "id": "reply.fan.commit.reaction.1",
+        "body": "{parentHandle} Welcome to the {nickname}. Already pretending I know your whole highlight reel"
+      },
+      {
+        "id": "reply.fan.commit.reaction.2",
+        "body": "{parentHandle} That is the school right there. Welcome aboard"
+      },
+      {
+        "id": "reply.fan.commit.reaction.3",
+        "body": "{parentHandle} I have known about this for ten seconds and I am already invested"
+      },
+      {
+        "id": "reply.fan.commit.reaction.4",
+        "body": "{parentHandle} Your highlights are about to become my entire personality"
+      },
+      {
+        "id": "reply.fan.commit.reaction.5",
+        "body": "{parentHandle} Good choice. Welcome to {school}"
+      },
+      {
+        "id": "reply.fan.commit.reaction.6",
+        "body": "{parentHandle} Welcome! I am choosing to have wildly optimistic expectations"
+      },
+      {
+        "id": "reply.fan.commit.reaction.7",
+        "body": "{parentHandle} The group chat likes this one"
+      },
+      {
+        "id": "reply.fan.commit.reaction.8",
+        "body": "{parentHandle} A new {nickname}. Love to see it"
+      },
+      {
+        "id": "reply.fan.commit.reaction.9",
+        "body": "{parentHandle} Coach {coachLastName} keeps giving us things to talk about"
+      },
+      {
+        "id": "reply.fan.commit.reaction.10",
+        "body": "{parentHandle} We have already started talking ourselves into your future highlights"
+      }
+    ],
+    "reply.fan.offer": [
+      {
+        "id": "reply.fan.offer.reaction.1",
+        "body": "{parentHandle} Congrats! Hope we get to see you in {school} colors"
+      },
+      {
+        "id": "reply.fan.offer.reaction.2",
+        "body": "{parentHandle} Good offer. Would love to see you with the {nickname}"
+      },
+      {
+        "id": "reply.fan.offer.reaction.3",
+        "body": "{parentHandle} Come see what {school} is about"
+      },
+      {
+        "id": "reply.fan.offer.reaction.4",
+        "body": "{parentHandle} Congrats on the offer. The {nickname} fans are paying attention"
+      },
+      {
+        "id": "reply.fan.offer.reaction.5",
+        "body": "{parentHandle} This would be a fun fit. Congrats on the offer"
+      },
+      {
+        "id": "reply.fan.offer.reaction.6",
+        "body": "{parentHandle} Welcome to the part where {school} fans watch all your highlights"
+      },
+      {
+        "id": "reply.fan.offer.reaction.7",
+        "body": "{parentHandle} Hope this turns into a visit to {school}"
+      },
+      {
+        "id": "reply.fan.offer.reaction.8",
+        "body": "{parentHandle} Congrats! Adding this to my recruiting watch list"
+      },
+      {
+        "id": "reply.fan.offer.reaction.9",
+        "body": "{parentHandle} I have already decided you would look good in these colors"
+      },
+      {
+        "id": "reply.fan.offer.reaction.10",
+        "body": "{parentHandle} Love this offer. Come be a {nickname}"
+      }
+    ],
+    "reply.player.offer": [
+      {
+        "id": "reply.player.offer.reaction.1",
+        "body": "{parentHandle} Congrats on the offer!"
+      },
+      {
+        "id": "reply.player.offer.reaction.2",
+        "body": "{parentHandle} Happy for you. Big opportunity"
+      },
+      {
+        "id": "reply.player.offer.reaction.3",
+        "body": "{parentHandle} Congrats man. Keep it going"
+      },
+      {
+        "id": "reply.player.offer.reaction.4",
+        "body": "{parentHandle} Good news! Appreciate seeing you get the opportunity"
+      },
+      {
+        "id": "reply.player.offer.reaction.5",
+        "body": "{parentHandle} Congrats. Love to see the work getting noticed"
+      },
+      {
+        "id": "reply.player.offer.reaction.6",
+        "body": "{parentHandle} That is a good feeling. Congrats on the offer"
+      },
+      {
+        "id": "reply.player.offer.reaction.7",
+        "body": "{parentHandle} Happy for you and your people"
+      },
+      {
+        "id": "reply.player.offer.reaction.8",
+        "body": "{parentHandle} Congrats! Keep enjoying the process"
+      },
+      {
+        "id": "reply.player.offer.reaction.9",
+        "body": "{parentHandle} Good stuff. Wishing you the best with it"
+      },
+      {
+        "id": "reply.player.offer.reaction.10",
+        "body": "{parentHandle} Congrats on this one. Keep going"
+      }
+    ],
+    "reply.player.commit.Leader": [
+      {
+        "id": "reply.player.commit.Leader.reaction.1",
+        "body": "{parentHandle} Welcome to the {nickname}. Looking forward to having you with us."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.2",
+        "body": "{parentHandle} Congrats to you and your family. Glad you are joining us."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.3",
+        "body": "{parentHandle} Welcome aboard. Excited to share a team with you."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.4",
+        "body": "{parentHandle} Good decision. Looking forward to meeting you."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.5",
+        "body": "{parentHandle} Happy for you. Welcome to {school}."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.6",
+        "body": "{parentHandle} Congrats on your commitment. Glad to have you with us."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.7",
+        "body": "{parentHandle} Welcome to this group. Appreciate you choosing {school}."
+      },
+      {
+        "id": "reply.player.commit.Leader.reaction.8",
+        "body": "{parentHandle} Excited for you and your next chapter with the {nickname}."
+      }
+    ],
+    "reply.player.commit.TeamPlayer": [
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.1",
+        "body": "{parentHandle} Welcome to the family!"
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.2",
+        "body": "{parentHandle} Glad you are joining the group. Congrats man."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.3",
+        "body": "{parentHandle} Happy for you and your people. Welcome aboard."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.4",
+        "body": "{parentHandle} Looking forward to having you around the guys."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.5",
+        "body": "{parentHandle} Congrats! Good to have another {nickname}."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.6",
+        "body": "{parentHandle} Welcome to {school}. Excited to be teammates."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.7",
+        "body": "{parentHandle} Love seeing this. Congrats to your family too."
+      },
+      {
+        "id": "reply.player.commit.TeamPlayer.reaction.8",
+        "body": "{parentHandle} Welcome! Looking forward to sharing the field."
+      }
+    ],
+    "reply.player.commit.Intense": [
+      {
+        "id": "reply.player.commit.Intense.reaction.1",
+        "body": "{parentHandle} Let's get it. Welcome."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.2",
+        "body": "{parentHandle} Good choice. Ready to see you compete."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.3",
+        "body": "{parentHandle} The {nickname} got another one."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.4",
+        "body": "{parentHandle} Welcome to the group. Let's go."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.5",
+        "body": "{parentHandle} Yeah we needed this one."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.6",
+        "body": "{parentHandle} Glad you picked {school}. Ready to get after it."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.7",
+        "body": "{parentHandle} Good stuff. Welcome to our side."
+      },
+      {
+        "id": "reply.player.commit.Intense.reaction.8",
+        "body": "{parentHandle} Welcome aboard. Time to see what we can do."
+      }
+    ],
+    "reply.player.commit.Entertainer": [
+      {
+        "id": "reply.player.commit.Entertainer.reaction.1",
+        "body": "{parentHandle} Yall see who we just got??"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.2",
+        "body": "{parentHandle} Okay then! Welcome to the {nickname}."
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.3",
+        "body": "{parentHandle} Had to come say welcome. Good choice lol"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.4",
+        "body": "{parentHandle} The group chat likes this decision"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.5",
+        "body": "{parentHandle} Another {nickname}! Yeah I can get used to this"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.6",
+        "body": "{parentHandle} Guess we are teammates now. Welcome!!"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.7",
+        "body": "{parentHandle} Now this is a good update to open my phone to"
+      },
+      {
+        "id": "reply.player.commit.Entertainer.reaction.8",
+        "body": "{parentHandle} Good choice. Your mentions are about to be busy lol"
+      }
+    ],
+    "reply.player.commit.Unpredictable": [
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.1",
+        "body": "{parentHandle} Oh we got one."
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.2",
+        "body": "{parentHandle} This just improved my day."
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.3",
+        "body": "{parentHandle} I see you. Welcome."
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.4",
+        "body": "{parentHandle} Good decision. I might be biased"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.5",
+        "body": "{parentHandle} The group chat has thoughts. All good ones today"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.6",
+        "body": "{parentHandle} That is what I wanted to see on my phone"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.7",
+        "body": "{parentHandle} Welcome to our side. Interesting times ahead"
+      },
+      {
+        "id": "reply.player.commit.Unpredictable.reaction.8",
+        "body": "{parentHandle} Yeah I am posting about this one. Welcome"
+      }
+    ],
+    "reply.player.commit.Neutral": [
+      {
+        "id": "reply.player.commit.Neutral.reaction.1",
+        "body": "{parentHandle} Congrats on the commitment!"
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.2",
+        "body": "{parentHandle} Welcome to the {nickname}."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.3",
+        "body": "{parentHandle} Happy for you. Welcome aboard."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.4",
+        "body": "{parentHandle} Looking forward to having you with us."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.5",
+        "body": "{parentHandle} Congrats! Excited to be teammates."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.6",
+        "body": "{parentHandle} Good to see this. Welcome to {school}."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.7",
+        "body": "{parentHandle} Glad you are joining us."
+      },
+      {
+        "id": "reply.player.commit.Neutral.reaction.8",
+        "body": "{parentHandle} Welcome! Congrats to you and your family."
+      }
+    ],
+    "reply.player.teammate": [
+      {
+        "id": "reply.player.teammate.reaction.1",
+        "body": "{parentHandle} Love seeing you get yours."
+      },
+      {
+        "id": "reply.player.teammate.reaction.2",
+        "body": "{parentHandle} That was fun to watch."
+      },
+      {
+        "id": "reply.player.teammate.reaction.3",
+        "body": "{parentHandle} You were moving out there."
+      },
+      {
+        "id": "reply.player.teammate.reaction.4",
+        "body": "{parentHandle} Proud of you, brother."
+      },
+      {
+        "id": "reply.player.teammate.reaction.5",
+        "body": "{parentHandle} The work is showing up."
+      },
+      {
+        "id": "reply.player.teammate.reaction.6",
+        "body": "{parentHandle} You earned the love today."
+      },
+      {
+        "id": "reply.player.teammate.reaction.7",
+        "body": "{parentHandle} Keep getting after it."
+      },
+      {
+        "id": "reply.player.teammate.reaction.8",
+        "body": "{parentHandle} Could not be happier for you."
+      },
+      {
+        "id": "reply.player.teammate.reaction.9",
+        "body": "{parentHandle} Love sharing a field with you."
+      },
+      {
+        "id": "reply.player.teammate.reaction.10",
+        "body": "{parentHandle} Yeah this one deserves a post."
+      }
+    ],
+    "reply.player.award": [
+      {
+        "id": "reply.player.award.reaction.1",
+        "body": "{parentHandle} Thankful for this. Appreciate my guys."
+      },
+      {
+        "id": "reply.player.award.reaction.2",
+        "body": "{parentHandle} Love the support. Nobody does it alone."
+      },
+      {
+        "id": "reply.player.award.reaction.3",
+        "body": "{parentHandle} Thank you! Grateful for everybody helping me along the way."
+      },
+      {
+        "id": "reply.player.award.reaction.4",
+        "body": "{parentHandle} Appreciate the love. Means a lot."
+      },
+      {
+        "id": "reply.player.award.reaction.5",
+        "body": "{parentHandle} My teammates are a big part of this. Thank you."
+      },
+      {
+        "id": "reply.player.award.reaction.6",
+        "body": "{parentHandle} A lot of people helped me get here. Appreciate all of you."
+      },
+      {
+        "id": "reply.player.award.reaction.7",
+        "body": "{parentHandle} Grateful for this team and everyone behind us."
+      },
+      {
+        "id": "reply.player.award.reaction.8",
+        "body": "{parentHandle} Thank you to my family and teammates."
+      },
+      {
+        "id": "reply.player.award.reaction.9",
+        "body": "{parentHandle} Honored. Love this group."
+      },
+      {
+        "id": "reply.player.award.reaction.10",
+        "body": "{parentHandle} Appreciate everybody showing love today."
+      }
+    ],
+    "reply.fan.award": [
+      {
+        "id": "reply.fan.award.reaction.1",
+        "body": "{parentHandle} {playerName} earned that. Love the recognition"
+      },
+      {
+        "id": "reply.fan.award.reaction.2",
+        "body": "{parentHandle} Well deserved for {playerName}. Say the name a little louder"
+      },
+      {
+        "id": "reply.fan.award.reaction.3",
+        "body": "{parentHandle} Put some respect on {playerName}. {nickname} getting recognized"
+      },
+      {
+        "id": "reply.fan.award.reaction.4",
+        "body": "{parentHandle} That award found the right player. Congrats {playerName}"
+      },
+      {
+        "id": "reply.fan.award.reaction.5",
+        "body": "{parentHandle} Been telling people about {playerName}. Happy to see this"
+      },
+      {
+        "id": "reply.fan.award.reaction.6",
+        "body": "{parentHandle} {playerName} deserves every bit of that"
+      },
+      {
+        "id": "reply.fan.award.reaction.7",
+        "body": "{parentHandle} The {school} timeline will be posting this for a while"
+      },
+      {
+        "id": "reply.fan.award.reaction.8",
+        "body": "{parentHandle} A proud day for everyone who has watched {playerName}"
+      },
+      {
+        "id": "reply.fan.award.reaction.9",
+        "body": "{parentHandle} Give {playerName} the flowers. Earned them"
+      },
+      {
+        "id": "reply.fan.award.reaction.10",
+        "body": "{parentHandle} Love seeing our guys get their recognition. Congrats {playerName}"
+      }
+    ],
+    "reply.fan.coach_good": [
+      {
+        "id": "reply.fan.coach_good.reaction.1",
+        "body": "{parentHandle} {coachName} deserves more credit for this"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.2",
+        "body": "{parentHandle} Give {coachName} some flowers. Real production at {school}"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.3",
+        "body": "{parentHandle} Been trying to tell people about {coachName}"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.4",
+        "body": "{parentHandle} This is why I keep defending {coachName}"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.5",
+        "body": "{parentHandle} I would like the {coachName} appreciation posts to be a little louder"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.6",
+        "body": "{parentHandle} {coachName} has earned some positive noise on this timeline"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.7",
+        "body": "{parentHandle} The numbers back it up for {coachName}"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.8",
+        "body": "{parentHandle} Finally some credit for {coachName}. Keep it going"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.9",
+        "body": "{parentHandle} No complaints from me about {coachName} right now"
+      },
+      {
+        "id": "reply.fan.coach_good.reaction.10",
+        "body": "{parentHandle} The {nickname} are getting something real from {coachName}"
+      }
+    ],
+    "reply.fan.player_good": [
+      {
+        "id": "reply.fan.player_good.reaction.1",
+        "body": "{parentHandle} {playerName} deserves more credit for this"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.2",
+        "body": "{parentHandle} Give {playerName} some flowers. Real production at {school}"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.3",
+        "body": "{parentHandle} Been trying to tell people about {playerName}"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.4",
+        "body": "{parentHandle} This is why I keep defending {playerName}"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.5",
+        "body": "{parentHandle} I would like the {playerName} appreciation posts to be a little louder"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.6",
+        "body": "{parentHandle} {playerName} has earned some positive noise on this timeline"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.7",
+        "body": "{parentHandle} The numbers back it up for {playerName}"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.8",
+        "body": "{parentHandle} Finally some credit for {playerName}. Keep it going"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.9",
+        "body": "{parentHandle} No complaints from me about {playerName} right now"
+      },
+      {
+        "id": "reply.fan.player_good.reaction.10",
+        "body": "{parentHandle} The {nickname} are getting something real from {playerName}"
+      }
+    ],
+    "reply.fan.coach_bad": [
+      {
+        "id": "reply.fan.coach_bad.reaction.1",
+        "body": "{parentHandle} I want {coachName} to turn it around. Cannot pretend this is working"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.2",
+        "body": "{parentHandle} Those {coachName} numbers are rough. Something has to change"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.3",
+        "body": "{parentHandle} How long are we supposed to act like this part of {school} is fine?"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.4",
+        "body": "{parentHandle} {coachName} needs to give us a reason to feel better about this"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.5",
+        "body": "{parentHandle} Love {school}, but defending {coachName} is getting difficult"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.6",
+        "body": "{parentHandle} I would love to be wrong about {coachName}. Please give me a reason"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.7",
+        "body": "{parentHandle} The {nickname} need more from {coachName}. It is fair to say it"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.8",
+        "body": "{parentHandle} Criticism of {coachName} is not the same thing as wanting the team to fail"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.9",
+        "body": "{parentHandle} Wish these numbers looked different. Looking at you, {coachName}"
+      },
+      {
+        "id": "reply.fan.coach_bad.reaction.10",
+        "body": "{parentHandle} I am still rooting for {coachName}. I am also frustrated"
+      }
+    ],
+    "reply.fan.player_bad": [
+      {
+        "id": "reply.fan.player_bad.reaction.1",
+        "body": "{parentHandle} I want {playerName} to turn it around. Cannot pretend this is working"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.2",
+        "body": "{parentHandle} Those {playerName} numbers are rough. Something has to change"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.3",
+        "body": "{parentHandle} How long are we supposed to act like this part of {school} is fine?"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.4",
+        "body": "{parentHandle} {playerName} needs to give us a reason to feel better about this"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.5",
+        "body": "{parentHandle} Love {school}, but defending {playerName} is getting difficult"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.6",
+        "body": "{parentHandle} I would love to be wrong about {playerName}. Please give me a reason"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.7",
+        "body": "{parentHandle} The {nickname} need more from {playerName}. It is fair to say it"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.8",
+        "body": "{parentHandle} Criticism of {playerName} is not the same thing as wanting the team to fail"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.9",
+        "body": "{parentHandle} Wish these numbers looked different. Looking at you, {playerName}"
+      },
+      {
+        "id": "reply.fan.player_bad.reaction.10",
+        "body": "{parentHandle} I am still rooting for {playerName}. I am also frustrated"
+      }
+    ],
+    "reply.fan.recruit_number_one": [
+      {
+        "id": "reply.fan.recruit_number_one.reaction.1",
+        "body": "{parentHandle} THE NUMBER ONE PLAYER. To {school}. I need a minute"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.2",
+        "body": "{parentHandle} The No. 1 recruit picked US. Sorry in advance for how I will act about this"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.3",
+        "body": "{parentHandle} No. 1 in the country and a future {nickname}. This is massive"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.4",
+        "body": "{parentHandle} Somebody tell me to calm down. Actually do not. Number one!!"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.5",
+        "body": "{parentHandle} The top player in the entire class. {school} actually did that"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.6",
+        "body": "{parentHandle} The group chat is not going to sleep. No. 1 to the {nickname}"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.7",
+        "body": "{parentHandle} The best-ranked recruit in the country chose {school}. Read that again"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.8",
+        "body": "{parentHandle} I will be bringing up this commitment in unrelated conversations"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.9",
+        "body": "{parentHandle} We got the NUMBER ONE recruit. There is no normal way for me to react"
+      },
+      {
+        "id": "reply.fan.recruit_number_one.reaction.10",
+        "body": "{parentHandle} That is the kind of news that gets pinned on the {school} timeline"
+      }
+    ],
+    "reply.fan.recruit_program_changer": [
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.1",
+        "body": "{parentHandle} A {stars}-star chose {school}?! This changes the mood around here"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.2",
+        "body": "{parentHandle} {stars} stars. The {nickname}. This is the sort of pickup we watched other schools celebrate"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.3",
+        "body": "{parentHandle} This is a HUGE deal for {school}. I am not going to act casual about it"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.4",
+        "body": "{parentHandle} We used to watch these announcements hoping for a mention. A {stars}-star to US"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.5",
+        "body": "{parentHandle} A {stars}-star in these colors. That is a different kind of recruiting day"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.6",
+        "body": "{parentHandle} This is the kind of commitment the whole {school} fanbase notices"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.7",
+        "body": "{parentHandle} The {nickname} really landed a {stars}-star. Keep saying it until it sounds normal"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.8",
+        "body": "{parentHandle} Call it a program moment. That is what a pickup like this means here"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.9",
+        "body": "{parentHandle} {school} fans have earned the right to be loud about this one"
+      },
+      {
+        "id": "reply.fan.recruit_program_changer.reaction.10",
+        "body": "{parentHandle} A {stars}-star picked us. I am going to need a few more highlight clips"
+      }
+    ],
+    "reply.fan.recruit_five_star": [
+      {
+        "id": "reply.fan.recruit_five_star.reaction.1",
+        "body": "{parentHandle} Five stars. Welcome to the {nickname}"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.2",
+        "body": "{parentHandle} Another serious talent for {school}. Love this pickup"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.3",
+        "body": "{parentHandle} A 5-star is always worth celebrating. Welcome aboard"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.4",
+        "body": "{parentHandle} FIVE STAR. The {nickname} keep building"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.5",
+        "body": "{parentHandle} A big addition for {school}. Excited to see this one develop"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.6",
+        "body": "{parentHandle} Five stars in these colors. I like that"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.7",
+        "body": "{parentHandle} Plenty of talent coming in. Welcome to {school}"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.8",
+        "body": "{parentHandle} A 5-star chose the {nickname}. Good recruiting day"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.9",
+        "body": "{parentHandle} This is why I keep checking the recruiting news"
+      },
+      {
+        "id": "reply.fan.recruit_five_star.reaction.10",
+        "body": "{parentHandle} Five-star news is the kind of notification I want"
+      }
+    ],
+    "reply.fan.recruit_questioned": [
+      {
+        "id": "reply.fan.recruit_questioned.reaction.1",
+        "body": "{parentHandle} A {stars}-star for {school}? I hope the staff sees a fit I am missing"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.2",
+        "body": "{parentHandle} Not writing anybody off, but I expected a bigger pickup at our level"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.3",
+        "body": "{parentHandle} The {nickname} usually aim higher. I would like to understand this one"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.4",
+        "body": "{parentHandle} Hope you prove the rankings wrong. This is a surprising signing for {school}"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.5",
+        "body": "{parentHandle} I am rooting for it to work. I also have questions about the recruiting approach"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.6",
+        "body": "{parentHandle} A {stars}-star at {school} is not automatically a bad player. Still a strange fit on paper"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.7",
+        "body": "{parentHandle} This is where I want the staff to explain what it sees beyond the stars"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.8",
+        "body": "{parentHandle} Would love to be wrong about this pickup. It is fair to ask questions"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.9",
+        "body": "{parentHandle} The signing surprised me. Hope the staff found something the rest of us missed"
+      },
+      {
+        "id": "reply.fan.recruit_questioned.reaction.10",
+        "body": "{parentHandle} Not the kind of announcement I expected from {school}. We will see"
+      }
+    ],
+    "reply.fan.flip": [
+      {
+        "id": "reply.fan.flip.reaction.1",
+        "body": "{parentHandle} All that recruiting for {newSchool} to get the commitment. That is annoying"
+      },
+      {
+        "id": "reply.fan.flip.reaction.2",
+        "body": "{parentHandle} From {oldSchool} to {newSchool}. Yeah I do not love seeing that"
+      },
+      {
+        "id": "reply.fan.flip.reaction.3",
+        "body": "{parentHandle} Guess those {oldSchool} welcome posts aged fast. This one hurts"
+      },
+      {
+        "id": "reply.fan.flip.reaction.4",
+        "body": "{parentHandle} Losing a commitment to {newSchool} was not the update I wanted"
+      },
+      {
+        "id": "reply.fan.flip.reaction.5",
+        "body": "{parentHandle} Cool. We can apparently enjoy a commitment right up until {newSchool} calls"
+      },
+      {
+        "id": "reply.fan.flip.reaction.6",
+        "body": "{parentHandle} The flip from {oldSchool} to {newSchool} has ruined my recruiting mood"
+      },
+      {
+        "id": "reply.fan.flip.reaction.7",
+        "body": "{parentHandle} That is a rough notification for {oldSchool} fans to open"
+      },
+      {
+        "id": "reply.fan.flip.reaction.8",
+        "body": "{parentHandle} Would have preferred literally any {oldSchool} update other than this flip"
+      },
+      {
+        "id": "reply.fan.flip.reaction.9",
+        "body": "{parentHandle} I know recruiting changes. I do not have to enjoy {newSchool} taking this one"
+      },
+      {
+        "id": "reply.fan.flip.reaction.10",
+        "body": "{parentHandle} The {oldSchool} group chat is going to need a minute after that flip"
+      }
+    ],
+    "reply.fan.decommit": [
+      {
+        "id": "reply.fan.decommit.reaction.1",
+        "body": "{parentHandle} Losing this commitment hurts. Staff has work to do"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.2",
+        "body": "{parentHandle} Reopened the recruitment? Yeah I do not love that"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.3",
+        "body": "{parentHandle} This is why I should stop getting attached before signing day"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.4",
+        "body": "{parentHandle} Cool cool cool. Another reason for me to keep refreshing recruiting news"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.5",
+        "body": "{parentHandle} I was enjoying the commitment. Would have enjoyed keeping it more"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.6",
+        "body": "{parentHandle} The class did not need that update. Time for the staff to respond"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.7",
+        "body": "{parentHandle} Not the recruiting notification I wanted to open"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.8",
+        "body": "{parentHandle} This one is frustrating. Back to the board"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.9",
+        "body": "{parentHandle} Hope the staff has another plan because I was counting on this one"
+      },
+      {
+        "id": "reply.fan.decommit.reaction.10",
+        "body": "{parentHandle} I know nothing is final. Still hurts to lose the commitment"
+      }
+    ],
+    "reply.fan.upset": [
+      {
+        "id": "reply.fan.upset.reaction.1",
+        "body": "{parentHandle} {winner} over {loser}. This sport is ridiculous"
+      },
+      {
+        "id": "reply.fan.upset.reaction.2",
+        "body": "{parentHandle} That upset is going to fuel the timeline for a week"
+      },
+      {
+        "id": "reply.fan.upset.reaction.3",
+        "body": "{parentHandle} {winner} actually did that to {loser}. I love college football"
+      },
+      {
+        "id": "reply.fan.upset.reaction.4",
+        "body": "{parentHandle} The {loser} group chats are having a very different evening"
+      },
+      {
+        "id": "reply.fan.upset.reaction.5",
+        "body": "{parentHandle} Respect to {winner}. That is how you change the conversation"
+      },
+      {
+        "id": "reply.fan.upset.reaction.6",
+        "body": "{parentHandle} Please keep the {winner}-{loser} final on my screen a little longer"
+      },
+      {
+        "id": "reply.fan.upset.reaction.7",
+        "body": "{parentHandle} {winner} just gave every underdog fan something to smile about"
+      },
+      {
+        "id": "reply.fan.upset.reaction.8",
+        "body": "{parentHandle} Some preseason arguments are going to look very funny after {winner} beat {loser}"
+      },
+      {
+        "id": "reply.fan.upset.reaction.9",
+        "body": "{parentHandle} The upset alert was not a drill. {winner} got it done"
+      },
+      {
+        "id": "reply.fan.upset.reaction.10",
+        "body": "{parentHandle} {loser} fans are going to be hearing about {winner} for a while"
+      }
+    ]
+  }
+}

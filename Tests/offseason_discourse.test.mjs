@@ -27,7 +27,7 @@ test('one-stars get no recruiting coverage and occasional two-stars get only und
  const p=s.players.at(-1);p.starRating=2;while(!recruitAttention(s,p))s.leagueId++;const posts=buildFeed(s).stories.filter(p=>p.playerId==='r');assert.ok(posts.length);assert.ok(posts.every(p=>p.templateId.startsWith('roster.underdog')));
 });
 test('transfer commitment names both schools and recognizes either side of a native rivalry',()=>{
- const s=fixture();s.draftResults=[];s.teams[0].name='Florida';s.teams[1].name='Florida State';s.teams[0].rivals=[2];recruit(s);const f=buildFeed(s),report=f.stories.find(p=>p.templateId.startsWith('roster.rival-transfer'));assert.ok(report);assert.match(report.body,/Florida State/);assert.match(report.body,/from Florida/);assert.match(report.body,/4-star transfer QB/);assert.ok(detectEvents(s).find(e=>e.id==='commit:2:r').facts.rivalTransfer);
+ const s=fixture();s.draftResults=[];s.teams[0].name='Florida';s.teams[1].name='Florida State';s.teams[0].rivals=[2];recruit(s);const f=buildFeed(s),report=f.stories.find(p=>p.templateId.startsWith('roster.rival-transfer'));assert.ok(report);assert.match(report.body,/Florida State/);assert.match(report.body,/from (?:rival )?Florida/);assert.match(report.body,/4-star transfer QB/);assert.ok(detectEvents(s).find(e=>e.id==='commit:2:r').facts.rivalTransfer);
 });
 test('a returning portal player gets beat retention coverage and smug fans, never an official welcome',()=>{
  const s=fixture();s.draftResults=[];const p=recruit(s,{team:1});s.players.at(-1).overall=91;
@@ -38,7 +38,7 @@ test('JUCO is explicit in reports and recruit profile; five-stars are announced 
  const s=fixture();s.draftResults=[];recruit(s,{stars:5,kind:'JuniorCollege_Sophomore'});const f=buildFeed(s);assert.ok(f.stories.some(p=>p.handle==='@ESPNCFB'&&/5-star JUCO QB/.test(p.body)));assert.ok(f.stories.some(p=>p.voice==='recruit'&&/JUCO QB/.test(p.author)));
 });
 test('every qualifying team commitment survives weekly flavor limits',()=>{
- const s=fixture();s.draftResults=[];for(let i=0;i<25;i++)recruit(s,{id:'r'+i,stars:3,kind:'HighSchool',team:1,rank:100+i});const f=buildFeed(s),reports=f.stories.filter(p=>p.coverageExempt&&p.eventId.startsWith('commit:1:'));assert.equal(reports.length,25);assert.ok(reports.every(p=>f.views['team:1'].includes(p.id)));assert.ok(f.posts.length<=30);
+ const s=fixture();s.draftResults=[];for(let i=0;i<25;i++)recruit(s,{id:'r'+i,stars:3,kind:'HighSchool',team:1,rank:100+i});const f=buildFeed(s),reports=f.stories.filter(p=>p.coverageExempt&&p.eventId.startsWith('commit:1:'));assert.equal(reports.length,25);assert.ok(reports.every(p=>f.views['team:1:required'].includes(p.id)));assert.ok(reports.every(p=>f.views['team:1'].includes(p.id)));assert.ok(f.posts.length<=30);
 });
 test('Maddox and Brooks cover genuine portal interest throughout recruiting; committed transfers are excluded',()=>{
  const s=fixture();s.draftResults=[];s.season.CurrentWeek=3;for(let i=0;i<12;i++){const p=recruit(s,{id:'open'+i,kind:'Transfer_Junior',stage:'Top3'});s.portalEntrants.push(p.id);}const f=buildFeed(s),posts=f.stories.filter(p=>p.templateId.startsWith('roster.interest'));assert.ok(posts.some(p=>p.author==='Chris Maddox'));assert.ok(posts.some(p=>p.author==='Tina Brooks'));assert.ok(posts.every(p=>p.body.includes('School 1')&&p.body.includes('School 2')));
@@ -56,4 +56,11 @@ test('draft discussion survives native draft cleanup using the recorded class, w
 });
 test('archived draft browsing gains every own pick without rewriting its stories',()=>{
  const s=fixture(),f=buildFeed(s),before=f.stories.map(p=>[p.id,p.body,p.likes]);delete f.views['all:expanded'];delete f.views['all:default'];const fixed=refreshAccountPresentation(f,s);assert.deepEqual(fixed.stories.map(p=>[p.id,p.body,p.likes]),before);assert.equal(fixed.views['all:default'].filter(id=>fixed.stories.find(p=>p.id===id)?.voice==='nflDraft'&&fixed.stories.find(p=>p.id===id)?.teamIds.includes(1)).length,28);
+});
+
+test('undrafted signings do not prevent draft recovery after native cleanup',()=>{
+ const s=fixture(),a=updateRuntime(structuredClone(s)),entry=a.state.editions.at(-1);
+ entry.snapshot.recentDraftClass=[];entry.feed.events.push({id:'udfa:test',category:'draft',teamIds:[1],facts:{family:'draft.udfa',playerName:'Undrafted Senior'}});
+ s.season.CurrentWeek=4;s.draftResults=[];s.players.forEach(p=>p.team=255);
+ const b=updateRuntime(s,a.state);assert.equal(s.recentDraftClass.length,224);assert.ok(b.catalog.stories.some(p=>p.category==='draft-discourse'));
 });

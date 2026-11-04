@@ -25,7 +25,7 @@ export function trackOffers(s,sameWeek=null,previous=null,earlier=null){
 export function buildFeed(s,previous=null,options={}){
   const publication={key:weekKey(s),leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,season:s.season.CurrentSeasonYear,phase:s.season.CurrentWeekType,week:s.season.CurrentWeek};
   const events=freshEditorialEvents(detectEvents(s,previous),publication,options.history??[]),key=weekKey(s);
-  const rendered=renderStories(s,events,{authors:options.authors??{},history:options.history??[],sameWeek:options.sameWeek??null});
+  const rendered=renderStories(s,events,{authors:options.authors??{},history:options.history??[],sameWeek:options.sameWeek??null,onTemplates:options.onTemplates??null});
   options.onAuthors?.(rendered.authors);
   return publishWeek({format:1,engineVersion:ENGINE_VERSION,key,leagueId:s.leagueId,userTeamIndex:s.userTeamIndex,
     offseasonStage:s.season.CurrentOffseasonStage,championshipWeek:s.season.RegularSeasonWeekConferenceChampionship,season:publication.season,week:publication.week,phase:publication.phase,source:s.source,sourceKind:s.sourceKind??'save',sha256:s.sha256,sourceUnchanged:true,

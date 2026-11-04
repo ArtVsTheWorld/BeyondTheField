@@ -45,7 +45,7 @@ export function seasonLaunchEvents(s){
    if(freshman&&freshman.overall>=78)emit('freshman:'+t.id,'freshman','beat',{...v,playerName:freshman.name,position:freshman.position},t,{player:freshman.id,priority:87});
    const young=roster.find(p=>['Freshman','Sophomore'].includes(p.classYear)&&p.overall>=80);
    if(young)emit('breakout:'+t.id,'breakout','analyst',{...v,playerName:young.name,position:young.position,classLabel:classLabel(young)},t,{player:young.id,category:'analytics',priority:87});
-   const senior=roster.find(p=>p.classYear==='Senior');if(senior)emit('senior:'+t.id,'senior','player',{...v,classLabel:classLabel(senior)},t,{player:senior.id,national:false});
+   const senior=roster.find(p=>p.classYear==='Senior'&&p.redshirt!=='Current');if(senior)emit('senior:'+t.id,'senior','player',{...v,classLabel:classLabel(senior)},t,{player:senior.id,national:false});
    const nil=roster.find(p=>p.nil>0);if(nil)emit('nil:'+t.id,'nil','player',v,t,{player:nil.id,national:false,priority:75});
    const honors=(s.preseasonHonors??[]).filter(a=>a.team===t.id&&a.year===s.season.CurrentYear&&!a.type.endsWith('_CONF'));
    const star=players.get(honors[0]?.player)??roster[0];if(star&&honors.length)emit('spotlight:'+t.id,'spotlight','official',{...v,playerName:star.name,position:star.position},t,{player:star.id,category:'awards',priority:88});

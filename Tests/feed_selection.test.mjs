@@ -57,3 +57,8 @@ test('For You fills a final slot by relaxing soft variety caps, while preserving
 test('publication picker labels hide internal phase names and respect native offseason stages',async()=>{
  const {publicationLabel}=await import('../Tools/publication_timeline.mjs');for(const [phase,expected] of [['BowlSeason1','Bowl Week 1'],['BowlSeason2','Bowl Week 2'],['BowlSeason3','Bowl Week 3'],['NationalChampionship','National Championship']])assert.equal(publicationLabel({phase,week:18,season:2028}),expected+', 2028');assert.equal(publicationLabel({phase:'OffSeason',week:9,offseasonStage:9,season:2028}),'Encourage Transfers / Conference Realignment, 2028');assert.ok(publicationLabel({phase:'OffSeason',week:6,offseasonStage:7,season:2028}).includes('Position Changes'));
 });
+
+test('For You keeps every user draft signing beyond its normal curated limit',()=>{
+ const posts=Array.from({length:36},(_,i)=>({...story('pick'+i,'team'),voice:'nflDraft',category:'draft',teamIds:[1],draftPick:i+1}));
+ const f=publishWeek({...edition(8),stories:posts});assert.equal(f.views.all.length,30);assert.equal(f.views['all:required'].length,36);assert.equal(f.views['all:default'].length,36);
+});

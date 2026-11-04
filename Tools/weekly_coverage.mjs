@@ -19,7 +19,7 @@ export function applyWeeklyCoverage(stories,s){
  // Specialist voices and the draft's national conclusions get room before
  // a large local portal pool consumes a program's entire flavor allowance.
  for(const name of ['Chris Maddox','Tina Brooks']){const p=editorialRoots(roots.filter(p=>p.author===name&&p.category==='recruiting'&&p.id.includes(':interest:')&&p.scopes.includes('national')))[0];if(p)add(p);}
- const draftFamilies=new Set();for(const p of editorialRoots(roots.filter(p=>p.category==='draft-discourse'&&p.voice==='analyst'))){const family=p.templateId?.split('.v87.')[0];if(draftFamilies.has(family))continue;if(add(p))draftFamilies.add(family);}
+ const draftFamilies=new Set();for(const p of editorialRoots(roots.filter(p=>p.category==='draft-discourse'&&p.voice==='analyst'))){const family=p.templateFamily??p.templateId?.split('.v87.')[0];if(draftFamilies.has(family))continue;if(add(p))draftFamilies.add(family);}
  const focusGroups=new Map();for(const p of stories)if(p.eventFocus){const list=focusGroups.get(p.thread)??[];list.push(p);focusGroups.set(p.thread,list);for(const id of p.focusTeams??[])if(budgets.has(id))budgets.set(id,Math.max(budgets.get(id),p.eventFocus==='title'?20:p.eventFocus==='playoff'?16:budgets.get(id)));}
  // Keep one factual recap of the preceding game for each finalist. Hype
  // must not consume the whole allowance and erase how the team got here.

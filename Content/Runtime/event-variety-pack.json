@@ -1,0 +1,2609 @@
+{
+  "revision": "event-variety-v99",
+  "families": {
+    "beat.result": [
+      {
+        "id": "beat.result.eventcopy.1",
+        "body": "{winner} beats {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.2",
+        "body": "{winner} defeats {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.3",
+        "body": "{winner} gets past {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.4",
+        "body": "{winner} takes down {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.5",
+        "body": "{winner} wins against {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.6",
+        "body": "{winner} prevails over {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.7",
+        "body": "{winner} earns a win over {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.8",
+        "body": "{winner} gets the better of {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.9",
+        "body": "{winner} finishes on top against {loser}, {score}."
+      },
+      {
+        "id": "beat.result.eventcopy.10",
+        "body": "{winner} comes away with a win over {loser}, {score}."
+      }
+    ],
+    "beat.result_close": [
+      {
+        "id": "beat.result_close.eventcopy.1",
+        "body": "{winner} edges {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.2",
+        "body": "{winner} gets past {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.3",
+        "body": "{winner} holds the final advantage over {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.4",
+        "body": "{winner} comes out ahead of {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.5",
+        "body": "{winner} wins a close one against {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.6",
+        "body": "{winner} earns a narrow win over {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.7",
+        "body": "{winner} prevails against {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.8",
+        "body": "{winner} takes a tight one against {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.9",
+        "body": "{winner} finishes ahead of {loser}, {score}. A {margin}-point game."
+      },
+      {
+        "id": "beat.result_close.eventcopy.10",
+        "body": "{winner} beats {loser}, {score}. A {margin}-point game."
+      }
+    ],
+    "beat.result_wide": [
+      {
+        "id": "beat.result_wide.eventcopy.1",
+        "body": "{winner} beats {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.2",
+        "body": "{winner} defeats {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.3",
+        "body": "{winner} gets the better of {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.4",
+        "body": "{winner} finishes ahead of {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.5",
+        "body": "{winner} wins against {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.6",
+        "body": "{winner} prevails over {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.7",
+        "body": "{winner} takes down {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.8",
+        "body": "{winner} comes out on top against {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.9",
+        "body": "{winner} earns a win over {loser}, {score}. The final margin is {margin}."
+      },
+      {
+        "id": "beat.result_wide.eventcopy.10",
+        "body": "{winner} comes away with a win over {loser}, {score}. The final margin is {margin}."
+      }
+    ],
+    "beat.tie": [
+      {
+        "id": "beat.tie.eventcopy.1",
+        "body": "{home} and {away} finish tied, {homeScore}-{awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.2",
+        "body": "A tie on the final scoreboard: {home} {homeScore}, {away} {awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.3",
+        "body": "No winner in this one. {home} {homeScore}, {away} {awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.4",
+        "body": "Final: {home} {homeScore}, {away} {awayScore}. The result is a tie."
+      },
+      {
+        "id": "beat.tie.eventcopy.5",
+        "body": "{homeScore}-{awayScore}: {home} and {away} end level."
+      },
+      {
+        "id": "beat.tie.eventcopy.6",
+        "body": "The final leaves nothing between them: {home} {homeScore}, {away} {awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.7",
+        "body": "A level finish for {home} and {away}, {homeScore}-{awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.8",
+        "body": "{home} {homeScore}, {away} {awayScore}. Neither team gets a win from this result."
+      },
+      {
+        "id": "beat.tie.eventcopy.9",
+        "body": "Tied at the finish: {home} {homeScore}, {away} {awayScore}."
+      },
+      {
+        "id": "beat.tie.eventcopy.10",
+        "body": "The {home}-{away} result is a tie, {homeScore}-{awayScore}."
+      }
+    ],
+    "beat.poll_up": [
+      {
+        "id": "beat.poll_up.eventcopy.1",
+        "body": "{school} moves up from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.2",
+        "body": "{school} climbs from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.3",
+        "body": "{school} rises from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.4",
+        "body": "{school} goes up from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.5",
+        "body": "{school} advances from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.6",
+        "body": "{school} moves higher from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.7",
+        "body": "{school} makes a move up from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.8",
+        "body": "{school} takes a step up from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.9",
+        "body": "{school} is up from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_up.eventcopy.10",
+        "body": "{school} has risen from No. {previousRank} to No. {rank} in the {pollName}."
+      }
+    ],
+    "beat.poll_down": [
+      {
+        "id": "beat.poll_down.eventcopy.1",
+        "body": "{school} moves down from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.2",
+        "body": "{school} slips from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.3",
+        "body": "{school} falls from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.4",
+        "body": "{school} drops from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.5",
+        "body": "{school} slides from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.6",
+        "body": "{school} moves lower from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.7",
+        "body": "{school} takes a step down from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.8",
+        "body": "{school} is down from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.9",
+        "body": "{school} has dropped from No. {previousRank} to No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_down.eventcopy.10",
+        "body": "{school} has fallen from No. {previousRank} to No. {rank} in the {pollName}."
+      }
+    ],
+    "beat.poll_entry": [
+      {
+        "id": "beat.poll_entry.eventcopy.1",
+        "body": "{school} enters at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.2",
+        "body": "{school} joins the rankings at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.3",
+        "body": "{school} makes an appearance at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.4",
+        "body": "{school} checks in at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.5",
+        "body": "{school} arrives at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.6",
+        "body": "{school} is newly ranked at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.7",
+        "body": "{school} is a new entry at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.8",
+        "body": "{school} joins the list at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.9",
+        "body": "{school} appears for the first time in this edition at No. {rank} in this week's {pollName} Top 25."
+      },
+      {
+        "id": "beat.poll_entry.eventcopy.10",
+        "body": "{school} makes the list at No. {rank} in this week's {pollName} Top 25."
+      }
+    ],
+    "beat.poll_same": [
+      {
+        "id": "beat.poll_same.eventcopy.1",
+        "body": "{school} holds at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.2",
+        "body": "{school} stays at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.3",
+        "body": "{school} remains at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.4",
+        "body": "{school} keeps its place at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.5",
+        "body": "{school} is still No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.6",
+        "body": "{school} continues at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.7",
+        "body": "{school} retains the spot at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.8",
+        "body": "{school} checks in again at No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.9",
+        "body": "{school} has not moved from No. {rank} in the {pollName}."
+      },
+      {
+        "id": "beat.poll_same.eventcopy.10",
+        "body": "{school} sits unchanged at No. {rank} in the {pollName}."
+      }
+    ],
+    "beat.recovery": [
+      {
+        "id": "beat.recovery.eventcopy.1",
+        "body": "{school}'s {playerName} is no longer listed as injured. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.2",
+        "body": "{school}'s {playerName} has come off the injury list. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.3",
+        "body": "{school}'s {playerName} is off the current injury list. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.4",
+        "body": "{school}'s {playerName} no longer has an injured designation. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.5",
+        "body": "{school}'s {playerName} has cleared the listed injury status. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.6",
+        "body": "{school}'s {playerName} has seen the injury designation removed. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.7",
+        "body": "{school}'s {playerName} is not listed as injured now. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.8",
+        "body": "{school}'s {playerName} has had the injured listing cleared. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.9",
+        "body": "{school}'s {playerName} has a cleared injury listing. Game participation remains a separate question."
+      },
+      {
+        "id": "beat.recovery.eventcopy.10",
+        "body": "{school}'s {playerName} is no longer carrying the injured designation. Game participation remains a separate question."
+      }
+    ],
+    "beat.watch": [
+      {
+        "id": "beat.watch.eventcopy.1",
+        "body": "{school}'s {playerName} is a name to watch against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.2",
+        "body": "{school}'s {playerName} belongs on the watch list against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.3",
+        "body": "{school}'s {playerName} gets a closer look against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.4",
+        "body": "{school}'s {playerName} is one to follow against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.5",
+        "body": "{school}'s {playerName} has a spot on the watch list against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.6",
+        "body": "{school}'s {playerName} is a player to keep in view against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.7",
+        "body": "{school}'s {playerName} is worth following against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.8",
+        "body": "{school}'s {playerName} is on the radar against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.9",
+        "body": "{school}'s {playerName} will be a name to track against {opponent}.{watchDetail}"
+      },
+      {
+        "id": "beat.watch.eventcopy.10",
+        "body": "{school}'s {playerName} is part of the players-to-watch discussion against {opponent}.{watchDetail}"
+      }
+    ],
+    "beat.cfp": [
+      {
+        "id": "beat.cfp.eventcopy.1",
+        "body": "{school} sits at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.2",
+        "body": "{school} checks in at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.3",
+        "body": "{school} is ranked No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.4",
+        "body": "{school} stands at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.5",
+        "body": "{school} holds No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.6",
+        "body": "{school} occupies No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.7",
+        "body": "{school} is listed at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.8",
+        "body": "{school} has the spot at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.9",
+        "body": "{school} appears at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      },
+      {
+        "id": "beat.cfp.eventcopy.10",
+        "body": "{school} finds itself at No. {rank} in the CFP rankings. That is a ranking, not a confirmed berth."
+      }
+    ],
+    "beat.heisman": [
+      {
+        "id": "beat.heisman.eventcopy.1",
+        "body": "{school}'s {playerName} {rankChange} in the Heisman race."
+      },
+      {
+        "id": "beat.heisman.eventcopy.2",
+        "body": "Heisman watch: {school}'s {playerName} {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.3",
+        "body": "{playerName} of {school} {rankChange} on the Heisman watch."
+      },
+      {
+        "id": "beat.heisman.eventcopy.4",
+        "body": "The current Heisman list has {school}'s {playerName}: he {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.5",
+        "body": "{school} Heisman update: {playerName} {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.6",
+        "body": "In the Heisman picture, {school}'s {playerName} {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.7",
+        "body": "The Heisman ranking for {school}'s {playerName}: he {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.8",
+        "body": "On this week's Heisman watch, {playerName} of {school} {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.9",
+        "body": "{school}'s {playerName} remains in the Heisman discussion: he {rankChange}."
+      },
+      {
+        "id": "beat.heisman.eventcopy.10",
+        "body": "A Heisman-watch check on {playerName} at {school}: he {rankChange}."
+      }
+    ],
+    "playoff.first_rank": [
+      {
+        "id": "playoff.first_rank.eventcopy.1",
+        "body": "The first CFP rankings place {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.2",
+        "body": "The first CFP rankings have {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.3",
+        "body": "The first CFP rankings list {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.4",
+        "body": "The first CFP rankings put {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.5",
+        "body": "The first CFP rankings rank {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.6",
+        "body": "The first CFP rankings show {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.7",
+        "body": "The first CFP rankings introduce {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.8",
+        "body": "The first CFP rankings position {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.9",
+        "body": "The first CFP rankings feature {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.first_rank.eventcopy.10",
+        "body": "The first CFP rankings bring in {school} at No. {rank}."
+      }
+    ],
+    "playoff.rank": [
+      {
+        "id": "playoff.rank.eventcopy.1",
+        "body": "CFP No. {rank}: {school}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.2",
+        "body": "{school} is No. {rank} in the latest CFP rankings."
+      },
+      {
+        "id": "playoff.rank.eventcopy.3",
+        "body": "The latest playoff rankings put {school} No. {rank}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.4",
+        "body": "CFP update: No. {rank} belongs to {school}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.5",
+        "body": "{school} checks in at No. {rank} on the CFP list."
+      },
+      {
+        "id": "playoff.rank.eventcopy.6",
+        "body": "No. {rank} in this edition of the CFP rankings: {school}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.7",
+        "body": "The new CFP list has {school} at No. {rank}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.8",
+        "body": "Playoff rankings check: {school}, No. {rank}."
+      },
+      {
+        "id": "playoff.rank.eventcopy.9",
+        "body": "{school} occupies the No. {rank} spot in the CFP rankings."
+      },
+      {
+        "id": "playoff.rank.eventcopy.10",
+        "body": "This week's CFP ranking for {school}: No. {rank}."
+      }
+    ],
+    "playoff.rank_move": [
+      {
+        "id": "playoff.rank_move.eventcopy.1",
+        "body": "{school}: No. {previousRank} to No. {rank} in the CFP rankings."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.2",
+        "body": "{school} moves {movement} to CFP No. {rank}, from No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.3",
+        "body": "CFP update: {school} is now No. {rank}. Previous ranking: No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.4",
+        "body": "The CFP ranking changes for {school}: No. {rank}, after No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.5",
+        "body": "A move {movement} for {school}. No. {previousRank} becomes No. {rank} in the CFP rankings."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.6",
+        "body": "{school} checks in at CFP No. {rank}; the previous list had it No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.7",
+        "body": "Updated playoff rankings: {school}, No. {rank}. That is {movement} from No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.8",
+        "body": "The new CFP list has {school} No. {rank}, previously No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.9",
+        "body": "CFP No. {rank} for {school}. Last edition: No. {previousRank}."
+      },
+      {
+        "id": "playoff.rank_move.eventcopy.10",
+        "body": "{school} moves from CFP No. {previousRank} to No. {rank}. Direction: {movement}."
+      }
+    ],
+    "playoff.preview": [
+      {
+        "id": "playoff.preview.eventcopy.1",
+        "body": "College Football Playoff: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.2",
+        "body": "The next playoff matchup is {away} vs. {home}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.3",
+        "body": "The CFP stage is set for {away} and {home}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.4",
+        "body": "{home} faces {away} in the College Football Playoff."
+      },
+      {
+        "id": "playoff.preview.eventcopy.5",
+        "body": "In the playoff: {home} vs. {away}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.6",
+        "body": "{away} and {home} meet on the playoff stage."
+      },
+      {
+        "id": "playoff.preview.eventcopy.7",
+        "body": "Playoff matchup confirmed: {home} and {away}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.8",
+        "body": "{away} vs. {home}. A place in the next playoff round is on the line."
+      },
+      {
+        "id": "playoff.preview.eventcopy.9",
+        "body": "The College Football Playoff brings together {away} and {home}."
+      },
+      {
+        "id": "playoff.preview.eventcopy.10",
+        "body": "Next on the playoff schedule: {away} vs. {home}."
+      }
+    ],
+    "playoff.title_preview": [
+      {
+        "id": "playoff.title_preview.eventcopy.1",
+        "body": "For the national championship, the matchup is set: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.2",
+        "body": "For the national championship, the last pairing is confirmed: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.3",
+        "body": "For the national championship, the stage is set: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.4",
+        "body": "For the national championship, the finalists are ready: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.5",
+        "body": "For the national championship, the final game is on the board: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.6",
+        "body": "For the national championship, the last two teams meet: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.7",
+        "body": "For the national championship, the title matchup is confirmed: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.8",
+        "body": "For the national championship, the season comes down to this: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.9",
+        "body": "For the national championship, the final pairing is in place: {away} vs. {home}."
+      },
+      {
+        "id": "playoff.title_preview.eventcopy.10",
+        "body": "For the national championship, one game remains: {away} vs. {home}."
+      }
+    ],
+    "playoff.result": [
+      {
+        "id": "playoff.result.eventcopy.1",
+        "body": "{school} beats {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.2",
+        "body": "{school} defeats {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.3",
+        "body": "{school} gets past {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.4",
+        "body": "{school} wins against {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.5",
+        "body": "{school} prevails over {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.6",
+        "body": "{school} takes down {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.7",
+        "body": "{school} comes out ahead of {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.8",
+        "body": "{school} gets the better of {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.9",
+        "body": "{school} earns a win over {opponent}, {score}, and advances in the College Football Playoff."
+      },
+      {
+        "id": "playoff.result.eventcopy.10",
+        "body": "{school} comes away with a win over {opponent}, {score}, and advances in the College Football Playoff."
+      }
+    ],
+    "playoff.champion": [
+      {
+        "id": "playoff.champion.eventcopy.1",
+        "body": "NATIONAL CHAMPIONS: {school} beats {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.2",
+        "body": "NATIONAL CHAMPIONS: {school} defeats {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.3",
+        "body": "NATIONAL CHAMPIONS: {school} gets past {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.4",
+        "body": "NATIONAL CHAMPIONS: {school} wins against {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.5",
+        "body": "NATIONAL CHAMPIONS: {school} prevails over {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.6",
+        "body": "NATIONAL CHAMPIONS: {school} takes down {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.7",
+        "body": "NATIONAL CHAMPIONS: {school} comes out ahead of {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.8",
+        "body": "NATIONAL CHAMPIONS: {school} gets the better of {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.9",
+        "body": "NATIONAL CHAMPIONS: {school} earns a win over {opponent}, {score}, in the title game."
+      },
+      {
+        "id": "playoff.champion.eventcopy.10",
+        "body": "NATIONAL CHAMPIONS: {school} comes away with a win over {opponent}, {score}, in the title game."
+      }
+    ],
+    "playoff.result_analysis": [
+      {
+        "id": "playoff.result_analysis.eventcopy.1",
+        "body": "{school} moves on after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.2",
+        "body": "{school} advances after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.3",
+        "body": "{school} earns another game after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.4",
+        "body": "{school} keeps its title run alive after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.5",
+        "body": "{school} takes the next step after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.6",
+        "body": "{school} extends its postseason after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.7",
+        "body": "{school} stays in the championship chase after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.8",
+        "body": "{school} continues its playoff run after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.9",
+        "body": "{school} secures a place in the next round after a {score} playoff win over {opponent}."
+      },
+      {
+        "id": "playoff.result_analysis.eventcopy.10",
+        "body": "{school} remains in the hunt after a {score} playoff win over {opponent}."
+      }
+    ],
+    "playoff.champion_analysis": [
+      {
+        "id": "playoff.champion_analysis.eventcopy.1",
+        "body": "{school} wins the national championship with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.2",
+        "body": "{school} finishes as national champion with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.3",
+        "body": "{school} claims the national title with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.4",
+        "body": "{school} ends the season on top with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.5",
+        "body": "{school} takes the national title with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.6",
+        "body": "{school} closes a championship season with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.7",
+        "body": "{school} is crowned national champion with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.8",
+        "body": "{school} earns the national championship with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.9",
+        "body": "{school} completes its national-title run with a {score} win over {opponent} in the final."
+      },
+      {
+        "id": "playoff.champion_analysis.eventcopy.10",
+        "body": "{school} finishes the job for a national title with a {score} win over {opponent} in the final."
+      }
+    ],
+    "postseason.heisman": [
+      {
+        "id": "postseason.heisman.eventcopy.1",
+        "body": "{school}'s {playerName} wins the Heisman Trophy. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.2",
+        "body": "{school}'s {playerName} is the Heisman Trophy winner. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.3",
+        "body": "{school}'s {playerName} takes home the Heisman. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.4",
+        "body": "{school}'s {playerName} receives the Heisman Trophy. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.5",
+        "body": "{school}'s {playerName} claims the Heisman. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.6",
+        "body": "{school}'s {playerName} has won the Heisman. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.7",
+        "body": "{school}'s {playerName} is this season's Heisman winner. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.8",
+        "body": "{school}'s {playerName} earns the Heisman Trophy. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.9",
+        "body": "{school}'s {playerName} finishes the Heisman race as the winner. The Heisman decision is final."
+      },
+      {
+        "id": "postseason.heisman.eventcopy.10",
+        "body": "{school}'s {playerName} is awarded the Heisman Trophy. The Heisman decision is final."
+      }
+    ],
+    "postseason.award": [
+      {
+        "id": "postseason.award.eventcopy.1",
+        "body": "{school}'s {playerName} wins the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.2",
+        "body": "{school}'s {playerName} receives the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.3",
+        "body": "{school}'s {playerName} takes home the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.4",
+        "body": "{school}'s {playerName} claims the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.5",
+        "body": "{school}'s {playerName} earns the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.6",
+        "body": "{school}'s {playerName} has won the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.7",
+        "body": "{school}'s {playerName} is awarded the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.8",
+        "body": "{school}'s {playerName} is the winner of the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.9",
+        "body": "{school}'s {playerName} has been awarded the {award}. The annual award is final."
+      },
+      {
+        "id": "postseason.award.eventcopy.10",
+        "body": "{school}'s {playerName} is honored with the {award}. The annual award is final."
+      }
+    ],
+    "postseason.all-american": [
+      {
+        "id": "postseason.all-american.eventcopy.1",
+        "body": "{school}'s {playerName} is named a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.2",
+        "body": "{school}'s {playerName} has been named a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.3",
+        "body": "{school}'s {playerName} is selected as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.4",
+        "body": "{school}'s {playerName} earns selection as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.5",
+        "body": "{school}'s {playerName} is officially a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.6",
+        "body": "{school}'s {playerName} is recognized as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.7",
+        "body": "{school}'s {playerName} finishes the season as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.8",
+        "body": "{school}'s {playerName} has been selected as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.9",
+        "body": "{school}'s {playerName} receives recognition as a {honor}."
+      },
+      {
+        "id": "postseason.all-american.eventcopy.10",
+        "body": "{school}'s {playerName} is honored as a {honor}."
+      }
+    ],
+    "postseason.award-team": [
+      {
+        "id": "postseason.award-team.eventcopy.1",
+        "body": "{playerName} wins the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.2",
+        "body": "{playerName} receives the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.3",
+        "body": "{playerName} brings home the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.4",
+        "body": "{playerName} claims the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.5",
+        "body": "{playerName} earns the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.6",
+        "body": "{playerName} has won the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.7",
+        "body": "{playerName} is awarded the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.8",
+        "body": "{playerName} is the winner of the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.9",
+        "body": "{playerName} takes home the {award}. {nickname} proud. {hashtag}"
+      },
+      {
+        "id": "postseason.award-team.eventcopy.10",
+        "body": "{playerName} has earned the {award}. {nickname} proud. {hashtag}"
+      }
+    ],
+    "postseason.coach-fired": [
+      {
+        "id": "postseason.coach-fired.eventcopy.1",
+        "body": "{school} has dismissed {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.2",
+        "body": "{school} has moved on from {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.3",
+        "body": "{school} has parted ways with {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.4",
+        "body": "{school} has removed {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.5",
+        "body": "{school} is moving on from {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.6",
+        "body": "{school} ends the tenure of {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.7",
+        "body": "{school} has let go of {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.8",
+        "body": "{school} parts company with {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.9",
+        "body": "{school} has ended the tenure of {coachName} as {role}. The search for a replacement is next."
+      },
+      {
+        "id": "postseason.coach-fired.eventcopy.10",
+        "body": "{school} dismisses {coachName} as {role}. The search for a replacement is next."
+      }
+    ],
+    "postseason.coach-hired": [
+      {
+        "id": "postseason.coach-hired.eventcopy.1",
+        "body": "{school} has hired {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.2",
+        "body": "{school} has appointed {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.3",
+        "body": "{school} has named {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.4",
+        "body": "{school} has selected {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.5",
+        "body": "{school} is bringing in {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.6",
+        "body": "{school} turns to {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.7",
+        "body": "{school} appoints {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.8",
+        "body": "{school} names {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.9",
+        "body": "{school} hires {coachName} as its {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-hired.eventcopy.10",
+        "body": "{school} chooses {coachName} as its {role}.{contractTerm}"
+      }
+    ],
+    "postseason.coach-retained": [
+      {
+        "id": "postseason.coach-retained.eventcopy.1",
+        "body": "{school} retains {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.2",
+        "body": "{school} keeps {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.3",
+        "body": "{school} is keeping {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.4",
+        "body": "{school} will keep {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.5",
+        "body": "{school} is retaining {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.6",
+        "body": "{school} continues with {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.7",
+        "body": "{school} sticks with {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.8",
+        "body": "{school} will continue with {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.9",
+        "body": "{school} has retained {coachName} as {role}.{contractTerm}"
+      },
+      {
+        "id": "postseason.coach-retained.eventcopy.10",
+        "body": "{school} has kept {coachName} as {role}.{contractTerm}"
+      }
+    ],
+    "postseason.coach-retired": [
+      {
+        "id": "postseason.coach-retired.eventcopy.1",
+        "body": "{school}'s {role} {coachName} is retiring."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.2",
+        "body": "{school}'s {role} {coachName} has a retirement transition ahead."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.3",
+        "body": "{school}'s {role} {coachName} is moving into retirement."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.4",
+        "body": "{school}'s {role} {coachName} is leaving the role for retirement."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.5",
+        "body": "{school}'s {role} {coachName} will retire from the role."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.6",
+        "body": "{school}'s {role} {coachName} is stepping away into retirement."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.7",
+        "body": "{school}'s {role} {coachName} is set to retire."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.8",
+        "body": "{school}'s {role} {coachName} is heading into retirement."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.9",
+        "body": "{school}'s {role} {coachName} will leave the role through retirement."
+      },
+      {
+        "id": "postseason.coach-retired.eventcopy.10",
+        "body": "{school}'s {role} {coachName} has retirement as the next chapter."
+      }
+    ],
+    "postseason.coach-pro": [
+      {
+        "id": "postseason.coach-pro.eventcopy.1",
+        "body": "{school}'s {role} {coachName} is leaving for the pro game. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.2",
+        "body": "{school}'s {role} {coachName} is moving to pro football. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.3",
+        "body": "{school}'s {role} {coachName} is taking the next step at the pro level. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.4",
+        "body": "{school}'s {role} {coachName} is set to leave for professional football. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.5",
+        "body": "{school}'s {role} {coachName} is heading to the pro level. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.6",
+        "body": "{school}'s {role} {coachName} will move on to the pro game. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.7",
+        "body": "{school}'s {role} {coachName} is moving on to professional football. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.8",
+        "body": "{school}'s {role} {coachName} is leaving the college staff for the pro level. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.9",
+        "body": "{school}'s {role} {coachName} has a pro-football move ahead. The staff has an opening to address."
+      },
+      {
+        "id": "postseason.coach-pro.eventcopy.10",
+        "body": "{school}'s {role} {coachName} is departing for the pro game. The staff has an opening to address."
+      }
+    ],
+    "postseason.coach-open": [
+      {
+        "id": "postseason.coach-open.eventcopy.1",
+        "body": "{school} has an opening at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.2",
+        "body": "{school} has a vacancy at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.3",
+        "body": "{school} has a job to fill at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.4",
+        "body": "{school} needs an appointment at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.5",
+        "body": "{school} has an unfilled position at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.6",
+        "body": "{school} faces a staff decision at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.7",
+        "body": "{school} has a position available at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.8",
+        "body": "{school} is seeking a replacement at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.9",
+        "body": "{school} still has a vacancy at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      },
+      {
+        "id": "postseason.coach-open.eventcopy.10",
+        "body": "{school} has an open job at {role} after the contract situation involving {coachName}. No replacement is confirmed."
+      }
+    ],
+    "postseason.coach-contract": [
+      {
+        "id": "postseason.coach-contract.eventcopy.1",
+        "body": "The {role} contract situation involving {coachName} at {school} remains open. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.2",
+        "body": "The {role} contract situation involving {coachName} at {school} is unresolved. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.3",
+        "body": "The {role} contract situation involving {coachName} at {school} is not settled. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.4",
+        "body": "The {role} contract situation involving {coachName} at {school} still needs a decision. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.5",
+        "body": "The {role} contract situation involving {coachName} at {school} has not been settled. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.6",
+        "body": "The {role} contract situation involving {coachName} at {school} is still pending. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.7",
+        "body": "The {role} contract situation involving {coachName} at {school} remains a decision to watch. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.8",
+        "body": "The {role} contract situation involving {coachName} at {school} has yet to be resolved. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.9",
+        "body": "The {role} contract situation involving {coachName} at {school} is an open question. There is no confirmed new appointment."
+      },
+      {
+        "id": "postseason.coach-contract.eventcopy.10",
+        "body": "The {role} contract situation involving {coachName} at {school} is awaiting a resolution. There is no confirmed new appointment."
+      }
+    ],
+    "postseason.coach-pending": [
+      {
+        "id": "postseason.coach-pending.eventcopy.1",
+        "body": "A {role} transition involving {coachName} at {school} is pending. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.2",
+        "body": "A {role} transition involving {coachName} at {school} is in progress. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.3",
+        "body": "A {role} transition involving {coachName} at {school} has not been completed. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.4",
+        "body": "A {role} transition involving {coachName} at {school} is still developing. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.5",
+        "body": "A {role} transition involving {coachName} at {school} remains pending. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.6",
+        "body": "A {role} transition involving {coachName} at {school} is not finalized. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.7",
+        "body": "A {role} transition involving {coachName} at {school} has yet to be finalized. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.8",
+        "body": "A {role} transition involving {coachName} at {school} is in the pending stage. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.9",
+        "body": "A {role} transition involving {coachName} at {school} still needs to be completed. The replacement is not confirmed."
+      },
+      {
+        "id": "postseason.coach-pending.eventcopy.10",
+        "body": "A {role} transition involving {coachName} at {school} is moving toward a change. The replacement is not confirmed."
+      }
+    ],
+    "postseason.coach-departed": [
+      {
+        "id": "postseason.coach-departed.eventcopy.1",
+        "body": "{coachName}'s job move creates an opening at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.2",
+        "body": "{coachName}'s job move leaves a vacancy at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.3",
+        "body": "{coachName}'s job move opens a staff role at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.4",
+        "body": "{coachName}'s job move creates a staff vacancy at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.5",
+        "body": "{coachName}'s job move leaves a role to fill at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.6",
+        "body": "{coachName}'s job move means a transition at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.7",
+        "body": "{coachName}'s job move brings a staff change at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.8",
+        "body": "{coachName}'s job move leaves an opening on the staff at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.9",
+        "body": "{coachName}'s job move creates a replacement decision at {school}. The staff must fill the {role} position."
+      },
+      {
+        "id": "postseason.coach-departed.eventcopy.10",
+        "body": "{coachName}'s job move sets up a staff search at {school}. The staff must fill the {role} position."
+      }
+    ],
+    "history.team-counter": [
+      {
+        "id": "history.team-counter.eventcopy.1",
+        "body": "{school} records its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.2",
+        "body": "{school} celebrates its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.3",
+        "body": "{school} has recorded its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.4",
+        "body": "{school} reaches its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.5",
+        "body": "{school} marks its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.6",
+        "body": "{school} adds its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.7",
+        "body": "{school} registers its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.8",
+        "body": "{school} has reached its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.9",
+        "body": "{school} notches its {ordinal} {achievement} in program history."
+      },
+      {
+        "id": "history.team-counter.eventcopy.10",
+        "body": "{school} has added its {ordinal} {achievement} in program history."
+      }
+    ],
+    "history.team-wins": [
+      {
+        "id": "history.team-wins.eventcopy.1",
+        "body": "{school} reaches {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.2",
+        "body": "{school} has reached {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.3",
+        "body": "{school} hits the mark of {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.4",
+        "body": "{school} gets to {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.5",
+        "body": "{school} has made it to {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.6",
+        "body": "{school} crosses the threshold of {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.7",
+        "body": "{school} records at least {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.8",
+        "body": "{school} has recorded at least {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.9",
+        "body": "{school} stands at or beyond {threshold} all-time wins. The current total is {total}."
+      },
+      {
+        "id": "history.team-wins.eventcopy.10",
+        "body": "{school} is at or beyond {threshold} all-time wins. The current total is {total}."
+      }
+    ],
+    "history.player-career": [
+      {
+        "id": "history.player-career.eventcopy.1",
+        "body": "{school}'s {playerName} reaches {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.2",
+        "body": "{school}'s {playerName} has reached {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.3",
+        "body": "{school}'s {playerName} gets to {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.4",
+        "body": "{school}'s {playerName} has made it to {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.5",
+        "body": "{school}'s {playerName} hits the mark of {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.6",
+        "body": "{school}'s {playerName} records at least {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.7",
+        "body": "{school}'s {playerName} has recorded at least {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.8",
+        "body": "{school}'s {playerName} crosses the threshold of {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.9",
+        "body": "{school}'s {playerName} is at or beyond {threshold} career {metric}. The total is now {total}."
+      },
+      {
+        "id": "history.player-career.eventcopy.10",
+        "body": "{school}'s {playerName} stands at or beyond {threshold} career {metric}. The total is now {total}."
+      }
+    ],
+    "history.coach-wins": [
+      {
+        "id": "history.coach-wins.eventcopy.1",
+        "body": "{school} coach {coachName} reaches {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.2",
+        "body": "{school} coach {coachName} has reached {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.3",
+        "body": "{school} coach {coachName} gets to {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.4",
+        "body": "{school} coach {coachName} has made it to {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.5",
+        "body": "{school} coach {coachName} hits the mark of {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.6",
+        "body": "{school} coach {coachName} records at least {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.7",
+        "body": "{school} coach {coachName} has recorded at least {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.8",
+        "body": "{school} coach {coachName} crosses the threshold of {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.9",
+        "body": "{school} coach {coachName} is at or beyond {threshold} career wins. The running total is {total}."
+      },
+      {
+        "id": "history.coach-wins.eventcopy.10",
+        "body": "{school} coach {coachName} stands at or beyond {threshold} career wins. The running total is {total}."
+      }
+    ],
+    "history.coach-counter": [
+      {
+        "id": "history.coach-counter.eventcopy.1",
+        "body": "{school} coach {coachName} records his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.2",
+        "body": "{school} coach {coachName} celebrates his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.3",
+        "body": "{school} coach {coachName} has recorded his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.4",
+        "body": "{school} coach {coachName} reaches his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.5",
+        "body": "{school} coach {coachName} marks his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.6",
+        "body": "{school} coach {coachName} adds his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.7",
+        "body": "{school} coach {coachName} registers his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.8",
+        "body": "{school} coach {coachName} has reached his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.9",
+        "body": "{school} coach {coachName} notches his {ordinal} career {achievement}."
+      },
+      {
+        "id": "history.coach-counter.eventcopy.10",
+        "body": "{school} coach {coachName} has added his {ordinal} career {achievement}."
+      }
+    ],
+    "transactions.signed": [
+      {
+        "id": "transactions.signed.eventcopy.1",
+        "body": "{school} has signed {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.2",
+        "body": "{school} signs {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.3",
+        "body": "{school} announces the signing of {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.4",
+        "body": "{school} adds the signature of {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.5",
+        "body": "{school} secures a signature from {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.6",
+        "body": "{school} has a signed commitment from {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.7",
+        "body": "{school} gets a signature from {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.8",
+        "body": "{school} has completed the signing of {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.9",
+        "body": "{school} makes it official with {starDetail}{playerName}.{nilDetail}"
+      },
+      {
+        "id": "transactions.signed.eventcopy.10",
+        "body": "{school} lands a signature from {starDetail}{playerName}.{nilDetail}"
+      }
+    ],
+    "transactions.coach-deal": [
+      {
+        "id": "transactions.coach-deal.eventcopy.1",
+        "body": "{school} retains {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.2",
+        "body": "{school} keeps {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.3",
+        "body": "{school} has retained {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.4",
+        "body": "{school} has kept {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.5",
+        "body": "{school} is retaining {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.6",
+        "body": "{school} is keeping {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.7",
+        "body": "{school} will retain {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.8",
+        "body": "{school} will keep {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.9",
+        "body": "{school} continues with {role} {coachName} on a new contract.{term}"
+      },
+      {
+        "id": "transactions.coach-deal.eventcopy.10",
+        "body": "{school} moves forward with {role} {coachName} on a new contract.{term}"
+      }
+    ],
+    "transactions.nil-change": [
+      {
+        "id": "transactions.nil-change.eventcopy.1",
+        "body": "{school}: {playerName}'s NIL deal is now {current}, {change} from {previous}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.2",
+        "body": "{playerName} at {school} has a {current} NIL deal, {change} by {difference}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.3",
+        "body": "NIL update for {school}'s {playerName}: {previous} to {current}, a {difference} change."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.4",
+        "body": "A {difference} NIL adjustment for {school}'s {playerName}. The deal has {change} from {previous} to {current}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.5",
+        "body": "{school}'s {playerName} now has {current} in NIL compensation. Previously: {previous}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.6",
+        "body": "The NIL figure for {playerName} at {school} has {change} to {current}. The prior deal was {previous}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.7",
+        "body": "{previous} becomes {current} for {school}'s {playerName}. NIL compensation has {change} by {difference}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.8",
+        "body": "A deal update at {school}: {playerName}, {current} in NIL compensation, {change} from {previous}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.9",
+        "body": "New NIL figure for {school}'s {playerName}: {current}. The adjustment from {previous} is {difference}."
+      },
+      {
+        "id": "transactions.nil-change.eventcopy.10",
+        "body": "{playerName}'s {school} NIL deal moves from {previous} to {current}. That is a {difference} change."
+      }
+    ],
+    "transactions.nil-review": [
+      {
+        "id": "transactions.nil-review.eventcopy.1",
+        "body": "Following last week's review, {school}'s {playerName} has a {current} NIL deal, {change} from {previous}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.2",
+        "body": "Last week's NIL adjustment at {school}: {playerName}, {previous} to {current}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.3",
+        "body": "A follow-up from the season review: {playerName}'s {school} NIL deal has {change} to {current}. It was {previous}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.4",
+        "body": "{school} NIL follow-up: {playerName} is at {current} after last week's adjustment from {previous}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.5",
+        "body": "From last week's roster review: {school}'s {playerName} had a {difference} NIL change. The deal is now {current}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.6",
+        "body": "The season-review adjustment for {school}'s {playerName}: {current}, {change} by {difference}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.7",
+        "body": "{playerName} at {school} has {current} in NIL compensation following last week's review. Prior figure: {previous}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.8",
+        "body": "One NIL update from the review week: {playerName} of {school}, {change} from {previous} to {current}."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.9",
+        "body": "Last week's review changed {playerName}'s NIL deal at {school}: {previous} to {current}, a {difference} adjustment."
+      },
+      {
+        "id": "transactions.nil-review.eventcopy.10",
+        "body": "Review-week NIL news at {school}: {playerName}'s deal is {current}. It {change} by {difference}."
+      }
+    ],
+    "transactions.position-change": [
+      {
+        "id": "transactions.position-change.eventcopy.1",
+        "body": "{school} is moving {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.2",
+        "body": "{school} has moved {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.3",
+        "body": "{school} switches {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.4",
+        "body": "{school} is switching {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.5",
+        "body": "{school} shifts {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.6",
+        "body": "{school} has shifted {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.7",
+        "body": "{school} is shifting {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.8",
+        "body": "{school} moves {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.9",
+        "body": "{school} makes a switch for {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      },
+      {
+        "id": "transactions.position-change.eventcopy.10",
+        "body": "{school} makes a position change for {playerName} from {oldPosition} to {newPosition} during offseason position changes."
+      }
+    ],
+    "carry.training": [
+      {
+        "id": "carry.training.eventcopy.1",
+        "body": "{school}'s {position} {playerName} improved in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.2",
+        "body": "{school}'s {position} {playerName} made progress in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.3",
+        "body": "{school}'s {position} {playerName} developed in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.4",
+        "body": "{school}'s {position} {playerName} showed improvement in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.5",
+        "body": "{school}'s {position} {playerName} took a step forward in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.6",
+        "body": "{school}'s {position} {playerName} has improved in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.7",
+        "body": "{school}'s {position} {playerName} has made progress in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.8",
+        "body": "{school}'s {position} {playerName} has developed in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.9",
+        "body": "{school}'s {position} {playerName} showed development in {area} during {period}."
+      },
+      {
+        "id": "carry.training.eventcopy.10",
+        "body": "{school}'s {position} {playerName} made gains in {area} during {period}."
+      }
+    ],
+    "carry.move": [
+      {
+        "id": "carry.move.eventcopy.1",
+        "body": "{school} moves from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.2",
+        "body": "{school} has moved from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.3",
+        "body": "{school} switches from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.4",
+        "body": "{school} has switched from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.5",
+        "body": "{school} is moving from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.6",
+        "body": "{school} makes the move from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.7",
+        "body": "{school} changes leagues from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.8",
+        "body": "{school} is switching from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.9",
+        "body": "{school} transitions from {oldConference} to {newConference} for the new season."
+      },
+      {
+        "id": "carry.move.eventcopy.10",
+        "body": "{school} makes a conference move from {oldConference} to {newConference} for the new season."
+      }
+    ],
+    "carry.history": [
+      {
+        "id": "carry.history.eventcopy.1",
+        "body": "{school}: {oldConference} last year, {newConference} this season."
+      },
+      {
+        "id": "carry.history.eventcopy.2",
+        "body": "{school} was in {oldConference} last season. Its current league is {newConference}."
+      },
+      {
+        "id": "carry.history.eventcopy.3",
+        "body": "A different league for {school}: {oldConference} previously, {newConference} now."
+      },
+      {
+        "id": "carry.history.eventcopy.4",
+        "body": "Conference context at {school}: last year's {oldConference} membership gives way to {newConference}."
+      },
+      {
+        "id": "carry.history.eventcopy.5",
+        "body": "{school} enters this season in {newConference} after playing in {oldConference} last year."
+      },
+      {
+        "id": "carry.history.eventcopy.6",
+        "body": "The league column changes for {school}. It was {oldConference}; it is now {newConference}."
+      },
+      {
+        "id": "carry.history.eventcopy.7",
+        "body": "For {school}, the conference backdrop is now {newConference}. Last season it was {oldConference}."
+      },
+      {
+        "id": "carry.history.eventcopy.8",
+        "body": "New conference context: {school} played in {oldConference} last year and is in {newConference} this year."
+      },
+      {
+        "id": "carry.history.eventcopy.9",
+        "body": "{school}'s current {newConference} membership differs from last year's {oldConference} listing."
+      },
+      {
+        "id": "carry.history.eventcopy.10",
+        "body": "Last season, {oldConference}. This season, {newConference}. That is {school}'s league change."
+      }
+    ],
+    "carry.team-move": [
+      {
+        "id": "carry.team-move.eventcopy.1",
+        "body": "New conference. Same {nickname}. Hello, {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.2",
+        "body": "New conference. Same {nickname}. Our new home is {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.3",
+        "body": "New conference. Same {nickname}. Ready for life in {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.4",
+        "body": "New conference. Same {nickname}. Our next chapter is in {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.5",
+        "body": "New conference. Same {nickname}. We are now part of {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.6",
+        "body": "New conference. Same {nickname}. Looking ahead to {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.7",
+        "body": "New conference. Same {nickname}. We are headed into {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.8",
+        "body": "New conference. Same {nickname}. Here we come, {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.9",
+        "body": "New conference. Same {nickname}. See you in {newConference}. {hashtag}"
+      },
+      {
+        "id": "carry.team-move.eventcopy.10",
+        "body": "New conference. Same {nickname}. Looking forward to {newConference}. {hashtag}"
+      }
+    ],
+    "carry.rename": [
+      {
+        "id": "carry.rename.eventcopy.1",
+        "body": "Conference name update: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.2",
+        "body": "New league name: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.3",
+        "body": "A name change on the conference map: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.4",
+        "body": "The league has a new name: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.5",
+        "body": "An updated conference name: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.6",
+        "body": "Conference rebranding: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.7",
+        "body": "On the conference map: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.8",
+        "body": "A new name for the league: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.9",
+        "body": "The updated league name is official: {oldConference} is now {newConference}."
+      },
+      {
+        "id": "carry.rename.eventcopy.10",
+        "body": "A conference naming change: {oldConference} is now {newConference}."
+      }
+    ],
+    "carry.departure-destination": [
+      {
+        "id": "carry.departure-destination.eventcopy.1",
+        "body": "{position} {playerName} has left {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.2",
+        "body": "{position} {playerName} moves on from {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.3",
+        "body": "{position} {playerName} has moved on from {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.4",
+        "body": "{position} {playerName} departs {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.5",
+        "body": "{position} {playerName} has departed {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.6",
+        "body": "{position} {playerName} is moving on from {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.7",
+        "body": "{position} {playerName} leaves {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.8",
+        "body": "{position} {playerName} is departing {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.9",
+        "body": "{position} {playerName} has transferred from {school} and is now on {destination}'s roster following {period}."
+      },
+      {
+        "id": "carry.departure-destination.eventcopy.10",
+        "body": "{position} {playerName} moves away from {school} and is now on {destination}'s roster following {period}."
+      }
+    ],
+    "carry.departure-portal": [
+      {
+        "id": "carry.departure-portal.eventcopy.1",
+        "body": "Following {period}, {position} {playerName} is in the transfer portal after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.2",
+        "body": "Following {period}, {position} {playerName} is listed in the portal after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.3",
+        "body": "Following {period}, {position} {playerName} appears among portal entrants after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.4",
+        "body": "Following {period}, {position} {playerName} is among the transfer-portal entrants after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.5",
+        "body": "Following {period}, {position} {playerName} has a portal entry after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.6",
+        "body": "Following {period}, {position} {playerName} is on the portal list after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.7",
+        "body": "Following {period}, {position} {playerName} is part of the portal pool after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.8",
+        "body": "Following {period}, {position} {playerName} is listed as a portal entrant after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.9",
+        "body": "Following {period}, {position} {playerName} is in the pool of transfer recruits after leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure-portal.eventcopy.10",
+        "body": "Following {period}, {position} {playerName} has entered the transfer pool after leaving {school}. No destination is confirmed."
+      }
+    ],
+    "carry.departure": [
+      {
+        "id": "carry.departure.eventcopy.1",
+        "body": "After {period}, {position} {playerName} is no longer with {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.2",
+        "body": "After {period}, {position} {playerName} will not return to {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.3",
+        "body": "After {period}, {position} {playerName} has left {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.4",
+        "body": "After {period}, {position} {playerName} has moved on from {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.5",
+        "body": "After {period}, {position} {playerName} is moving on from {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.6",
+        "body": "After {period}, {position} {playerName} has departed {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.7",
+        "body": "After {period}, {position} {playerName} departs {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.8",
+        "body": "After {period}, {position} {playerName} is leaving {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.9",
+        "body": "After {period}, {position} {playerName} will move on from {school}. No destination is confirmed."
+      },
+      {
+        "id": "carry.departure.eventcopy.10",
+        "body": "After {period}, {position} {playerName} leaves {school}. No destination is confirmed."
+      }
+    ],
+    "postseason.bowl-invite": [
+      {
+        "id": "postseason.bowl-invite.eventcopy.1",
+        "body": "Our bowl matchup is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.2",
+        "body": "The bowl matchup is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.3",
+        "body": "The bowl matchup is confirmed: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.4",
+        "body": "The next stop is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.5",
+        "body": "Postseason plans are locked in: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.6",
+        "body": "The postseason pairing is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.7",
+        "body": "The destination is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.8",
+        "body": "The postseason stage is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.9",
+        "body": "Our next matchup is confirmed: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.bowl-invite.eventcopy.10",
+        "body": "The postseason schedule is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      }
+    ],
+    "postseason.playoff-invite": [
+      {
+        "id": "postseason.playoff-invite.eventcopy.1",
+        "body": "Our playoff matchup is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.2",
+        "body": "The playoff matchup is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.3",
+        "body": "The playoff matchup is confirmed: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.4",
+        "body": "The next stop is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.5",
+        "body": "Postseason plans are locked in: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.6",
+        "body": "The postseason pairing is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.7",
+        "body": "The destination is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.8",
+        "body": "The postseason stage is set: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.9",
+        "body": "Our next matchup is confirmed: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      },
+      {
+        "id": "postseason.playoff-invite.eventcopy.10",
+        "body": "The postseason schedule is official: {nickname} vs. {opponent} in {venue}. {hashtag}"
+      }
+    ],
+    "postseason.bye-team-opponent": [
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.1",
+        "body": "Quarterfinal matchup set: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.2",
+        "body": "Our quarterfinal opponent is confirmed: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.3",
+        "body": "The quarterfinal pairing is official: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.4",
+        "body": "The next playoff game is set: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.5",
+        "body": "Quarterfinal plans are locked in: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.6",
+        "body": "The bye is followed by this quarterfinal: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.7",
+        "body": "The quarterfinal stage is set: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.8",
+        "body": "Our next playoff opponent is known: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.9",
+        "body": "The quarterfinal matchup is official: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      },
+      {
+        "id": "postseason.bye-team-opponent.eventcopy.10",
+        "body": "Our quarterfinal game is confirmed: {nickname} vs. {opponent} in Week {quarterWeek}. {hashtag}"
+      }
+    ],
+    "postseason.honors-team": [
+      {
+        "id": "postseason.honors-team.eventcopy.1",
+        "body": "Postseason recognition: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.2",
+        "body": "Honors for our guys: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.3",
+        "body": "The selections are official: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.4",
+        "body": "Proud of this group: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.5",
+        "body": "Congratulations to our honorees: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.6",
+        "body": "Postseason honors roll: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.7",
+        "body": "Celebrating our selections: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.8",
+        "body": "Recognition for the squad: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.9",
+        "body": "Our postseason honorees: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      },
+      {
+        "id": "postseason.honors-team.eventcopy.10",
+        "body": "A proud moment for this group: {nationalCount} All-Americans and {conferenceCount} All-Conference honorees for the {nickname}. {hashtag}"
+      }
+    ],
+    "postseason.award-multiple": [
+      {
+        "id": "postseason.award-multiple.eventcopy.1",
+        "body": "{school}'s {playerName} collects {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.2",
+        "body": "{school}'s {playerName} has collected {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.3",
+        "body": "{school}'s {playerName} earns {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.4",
+        "body": "{school}'s {playerName} has earned {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.5",
+        "body": "{school}'s {playerName} receives {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.6",
+        "body": "{school}'s {playerName} has received {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.7",
+        "body": "{school}'s {playerName} takes home {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.8",
+        "body": "{school}'s {playerName} has taken home {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.9",
+        "body": "{school}'s {playerName} is recognized with {count} national defensive player honors this season."
+      },
+      {
+        "id": "postseason.award-multiple.eventcopy.10",
+        "body": "{school}'s {playerName} finishes with {count} national defensive player honors this season."
+      }
+    ],
+    "postseason.coach-offer": [
+      {
+        "id": "postseason.coach-offer.eventcopy.1",
+        "body": "{school} has an offer out to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.2",
+        "body": "{school} has made an offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.3",
+        "body": "{school} has extended an offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.4",
+        "body": "{school} has put a contract offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.5",
+        "body": "{school} has offered a contract to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.6",
+        "body": "{school} has a contract offer out to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.7",
+        "body": "{school} has sent an offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.8",
+        "body": "{school} has a pending offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.9",
+        "body": "{school} has presented an offer to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      },
+      {
+        "id": "postseason.coach-offer.eventcopy.10",
+        "body": "{school} has a job offer out to {coachName} for its {role} job.{contractTerm} Acceptance is pending."
+      }
+    ],
+    "postseason.coach-renewal-offer": [
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.1",
+        "body": "{school} has made a renewal offer to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.2",
+        "body": "{school} has extended a retention offer to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.3",
+        "body": "{school} has offered a new contract to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.4",
+        "body": "{school} has a new contract offer out to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.5",
+        "body": "{school} has put a renewal offer to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.6",
+        "body": "{school} has sent a retention offer to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.7",
+        "body": "{school} has presented a renewal offer to {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.8",
+        "body": "{school} has a pending renewal offer for {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.9",
+        "body": "{school} has a proposed new deal for {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      },
+      {
+        "id": "postseason.coach-renewal-offer.eventcopy.10",
+        "body": "{school} has a retention proposal for {role} {coachName}.{contractTerm} No acceptance is confirmed."
+      }
+    ],
+    "draft.pick": [
+      {
+        "id": "draft.pick.eventcopy.1",
+        "body": "Pick {draftPick}: the {nflTeam} select {position} {playerName}, {school}. Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.2",
+        "body": "Round {draftRound}, No. {draftPick} overall: {position} {playerName} ({school}) to the {nflTeam}."
+      },
+      {
+        "id": "draft.pick.eventcopy.3",
+        "body": "The {nflTeam} take {school}'s {position} {playerName} with pick {draftPick} in Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.4",
+        "body": "{school}'s {position} {playerName} is the {nflTeam}'s choice at No. {draftPick}. Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.5",
+        "body": "At pick {draftPick}, the {nflTeam} go with {position} {playerName} from {school}. Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.6",
+        "body": "Selection {draftPick}, Round {draftRound}: {nflTeam} \u2014 {position} {playerName}, {school}."
+      },
+      {
+        "id": "draft.pick.eventcopy.7",
+        "body": "{position} {playerName}, {school}, is headed to the {nflTeam}. Pick {draftPick}, Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.8",
+        "body": "The next name off the board: {position} {playerName} ({school}). {nflTeam}, No. {draftPick}, Round {draftRound}."
+      },
+      {
+        "id": "draft.pick.eventcopy.9",
+        "body": "No. {draftPick} belongs to {position} {playerName} of {school}. The {nflTeam} make the Round {draftRound} selection."
+      },
+      {
+        "id": "draft.pick.eventcopy.10",
+        "body": "The {nflTeam} add {position} {playerName} from {school} at No. {draftPick} overall in Round {draftRound}."
+      }
+    ],
+    "draft.top-ten": [
+      {
+        "id": "draft.top-ten.eventcopy.1",
+        "body": "TOP 10: Off the board goes {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.2",
+        "body": "TOP 10: The selection is {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.3",
+        "body": "TOP 10: A top-ten call for {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.4",
+        "body": "TOP 10: The name called is {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.5",
+        "body": "TOP 10: The choice is {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.6",
+        "body": "TOP 10: A first-round moment for {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.7",
+        "body": "TOP 10: A top-ten landing for {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.8",
+        "body": "TOP 10: A high first-round pick for {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.9",
+        "body": "TOP 10: The top-ten selection is {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      },
+      {
+        "id": "draft.top-ten.eventcopy.10",
+        "body": "TOP 10: The pick brings in {position} {playerName}, {school}. Pick {draftPick} to the {nflTeam}."
+      }
+    ],
+    "draft.irrelevant": [
+      {
+        "id": "draft.irrelevant.eventcopy.1",
+        "body": "MR. IRRELEVANT: The last name called is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.2",
+        "body": "MR. IRRELEVANT: The final pick is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.3",
+        "body": "MR. IRRELEVANT: The final selection is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.4",
+        "body": "MR. IRRELEVANT: The draft ends with {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.5",
+        "body": "MR. IRRELEVANT: The closing selection is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.6",
+        "body": "MR. IRRELEVANT: The last call goes to {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.7",
+        "body": "MR. IRRELEVANT: The board closes with {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.8",
+        "body": "MR. IRRELEVANT: The last selection is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.9",
+        "body": "MR. IRRELEVANT: The final name off the board is {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      },
+      {
+        "id": "draft.irrelevant.eventcopy.10",
+        "body": "MR. IRRELEVANT: The last pick goes to {position} {playerName} from {school}. The {nflTeam} make pick {draftPick}, the final selection."
+      }
+    ]
+  }
+}

@@ -12,7 +12,7 @@
     {
       "id": 2,
       "name": "Background change detection",
-      "status": "Live idle CPU reduction verified; user says smoother; late-season and Week 0 midweek tests pending",
+      "status": "Consumed-byte baseline measured; v101 adds exact string lengths and selected packed-bit masks after live v100 false-trigger diagnosis. New live CPU comparison pending.",
       "gates": [
         "Avoid repeated full decode when unchanged",
         "Retain identity/stage/consistency guards",
@@ -23,7 +23,7 @@
     {
       "id": 3,
       "name": "Archive handling",
-      "status": "Implemented; 351 tests and exact frozen replay pass; live preseason migration exact",
+      "status": "Immutable archives implemented; exact replay and migration of 106 editions / 163741 posts verified.",
       "gates": [
         "Reduce full-season JSON read/rewrite",
         "Preserve immutable wording and existing archives",
@@ -34,7 +34,7 @@
     {
       "id": 4,
       "name": "Dropdown discovery",
-      "status": "Live preseason entry and all controls verified; 0 ms measured setup in three requests; late-season remains pending",
+      "status": "Execution-based dropdown discovery passes v98 and v100 live entry/controller checks; final cold launch pending.",
       "gates": [
         "Remove process-wide UI-thread scans",
         "Validate cached ownership/generation",
@@ -45,12 +45,12 @@
     {
       "id": 5,
       "name": "Correctness and contextual review",
-      "status": "Core corrections implemented; 359 Node tests and native checks pass; real 224-pick draft replay yields 25 eligible undrafted signings with no duplicate early QB; live content check pending"
+      "status": "371 Node tests and native checks pass; corrected live Week 9 feed and full controls confirmed on v100."
     },
     {
       "id": 6,
       "name": "Thousands of natural variants",
-      "status": "In progress: static analyst and personal copy expanded; full 31-edition eligibility audit identifies remaining thin paths",
+      "status": "Complete: 5704 distinct representative-usable wordings, 561 families, 601 minimal paths and 472 recorded paths; minimum eight eligible choices per root path.",
       "targets": {
         "usableVariants": 5000,
         "minimumEligibleVariantsPerPath": 8
@@ -65,7 +65,7 @@
     {
       "id": 7,
       "name": "Package, live verification and success report",
-      "status": "pending"
+      "status": "v101 built and installed with checksum-verified history; cold launch and live CPU measurement pending."
     }
   ],
   "contentRequirements": [

@@ -53,7 +53,7 @@ export function detectEvents(s,previous=null){
       facts={...facts,...recruitContext(s,p)};
       if(facts.recruitKind==='transfer'&&facts.formerTeam===team&&(facts.newlyObserved||facts.signed))facts={...facts,returningPortal:true,exceptionalReturn:p.overall>=88,family:'roster.returning',voice:'beat'};
       if(facts.recruitKind==='transfer'&&p.starRating>=4&&(facts.newlyObserved||facts.signed)){national=true;facts.analystPersona=hashForRecruit(id);}
-      if(p.starRating===5&&category==='signings')facts={...facts,voice:'analyst',analystPersona:0};
+      if(p.starRating===5&&category==='signings'&&!facts.returningPortal)facts={...facts,voice:'analyst',analystPersona:0};
       if(p.starRating===2){if(!id.startsWith('commit:')&&!id.startsWith('portal-opening:unsigned:')&&!id.startsWith('portal-opening:entrant:'))return;facts.family='roster.underdog';facts.voice='beat';}
       if(facts.recruitKind==='transfer'&&facts.formerTeam!==null){relatedTeams=[...relatedTeams,facts.formerTeam];facts.rivalTransfer=Boolean(teams.get(team)?.rivals?.includes(facts.formerTeam)||teams.get(facts.formerTeam)?.rivals?.includes(team));}
     }

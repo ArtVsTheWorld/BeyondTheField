@@ -1,0 +1,929 @@
+{
+  "revision": "matchup-variety-v99",
+  "families": {
+    "matchup.passing-preview": [
+      {
+        "id": "matchup.passing-preview.matchcopy.1",
+        "body": "{school}: {attack} passing yards a game through {games} games. {opponent}: {defense} allowed through {opponentGames}."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.2",
+        "body": "{opponent} allows {defense} passing yards a game ({opponentGames} games). Next up: {school}, averaging {attack} ({games} games)."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.3",
+        "body": "{school}'s passing average is {attack} across {games} games; {opponent}'s allowed average is {defense} across {opponentGames}."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.4",
+        "body": "The passing comparison: {school} produces {attack} yards per game; {opponent} allows {defense}. Samples: {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.5",
+        "body": "{attack} passing yards a game from {school} meets {defense} allowed by {opponent}. {games} offensive games; {opponentGames} defensive games."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.6",
+        "body": "{school} brings a {attack}-yard passing average through {games} games. {opponent} has allowed {defense} per game through {opponentGames}."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.7",
+        "body": "A passing test for {opponent}: {school} averages {attack} yards over {games} games. The defense allows {defense} over {opponentGames}."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.8",
+        "body": "Before kickoff: {school}, {attack} passing yards per game; {opponent}, {defense} allowed. The samples are {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.9",
+        "body": "{opponent}'s passing defense has allowed {defense} yards a game in {opponentGames} games. {school} produces {attack} in a {games}-game sample."
+      },
+      {
+        "id": "matchup.passing-preview.matchcopy.10",
+        "body": "Entering this matchup, {school} averages {attack} passing yards ({games} games). {opponent} allows {defense} ({opponentGames} games)."
+      }
+    ],
+    "matchup.passing-recap": [
+      {
+        "id": "matchup.passing-recap.matchcopy.1",
+        "body": "{school} entered at {attack} passing yards a game; {opponent} had allowed {defense}. The actual matchup produced {actual} for {school}."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.2",
+        "body": "Against {opponent}, {school} gained {actual} passing yards. Entering averages: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.3",
+        "body": "The passing comparison met the game: {school} finished with {actual} yards vs. {opponent}, after entering at {attack} against {defense} allowed."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.4",
+        "body": "{actual} passing yards for {school} vs. {opponent}. The pregame figures were {attack} produced and {defense} allowed per game."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.5",
+        "body": "Before the game, {school} averaged {attack} passing yards and {opponent} allowed {defense}. In the game: {actual} for {school}."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.6",
+        "body": "{opponent} had allowed {defense} passing yards per game. {school} brought a {attack} average and finished this matchup at {actual}."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.7",
+        "body": "The actual passing result for {school}: {actual} yards against {opponent}. Entering comparison: {attack} vs. {defense} per game."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.8",
+        "body": "{school}'s passing total vs. {opponent} was {actual}. Its entering average was {attack}; the defense's was {defense} allowed."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.9",
+        "body": "Pregame passing averages: {school} {attack}, {opponent} {defense} allowed. Actual {school} production: {actual} yards."
+      },
+      {
+        "id": "matchup.passing-recap.matchcopy.10",
+        "body": "The passing matchup in retrospect: {school} entered at {attack}, {opponent} at {defense} allowed. {school} ended with {actual} yards."
+      }
+    ],
+    "matchup.passing-preview-rates": [
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.1",
+        "body": "{school} gains {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.2",
+        "body": "{school} gains {attackRate} yards per pass attempt; {opponent} allows {defenseRate}. Per-game passing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.3",
+        "body": "The efficiency matchup: {school}, {attackRate} yards per pass attempt; {opponent}, {defenseRate} allowed. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.4",
+        "body": "The efficiency matchup: {school}, {attackRate} yards per pass attempt; {opponent}, {defenseRate} allowed. Per-game passing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.5",
+        "body": "{opponent} allows {defenseRate} yards per pass attempt. {school} produces {attackRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.6",
+        "body": "{opponent} allows {defenseRate} yards per pass attempt. {school} produces {attackRate}. Per-game passing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.7",
+        "body": "Before the matchup: {school} {attackRate} yards per pass attempt against {opponent}'s {defenseRate} allowed. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.8",
+        "body": "Before the matchup: {school} {attackRate} yards per pass attempt against {opponent}'s {defenseRate} allowed. Per-game passing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.9",
+        "body": "{school}'s passing rate is {attackRate} yards per pass attempt. {opponent}'s defensive rate is {defenseRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.passing-preview-rates.matchcopy.10",
+        "body": "{school}'s passing rate is {attackRate} yards per pass attempt. {opponent}'s defensive rate is {defenseRate}. Per-game passing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      }
+    ],
+    "matchup.passing-recap-rates": [
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.1",
+        "body": "{school} finished with {actual} passing yards at {actualRate} per pass attempt vs. {opponent}. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.2",
+        "body": "{school} finished with {actual} passing yards at {actualRate} per pass attempt vs. {opponent}. The pregame comparison was {attackRate} vs. {defenseRate} yards per pass attempt."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.3",
+        "body": "Against {opponent}, {school} gained {actual} passing yards, {actualRate} per pass attempt. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.4",
+        "body": "Against {opponent}, {school} gained {actual} passing yards, {actualRate} per pass attempt. The pregame comparison was {attackRate} vs. {defenseRate} yards per pass attempt."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.5",
+        "body": "Actual passing production: {school}, {actual} yards and {actualRate} per pass attempt against {opponent}. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.6",
+        "body": "Actual passing production: {school}, {actual} yards and {actualRate} per pass attempt against {opponent}. The pregame comparison was {attackRate} vs. {defenseRate} yards per pass attempt."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.7",
+        "body": "{school}'s passing game vs. {opponent}: {actual} yards, {actualRate} per pass attempt. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.8",
+        "body": "{school}'s passing game vs. {opponent}: {actual} yards, {actualRate} per pass attempt. The pregame comparison was {attackRate} vs. {defenseRate} yards per pass attempt."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.9",
+        "body": "{actualRate} yards per pass attempt for {school} against {opponent}, {actual} passing yards in total. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.passing-recap-rates.matchcopy.10",
+        "body": "{actualRate} yards per pass attempt for {school} against {opponent}, {actual} passing yards in total. The pregame comparison was {attackRate} vs. {defenseRate} yards per pass attempt."
+      }
+    ],
+    "matchup.rushing-preview": [
+      {
+        "id": "matchup.rushing-preview.matchcopy.1",
+        "body": "{school}: {attack} rushing yards a game through {games} games. {opponent}: {defense} allowed through {opponentGames}."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.2",
+        "body": "{opponent} allows {defense} rushing yards a game ({opponentGames} games). Next up: {school}, averaging {attack} ({games} games)."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.3",
+        "body": "{school}'s rushing average is {attack} across {games} games; {opponent}'s allowed average is {defense} across {opponentGames}."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.4",
+        "body": "The rushing comparison: {school} produces {attack} yards per game; {opponent} allows {defense}. Samples: {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.5",
+        "body": "{attack} rushing yards a game from {school} meets {defense} allowed by {opponent}. {games} offensive games; {opponentGames} defensive games."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.6",
+        "body": "{school} brings a {attack}-yard rushing average through {games} games. {opponent} has allowed {defense} per game through {opponentGames}."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.7",
+        "body": "A rushing test for {opponent}: {school} averages {attack} yards over {games} games. The defense allows {defense} over {opponentGames}."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.8",
+        "body": "Before kickoff: {school}, {attack} rushing yards per game; {opponent}, {defense} allowed. The samples are {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.9",
+        "body": "{opponent}'s rushing defense has allowed {defense} yards a game in {opponentGames} games. {school} produces {attack} in a {games}-game sample."
+      },
+      {
+        "id": "matchup.rushing-preview.matchcopy.10",
+        "body": "Entering this matchup, {school} averages {attack} rushing yards ({games} games). {opponent} allows {defense} ({opponentGames} games)."
+      }
+    ],
+    "matchup.rushing-recap": [
+      {
+        "id": "matchup.rushing-recap.matchcopy.1",
+        "body": "{school} entered at {attack} rushing yards a game; {opponent} had allowed {defense}. The actual matchup produced {actual} for {school}."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.2",
+        "body": "Against {opponent}, {school} gained {actual} rushing yards. Entering averages: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.3",
+        "body": "The rushing comparison met the game: {school} finished with {actual} yards vs. {opponent}, after entering at {attack} against {defense} allowed."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.4",
+        "body": "{actual} rushing yards for {school} vs. {opponent}. The pregame figures were {attack} produced and {defense} allowed per game."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.5",
+        "body": "Before the game, {school} averaged {attack} rushing yards and {opponent} allowed {defense}. In the game: {actual} for {school}."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.6",
+        "body": "{opponent} had allowed {defense} rushing yards per game. {school} brought a {attack} average and finished this matchup at {actual}."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.7",
+        "body": "The actual rushing result for {school}: {actual} yards against {opponent}. Entering comparison: {attack} vs. {defense} per game."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.8",
+        "body": "{school}'s rushing total vs. {opponent} was {actual}. Its entering average was {attack}; the defense's was {defense} allowed."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.9",
+        "body": "Pregame rushing averages: {school} {attack}, {opponent} {defense} allowed. Actual {school} production: {actual} yards."
+      },
+      {
+        "id": "matchup.rushing-recap.matchcopy.10",
+        "body": "The rushing matchup in retrospect: {school} entered at {attack}, {opponent} at {defense} allowed. {school} ended with {actual} yards."
+      }
+    ],
+    "matchup.rushing-preview-rates": [
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.1",
+        "body": "{school} gains {attackRate} yards per carry; {opponent} allows {defenseRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.2",
+        "body": "{school} gains {attackRate} yards per carry; {opponent} allows {defenseRate}. Per-game rushing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.3",
+        "body": "The efficiency matchup: {school}, {attackRate} yards per carry; {opponent}, {defenseRate} allowed. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.4",
+        "body": "The efficiency matchup: {school}, {attackRate} yards per carry; {opponent}, {defenseRate} allowed. Per-game rushing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.5",
+        "body": "{opponent} allows {defenseRate} yards per carry. {school} produces {attackRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.6",
+        "body": "{opponent} allows {defenseRate} yards per carry. {school} produces {attackRate}. Per-game rushing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.7",
+        "body": "Before the matchup: {school} {attackRate} yards per carry against {opponent}'s {defenseRate} allowed. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.8",
+        "body": "Before the matchup: {school} {attackRate} yards per carry against {opponent}'s {defenseRate} allowed. Per-game rushing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.9",
+        "body": "{school}'s rushing rate is {attackRate} yards per carry. {opponent}'s defensive rate is {defenseRate}. {interpretation}"
+      },
+      {
+        "id": "matchup.rushing-preview-rates.matchcopy.10",
+        "body": "{school}'s rushing rate is {attackRate} yards per carry. {opponent}'s defensive rate is {defenseRate}. Per-game rushing yardage: {attack} produced by {school}, {defense} allowed by {opponent}."
+      }
+    ],
+    "matchup.rushing-recap-rates": [
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.1",
+        "body": "{school} finished with {actual} rushing yards at {actualRate} per carry vs. {opponent}. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.2",
+        "body": "{school} finished with {actual} rushing yards at {actualRate} per carry vs. {opponent}. The pregame comparison was {attackRate} vs. {defenseRate} yards per carry."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.3",
+        "body": "Against {opponent}, {school} gained {actual} rushing yards, {actualRate} per carry. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.4",
+        "body": "Against {opponent}, {school} gained {actual} rushing yards, {actualRate} per carry. The pregame comparison was {attackRate} vs. {defenseRate} yards per carry."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.5",
+        "body": "Actual rushing production: {school}, {actual} yards and {actualRate} per carry against {opponent}. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.6",
+        "body": "Actual rushing production: {school}, {actual} yards and {actualRate} per carry against {opponent}. The pregame comparison was {attackRate} vs. {defenseRate} yards per carry."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.7",
+        "body": "{school}'s rushing game vs. {opponent}: {actual} yards, {actualRate} per carry. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.8",
+        "body": "{school}'s rushing game vs. {opponent}: {actual} yards, {actualRate} per carry. The pregame comparison was {attackRate} vs. {defenseRate} yards per carry."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.9",
+        "body": "{actualRate} yards per carry for {school} against {opponent}, {actual} rushing yards in total. Entering rates were {attackRate} produced and {defenseRate} allowed; those averages exclude this game."
+      },
+      {
+        "id": "matchup.rushing-recap-rates.matchcopy.10",
+        "body": "{actualRate} yards per carry for {school} against {opponent}, {actual} rushing yards in total. The pregame comparison was {attackRate} vs. {defenseRate} yards per carry."
+      }
+    ],
+    "matchup.protection-preview": [
+      {
+        "id": "matchup.protection-preview.matchcopy.1",
+        "body": "{school} allows {attack} sacks a game ({games} games); {opponent} produces {defense} ({opponentGames}). A protection matchup to watch."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.2",
+        "body": "{opponent} averages {defense} sacks through {opponentGames} games. {school} has allowed {attack} a game through {games}."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.3",
+        "body": "Protection comparison: {school}, {attack} sacks allowed per game. {opponent}, {defense} sacks produced. Samples: {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.4",
+        "body": "{school}'s line has allowed {attack} sacks a game. {opponent} gets {defense}. There are {games} offensive and {opponentGames} defensive games in the sample."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.5",
+        "body": "Before kickoff: {school} allows {attack} sacks a game over {games} games. {opponent} records {defense} over {opponentGames}."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.6",
+        "body": "A test for {school}'s protection: {attack} sacks allowed a game faces {opponent}'s {defense} sacks a game. Samples: {games}/{opponentGames} games."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.7",
+        "body": "{opponent}'s sack production is {defense} per game ({opponentGames} games). {school}'s sacks allowed: {attack} ({games} games)."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.8",
+        "body": "The sack matchup starts at {attack} allowed per game by {school}, {defense} produced by {opponent}. {games} and {opponentGames} games behind the averages."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.9",
+        "body": "{school} brings a {attack}-sack-allowed average into {opponent}, which averages {defense} sacks. The samples are {games} and {opponentGames} games."
+      },
+      {
+        "id": "matchup.protection-preview.matchcopy.10",
+        "body": "Protection watch: {school} has given up {attack} sacks per game in {games} games. {opponent} has produced {defense} per game in {opponentGames}."
+      }
+    ],
+    "matchup.protection-recap": [
+      {
+        "id": "matchup.protection-recap.matchcopy.1",
+        "body": "{school} allowed {actual} sacks against {opponent}. Entering the game, {school} allowed {attack} sacks a game and {opponent} produced {defense}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.2",
+        "body": "{school} allowed {actual} sacks against {opponent}. Pregame averages: {attack} allowed by {school}, {defense} produced by {opponent}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.3",
+        "body": "Against {opponent}, {school} conceded {actual} sacks. Entering the game, {school} allowed {attack} sacks a game and {opponent} produced {defense}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.4",
+        "body": "Against {opponent}, {school} conceded {actual} sacks. Pregame averages: {attack} allowed by {school}, {defense} produced by {opponent}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.5",
+        "body": "The game's protection result: {school}, {actual} sacks allowed vs. {opponent}. Entering the game, {school} allowed {attack} sacks a game and {opponent} produced {defense}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.6",
+        "body": "The game's protection result: {school}, {actual} sacks allowed vs. {opponent}. Pregame averages: {attack} allowed by {school}, {defense} produced by {opponent}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.7",
+        "body": "The actual {school}-{opponent} sack count: {actual} allowed by {school}. Entering the game, {school} allowed {attack} sacks a game and {opponent} produced {defense}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.8",
+        "body": "The actual {school}-{opponent} sack count: {actual} allowed by {school}. Pregame averages: {attack} allowed by {school}, {defense} produced by {opponent}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.9",
+        "body": "{opponent} finished this matchup with {actual} sacks against {school}. Entering the game, {school} allowed {attack} sacks a game and {opponent} produced {defense}."
+      },
+      {
+        "id": "matchup.protection-recap.matchcopy.10",
+        "body": "{opponent} finished this matchup with {actual} sacks against {school}. Pregame averages: {attack} allowed by {school}, {defense} produced by {opponent}."
+      }
+    ],
+    "matchup.receiver-secondary-preview": [
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.1",
+        "body": "{school}'s {receiver}: {catches} catches, {yards} yards. {opponent}'s {defender}: {breakups} PBU, {interceptions} INT. This compares production, not individual coverage assignments."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.2",
+        "body": "{school}'s {receiver}: {catches} catches, {yards} yards. {opponent}'s {defender}: {breakups} PBU, {interceptions} INT. Those are opponent-side totals."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.3",
+        "body": "Receiving and secondary production: {receiver} ({school}), {catches} catches for {yards}; {defender} ({opponent}), {breakups} PBU and {interceptions} INT. This compares production, not individual coverage assignments."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.4",
+        "body": "Receiving and secondary production: {receiver} ({school}), {catches} catches for {yards}; {defender} ({opponent}), {breakups} PBU and {interceptions} INT. Those are opponent-side totals."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.5",
+        "body": "{receiver} has {catches} catches for {yards} at {school}. On {opponent}'s side, {defender} has {breakups} PBU and {interceptions} INT. This compares production, not individual coverage assignments."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.6",
+        "body": "{receiver} has {catches} catches for {yards} at {school}. On {opponent}'s side, {defender} has {breakups} PBU and {interceptions} INT. Those are opponent-side totals."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.7",
+        "body": "For the passing matchup: {school} has {receiver} ({catches} catches, {yards} yards); {opponent} has {defender} ({breakups} PBU, {interceptions} INT). This compares production, not individual coverage assignments."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.8",
+        "body": "For the passing matchup: {school} has {receiver} ({catches} catches, {yards} yards); {opponent} has {defender} ({breakups} PBU, {interceptions} INT). Those are opponent-side totals."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.9",
+        "body": "Opposing-unit names: {school}'s {receiver}, {catches} catches and {yards} yards; {opponent}'s {defender}, {breakups} PBU and {interceptions} INT. This compares production, not individual coverage assignments."
+      },
+      {
+        "id": "matchup.receiver-secondary-preview.matchcopy.10",
+        "body": "Opposing-unit names: {school}'s {receiver}, {catches} catches and {yards} yards; {opponent}'s {defender}, {breakups} PBU and {interceptions} INT. Those are opponent-side totals."
+      }
+    ],
+    "matchup.receiver-secondary-recap": [
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.1",
+        "body": "{school}'s {receiver} had {actualCatches} catches for {actualYards} yards. {opponent}'s {defender} had {actualBreakups} PBU and {actualInts} INT. No individual coverage assignment implied."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.2",
+        "body": "{school}'s {receiver} had {actualCatches} catches for {actualYards} yards. {opponent}'s {defender} had {actualBreakups} PBU and {actualInts} INT. These are opposing-player totals, not head-to-head targets."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.3",
+        "body": "Actual passing-matchup production: {receiver} ({school}), {actualCatches} catches, {actualYards} yards; {defender} ({opponent}), {actualBreakups} PBU, {actualInts} INT. No individual coverage assignment implied."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.4",
+        "body": "Actual passing-matchup production: {receiver} ({school}), {actualCatches} catches, {actualYards} yards; {defender} ({opponent}), {actualBreakups} PBU, {actualInts} INT. These are opposing-player totals, not head-to-head targets."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.5",
+        "body": "{receiver} finished with {actualCatches} catches for {actualYards} at {school}; {defender} recorded {actualBreakups} PBU and {actualInts} INT for {opponent}. No individual coverage assignment implied."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.6",
+        "body": "{receiver} finished with {actualCatches} catches for {actualYards} at {school}; {defender} recorded {actualBreakups} PBU and {actualInts} INT for {opponent}. These are opposing-player totals, not head-to-head targets."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.7",
+        "body": "The receiving/secondary totals: {school}'s {receiver}, {actualCatches} catches for {actualYards}; {opponent}'s {defender}, {actualBreakups} PBU, {actualInts} INT. No individual coverage assignment implied."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.8",
+        "body": "The receiving/secondary totals: {school}'s {receiver}, {actualCatches} catches for {actualYards}; {opponent}'s {defender}, {actualBreakups} PBU, {actualInts} INT. These are opposing-player totals, not head-to-head targets."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.9",
+        "body": "In this game, {receiver} had {actualCatches} catches and {actualYards} yards for {school}. {defender} posted {actualBreakups} PBU, {actualInts} INT for {opponent}. No individual coverage assignment implied."
+      },
+      {
+        "id": "matchup.receiver-secondary-recap.matchcopy.10",
+        "body": "In this game, {receiver} had {actualCatches} catches and {actualYards} yards for {school}. {defender} posted {actualBreakups} PBU, {actualInts} INT for {opponent}. These are opposing-player totals, not head-to-head targets."
+      }
+    ],
+    "context.heisman": [
+      {
+        "id": "context.heisman.matchcopy.1",
+        "body": "Heisman No. {rank}: {school}'s {playerName}. Season: {seasonLine}. Latest vs. {opponent}: {recentLine}, in {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.2",
+        "body": "{school}'s {playerName} is Heisman No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. Season: {seasonLine}."
+      },
+      {
+        "id": "context.heisman.matchcopy.3",
+        "body": "The full Heisman line for {playerName} of {school}, No. {rank}: {seasonLine}. Against {opponent}: {recentLine}, {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.4",
+        "body": "No. {rank} in the Heisman race, {school}'s {playerName}: {seasonLine} this season. Most recent: {recentLine} vs. {opponent}, {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.5",
+        "body": "{playerName} at {school}: {seasonLine} this season, Heisman No. {rank}. The {opponent} game brought {recentLine} in {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.6",
+        "body": "Heisman profile: {school}'s {playerName}, No. {rank}. {seasonLine} this season; {recentLine} vs. {opponent} in {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.7",
+        "body": "{seasonLine} on the season for {school}'s {playerName}. Heisman No. {rank}; most recently {recentLine} vs. {opponent}, {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.8",
+        "body": "The season and the latest game: {school}'s {playerName}, {seasonLine}; {recentLine} vs. {opponent}, {result}. Heisman No. {rank}."
+      },
+      {
+        "id": "context.heisman.matchcopy.9",
+        "body": "For Heisman No. {rank} {playerName} ({school}), the season is {seasonLine}. Latest: {recentLine} vs. {opponent}, {result}."
+      },
+      {
+        "id": "context.heisman.matchcopy.10",
+        "body": "{school}'s Heisman No. {rank} {playerName}: season {seasonLine}; latest {recentLine} against {opponent} in {result}."
+      }
+    ],
+    "context.heisman-recent": [
+      {
+        "id": "context.heisman-recent.matchcopy.1",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. The full recent performance belongs in the discussion."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.2",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. That is the latest game behind the watch-list position."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.3",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. Keep the complete line in view."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.4",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. A recent performance to weigh in the race."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.5",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. The case goes beyond one headline number."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.6",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. That is the latest on-field reference point."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.7",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. The whole game matters to the evaluation."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.8",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. The production and result both belong in the picture."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.9",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. One more game in the season-long discussion."
+      },
+      {
+        "id": "context.heisman-recent.matchcopy.10",
+        "body": "Heisman No. {rank}, {school}'s {playerName}: {recentLine} vs. {opponent} in {result}. The next game will add another piece to the case."
+      }
+    ],
+    "editorial.heisman-movement": [
+      {
+        "id": "editorial.heisman-movement.matchcopy.1",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. The rank and the recent line are both part of the update."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.2",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. That is the latest watch-list movement."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.3",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. A performance and a ranking to consider together."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.4",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. The move is an update, not an explanation of every vote."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.5",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. The recent game adds context to the position."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.6",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. That is the current shape of this player's case."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.7",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. Keep the whole performance alongside the move."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.8",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. The race has another game and another ranking to weigh."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.9",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. That is the newest entry in the Heisman discussion."
+      },
+      {
+        "id": "editorial.heisman-movement.matchcopy.10",
+        "body": "{school}'s {playerName} moves {movement} from Heisman No. {previousRank} to No. {rank}. Latest: {recentLine} vs. {opponent}, {result}. The latest game is part of a longer evaluation."
+      }
+    ],
+    "editorial.heisman-slip": [
+      {
+        "id": "editorial.heisman-slip.matchcopy.1",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. A productive win and a ranking drop in the same week."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.2",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The strong performance did not prevent the drop."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.3",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The result and production deserve mention beside the movement."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.4",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The rank fell even with that productive game."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.5",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The individual line was stronger than the direction of the ranking."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.6",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. That is a ranking move worth discussing alongside the performance."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.7",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. A lower place on the watch list after a strong winning performance."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.8",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The move is down; the recent game still belongs in the case."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.9",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. The drop did not come with a poor recent performance."
+      },
+      {
+        "id": "editorial.heisman-slip.matchcopy.10",
+        "body": "{school}'s {playerName} slips from Heisman No. {previousRank} to No. {rank} after {recentLine} in a win over {opponent}. A strong game in a win, with a lower spot on the watch list."
+      }
+    ],
+    "editorial.close-wins": [
+      {
+        "id": "editorial.close-wins.matchcopy.1",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. That is a very narrow winning margin."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.2",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The wins have left little room for error."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.3",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The winning results have come with almost no separation."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.4",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The close finishes are part of the season's story."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.5",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The win total hides how tight those games were."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.6",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The record includes repeated tight finishes."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.7",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The team has been living on fine margins."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.8",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The combined gap is worth keeping beside the record."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.9",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The scorelines give the wins more context."
+      },
+      {
+        "id": "editorial.close-wins.matchcopy.10",
+        "body": "{school} is {record}. All {wins} wins were by {maxMargin} points or fewer, {totalMargin} points combined. The games that went its way were very close."
+      }
+    ],
+    "editorial.close-losses": [
+      {
+        "id": "editorial.close-losses.matchcopy.1",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The close results have taken a toll."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.2",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The record has a small-margin story underneath it."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.3",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. Those are narrow defeats with a large effect on the record."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.4",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The final record alone hides several fine margins."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.5",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. That is a painful collection of close finishes."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.6",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. A few points have changed several outcomes."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.7",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The close-game column is part of the evaluation."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.8",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The defeats have been costly despite the small gaps."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.9",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. The record deserves that context."
+      },
+      {
+        "id": "editorial.close-losses.matchcopy.10",
+        "body": "{school} is {record}, with {count} losses by three points or fewer. Those losses total {totalMargin} points. Those narrow losses help describe the season."
+      }
+    ],
+    "editorial.comebacks": [
+      {
+        "id": "editorial.comebacks.matchcopy.1",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. Second-half responses are part of the story."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.2",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. Those wins required recovery after a deficit."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.3",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The team has repeatedly had to come from behind."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.4",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The halftime or third-quarter score has not settled those games."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.5",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The record includes repeated recoveries."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.6",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The finishes have changed several early pictures."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.7",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. Those games needed a response after falling behind."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.8",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The wins have included more than one turnaround."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.9",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The comeback element belongs in the season assessment."
+      },
+      {
+        "id": "editorial.comebacks.matchcopy.10",
+        "body": "{school} has {count} wins after trailing at halftime or entering the fourth. The record is {record}. The early deficit has not been the final answer in those games."
+      }
+    ],
+    "buzz.star": [
+      {
+        "id": "buzz.star.matchcopy.1",
+        "body": "The player spotlight: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.2",
+        "body": "A name on the big stage: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.3",
+        "body": "The season-long production: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.4",
+        "body": "A player line to know: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.5",
+        "body": "The individual profile: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.6",
+        "body": "The spotlight before kickoff: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.7",
+        "body": "A postseason player watch: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.8",
+        "body": "The production entering the game: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.9",
+        "body": "One player in the matchup: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      },
+      {
+        "id": "buzz.star.matchcopy.10",
+        "body": "The big-game stat profile: {school}'s {playerName} enters the {eventLabel} with {line} this season."
+      }
+    ],
+    "buzz.record": [
+      {
+        "id": "buzz.record.matchcopy.1",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. That is the season-long result behind this matchup."
+      },
+      {
+        "id": "buzz.record.matchcopy.2",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The full year gets another major test."
+      },
+      {
+        "id": "buzz.record.matchcopy.3",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The record meets a defining postseason game."
+      },
+      {
+        "id": "buzz.record.matchcopy.4",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The next result carries more weight than an ordinary week."
+      },
+      {
+        "id": "buzz.record.matchcopy.5",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The stage gives that record another test."
+      },
+      {
+        "id": "buzz.record.matchcopy.6",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The next game is a major point in the season's story."
+      },
+      {
+        "id": "buzz.record.matchcopy.7",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The postseason adds a new level to the evaluation."
+      },
+      {
+        "id": "buzz.record.matchcopy.8",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. That is the backdrop for the game."
+      },
+      {
+        "id": "buzz.record.matchcopy.9",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The season has earned a place on this stage."
+      },
+      {
+        "id": "buzz.record.matchcopy.10",
+        "body": "{school} brings {record} into the {eventLabel} against {opponent}. The next opponent will test that record."
+      }
+    ],
+    "buzz.matchup": [
+      {
+        "id": "buzz.matchup.matchcopy.1",
+        "body": "{school}: {ppg} PPG, {ypg} yards a game, {ypp} per play. {opponent} allows {ppga} PPG, {ypga} yards, {yppa} per play. That is one test in the {eventLabel}."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.2",
+        "body": "{school}: {ppg} PPG, {ypg} yards a game, {ypp} per play. {opponent} allows {ppga} PPG, {ypga} yards, {yppa} per play. The {eventLabel} puts those units together."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.3",
+        "body": "{opponent}'s defense allows {ppga} PPG, {ypga} yards and {yppa} per play. {school} produces {ppg} PPG, {ypg} yards, {ypp} per play. That is one test in the {eventLabel}."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.4",
+        "body": "{opponent}'s defense allows {ppga} PPG, {ypga} yards and {yppa} per play. {school} produces {ppg} PPG, {ypg} yards, {ypp} per play. The {eventLabel} puts those units together."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.5",
+        "body": "Offense vs. defense: {school} {ppg} PPG, {ypg} YPG, {ypp} YPP; {opponent} allows {ppga} PPG, {ypga} YPG, {yppa} YPP. That is one test in the {eventLabel}."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.6",
+        "body": "Offense vs. defense: {school} {ppg} PPG, {ypg} YPG, {ypp} YPP; {opponent} allows {ppga} PPG, {ypga} YPG, {yppa} YPP. The {eventLabel} puts those units together."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.7",
+        "body": "The {school} attack brings {ppg} points and {ypg} yards a game at {ypp} per play. {opponent} allows {ppga} points, {ypga} yards and {yppa} per play. That is one test in the {eventLabel}."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.8",
+        "body": "The {school} attack brings {ppg} points and {ypg} yards a game at {ypp} per play. {opponent} allows {ppga} points, {ypga} yards and {yppa} per play. The {eventLabel} puts those units together."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.9",
+        "body": "Before kickoff: {school} produces {ppg} PPG, {ypg} YPG, {ypp} YPP. {opponent} concedes {ppga} PPG, {ypga} YPG, {yppa} YPP. That is one test in the {eventLabel}."
+      },
+      {
+        "id": "buzz.matchup.matchcopy.10",
+        "body": "Before kickoff: {school} produces {ppg} PPG, {ypg} YPG, {ypp} YPP. {opponent} concedes {ppga} PPG, {ypga} YPG, {yppa} YPP. The {eventLabel} puts those units together."
+      }
+    ]
+  }
+}

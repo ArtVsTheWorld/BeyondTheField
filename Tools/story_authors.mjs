@@ -1,6 +1,7 @@
 // Persistent fictional account identities. Position and publication week never seed handles.
 export function hash(text){let h=2166136261;for(const c of text){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 const clean=x=>String(x??'').normalize('NFKD').replace(/[^A-Za-z0-9]/g,'');
+const nameKey=name=>{const parts=String(name??'').trim().split(/\s+/).filter(p=>!['jr','sr','ii','iii','iv'].includes(clean(p).toLowerCase()));return [clean(parts[0]),clean(parts.at(-1))].join('|').toLowerCase();};
 const firstNames=['Maya','Jordan','Cameron','Alex','Riley','Morgan','Taylor','Casey','Aisha','Javier','Priya','Andre','Mei','Diego','Imani','Nadia','Omar','Elena','Darius','Sofia','Malik','Hannah','Luis','Simone','Rohan','Gabriela','Kenji','Amara','Isaiah','Naomi','Ethan','Valeria'];
 const surnames=['Wells','Bennett','Reed','Lawson','Brooks','Ellis','Grant','Hayes','Cole','Parker','Miles','West','Lane','Stone','Ford','Davis','Nguyen','Patel','Rodriguez','Chen','Washington','Martinez','Okafor','Hassan','Kim','Santiago','Robinson','Ali','Nakamura','Shah','Rivera','Williams','Ortiz','Thompson','Park','Campbell','Santos','Jackson','Flores','Mensah'];
 const analysts=[['ESPNCFB','ESPNCFB'],['Jake Whitmore','JakeWhitmoreCFB'],['Marcus Bennett','MBennettSports'],['Tina Brooks','TinaBrooksCFB'],['David Ellison','DavidEllisonFB'],['Chris Maddox','ChrisMaddoxCFB']];
@@ -12,7 +13,18 @@ export function authorRegistry(saved={}){
   const recruitClass=person?s.recruitStatuses?.find(r=>r.player===player.id)?.recruitClass:null;
   const classLabel=recruitClass?.startsWith('Transfer_')?'Transfer ':recruitClass?.startsWith('JuniorCollege_')?'JUCO ':'';
   const displayName=person?player.name+(role==='recruit'&&player.position?' | '+classLabel+player.position:''):null;
-  if(entries[key]&&(person||entries[key].identityVersion===2)){if(role==='model'){const old=entries[key].handle.toLowerCase();entries[key].author='CanDuel Sports';entries[key].handle='@CanDuelSports';handles.delete(old);handles.set('@canduelsports',key);}if(person)entries[key].author=displayName;return entries[key];}
+  const personIdentity=person?{name:player.name,presentationId:Number.isInteger(player.presentationId)&&player.presentationId>0?player.presentationId:null}:null;
+  if(person&&entries[key]){
+   const old=entries[key],identity=old.personIdentity,oldName=identity?.name??old.author?.split(' | ')[0];
+   const changed=identity?.presentationId&&personIdentity.presentationId?identity.presentationId!==personIdentity.presentationId:oldName&&nameKey(oldName)!==nameKey(player.name);
+   if(changed){
+    // Native record slots can be recycled after graduation. Keep the old
+    // handle reserved for its archived owner instead of giving it to a recruit.
+    let retired=key+':retired:'+hash(old.handle+'|'+JSON.stringify(identity??oldName));let suffix=0;while(entries[retired])retired=key+':retired:'+hash(old.handle+'|'+JSON.stringify(identity??oldName))+'-'+(++suffix);
+    entries[retired]=old;handles.set(old.handle.toLowerCase(),retired);delete entries[key];
+   }
+  }
+  if(entries[key]&&(person||entries[key].identityVersion===2)){if(role==='model'){const old=entries[key].handle.toLowerCase();entries[key].author='CanDuel Sports';entries[key].handle='@CanDuelSports';handles.delete(old);handles.set('@canduelsports',key);}if(person){entries[key].author=displayName;entries[key].personIdentity={...personIdentity,presentationId:personIdentity.presentationId??entries[key].personIdentity?.presentationId??null};}return entries[key];}
   if(entries[key])handles.delete(entries[key].handle.toLowerCase());
   const seed=hash(key),school=team?.name??'College Football',slug=clean(school).slice(0,13)||'College';let author,base;
   if(person){const pieces=player.name.trim().split(/\s+/),first=clean(pieces[0])||'Player',last=clean(pieces.slice(1).join(''))||first,num=player.team!==255&&Number.isInteger(player.jerseyNumber)?player.jerseyNumber:1+seed%99;
@@ -26,6 +38,6 @@ export function authorRegistry(saved={}){
   else{[author,base]=analysts[persona%analysts.length];}
   base=base.slice(0,28);let handle='@'+base;
   if(handles.has(handle.toLowerCase())&&handles.get(handle.toLowerCase())!==key){let n=0;do{handle='@'+base.slice(0,23)+(10+hash(key+':'+n++)%90);}while(handles.has(handle.toLowerCase()));}
-  const profile={identityVersion:2,author,handle,styleSeed:seed,faithLanguage:person&&hash(key+':faith')%5===0};entries[key]=profile;handles.set(handle.toLowerCase(),key);return profile;
+  const profile={identityVersion:2,author,handle,styleSeed:seed,faithLanguage:person&&hash(key+':faith')%5===0,...(person?{personIdentity}:{} )};entries[key]=profile;handles.set(handle.toLowerCase(),key);return profile;
  }};
 }

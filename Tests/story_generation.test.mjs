@@ -23,6 +23,17 @@ test('account identity survives recruit-to-roster, position, name, jersey, week 
 test('similar names resolve handle collisions once and preserve the chosen identities',()=>{
  const s=fixture(),r=authorRegistry();for(let i=0;i<30;i++)r.get(s,'recruit',s.teams[0],{id:'same'+i,name:'Alex Smith',team:255});const values=Object.values(r.entries).map(p=>p.handle.toLowerCase());assert.equal(new Set(values).size,30);assert.deepEqual(authorRegistry(r.entries).entries,r.entries);
 });
+test('recycled player slots receive a new handle while the old handle remains reserved',()=>{
+ const s=fixture(),r=authorRegistry(),team=s.teams[0],a={id:'reused',name:'Jordan Smith',team:1,position:'QB',presentationId:100};
+ const first=r.get(s,'player',team,a),later=r.get(s,'recruit',team,{...a,team:255,name:'Alex Davis',position:'CB',presentationId:200});
+ assert.notEqual(first.handle,later.handle);assert.equal(Object.keys(r.entries).length,2);assert.ok(Object.values(r.entries).some(p=>p.author==='Jordan Smith'&&p.handle===first.handle));
+ assert.equal(authorRegistry(r.entries).get(s,'player',team,{...a,name:'Alex Davis',presentationId:200}).handle,later.handle);
+ const unknown=authorRegistry(),old=unknown.get(s,'player',team,{...a,presentationId:null}),fresh=unknown.get(s,'player',team,{...a,name:'Zane Wilson',presentationId:null});assert.notEqual(old.handle,fresh.handle);
+});
+test('a known native presentation identity preserves a handle through a full display-name edit',()=>{
+ const s=fixture(),r=authorRegistry(),p={id:'edit',name:'Jordan Smith',team:1,position:'QB',presentationId:100},first=r.get(s,'player',s.teams[0],p);
+ assert.equal(r.get(s,'player',s.teams[0],{...p,name:'Alex Davis'}).handle,first.handle);
+});
 test('personality changes vocabulary while QB influence remains secondary; unknown personality is neutral',()=>{
  const s=fixture(),p=s.players[2],facts={playerName:p.name,school:'Harbor State',position:'QB'},e=event('offers',facts,{playerId:p.id});
  const noFaith=authorRegistry();const account=noFaith.get(s,'recruit',s.teams[0],p);account.faithLanguage=false;
@@ -49,7 +60,7 @@ test('midweek unsaved recruiting renders once, persists identity, and does not r
 });
 test('analyst replies quote a real parent, retain school context, and stay out of All Posts without a parent',()=>{
  const s=fixture(),e=event('analytics',{metric:'rushingYardsPerGame',school:'Harbor State',sampleGames:7,rushingYards:1643,rushingYardsPerGame:1643/7,nationalRank:3,nationalRankTied:false,pollRank:8,previousPollRank:12},{scopes:['team','national']});
- const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.equal(Boolean(reply),publishReply(s,'reply',parent.id));if(reply)assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8 feels about right'));if(reply)assert.equal(reply.curated,true);
+ const result=renderStories(s,[e]).stories,parent=result.find(p=>p.voice==='analyst'),reply=result.find(p=>p.replyTo);assert.ok(parent.body.includes('234.7'));assert.ok(parent.body.includes('Harbor State'));assert.equal(Boolean(reply),publishReply(s,'reply',parent.id));if(reply)assert.equal(reply.replyTo,parent.id);assert.ok(parent.body.includes('No. 8')&&parent.body.includes('No. 12'));if(reply)assert.equal(reply.curated,true);
 });
 
 test('all five supported analyst measures resolve their actual denominators and polarity',()=>{

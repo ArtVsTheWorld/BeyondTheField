@@ -1,0 +1,1055 @@
+{
+  "revision": "fan-variety-v99",
+  "families": {
+    "player.rivalry": [
+      {
+        "id": "player.rivalry.fancopy.1",
+        "body": "Rivalry W with my guys. Appreciate everybody who was with us. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.2",
+        "body": "Rivalry W with my guys. Love this team. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.3",
+        "body": "That rivalry win means a lot to this group. Appreciate everybody who was with us. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.4",
+        "body": "That rivalry win means a lot to this group. Love this team. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.5",
+        "body": "Bragging rights with my brothers. Appreciate everybody who was with us. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.6",
+        "body": "Bragging rights with my brothers. Love this team. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.7",
+        "body": "A win in this rivalry is a good feeling. Appreciate everybody who was with us. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.8",
+        "body": "A win in this rivalry is a good feeling. Love this team. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.9",
+        "body": "Glad we could share this rivalry win with our fans. Appreciate everybody who was with us. {hashtag}"
+      },
+      {
+        "id": "player.rivalry.fancopy.10",
+        "body": "Glad we could share this rivalry win with our fans. Love this team. {hashtag}"
+      }
+    ],
+    "player.performance.Leader": [
+      {
+        "id": "player.performance.Leader.fancopy.1",
+        "body": "Proud of how my teammates showed up. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.2",
+        "body": "Proud of how my teammates showed up. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.3",
+        "body": "Grateful for the guys who made this possible. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.4",
+        "body": "Grateful for the guys who made this possible. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.5",
+        "body": "A team win to go with a good day. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.6",
+        "body": "A team win to go with a good day. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.7",
+        "body": "Glad we could share that win with our fans. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.8",
+        "body": "Glad we could share that win with our fans. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.9",
+        "body": "Nothing about a game like that is just one person. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Leader.fancopy.10",
+        "body": "Nothing about a game like that is just one person. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.Intense": [
+      {
+        "id": "player.performance.Intense.fancopy.1",
+        "body": "{statLine}. Team W. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.2",
+        "body": "{statLine}. Team W. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.3",
+        "body": "Got the win. Enjoyed that one. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.4",
+        "body": "Got the win. Enjoyed that one. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.5",
+        "body": "A good day with my guys. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.6",
+        "body": "A good day with my guys. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.7",
+        "body": "The W was what we came for. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.8",
+        "body": "The W was what we came for. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.9",
+        "body": "Happy with the result. Love this group. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Intense.fancopy.10",
+        "body": "Happy with the result. Love this group. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.Entertainer": [
+      {
+        "id": "player.performance.Entertainer.fancopy.1",
+        "body": "{statLine} and a win. Not a bad day lol Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.2",
+        "body": "{statLine} and a win. Not a bad day lol Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.3",
+        "body": "The highlights might get watched a few times. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.4",
+        "body": "The highlights might get watched a few times. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.5",
+        "body": "Got the W. My mentions are more fun tonight. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.6",
+        "body": "Got the W. My mentions are more fun tonight. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.7",
+        "body": "A pretty good day to be out there with my guys. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.8",
+        "body": "A pretty good day to be out there with my guys. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.9",
+        "body": "I am keeping this game in the camera roll. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Entertainer.fancopy.10",
+        "body": "I am keeping this game in the camera roll. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.TeamPlayer": [
+      {
+        "id": "player.performance.TeamPlayer.fancopy.1",
+        "body": "My guys made a lot of this happen. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.2",
+        "body": "My guys made a lot of this happen. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.3",
+        "body": "Love when we get to enjoy a win together. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.4",
+        "body": "Love when we get to enjoy a win together. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.5",
+        "body": "Shoutout to everybody doing their part. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.6",
+        "body": "Shoutout to everybody doing their part. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.7",
+        "body": "A lot of teammates deserve love after that game. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.8",
+        "body": "A lot of teammates deserve love after that game. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.9",
+        "body": "Could not do this without the people around me. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.TeamPlayer.fancopy.10",
+        "body": "Could not do this without the people around me. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.Unpredictable": [
+      {
+        "id": "player.performance.Unpredictable.fancopy.1",
+        "body": "{statLine}. And we won. Interesting evening for my mentions. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.2",
+        "body": "{statLine}. And we won. Interesting evening for my mentions. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.3",
+        "body": "Got the W. I might leave my phone on for a while. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.4",
+        "body": "Got the W. I might leave my phone on for a while. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.5",
+        "body": "Some of the pregame opinions got quiet. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.6",
+        "body": "Some of the pregame opinions got quiet. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.7",
+        "body": "I am enjoying the final exactly where it is. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.8",
+        "body": "I am enjoying the final exactly where it is. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.9",
+        "body": "A win and a few saved screenshots. Good day. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Unpredictable.fancopy.10",
+        "body": "A win and a few saved screenshots. Good day. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.Neutral": [
+      {
+        "id": "player.performance.Neutral.fancopy.1",
+        "body": "Good win with this group. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.2",
+        "body": "Good win with this group. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.3",
+        "body": "Happy we could get this one together. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.4",
+        "body": "Happy we could get this one together. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.5",
+        "body": "Grateful for another win with my teammates. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.6",
+        "body": "Grateful for another win with my teammates. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.7",
+        "body": "Appreciate the guys around me. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.8",
+        "body": "Appreciate the guys around me. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.9",
+        "body": "Glad we got to share a win with our fans. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.Neutral.fancopy.10",
+        "body": "Glad we got to share a win with our fans. Love representing {school}. {hashtag}"
+      }
+    ],
+    "player.performance.QB": [
+      {
+        "id": "player.performance.QB.fancopy.1",
+        "body": "Proud of my teammates making plays. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.2",
+        "body": "Proud of my teammates making plays. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.3",
+        "body": "A good team win. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.4",
+        "body": "A good team win. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.5",
+        "body": "Thankful for the guys around me. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.6",
+        "body": "Thankful for the guys around me. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.7",
+        "body": "Appreciate everyone who helped us get this one. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.8",
+        "body": "Appreciate everyone who helped us get this one. Love representing {school}. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.9",
+        "body": "Grateful we could get the win together. Appreciate all the support. {hashtag}"
+      },
+      {
+        "id": "player.performance.QB.fancopy.10",
+        "body": "Grateful we could get the win together. Love representing {school}. {hashtag}"
+      }
+    ],
+    "fan.narrow_win": [
+      {
+        "id": "fan.narrow_win.fancopy.1",
+        "body": "The {nickname} won by {margin}. The scoreboard does not record how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.2",
+        "body": "The {nickname} won by {margin}. I would enjoy a slightly easier watch next time"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.3",
+        "body": "A {margin}-point {school} win. The scoreboard does not record how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.4",
+        "body": "A {margin}-point {school} win. I would enjoy a slightly easier watch next time"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.5",
+        "body": "{school} got it by {margin}. The scoreboard does not record how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.6",
+        "body": "{school} got it by {margin}. I would enjoy a slightly easier watch next time"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.7",
+        "body": "The final margin for the {nickname}: {margin}. The scoreboard does not record how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.8",
+        "body": "The final margin for the {nickname}: {margin}. I would enjoy a slightly easier watch next time"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.9",
+        "body": "{school} won another close one by {margin}. The scoreboard does not record how stressed I was"
+      },
+      {
+        "id": "fan.narrow_win.fancopy.10",
+        "body": "{school} won another close one by {margin}. I would enjoy a slightly easier watch next time"
+      }
+    ],
+    "fan.win": [
+      {
+        "id": "fan.win.fancopy.1",
+        "body": "The {nickname} won. Suddenly the rest of the weekend looks better"
+      },
+      {
+        "id": "fan.win.fancopy.2",
+        "body": "The {nickname} won. I have several people to send this to"
+      },
+      {
+        "id": "fan.win.fancopy.3",
+        "body": "A {school} W. Suddenly the rest of the weekend looks better"
+      },
+      {
+        "id": "fan.win.fancopy.4",
+        "body": "A {school} W. I have several people to send this to"
+      },
+      {
+        "id": "fan.win.fancopy.5",
+        "body": "Good day to be a {school} fan. Suddenly the rest of the weekend looks better"
+      },
+      {
+        "id": "fan.win.fancopy.6",
+        "body": "Good day to be a {school} fan. I have several people to send this to"
+      },
+      {
+        "id": "fan.win.fancopy.7",
+        "body": "A win for the {nickname}. Suddenly the rest of the weekend looks better"
+      },
+      {
+        "id": "fan.win.fancopy.8",
+        "body": "A win for the {nickname}. I have several people to send this to"
+      },
+      {
+        "id": "fan.win.fancopy.9",
+        "body": "{school} got the result. Suddenly the rest of the weekend looks better"
+      },
+      {
+        "id": "fan.win.fancopy.10",
+        "body": "{school} got the result. I have several people to send this to"
+      }
+    ],
+    "fan.rivalry": [
+      {
+        "id": "fan.rivalry.fancopy.1",
+        "body": "{school} {ownScore}, {opponent} {opponentScore}. The receipts are going to last a year"
+      },
+      {
+        "id": "fan.rivalry.fancopy.2",
+        "body": "{school} {ownScore}, {opponent} {opponentScore}. No need for anyone on the other side to rush back online"
+      },
+      {
+        "id": "fan.rivalry.fancopy.3",
+        "body": "The {nickname} beat {opponent}. The receipts are going to last a year"
+      },
+      {
+        "id": "fan.rivalry.fancopy.4",
+        "body": "The {nickname} beat {opponent}. No need for anyone on the other side to rush back online"
+      },
+      {
+        "id": "fan.rivalry.fancopy.5",
+        "body": "A rivalry win for {school}. The receipts are going to last a year"
+      },
+      {
+        "id": "fan.rivalry.fancopy.6",
+        "body": "A rivalry win for {school}. No need for anyone on the other side to rush back online"
+      },
+      {
+        "id": "fan.rivalry.fancopy.7",
+        "body": "{school} over {opponent}. Save that score. The receipts are going to last a year"
+      },
+      {
+        "id": "fan.rivalry.fancopy.8",
+        "body": "{school} over {opponent}. Save that score. No need for anyone on the other side to rush back online"
+      },
+      {
+        "id": "fan.rivalry.fancopy.9",
+        "body": "{opponent} fans, the {nickname} won this one. The receipts are going to last a year"
+      },
+      {
+        "id": "fan.rivalry.fancopy.10",
+        "body": "{opponent} fans, the {nickname} won this one. No need for anyone on the other side to rush back online"
+      }
+    ],
+    "fan.loss": [
+      {
+        "id": "fan.loss.fancopy.1",
+        "body": "{school} lost {score} to {opponent}. Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "fan.loss.fancopy.2",
+        "body": "{school} lost {score} to {opponent}. My phone and I need a little time apart"
+      },
+      {
+        "id": "fan.loss.fancopy.3",
+        "body": "A {score} loss for the {nickname} against {opponent}. Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "fan.loss.fancopy.4",
+        "body": "A {score} loss for the {nickname} against {opponent}. My phone and I need a little time apart"
+      },
+      {
+        "id": "fan.loss.fancopy.5",
+        "body": "{opponent} {opponentScore}, {school} {ownScore}. Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "fan.loss.fancopy.6",
+        "body": "{opponent} {opponentScore}, {school} {ownScore}. My phone and I need a little time apart"
+      },
+      {
+        "id": "fan.loss.fancopy.7",
+        "body": "The {nickname} fell {score} to {opponent}. Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "fan.loss.fancopy.8",
+        "body": "The {nickname} fell {score} to {opponent}. My phone and I need a little time apart"
+      },
+      {
+        "id": "fan.loss.fancopy.9",
+        "body": "{school} loses to {opponent}. That {score} final is going to sit with me. Still a fan tomorrow. Extremely frustrated today"
+      },
+      {
+        "id": "fan.loss.fancopy.10",
+        "body": "{school} loses to {opponent}. That {score} final is going to sit with me. My phone and I need a little time apart"
+      }
+    ],
+    "fan.picks": [
+      {
+        "id": "fan.picks.fancopy.1",
+        "body": "Two picks from {playerName} in a {school} loss. I want better for this team"
+      },
+      {
+        "id": "fan.picks.fancopy.2",
+        "body": "Two picks from {playerName} in a {school} loss. Hard to enjoy the rest of the games after that"
+      },
+      {
+        "id": "fan.picks.fancopy.3",
+        "body": "{school} lost with two interceptions from {playerName}. I want better for this team"
+      },
+      {
+        "id": "fan.picks.fancopy.4",
+        "body": "{school} lost with two interceptions from {playerName}. Hard to enjoy the rest of the games after that"
+      },
+      {
+        "id": "fan.picks.fancopy.5",
+        "body": "{playerName} threw two picks. A rough part of this {school} loss. I want better for this team"
+      },
+      {
+        "id": "fan.picks.fancopy.6",
+        "body": "{playerName} threw two picks. A rough part of this {school} loss. Hard to enjoy the rest of the games after that"
+      },
+      {
+        "id": "fan.picks.fancopy.7",
+        "body": "Those two {playerName} interceptions hurt in a loss. I want better for this team"
+      },
+      {
+        "id": "fan.picks.fancopy.8",
+        "body": "Those two {playerName} interceptions hurt in a loss. Hard to enjoy the rest of the games after that"
+      },
+      {
+        "id": "fan.picks.fancopy.9",
+        "body": "Two interceptions for {playerName} and no {school} win. I want better for this team"
+      },
+      {
+        "id": "fan.picks.fancopy.10",
+        "body": "Two interceptions for {playerName} and no {school} win. Hard to enjoy the rest of the games after that"
+      }
+    ],
+    "fan.performance": [
+      {
+        "id": "fan.performance.fancopy.1",
+        "body": "{playerName}: {statLine}. That is getting sent to several people"
+      },
+      {
+        "id": "fan.performance.fancopy.2",
+        "body": "{playerName}: {statLine}. Keep that player involved"
+      },
+      {
+        "id": "fan.performance.fancopy.3",
+        "body": "What a day from {playerName}. {statLine}. That is getting sent to several people"
+      },
+      {
+        "id": "fan.performance.fancopy.4",
+        "body": "What a day from {playerName}. {statLine}. Keep that player involved"
+      },
+      {
+        "id": "fan.performance.fancopy.5",
+        "body": "{statLine} for {playerName}. That is getting sent to several people"
+      },
+      {
+        "id": "fan.performance.fancopy.6",
+        "body": "{statLine} for {playerName}. Keep that player involved"
+      },
+      {
+        "id": "fan.performance.fancopy.7",
+        "body": "Give {playerName} some noise after {statLine}. That is getting sent to several people"
+      },
+      {
+        "id": "fan.performance.fancopy.8",
+        "body": "Give {playerName} some noise after {statLine}. Keep that player involved"
+      },
+      {
+        "id": "fan.performance.fancopy.9",
+        "body": "{playerName} put up {statLine}. That is getting sent to several people"
+      },
+      {
+        "id": "fan.performance.fancopy.10",
+        "body": "{playerName} put up {statLine}. Keep that player involved"
+      }
+    ],
+    "fan.breakout": [
+      {
+        "id": "fan.breakout.fancopy.1",
+        "body": "{playerHandle}: {statLine}. That performance deserves a few more posts"
+      },
+      {
+        "id": "fan.breakout.fancopy.2",
+        "body": "{playerHandle}: {statLine}. Please keep finding ways to get that production"
+      },
+      {
+        "id": "fan.breakout.fancopy.3",
+        "body": "{statLine} from {playerHandle}. That performance deserves a few more posts"
+      },
+      {
+        "id": "fan.breakout.fancopy.4",
+        "body": "{statLine} from {playerHandle}. Please keep finding ways to get that production"
+      },
+      {
+        "id": "fan.breakout.fancopy.5",
+        "body": "A big day from {playerHandle}. {statLine}. That performance deserves a few more posts"
+      },
+      {
+        "id": "fan.breakout.fancopy.6",
+        "body": "A big day from {playerHandle}. {statLine}. Please keep finding ways to get that production"
+      },
+      {
+        "id": "fan.breakout.fancopy.7",
+        "body": "{playerHandle} gave us {statLine}. That performance deserves a few more posts"
+      },
+      {
+        "id": "fan.breakout.fancopy.8",
+        "body": "{playerHandle} gave us {statLine}. Please keep finding ways to get that production"
+      },
+      {
+        "id": "fan.breakout.fancopy.9",
+        "body": "Some love for {playerHandle}: {statLine}. That performance deserves a few more posts"
+      },
+      {
+        "id": "fan.breakout.fancopy.10",
+        "body": "Some love for {playerHandle}: {statLine}. Please keep finding ways to get that production"
+      }
+    ],
+    "fan.poll_reply": [
+      {
+        "id": "fan.poll_reply.fancopy.1",
+        "body": "{analystHandle} No. {pollRank} feels about right? The {nickname} fans have a different view"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.2",
+        "body": "{analystHandle} The {nickname} keep winning and I am supposed to be thrilled with No. {pollRank}?"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.3",
+        "body": "{analystHandle} I have a different idea of where {school} belongs than No. {pollRank}"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.4",
+        "body": "{analystHandle} Respectfully, No. {pollRank} is not the {school} ranking I wanted to read"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.5",
+        "body": "{analystHandle} The {school} side of this argument is going to need a little more convincing"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.6",
+        "body": "{analystHandle} No. {pollRank} for the {nickname}. You knew the replies were coming"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.7",
+        "body": "{analystHandle} I watched {school} too. We are not agreeing on No. {pollRank}"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.8",
+        "body": "{analystHandle} The {nickname} have given us a reason to want better than No. {pollRank}"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.9",
+        "body": "{analystHandle} No. {pollRank}? I have several {school} arguments ready"
+      },
+      {
+        "id": "fan.poll_reply.fancopy.10",
+        "body": "{analystHandle} We can disagree about {school}. No. {pollRank} does not feel generous to me"
+      }
+    ],
+    "fan.holiday": [
+      {
+        "id": "fan.holiday.fancopy.1",
+        "body": "{holiday} and college football. My plans are made"
+      },
+      {
+        "id": "fan.holiday.fancopy.2",
+        "body": "{holiday} and college football. The schedule has my attention"
+      },
+      {
+        "id": "fan.holiday.fancopy.3",
+        "body": "{holiday} and college football. That is the day sorted out"
+      },
+      {
+        "id": "fan.holiday.fancopy.4",
+        "body": "{holiday} and college football. I am not volunteering for other plans"
+      },
+      {
+        "id": "fan.holiday.fancopy.5",
+        "body": "{holiday} and college football. There is a game to fit the day around"
+      },
+      {
+        "id": "fan.holiday.fancopy.6",
+        "body": "{holiday} and college football. The rest of the calendar can work around kickoff"
+      },
+      {
+        "id": "fan.holiday.fancopy.7",
+        "body": "{holiday} and college football. No further entertainment required"
+      },
+      {
+        "id": "fan.holiday.fancopy.8",
+        "body": "{holiday} and college football. Give me the games and something to eat"
+      },
+      {
+        "id": "fan.holiday.fancopy.9",
+        "body": "{holiday} and college football. I know how I want to spend the day"
+      },
+      {
+        "id": "fan.holiday.fancopy.10",
+        "body": "{holiday} and college football. The game schedule wins this argument"
+      }
+    ],
+    "fan.rank_up": [
+      {
+        "id": "fan.rank_up.fancopy.1",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. The screenshots are going out"
+      },
+      {
+        "id": "fan.rank_up.fancopy.2",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. I have people to remind about last week's opinions"
+      },
+      {
+        "id": "fan.rank_up.fancopy.3",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. Everybody keep the same energy"
+      },
+      {
+        "id": "fan.rank_up.fancopy.4",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. A very enjoyable poll notification"
+      },
+      {
+        "id": "fan.rank_up.fancopy.5",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. The {school} group chat likes this update"
+      },
+      {
+        "id": "fan.rank_up.fancopy.6",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. I will be posting about this more than necessary"
+      },
+      {
+        "id": "fan.rank_up.fancopy.7",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. I am trying to stay normal about it"
+      },
+      {
+        "id": "fan.rank_up.fancopy.8",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. I have not forgotten the old rankings arguments"
+      },
+      {
+        "id": "fan.rank_up.fancopy.9",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. A good day to check the rankings"
+      },
+      {
+        "id": "fan.rank_up.fancopy.10",
+        "body": "{parentHandle} No. {rank} for the {nickname}, from No. {previousRank}. That number looks good on the timeline"
+      }
+    ],
+    "fan.preview.rivalry": [
+      {
+        "id": "fan.preview.rivalry.fancopy.1",
+        "body": "{parentHandle} {opponent} week for the {nickname}. If you need me, I will be arguing with strangers"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.2",
+        "body": "{parentHandle} {opponent} week for the {nickname}. The rest of my calendar can wait"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.3",
+        "body": "{parentHandle} {opponent} week for the {nickname}. I am already being annoying about this game"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.4",
+        "body": "{parentHandle} {opponent} week for the {nickname}. The receipts folder is ready"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.5",
+        "body": "{parentHandle} {opponent} week for the {nickname}. Nobody is asking me to be neutral"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.6",
+        "body": "{parentHandle} {opponent} week for the {nickname}. I have had enough of the other side's predictions"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.7",
+        "body": "{parentHandle} {opponent} week for the {nickname}. The usual football opinions just got louder"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.8",
+        "body": "{parentHandle} {opponent} week for the {nickname}. I will remember everything said this week"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.9",
+        "body": "{parentHandle} {opponent} week for the {nickname}. This one has my full attention"
+      },
+      {
+        "id": "fan.preview.rivalry.fancopy.10",
+        "body": "{parentHandle} {opponent} week for the {nickname}. There is a year of bragging rights attached to this"
+      }
+    ],
+    "fanclub.win": [
+      {
+        "id": "fanclub.win.fancopy.1",
+        "body": "{school} beat {opponent}, {score}. Opening the group chat like we called the plays"
+      },
+      {
+        "id": "fanclub.win.fancopy.2",
+        "body": "{school} beat {opponent}, {score}. Good work, everybody. The memes can be happy ones"
+      },
+      {
+        "id": "fanclub.win.fancopy.3",
+        "body": "The {nickname} got the W over {opponent}, {score}. Opening the group chat like we called the plays"
+      },
+      {
+        "id": "fanclub.win.fancopy.4",
+        "body": "The {nickname} got the W over {opponent}, {score}. Good work, everybody. The memes can be happy ones"
+      },
+      {
+        "id": "fanclub.win.fancopy.5",
+        "body": "A {score} {school} win against {opponent}. Opening the group chat like we called the plays"
+      },
+      {
+        "id": "fanclub.win.fancopy.6",
+        "body": "A {score} {school} win against {opponent}. Good work, everybody. The memes can be happy ones"
+      },
+      {
+        "id": "fanclub.win.fancopy.7",
+        "body": "{school} over {opponent}. That {score} final looks good. Opening the group chat like we called the plays"
+      },
+      {
+        "id": "fanclub.win.fancopy.8",
+        "body": "{school} over {opponent}. That {score} final looks good. Good work, everybody. The memes can be happy ones"
+      },
+      {
+        "id": "fanclub.win.fancopy.9",
+        "body": "{score}. {school} takes care of {opponent}. Opening the group chat like we called the plays"
+      },
+      {
+        "id": "fanclub.win.fancopy.10",
+        "body": "{score}. {school} takes care of {opponent}. Good work, everybody. The memes can be happy ones"
+      }
+    ],
+    "fanclub.rivalry-win": [
+      {
+        "id": "fanclub.rivalry-win.fancopy.1",
+        "body": "{school} {score} over {opponent}. Rivalry receipts are ready. The bragging-rights subscription lasts a year"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.2",
+        "body": "{school} {score} over {opponent}. Rivalry receipts are ready. The posting department is going to be very busy"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.3",
+        "body": "{opponent} fans, {school} won {score}. The bragging-rights subscription lasts a year"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.4",
+        "body": "{opponent} fans, {school} won {score}. The posting department is going to be very busy"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.5",
+        "body": "A {score} rivalry win for {school}. The bragging-rights subscription lasts a year"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.6",
+        "body": "A {score} rivalry win for {school}. The posting department is going to be very busy"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.7",
+        "body": "{school} beat {opponent}. Put that {score} final everywhere. The bragging-rights subscription lasts a year"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.8",
+        "body": "{school} beat {opponent}. Put that {score} final everywhere. The posting department is going to be very busy"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.9",
+        "body": "The {school}-{opponent} result: {score} for our side. The bragging-rights subscription lasts a year"
+      },
+      {
+        "id": "fanclub.rivalry-win.fancopy.10",
+        "body": "The {school}-{opponent} result: {score} for our side. The posting department is going to be very busy"
+      }
+    ],
+    "fanclub.loss": [
+      {
+        "id": "fanclub.loss.fancopy.1",
+        "body": "{school} falls {score} to {opponent}. Still supporting the team. Not pretending that was fun"
+      },
+      {
+        "id": "fanclub.loss.fancopy.2",
+        "body": "{school} falls {score} to {opponent}. See you next game. Will need a minute first"
+      },
+      {
+        "id": "fanclub.loss.fancopy.3",
+        "body": "A {score} loss to {opponent} for the {nickname}. Still supporting the team. Not pretending that was fun"
+      },
+      {
+        "id": "fanclub.loss.fancopy.4",
+        "body": "A {score} loss to {opponent} for the {nickname}. See you next game. Will need a minute first"
+      },
+      {
+        "id": "fanclub.loss.fancopy.5",
+        "body": "{school} loses to {opponent}, {score}. Still supporting the team. Not pretending that was fun"
+      },
+      {
+        "id": "fanclub.loss.fancopy.6",
+        "body": "{school} loses to {opponent}, {score}. See you next game. Will need a minute first"
+      },
+      {
+        "id": "fanclub.loss.fancopy.7",
+        "body": "The {nickname} did not get it against {opponent}. {score}. Still supporting the team. Not pretending that was fun"
+      },
+      {
+        "id": "fanclub.loss.fancopy.8",
+        "body": "The {nickname} did not get it against {opponent}. {score}. See you next game. Will need a minute first"
+      },
+      {
+        "id": "fanclub.loss.fancopy.9",
+        "body": "{score} against {opponent}. A tough result for {school}. Still supporting the team. Not pretending that was fun"
+      },
+      {
+        "id": "fanclub.loss.fancopy.10",
+        "body": "{score} against {opponent}. A tough result for {school}. See you next game. Will need a minute first"
+      }
+    ],
+    "fanclub.bad-loss": [
+      {
+        "id": "fanclub.bad-loss.fancopy.1",
+        "body": "{school} {score} against {opponent}. The memes cannot cover this one. The football has to look a lot better next time"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.2",
+        "body": "{school} {score} against {opponent}. The memes cannot cover this one. Supporting this team includes asking for better"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.3",
+        "body": "A rough {score} result for {school} against {opponent}. The football has to look a lot better next time"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.4",
+        "body": "A rough {score} result for {school} against {opponent}. Supporting this team includes asking for better"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.5",
+        "body": "{opponent} beat {school}, {score}. That needs an answer. The football has to look a lot better next time"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.6",
+        "body": "{opponent} beat {school}, {score}. That needs an answer. Supporting this team includes asking for better"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.7",
+        "body": "{school} loses {score}. {opponent} gave us plenty to be frustrated about. The football has to look a lot better next time"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.8",
+        "body": "{school} loses {score}. {opponent} gave us plenty to be frustrated about. Supporting this team includes asking for better"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.9",
+        "body": "{score} vs. {opponent}. A bad day for the {nickname}. The football has to look a lot better next time"
+      },
+      {
+        "id": "fanclub.bad-loss.fancopy.10",
+        "body": "{score} vs. {opponent}. A bad day for the {nickname}. Supporting this team includes asking for better"
+      }
+    ],
+    "fanclub.tie": [
+      {
+        "id": "fanclub.tie.fancopy.1",
+        "body": "{school} and {opponent}: {score}. A tie. The group chat needs a new reaction picture"
+      },
+      {
+        "id": "fanclub.tie.fancopy.2",
+        "body": "{school} and {opponent}: {score}. A tie. Not sure which folder the memes go in now"
+      },
+      {
+        "id": "fanclub.tie.fancopy.3",
+        "body": "The {school}-{opponent} game ends level, {score}. The group chat needs a new reaction picture"
+      },
+      {
+        "id": "fanclub.tie.fancopy.4",
+        "body": "The {school}-{opponent} game ends level, {score}. Not sure which folder the memes go in now"
+      },
+      {
+        "id": "fanclub.tie.fancopy.5",
+        "body": "A {score} tie for {school} vs. {opponent}. The group chat needs a new reaction picture"
+      },
+      {
+        "id": "fanclub.tie.fancopy.6",
+        "body": "A {score} tie for {school} vs. {opponent}. Not sure which folder the memes go in now"
+      },
+      {
+        "id": "fanclub.tie.fancopy.7",
+        "body": "Neither {school} nor {opponent} won. {score}. The group chat needs a new reaction picture"
+      },
+      {
+        "id": "fanclub.tie.fancopy.8",
+        "body": "Neither {school} nor {opponent} won. {score}. Not sure which folder the memes go in now"
+      },
+      {
+        "id": "fanclub.tie.fancopy.9",
+        "body": "{school} ties {opponent}, {score}. The group chat needs a new reaction picture"
+      },
+      {
+        "id": "fanclub.tie.fancopy.10",
+        "body": "{school} ties {opponent}, {score}. Not sure which folder the memes go in now"
+      }
+    ],
+    "fanclub.rivalry-week": [
+      {
+        "id": "fanclub.rivalry-week.fancopy.1",
+        "body": "{opponent} week for {school}. Please hydrate before being impossible in the replies"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.2",
+        "body": "{opponent} week for {school}. The rivalry posting schedule is officially active"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.3",
+        "body": "The {school}-{opponent} rivalry is here. Please hydrate before being impossible in the replies"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.4",
+        "body": "The {school}-{opponent} rivalry is here. The rivalry posting schedule is officially active"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.5",
+        "body": "A very normal and relaxed {opponent} week for {school}. Obviously. Please hydrate before being impossible in the replies"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.6",
+        "body": "A very normal and relaxed {opponent} week for {school}. Obviously. The rivalry posting schedule is officially active"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.7",
+        "body": "{school} fans, the {opponent} game is the one on the calendar. Please hydrate before being impossible in the replies"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.8",
+        "body": "{school} fans, the {opponent} game is the one on the calendar. The rivalry posting schedule is officially active"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.9",
+        "body": "The {nickname} have {opponent} this week. Please hydrate before being impossible in the replies"
+      },
+      {
+        "id": "fanclub.rivalry-week.fancopy.10",
+        "body": "The {nickname} have {opponent} this week. The rivalry posting schedule is officially active"
+      }
+    ]
+  }
+}
