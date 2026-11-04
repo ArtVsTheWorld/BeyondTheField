@@ -10,7 +10,9 @@ class AdapterSmoke {
   var action=Activator.CreateInstance(type);Require(type.GetProperty("PreLaunchAction").GetValue(action,null)!=null&&type.GetProperty("PostLaunchAction").GetValue(action,null)!=null,"Missing launch callbacks");
   if(args.Length>2&&args[2]=="--verify-only"){Console.WriteLine("Installed MMC adapter, protected payload, configuration and launch callbacks validated; no game injection.");return 0;}
   var folder=(string)type.GetProperty("RuntimeFolder").GetValue(null,null);
-  foreach(var relative in new[]{"LoadDynastyEnhancer.exe","Content/Runtime/analysis-pack.json"}){
+  var tamperFiles=new System.Collections.Generic.List<string>(new[]{"LoadDynastyEnhancer.exe","Content/Runtime/analysis-pack.json"});
+  var nativeFiles=type.GetProperty("NativeFiles");if(nativeFiles!=null)tamperFiles.AddRange((string[])nativeFiles.GetValue(null,null));
+  foreach(var relative in tamperFiles){
    var path=Path.Combine(folder,relative);var original=File.ReadAllBytes(path);bool rejected=false;
    try{File.WriteAllText(path,"tampered smoke fixture");try{prepare.Invoke(null,null);}catch(TargetInvocationException error){rejected=error.InnerException is IOException;}}
    finally{File.WriteAllBytes(path,original);}Require(rejected,"Tampered runtime/content accepted");

@@ -1,6 +1,6 @@
 {
   "feature": "High-school resume and recruit Notes expansion",
-  "status": "p19 active; first live OL report visually verified. Awaiting user confirmation and final controller/reentry/persistence checks.",
+  "status": "p19 expansion verified live including controls and Dynasty reload. p20 automatic MMC package built and verified; awaiting closed apps for installation.",
   "sourceBranch": "research/recruiting-fog",
   "workingNativeDll": "p18 retained unchanged as recovery; p19 active candidate",
   "stages": [
@@ -190,7 +190,7 @@
     {
       "stage": 6,
       "name": "Native layout and immutable persistence",
-      "status": "native candidate built; live verification pending",
+      "status": "passed live layout, controls and same-Dynasty reload with identical stored figures",
       "identityParity": "Native parser, stable SHA256 identities and generated public resumes match all 3,721 offline audited inputs",
       "capture": "8,205 records: only identity, Recruit records and linked Player records; no complete league/news capture. Worker captures on loaded-session changes or requested unknown recruits, with bounded retry. UI hooks perform cached lookups and formatting only.",
       "persistence": "Versioned per-league/per-season journals; existing resumes remain unchanged as ratings/scouting change. Previous-season identities survive year boundaries. Atomic replacement; no game save writes.",
@@ -200,12 +200,24 @@
         "Repeat prepared journal SHA256 remains byte-for-byte identical",
         "Composed real-data reports fit the 1,500-character test budget"
       ],
-      "loading": "Native 500ms retry timer only while report is preparing, capped at 20 attempts; cancellation on Scouting restore, ModelHidden and Shutdown."
+      "loading": "Native 500ms retry timer only while report is preparing, capped at 20 attempts; cancellation on Scouting restore, ModelHidden and Shutdown.",
+      "measuredCaptureMs": 250
     },
     {
       "stage": 7,
       "name": "Full validation and automatic loading",
-      "status": "native checks pass; live report/controls/reload and automatic MMC integration remain"
+      "status": "automatic-loading package built; installation and fresh MMC launch pending",
+      "adapter": "v104 single Dynasty Enhancer plugin launches preserved v103 Social runtime and Recruiting Fog component independently",
+      "preservedSocialPayloadFiles": 122,
+      "packageChecks": [
+        "MMC callbacks registered",
+        "Both native DLLs protected by payload hashes",
+        "Tampered native/content files rejected",
+        "Payload paths bounded",
+        "Editable user configuration preserved",
+        "No histories, snapshots or game saves in ZIP"
+      ],
+      "scriptRetention": "512 source generations maximum, approximately 22 MiB of definition pages at the cap; ordinary sessions retain far fewer. Clean restart unloads them."
     }
   ],
   "model": {
@@ -238,7 +250,13 @@
     "bytes": 824320,
     "sha256": "9777c4a1907e614694bfbec82a450031108a7c9401c2f6a6f3c9b3b313f60add",
     "loaded": true,
-    "liveVerification": "Screenshot: Knijeah Williams (LG), Cambridge MA, 1A: 12/372 sacks allowed = 3.2%; 13 pancakes/205 run-block snaps. Scouting prose and report fit inside the panel.",
+    "liveVerification": "User confirmed p19 reports, Scouting and Back; Knijeah\u2019s 12/372 sacks (3.2%) and 13/205 pancakes remain unchanged after returning to main menu and continuing.",
     "automaticMmcLoading": false
+  },
+  "automaticPackage": {
+    "zip": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-RecruitingFog\\Build\\DynastyEnhancer-Recruiting-v1-MMC.zip",
+    "native": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-RecruitingFog\\Build\\Package-Recruiting-v1-394992b495c942d7a9afc1f7ffdfec0c\\Plugins\\DynastyEnhancer\\Runtime-v103\\DynastyEnhancerRecruitFog-v1.dll",
+    "sourceBuild": "p20",
+    "installed": false
   }
 }

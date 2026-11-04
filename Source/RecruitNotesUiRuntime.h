@@ -49,7 +49,7 @@ public:
             const auto result=redirectDefinition(location,bank.definitions);if(result>=0)++attached;return result;
         }
         char magic[14]{};if(!read(asset,magic,14)||memcmp(magic,"Apt Data:1:",11))return -1;
-        if(banks.size()>=16)throw std::runtime_error("Notes reached its bounded asset-generation limit");
+        if(banks.size()>=512)throw std::runtime_error("Notes reached its bounded asset-generation limit");
         Bank bank;bank.asset=asset;
         std::vector<std::vector<unsigned char>> verified;
         for(const auto& p:code){
