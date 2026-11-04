@@ -69,13 +69,18 @@ class Assembler:
 
 HIDDEN = ('mcCircularBar', 'mcBarIcon', 'mcScoutBtn', 'mcTotalHours',
           'mcAttributesTitle', 'mcAbilitiesTitle', 'mcMentalsTitle',
-          'mcDevelopmentTitle', 'mcDevelopmentDesc', 'mcDevTrait', 'mcList')
+          'mcDevelopmentTitle', 'mcDevelopmentDesc', 'mcDevTrait', 'mcList',
+          'mcLineMid', 'mcLineLeft', 'mcLineRight')
 ALL = HIDDEN + ('mcTitle', 'mcDescription')
 
 
 def append_tab(a):
     # The native method's register 1 contains the three-element return array.
     # The navigation builder assigns a fresh screen-layer key to every row.
+    # Native tabs cache their widths before the board replaces the Scouting
+    # label with its percentage. Reserve its longest label before adding Notes.
+    a.reg(1); a.number(2); a.raw(0x4E); a.store(8)
+    a.reg(8); a.string('display'); a.reg(8); a.member('display'); a.string(' (100%)'); a.raw(0x47, 0x4F)
     a.empty_object(0)
     a.set_field(0, 'display', 'Notes')
     a.set_field(0, 'DENotes', True)
@@ -119,8 +124,17 @@ def description_style(a, width, color):
 def draw_notes(a):
     a.reg(1); a.member('mView'); a.store(4); a.missing(4, 'done')
     a.reg(4); a.member('mcDescription'); a.store(6); a.missing(6, 'done')
-    a.number(0); a.reg(1); a.member('mRecruitingBoardService'); a.string('GetActiveRecruit'); a.raw(0x52); a.store(3)
-    a.missing(3, 'done')
+    # GetActiveRecruit returns a RecordId, not the recruit object. Match it in
+    # the same native response used by Scouting, retaining our DENotesBody.
+    a.number(0); a.reg(1); a.member('mRecruitingBoardService'); a.string('GetActiveRecruit'); a.raw(0x52); a.store(8)
+    a.number(0); a.reg(1); a.member('mRecruitingBoardAdapter'); a.string('GetTeamRecruitList'); a.raw(0x52); a.store(9)
+    a.missing(9, 'done')
+    a.string('RecordId'); a.reg(8); a.reg(9); a.number(3)
+    a.global_object('cafe', 'utility', 'ArrayUtil'); a.string('Search'); a.raw(0x52); a.store(0)
+    a.reg(0); a.global_object('cafe', 'utility', 'ArrayUtil', 'SEARCH_FAIL'); a.raw(0x49); a.branch('found_recruit', 0xB8)
+    a.empty_object(3); a.branch('recruit_ready', 0x99)
+    a.label('found_recruit'); a.reg(9); a.reg(0); a.raw(0x4E); a.store(3)
+    a.label('recruit_ready')
     a.reg(1); a.string('mCurrentRecruit'); a.reg(3); a.raw(0x4F)
     a.reg(4); a.member('mDENotesSaved'); a.raw(0x76, 0x49); a.branch('hide_widgets', 0xB8)
     a.empty_object(5)
@@ -138,9 +152,16 @@ def draw_notes(a):
         a.set_field(6, '_visible', False)
         if name == 'mcScoutBtn': a.number(0); a.reg(6); a.call('Unfocus')
         a.label(f'hide_skip{index}')
-    for name, x, y in [('mcTitle', 24, 20), ('mcDescription', 24, 78)]:
+    # These native widgets use stage coordinates, not coordinates relative to
+    # their visible panel. Anchor to their original positions and lift them
+    # into the now-empty body, preserving the game's resolution/safe-zone work.
+    for name, lift in [('mcTitle', 140), ('mcDescription', 154)]:
         a.reg(4); a.member(name); a.store(6)
-        a.set_field(6, '_x', x); a.set_field(6, '_y', y); a.set_field(6, '_visible', True)
+        for axis in ('_x', '_y'):
+            a.reg(6); a.string(axis); a.reg(4); a.member('mDENotesSaved'); a.member(name+axis)
+            if axis=='_y': a.number(lift); a.raw(0x0B)
+            a.raw(0x4F)
+        a.set_field(6, '_visible', True)
     a.string('Recruit Notes'); a.number(1); a.reg(4); a.member('mcTitle'); a.call('SetLabel')
     description_style(a, 1180, 'PRIMARY_LIGHT_COLOR')
     a.reg(3); a.member('DENotesBody'); a.store(6)

@@ -6,6 +6,10 @@ unsigned forwarded=0;
 void* __fastcall fakeGetter(void*,void** out){++forwarded;return out;}
 std::array<uintptr_t,2> detailArguments{};
 void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t second){++forwarded;detailArguments={first,second};return out;}
+#if defined(RECRUIT_NOTES_UI)
+std::array<uintptr_t,5> setupArguments{};
+uintptr_t __fastcall fakeScriptSetup(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){setupArguments={reinterpret_cast<uintptr_t>(object),reinterpret_cast<uintptr_t>(saved),receiver,parent,super};return 0xabcdef;}
+#endif
 struct FixtureView {
     std::map<uintptr_t,std::vector<uintptr_t>> arrays;
     std::map<uintptr_t,std::map<std::string,uintptr_t>> maps;
@@ -49,6 +53,38 @@ int main(){try{
         require(field<unsigned>(cloned.data(),24)==16&&field<unsigned short>(cloned.data(),12)==10&&std::equal(original.begin(),original.end(),cloned.begin()+56),"Notes definition header/body copy differs");
         require(std::equal(h.begin()+32,h.end(),cloned.begin()+32),"Notes clone changed the native constant pool");
         original[0]^=1;bool rejected=false;try{makeDefinition(p,h,original);}catch(const std::exception&){rejected=true;}require(rejected,"Changed native method body bypassed the Notes gate");
+        const std::vector<OwnedDefinition> definitions={{0x10000,0x20000},{0x30000,0x40000}};
+        PVOID volatile location=reinterpret_cast<void*>(0x30000);
+        require(redirectDefinition(&location,definitions)==1&&location==reinterpret_cast<void*>(0x40000),"Live invocation did not attach its matching definition");
+        require(redirectDefinition(&location,definitions)==-1&&location==reinterpret_cast<void*>(0x40000),"Already-patched clone was changed twice");
+        location=reinterpret_cast<void*>(0x50000);
+        require(redirectDefinition(&location,definitions)==-1&&location==reinterpret_cast<void*>(0x50000),"Recycled owner or unrelated script was changed");
+        // The fifth native setup argument lives on the stack; forwarding only
+        // register arguments would corrupt super-binding on other UI scripts.
+        runtime::originalScriptSetup=fakeScriptSetup;
+        for(bool stopped:{false,true}){runtime::disabled=stopped;
+            require(runtime::notesSetupHook(reinterpret_cast<void*>(1),reinterpret_cast<void*>(2),3,4,5)==0xabcdef&&setupArguments==std::array<uintptr_t,5>{1,2,3,4,5},"Notes setup hook changed native ABI or pass-through return");}
+        runtime::disabled=false;
+        std::array<unsigned char,4096> asset{};std::array<uintptr_t,6> pool{};memcpy(asset.data(),"Apt Data:1:",11);
+        original[0]^=1;p.offset=256;auto second=p;second.offset=512;second.argc=0;
+        const auto assetBase=reinterpret_cast<uintptr_t>(asset.data());const auto poolAddress=reinterpret_cast<uintptr_t>(pool.data());
+        put(40,poolAddress);
+        memcpy(asset.data()+p.offset,h.data(),48);memcpy(asset.data()+p.offset+48,original.data(),original.size());
+        put(8,unsigned(0));memcpy(asset.data()+second.offset,h.data(),48);memcpy(asset.data()+second.offset+48,original.data(),original.size());
+        Runtime live({p,second});live.prepare();std::array<uintptr_t,12> object{};object[11]=assetBase+p.offset;
+        asset[second.offset+48]^=1;rejected=false;
+        try{live.beforeInvoke(object.data(),runtime::read);}catch(const std::exception&){rejected=true;}
+        require(rejected&&object[11]==assetBase+p.offset&&live.ownerCount()==0,"Notes attached before every method body passed its gate");
+        asset[second.offset+48]^=1;
+        require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=assetBase+p.offset&&live.ownerCount()==1,"Notes failed to attach to a newly-created live script");
+        const auto owned=object[11];object[11]=assetBase+p.offset;
+        require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]==owned,"Fresh receiver failed to reuse verified script generation");
+        // Same source allocation may be reused after leaving Recruiting. A
+        // changed pool pointer must generate fresh headers, never stale ones.
+        const auto nextPool=reinterpret_cast<uintptr_t>(pool.data()+1);memcpy(asset.data()+p.offset+40,&nextPool,8);
+        object[11]=assetBase+p.offset;
+        require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=owned,"Reloaded source reused a stale constant-pool header");
+        require(field<uintptr_t>(reinterpret_cast<const unsigned char*>(object[11]),40)==nextPool,"Reloaded definition lost its current pool");
     }
 #endif
     {

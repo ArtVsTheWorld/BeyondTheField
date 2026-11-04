@@ -1,6 +1,8 @@
 #pragma once
 #include "RecruitNotesUiPrograms.h"
 #include <array>
+#include <atomic>
+#include <mutex>
 #include <fstream>
 #include <set>
 #include <stdexcept>
@@ -16,41 +18,57 @@ inline std::vector<unsigned char> makeDefinition(const Program& p,const std::arr
     const auto registers=static_cast<unsigned short>(p.newRegisters);const auto size=static_cast<unsigned>(p.code.size());memcpy(result.data()+12,&registers,2);memcpy(result.data()+24,&size,4);return result;
 }
 struct OwnedDefinition {uintptr_t original=0,owned=0;};
-struct Owner {uintptr_t address=0;size_t program=0;};
+inline int redirectDefinition(PVOID volatile* location,const std::vector<OwnedDefinition>& definitions){
+    const auto current=reinterpret_cast<uintptr_t>(*location);
+    for(size_t i=0;i<definitions.size();++i){const auto& d=definitions[i];if(current!=d.original)continue;
+        return InterlockedCompareExchangePointer(location,reinterpret_cast<void*>(d.owned),reinterpret_cast<void*>(d.original))==reinterpret_cast<void*>(d.original)?static_cast<int>(i):-1;
+    }
+    return -1;
+}
 class Runtime {
-    std::vector<Program> code=programs();std::vector<OwnedDefinition> definitions;std::vector<Owner> owners;
-    static bool exchange(uintptr_t address,uintptr_t expected,uintptr_t desired){DWORD old=0,unused=0;if(!VirtualProtect(reinterpret_cast<void*>(address),8,PAGE_READWRITE,&old))return false;const auto before=InterlockedCompareExchangePointer(reinterpret_cast<PVOID volatile*>(address),reinterpret_cast<void*>(desired),reinterpret_cast<void*>(expected));VirtualProtect(reinterpret_cast<void*>(address),8,old,&unused);return before==reinterpret_cast<void*>(expected);}
+    struct Bank {uintptr_t asset=0;std::vector<OwnedDefinition> definitions;std::vector<std::array<unsigned char,48>> headers;};
+    std::vector<Program> code;std::vector<Bank> banks;std::mutex bankMutex;
+    std::atomic<unsigned> attached{0};
 public:
-    bool installed=false;
-    template<class Read>void install(const std::filesystem::path& folder,uintptr_t image,Read read){
-        std::ifstream in(folder/L"recruit-notes-runtime.json");if(!in)throw std::runtime_error("Notes runtime manifest is missing");nlohmann::json config;in>>config;
-        if(config.at("pid").get<DWORD>()!=GetCurrentProcessId())throw std::runtime_error("Notes manifest belongs to a different session");
-        const auto asset=config.at("asset").get<uintptr_t>();char magic[14]{};if(!read(asset,magic,14)||memcmp(magic,"Apt Data:1:",11))throw std::runtime_error("Notes APT stream is no longer loaded");
+    explicit Runtime(std::vector<Program> selected=programs()):code(std::move(selected)){}
+    bool prepared=false;
+    void prepare(){prepared=true;}
+    template<class Read>int beforeInvoke(void* object,Read read){
+        if(!prepared)return -1;
+        // The native invocation guarantees a live ScriptFunction2 receiver and
+        // definition. Most calls leave after these small in-process comparisons;
+        // no process scan, allocation or ReadProcessMemory is used on that path.
+        auto location=reinterpret_cast<PVOID volatile*>(static_cast<unsigned char*>(object)+0x58);
+        const auto definition=reinterpret_cast<uintptr_t>(*location);
+        std::array<unsigned char,48> current{};memcpy(current.data(),reinterpret_cast<const void*>(definition),current.size());
+        size_t index=0;for(;index<code.size();++index)if(headerMatches(code[index],current))break;
+        if(index==code.size()||definition<code[index].offset+0x10000)return -1;
+        const auto asset=definition-code[index].offset;
+        std::lock_guard<std::mutex> lock(bankMutex);
+        for(const auto& bank:banks)if(bank.asset==asset&&bank.headers[index]==current){
+            const auto result=redirectDefinition(location,bank.definitions);if(result>=0)++attached;return result;
+        }
+        char magic[14]{};if(!read(asset,magic,14)||memcmp(magic,"Apt Data:1:",11))return -1;
+        if(banks.size()>=16)throw std::runtime_error("Notes reached its bounded asset-generation limit");
+        Bank bank;bank.asset=asset;
+        std::vector<std::vector<unsigned char>> verified;
         for(const auto& p:code){
             const auto original=asset+p.offset;std::array<unsigned char,48> h{};std::vector<unsigned char> body(p.size);
             if(!read(original,h.data(),48)||!read(original+48,body.data(),body.size()))throw std::runtime_error("Notes source definition is no longer readable");
-            const auto bytes=makeDefinition(p,h,body);auto memory=VirtualAlloc(nullptr,(bytes.size()+4095)&~size_t(4095),MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);if(!memory)throw std::runtime_error("Cannot retain a Notes script definition");
-            memcpy(memory,bytes.data(),bytes.size());definitions.push_back({original,reinterpret_cast<uintptr_t>(memory)});
+            const auto bytes=makeDefinition(p,h,body);std::vector<unsigned char> pool(field<unsigned>(h.data(),32)*8);
+            if(!read(field<uintptr_t>(h.data(),40),pool.data(),pool.size()))throw std::runtime_error("Notes native constant pool is no longer readable");
+            bank.headers.push_back(h);verified.push_back(bytes);
         }
-        if(!config.at("owners").is_array()||config.at("owners").size()>128)throw std::runtime_error("Notes owner count is unsupported");
-        std::set<uintptr_t> unique;std::set<size_t> matched;
-        for(const auto& item:config.at("owners")){
-            Owner owner{item.at("address").get<uintptr_t>(),item.at("program").get<size_t>()};if(owner.program>=definitions.size()||owner.address%8||!unique.insert(owner.address).second)throw std::runtime_error("Notes owner metadata is unsupported");
-            // Leaving Recruiting can release instance/delegate clones. Skip
-            // stale instances, but require a valid owner for every method.
-            std::array<unsigned char,96> object{};if(!read(owner.address,object.data(),object.size())||field<uintptr_t>(object.data(),0)!=image+0xbc42fe8||field<uintptr_t>(object.data(),0x58)!=definitions[owner.program].original)continue;
-            owners.push_back(owner);matched.insert(owner.program);
+        // Gate the entire set before allocating or changing the first receiver.
+        for(size_t i=0;i<code.size();++i){const auto& bytes=verified[i];
+            auto memory=VirtualAlloc(nullptr,(bytes.size()+4095)&~size_t(4095),MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);if(!memory)throw std::runtime_error("Cannot retain a Notes script definition");
+            memcpy(memory,bytes.data(),bytes.size());bank.definitions.push_back({asset+code[i].offset,reinterpret_cast<uintptr_t>(memory)});
         }
-        if(matched.size()!=code.size())throw std::runtime_error("A Notes script owner is unavailable");
-        size_t done=0;
-        for(const auto& owner:owners){const auto& d=definitions[owner.program];if(!exchange(owner.address+0x58,d.original,d.owned)){
-                while(done){const auto& previous=owners[--done];const auto& saved=definitions[previous.program];exchange(previous.address+0x58,saved.owned,saved.original);}throw std::runtime_error("Notes script ownership changed before installation");}
-            ++done;
-        }
-        // Native ScriptFunction clones retain these definition pointers. Keep
-        // both data pages and the containing DLL pinned until a clean restart.
-        installed=true;
+        // Script owners are released on leaving Recruiting. Never retain their
+        // addresses: attach only to the live receiver at native invocation setup,
+        // before flags, argument registers, body length or body are consumed.
+        banks.push_back(std::move(bank));const auto result=redirectDefinition(location,banks.back().definitions);if(result>=0)++attached;return result;
     }
-    size_t ownerCount()const{return owners.size();}
+    unsigned ownerCount()const{return attached.load();}
 };
 }

@@ -37,6 +37,12 @@ std::atomic<bool> disabled{false};std::atomic<unsigned> inflight{0},calls{0};boo
 std::mutex queueMutex;std::deque<Json> pending;
 #if defined(RECRUIT_NOTES_UI)
 notesui::Runtime notesUi;
+using ScriptSetup=uintptr_t(__fastcall*)(void*,void*,uintptr_t,uintptr_t,uintptr_t);
+ScriptSetup originalScriptSetup=nullptr;bool notesSetupInstalled=false;
+std::atomic<unsigned> notesAttachedMethods{0};
+std::atomic<bool> notesAttachmentFailed{false};
+constexpr uintptr_t scriptSetupRva=0x7c36850,scriptTableRva=0xbc42fe8,scriptSetupSlot=0xc8;
+constexpr std::array<unsigned char,24> scriptSetupPrefix={0x48,0x89,0x5c,0x24,0x10,0x48,0x89,0x6c,0x24,0x18,0x48,0x89,0x74,0x24,0x20,0x57,0x41,0x56,0x41,0x57,0x48,0x83,0xec,0x20};
 #endif
 constexpr uintptr_t vtableRva=0xc752bc8,slot=0x40,getterRva=0xa0e91a0;
 constexpr std::array<unsigned char,32> prefix={0x48,0x89,0x54,0x24,0x10,0x48,0x89,0x4c,0x24,0x08,0x55,0x53,0x41,0x56,0x48,0x8d,0xac,0x24,0xd0,0xfc,0xff,0xff,0x48,0x81,0xec,0x30,0x04,0x00,0x00,0x48,0x8b,0xda};
@@ -131,6 +137,15 @@ Json snapshot(uintptr_t at,unsigned depth=0,bool full=false,size_t rootLimit=2){
     return {{"kind",kind},{"header",header(at)}};
 }
 struct CallGuard{CallGuard(){++inflight;}~CallGuard(){--inflight;}};
+#if defined(RECRUIT_NOTES_UI)
+uintptr_t __fastcall notesSetupHook(void* object,void* saved,uintptr_t receiver,uintptr_t parent,uintptr_t super){
+    CallGuard guard;
+    if(!disabled&&!notesAttachmentFailed)try{const auto index=notesUi.beforeInvoke(object,read);if(index>=0){const auto bit=1u<<index;
+        if(!(notesAttachedMethods.fetch_or(bit)&bit))note({{"event","recruit_notes_method_attached"},{"program",index}});}}
+    catch(const std::exception& error){notesAttachmentFailed=true;note({{"event","recruit_notes_attachment_failed"},{"reason",error.what()}});}
+    return originalScriptSetup(object,saved,receiver,parent,super);
+}
+#endif
 template<size_t Index>void* __fastcall detailHook(void* object,void** out,uintptr_t first,uintptr_t second){
     CallGuard guard;auto result=detailOriginal[Index](object,out,first,second);const auto call=++detailCalls[Index];
     if(!disabled){uintptr_t value=0;if(out)read(reinterpret_cast<uintptr_t>(out),&value,8);
@@ -169,10 +184,13 @@ void* __fastcall getterHook(void* object,void** out){
 }
 DWORD stop(){
 #if defined(RECRUIT_NOTES_UI)
-    if(notesUi.installed){note({{"event","notes_ui_restart_required"},{"reason","The game can retain cloned Notes definitions; use a clean restart"}});return 4;}
+    if(notesUi.ownerCount()){note({{"event","notes_ui_restart_required"},{"reason","The game can retain cloned Notes definitions; use a clean restart"}});return 4;}
 #endif
     disabled=true;
     bool ownershipFailed=false;
+#if defined(RECRUIT_NOTES_UI)
+    if(notesSetupInstalled){if(replace(reinterpret_cast<void*>(notesSetupHook),reinterpret_cast<void*>(originalScriptSetup),scriptTableRva,scriptSetupSlot))notesSetupInstalled=false;else ownershipFailed=true;}
+#endif
 #if defined(RECRUIT_NOTES_PROBE)
     if(notesProbeInstalled){if(replace(reinterpret_cast<void*>(notesLengthHook),reinterpret_cast<void*>(originalScriptLength),0xbc42fe8,0xb0))notesProbeInstalled=false;else ownershipFailed=true;}
 #endif
@@ -195,7 +213,10 @@ DWORD WINAPI worker(void*){
         if(!replace(reinterpret_cast<void*>(original),reinterpret_cast<void*>(getterHook)))throw std::runtime_error("Recruiting getter ownership changed");installed=true;
         for(size_t i=0;i<detailCount;++i){const auto& gate=playingTimeGates[i];detailOriginal[i]=reinterpret_cast<DetailGetter>(base+gate.rva);if(!replace(reinterpret_cast<void*>(detailOriginal[i]),reinterpret_cast<void*>(hooks[i]),gate.vtable,gate.slot))throw std::runtime_error("Playing-time getter ownership changed");detailInstalled[i]=true;}
 #if defined(RECRUIT_NOTES_UI)
-        notesUi.install(folder,base,read);note({{"event","recruit_notes_ui_installed"},{"owners",notesUi.ownerCount()},{"unload","clean restart required"}});
+        if(!read(base+scriptSetupRva,actual.data(),scriptSetupPrefix.size())||memcmp(actual.data(),scriptSetupPrefix.data(),scriptSetupPrefix.size())||!read(base+scriptTableRva+scriptSetupSlot,&current,8)||current!=base+scriptSetupRva)throw std::runtime_error("Unsupported or already-owned script invocation setup");
+        notesUi.prepare();originalScriptSetup=reinterpret_cast<ScriptSetup>(current);
+        if(!replace(reinterpret_cast<void*>(originalScriptSetup),reinterpret_cast<void*>(notesSetupHook),scriptTableRva,scriptSetupSlot))throw std::runtime_error("Notes invocation setup ownership changed");
+        notesSetupInstalled=true;note({{"event","recruit_notes_ui_prepared"},{"methods",8},{"attachment","live invocation setup"},{"unload","clean restart required after entry"}});
 #endif
 #if defined(RECRUIT_NOTES_PROBE)
         constexpr unsigned char lengthPrefix[]={0x48,0x8b,0x41,0x58,0x8b,0x40,0x18,0xc3};
