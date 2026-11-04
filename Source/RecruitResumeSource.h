@@ -83,7 +83,10 @@ inline void persistClass(NativeClass& c,const std::filesystem::path& root){
             else addResumeDetails(entry.saved,entry.prospect); // Additive v2 migration: preserve all existing counts and opportunity.
             if(entry.juniorCollege)entry.saved["collegeSchool"]=entry.prospect.collegeSchool;
             validate(entry.saved);
-        }else if(entry.saved.is_null())entry.saved={{"modelVersion",3},{"kind","transfer"},{"gpa",academicGpa(entry.prospect)}};
+        }else{
+            if(entry.saved.is_null())entry.saved={{"modelVersion",3},{"kind","transfer"}};
+            addAcademicBackground(entry.saved,entry.identity);
+        }
         if(!data["entries"].contains(entry.identity)||data["entries"].at(entry.identity)!=entry.saved){data["entries"][entry.identity]=entry.saved;dirty=true;}
     }
     if(dirty){const auto text=data.dump();if(text.size()>16u*1024*1024)throw std::runtime_error("Resume journal exceeds write bounds");auto temp=path;temp+=L".tmp";{std::ofstream out(temp,std::ios::binary|std::ios::trunc);out<<text;out.flush();if(!out)throw std::runtime_error("Cannot write resume journal");}

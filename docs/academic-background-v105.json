@@ -1,0 +1,69 @@
+{
+  "feature": "Independent academic background and football intelligence",
+  "candidate": "DynastyEnhancerRecruitFog-p28",
+  "package": "Build/DynastyEnhancer-v105-MMC.zip",
+  "state": "Built and verified offline; installed v104/p27 left untouched while CFB and MMC are running.",
+  "academicModel": {
+    "version": 2,
+    "inputs": [
+      "stable prospect identity only"
+    ],
+    "range": [
+      2.0,
+      4.5
+    ],
+    "distribution": "Mean of three independent uniform draws, scaled to 2.0\u20134.5 and rounded to two decimals. All prospects use the same distribution.",
+    "excluded": [
+      "stars",
+      "Overall",
+      "Awareness",
+      "development",
+      "position",
+      "competition level"
+    ],
+    "availability": "Immediate background information, independent of scouting progress."
+  },
+  "footballIntelligence": {
+    "source": "Publicly revealed Awareness bounds only",
+    "groups": [
+      "QB",
+      "offensive line",
+      "receivers and tight ends",
+      "running backs and fullbacks",
+      "defense",
+      "specialists",
+      "generic fallback for unresolved position"
+    ],
+    "progression": "Existing notes progression retained: no detailed observations below 25%; at most 2/3/4 observations from 25/50/75%. A range crossing confidence bands cannot support a firm statement. Awareness competes with other observed attributes for available report space.",
+    "newPassages": 54,
+    "totalPassages": 432
+  },
+  "migration": {
+    "rule": "Legacy GPAs are replaced once with the identity-only draw and marked academicModelVersion 2. Existing stats, competition levels, school assignments and all other fields are preserved.",
+    "actualProspectsCompared": 4101,
+    "oldGpasChanged": 4076,
+    "otherFieldsPreserved": true,
+    "secondRunByteIdentical": true,
+    "activeFilesModified": false
+  },
+  "checks": {
+    "controlledAcademicPairs": 6000,
+    "academicIndependence": true,
+    "sampleMean": 3.25301,
+    "shareBetween2_75And3_75": 0.7578333333333334,
+    "shareAtOrBelow2_25OrAtOrAbove4_25": 0.009333333333333334,
+    "boundaryResumes": 22000,
+    "developmentIsolation": true,
+    "footballNotesProgressAndPositionChecks": "passed",
+    "nativeGradesPlayingTimeColorsAndClassGridChecks": "passed",
+    "mmcAdapterPackageChecks": "passed"
+  },
+  "sha256": {
+    "dll": "5073b66543251eda51c87c308c7fae3f59acc8743afdb95f4f93cbb5e7695d27",
+    "package": "ddd2d3f5fa111f1a560a19e87a60d7efba252b9c9e55d723c4f213393156dcc4"
+  },
+  "pending": [
+    "Install during a clean CFB/MMC restart",
+    "Visual check of new GPA and football-intelligence wording"
+  ]
+}

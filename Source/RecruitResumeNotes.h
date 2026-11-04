@@ -32,6 +32,16 @@ inline std::string renderResume(const Json& v){
     if(s.contains("specialTeamsSnaps"))out+="Long snapping: "+n("badSnaps")+" off-target snaps / "+n("specialTeamsSnaps")+" snaps\n";
     return out+"\n"+v.at("background").get<std::string>();
 }
+inline const char* awarenessFamily(const std::string& position){
+    if(position=="QB")return "awareness qb";
+    if(position=="LT"||position=="LG"||position=="C"||position=="RG"||position=="RT")return "awareness line";
+    if(position=="WR"||position=="TE")return "awareness receiver";
+    if(position=="HB"||position=="RB"||position=="FB")return "awareness back";
+    if(position=="K"||position=="P"||position=="LS")return "awareness specialist";
+    const std::string defense="|LE|RE|DT|LEDG|REDG|LOLB|MLB|ROLB|SAM|MIKE|WILL|CB|FS|SS|";
+    if(!position.empty()&&defense.find("|"+position+"|")!=std::string::npos)return "awareness defense";
+    return "awareness";
+}
 inline std::string scoutingSection(const NotesProspect& p){
     const auto progress=std::isfinite(p.progress)&&p.progress>=0&&p.progress<=100?p.progress:0;
     if(progress<25)return "SCOUTING NOTES\nSpecific film observations are not yet available.";
@@ -40,7 +50,8 @@ inline std::string scoutingSection(const NotesProspect& p){
         if(!std::isfinite(o.low)||!std::isfinite(o.high)||o.low<0||o.high>100||o.low>o.high)continue;
         auto key=notesKey(o.name);if(key=="tackling")key="tackle";if(!seen.insert(key).second)continue;
         const int band=o.low>=80?0:o.low>=70&&o.high<80?1:o.high<70?2:-1;if(band<0)continue;
-        for(const auto& entry:prose)if(key==entry.attribute){const auto seed=notesHash(p.identity+"|"+key+"|"+std::to_string(band));bands[band].push_back({seed,entry.bands[band][seed%3]});break;}
+        const std::string family=key=="awareness"?awarenessFamily(p.position):key;
+        for(const auto& entry:prose)if(family==entry.attribute){const auto seed=notesHash(p.identity+"|"+family+"|"+std::to_string(band));bands[band].push_back({seed,entry.bands[band][seed%3]});break;}
     }
     for(auto& b:bands)std::sort(b.begin(),b.end(),[](const Pick& a,const Pick& b){return a.order<b.order;});
     std::string out="SCOUTING NOTES";unsigned used=0;const unsigned limit=progress>=75?4:progress>=50?3:2;

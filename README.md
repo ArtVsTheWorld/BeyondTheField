@@ -6,23 +6,25 @@ This is a development prototype, not the planned 1.0 release.
 
 ## Combined prototype on main
 
-Social Media and recruiting Fog of War now share one **Dynasty Enhancer** MMC plugin and installation. The verified components are Social Media v103 and recruiting p27. Active-roster Fog and player analytics remain later work toward 1.0; the separate hub-tab experiment stays deferred.
+Social Media and recruiting Fog of War now share one **Dynasty Enhancer** MMC plugin and installation. The current candidate combines Social Media v103 with recruiting p28; p27 remains the installed, live-verified UI build. Active-roster Fog and player analytics remain later work toward 1.0; the separate hub-tab experiment stays deferred.
 
-Recruiting includes native letter grades and public-bound ranges, midpoint grade colors that survive profile-tab changes, Playing Time masking (including the Prospect List preview), and a Notes tab. Notes contain persistent generated high-school résumés, completion and blocking percentages, noisy awareness-linked GPA, and fictional D3/D2/FCS backgrounds for game JUCO entries. College transfers use actual linked college statistics. The Board, Prospect List Class column and side panel share the same stored college association. Player attributes, recruiting decisions and game saves are not rewritten.
+Recruiting includes native letter grades and public-bound ranges, midpoint grade colors that survive profile-tab changes, Playing Time masking (including the Prospect List preview), and a Notes tab. Notes contain persistent generated high-school résumés, completion and blocking percentages, independent, middle-weighted academic GPA, and fictional D3/D2/FCS backgrounds for game JUCO entries. College transfers use actual linked college statistics. The Board, Prospect List Class column and side panel share the same stored college association. Player attributes, recruiting decisions and game saves are not rewritten.
 
-The package is `Build/DynastyEnhancer-v104-MMC.zip`. Its single installed plugin is `Plugins/DynastyEnhancer.dll`; Social Media and recruiting run as two internal native components managed by that plugin. This avoids a second mod-manager entry or manual per-session loading. Existing Social Media history, configuration and résumé journals are preserved on installation.
+The package is `Build/DynastyEnhancer-v105-MMC.zip`. Its single installed plugin is `Plugins/DynastyEnhancer.dll`; Social Media and recruiting run as two internal native components managed by that plugin. This avoids a second mod-manager entry or manual per-session loading. Existing Social Media history, configuration and résumé journals are preserved on installation.
 
 Build and validate the components sequentially from this repository:
 
 ```powershell
 .\Source\build.ps1 -NativeName DynastyEnhancerNative-v103
-.\Source\build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-p27 -RecruitNotesUi
+.\Source\build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-p28 -RecruitNotesUi
 .\Source\Package-DynastyEnhancer.ps1
 ```
 
 Use a fresh `pNN` filename for subsequent development candidates; pinned DLLs must not be overwritten. The package builder preserves the installed, verified Social Media payload. After closing CFB and MMC, install with `Source/Install-Mmc.ps1 -RecruitResumeHistoryFrom <existing-RecruitResumeHistory-folder>`. Generated history is intentionally excluded from the distributable ZIP.
 
-The user verified p27's stable colors, midpoint ranges, Prospect List labels and responsive menus. Native checks and 375 JavaScript tests pass. The combined adapter/package passes MMC registration, payload-integrity and path-boundary checks. Automatic loading of the combined package still needs the final clean-launch check. See [recruiting UI verification](docs/recruiting-ui-colors-class-fix.json) and [résumé details](docs/recruit-resume-additions.json).
+Academic background is independent of every football input. A stable identity-only draw produces GPA from 2.0–4.5, concentrated around the middle. Existing awareness-correlated GPAs migrate once; every saved stat, competition assignment and other résumé field is preserved. GPA remains visible immediately. Position-specific Awareness observations use only revealed scouting bounds and the existing scouting-progress gates. See [academic separation and migration checks](docs/academic-background-v105.json).
+
+The user verified p27's stable colors, midpoint ranges, Prospect List labels and responsive menus. Native checks and 375 JavaScript tests pass. The combined adapter/package passes MMC registration, payload-integrity and path-boundary checks. The v104 launcher logs confirm automatic activation of both components. The v105 academic update is built and staged for installation. See [recruiting UI verification](docs/recruiting-ui-colors-class-fix.json) and [résumé details](docs/recruit-resume-additions.json).
 
 ## Content and menu performance review (v103)
 

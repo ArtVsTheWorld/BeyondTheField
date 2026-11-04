@@ -12,9 +12,9 @@ using FrostySdk.Interfaces;
 [assembly: AssemblyTitle("Dynasty Enhancer")]
 [assembly: AssemblyProduct("Dynasty Enhancer")]
 [assembly: AssemblyDescription("Native Dynasty Social Media and recruiting Fog of War")]
-[assembly: AssemblyVersion("0.1.104.0")]
-[assembly: AssemblyFileVersion("0.1.104.0")]
-[assembly: PluginVersion("0.1.104-prototype")]
+[assembly: AssemblyVersion("0.1.105.0")]
+[assembly: AssemblyFileVersion("0.1.105.0")]
+[assembly: PluginVersion("0.1.105-prototype")]
 [assembly: PluginAuthor("ArtVsTheWorld")]
 [assembly: PluginDisplayName("Dynasty Enhancer (Prototype)")]
 [assembly: RegisterExecutionAction(typeof(DynastyEnhancer.LaunchAction))]
@@ -65,7 +65,7 @@ namespace DynastyEnhancer {
    bool first;watcherMutex=new Mutex(false,"Local\\DynastyEnhancer.MMC."+Process.GetCurrentProcess().Id,out first);if(!first)return;
    new Thread(()=>{
     try{
-     Prepare();Note("v104 watcher ready; Social Media and recruiting Fog activate independently as their native assets become available.");
+     Prepare();Note("v105 watcher ready; Social Media and recruiting Fog activate independently as their native assets become available.");
      var loaded=new HashSet<string>();var retryAt=new Dictionary<string,DateTime>();var attempts=new Dictionary<string,int>();string previousIssue=null;
      while(true){
       var issue=ConfigurationIssue();if(issue.Length!=0){if(issue!=previousIssue)Note(issue);previousIssue=issue;Thread.Sleep(1000);continue;}previousIssue=null;

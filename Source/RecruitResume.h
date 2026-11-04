@@ -49,12 +49,21 @@ inline double skill(const Prospect& p){
     if(pos=="LE"||pos=="RE"||pos=="DT"||pos=="LEDG"||pos=="REDG")return .3*r("BlockSheddingRating")+.2*r("FinesseMovesRating")+.2*r("PowerMovesRating")+.2*r("TackleRating")+.1*r("StrengthRating");
     return .3*r("TackleRating")+.25*r("PlayRecognitionRating")+.2*r("BlockSheddingRating")+.15*r("SpeedRating")+.1*r("ZoneCoverageRating");
 }
-inline double academicGpa(const Prospect& p){
-    Random random(p.identity+"|academic-gpa-v1");
-    return std::round(clamp(3.05+.012*(p.rating("AwarenessRating")-65)+.43*random.noise(),2.,4.5)*100.)/100.;
+inline double academicGpa(const std::string& identity){
+    // The API accepts identity alone: football ability, stars, development,
+    // competition level and position cannot influence academic background.
+    Random random(identity+"|academic-gpa-v2");
+    const auto middleWeighted=(random.unit()+random.unit()+random.unit())/3.;
+    return std::round((2.+2.5*middleWeighted)*100.)/100.;
+}
+inline void addAcademicBackground(Json& data,const std::string& identity){
+    // One-time migration retires the old awareness-correlated GPA. Other
+    // persisted biography and production fields remain untouched.
+    if(!data.contains("gpa")||data.value("academicModelVersion",0)!=2)data["gpa"]=academicGpa(identity);
+    data["academicModelVersion"]=2;
 }
 inline void addResumeDetails(Json& data,const Prospect& p){
-    if(!data.contains("gpa"))data["gpa"]=academicGpa(p);
+    addAcademicBackground(data,p.identity);
     const auto& s=data.at("stats");auto& rates=data["rates"];if(!rates.is_object())rates=Json::object();
     auto rate=[&](const char* key,const char* numerator,const char* denominator){if(!s.contains(denominator))return;const auto n=s.value(numerator,0),d=s.at(denominator).get<int>();rates[key]=d?Json(std::round(1000.*n/d)/10.):Json(nullptr);};
     rate("completionPercent","passCompletions","passAttempts");rate("pancakePercent","pancakes","runBlockingSnaps");rate("sacksAllowedPercent","sacksAllowed","passProtectionSnaps");

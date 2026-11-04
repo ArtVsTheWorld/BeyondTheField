@@ -18,7 +18,7 @@
     "combinedMmcAdapterAndPayloadChecks": "passed",
     "installedSocialStaticPayload": "Matches main source text; byte differences are line endings only. Package preserves installed payload bytes."
   },
-  "installState": "Staged; current game/MMC session has not been replaced. Awaiting closed apps for installation and automatic-launch check.",
+  "installState": "Installed; all 501 preexisting runtime/history files preserved, resume journal copied byte-for-byte. Launcher and native logs confirm both components loaded automatically. Full combined UI launch check was interrupted by user Escape; recruiting activity is present in the automatic session.",
   "liveRecruitingVerification": "User confirmed persistent midpoint colors, correct Class labels, and responsive menus in p27.",
   "sha256": "3eac506f12391cc01e92eb56cd55a8c891f62e624f0a419c1506de0a1b5c9c5e"
 }
