@@ -36,6 +36,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'In-game player renderer checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_recruit_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Recruiting player-risk renderer checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_formation_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Formation Subs player renderer checks failed'}
 }
 Push-Location $fogOut
 try{

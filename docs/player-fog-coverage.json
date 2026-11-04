@@ -63,10 +63,10 @@
       "surface": "Dynasty hub player previews",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass; not loaded yet.",
+      "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass. Loaded in p50; Starting Offense live verified. Reviewer confirms PlayerCompare helper is called twice from Init; PlayersToWatch helper has no current Init caller or OVR children, so attachment absence alone is not a visible leak.",
       "remaining": [
-        "Live comparison/watch previews and their reentry/selection",
-        "Default-style players-to-watch grade colors"
+        "Live PlayerCompare preview and reentry/selection",
+        "PlayersToWatch current layout inspection; helper appears dormant and pane may not display OVR"
       ],
       "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending."
     },
@@ -144,10 +144,22 @@
     {
       "surface": "Injury Report table and player panel",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p46 live raw78; native10-column metadata including hiddenblank0 captured. p50 masksOVR4 only plus separately typed3 GetInjuryInfo overall/revealed attributes. Tests preserve injury duration/risk/status/age/stats/sorting. Independent review corrected leading-hidden-column shift before any live activation.",
       "remaining": [
-        "p50 clean-start live injury table/panel and filters"
+        "Focused position-filter/reentry regression"
+      ],
+      "liveStatus": "p50 clean PID31340: FIU filter shows Kyle McNeal and S. Sterlin OVR C in table; selected Kyle panel C yellow. Injury Dislocated Hip/Torn Pectoral, Length2/33 and status unchanged. Selected row black, unselected C yellow. Native team banner showed Florida Atlantic while selector/sidebar showed FIU; do not attribute untested native banner discrepancy to fog adapter. Second selected player Shamir Sterlin panel also C yellow after refresh, jersey1/6ft2in/215lb/class preserved."
+    },
+    {
+      "surface": "Formation Subs player OVRs and detail views",
+      "implemented": true,
+      "liveVerified": false,
+      "liveStatus": "p50 live numeric leaks observed: selected JaCorey McNeil67, reserve list60/59/55/52/47. Diagram numbers are jerseys and intentionally numeric. No substitutions made, counter0/50.",
+      "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed.",
+      "remaining": [
+        "Clean p51 entry and live formation/list/detail labels and reentry",
+        "Legacy attribute setup path observation; no uppercase/lowercase schema assumptions"
       ]
     }
   ],
@@ -460,9 +472,9 @@
     "releaseReady": false,
     "previewSha256": "95d6e18510c659308e23fcd57843ff43ba07f0b2ced4fa0c0ee102b43ba07281",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p50.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p50-MMC.zip",
-    "nextCandidateSha256": "95d6e18510c659308e23fcd57843ff43ba07f0b2ced4fa0c0ee102b43ba07281"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p51.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p51-MMC.zip",
+    "nextCandidateSha256": "822102a51fa29db7276c2d2c889686be304330657c27de95e7c8994614edafca"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -483,7 +495,9 @@
     "p50Build": "Passed MSVC /W4 /WX, native tests and all six UI VM suites. Corrected Injury hidden-column fixture, native Injury typed3 getter, Redshirts schema, risk-player labels and retained-memory counters independently reviewed.",
     "p50Package": "MMC registration/launch/tamper/path/config smoke passed. No installed file or history changes.",
     "p50Activation": "Baseline stop0; p50 active log and empty initial retention/performance report confirmed before Dynasty load.",
-    "p50Live": "Clean PID31340 Dynasty entry passed. Starting Offense colored grades retained. Redshirts All table/player panel live verified; focused filters/far-right/reentry pending. Injury Report next; automated Back ignored, controller step requested."
+    "p50Live": "Clean PID31340 Dynasty entry, Starting Offense, Redshirts All table/panel and initial FIU Injury table/panel passed. Injury lengths remain2/33. Full regression still in progress.",
+    "p51Build": "MSVC/W4/WX/native and seven UI suites pass. Independent Formation Subs source/fingerprint/ABI/frame/model review pass. Improved actual registerbudget and recycled selection fixtures pass.",
+    "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

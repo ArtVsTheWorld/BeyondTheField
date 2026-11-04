@@ -198,7 +198,7 @@
       "0x68": "0xa0c63b0 AwardsPlayerInfo"
     },
     "fields": "Root object overall; attributesSubpanelInfo[].ratingValue only if isFullyScouted true. No recursive conversion.",
-    "implemented": "p47 built; not active or live-verified",
+    "implemented": "Included in active p50; per-surface live verification pending.",
     "caution": "AnnualAwards requires explicit native Boolean isCoach=false; coach/missing/invalid discriminator pass through.",
     "abi": "void* (self,void** out,void* opaqueKey); one native invocation"
   },
@@ -260,7 +260,7 @@
     "ratingIds": [
       4
     ],
-    "status": "p50 built and reviewed against both native raw captures; live candidate test pending",
+    "status": "p50 clean PID31340 live two-player FIU table verified: bothOVR C, duration2/33 and status preserved.",
     "preserved": "Injury/length/status/return data, position/name/intValue/sort"
   },
   "injurySidebar": {
@@ -270,7 +270,7 @@
     "liveGate": "Target address and full32-byte prefix verified in PID30084 before candidate activation",
     "fields": "overall and fully-revealed attributesSubpanelInfo.ratingValue only",
     "preserved": "injuryName, injuryStatus, injuryLength, risk, age, season stats",
-    "status": "p50 built; live display verification pending"
+    "status": "p50 live KyleMcNeal and ShamirSterlin selection bothC yellow, native jersey/class/measurements unchanged."
   },
   "prospectPreviewCapture": {
     "tool": "Development-only RecruitPreviewProbe.cpp / Build/DynastyEnhancerRecruitPreviewProbe-p2.dll",
@@ -292,5 +292,61 @@
     "fnv": "7b0efb4dda13f53e",
     "path": "ExtraInfo.OverallText to TextFieldGeneric mcOverall.SetLabel",
     "guard": "Do not transform OverallText globally: newer injury panels use injury text; standings/stats/schedules reuse it for ordinary numbers. Consider class-specific numeric-only suffix only if live observed."
+  },
+  "hubPreviewRoutes": {
+    "playerCompare": "SCREEN_INFO_PANEL_PLAYER_COMPARE registered to InfoPanelPlayerCompare. _SetPlayerOvrParams called twice by Init.",
+    "playersToWatch": "Current Init has no call to _GetOvrParams and pool lacks player OVR children. Helper may be dormant; verify actual visible pane, do not demand unused helper attachment.",
+    "route": "mainhub.PanelMenu._OnDelayedServiceTileFocusChanged calls HubInfoPanelsService.TriggerPanelSwitch with selected tile HubPanelType and TabIndex. Focus current game/action tile and cycle stock info panes.",
+    "inference": "Pregame game tile is best-supported comparison target because pane contains date/weather and player passing/rushing stats; actual tile mapping is native and remains unverified."
+  },
+  "abilityTooltipCollector": {
+    "native": "bab5778+a8 ->796e160",
+    "abi": "void(self,int abilityId,collector*)",
+    "prefix32": "4c8bdc4881ec18010000488b05cf4612064833c448898424e0000000488b8920",
+    "wrapper": "79d6930 obtains integer argument, invokes virtuala8 and sends row collector",
+    "fields": "display string and value integer;8264820 builds data rows, further live capture needed before deciding rating semantics.",
+    "status": "Read-only static disassembly from existing private snapshot; no hook or model changes.",
+    "warning": "Do not treat all numeric value fields as ratings without observed display semantics."
+  },
+  "formationSubsDiscovery": {
+    "asset": "Private current formationsubs.ast, GUID1bd56600-dc3e-94c9-057c-8ee550404bec",
+    "model": "node_cfm/corenode root21988 _ApplyDataFormat imports native PlayerOvr into ExtraInfo.Ovr. Model remains numeric.",
+    "surfaceMethods": [
+      {
+        "method": "FormSubModuleTile._UpdatePlayer",
+        "header": "3e70",
+        "body": "3ea0",
+        "argc": 1,
+        "regs": 7,
+        "flags": 41,
+        "size": 348,
+        "hash": "18d00aa7087bbb23",
+        "path": "mcOvrData RatingValueItem.SetValue(ExtraInfo.Ovr)"
+      },
+      {
+        "method": "FormSubListItem.Draw",
+        "header": "8af0",
+        "body": "8b20",
+        "argc": 0,
+        "regs": 4,
+        "flags": 25,
+        "size": 120,
+        "hash": "36c9d322b6943faf",
+        "path": "direct mcTxt2 label from ExtraInfo.Ovr"
+      },
+      {
+        "method": "FormSubPlayerTile.Draw",
+        "header": "5740",
+        "body": "5770",
+        "argc": 0,
+        "regs": 21,
+        "flags": 25,
+        "size": 1126,
+        "hash": "d9c74e57cf9721c9",
+        "path": "own Ovr label, attribute RatingValue records, lower PlayerInfo/PlayerModule branch"
+      }
+    ],
+    "warning": "Legacy PlayerSerial branch mcPlayerInfo is PlayerInfo containing shared OVRItem; existing RatingValueItem suffix does not cover it. Do not globally convert OVRItem because team ratings use it.",
+    "status": "p50 live numeric selectedModule/reserveList leaks confirmed; p51 scoped label/color adapters built/tested/reviewed; clean-start live candidate test pending."
   }
 }

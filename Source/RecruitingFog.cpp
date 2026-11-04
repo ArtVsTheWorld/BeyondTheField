@@ -30,6 +30,7 @@
 #include "PlayerHubUiPrograms.h"
 #include "PlayerInGameUiPrograms.h"
 #include "PlayerRecruitUiPrograms.h"
+#include "PlayerFormationUiPrograms.h"
 #include "PlayerAbilityDescriptions.h"
 #endif
 
@@ -59,7 +60,9 @@ notesui::Runtime playerHubUi(playerhubui::programs());
 notesui::Runtime playerSliderUi(playercardui::sliderPrograms());
 notesui::Runtime playerInGameUi(playeringameui::programs());
 notesui::Runtime playerRecruitUi(playerrecruitui::programs());
-const std::array<notesui::Runtime*,8> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi};
+notesui::Runtime playerFormationUi(playerformationui::programs());
+notesui::Runtime playerLegacyOvrUi(playerformationui::legacyPrograms());
+const std::array<notesui::Runtime*,10> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi};
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};
