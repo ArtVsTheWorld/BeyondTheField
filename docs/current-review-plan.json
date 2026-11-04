@@ -1,0 +1,87 @@
+{
+  "task": "Complete ULM cycle review, severe menu performance fixes, content correctness and major variety expansion",
+  "directHubTab": "Paused at user request; keep Team shortcut",
+  "frozenCorpus": "Backups/completed-ulm-review.json",
+  "stages": [
+    {
+      "id": 1,
+      "name": "Rollover verification and corpus preservation",
+      "status": "complete",
+      "evidence": "Preseason 2029 published; 15 ULM training facts; Manupuna departure; 22 checksum-verified files"
+    },
+    {
+      "id": 2,
+      "name": "Background change detection",
+      "status": "Live idle CPU passed; UI/midweek check pending",
+      "gates": [
+        "Avoid repeated full decode when unchanged",
+        "Retain identity/stage/consistency guards",
+        "Detect midweek changes without saves",
+        "Benchmark live data and reject stale/failed probes"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Archive handling",
+      "status": "Offline implementation: 351 Node tests and exact real-catalog replay passed; live migration pending",
+      "gates": [
+        "Reduce full-season JSON read/rewrite",
+        "Preserve immutable wording and existing archives",
+        "Test reload, rewind and year rollover",
+        "Benchmark frozen full-season corpus"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Dropdown discovery",
+      "status": "pending",
+      "gates": [
+        "Remove process-wide UI-thread scans",
+        "Validate cached ownership/generation",
+        "Preserve stock menus and controller behavior",
+        "Measure entry latency"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Correctness and contextual review",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "name": "Thousands of natural variants",
+      "status": "pending",
+      "targets": {
+        "usableVariants": 5000,
+        "minimumEligibleVariantsPerPath": 8
+      },
+      "gates": [
+        "Coverage measured after slot/personality/condition filtering",
+        "Distinct voices and syntax",
+        "No filler that invents facts",
+        "Full-corpus duplicate/context audit"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Package, live verification and success report",
+      "status": "pending"
+    }
+  ],
+  "contentRequirements": [
+    "National news during Players Leaving",
+    "Suppress NIL compensation drops to zero; use $4000 per Dynasty point everywhere",
+    "Capitalize sentence starts",
+    "CanDuel publishes gambling lines without fictional/model disclaimers",
+    "Analysts have distinct evidence-based projection models",
+    "NFL team/position-aware synthetic draft destinations; avoid implausible early duplicate QB picks",
+    "20-30 NFL Draft undrafted signing posts using eligible graduated near-draft/exceptional-stat players",
+    "Team views require direct team involvement, not merely conference membership",
+    "10-25 stories per team across all voices",
+    "Returning portal player: beat report and smug fans, no official commitment announcement; stronger positive reaction for exceptional player",
+    "Natural position and HS/JUCO context only when useful; avoid repeated name/handle/position",
+    "Encouraged departure without verified destination: FCS continuation flavor without inventing a named destination",
+    "Thorough bugs/context/repetition audit and new contextual opportunity report"
+  ],
+  "reporting": "Report offline results separately from live verification after each stage"
+}

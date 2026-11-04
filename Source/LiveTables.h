@@ -10,15 +10,16 @@
 #include <chrono>
 #include <atomic>
 #include "../Vendor/json.hpp"
+#include "PackedChangeWatch.h"
 // Runtime observation only: no native calls, setters, handles, or reference-count writes.
 namespace dynasty::live {
 using Json=nlohmann::json;using Address=uintptr_t;
 struct Memory {
-    HANDLE process=GetCurrentProcess();size_t bytes=0;uint64_t deadline=GetTickCount64()+8000;
+    HANDLE process=GetCurrentProcess();size_t bytes=0;uint64_t deadline=GetTickCount64()+8000;PackedChangeWatch* observation=nullptr;
     std::vector<unsigned char> read(Address address,size_t size){
         if(address<0x10000||address+size<address||size>128u*1024*1024||bytes+size>512u*1024*1024||GetTickCount64()>deadline)throw std::runtime_error("Live capture exceeds bounds: bytes="+std::to_string(bytes)+" read="+std::to_string(size)+" at="+std::to_string(address));
         std::vector<unsigned char> result(size);SIZE_T got=0;
-        if(size&&(!ReadProcessMemory(process,reinterpret_cast<void*>(address),result.data(),size,&got)||got!=size))throw std::runtime_error("Live session read unavailable at "+std::to_string(address)+" bytes="+std::to_string(size));bytes+=size;return result;
+        if(size&&(!ReadProcessMemory(process,reinterpret_cast<void*>(address),result.data(),size,&got)||got!=size))throw std::runtime_error("Live session read unavailable at "+std::to_string(address)+" bytes="+std::to_string(size));bytes+=size;if(observation)observation->record(address,result);return result;
     }
     template<class T>T at(Address address){auto b=read(address,sizeof(T));T value;memcpy(&value,b.data(),sizeof(T));return value;}
     std::string text(Address address){
@@ -215,7 +216,8 @@ public:
         if(!season||!flow||!league)throw std::runtime_error("Active Dynasty identity is incomplete");
         return result;
     }
-    Json run(){
+    Json run(PackedChangeWatch* observation=nullptr){
+        memory.observation=observation;
         const auto before=status();
         for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}

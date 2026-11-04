@@ -1,0 +1,117 @@
+{
+  "build": "v97",
+  "stage": "Background change detection",
+  "status": "Native tests and live idle CPU passed; controller and live midweek confirmation pending",
+  "native": "Build/DynastyEnhancerNative-v97.dll",
+  "nativeSha256": "57513c328b21421d1e281e83e92977e572789bb048d7eba31f6d76997412f916",
+  "live": {
+    "pid": 22736,
+    "publication": "831346515/2029/PreSeason/0",
+    "stories": 1226,
+    "entireCatalogUnchanged": true,
+    "cpuComparison": {
+      "before": {
+        "tid": 16144,
+        "seconds": 17.002,
+        "readerCpuSeconds": 4.15625,
+        "percentOfOneCore": 24.445653452534994
+      },
+      "after": {
+        "tid": 9284,
+        "seconds": 27.003999999999998,
+        "readerCpuSeconds": 0.0625,
+        "percentOfOneCore": 0.2314471930084432
+      },
+      "reductionPercent": 99.05321740137634
+    },
+    "diagnosticFullCaptureMs": 828,
+    "diagnosticProbes": [
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 16,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 16,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 16,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 16,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 15,
+        "unchanged": true
+      },
+      {
+        "bytes": 16147615,
+        "calls": 2381,
+        "probeMs": 0,
+        "unchanged": true
+      }
+    ]
+  },
+  "guards": [
+    "Consumed-byte equality only",
+    "All capture reads, including status/catalog/schema/string/reference and packed data",
+    "Inconsistent overlapping reads rejected",
+    "Failed/cancelled/over-budget probes never suppress full capture",
+    "Existing two-capture debounce and identity checks retained"
+  ],
+  "limits": [
+    "No quantitative frame-time trace",
+    "Late-season idle CPU not yet remeasured with v97",
+    "Reader still needs one full capture per actual data change",
+    "Installed MMC adapter still points at original v96 until final packaging"
+  ],
+  "originalArchiveBackup": "C:\\Apps\\CFB 27\\MMC\\DynastyEnhancer-Performance\\Backups\\ULM-CompletedReview-20261103-192116"
+}

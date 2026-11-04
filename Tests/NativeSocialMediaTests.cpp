@@ -35,6 +35,22 @@ void require(bool result,const char* detail){if(!result)throw std::runtime_error
 int main(int argc,char** argv){
     using namespace fixture;
     try {
+        {
+            dynasty::live::PackedChangeWatch watch;std::vector<unsigned char> memory(0x4000,7);constexpr uintptr_t start=0x100000;
+            watch.record(start+4,{1,2,3,4});watch.record(start+6,{3,4,5});watch.record(start+0x800,{9});
+            const auto count=watch.bytes();watch.record(start+4,{1,2,3,4});require(watch.bytes()==count,"Repeated packed reads were retained twice");
+            auto put=[&](uintptr_t at,const std::vector<unsigned char>& bytes){memcpy(memory.data()+at-start,bytes.data(),bytes.size());};put(start+4,{1,2,3,4,5});put(start+0x800,{9});
+            unsigned calls=0;auto q=[&](uintptr_t at,void* out,size_t size){++calls;if(at<start||at-start+size>memory.size())return false;memcpy(out,memory.data()+at-start,size);return true;};
+            require(watch.unchanged(q)&&calls==1,"Same-page observation ranges did not coalesce");
+            memory[0x200]=55;require(watch.unchanged(q),"Unconsumed UI bytes caused a false change");
+            for(size_t at:{size_t(4),size_t(7),size_t(0x800)}){auto old=memory[at];memory[at]^=1;require(!watch.unchanged(q),"Consumed midweek byte change was missed");memory[at]=old;}
+            require(!watch.unchanged([](uintptr_t,void*,size_t){return false;}),"Failed/cancelled observation was reported unchanged");
+            bool conflict=false;try{watch.record(start+6,{33});}catch(...){conflict=true;}require(conflict,"Changing overlapping capture reads were accepted");
+            dynasty::live::PackedChangeWatch empty;require(!empty.available()&&!empty.unchanged(q),"An uninitialized observer suppressed capture");
+            dynasty::live::PackedChangeWatch large;std::vector<unsigned char> data(2*1024*1024+3,42);large.record(start,data);size_t maximumRead=0,reads=0;
+            auto largeRead=[&](uintptr_t at,void* out,size_t n){maximumRead=(std::max)(maximumRead,n);++reads;if(at<start||at-start+n>data.size())return false;memcpy(out,data.data()+at-start,n);return true;};
+            require(large.unchanged(largeRead)&&reads==3&&maximumRead<=dynasty::live::PackedChangeWatch::chunkBytes,"Large probes escaped their bounded chunk size");data.back()^=1;require(!large.unchanged(largeRead),"A changed final chunk was ignored");
+        }
         for(const auto& binding:bindings)require(binding.vt!=0xbac63a8||binding.offset!=0x20,"Recovery build must leave native MenuPanelsReady unhooked");
         {
             auto c=std::make_shared<social::Catalog>();c->scopes={{"all","For You"},{"team:1","Team"}};social::Edition e;e.key="paged";

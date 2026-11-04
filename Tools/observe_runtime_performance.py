@@ -132,10 +132,13 @@ def main():
                 previous_at, previous_cpu = at, proc_cpu
                 if sample < args.seconds:
                     time.sleep(max(0, 1-(time.monotonic()-at)))
-        print(json.dumps(dict(pid=args.pid, output=str(args.output), seconds=args.seconds,
+        summary=dict(pid=args.pid, output=str(args.output), seconds=args.seconds,
             top_threads=[dict(tid=tid, cpu_seconds=round(total, 3),
                               start=starts.get(tid), priority=priorities.get(tid))
-                         for tid, total in sorted(totals.items(), key=lambda p: -p[1])[:15]])))
+                         for tid, total in sorted(totals.items(), key=lambda p: -p[1])[:15]],
+            thread_info=[dict(tid=tid,start=start,priority=priorities.get(tid)) for tid,start in starts.items()])
+        args.output.with_suffix('.summary.json').write_text(json.dumps(summary,indent=2))
+        print(json.dumps({key:value for key,value in summary.items() if key!='thread_info'}))
     finally:
         for handle in handles.values():
             kernel.CloseHandle(handle)
