@@ -74,7 +74,7 @@
       "surface": "Recruit scouting grades, ranges and colors",
       "implemented": true,
       "liveVerified": true,
-      "evidence": "User-confirmed p27 persistence, class labels and controls",
+      "evidence": "User-confirmed p27 persistence, class labels and controls p51 bounded Prospect List response trace captured; user confirms attributes are not displayed in that view, so no conversion added to unexposed fields. Read-onlyprobe stopped0.",
       "remaining": [
         "additional transfer/entry preview leak audit"
       ]
@@ -156,7 +156,7 @@
       "implemented": true,
       "liveVerified": false,
       "liveStatus": "p51 clean PID20872 initial WingTight view: JaCoreyMcNeil67->D orange; reserve60->D and59/55/52/47->F, native alpha preserved. Names/positions, portrait, jersey diagram and0/50 substitution counter unchanged. Bank8 methods attached. No replacements chosen. Deeperedit view reveals rightpanel OVR67 orange and attributes62/85/89/68/64/85 numeric; direct parent suffix is overwritten by child refresh. Center/list remaingrades. Counter0/50.",
-      "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed.",
+      "evidence": "p51 built: exact current-asset gated selectedModule, reserveListDraw/unfocus, two-branch detailDraw, marker-only sharedOVRItem.Draw. All101 boundaries, native selected black contrast, same-widget focus/unfocus, unknowns, registerbudget, source/command/jersey preservation passed. Independent source review passed. p55 adds scoped parent/attribute-slot conversion after the nativechildrepaint. Regression reproduces live67/62/85/89/68/64/85 ordering and preserves sourcevalues, unknowns, numericstatbadges and native23/9/21-registerframes.",
       "remaining": [
         "Fix right-hand detail OVR/attribute refresh path; source numeric model unchanged",
         "Live defense/reentry and selected reserve contrast"
@@ -521,9 +521,9 @@
     "releaseReady": false,
     "previewSha256": "822102a51fa29db7276c2d2c889686be304330657c27de95e7c8994614edafca",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p51.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p51-MMC.zip",
-    "nextCandidateSha256": "822102a51fa29db7276c2d2c889686be304330657c27de95e7c8994614edafca"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p55.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p55-MMC.zip",
+    "nextCandidateSha256": "2958924bb4c91803459ffb025f1b0ab05ff35150f96da21ede501b9e3eaadbde"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -549,8 +549,10 @@
     "p51Package": "MMC registration/launch/tamper/path/config checks pass; installed files/history unchanged. Not loaded yet.",
     "p51Activation": "Baseline stop0, p51 active event and empty10-bank initial retention report confirmed before Dynasty entry in PID20872.",
     "p51Live": "Clean Dynasty entry and StartingOffense pass. FormationSubs initial selected player/reserve grades live verified; detailed subview next. No swaps/reset/player edits/advance.",
-    "queuedNext": "Fix FormationSubs right-detail refresh, then use fresh candidate name; p52/p53/p54 neverloaded.",
-    "p54Build": "MSVC/W4/WX/native and eight UI suites passed. Includes NILrow, allthree stats sidebars and unchanged-list redrawoptimization. Independentlyreviewed. Unloaded; p51 remainsactive and its deeperFormationdetail gap mustbe fixed before nextlivecandidate."
+    "queuedNext": "p55 packaged/readypendingcleanrestart toreplacep51. p52/p53/p54neverloaded. p3Prospectread-onlyprobe explicitlystopped0.",
+    "p54Build": "MSVC/W4/WX/native and eight UI suites passed. Includes NILrow, allthree stats sidebars and unchanged-list redrawoptimization. Independentlyreviewed. Unloaded; p51 remainsactive and its deeperFormationdetail gap mustbe fixed before nextlivecandidate.",
+    "p55Prepared": "p55 buildpassedMSVC/W4/WX/native/eightUIVMsuites; independentparent/slot repaintreview and fouraffected suites pass; actualFormationlate-repaintverificationpending.",
+    "p55Package": "MMC registration/launch/tamper/path/config checks pass; installedfiles/history unchanged."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

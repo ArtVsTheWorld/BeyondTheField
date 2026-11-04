@@ -6,11 +6,11 @@ from build_recruit_notes_ui import Assembler, fnv
 from build_player_card_ui import path, numeric_grade, palette, text_label
 
 
-def mark_item(a, register, prefix):
+def mark_item(a, register, prefix, marker='DEPlayerRating'):
     path(a, register, 'mData', 'ExtraInfo');a.raw(0x76,0x49);a.branch(prefix+'extra',0xB8)
     path(a, register, 'mData');a.string('ExtraInfo');a.number(0);a.raw(0x43,0x4F)
     a.label(prefix+'extra')
-    path(a, register, 'mData', 'ExtraInfo');a.string('DEPlayerRating');a.raw(0x73,0x4F)
+    path(a, register, 'mData', 'ExtraInfo');a.string(marker);a.raw(0x73,0x4F)
 
 
 def module_suffix(a):
@@ -66,6 +66,8 @@ def detail_suffix(a):
     a.label('detailModern')
     path(a,1,'mcPlayerModule');a.store(5);a.missing(5,done)
     path(a,5,'_visible');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,5,'mData');a.raw(0x76,0x49);a.branch(done)
+    mark_item(a,5,'detailModuleParent','DEFormationPlayerRatings')
     path(a,5,'mcStat');a.store(5);a.missing(5,done)
     path(a,5,'mData');a.raw(0x76,0x49);a.branch(done)
     mark_item(a,5,'detailModernMark')

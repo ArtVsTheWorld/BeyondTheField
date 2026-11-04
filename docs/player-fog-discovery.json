@@ -274,10 +274,11 @@
   },
   "prospectPreviewCapture": {
     "tool": "Development-only RecruitPreviewProbe.cpp / Build/DynastyEnhancerRecruitPreviewProbe-p3.dll",
-    "status": "Built and independently reviewed; not loaded, not included in combined package",
+    "status": "p3 loaded in p51PID20872, bounded real responses captured; explicit stop result0. User confirms attributes not visible in Prospect List; no release conversion added for unexposed fields.",
     "bounds": "Eight native responses or five minutes; depth3/array32; descends only attributesSubpanelInfo, other containers left untraversed",
     "ownership": "p51 parent module + native32-byte GetEntryInfo gate; one native call, lifecycle mutex/CAS restoration; response unchanged",
-    "manual": "Select existing0%, partial Luke40%, and existing100% in Prospect List; compare actual selected IDs and visible sidebar with captured flags/ranges. Then Transfer Portal; no hours or recruiting actions."
+    "manual": "No further Prospect List attribute request; user confirms unavailable. Scouting remains visible ratings surface and is handled by existing reveal/range conversion.",
+    "observed": "LukeCallen561120980 nativebounds66..96,92..92,70..100,79..79 etc while nativeisFullyScouted=true onall. Audige561122930 andHaack561122500 returned0/0 withsameflag. Thusflagalonecannotprovevisibility."
   },
   "legacyHubInjuryWidget": {
     "status": "Asset-only discovery; no implementation or live verification",
@@ -350,7 +351,8 @@
       }
     ],
     "warning": "Legacy PlayerSerial branch mcPlayerInfo is PlayerInfo containing shared OVRItem; existing RatingValueItem suffix does not cover it. Do not globally convert OVRItem because team ratings use it.",
-    "status": "p51 initial live formation module/list grades verified in cleanPID20872; detail/editing/defense/reentry still pending, no substitutions made."
+    "status": "p51 initial live formation module/list grades verified in cleanPID20872; detail/editing/defense/reentry still pending, no substitutions made.",
+    "detailFix": "p55 source: parent DEFormationPlayerRatings marker, guardedPlayerModule.Draw numericbadge repaint after nativeSetValue; forwarded marker to mcInfoSlotAttributes, fullyrevealed numeric slots only. Numericoverall/ratingValue remainsunchanged. Native-order regressionfixture added; live fixverificationpending."
   },
   "statPlayerSidebars": {
     "abi": "void*(self,void**out,opaqueKey)",

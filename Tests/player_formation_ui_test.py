@@ -5,12 +5,12 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
 from build_player_formation_ui import module_suffix,list_suffix,detail_suffix,legacy_ovr_suffix,SPECS
-from build_player_card_ui import rating_value_draw_suffix
+from build_player_card_ui import rating_value_draw_suffix,badge_suffix,attribute_slots_suffix
 from recruit_notes_vm import Machine,UNDEFINED
 
 
 def program(suffix):
-    a=Assembler();suffix(a);return a.finish()
+    a=Assembler();suffix(a);a.ret();return a.finish()
 
 
 def text(value):
@@ -46,7 +46,7 @@ for n in range(101):
         assert source==before and receiver['mcHighlight']['_visible']==selected
     for legacy in [False,True]:
         old=item(n);new=item(n)
-        receiver={'mData':source,'mcPlayerInfo':{'_visible':legacy,'mcOvr':old},'mcPlayerModule':{'_visible':not legacy,'mcStat':new}}
+        receiver={'mData':source,'mcPlayerInfo':{'_visible':legacy,'mcOvr':old},'mcPlayerModule':{'_visible':not legacy,'mData':{'ExtraInfo':{'roster':True,'overall':n}},'mcStat':new}}
         Machine({},[]).run(program(detail_suffix),{1:receiver})
         active=old if legacy else new;inactive=new if legacy else old
         assert active['mcValue']['mData']['display']==grade(n) and active['mData']['value']==n
@@ -100,4 +100,44 @@ Machine({},[]).run(program(list_suffix),{1:receiver})
 assert label['mData']['display']=='F' and label['mData']['ExtraInfo']['fontColor']==GRADE_COLORS['F']
 label['calls'].clear();Machine({},[]).run(program(list_suffix),{1:receiver})
 assert not label['calls'],'An unchanged list draw invalidated native text/style again'
+
+# Reproduce the observed child-after-parent repaint, rather than testing only
+# direct labels immediately after the formation parent's callback.
+for marked in [False,True]:
+    for n,values in [(67,[62,85,89,68,64,85]),(90,[90,59,60,79,80,100])]:
+        records=[{'ratingValue':v,'isFullyScouted':True,'ratingName':str(i)} for i,v in enumerate(values)]
+        source=copy.deepcopy(records)
+        slots={'mData':{'ExtraInfo':{f'AttributesData{i}':v for i,v in enumerate(records)}}}
+        for i,v in enumerate(values):slots[f'mcValueSlotText{i}']=text(v)
+        badge=item(n)
+        module={'_visible':True,'mData':{'ExtraInfo':{'roster':True,'overall':n,'attributesSubpanelInfo':records}},'mcStat':badge,'mcInfoSlotAttributes':slots}
+        if marked:
+            detail={'mData':{'ExtraInfo':{'Ovr':n}},'mcPlayerInfo':{'_visible':False},'mcPlayerModule':module}
+            Machine({},[]).run(program(detail_suffix),{1:detail})
+        for _ in range(2):
+            badge['mcValue']['mData']['display']=n;badge['mcValue']['mData']['ExtraInfo']['fontColor']=0xFFFFFF
+            for i,v in enumerate(values):
+                slots[f'mcValueSlotText{i}']['mData']['display']=v
+                slots[f'mcValueSlotText{i}']['mData']['ExtraInfo']['fontColor']=0xFFFFFF
+            Machine({},[]).run(program(badge_suffix),{1:module})
+            Machine({},[]).run(program(attribute_slots_suffix),{1:slots})
+            assert badge['mcValue']['mData']['display']==(grade(n) if marked else n)
+            for i,v in enumerate(values):
+                target=slots[f'mcValueSlotText{i}']['mData']
+                assert target['display']==(grade(v) if marked else v)
+                assert target['ExtraInfo']['fontColor']==(GRADE_COLORS[grade(v)] if marked else 0xFFFFFF)
+            assert module['mData']['ExtraInfo']['overall']==n and badge['mData']['value']==n and records==source
+        # Unrevealed and unsupported values must not be disclosed by the marker.
+        records[0]['isFullyScouted']=False;slots['mcValueSlotText0']['mData']['display']='?'
+        records[1]['ratingValue']='?';slots['mcValueSlotText1']['mData']['display']='?'
+        Machine({},[]).run(program(attribute_slots_suffix),{1:slots})
+        assert slots['mcValueSlotText0']['mData']['display']=='?' and slots['mcValueSlotText1']['mData']['display']=='?'
+
+# A stale marker cannot convert a non-roster/stat badge or a mismatched value.
+for roster,value in [(False,67),(True,45)]:
+    badge=item(value);module={'mData':{'ExtraInfo':{'DEFormationPlayerRatings':True,'roster':roster,'overall':67}},'mcStat':badge}
+    Machine({},[]).run(program(badge_suffix),{1:module})
+    assert badge['mcValue']['mData']['display']==value
+for regs,suffix in [(23,badge_suffix),(9,attribute_slots_suffix)]:
+    a=BoundedAssembler(regs);suffix(a);a.ret();a.finish()
 print('Passed: Formation Subs101 grade boundaries, native selected contrast, hidden values, both detail branches, marker repaint, jersey/commands/models preserved.')

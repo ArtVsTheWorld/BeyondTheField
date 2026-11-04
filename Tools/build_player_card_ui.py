@@ -113,7 +113,31 @@ def generic_slider_draw_suffix(a):
     a.label(done)
 
 
+def formation_parent_suffix(a):
+    # Formation Subs supplies a numeric PlayerModule model. Native Draw resets
+    # the badge after its parent's Draw; convert only this explicitly marked
+    # player's presentation, after that reset, never a shared NIL/stat module.
+    done='formationModuleDone'
+    path(a,1,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo','DEFormationPlayerRatings');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,1,'mData','ExtraInfo','roster');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,1,'mData','ExtraInfo','overall');a.store(17)
+    numeric_grade(a,17,18,done,'formationModuleGrade')
+    path(a,1,'mcInfoSlotAttributes');a.store(17);a.missing(17,'formationModuleBadge')
+    path(a,17,'mData');a.raw(0x76,0x49);a.branch('formationModuleBadge')
+    path(a,17,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch('formationModuleBadge')
+    path(a,17,'mData','ExtraInfo');a.string('DEFormationPlayerRatings');a.raw(0x73,0x4F)
+    a.label('formationModuleBadge')
+    path(a,1,'mcStat');a.store(17);a.missing(17,done)
+    path(a,17,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,17,'mData','value');path(a,1,'mData','ExtraInfo','overall');a.raw(0x66);a.branch(done,0xB8)
+    value_item_suffix(a,17,18,'formationModuleValue',mark=True)
+    a.label(done)
+
+
 def badge_suffix(a):
+    formation_parent_suffix(a)
     path(a, 1, 'mcStat'); a.store(17)
     # Shared PlayerModule may show NIL/stat values. Only an already-converted
     # exact grade is recolored; this adapter never converts its numeric values.
@@ -220,6 +244,10 @@ def attribute_slots_suffix(a):
     path(a,1,'mData','ExtraInfo');a.string('AttributesData');a.reg(3);a.raw(0x47,0x4E);a.store(4);a.missing(4,'slotsNext')
     path(a,4,'isFullyScouted');a.raw(0x73,0x66);a.branch('slotsNext',0xB8)
     path(a,4,'ratingValue');a.store(5)
+    a.reg(5);a.raw(0x44);a.string('number');a.raw(0x66);a.branch('slotsExistingGrade',0xB8)
+    path(a,1,'mData','ExtraInfo','DEFormationPlayerRatings');a.raw(0x73,0x66);a.branch('slotsNext',0xB8)
+    numeric_grade(a,5,5,'slotsNext','slotsFormationGrade')
+    a.label('slotsExistingGrade')
     palette(a,5,6,'slotsNext','slotsPalette')
     a.reg(1);a.string('mcValueSlotText');a.reg(3);a.raw(0x47,0x4E);a.store(7)
     text_label(a,7,5,6,8,'slotsNext','slotsText')
