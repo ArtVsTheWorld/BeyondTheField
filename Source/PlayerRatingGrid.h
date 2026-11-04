@@ -10,11 +10,11 @@ namespace recruitingfog::playerfog {
 // Semantic column IDs, not screen positions. Native position/team filters may
 // reorder or request only a subset of these columns.
 inline bool rosterRatingColumn(int id){return id==5||(id>=8&&id<=61);}
-enum class GridSchema{None,Roster,DepthChart,Redshirts,InjuryReport,PositionAth,PlayersLeaving,Training,EncourageTransfers};
+enum class GridSchema{None,Roster,DepthChart,Redshirts,InjuryReport,PositionAth,PlayersLeaving,Training,EncourageTransfers,EncourageFiltered,EncouragePosition};
 inline uint64_t gridState(int form,GridSchema schema){return form<0||schema==GridSchema::None?0:(uint64_t(uint32_t(form)+1)<<32)|uint32_t(schema);}
 inline int gridStateForm(uint64_t state){return state?int((state>>32)-1):-1;}
 inline GridSchema gridStateSchema(uint64_t state){return GridSchema(uint32_t(state));}
-inline bool ratingColumn(GridSchema schema,int id){return schema==GridSchema::Roster?rosterRatingColumn(id):schema==GridSchema::DepthChart?(id==7||(id>=10&&id<=63)):schema==GridSchema::Redshirts?(id==4||(id>=7&&id<=59)):(schema==GridSchema::InjuryReport||schema==GridSchema::PlayersLeaving)?id==4:schema==GridSchema::PositionAth?(id==5||(id>=7&&id<=31)):schema==GridSchema::Training?(id==5||(id>=7&&id<=60)):schema==GridSchema::EncourageTransfers?(id==4||(id>=7&&id<=60)):false;}
+inline bool ratingColumn(GridSchema schema,int id){return schema==GridSchema::Roster?rosterRatingColumn(id):schema==GridSchema::DepthChart?(id==7||(id>=10&&id<=63)):schema==GridSchema::Redshirts?(id==4||(id>=7&&id<=59)):(schema==GridSchema::InjuryReport||schema==GridSchema::PlayersLeaving)?id==4:schema==GridSchema::PositionAth?(id==5||(id>=7&&id<=31)):schema==GridSchema::Training?(id==5||(id>=7&&id<=60)):schema==GridSchema::EncourageTransfers?(id==4||(id>=7&&id<=60)):schema==GridSchema::EncourageFiltered?(id==4||(id>=6&&id<=59)):schema==GridSchema::EncouragePosition?(id==3||(id>=5&&id<=58)):false;}
 inline bool ratingText(std::string_view text,int& value){
     unsigned result=0;size_t i=0;
     while(i<text.size()&&text[i]>='0'&&text[i]<='9'){
@@ -74,6 +74,11 @@ inline GridSchema classifyGrid(const std::array<std::string,90>& names,unsigned 
     if(count==8&&names[0]=="Name"&&names[1].empty()&&names[2]=="POS"&&names[3]=="Year"&&names[4]=="OVR"&&names[5]=="Reason"&&names[6]=="Persuasion Chance"&&names[7]=="RS")return GridSchema::PlayersLeaving;
     if(count>=8&&count<=61&&names[0].empty()&&names[1]=="RS"&&names[2]=="Name"&&names[3]=="Year"&&names[4]=="POS"&&names[5]=="OVR"&&names[6]=="NIL"&&knownAttributeColumns(names,7,count))return GridSchema::Training;
     if(count==61&&names[0].empty()&&names[1]=="Name"&&names[2]=="Year"&&names[3]=="POS"&&names[4]=="OVR"&&names[5]=="NIL"&&names[6]=="DEV"&&knownAttributeColumns(names,7,count))return GridSchema::EncourageTransfers;
+    // Encourage Transfers filters omit DEV and select/reorder attributes from6.
+    // Keep NIL at5 numeric; require the complete identity prefix and rating-only tail.
+    if(count>=7&&count<=60&&names[0].empty()&&names[1]=="Name"&&names[2]=="Year"&&names[3]=="POS"&&names[4]=="OVR"&&names[5]=="NIL"&&knownAttributeColumns(names,6,count))return GridSchema::EncourageFiltered;
+    // Individual position filters omit POS as well as DEV (captured QB).
+    if(count>=6&&count<=59&&names[0].empty()&&names[1]=="Name"&&names[2]=="Year"&&names[3]=="OVR"&&names[4]=="NIL"&&knownAttributeColumns(names,5,count))return GridSchema::EncouragePosition;
     return GridSchema::None;
 }
 struct GridSink{

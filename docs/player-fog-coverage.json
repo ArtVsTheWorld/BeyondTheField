@@ -55,7 +55,7 @@
       "liveVerified": false,
       "evidence": "Native QB depth columns captured: form0; identity POS,#,RS,Name,Year,POS,OVR,NIL,MOR; rating IDs7,10+. p46 exact-prefix/known-attribute schema plus one atomic form/schema snapshot. Tests preserve depth2 ordinal formatter13, NIL8 currency49, MOR9, intValue/sorting and names.",
       "remaining": [
-        "Separate lineup/comparison/formation popups and remaining hub comparison/watch previews"
+        "Formation Subs defensive view and reentry preservation sweep"
       ],
       "liveStatus": "p46 clean session QB/C table and panel verified; user additionally checked offense, defense, return/specialist filters and far-right ratings, reporting all letters while depth/NIL/team ratings remain numeric. No lineup edits."
     },
@@ -65,8 +65,7 @@
       "liveVerified": false,
       "evidence": "p40 adds three fingerprinted player-only hub methods: TeamFormation._SetPlayersData and comparison/watch Ovr templates. Boundary/color/hidden/source-preservation fixtures pass. Loaded in p50; Starting Offense live verified. Reviewer confirms PlayerCompare helper is called twice from Init; PlayersToWatch helper has no current Init caller or OVR children, so attachment absence alone is not a visible leak.",
       "remaining": [
-        "Live check of canonical-string comparison attribute fix in next build",
-        "PlayersToWatch current layout inspection; dormant OVR helper only matters if displayed"
+        "Verify p59 Mismatch on Paper eight attribute labels; dormant PlayersToWatch helper is excluded unless an actual badge is observed"
       ],
       "liveStatus": "p46 clean-start Starting Offense shows all11 player Overalls as colored letters; jersey numbers remain numeric. Other hub panels pending. p55liveMismatchOnPapercomparison: bothOVRbadgesC/Bcolored;8attributes79/82/83/78 vs85/87/90/83 remainnumeric. Discoveredadditionalvisibleattributeleak, do notmarkStage2passed. p57 method3 attached but eight attributes remain numeric: nativeproducer7932a10 formats StatValue as string via %d. Next source handles only canonical0..100 strings after attribute-name gate."
     },
@@ -82,13 +81,12 @@
     {
       "surface": "Training and position changes",
       "implemented": true,
-      "liveVerified": false,
-      "evidence": "p39 hooks verified player-only GetEntryInfo UI maps for PositionChanges and Injury/Training; common RosterManagement entry hook now applies beyond rosterForm. Actual training/position-change table schemas still need discovery. Captured Training61 schema and ATH32 schema; source now recognizes both. Nativeformat35 switch8254680/82551B0 calls7e0c670 producing exactcomma TrendWithDelta suffix, retainedunchanged; only base token graded. ATH hiddenDEV6 preserved. Build/review/live pending.",
+      "liveVerified": true,
+      "evidence": "p59 strict captured Training61 and ATH32 table schemas plus existing normal roster schema. Training format35 keeps native TrendWithDelta adjustment strings and numeric sorting; native delta helper7e0c670 and formatter35 independently verified. UI data maps mask revealed sidebar ratings only.",
       "remaining": [
-        "Training position/far-right and reentry regression",
-        "p59 ATH and normal Position Changes liveverification"
+        "Normal position-change and ATH reentry regression; native numeric sorting preserved in tests"
       ],
-      "liveStatus": "p59 live Training Results: Jotavian Pierce selected row C with nativegreen(+1), AWRB(+2); otherrows coloredgrades plus(+2)/(+8)/(+10), native delta child layout preserved. SidebarC; NIL10/0 and team75/75/74 numeric. User confirms looks good. ATH/nativeposition livecheck next."
+      "liveStatus": "p59 Training Roster/QB views live verified; user confirms far-right training columns. Native positive improvement deltas preserved, selected black/other grades colored, NIL and team values numeric. USC ATH actual Demari Hussey C, D.Phillips C and R.Tegegn D with all displayed attributes letters; selected black/other rows colored, sidebarC, USC82/83/82 numeric. No positions changed."
     },
     {
       "surface": "Pregame and in-game menus",
@@ -107,9 +105,7 @@
       "liveVerified": false,
       "evidence": "Ability requirements/current ratings fixed and live-verified via typed native preview. p46 includes same parser only in Description/UpgradeDescription; costs, ranks and eligibility untouched. TextFieldGeneric uses plain text, so requirement paragraphs keep their native text color. Other tooltips pending.",
       "remaining": [
-        "Ability tooltip row-collector path",
-        "Additional player popup displays",
-        "Temporary boost audit; no generic number replacement"
+        "Inspect one actual native ability tooltip row response for attribute requirements; preserve non-rating values"
       ],
       "status": "Partial implementation; additional tooltip paths pending"
     },
@@ -226,20 +222,20 @@
     {
       "surface": "Players Leaving table OVR",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p57 ULM milestone actual table8 columns: Name0,hidden1,POS2,Year3,OVR4,Reason5,PersuasionChance6,hiddenRS7. Sidebar alreadygraded; new strictschema converts tableOVR4 only.",
-      "remaining": [
-        "Build/review/live grade and decision-field verification"
-      ]
+      "remaining": [],
+      "liveStatus": "p59 user checked ULMPLAYERSLEAVING28 and confirmed table grades look right; no persuasion, advance or save."
     },
     {
       "surface": "Encourage Transfers table ratings",
       "implemented": true,
       "liveVerified": false,
-      "evidence": "p57 ULM milestone actual61columns: hidden0,Name1,Year2,POS3,OVR4,NIL5,DEV6,knownattributes7..60. Sidebargrades work; new strictschema converts onlyOVR/attributes, preserves eligibility/disabledstyling and rostercount.",
+      "evidence": "p57 ULM milestone actual61columns: hidden0,Name1,Year2,POS3,OVR4,NIL5,DEV6,knownattributes7..60. Sidebargrades work; new strictschema converts onlyOVR/attributes, preserves eligibility/disabledstyling and rostercount. p60 handles no-DEV group filters and no-POS/no-DEV individual positions with strict identity prefixes plus rating-only headers; no row data mutation.",
       "remaining": [
-        "Build/review/live grades and eligibility preservation"
-      ]
+        "Live p60 offense/defense/specialist/individual-position and disabled-style check"
+      ],
+      "liveStatus": "p59 All view verified by user. Filtered views confirmed numeric; captured Offense46/Defense27/SpecialTeams13/QB30 and fixed in p60. Awaiting live p60 verification."
     }
   ],
   "invariants": [
@@ -570,14 +566,14 @@
     "installedBaselineUntouched": true,
     "developmentDll": "Build/DynastyEnhancerRecruitFog-p59.dll",
     "cleanRestartRequired": "p59 clean activation complete; future copied UI definition changes need clean restart.",
-    "activeRuntime": "p59 active alone in clean PID17172 after installed baseline stop0 at observed main menu; no probes loaded.",
+    "activeRuntime": "p59 active in PID17172; p11 metadata probe explicitly stopped0 with inflight0. p60 not loaded.",
     "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p59-MMC.zip",
     "releaseReady": false,
     "previewSha256": "98eb31b0ef8fe68a9c890a36a473acd327fbf021b4e229e504fd4f282cd945d9",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p59.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p59-MMC.zip",
-    "nextCandidateSha256": "98eb31b0ef8fe68a9c890a36a473acd327fbf021b4e229e504fd4f282cd945d9"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p60.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p60-MMC.zip",
+    "nextCandidateSha256": "c893f250426662d455ab163953e2bb6e7afd510ea66bbb0ddc79f504de8a3fee"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -624,22 +620,46 @@
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
     "milestoneBackups": "Five ULM manual milestones copied and SHA256 verified in Backups/PlayerFog-Milestones-20261104-1642; TrainingResults28, NSD2POSCHANGE, PlayersLeaving28, ConferencesCuts28, EOSRecap28. No original saves modified.",
     "p58Prepared": "Source includes canonical hub attribute strings, weekly Practice Plans row OVR and four exact captured offseason grid schemas. Build/review pending; p57 active.",
-    "columnProbe": "p10 read-only metadata capture completed and explicitly stopped0; no probes remain active.",
+    "columnProbe": "p11 capture completed; explicit stop result0 and inflight0 confirmed.",
     "p58Build": "MSVC/W4/WX, native tests including new4grid schemas/training101xprevious pairs, and all10UIVM suites passed. Independent Practice and grid/schema/parser reviews pass. Notloaded; p57 active.",
     "p58Next": "Package built for recovery; hold next live restart until editable NIL list renderer gap is traced, to batch fixes.",
     "p58Package": "Combined MMC package registration/launch/tamper/path/config checks passed. p58 is not loaded; pending NIL renderer fix will be batched in another fresh build.",
     "p59Build": "MSVC/W4/WX/native/all10UIVM suites passed. Independent source/frame/model/lifecycle reviews passed for hubstrings, four captured grids, weeklypractice and embeddedNIL.",
     "p59Package": "Combined MMC registration/launch/tamper/path/config smoke passed; installed baseline unchanged; p59 not loaded.",
-    "milestonePersistence": "Allfive milestone sourcefiles stillmatchSHA256 backups afterread-onlymenuQA; noadvance/save/player/deal changes.",
+    "milestonePersistence": "Allfive milestone sourcefiles stillmatchSHA256 backups afterp59 read-only QA including Leaving and Encourage filter captures; noadvance/save/player/deal changes.",
     "p59Activation": "Observed main menu in fresh PID17172; installed recruit baseline stop0, p59 active event and empty14-bank retention confirmed before Dynasty load.",
     "p59NilLive": "p59 clean PID17172 actual editableHighRisk list: selectedToothman B black, otherC/D colored, sidebarB; current/expectedNIL0, budget840,roster80,recruit215,team75/75/74 and riskbars preserved. Bank13 Draw+unfocus attached; user confirms looks good. No deals changed.",
     "p59TrainingLive": "p59 live Training Results: Jotavian Pierce selected row C with nativegreen(+1), AWRB(+2); otherrows coloredgrades plus(+2)/(+8)/(+10), native delta child layout preserved. SidebarC; NIL10/0 and team75/75/74 numeric. User confirms looks good. ATH/nativeposition livecheck next.",
-    "p59TrainingQbFilter": "Automated native dropdown selection toQB passed. Marc Friedel Overall D(+4), strengthD(+1), awarenessD(+4), throwpowerB(+2); selectedblack, numericNIL0/team75/75/74 preserved. Horizontal automated scroll ignored; user controller far-right check requested."
+    "p59TrainingQbFilter": "Automated native dropdown selection toQB passed. Marc Friedel Overall D(+4), strengthD(+1), awarenessD(+4), throwpowerB(+2); selectedblack, numericNIL0/team75/75/74 preserved. Horizontal automated scroll ignored; user controller far-right check requested.",
+    "p59AthLive": "User confirms ATH and far-right training checks; screenshot confirms ATH ratings/selected contrast and team ratings preserved.",
+    "p60Build": "MSVC /W4 /WX, native tests and all10 UI VM suites passed. Four actual filtered metadata fixtures verify shifted rating columns, unchanged NIL/sorting/unknown/disabled fields, and rejection of stats/unrelated schemas.",
+    "p60Review": "Independent read-only review passed allfour schemas and native preservation. Native disabled foreground pending visual QA.",
+    "p60Package": "MMC registration/launch/tamper/path/config checks passed. Installed baseline untouched; p60 not loaded.",
+    "p59LeavingEncourage": "User confirmed Players Leaving and Encourage All. Filtered Encourage raw rating leak reproduced and fixed in p60."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "In progress: all requested depth filters/far-right verified by user; roster card Ratings/Physicals and Starting Offense verified. Separate lineup/comparison/watch previews and secondary card paths pending.",
     "remainingMenusLeakAudit": "In progress: awards and MySchool risk-player adapters built, live verification pending.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
+  },
+  "completionAudit": {
+    "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
+    "remainingPriority": [
+      "Hub comparison eight attribute labels",
+      "Pregame/in-game player ratings and substitution views without gameplay or lineup changes",
+      "Injured-player Health and one Mentals tooltip",
+      "Weekly Practice Plans player OVR labels via stock available entry",
+      "Annual player/coach and weekly player award views",
+      "Recruiting My School risk list player OVR and ordinary risk data",
+      "One native ability tooltip row response if it displays actual rating requirements",
+      "Leaving/Encourage and short filter/reentry preservation sweep"
+    ],
+    "excluded": [
+      "Edit Player numeric ratings per user",
+      "Team OVR/OFF/DEF",
+      "Dormant uncalled templates without visible ratings",
+      "Statistics, Auto Subs thresholds, health deductions, costs, and unrelated metadata"
+    ]
   }
 }

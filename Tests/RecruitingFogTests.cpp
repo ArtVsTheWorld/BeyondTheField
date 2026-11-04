@@ -175,7 +175,7 @@ int main(){try{
         std::array<std::string,90> depthNames{};const char* depthHeaders[]={"","POS","#","RS","Name","Year","POS","OVR","NIL","MOR","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
         for(size_t i=0;i<std::size(depthHeaders);++i)depthNames[i]=depthHeaders[i];
         require(classifyGrid(depthNames,35)==GridSchema::DepthChart&&!rosterSchema(depthNames,35),"Captured native depth schema misclassified");
-        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart,GridSchema::Redshirts,GridSchema::InjuryReport,GridSchema::PositionAth,GridSchema::PlayersLeaving,GridSchema::Training,GridSchema::EncourageTransfers}){
+        for(int form:{0,1,999,2147483647})for(auto schema:{GridSchema::Roster,GridSchema::DepthChart,GridSchema::Redshirts,GridSchema::InjuryReport,GridSchema::PositionAth,GridSchema::PlayersLeaving,GridSchema::Training,GridSchema::EncourageTransfers,GridSchema::EncourageFiltered,GridSchema::EncouragePosition}){
             const auto state=gridState(form,schema);require(gridStateForm(state)==form&&gridStateSchema(state)==schema,"Atomic form/schema snapshot lost identity");
         }
         require(gridState(-1,GridSchema::Roster)==0&&gridState(0,GridSchema::None)==0&&gridStateForm(0)==-1,"Inactive grid state admitted a row");
@@ -255,6 +255,62 @@ int main(){try{
         for(unsigned i=0;i<6;++i)gridString(&encourageCells,i,"display",std::array<const char*,6>{"57,TrendNone","10","2","71","88","Joseph"}[i]);
         gridInt(&encourageCells,0,"intValue",57);
         require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="10"&&output.values[4]["value"]=="2"&&output.values[5]["value"]=="C"&&output.values[8]["value"]=="B"&&output.values[11]["value"]=="Joseph"&&output.values[12]["value"]==57,"Encourage conversion changed NIL,DEV,name or numeric sort value");
+        { // Captured Encourage Transfers offense filter; no private player records.
+            std::array<std::string,90> filteredNames{};const char* headers[]={"","Name","Year","POS","OVR","NIL","SPD","ACC","AGI","COD","STR","AWR","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","BTK","TRK","SFA","SPM","JKM","CTH","CIT","SPC","SRR","MRR","DRR","RLS","IBL","LBK","RBK","RBF","RBP","PBK","PBF","PBP","RET","STA","INJ","TGH","LSP"};
+            for(size_t i=0;i<std::size(headers);++i)filteredNames[i]=headers[i];
+            require(classifyGrid(filteredNames,46)==GridSchema::EncourageFiltered,"Encourage offense filter not recognized");
+            require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,45)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage offense rating column boundaries wrong");
+            output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,45};
+            gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
+            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage offense changed NIL, unknown, numeric sorting or disabled state");
+            ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
+            output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
+            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage offense left native numeric OVR formatting or changed NIL formatting");
+            filteredNames[6]="Yards";require(classifyGrid(filteredNames,46)==GridSchema::None,"Encourage offense admitted statistics");filteredNames[6]=headers[6];
+            filteredNames[5]="Salary";require(classifyGrid(filteredNames,46)==GridSchema::None,"Encourage offense admitted another table");
+        }
+        { // Captured Encourage Transfers defense filter; no private player records.
+            std::array<std::string,90> filteredNames{};const char* headers[]={"","Name","Year","POS","OVR","NIL","SPD","ACC","AGI","COD","STR","AWR","PRC","POW","PUR","BSH","PRS","MCV","ZCV","FMV","PMV","CTH","CAR","JMP","INJ","STA","TGH"};
+            for(size_t i=0;i<std::size(headers);++i)filteredNames[i]=headers[i];
+            require(classifyGrid(filteredNames,27)==GridSchema::EncourageFiltered,"Encourage defense filter not recognized");
+            require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,26)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage defense rating column boundaries wrong");
+            output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,26};
+            gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
+            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage defense changed NIL, unknown, numeric sorting or disabled state");
+            ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
+            output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
+            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage defense left native numeric OVR formatting or changed NIL formatting");
+            filteredNames[6]="Yards";require(classifyGrid(filteredNames,27)==GridSchema::None,"Encourage defense admitted statistics");filteredNames[6]=headers[6];
+            filteredNames[5]="Salary";require(classifyGrid(filteredNames,27)==GridSchema::None,"Encourage defense admitted another table");
+        }
+        { // Captured Encourage Transfers special filter; no private player records.
+            std::array<std::string,90> filteredNames{};const char* headers[]={"","Name","Year","POS","OVR","NIL","KPW","KAC","SPD","ACC","TAK","INJ","COD"};
+            for(size_t i=0;i<std::size(headers);++i)filteredNames[i]=headers[i];
+            require(classifyGrid(filteredNames,13)==GridSchema::EncourageFiltered,"Encourage special filter not recognized");
+            require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,12)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage special rating column boundaries wrong");
+            output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,12};
+            gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
+            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage special changed NIL, unknown, numeric sorting or disabled state");
+            ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
+            output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
+            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage special left native numeric OVR formatting or changed NIL formatting");
+            filteredNames[6]="Yards";require(classifyGrid(filteredNames,13)==GridSchema::None,"Encourage special admitted statistics");filteredNames[6]=headers[6];
+            filteredNames[5]="Salary";require(classifyGrid(filteredNames,13)==GridSchema::None,"Encourage special admitted another table");
+        }
+        { // Captured Encourage Transfers qb filter; no private player records.
+            std::array<std::string,90> filteredNames{};const char* headers[]={"","Name","Year","OVR","NIL","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","BTK","TRK","SFA","SPM","JKM","IBL","STA","TGH","INJ"};
+            for(size_t i=0;i<std::size(headers);++i)filteredNames[i]=headers[i];
+            require(classifyGrid(filteredNames,30)==GridSchema::EncouragePosition,"Encourage qb filter not recognized");
+            require(ratingColumn(GridSchema::EncouragePosition,3)&&ratingColumn(GridSchema::EncouragePosition,5)&&ratingColumn(GridSchema::EncouragePosition,29)&&!ratingColumn(GridSchema::EncouragePosition,4),"Encourage qb rating column boundaries wrong");
+            output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncouragePosition;filteredCells.count=4;filteredCells.columns={3,4,5,29};
+            gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
+            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage qb changed NIL, unknown, numeric sorting or disabled state");
+            ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,3,"formatType",15);columnBool(&filteredColumns,3,"isTrend",true);columnInt(&filteredColumns,4,"formatType",49);columnString(&filteredColumns,5,"display",headers[5]);
+            output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncouragePosition);
+            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage qb left native numeric OVR formatting or changed NIL formatting");
+            filteredNames[5]="Yards";require(classifyGrid(filteredNames,30)==GridSchema::None,"Encourage qb admitted statistics");filteredNames[5]=headers[5];
+            filteredNames[4]="Salary";require(classifyGrid(filteredNames,30)==GridSchema::None,"Encourage qb admitted another table");
+        }
         FixtureView view;view.maps[1]={{"overall",2},{"teamOverall",3},{"jersey",4}};view.numbers={{2,82},{3,64},{4,1}};std::string changed;
         require(selectedOverall(view,1,[&](uintptr_t root,const char* key,const char* value){require(root==1,"Selected player root changed");changed=std::string(key)+"="+value;})&&changed=="overall=B","Selected overall not scoped to player field");
         view.numbers[2]=-1;require(!selectedOverall(view,1,[&](uintptr_t,const char*,const char*){throw std::runtime_error("Invalid selected rating exposed");}),"Invalid player overall changed");
