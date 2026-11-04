@@ -167,8 +167,9 @@
       "liveVerified": false,
       "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
       "remaining": [
-        "Live selected-player/reentry verification in next combined candidate"
-      ]
+        "Other position/team filters and reentry regression"
+      ],
+      "liveStatus": "p55 live Cole Whitaker Overall D and AwarenessD/PowerB/AccuracyC/C/D/OnRunC colored; stats62/131,47%,785yd,7TD/6INT,NIL10,jersey11 unchanged. User confirms looks good."
     },
     {
       "surface": "Season Stats player sidebar",
@@ -176,8 +177,9 @@
       "liveVerified": false,
       "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
       "remaining": [
-        "Live selected-player/reentry verification in next combined candidate"
-      ]
+        "Other position/team filters and reentry regression"
+      ],
+      "liveStatus": "p55 live Cole Whitaker Overall D, sidebar category grades C/B/D/C/C/B; passing62/131,47%,785yd,7TD/6INT remain numeric. User confirms looks good."
     },
     {
       "surface": "Completed-game Box Score player sidebar",
@@ -185,8 +187,9 @@
       "liveVerified": false,
       "evidence": "Narrow overall/revealed-attribute UI-map conversion. Native typed3 bindings and32-byte gates verified live in PID20872. Stats/rank/percentage/compensation source fields preserved; no stats table conversion.",
       "remaining": [
-        "Live selected-player/reentry verification in next combined candidate"
-      ]
+        "Other team/category filters and reentry regression"
+      ],
+      "liveStatus": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good."
     },
     {
       "surface": "NIL roster list OVR",
@@ -200,13 +203,13 @@
     },
     {
       "surface": "Dynasty Blueprint Highest NIL Players overview",
-      "implemented": false,
+      "implemented": true,
       "liveVerified": false,
       "liveStatus": "p55 actual visible OVR82/55/56/49/63 remain numeric; compensation45/25/20/15/10 and budget values should remain numeric.",
       "remaining": [
-        "Discover scoped player-only overview renderer",
-        "Implement and live verify without editing budget/deals"
-      ]
+        "Live Program Overview badge verification"
+      ],
+      "evidence": "p57 separate12thbank: full current asset SHA and Drawfingerprint, native0args/fixed5frame. LayoutStyle1+validOVRValue+visiblematchingbadge guards, marker-only child repaint.101boundaries/repaint/hidden/recruit/budget/source tests and independent review passed."
     }
   ],
   "invariants": [
@@ -531,9 +534,9 @@
     "releaseReady": false,
     "previewSha256": "2958924bb4c91803459ffb025f1b0ab05ff35150f96da21ede501b9e3eaadbde",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p56.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p56-MMC.zip",
-    "nextCandidateSha256": "2dae7679900c2d22493c803e9089b0a3dd2b421f55842339da907107a4ad979d"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p57.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p57-MMC.zip",
+    "nextCandidateSha256": "e8237d5857155e2a09caa2a25831dcb81a31158466a75fcbdd5b70703cd0c4d4"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -565,7 +568,14 @@
     "p55Package": "MMC registration/launch/tamper/path/config checks pass; installedfiles/history unchanged.",
     "p55Activation": "Baseline stop0; p55active and empty11-bankretentionreport confirmed at mainmenu PID7528. Includes all7 typed3 getter gates.",
     "p55FormationLive": "p55 clean PID7528: Wing Tight right detail now shows JaCorey McNeil Overall D and six colored attributes D/B/B/D/D/B, matching prior native67/62/85/89/68/64/85. Center/reserve grades remain correct; jersey diagram, measurements and0/50 counter unchanged. No substitutions/reset/advance.",
-    "hubComparisonFix": "p56 built with MSVC/W4/WX, native tests and all8UIVM suites; independent review passed exact2argc/fixed5register/nativecopy51/54bytes, ordinary stats and source preservation. MMC package checks pass. Not loaded; p55 active."
+    "hubComparisonFix": "p56 built with MSVC/W4/WX, native tests and all8UIVM suites; independent review passed exact2argc/fixed5register/nativecopy51/54bytes, ordinary stats and source preservation. MMC package checks pass. Not loaded; p55 active.",
+    "p55StatsLive": {
+      "Season Stats player sidebar": "p55 live Cole Whitaker Overall D, sidebar category grades C/B/D/C/C/B; passing62/131,47%,785yd,7TD/6INT remain numeric. User confirms looks good.",
+      "Career Stats player sidebar": "p55 live Cole Whitaker Overall D and AwarenessD/PowerB/AccuracyC/C/D/OnRunC colored; stats62/131,47%,785yd,7TD/6INT,NIL10,jersey11 unchanged. User confirms looks good."
+    },
+    "p57Blueprint": "MSVC/W4/WX/native/nineUIVMsuites pass; independent scopedbadge/fixed5frame/source/compensation/12thbank review passed. Package/live pending; p55 active.",
+    "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
+    "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",

@@ -40,6 +40,8 @@ if($RecruitNotesUi){
  if($LASTEXITCODE -ne 0){throw 'Formation Subs player renderer checks failed'}
  & python (Join-Path $fogRoot 'Tests/player_nil_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'NIL roster player renderer checks failed'}
+ & python (Join-Path $fogRoot 'Tests/player_blueprint_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Blueprint player renderer checks failed'}
 }
 Push-Location $fogOut
 try{
