@@ -271,5 +271,12 @@
     "fields": "overall and fully-revealed attributesSubpanelInfo.ratingValue only",
     "preserved": "injuryName, injuryStatus, injuryLength, risk, age, season stats",
     "status": "p50 built; live display verification pending"
+  },
+  "prospectPreviewCapture": {
+    "tool": "Development-only RecruitPreviewProbe.cpp / Build/DynastyEnhancerRecruitPreviewProbe-p2.dll",
+    "status": "Built and independently reviewed; not loaded, not included in combined package",
+    "bounds": "Eight native responses or five minutes; depth3/array32; descends only attributesSubpanelInfo, other containers left untraversed",
+    "ownership": "p50 parent module + native32-byte GetEntryInfo gate; one native call, lifecycle mutex/CAS restoration; response unchanged",
+    "manual": "Select existing0%, partial Luke40%, and existing100% in Prospect List; compare actual selected IDs and visible sidebar with captured flags/ranges. Then Transfer Portal; no hours or recruiting actions."
   }
 }
