@@ -1,0 +1,80 @@
+{
+  "stage": 2,
+  "feature": "Native recruit Scouting letter grades and grade ranges",
+  "status": "Stage 2 prototype complete; revealed values, partial ranges, hidden values, another position and Back verified live",
+  "branch": "research/recruiting-fog",
+  "prototype": {
+    "dll": "Build/DynastyEnhancerRecruitFog-p04.dll",
+    "sha256": "845b8ebaaba0901beec9165a5b13562cb5685b0e86d46ca257a618990835714d",
+    "installedInMmc": false,
+    "loading": "Separate session-only DLL alongside the unchanged installed Social Media v103 runtime",
+    "build": "./Source/build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-pNN",
+    "buildNote": "Choose an unused numeric pNN suffix. Existing DLL filenames are refused because loaded prototypes are pinned.",
+    "load": "./Build/LoadDynastyEnhancer.exe <CollegeFB27 PID> <absolute prototype DLL path>",
+    "stop": "./Build/LoadDynastyEnhancer.exe <CollegeFB27 PID> <absolute prototype DLL path> --stop",
+    "recovery": "Stop restores only the owned recruiting getter slot. Reopen recruiting to request a fresh unmodified native response. A game restart unloads the session-only prototype."
+  },
+  "gradeBands": {
+    "A": "90-100",
+    "B": "80-89",
+    "C": "70-79",
+    "D": "60-69",
+    "F": "0-59"
+  },
+  "visibility": {
+    "revealed": "Convert the already-displayed integer value to one letter",
+    "partial": "Convert the already-displayed lower/upper bounds to a range, e.g. C–B; collapse to one letter when both bounds share a grade",
+    "rangePrecision": "Fractional bounds are conservatively rounded outward; no hidden true rating is consulted",
+    "nativeUnknown": "Leave HaveSlider=false, SliderStart=0 untouched below 100% scouting, preserving native incognito behavior",
+    "fullyUninformativeRange": "A 0-100 range below 100% becomes ?",
+    "invalidValues": "Malformed ratings/bounds become ?; unrecognized response structures are left untouched and counted",
+    "fullyScoutedZero": "A genuinely revealed zero at 100% scouting becomes F"
+  },
+  "integration": {
+    "getter": "GetTeamRecruitList",
+    "vtableRva": "0xc752bc8",
+    "slot": "0x40",
+    "getterRva": "0xa0e91a0",
+    "stringSetterRva": "0x25a3e60",
+    "flagSetterRva": "0x2bf6720",
+    "guards": "Getter and both UI setter prologues must match 32-byte fingerprints; vtable slot must still point to the verified original getter",
+    "response": "Native UI Variant array of recruit maps, with ScoutingAttributes maps",
+    "modifiedFields": ["ScoutingAttributes[].SliderStart", "ScoutingAttributes[].SliderEnd", "ScoutingAttributes[].HaveSlider"],
+    "dataflow": "Native Scouting model copies SliderStart directly into AttributeButton.ExtraInfo.Points. String labels plus a false HaveSlider flag use the existing mcPoints.SetLabel branch instead of the numeric bar.",
+    "flagRepresentation": "The native flag setter creates numeric 0/1 UI values; the script tests their truth value. It is not a direct boolean-memory write.",
+    "ownership": "Original getter called exactly once; its result and output pointer preserved. Native UI setters handle string storage and reference ownership.",
+    "backgroundWork": "No player/database polling or archive scanning. Conversion runs only when the game naturally requests the recruit list. A bounded diagnostic queue flushes separately.",
+    "nativeUnknownZeroHandling": "Scouted is already true for a partially scouted recruit, so the native PercentageScouted value, not Scouted alone, distinguishes full completion."
+  },
+  "unchanged": [
+    "Player/Recruit database ratings and simulation data",
+    "Scouting progress, hours, costs and action availability",
+    "Abilities, mentals and development trait visibility",
+    "Save files and installed MMC plugins",
+    "Social Media runtime and hooks"
+  ],
+  "localChecks": {
+    "build": "MSVC x64, C++17, /O2 /MT /W4 /WX /utf-8",
+    "allRevealedValues": "Every integer from 0 through 100",
+    "allIntegerRangePairs": 5151,
+    "hiddenRatingIndependence": "Changing the hidden-value argument does not change range output",
+    "fixtures": [
+      "Ten real partial/revealed attribute bounds captured from Luke Callen",
+      "Unknown zero below 100% and genuine zero at 100%",
+      "Wholly unknown 0-100 range",
+      "Invalid values and unsupported root response",
+      "Current interned string layout uses pointer at +0x20",
+      "Native getter ABI and disabled-hook pass-through"
+    ],
+    "bytecodeEvidenceLimit": "The extraction tool now reports unsupported nested instructions separately from top-level decode exceptions. There are 62 unsupported instructions across 53 assets. The specific attribute-copy fragment and AttributeButton.Draw branch were independently inspected."
+  },
+  "liveChecks": {
+    "reference": "Luke Callen, QB, 40% scouting",
+    "userConfirmed": ["Throw Power 92 becomes A", "Medium Accuracy 79 becomes C", "Speed 67-82 bar becomes D–B", "Scouting percentage remains 40%", "0% unknown ratings remain hidden", "Another scouted position displays correctly", "Back and controls work normally"],
+    "responseCounts": {"recruits": 34, "convertedAttributes": 80, "revealed": 19, "ranges": 61, "unknownPreserved": 260, "unsupported": 0},
+    "timing": "Captured conversions report 0 ms on GetTickCount64. This is a coarse timer, not proof of sub-millisecond latency.",
+    "pending": [],
+    "notYetExercisedLive": ["100% scouting boundary; covered by local fixtures without spending user scouting hours", "Transfer/portal-specific profile variations", "Fresh-launch automatic loading; prototype is session-only"]
+  },
+  "deferred": ["Playing-time grade masking", "Recruiting Notes tab and flavor generation", "Active-player roster Fog", "MMC package integration after prototype validation"]
+}

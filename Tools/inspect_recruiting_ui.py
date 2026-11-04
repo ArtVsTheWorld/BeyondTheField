@@ -47,7 +47,7 @@ for name in sorted(names):
     apt = load(dest)
     strings = [{'index': i, 'value': v} for i, v in enumerate(apt.const) if isinstance(v, str)]
     dest.with_suffix('.strings.json').write_text(json.dumps(strings, indent=2), encoding='utf8')
-    streams, lines, errors = [], [], []
+    streams, lines, errors, unsupported = [], [], [], []
     for label, offset in apt.root_streams():
         try:
             items = apt.decode(offset)
@@ -55,11 +55,15 @@ for name in sorted(names):
             lines.append(label)
             for parents, i, item in walk(items):
                 lines.append('  '*len(parents) + repr(item[:3]))
+                if item[1] == -1:
+                    unsupported.append({'label': label, 'offset': item[0], 'detail': str(item[2])[:512]})
         except Exception as error:
             errors.append({'label': label, 'error': str(error)})
     dest.with_suffix('.actions.txt').write_text('\n'.join(lines), encoding='utf8')
     report.append({'asset': name, 'sha256': hashlib.sha256(data).hexdigest(),
-                   'bytes': len(data), 'strings': strings, 'streams': streams, 'decodeErrors': errors})
+                   'bytes': len(data), 'strings': strings, 'streams': streams, 'decodeErrors': errors,
+                   'unsupportedInstructions': unsupported})
 (args.output/'asset-report.json').write_text(json.dumps(report, indent=2), encoding='utf8')
 print(json.dumps({'assets': len(report), 'decodeErrors': sum(len(r['decodeErrors']) for r in report),'readErrors': sum('readError' in r for r in report),
+                  'unsupportedInstructions': sum(len(r.get('unsupportedInstructions', [])) for r in report),
                   'report': str(args.output/'asset-report.json')}))

@@ -4,6 +4,10 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## Recruiting Fog prototype (research branch)
+
+Stage 2 adds letter grades and grade ranges to the native recruit Scouting attributes. Hidden values retain their hidden state; ranges use only the bounds the game already reveals. The separate test DLL is `Build/DynastyEnhancerRecruitFog-p04.dll`; it is not part of the installed v103 MMC package and must currently be loaded per session. See [scope, build instructions and validation](docs/recruiting-fog-stage2.json). Playing-time masking, recruiting Notes and active-roster Fog remain later work.
+
 ## Content and menu performance review (v103)
 
 The package is `Build/DynastyEnhancer-v103-MMC.zip`. It retains **Team → Social Media** and the native feed controls. A separate hub tab is deferred.

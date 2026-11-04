@@ -33,6 +33,7 @@
     "count": 53,
     "readErrors": 0,
     "decodeErrors": 0,
+    "decodeScope": "Zero top-level decode exceptions does not mean full bytecode support. The disassembler can report unsupported nested instructions; stage 2 verifies the specific attribute-copy and label branches independently.",
     "cacheVersion": 6,
     "staleMetadataFound": true,
     "resolution": "Fresh selected-GUID metadata parsed from the installed MMC cache; original cache and old research files unchanged",
