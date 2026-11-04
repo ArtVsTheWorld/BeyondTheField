@@ -230,12 +230,10 @@
     {
       "surface": "Encourage Transfers table ratings",
       "implemented": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "evidence": "p57 ULM milestone actual61columns: hidden0,Name1,Year2,POS3,OVR4,NIL5,DEV6,knownattributes7..60. Sidebargrades work; new strictschema converts onlyOVR/attributes, preserves eligibility/disabledstyling and rostercount. p60 handles no-DEV group filters and no-POS/no-DEV individual positions with strict identity prefixes plus rating-only headers; no row data mutation.",
-      "remaining": [
-        "Live p60 offense/defense/specialist/individual-position and disabled-style check"
-      ],
-      "liveStatus": "p59 All view verified by user. Filtered views confirmed numeric; captured Offense46/Defense27/SpecialTeams13/QB30 and fixed in p60. Awaiting live p60 verification."
+      "remaining": [],
+      "liveStatus": "p60 clean PID30540 user verified Offense, Defense, Special Teams and multiple individual position/far-right filters: ratings letters, NIL numeric, ineligible rows gray. No encourage/advance/save."
     }
   ],
   "invariants": [
@@ -614,7 +612,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "ULMEOSRECAP28 editable NIL list requested; then Training native delta, ATH/leaving/encourage tables and hub comparison.",
+    "nextManualCheck": "Load EPUWK4 and inspect hub Mismatch on Paper eight attribute labels; no game start/advance/save.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -626,7 +624,7 @@
     "p58Package": "Combined MMC package registration/launch/tamper/path/config checks passed. p58 is not loaded; pending NIL renderer fix will be batched in another fresh build.",
     "p59Build": "MSVC/W4/WX/native/all10UIVM suites passed. Independent source/frame/model/lifecycle reviews passed for hubstrings, four captured grids, weeklypractice and embeddedNIL.",
     "p59Package": "Combined MMC registration/launch/tamper/path/config smoke passed; installed baseline unchanged; p59 not loaded.",
-    "milestonePersistence": "Allfive milestone sourcefiles stillmatchSHA256 backups afterp59 read-only QA including Leaving and Encourage filter captures; noadvance/save/player/deal changes.",
+    "milestonePersistence": "Allfive milestone saves still match SHA256 backups afterp60 filtered Encourage Transfers checks; no advance/save/player/deal changes.",
     "p59Activation": "Observed main menu in fresh PID17172; installed recruit baseline stop0, p59 active event and empty14-bank retention confirmed before Dynasty load.",
     "p59NilLive": "p59 clean PID17172 actual editableHighRisk list: selectedToothman B black, otherC/D colored, sidebarB; current/expectedNIL0, budget840,roster80,recruit215,team75/75/74 and riskbars preserved. Bank13 Draw+unfocus attached; user confirms looks good. No deals changed.",
     "p59TrainingLive": "p59 live Training Results: Jotavian Pierce selected row C with nativegreen(+1), AWRB(+2); otherrows coloredgrades plus(+2)/(+8)/(+10), native delta child layout preserved. SidebarC; NIL10/0 and team75/75/74 numeric. User confirms looks good. ATH/nativeposition livecheck next.",
@@ -636,7 +634,8 @@
     "p60Review": "Independent read-only review passed allfour schemas and native preservation. Native disabled foreground pending visual QA.",
     "p60Package": "MMC registration/launch/tamper/path/config checks passed. Installed baseline untouched; p60 not loaded.",
     "p59LeavingEncourage": "User confirmed Players Leaving and Encourage All. Filtered Encourage raw rating leak reproduced and fixed in p60.",
-    "p60Activation": "Observed main menu in clean PID30540; installed recruit baseline stop0, p60 loaded, active event and empty14-bank retention confirmed before Dynasty entry."
+    "p60Activation": "Observed main menu in clean PID30540; installed recruit baseline stop0, p60 loaded, active event and empty14-bank retention confirmed before Dynasty entry.",
+    "p60EncourageLive": "User confirms allgroup andmultipleindividual-position/far-right filters. Actual RG screenshot confirms colored eligible grades, disabledgray playerratings, NIL0/10, team75/75/74, roster70/85 and ordinary stats0 unchanged. No gameplay changes."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
