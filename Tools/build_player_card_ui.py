@@ -30,6 +30,22 @@ def numeric_grade(a, value, label, done, prefix):
     a.label(prefix+'ready')
 
 
+def numeric_display_grade(a, source, output, done, prefix):
+    # Call only for an explicitly scoped player-rating display. Native sources
+    # may supply numbers or canonical integer text. Reject formatted statistics,
+    # blanks and sentinels instead of coercing arbitrary strings with Number().
+    a.reg(source);a.raw(0x44);a.string('string');a.raw(0x66);a.branch(prefix+'Strings')
+    numeric_grade(a,source,output,done,prefix+'Numeric');a.branch(prefix+'Ready',0x99)
+    a.label(prefix+'Strings')
+    for value in range(101):
+        grade='A' if value>=90 else 'B' if value>=80 else 'C' if value>=70 else 'D' if value>=60 else 'F'
+        a.reg(source);a.string(str(value));a.raw(0x66);a.branch(prefix+grade)
+    a.branch(done,0x99)
+    for grade in 'ABCDF':
+        a.label(prefix+grade);a.string(grade);a.store(output);a.branch(prefix+'Ready',0x99)
+    a.label(prefix+'Ready')
+
+
 def palette(a, label, color, done, prefix):
     for grade, rgb in GRADE_COLORS.items():
         a.reg(label); a.string(grade); a.raw(0x66); a.branch(prefix+grade)
@@ -53,15 +69,25 @@ def text_label(a, target, label, color, style, done, prefix):
     a.reg(style); a.number(1); a.reg(target); a.call('SetExtraInfo')
 
 
-def value_item_suffix(a, container, scratch, prefix, numeric=True, mark=False):
+def value_item_suffix(a, container, scratch, prefix, numeric=True, mark=False, numeric_text=False):
     # container is a RatingValueItem, whose mcValue is its real text child.
     value, label, color, target, style = range(scratch, scratch+5)
     done = prefix+'done'
     a.missing(container, done)
     path(a, container, 'mData'); a.raw(0x76, 0x49); a.branch(done)
+    if numeric_text:
+        # Opt in only the two known KickerRange player badges. Mark before
+        # checking the value/child so a deferred native SetValue+Draw can apply
+        # the same strict conversion when the widget finishes initialization.
+        path(a,container,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(prefix+'textExtra',0xB8)
+        path(a,container,'mData');a.string('ExtraInfo');a.number(0);a.raw(0x43,0x4F)
+        a.label(prefix+'textExtra')
+        for field in ['DEPlayerRating','DEPlayerRatingNumericText']:
+            path(a,container,'mData','ExtraInfo');a.string(field);a.raw(0x73,0x4F)
     path(a, container, 'mData', 'value'); a.store(value)
     if numeric:
-        numeric_grade(a, value, label, done, prefix+'grade')
+        converter=numeric_display_grade if numeric_text else numeric_grade
+        converter(a, value, label, done, prefix+'grade')
     else:
         a.reg(value); a.store(label)
     palette(a, label, color, done, prefix+'palette')
@@ -90,12 +116,29 @@ def rating_value_draw_suffix(a):
     path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
     path(a,1,'mData','ExtraInfo','DEPlayerRating');a.raw(0x73,0x66);a.branch(done,0xB8)
     path(a,1,'mData','value');a.store(0)
+    path(a,1,'mData','ExtraInfo','DEPlayerRatingNumericText');a.raw(0x73,0x66);a.branch('ratingDrawNumericText')
     a.reg(0);a.raw(0x44);a.string('number');a.raw(0x66);a.branch('ratingDrawNumeric')
     a.reg(0);a.store(2);a.branch('ratingDrawLabel',0x99)
     a.label('ratingDrawNumeric');numeric_grade(a,0,2,done,'ratingDrawGrade')
+    a.branch('ratingDrawLabel',0x99)
+    a.label('ratingDrawNumericText');numeric_display_grade(a,0,2,done,'ratingDrawTextGrade')
     a.label('ratingDrawLabel');palette(a,2,3,done,'ratingDrawPalette')
     path(a,1,'mcValue');a.store(4);text_label(a,4,2,3,5,done,'ratingDrawText')
     a.label(done)
+
+
+def kicker_value_set_suffix(a):
+    # Native SetValue directly rewrites mcValue even before the next Draw.
+    # Only the two KickerRange badges opt into this four-register suffix.
+    done='kickerSetDone'
+    path(a,1,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
+    path(a,1,'mData','ExtraInfo','DEPlayerRatingNumericText');a.raw(0x73,0x66);a.branch(done,0xB8)
+    path(a,1,'mData','value');a.store(0)
+    numeric_display_grade(a,0,2,done,'kickerSetGrade');palette(a,2,3,done,'kickerSetPalette')
+    path(a,1,'mcValue');a.store(0)
+    text_label(a,0,2,3,2,done,'kickerSetText')
+    a.label(done);a.ret()
 
 
 def generic_slider_draw_suffix(a):
@@ -291,7 +334,8 @@ SPECS={
         (0x18CC0,0,5,25,1233,0x9DCA6F0E09D88CDA,5,attributes_suffix,None),
         (0x327E8,0,9,25,388,0x45B4DB9AE855957E,9,attribute_slots_suffix,None),
         (0x44BF8,0,12,25,204,0xC3220200E8D796CA,21,skill_slots_suffix,None),
-        (0x22150,0,9,25,1730,0x444360923A963AB5,9,rating_value_draw_suffix,None)]),
+        (0x22150,0,9,25,1730,0x444360923A963AB5,9,rating_value_draw_suffix,None),
+        (0x21AF8,1,4,25,20,0x6D730F72E674695B,4,kicker_value_set_suffix,None)]),
     'sliderPrograms': ('C:/Apps/CFB 27/MMC/PlayerAnalytics/Research/assets/common/ui/node_com/scriptpod.ast', [
         (0x3EEB0,0,10,25,2587,0xF364EAE7B6CB59CA,10,generic_slider_draw_suffix,None)]),
     'cardPrograms': ('Evidence/PlayerFog/manageplayerart.ast', [

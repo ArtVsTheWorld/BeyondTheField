@@ -138,3 +138,30 @@ background scan or per-frame polling is added. The user subsequently confirmed
 The Trench fix in p70. The installed recruiting runtime checksum matches the
 verified p70 DLL. This closes that specific display leak; Kicker Range and any
 unseen presentation scenes retain their separate verification status.
+
+## Kicker Range numeric-text correction (p71)
+
+The p70 live screenshot still shows ACC64/PWR64, despite both Kicker Range
+methods attaching. A bounded read-only capture of the actual badge objects
+confirms that both `mData.value` fields contain the **string** `"64"`, not a
+number. Their text children also display `"64"`, and the private rating marker
+is absent. The old numeric-only guard exits before marking these widgets.
+
+p71 opts in only these two badges to strict canonical integer-text conversion,
+while preserving the original `mData.value`. The marker is installed before
+checking value/child readiness so deferred initialization can finish normally.
+Initial paint, marked `RatingValueItem.Draw`, and a new privately gated
+`RatingValueItem.SetValue` suffix all use the same parser. SetValue needs its
+own suffix because its native body directly resets the child label. Its original
+four-register frame is retained. Other shared team/stat badges keep their
+existing behavior, and ordinary field distances, range geometry, labels and
+circle colors remain native.
+
+Tests include all 101 numeric and canonical-string ratings, missing/deferred
+children, native value updates, style-reset redraws, reused kicker widgets,
+unknown/formatted values, marker exclusions and unchanged numeric source data.
+The existing Trench tests pass after moving their identical parser into the
+shared builder. No new production native hook or background work is introduced.
+Native tests, all 11 UI suites, independent review and MMC packaging pass.
+The diagnostic probes are stopped; final p71 Kicker Range visual confirmation
+remains pending.

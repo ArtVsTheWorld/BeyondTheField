@@ -115,7 +115,8 @@ for adjusted,expected in [(66,'D'),(72,'C'),(67,'D'),(80,'B'),(59,'F'),(90,'A')]
 print('Passed: pre-snap substitution adjusted OVR labels; player toggles, wear-and-tear, status meters, base ratings and composure preserved.')
 
 a=Assembler();kicker_range_suffix(a);kicker=a.finish()
-for rating in [*range(101),UNDEFINED,None,'?',-1,101,math.nan,math.inf]:
+for rating in [*range(101),*map(str,range(101)),UNDEFINED,None,'?',-1,101,math.nan,math.inf,
+               '',' 64','64 ','064','64.0','64%','64 ACC','+64','101']:
     def badge(value):
         return {'mData':{'value':value,'ExtraInfo':{'CircleColor':0x336633}},'mcValue':widget('native'),'_visible':True}
     accuracy,power=badge(rating),badge(92)
@@ -129,9 +130,10 @@ for rating in [*range(101),UNDEFINED,None,'?',-1,101,math.nan,math.inf]:
     Machine({},[]).run(kicker,{1:receiver})
     assert accuracy['mData']['value'] is rating and power['mData']['value']==92
     assert power['mcValue']['mData']['display']=='A'
-    assert power['mData']['ExtraInfo']=={'CircleColor':0x336633,'DEPlayerRating':True}
-    if isinstance(rating,int) and 0<=rating<=100:
-        grade='A' if rating>=90 else 'B' if rating>=80 else 'C' if rating>=70 else 'D' if rating>=60 else 'F'
+    assert power['mData']['ExtraInfo']=={'CircleColor':0x336633,'DEPlayerRating':True,'DEPlayerRatingNumericText':True}
+    valid=isinstance(rating,int) and 0<=rating<=100 or isinstance(rating,str) and rating in set(map(str,range(101)))
+    if valid:
+        n=int(rating);grade='A' if n>=90 else 'B' if n>=80 else 'C' if n>=70 else 'D' if n>=60 else 'F'
         assert accuracy['mcValue']['mData']['display']==grade
         assert accuracy['mcValue']['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
     else:assert accuracy['mcValue']['mData']['display']=='native'
@@ -150,3 +152,32 @@ for receiver in [{},{'mcAccStat':{}},{'mcPowStat':{'mData':{'value':90}}}]:
     Machine({},[]).run(kicker,{1:receiver})
 assert all(regs==newregs for _,_,regs,_,_,_,newregs,_ in KICKER_SPECS)
 print('Passed: separate Kicker Range accuracy/power grade colors, unknowns, persistent redraw and fixed frames; native numeric yard lines, distances, range geometry and player data preserved.')
+
+# The native source may be text; a late SetValue writes its raw label again.
+# Check both the immediate SetValue suffix and subsequent style-reset Draw,
+# including delayed child creation and reused badges receiving another kicker.
+from build_player_card_ui import rating_value_draw_suffix,kicker_value_set_suffix
+draw=Assembler();rating_value_draw_suffix(draw);draw=draw.finish()
+set_value=BoundedAssembler(4);kicker_value_set_suffix(set_value);set_value=set_value.finish()
+for initial in [UNDEFINED,'64',64]:
+    badge={'mData':{'value':initial,'ExtraInfo':{'CircleColor':0x123456}}}
+    Machine({},[]).run(kicker,{1:{'mcAccStat':badge}})
+    assert badge['mData']['ExtraInfo']['DEPlayerRatingNumericText'] is True
+    badge['mcValue']=widget('native')
+    for value,label in [('64','D'),('91','A'),(80,'B'),('0','F'),('100','A'),('?', '?'),('64%', '64%')]:
+        badge['mData']['value']=value
+        badge['mcValue']['mData']['display']=value # native SetValue
+        Machine({},[]).run(set_value,{1:badge})
+        assert badge['mcValue']['mData']['display']==label
+        assert badge['mData']['value'] is value
+        badge['mcValue']['mData'].update(display=value,ExtraInfo={'fontColor':0xFFFFFF,'font':'native'})
+        Machine({},[]).run(draw,{1:badge})
+        assert badge['mcValue']['mData']['display']==label
+        assert badge['mData']['ExtraInfo']['CircleColor']==0x123456
+        assert badge['mData']['value'] is value
+for extra in [{},{'DEPlayerRating':True},{'DEPlayerRatingNumericText':False}]:
+    badge={'mData':{'value':'64','ExtraInfo':extra},'mcValue':widget('64')}
+    Machine({},[]).run(set_value,{1:badge});Machine({},[]).run(draw,{1:badge})
+    assert badge['mcValue']['mData']['display']=='64'
+assert len(draw.code)+1730<32768 and len(set_value.code)+20<32768
+print('Passed: kicker canonical numeric text at initial paint, deferred initialization, SetValue and Draw; reused kicker/unknown values, four-register frame and unmarked team/stat badges preserved.')

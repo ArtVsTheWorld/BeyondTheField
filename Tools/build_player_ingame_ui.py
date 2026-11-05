@@ -71,7 +71,7 @@ def kicker_range_suffix(a):
     # calculate the target yard line, distance and field/range geometry.
     for widget,prefix in [('mcAccStat','kickerAccuracy'),('mcPowStat','kickerPower')]:
         path(a,1,widget);a.store(0)
-        value_item_suffix(a,0,2,prefix,mark=True)
+        value_item_suffix(a,0,2,prefix,mark=True,numeric_text=True)
     a.ret()
 
 

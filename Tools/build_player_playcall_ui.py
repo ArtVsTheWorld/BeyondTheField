@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 import sys
 from build_recruit_notes_ui import Assembler, fnv
-from build_player_card_ui import path, numeric_grade
+from build_player_card_ui import path, numeric_grade, numeric_display_grade as display_grade
 
 
 def native_label(a, target, label, done, prefix):
@@ -58,22 +58,6 @@ def impact_suffix(a):
         a.label(done)
     a.ret()
 
-
-def display_grade(a, source, output, done, prefix):
-    # These specific provider cells are confirmed player Overalls. Their data
-    # service can supply a number or canonical integer text. Reject formatted
-    # statistics, ranks with decorations, blanks and sentinels rather than
-    # coercing arbitrary strings through Number().
-    a.reg(source);a.raw(0x44);a.string('string');a.raw(0x66);a.branch(prefix+'Strings')
-    numeric_grade(a,source,output,done,prefix+'Numeric');a.branch(prefix+'Ready',0x99)
-    a.label(prefix+'Strings')
-    for value in range(101):
-        grade='A' if value>=90 else 'B' if value>=80 else 'C' if value>=70 else 'D' if value>=60 else 'F'
-        a.reg(source);a.string(str(value));a.raw(0x66);a.branch(prefix+grade)
-    a.branch(done,0x99)
-    for grade in 'ABCDF':
-        a.label(prefix+grade);a.string(grade);a.store(output);a.branch(prefix+'Ready',0x99)
-    a.label(prefix+'Ready')
 
 
 def provider_labels(a, providers, field):
