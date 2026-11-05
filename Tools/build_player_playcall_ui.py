@@ -59,6 +59,23 @@ def impact_suffix(a):
     a.ret()
 
 
+def display_grade(a, source, output, done, prefix):
+    # These specific provider cells are confirmed player Overalls. Their data
+    # service can supply a number or canonical integer text. Reject formatted
+    # statistics, ranks with decorations, blanks and sentinels rather than
+    # coercing arbitrary strings through Number().
+    a.reg(source);a.raw(0x44);a.string('string');a.raw(0x66);a.branch(prefix+'Strings')
+    numeric_grade(a,source,output,done,prefix+'Numeric');a.branch(prefix+'Ready',0x99)
+    a.label(prefix+'Strings')
+    for value in range(101):
+        grade='A' if value>=90 else 'B' if value>=80 else 'C' if value>=70 else 'D' if value>=60 else 'F'
+        a.reg(source);a.string(str(value));a.raw(0x66);a.branch(prefix+grade)
+    a.branch(done,0x99)
+    for grade in 'ABCDF':
+        a.label(prefix+grade);a.string(grade);a.store(output);a.branch(prefix+'Ready',0x99)
+    a.label(prefix+'Ready')
+
+
 def provider_labels(a, providers, field):
     # These providers contain freshly constructed presentation WidgetData, not
     # player database records. Every other cell and its native style stay intact.
@@ -74,8 +91,13 @@ def provider_labels(a, providers, field):
         a.reg(2); a.number(1); a.reg(0); a.string('GetItemData'); a.raw(0x52); a.store(4)
         a.missing(4,tag+'Next');path(a,4,'ExtraInfo');a.store(5);a.missing(5,tag+'Next')
         path(a,5,field); a.store(5)
-        numeric_grade(a,5,5,tag+'Next',tag+'Grade')
-        path(a,4,'ExtraInfo'); a.string(field); a.reg(5); a.raw(0x4F)
+        display_grade(a,5,5,tag+'Next',tag+'Grade')
+        # SetDataProvider has already bound the native rows. Direct dictionary
+        # mutation skips list notification. A field-specific UpdateProperty
+        # updates only this presentation cell; its VirtualItemAdapter copies
+        # the renderer's ExtraInfo and calls SetExtraInfo to invalidate it.
+        # Formal parameters: index(r2), propertyName(r4), value(r3).
+        a.reg(5);a.string(field);a.reg(2);a.number(3);a.reg(0);a.call('UpdateProperty')
         a.label(tag+'Next'); a.reg(2); a.number(1); a.raw(0x47); a.store(2); a.branch(tag+'Loop',0x99)
         a.label(done)
     a.ret()

@@ -678,20 +678,24 @@
     "p69PanelAudit": "Fresh current Presentation_Common collector (cachehead4338538) resolves all35 playcall panel assets, including newer TeamPositionGroups GUIDcf6f34b1-cb22-478f-109e-4859013375f4. All35 decoded with0errors. Six explicit rating renderer methods across five assets corrected. ConferenceRankings records, SignedRecruits ranks/stars, traits, generic statistics/time/ratios deliberately preserved after producer audits.",
     "p69BuildReview": "MSVC/W4/WX, native tests, all11UIVM suites and independent native-local/frame/hash/no-return/model/lifecycle review pass. Fixtures cover all grade boundaries plus mode2 vs manual/stats, native comparison arrows, partial/unknown entries, provider limits, exact method-specific cells and distinct Trench providers. No new native hooks or background work;20player asset banks. p69 not loaded.",
     "p69Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425. Installed files and private histories unchanged.",
-    "p69Activation": "Observed main menu in clean PID31288 (game window60034540). Only installed baseline and Social Media initially loaded; recruit baseline stop0, p69 load and prepared/active events confirmed. Initial retained bytes0 across23 reported banks (20player+3shared). New panel live verification pending; installed files untouched."
+    "p69Activation": "Observed main menu in clean PID31288 (game window60034540). Only installed baseline and Social Media initially loaded; recruit baseline stop0, p69 load and prepared/active events confirmed. Initial retained bytes0 across23 reported banks (20player+3shared). New panel live verification pending; installed files untouched.",
+    "p69TrenchLiveFailure": "User screenshot shows numeric player OVRs in The Trench while other encountered panels show grades. Bank19 method0 attached; average weights292/285 stay numeric. Four native broadcast fields converted in this session. Do not equate static catalog coverage with every scene visually checked.",
+    "p70ListRefreshFix": "Verified current native ArrayDataProvider.UpdateProperty formal params(index,propertyName,value), unconditional notification and VirtualItemAdapter field-specific SetExtraInfo invalidation. Replace silent provider dictionary mutation in Trench and both lineup variants. Scoped canonical0..100 integer strings also accepted; unknown/formatted strings and unrelated cells unchanged. Temporary Draw probe produced no matching rows, so live value type is unproven; both probe hooks stopped0.",
+    "p70BuildReview": "MSVC/W4/WX native tests and all11UIVM suites pass. Independent exact nativeAPI/arg-order/fixed-frame/scope review and independent tests pass. Bound-renderer fixtures require notifications for visible repaint; all101 numeric/string boundaries, style/function identity, distinct lists, numeric weights/IDs/key stats, repeat-pass no-op and32KiB bounds pass.",
+    "p70Package": "Combined MMC registration/launch/tamper/path/config smoke checks pass. Build/DynastyEnhancer-player-fog-p70-MMC.zip staged; DLL SHA256f816963a95af64849f8e1942982fab1d11e82de46a72db8b4305641e6941dc5d. Installed baseline and history unchanged. p69 remains active; p70 not yet loaded."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "Prior menu/in-game checks and pre-snap Subs pass. p69 batch fixes newly observed RB/FB Ratings plus related explicit comparison/impact/lineup/trench paths; live checks pending. Kicker Range and broad broadcast output remain pending natural-scene verification. p68 is active; no isolated preview remains after restart.",
+    "remainingMenusLeakAudit": "Prior menu/in-game checks and pre-snap Subs pass. p69 user reports other encountered panels now show grades; The Trench numeric leak persists despite adapter attachment. p70 corrects native provider notification and scoped numeric strings; visual check pending. Kicker Range still needs explicit natural-scene confirmation. p69 currently active.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Playcall IndividualPositionStats RB/FB Ratings and related explicit comparison/impact/lineup/trench displays: built/reviewed p69, awaiting clean-session live verification",
-      "Playcall Kicker Range ACC/PWR badges: screenshot-confirmed numeric leak, built/reviewed p68 correction awaiting live verification",
-      "Broadcast player-rating graphics: static audit and native formatter correction built/reviewed; isolated p67 active, natural-scene output check pending",
+      "The Trench player OVRs: p69 numeric leak; p70 native list notification correction built/reviewed, awaiting clean-session visual verification",
+      "Playcall Kicker Range ACC/PWR badges: p68 correction awaiting explicit natural-scene verification",
+      "Broadcast player-rating graphics: four live conversions logged; catalog-wide visual coverage not claimed",
       "Combined Social Media/recruiting/roster regression, bounded performance measurement and final installation"
     ],
     "excluded": [

@@ -100,6 +100,39 @@ IDs, jerseys, years, weight and ordinary statistics remain unchanged. Separate
 asset banks use the original register frames and the existing attachment path;
 no new native hook or background discovery is added.
 
-Pre-snap Subs passed the user's p68 check. Kicker Range and the p69 panel changes
-still need visual verification; the 35-asset audit is static evidence, not a claim
-that every panel has appeared in the current game.
+Pre-snap Subs passed the user's p68 check. In p69 the user reports other panels
+they encountered show grades, but The Trench still shows numeric player OVRs.
+The Trench adapter attached successfully (bank 19, method 0). Kicker Range still
+needs an explicit natural-scene check; the 35-asset audit is static evidence,
+not a claim that every panel has appeared in the current game.
+
+## Bound list refresh correction (p70)
+
+The native Trench method binds its left/right providers before the appended
+adapter executes. p69 assigned `row.ExtraInfo.OverallText` directly, which bypasses
+the provider's change notification. `InfoPanelListItem.Draw` refreshes that label
+only when its label invalidation flag is set. Updating the backing dictionary
+therefore does not ensure an already-bound renderer repaints.
+
+p70 uses the verified native `UpdateProperty(index, propertyName, value)` path
+for the one player OVR cell. Its notification flows through `VirtualItemAdapter`,
+which copies the renderer's ExtraInfo, changes the named property and calls
+`SetExtraInfo`. Other fields and nested style/function references are preserved.
+The same correction applies to the two TeamPositionGroups layouts, whose OVR
+cells are `OverallText` and `ConferenceText` respectively. The latter layout's
+ordinary key statistic in `OverallText` remains numeric.
+
+These exact player OVR cells also accept canonical integer strings `"0"` through
+`"100"`. No arbitrary numeric coercion is used: padded, signed, decimal, percentage,
+unit-bearing and sentinel strings are rejected. Existing letter labels are
+no-ops. This guards a possible source representation; the temporary row probe
+captured no matching rows, so it did not establish the live Trench value type.
+Both probe hooks were stopped successfully.
+
+Regression tests model a bound renderer with its own cached ExtraInfo and require
+the native field-specific notification to update its visible label. They cover
+all 101 numeric and canonical-string ratings, both unequal Trench lists, repeat
+visits, unknowns, source IDs, native style/function identity and numeric weight
+averages. Original fixed register frames are retained; no new production hook,
+background scan or per-frame polling is added. Final visual Trench verification
+remains pending.
