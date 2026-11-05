@@ -403,6 +403,17 @@
     "preservation": "Label-only; numeric ExtraInfo/source ratings, jersey numbers, depth slot/year, counts, yards, percentages, selection foreground and visibility remain native. Exact fingerprints and fixed register frames verified.",
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
+  "preSnapSubstitution": {
+    "status": "Observed numeric OVR leak in live pre-snap Subs panel; p65 source correction prepared, live verification pending.",
+    "asset": "common/ui/node_ig/scriptpod.ast",
+    "class": "art_control.list.listItem.preplayHints.WearTearSubListItem",
+    "method": "Draw",
+    "definitionOffset": "0x228e0",
+    "nativeFrame": "argc0, registers4, flags25, body1108, fnv739f1094c4fcab06",
+    "source": "mData.ExtraInfo.Overall from PreplayHint._SetExtraInfoForSubToggle/GetWearAndTearAppliedOVR",
+    "display": "mcOverall.SetLabel",
+    "preservation": "Suffix changes only visible OVR label; native adjusted numeric OVR, base rating, position/player toggle, injury impacts, status slider, captain/composure and focus foreground remain unchanged. Existing IG bank and exact fixed frame, no new hook or background work."
+  },
   "pauseDepthChart": {
     "status": "p64 live verified: user QB/HB/far-right checks and actual screenshot confirm table letters/colors, native black selection and numeric slots preserved.",
     "asset": "common/ui/node_com/scriptpod.ast",

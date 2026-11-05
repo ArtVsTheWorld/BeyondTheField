@@ -6,7 +6,8 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
 from build_player_ingame_ui import (FIELDS,player_ratings_suffix,key_player_suffix,
-                                  playcall_player_suffix,substitution_player_suffix,depth_panel_player_suffix,SPECS)
+                                  playcall_player_suffix,substitution_player_suffix,depth_panel_player_suffix,
+                                  preplay_sub_player_suffix,SPECS)
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -45,7 +46,8 @@ for suffix,field,name,colored,tail in [
         (key_player_suffix,'overall','mcOVR',True,' OVR'),
         (playcall_player_suffix,'PrimaryTargetOVR','mcOvrStat',False,''),
         (substitution_player_suffix,'overallRating','mcOvrStat',False,''),
-        (depth_panel_player_suffix,'PlayerOvr','mcOvr',False,'')]:
+        (depth_panel_player_suffix,'PlayerOvr','mcOvr',False,''),
+        (preplay_sub_player_suffix,'Overall','mcOverall',False,'')]:
     a=Assembler();suffix(a);program=a.finish()
     for visible in [True,False,UNDEFINED]:
         for value in [*range(101),UNDEFINED,None,'?',-1,101,'85',math.nan,math.inf]:
@@ -84,4 +86,30 @@ class BoundedAssembler(Assembler):
     def store(self,n):assert 0<=n<self.limit,(n,self.limit);super().store(n)
 for off,argc,regs,flags,size,expected,newregs,suffix in SPECS:
     a=BoundedAssembler(newregs);suffix(a);a.finish()
-print('Passed:4 in-game player label paths,101 boundaries each, hidden/invalid/absent fields, recycled players, native focus colors and non-rating playcall statistics.')
+print('Passed:5 in-game player label paths,101 boundaries each, hidden/invalid/absent fields, recycled players, native focus colors and non-rating playcall statistics.')
+
+# Actual pre-snap substitution shape: five visible player rows include the
+# adjusted OVR plus a player-name toggle, wear-and-tear text and a status meter.
+# Grade the adjusted value without changing base ratings, toggle selection,
+# injury penalties, slider steps, composure or pending boost flags.
+a=Assembler();preplay_sub_player_suffix(a);preplay=a.finish()
+for adjusted,expected in [(66,'D'),(72,'C'),(67,'D'),(80,'B'),(59,'F'),(90,'A')]:
+    extra={'Overall':adjusted,'BaseOverall':92,'Position':'QB','WearandTear':'-3',
+           'Status':4,'IsCaptain':True,'IsHot':False,'IsCold':True,'IsPendingBoost':True}
+    original=copy.deepcopy(extra)
+    label=widget(str(adjusted));label['_visible']=True
+    toggle={'mData':{'value':1,'display':'C. Whitaker - QB1'}}
+    status={'mData':{'value':4,'ExtraInfo':{'Min':0,'Max':5,'NumberOfSteps':5}}}
+    wear=widget('-3')
+    receiver={'mData':{'ExtraInfo':extra},'mcOverall':label,
+              'mcPlayerName':toggle,'mcStatus':status,'mcWearandTear':wear}
+    siblings=copy.deepcopy([toggle,status,wear['mData']])
+    Machine({},[]).run(preplay,{1:receiver})
+    assert label['mData']['display']==expected and extra==original
+    assert [toggle,status,wear['mData']]==siblings
+    # A clean redraw with no rating invalidation must retain the label, then
+    # a native update to a different player must replace it with a fresh grade.
+    Machine({},[]).run(preplay,{1:receiver});assert label['mData']['display']==expected
+    extra['Overall']=85;label['mData']['display']='85'
+    Machine({},[]).run(preplay,{1:receiver});assert label['mData']['display']=='B'
+print('Passed: pre-snap substitution adjusted OVR labels; player toggles, wear-and-tear, status meters, base ratings and composure preserved.')

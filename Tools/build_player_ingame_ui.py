@@ -59,12 +59,19 @@ def playcall_player_suffix(a):direct_player_suffix(a,'PrimaryTargetOVR','mcOvrSt
 def substitution_player_suffix(a):direct_player_suffix(a,'overallRating','mcOvrStat')
 def depth_panel_player_suffix(a):direct_player_suffix(a,'PlayerOvr','mcOvr')
 
+def preplay_sub_player_suffix(a):
+    # Pre-snap WearTearSubListItem owns a separate Overall text child. The
+    # source is the native wear-and-tear-adjusted OVR, not the base rating.
+    # Leave its toggle, status meter, injury impacts and focus styles native.
+    direct_player_suffix(a,'Overall','mcOverall')
+
 
 SPECS=[(0x37FE8,0,7,25,674,0xA570B1AFB77C6507,13,player_ratings_suffix),
        (0x2EB18,0,4,25,384,0xA4ED8C8AB9298E2B,4,key_player_suffix),
        (0x32720,0,13,41,3669,0xBDCD7B378AF81866,13,playcall_player_suffix),
        (0x37450,0,4,25,244,0xD63997CEC6812D50,4,substitution_player_suffix),
-       (0x2C0E8,0,4,25,93,0x0FFA0C82BC667F1C,4,depth_panel_player_suffix)]
+       (0x2C0E8,0,4,25,93,0x0FFA0C82BC667F1C,4,depth_panel_player_suffix),
+       (0x228E0,0,4,25,1108,0x739F1094C4FCAB06,4,preplay_sub_player_suffix)]
 
 
 def generate(destination):

@@ -554,9 +554,9 @@
     "releaseReady": false,
     "previewSha256": "b664248e57b7e7cdba76a0aa9ae43428d25053d79a8dc6b3541ad222cbee2df3",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p64.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p64-MMC.zip",
-    "nextCandidateSha256": "b664248e57b7e7cdba76a0aa9ae43428d25053d79a8dc6b3541ad222cbee2df3"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p65.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p65-MMC.zip",
+    "nextCandidateSha256": "e0236aebfabcf4dec7ac2b8e91b41f214e86fce2609287f37d596cf2010e678b"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Remaining conditional in-game player-root, substitution lists and coach-camera displays; view only, without snaps/substitutions/advance/save.",
+    "nextManualCheck": "Clean restart/main-menu activation of p65, then pre-snap Subs panel labels without substitutions or Dynasty advance. User has confirmed other in-game displays.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -660,18 +660,22 @@
     "p64Package": "MMC registration/launch/tamper/path/config smoke checks pass. All4bounded depth probes explicitly stopped0/inflight0, no probes remain active. Six manual milestones still match backups. Installed baseline untouched.",
     "p64Activation": "Observed main menu in clean PID25304; installed recruiting baseline stop0, p64 loaded and active event verified, all initial banks/definitions/retained bytes zero. No probes loaded. Exact native-header live test subsequently passed.",
     "p64PauseDepthLive": "PASSED: user confirms QB/HB and far-right ratings. Actual screenshot verifies letters/colors throughout CAR through SAC, selected black grade text, sidebar F OVR, numeric depth slots and jerseys/measurements preserved. No player selection, reordering, substitution, snap, save or advance.",
-    "p64PerformanceLimit": "Bounded script setup samples show mean 0.176 microseconds and max 9.3 microseconds over 8192 calls; retained UI memory 135168 bytes. These counters exclude AS body execution and frame time, so release performance/regression remains pending."
+    "p64PerformanceLimit": "Bounded script setup samples show mean 0.176 microseconds and max 9.3 microseconds over 8192 calls; retained UI memory 135168 bytes. These counters exclude AS body execution and frame time, so release performance/regression remains pending.",
+    "p64AdditionalInGameUserCheck": "User reports previously requested in-game Player/other display checks all good. Do not treat that as verification of the separate pre-snap substitution menu: actual screenshot shows Overall 66/66/72/67/80 there.",
+    "p65PreSnapSubCorrection": "Native WearTearSubListItem.Draw at definition 0x228e0, argc0/registers4/flags25/body1108/FNV739f1094c4fcab06 writes ExtraInfo.Overall into mcOverall. PreplayHint producer uses GetWearAndTearAppliedOVR. Appended fixed-frame label-only suffix to existing IG bank; adjusted numeric source, base rating, toggle selection, status meter, wear-and-tear and composure remain native. No new hooks or discovery.",
+    "p65BuildReview": "MSVC/W4/WX, native tests and all10 UI VM suites pass. Independent private native-body fingerprint/producer/frame review and in-game tests pass, including all101 grade boundaries and concrete adjusted OVR/toggle/status/wear-and-tear preservation fixtures. Live verification pending; p64 remains active.",
+    "p65Package": "Combined MMC registration/launch/tamper/path/config smoke checks pass. Installed baseline and private histories untouched. Candidate DLL SHA256 e0236aebfabcf4dec7ac2b8e91b41f214e86fce2609287f37d596cf2010e678b."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "All previously observed menu leaks verified: awards/All-Americans p61, Personnel Group p62, pause Depth Chart QB/HB/far-right p64. Conditional in-game player-root, substitution lists and coach-camera displays remain unverified live.",
+    "remainingMenusLeakAudit": "Awards/All-Americans p61, Personnel Group p62 and pause Depth Chart QB/HB/far-right p64 verified. User confirms other requested in-game displays. Newly observed pre-snap Subs OVR labels corrected in built/reviewed p65; live check pending.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Conditional in-game player-root, substitution lists and coach-camera displays without gameplay or lineup changes",
+      "Pre-snap substitution OVR column: observed numeric leak, built/reviewed p65 correction awaiting live verification",
       "Combined Social Media/recruiting/roster regression, bounded performance measurement and final installation"
     ],
     "excluded": [
