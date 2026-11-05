@@ -8,7 +8,7 @@ and full reports remain under ignored `Evidence/PlayerFog/Presentations`.
 
 | Presentation family | Rating fields found | Verification |
 |---|---|---|
-| Kicker graphic | Overall, kick power, kick accuracy | User observed numeric power/accuracy; exact definition identified |
+| Broadcast kicker graphic | Overall, kick power, kick accuracy | Static definition; visual output pending |
 | Kick-returner graphic | Overall, speed, agility | Static definition |
 | Pregame/runout/QB trot | Overall and position-specific attributes | Static definitions |
 | Freshman debuts and player bios | Overall, speed, ball skills and other position attributes | Static definitions |
@@ -16,7 +16,21 @@ and full reports remain under ignored `Evidence/PlayerFog/Presentations`.
 | Matchups to watch | Receiver/coverage, RB/LB, WR/LB and edge/QB comparisons | Static definitions |
 | Legacy spotlight variants | QB overall, throw power/accuracy | Static definitions; presence does not establish use in current Dynasty |
 
-## Implementation boundary
+## Separate playcall Kicker Range panel
+
+The later screenshot identifies `art_screen.playcall.panel.KickerRange`, which
+is separate from the broadcast definitions above. Its circular ACC/PWR badges
+import `art_control.group.RatingValueItem`. p68 adds a dedicated asset bank for
+the panel's initialization and range-refresh methods. Only `mcAccStat` and
+`mcPowStat` are marked for the existing grade-label renderer; their numeric
+`WidgetData.value` stays unchanged. Target line, distance remaining, yard
+markers, player identity and range geometry remain native.
+
+The panel's native 13- and 7-register frames are retained. Tests cover grade
+boundaries, unknown/absent widgets, grade-color repaint and untouched distances
+and geometry. A clean-session visual check remains pending.
+
+## Broadcast implementation boundary
 
 Football SystemMuse's `TextVariable` formatter converts an evaluated expression
 into a **separate rendered string**. The candidate changes only that rendered
@@ -51,7 +65,8 @@ destructor. The native formatter still receives its original input exactly once.
 - Scene execution and visual output still require a live check. The static audit
   identifies definitions and supported fields; it does not claim that every
   legacy template can appear, or that arbitrary replacement assets use this path.
-- Full p66 package includes the p65 pre-snap substitution fix. Isolated p67 tests
+- Full p68 package includes the pre-snap substitution and playcall Kicker Range
+  fixes. Isolated p67 tests
   only the presentation callback alongside p64; it has no reader, menu hooks or
   copied UI definitions and is not the automatic-loading package.
 

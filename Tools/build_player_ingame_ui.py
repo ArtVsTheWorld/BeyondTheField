@@ -65,6 +65,15 @@ def preplay_sub_player_suffix(a):
     # Leave its toggle, status meter, injury impacts and focus styles native.
     direct_player_suffix(a,'Overall','mcOverall')
 
+def kicker_range_suffix(a):
+    # The separate KickerRange asset imports RatingValueItem for these two
+    # circular badges. Mark only their text values; native stats[2:4] still
+    # calculate the target yard line, distance and field/range geometry.
+    for widget,prefix in [('mcAccStat','kickerAccuracy'),('mcPowStat','kickerPower')]:
+        path(a,1,widget);a.store(0)
+        value_item_suffix(a,0,2,prefix,mark=True)
+    a.ret()
+
 
 SPECS=[(0x37FE8,0,7,25,674,0xA570B1AFB77C6507,13,player_ratings_suffix),
        (0x2EB18,0,4,25,384,0xA4ED8C8AB9298E2B,4,key_player_suffix),
@@ -73,25 +82,33 @@ SPECS=[(0x37FE8,0,7,25,674,0xA570B1AFB77C6507,13,player_ratings_suffix),
        (0x2C0E8,0,4,25,93,0x0FFA0C82BC667F1C,4,depth_panel_player_suffix),
        (0x228E0,0,4,25,1108,0x739F1094C4FCAB06,4,preplay_sub_player_suffix)]
 
+KICKER_SPECS=[(0x11F0,1,13,41,679,0x73D8E5A514962C4A,13,kicker_range_suffix),
+              (0x14D0,2,7,41,381,0xB737A3A22902C70B,7,kicker_range_suffix)]
+
 
 def generate(destination):
     sys.path.insert(0,'C:/Apps/CFB 27/Working/Teambuilder Import Plugin/Tools')
     from inspect_tb_ast import load
-    apt=load(Path('Evidence/PlayerFog/node-ig-scriptpod.ast'))
     lines=['// Custom presentation bytecode only; native body verified/copied at attachment.',
            '#pragma once','#include "RecruitNotesUiPrograms.h"',
-           'namespace recruitingfog::playeringameui {',
-           'inline std::vector<notesui::Program> programs(){std::vector<notesui::Program> result;']
-    for offset,argc,regs,flags,size,expected,newregs,suffix in SPECS:
-        if fnv(apt.data[offset+48:offset+48+size])!=expected:
-            raise ValueError(f'Unsupported native in-game player renderer {offset:x}')
-        a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
-        code='{'+','.join(hex(b) for b in p.code)+'}'
-        lines.append(f'result.push_back({{{offset},{argc},{regs},{flags},{size},{expected}ull,{newregs},0,{size},{code}}});')
-        for at,text in p.literals:
-            lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
-    lines+=['return result;}','}'];destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
-    print(json.dumps({'inGameRatingMethods':len(SPECS),'nativeModelChanges':False}))
+           'namespace recruitingfog::playeringameui {']
+    # Each Runtime validates every method against one asset. Keep this panel
+    # in a separate program set instead of mixing its offsets with node_ig.
+    for name,asset,specs in [('programs','node-ig-scriptpod.ast',SPECS),
+                             ('kickerPrograms','Presentations/common__ui__art_screen__playcall__panel__kickerrange.ast',KICKER_SPECS)]:
+        apt=load(Path('Evidence/PlayerFog')/asset)
+        lines.append(f'inline std::vector<notesui::Program> {name}(){{std::vector<notesui::Program> result;')
+        for offset,argc,regs,flags,size,expected,newregs,suffix in specs:
+            if fnv(apt.data[offset+48:offset+48+size])!=expected:
+                raise ValueError(f'Unsupported native in-game player renderer {offset:x}')
+            a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
+            code='{'+','.join(hex(b) for b in p.code)+'}'
+            lines.append(f'result.push_back({{{offset},{argc},{regs},{flags},{size},{expected}ull,{newregs},0,{size},{code}}});')
+            for at,text in p.literals:
+                lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
+        lines.append('return result;}')
+    lines.append('}');destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
+    print(json.dumps({'inGameRatingMethods':len(SPECS),'kickerPanelMethods':len(KICKER_SPECS),'nativeModelChanges':False}))
 
 
 if __name__=='__main__':generate(Path('Source/PlayerInGameUiPrograms.h'))

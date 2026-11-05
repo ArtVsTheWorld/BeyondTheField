@@ -7,7 +7,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
 from build_player_ingame_ui import (FIELDS,player_ratings_suffix,key_player_suffix,
                                   playcall_player_suffix,substitution_player_suffix,depth_panel_player_suffix,
-                                  preplay_sub_player_suffix,SPECS)
+                                  preplay_sub_player_suffix,kicker_range_suffix,SPECS,KICKER_SPECS)
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -84,7 +84,7 @@ class BoundedAssembler(Assembler):
     def __init__(self,limit):super().__init__();self.limit=limit
     def reg(self,n):assert 0<=n<self.limit,(n,self.limit);super().reg(n)
     def store(self,n):assert 0<=n<self.limit,(n,self.limit);super().store(n)
-for off,argc,regs,flags,size,expected,newregs,suffix in SPECS:
+for off,argc,regs,flags,size,expected,newregs,suffix in [*SPECS,*KICKER_SPECS]:
     a=BoundedAssembler(newregs);suffix(a);a.finish()
 print('Passed:5 in-game player label paths,101 boundaries each, hidden/invalid/absent fields, recycled players, native focus colors and non-rating playcall statistics.')
 
@@ -113,3 +113,40 @@ for adjusted,expected in [(66,'D'),(72,'C'),(67,'D'),(80,'B'),(59,'F'),(90,'A')]
     extra['Overall']=85;label['mData']['display']='85'
     Machine({},[]).run(preplay,{1:receiver});assert label['mData']['display']=='B'
 print('Passed: pre-snap substitution adjusted OVR labels; player toggles, wear-and-tear, status meters, base ratings and composure preserved.')
+
+a=Assembler();kicker_range_suffix(a);kicker=a.finish()
+for rating in [*range(101),UNDEFINED,None,'?',-1,101,math.nan,math.inf]:
+    def badge(value):
+        return {'mData':{'value':value,'ExtraInfo':{'CircleColor':0x336633}},'mcValue':widget('native'),'_visible':True}
+    accuracy,power=badge(rating),badge(92)
+    stats=[{'value':rating},{'value':92},{'value':28},{'value':38}]
+    receiver={'mcAccStat':accuracy,'mcPowStat':power,'mPlayerId':901,
+              'stats':stats,'mcTargetText':widget('28 YARD LINE'),
+              'mcDistanceText':widget('WITHIN RANGE!'),
+              'mcTargetLine':{'_x':164},'mcEndLine':{'_x':356},'mcRange':{'_width':192}}
+    original_stats=copy.deepcopy(stats)
+    range_before=copy.deepcopy([receiver[k] for k in ['mcTargetLine','mcEndLine','mcRange']])
+    Machine({},[]).run(kicker,{1:receiver})
+    assert accuracy['mData']['value'] is rating and power['mData']['value']==92
+    assert power['mcValue']['mData']['display']=='A'
+    assert power['mData']['ExtraInfo']=={'CircleColor':0x336633,'DEPlayerRating':True}
+    if isinstance(rating,int) and 0<=rating<=100:
+        grade='A' if rating>=90 else 'B' if rating>=80 else 'C' if rating>=70 else 'D' if rating>=60 else 'F'
+        assert accuracy['mcValue']['mData']['display']==grade
+        assert accuracy['mcValue']['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
+    else:assert accuracy['mcValue']['mData']['display']=='native'
+    assert stats[0]['value'] is rating and stats[1:]==original_stats[1:]
+    assert [receiver[k] for k in ['mcTargetLine','mcEndLine','mcRange']]==range_before
+    assert receiver['mcTargetText']['mData']['display']=='28 YARD LINE'
+    assert receiver['mcDistanceText']['mData']['display']=='WITHIN RANGE!' and receiver['mPlayerId']==901
+    # Existing RatingValueItem.Draw honors the scoped marker after a native
+    # redraw. Exercise that route instead of assuming initial paint persists.
+    from build_player_card_ui import rating_value_draw_suffix
+    draw_asm=Assembler();rating_value_draw_suffix(draw_asm)
+    power['mcValue']['mData']['display']='92';power['mcValue']['mData']['ExtraInfo']['fontColor']=0xFFFFFF
+    Machine({},[]).run(draw_asm.finish(),{1:power})
+    assert power['mcValue']['mData']['display']=='A' and power['mData']['value']==92
+for receiver in [{},{'mcAccStat':{}},{'mcPowStat':{'mData':{'value':90}}}]:
+    Machine({},[]).run(kicker,{1:receiver})
+assert all(regs==newregs for _,_,regs,_,_,_,newregs,_ in KICKER_SPECS)
+print('Passed: separate Kicker Range accuracy/power grade colors, unknowns, persistent redraw and fixed frames; native numeric yard lines, distances, range geometry and player data preserved.')

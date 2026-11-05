@@ -403,6 +403,18 @@
     "preservation": "Label-only; numeric ExtraInfo/source ratings, jersey numbers, depth slot/year, counts, yards, percentages, selection foreground and visibility remain native. Exact fingerprints and fixed register frames verified.",
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
+  "playcallKickerRange": {
+    "status": "User screenshot confirms ACC/PWR64 numeric in Kicker Range panel; p68 correction built in source, live check pending.",
+    "asset": "common/ui/art_screen/playcall/panel/kickerrange.ast",
+    "class": "art_screen.playcall.panel.KickerRange",
+    "methods": {
+      "_InitializeComponents": "definition11F0/body1220 argc1 regs13 flags41 size679 FNV73D8E5A514962C4A",
+      "_SetRange": "definition14D0/body1500 argc2 regs7 flags41 size381 FNVB737A3A22902C70B"
+    },
+    "scope": "Exact mcAccStat/mcPowStat RatingValueItem imports; numeric stats0/1 and widget.value preserved, private marker enables existing label-only Draw grades/colors. Target/distance stats2/3, yard lines, position/player labels and range geometry remain native.",
+    "runtime": "Separate playerKickerUi bank14, 15-bank array: native Runtime validates all methods against the same asset. Both native fixed frames unchanged; suffix uses registers0/1/2..6. No native hooks or polling added by this panel fix.",
+    "distinction": "The provided screenshot is the playcall Kicker Range panel; it does not test the independent native broadcast TextVariable callback."
+  },
   "broadcastPresentations": {
     "status": "Full p66 built/reviewed/packaged; isolated p67 active beside p64, scene output not yet verified.",
     "audit": "704 IBX archive entries parsed,1350 definitions including aggregate copies,41 unique player-rating templates,239 direct Format0 rating cells and31 exact AGLP columns. No non-direct or non-default rating expressions found.",
