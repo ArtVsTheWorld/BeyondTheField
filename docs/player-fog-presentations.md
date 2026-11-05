@@ -134,5 +134,7 @@ the native field-specific notification to update its visible label. They cover
 all 101 numeric and canonical-string ratings, both unequal Trench lists, repeat
 visits, unknowns, source IDs, native style/function identity and numeric weight
 averages. Original fixed register frames are retained; no new production hook,
-background scan or per-frame polling is added. Final visual Trench verification
-remains pending.
+background scan or per-frame polling is added. The user subsequently confirmed
+The Trench fix in p70. The installed recruiting runtime checksum matches the
+verified p70 DLL. This closes that specific display leak; Kicker Range and any
+unseen presentation scenes retain their separate verification status.
