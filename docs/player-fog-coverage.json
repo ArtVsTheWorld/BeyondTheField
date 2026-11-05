@@ -547,12 +547,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p68.dll",
-    "cleanRestartRequired": "p68 clean activation complete; future copied UI definition changes require clean restart.",
-    "activeRuntime": "p68 active in clean PID25220 after installed recruit baseline stop0 at observed main menu. Previous p64 and isolated p67 were removed by process restart. Social Media v103 stays active; no probes loaded.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p68-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p69.dll",
+    "cleanRestartRequired": "p69 clean activation complete; future copied UI definition changes require clean restart.",
+    "activeRuntime": "p69 active in clean PID31288 after installed recruit baseline stop0 at observed main menu. Social Media v103 stays active; no prior preview or probe modules loaded.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p69-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "3d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68",
+    "previewSha256": "acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p69.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p69-MMC.zip",
@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "p68 Subs passed. Clean restart/main-menu activation of p69, then RB/FB Ratings panel (89/85/85 should be B/B/B), ordinary stats-mode preservation, and Kicker Range when available. Broader broadcast output remains a natural-scene check.",
+    "nextManualCheck": "p69 active: RB/FB or QB Ratings panel should show letter labels; check an ordinary stats panel stays numeric, and Kicker Range when available. Broader broadcast output remains a natural-scene check.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -677,7 +677,8 @@
     "p68SubsLive": "User confirms pre-snap Subs is fixed; bank6method5 attachment recorded. Kicker Range has not appeared yet and remains pending. New screenshot reveals separate IndividualPositionStats RB/FB Ratings89ACC/85COD/85SPD numeric.",
     "p69PanelAudit": "Fresh current Presentation_Common collector (cachehead4338538) resolves all35 playcall panel assets, including newer TeamPositionGroups GUIDcf6f34b1-cb22-478f-109e-4859013375f4. All35 decoded with0errors. Six explicit rating renderer methods across five assets corrected. ConferenceRankings records, SignedRecruits ranks/stars, traits, generic statistics/time/ratios deliberately preserved after producer audits.",
     "p69BuildReview": "MSVC/W4/WX, native tests, all11UIVM suites and independent native-local/frame/hash/no-return/model/lifecycle review pass. Fixtures cover all grade boundaries plus mode2 vs manual/stats, native comparison arrows, partial/unknown entries, provider limits, exact method-specific cells and distinct Trench providers. No new native hooks or background work;20player asset banks. p69 not loaded.",
-    "p69Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425. Installed files and private histories unchanged."
+    "p69Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425. Installed files and private histories unchanged.",
+    "p69Activation": "Observed main menu in clean PID31288 (game window60034540). Only installed baseline and Social Media initially loaded; recruit baseline stop0, p69 load and prepared/active events confirmed. Initial retained bytes0 across23 reported banks (20player+3shared). New panel live verification pending; installed files untouched."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
