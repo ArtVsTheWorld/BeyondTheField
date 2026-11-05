@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Load EPUWK4 and Free Practice, Personnel Group before any snap; verify playcall grade labels then pause Depth Chart filters/far-right without substitutions. No save/advance.",
+    "nextManualCheck": "p63 EPUWK4 FreePractice pause DepthChart QB/HB and far-right player grades; no snap/lineup changes/save/advance.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -652,7 +652,8 @@
     "p63Correction": "Reuse same exact-frame invocation attachment for legacy/modern grid banks in colorLengthHook as in existing card banks. GetColumnDefinitions/GetRowData/Cafe2color all preserve native frames. Added per-method/path logging; no bytecode/schema/nativehook/model changes fromp62. Dispatch omission is a source-confirmed gap; live cause/fix still pending.",
     "p63Build": "MSVC /W4 /WX, native ABI/frame/grade tests and all10UIVM suites pass. Build/p63-build.log; clean live QA pending.",
     "p63Package": "MMC registration/launch/tamper/path/config checks pass. Installed baseline and histories unchanged. Probe p6 stopped0/inflight0; its capped idle observations do not prove chart dispatch.",
-    "p63Review": "Independent source review passed shared attachment dispatch, macro/frame/hash guards, ordinary fast path, per-method logs, CallGuard/stop lifetime and exactly-once native forwarding. Existing native integration fixtures cover expanded-frame rejection, fixed-frame attachment and1M ordinary calls. No live completion claim."
+    "p63Review": "Independent source review passed shared attachment dispatch, macro/frame/hash guards, ordinary fast path, per-method logs, CallGuard/stop lifetime and exactly-once native forwarding. Existing native integration fixtures cover expanded-frame rejection, fixed-frame attachment and1M ordinary calls. No live completion claim.",
+    "p63Activation": "Observed main menu in clean PID15860; installed recruiting baseline stop0, p63 active event confirmed and all initial bank/definition/retention counts zero. No probes loaded."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
