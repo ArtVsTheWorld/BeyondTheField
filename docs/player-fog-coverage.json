@@ -682,21 +682,21 @@
     "p69TrenchLiveFailure": "User screenshot shows numeric player OVRs in The Trench while other encountered panels show grades. Bank19 method0 attached; average weights292/285 stay numeric. Four native broadcast fields converted in this session. Do not equate static catalog coverage with every scene visually checked.",
     "p70ListRefreshFix": "Verified current native ArrayDataProvider.UpdateProperty formal params(index,propertyName,value), unconditional notification and VirtualItemAdapter field-specific SetExtraInfo invalidation. Replace silent provider dictionary mutation in Trench and both lineup variants. Scoped canonical0..100 integer strings also accepted; unknown/formatted strings and unrelated cells unchanged. Temporary Draw probe produced no matching rows, so live value type is unproven; both probe hooks stopped0.",
     "p70BuildReview": "MSVC/W4/WX native tests and all11UIVM suites pass. Independent exact nativeAPI/arg-order/fixed-frame/scope review and independent tests pass. Bound-renderer fixtures require notifications for visible repaint; all101 numeric/string boundaries, style/function identity, distinct lists, numeric weights/IDs/key stats, repeat-pass no-op and32KiB bounds pass.",
-    "p70Package": "Combined MMC registration/launch/tamper/path/config smoke checks pass. Build/DynastyEnhancer-player-fog-p70-MMC.zip staged; DLL SHA256f816963a95af64849f8e1942982fab1d11e82de46a72db8b4305641e6941dc5d. Installed baseline and history unchanged. p69 remains active; p70 not yet loaded."
+    "p70Package": "Combined MMC registration/launch/tamper/path/config smoke checks pass. Build/DynastyEnhancer-player-fog-p70-MMC.zip staged; DLL SHA256f816963a95af64849f8e1942982fab1d11e82de46a72db8b4305641e6941dc5d. Installed baseline and history unchanged. p69 remains active; p70 not yet loaded.",
+    "p70TrenchLive": "PASSED: user explicitly confirms The Trench fix after installing the p70 MMC package. Installed Runtime-v103/DynastyEnhancerRecruitFog-v1.dll SHA256f816963a95af64849f8e1942982fab1d11e82de46a72db8b4305641e6941dc5d matches the verified p70 build. This closes the specific Trench numeric OVR leak; no claim that every presentation scene was visually checked."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "Prior menu/in-game checks and pre-snap Subs pass. p69 user reports other encountered panels now show grades; The Trench numeric leak persists despite adapter attachment. p70 corrects native provider notification and scoped numeric strings; visual check pending. Kicker Range still needs explicit natural-scene confirmation. p69 currently active.",
+    "remainingMenusLeakAudit": "Menu/in-game audits, pre-snap Subs and user-confirmed Trench p70 correction pass. Other encountered panels show grades. Kicker Range still needs explicit natural-scene confirmation; broad presentation coverage remains bounded by observed scenes and the static audit. Installed recruiting runtime checksum matches p70.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "The Trench player OVRs: p69 numeric leak; p70 native list notification correction built/reviewed, awaiting clean-session visual verification",
       "Playcall Kicker Range ACC/PWR badges: p68 correction awaiting explicit natural-scene verification",
       "Broadcast player-rating graphics: four live conversions logged; catalog-wide visual coverage not claimed",
-      "Combined Social Media/recruiting/roster regression, bounded performance measurement and final installation"
+      "Combined Social Media/recruiting/roster regression and bounded performance measurement; installed recruiting runtime checksum matches p70"
     ],
     "excluded": [
       "Edit Player numeric ratings per user",
