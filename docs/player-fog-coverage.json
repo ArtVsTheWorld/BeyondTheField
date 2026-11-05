@@ -547,12 +547,12 @@
   "package": {
     "combinedBuilt": true,
     "installedBaselineUntouched": true,
-    "developmentDll": "Build/DynastyEnhancerRecruitFog-p64.dll",
-    "cleanRestartRequired": "p61 clean activation complete; future copied UI definition changes require clean restart.",
-    "activeRuntime": "p64 active in PID25304; isolated p67 presentation-only callback added in that session. p67 has no reader, menu/script/grid hooks or copied definitions. Broadcast visual check pending.",
-    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p64-MMC.zip",
+    "developmentDll": "Build/DynastyEnhancerRecruitFog-p68.dll",
+    "cleanRestartRequired": "p68 clean activation complete; future copied UI definition changes require clean restart.",
+    "activeRuntime": "p68 active in clean PID25220 after installed recruit baseline stop0 at observed main menu. Previous p64 and isolated p67 were removed by process restart. Social Media v103 stays active; no probes loaded.",
+    "combinedDevelopmentPackage": "Build/DynastyEnhancer-player-fog-p68-MMC.zip",
     "releaseReady": false,
-    "previewSha256": "b664248e57b7e7cdba76a0aa9ae43428d25053d79a8dc6b3541ad222cbee2df3",
+    "previewSha256": "3d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
     "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p68.dll",
     "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p68-MMC.zip",
@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "Clean restart/main-menu activation of p68 (supersedes p66). Check pre-snap Subs and the playcall Kicker Range ACC/PWR badges when available; no need to manufacture all broadcast scenes. Restart clears active p64 and isolated p67.",
+    "nextManualCheck": "p68 active: check pre-snap Subs OVR labels and playcall Kicker Range ACC/PWR badges when available, without substitutions. Broader broadcast output remains a natural-scene check; no need to manufacture all scenes.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -672,7 +672,8 @@
     "p67PresentationSceneUnavailable": "User clarified that the kicker graphic had already disappeared before the isolated fix could be checked. No converted-field event observed yet. Do not mark presentation output passed; proceed to the combined build and check a natural future graphic.",
     "p68KickerRangeScreenshot": "New user screenshot identifies actual numeric display as PLAYCALL Kicker Range (Cristobal Rojas ACC64/PWR64), distinct from the audited broadcast TextVariable definitions. Added exact panel adapter rather than treating this as a failed broad broadcast conversion.",
     "p68KickerRangeBuildReview": "MSVC/W4/WX, native tests and all10UI VM suites pass. Independent exact asset/import/hash/outer-return/frame/model review and in-game UI tests pass. Dedicated kickerPrograms bank14 retains native13/7frames and existing marker-based RatingValueItem Draw; target/distance/field geometry remains numeric. Combined p68 includes Subs and broad broadcast support; live check pending.",
-    "p68Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA2563d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68. Installed files and histories unchanged."
+    "p68Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA2563d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68. Installed files and histories unchanged.",
+    "p68Activation": "Observed main menu in clean PID25220 (new game window36504684). Only installed baseline and Social Media modules initially loaded; recruit baseline stop0, p68 load and active/prepared events confirmed. Initial retained bytes0 across18 reported banks (15player+3shared). No previous p64/p67 modules or probes present. New native presentation preflight succeeded; visual Subs/Kicker checks pending."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
