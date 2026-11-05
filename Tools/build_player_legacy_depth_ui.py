@@ -22,7 +22,7 @@ def columns_suffix(a):
     a.missing(13,done)
     path(a,13,'length');a.number(6);a.raw(0x48);a.branch(done)
     path(a,13,'length');a.number(90);a.raw(0x67);a.branch(done)
-    for i,names in enumerate([('Slot','SLOT'),('Player','PLAYER'),('POS','Pos'),('OVR',),('Year','YEAR')]):
+    for i,names in enumerate([('Slot','SLOT'),('Player','PLAYER'),('POS','Pos'),('OVR','Ovr'),('Year','YEAR')]):
         a.reg(13);a.number(i);a.raw(0x4E);a.store(3);a.missing(3,done)
         path(a,3,'mHeaderText');a.store(3)
         for name in names:a.reg(3);a.string(name);a.raw(0x66);a.branch('depthPrefix'+str(i))

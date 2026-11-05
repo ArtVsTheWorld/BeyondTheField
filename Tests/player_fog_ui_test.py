@@ -94,6 +94,23 @@ assert definitions==original_defs
 mask=receiver['DEPauseRatingColumns']
 assert mask==[False,False,False,True,False]+[True]*len(ATTRIBUTES)+[False]
 
+# Exact59 native column names captured read-only from the paused game's
+# concrete spreadsheet descriptor. The UI font capitalizes 'Ovr' visually.
+native_depth_headers=['Slot','Player','Pos','Ovr','Year','SPD','STR','AGI','ACC','AWR',
+    'BTK','TRK','COD','BCV','SFA','SPM','JKM','CAR','CTH','SRR','MRR','DRR',
+    'CIT','SPC','RLS','JMP','THP','SAC','MAC','DAC','RUN','TUP','BSK','PAC',
+    'TAK','POW','PMV','FMV','BSH','PUR','PRC','MCV','ZCV','LSP','PRS','PBK',
+    'PBP','PBF','RBK','RBP','RBF','LBK','IBL','KPW','KAC','RET','STA','INJ','TGH']
+live_defs=[{'mHeaderText':name} for name in native_depth_headers]
+live_provider={'mSpreadsheetId':SHEET}
+assert Machine({},[]).run(suffix_program(columns_suffix),{1:live_provider,13:live_defs}) is live_defs
+assert live_provider['DEPauseRatingColumns']==[False,False,False,True,False]+[True]*54
+for column in range(59):
+    cell={'display':'85','trend':'TrendDown','rating':-3,'intValue':85}
+    Machine({},[]).run(suffix_program(rows_suffix),{1:live_provider,3:[cell],5:[column]})
+    assert cell['display']==('B' if column==3 or column>=5 else '85')
+    assert cell['trend']=='TrendDown' and cell['rating']==-3 and cell['intValue']==85
+
 for rating in range(101):
     grade='A' if rating>=90 else 'B' if rating>=80 else 'C' if rating>=70 else 'D' if rating>=60 else 'F'
     for raw in [rating,str(rating)]:

@@ -404,7 +404,7 @@
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
   "pauseDepthChart": {
-    "status": "p62 live FAILED: numeric table persists. p63 fixes missing exact-frame grid-bank dispatch; live validation pending.",
+    "status": "p64 built/reviewed, exact native Ovr alias correction; liveverificationpending.",
     "asset": "common/ui/node_com/scriptpod.ast",
     "screenAsset": "madden/screens/roster/madden_scrdepthchartselectplayer/madden_scrdepthchartselectplayer.ast",
     "provider": "madden.provider.Cafe2SpreadsheetProvider",
@@ -416,6 +416,22 @@
     },
     "preservation": "Only fresh returned cell display changes. Native rating/trend, underlying model, sorting, slots, years, filters and native highlight colors preserved. Header mask cached per provider, no new native hook or process discovery.",
     "research": "Frontend and generic native column probes saw no calls; each stopped0/inflight0. Bounded script trace stopped0/inflight0. Actual legacy screen asset identifies Cafe2 provider.",
-    "attachmentCorrection": "Source colorLengthHook previously handled only cardUiBanks/notesUi, while legacy/modern grid banks ran only on invocation setup. p63 adds exact-frame guards and per-method path logs to both routes."
+    "attachmentCorrection": "Source colorLengthHook previously handled only cardUiBanks/notesUi, while legacy/modern grid banks ran only on invocation setup. p63 adds exact-frame guards and per-method path logs to both routes.",
+    "liveHeaderEvidence": {
+      "columns": 59,
+      "prefix": [
+        "Slot",
+        "Player",
+        "Pos",
+        "Ovr",
+        "Year"
+      ],
+      "knownAttributes": 54,
+      "maskBefore": "undefined",
+      "rootCause": "Only OVR was accepted; native font visually uppercases Ovr",
+      "nativeRoute": "F550000\u2192adapterManager+20 tree exact mPath\u2192node+8 native spreadsheet\u2192+8 provider B4B6B00; header getter37BEA50 reads provider+18 descriptor, +10array, +18ushort count, stride38 headerptr+18",
+      "privateEvidence": "Evidence/PlayerFog/p63-depth-native-columns.json; not distributed"
+    },
+    "probeNotes": "ScriptFunction2 Setup actualthis comes from currentVMreg1 AFTERnativeSetup, including nullr9 lexical fallback; r8 isprototype, r9canbenull. NativeGetMember uses AptValueString+10hex StringRef, not Function2 poolslot. Probes validate both nativefieldnames and stop/drain; no model/UIdefinition writes."
   }
 }
