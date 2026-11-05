@@ -554,9 +554,9 @@
     "releaseReady": false,
     "previewSha256": "3d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68",
     "checks": "MMC adapter registration/callbacks/tamper/path/config smoke checks pass; private histories/evidence absent from ZIP.",
-    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p68.dll",
-    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p68-MMC.zip",
-    "nextCandidateSha256": "3d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68"
+    "nextCandidateDll": "Build/DynastyEnhancerRecruitFog-p69.dll",
+    "nextCandidatePackage": "Build/DynastyEnhancer-player-fog-p69-MMC.zip",
+    "nextCandidateSha256": "acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425"
   },
   "latestVerification": {
     "cppChecks": "passed",
@@ -597,7 +597,7 @@
     "p55BoxScoreLive": "p55 completed-game Player Stats actual screenshot: Cole Whitaker Overall D; six attributes D/B/C/C/D/C colored. Statistical passer rating104.0,211yd,2TD,3INT,long45,sacks4,16/33,48%,13.2YPC,NIL10 remain numeric. User confirms looks good.",
     "p57Package": "Combined DLL/package built and verified; MMC registration/launch/tamper/path/config checks pass. Not loaded; installed baseline untouched, p55 active.",
     "p55HeismanLive": "p55 Heisman Watch actual selected Kameryn Crawford shows Overall B green; NIL130,teamrank7,jersey1,height6ft5,265lb,lastgame48-8 and2TKL/2SACKS/2TFL remain numeric. User confirms looks good. Annual/weekly awards not yet inspected.",
-    "nextManualCheck": "p68 active: check pre-snap Subs OVR labels and playcall Kicker Range ACC/PWR badges when available, without substitutions. Broader broadcast output remains a natural-scene check; no need to manufacture all scenes.",
+    "nextManualCheck": "p68 Subs passed. Clean restart/main-menu activation of p69, then RB/FB Ratings panel (89/85/85 should be B/B/B), ordinary stats-mode preservation, and Kicker Range when available. Broader broadcast output remains a natural-scene check.",
     "p57Activation": "Baseline stop0 at observed main menu; p57 active event plus empty12-bank retention confirmed PID29144 before Dynasty entry.",
     "p57BlueprintLive": "Player OVR B/F/F/F/D; NIL and budget values unchanged; no deals edited.",
     "hubComparisonStringEvidence": "Reviewer traced nativeproducer7932a10: StatValue stringsetter25a3e60 at7932bef, DecimalPlaces supports formattedstats. Canonical integer string support implemented/tested after fullname gate; not live loaded.",
@@ -673,18 +673,22 @@
     "p68KickerRangeScreenshot": "New user screenshot identifies actual numeric display as PLAYCALL Kicker Range (Cristobal Rojas ACC64/PWR64), distinct from the audited broadcast TextVariable definitions. Added exact panel adapter rather than treating this as a failed broad broadcast conversion.",
     "p68KickerRangeBuildReview": "MSVC/W4/WX, native tests and all10UI VM suites pass. Independent exact asset/import/hash/outer-return/frame/model review and in-game UI tests pass. Dedicated kickerPrograms bank14 retains native13/7frames and existing marker-based RatingValueItem Draw; target/distance/field geometry remains numeric. Combined p68 includes Subs and broad broadcast support; live check pending.",
     "p68Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA2563d0d0ff3bca15e87ab9985047ebe31a0a1a6dced208b573e41d4aebe4ece2f68. Installed files and histories unchanged.",
-    "p68Activation": "Observed main menu in clean PID25220 (new game window36504684). Only installed baseline and Social Media modules initially loaded; recruit baseline stop0, p68 load and active/prepared events confirmed. Initial retained bytes0 across18 reported banks (15player+3shared). No previous p64/p67 modules or probes present. New native presentation preflight succeeded; visual Subs/Kicker checks pending."
+    "p68Activation": "Observed main menu in clean PID25220 (new game window36504684). Only installed baseline and Social Media modules initially loaded; recruit baseline stop0, p68 load and active/prepared events confirmed. Initial retained bytes0 across18 reported banks (15player+3shared). No previous p64/p67 modules or probes present. New native presentation preflight succeeded.",
+    "p68SubsLive": "User confirms pre-snap Subs is fixed; bank6method5 attachment recorded. Kicker Range has not appeared yet and remains pending. New screenshot reveals separate IndividualPositionStats RB/FB Ratings89ACC/85COD/85SPD numeric.",
+    "p69PanelAudit": "Fresh current Presentation_Common collector (cachehead4338538) resolves all35 playcall panel assets, including newer TeamPositionGroups GUIDcf6f34b1-cb22-478f-109e-4859013375f4. All35 decoded with0errors. Six explicit rating renderer methods across five assets corrected. ConferenceRankings records, SignedRecruits ranks/stars, traits, generic statistics/time/ratios deliberately preserved after producer audits.",
+    "p69BuildReview": "MSVC/W4/WX, native tests, all11UIVM suites and independent native-local/frame/hash/no-return/model/lifecycle review pass. New fixtures cover31grade bands/boundaries through prior presentation tests plus mode2 vs manual/stats, native comparison arrows, partial/unknown entries, provider limits, exact method-specific cells and distinct Trench providers. No new native hooks or background work;20player asset banks. p69 not loaded.",
+    "p69Package": "MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256acba78f784b88274aa351352b3f4d6ab87e4dd602f2c1f376ce443ab50f94425. Installed files and private histories unchanged."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "Prior menu/in-game checks pass. Combined p68 contains pre-snap Subs and newly identified playcall Kicker Range fixes, awaiting live checks. Broad broadcast support statically audited; isolated p67 remains active with natural-scene verification pending.",
+    "remainingMenusLeakAudit": "Prior menu/in-game checks and pre-snap Subs pass. p69 batch fixes newly observed RB/FB Ratings plus related explicit comparison/impact/lineup/trench paths; live checks pending. Kicker Range and broad broadcast output remain pending natural-scene verification. p68 is active; no isolated preview remains after restart.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Pre-snap substitution OVR column: observed numeric leak, built/reviewed p65 correction awaiting live verification",
+      "Playcall IndividualPositionStats RB/FB Ratings and related explicit comparison/impact/lineup/trench displays: built/reviewed p69, awaiting clean-session live verification",
       "Playcall Kicker Range ACC/PWR badges: screenshot-confirmed numeric leak, built/reviewed p68 correction awaiting live verification",
       "Broadcast player-rating graphics: static audit and native formatter correction built/reviewed; isolated p67 active, natural-scene output check pending",
       "Combined Social Media/recruiting/roster regression, bounded performance measurement and final installation"

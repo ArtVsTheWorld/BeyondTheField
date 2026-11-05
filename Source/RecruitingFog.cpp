@@ -29,6 +29,7 @@
 #include "PlayerFogPerformance.h"
 #include "PlayerHubUiPrograms.h"
 #include "PlayerInGameUiPrograms.h"
+#include "PlayerPlaycallUiPrograms.h"
 #include "PlayerRecruitUiPrograms.h"
 #include "PlayerFormationUiPrograms.h"
 #include "PlayerNilUiPrograms.h"
@@ -71,7 +72,12 @@ notesui::Runtime playerBlueprintUi(playerblueprintui::programs());
 notesui::Runtime playerPracticeUi(playerpracticeui::programs());
 notesui::Runtime playerNilEmbeddedUi(playernilui::embeddedPrograms());
 notesui::Runtime playerKickerUi(playeringameui::kickerPrograms());
-const std::array<notesui::Runtime*,15> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi,&playerPracticeUi,&playerNilEmbeddedUi,&playerKickerUi};
+notesui::Runtime playerIndividualPanelUi(playerplaycallui::individualPrograms());
+notesui::Runtime playerComparisonPanelUi(playerplaycallui::comparisonPrograms());
+notesui::Runtime playerImpactPanelUi(playerplaycallui::impactPrograms());
+notesui::Runtime playerLineupPanelUi(playerplaycallui::lineupPrograms());
+notesui::Runtime playerTrenchPanelUi(playerplaycallui::trenchPrograms());
+const std::array<notesui::Runtime*,20> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi,&playerPracticeUi,&playerNilEmbeddedUi,&playerKickerUi,&playerIndividualPanelUi,&playerComparisonPanelUi,&playerImpactPanelUi,&playerLineupPanelUi,&playerTrenchPanelUi};
 std::array<std::atomic<bool>,cardUiBanks.size()> cardUiFailed{};
 std::array<std::atomic<unsigned>,cardUiBanks.size()> cardUiAttached{};
 std::atomic<bool> playerUiFailed{false},playerUiLogged{false};

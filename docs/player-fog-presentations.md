@@ -71,3 +71,35 @@ destructor. The native formatter still receives its original input exactly once.
   copied UI definitions and is not the automatic-loading package.
 
 Repeat the offline audit with `python Tools/audit_player_presentations.py`.
+
+## Playcall info-panel family audit
+
+The current `Presentation_Common` collector was read separately from the older
+research index. All **35 playcall panel assets** were extracted read-only and
+decoded without errors. In particular, `TeamPositionGroups` has a newer asset
+GUID than the historical index; the current collector resolves it correctly.
+The private catalog is `Evidence/PlayerFog/PlaycallPanels/audit.json`.
+
+| Panel | Treatment in p69 |
+|---|---|
+| IndividualPositionStats, including the pictured RB/FB Ratings | Grade the three final labels only when the native panel mode is Ratings (2) |
+| PlayerVsPlayer | Grade up to three attribute pairs only in Ratings mode, after native comparisons and arrows are calculated |
+| ImpactPlayerDepth | Grade its three explicit attribute labels after native selection and ordering |
+| TeamPositionGroups | Grade each fresh row's player OVR display cell |
+| TeamPositionGroups key-stat variant | Grade `ConferenceText`, where this layout puts player OVR; preserve `OverallText`, which contains the ordinary key statistic |
+| Trench | Grade player OVR display cells in both lists; preserve weight averages |
+| ConferenceRankings | Preserve: even the field called `Ovr` contains a season record here |
+| SignedRecruits | Preserve: national rank, star rating and interest visualization |
+| ImpactPlayerTraits | Preserve ability names, descriptions and tiers |
+| ImpactPlayer / PlayerSelfComparison | Preserve generic statistics and comparisons; no confirmed rating-only path |
+
+The new panel adapters keep native fonts and comparison foregrounds. This also
+prevents grade colors from leaking into ordinary statistics when a cached panel
+changes modes. Numeric input arrays, rating ordering, comparison arrows, player
+IDs, jerseys, years, weight and ordinary statistics remain unchanged. Separate
+asset banks use the original register frames and the existing attachment path;
+no new native hook or background discovery is added.
+
+Pre-snap Subs passed the user's p68 check. Kicker Range and the p69 panel changes
+still need visual verification; the 35-asset audit is static evidence, not a claim
+that every panel has appeared in the current game.

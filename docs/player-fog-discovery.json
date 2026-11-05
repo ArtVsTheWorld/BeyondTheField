@@ -403,6 +403,21 @@
     "preservation": "Label-only; numeric ExtraInfo/source ratings, jersey numbers, depth slot/year, counts, yards, percentages, selection foreground and visibility remain native. Exact fingerprints and fixed register frames verified.",
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
+  "playcallInfoPanelFamily": {
+    "status": "All35 current panel assets decoded read-only with0errors. p69 source correction prepared for six explicit rating methods across five assets; live check pending.",
+    "observed": "p68 user confirms pre-snap Subs fixed; new screenshot IndividualPositionStats RB/FB RATINGS shows McNeil89ACC/85COD/85SPD. Native mode2 is the rating path;0manual/1statistics preserved.",
+    "adapters": [
+      "IndividualPositionStats._UpdatePanelData defF00 bodyF30 argc1 regs8 flags41 size568 FNVAAFCF14B1496DDDD: final mode r7, selected entries r3, value ->mcStat0..2",
+      "PlayerVsPlayer._UpdatePanelData def1048 body1078 argc1 regs15 flags41 size820 FNV567EA0C435169D4E: mode r14, selected entries r3, leftNum/rightNum ->mcNumLeft/Right0..2 after native arrow logic",
+      "ImpactPlayerDepth._InitializeComponents defBF0 bodyC20 argc1 regs11 flags41 size601 FNV259CAE7688E485F8: sorted rating array r4, value ->mcValue0..2",
+      "TeamPositionGroups._AddPosGroupItems def10E0 body1110 argc1 regs34 flags41 size612 FNV0CEFFD054D66A3FC: fresh provider row ExtraInfo.OverallText",
+      "TeamPositionGroups._AddPosGroupKeyStatItems def1380 body13B0 argc1 regs10 flags41 size668 FNV458D0B14010C332D: fresh provider row ExtraInfo.ConferenceText only, OverallText is a real key statistic",
+      "Trench._PopulateData def14F0 body1520 argc1 regs28 flags41 size1368 FNV28CE9EBE211C65E5: both fresh providers ExtraInfo.OverallText only, weight averages unchanged"
+    ],
+    "exclusions": "ConferenceRankings.Ovr is season W-L, SignedRecruits.OverallText is nationalrank/StadiumText stars and interest100/1, ImpactPlayerTraits abilitytiers, ImpactPlayer/PlayerSelfComparison generic stats/time/ratios. No blanket numeric conversion.",
+    "runtime": "Five separate asset banks appended to existing common prepare/attach/stop/perf loops (20 player banks); exact native frames retained, source/order/arrow/style data unchanged, no added native hooks or polling.",
+    "privateEvidence": "Evidence/PlayerFog/PlaycallPanels/audit.json and current-legacy-index.json; common/ui/fb_node_ig/corenode.ast producer evidence in node-ig-core.ast; not distributed"
+  },
   "playcallKickerRange": {
     "status": "User screenshot confirms ACC/PWR64 numeric in Kicker Range panel; p68 correction built in source, live check pending.",
     "asset": "common/ui/art_screen/playcall/panel/kickerrange.ast",
