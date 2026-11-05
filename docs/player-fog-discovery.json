@@ -404,7 +404,7 @@
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
   "pauseDepthChart": {
-    "status": "p64 built/reviewed, exact native Ovr alias correction; liveverificationpending.",
+    "status": "p64 live verified: user QB/HB/far-right checks and actual screenshot confirm table letters/colors, native black selection and numeric slots preserved.",
     "asset": "common/ui/node_com/scriptpod.ast",
     "screenAsset": "madden/screens/roster/madden_scrdepthchartselectplayer/madden_scrdepthchartselectplayer.ast",
     "provider": "madden.provider.Cafe2SpreadsheetProvider",
