@@ -8,6 +8,23 @@ void* __fastcall fakeGetter(void*,void** out){++forwarded;return out;}
 std::array<uintptr_t,2> detailArguments{};
 void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t second){++forwarded;detailArguments={first,second};return out;}
 #if defined(RECRUIT_NOTES_UI)
+unsigned presentationForwarded=0,presentationCreated=0,presentationAssigned=0,presentationDestroyed=0;
+recruitingfog::presentation::Value presentationInput{};
+void __fastcall fakePresentationFormat(void* self,const recruitingfog::presentation::Value* input){
+    ++presentationForwarded;presentationInput=*input;
+    auto* output=reinterpret_cast<recruitingfog::presentation::Value*>(static_cast<unsigned char*>(self)+0x28);
+    *output={123,3,0};
+}
+void* __fastcall fakePresentationAllocator(void*){return reinterpret_cast<void*>(1);}
+void* fakePresentationEnvironmentTable[]={nullptr,nullptr,nullptr,nullptr,reinterpret_cast<void*>(fakePresentationAllocator)};
+void* fakePresentationEnvironmentObject=fakePresentationEnvironmentTable;
+void* __fastcall fakePresentationEnvironment(){return &fakePresentationEnvironmentObject;}
+recruitingfog::presentation::Value* __fastcall fakePresentationString(recruitingfog::presentation::Value* out,const char* text,void* allocator){
+    if(allocator!=reinterpret_cast<void*>(1)||!text||text[1])throw std::runtime_error("Presentation string ABI changed");
+    ++presentationCreated;*out={static_cast<uint64_t>(text[0]),3,0};return out;
+}
+recruitingfog::presentation::Value* __fastcall fakePresentationAssign(recruitingfog::presentation::Value* out,const recruitingfog::presentation::Value* from){++presentationAssigned;*out=*from;return out;}
+void __fastcall fakePresentationDestroy(recruitingfog::presentation::Value* from){++presentationDestroyed;*from={};}
 std::array<uintptr_t,5> setupArguments{};
 unsigned __fastcall fakeColorLength(void*){return 148;}
 unsigned abilityForwarded=0;bool abilityMentals=false;
@@ -55,6 +72,49 @@ struct FixtureView {
 };
 int main(){try{
     using namespace recruitingfog;
+#if defined(RECRUIT_NOTES_UI)
+    {
+        using namespace recruitingfog::presentation;
+        const auto savedBase=runtime::base;runtime::base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
+        runtime::originalPresentationFormat=fakePresentationFormat;
+        runtime::makePresentationString=fakePresentationString;runtime::assignPresentationValue=fakePresentationAssign;
+        runtime::destroyPresentationValue=fakePresentationDestroy;runtime::presentationEnvironment=fakePresentationEnvironment;
+        alignas(8) std::array<unsigned char,0x40> object{};
+        alignas(8) std::array<unsigned char,0x38> query{};
+        alignas(8) std::array<unsigned char,0x78> descriptor{};
+        const auto write=[](auto& bytes,size_t offset,auto value){memcpy(bytes.data()+offset,&value,sizeof(value));};
+        write(object,0,runtime::base+textTable);write(object,0x18,reinterpret_cast<uintptr_t>(query.data()));write(object,0x38,uint32_t(0));
+        write(query,0,runtime::base+queryTable);write(query,0x18,reinterpret_cast<uintptr_t>(descriptor.data()));write(descriptor,8,fourcc("AGLP"));
+        std::set<uint32_t> unique(ratingColumns.begin(),ratingColumns.end());require(unique.size()==31,"Presentation rating whitelist has duplicates");
+        for(const auto column:ratingColumns)for(unsigned value=0;value<=100;++value)for(uint32_t kind:{0u,1u,2u}){
+            write(descriptor,0xc,column);Value input{value,kind,0xabcdef};
+            if(kind==2){float real=static_cast<float>(value);memcpy(&input.payload,&real,4);}
+            const auto before=input;const auto oldForwarded=presentationForwarded,oldCreated=presentationCreated;
+            runtime::presentationFormatHook(object.data(),&input);
+            Value output{};memcpy(&output,object.data()+0x28,sizeof(output));
+            require(output.kind==3&&output.payload==static_cast<uint64_t>(grade(static_cast<int>(value))),"Broadcast rating column/grade boundary leaked");
+            require(!memcmp(&input,&before,sizeof(input))&&!memcmp(&presentationInput,&before,sizeof(input)),"Broadcast formatter changed numeric input or its native arguments");
+            require(presentationForwarded==oldForwarded+1&&presentationCreated==oldCreated+1&&presentationCreated==presentationAssigned&&presentationAssigned==presentationDestroyed,"Broadcast forwarding or temporary value lifetime changed");
+        }
+        write(descriptor,0xc,fourcc("RPKP"));
+        for(const auto invalid:std::array<Value,8>{{{~uint64_t(0),1,0},{101,0,0},{0,3,0},{0,4,0},{0,5,0},{0,7,0},{0x7fc00000,2,0},{0x429f0000,2,0}}}){
+            const auto prior=presentationCreated;runtime::presentationFormatHook(object.data(),&invalid);require(presentationCreated==prior,"Unknown/non-numeric/fractional broadcast value converted");
+        }
+        Value valid{92,1,0};
+        const auto reject=[&](){const auto prior=presentationCreated,fwd=presentationForwarded;runtime::presentationFormatHook(object.data(),&valid);require(presentationCreated==prior&&presentationForwarded==fwd+1,"Unrelated/stopped presentation did not forward unchanged");};
+        runtime::disabled=true;reject();runtime::disabled=false;
+        write(descriptor,8,fourcc("TEAM"));reject();write(descriptor,8,fourcc("AGLP"));
+        write(descriptor,0xc,fourcc("QBRG"));reject();write(descriptor,0xc,fourcc("RPKP"));
+        write(object,0x38,uint32_t(1));reject();write(object,0x38,uint32_t(0));
+        write(query,0,runtime::base+textTable);reject();write(query,0,runtime::base+queryTable);
+        write(query,0x18,uintptr_t(0));reject();write(query,0x18,uintptr_t(1));reject();write(query,0x18,reinterpret_cast<uintptr_t>(descriptor.data()));
+        write(object,0x18,uintptr_t(0));reject();write(object,0x18,reinterpret_cast<uintptr_t>(query.data()));
+        write(object,0,runtime::base+queryTable);reject();
+        require(runtime::inflight==0,"Presentation callback guard leaked");
+        runtime::base=savedBase;
+        std::cout<<"Passed:31 broadcast rating columns x101 boundaries x3 native numeric kinds, exact class/table/column/format gates, native forwarding and string lifetime; query inputs preserved.\n";
+    }
+#endif
     {
         using namespace playerfog;
         require(abilityDescriptionGrades("Bronze Requires: 84 Pass Block Power (75 Currently)")=="Bronze Requires: B Pass Block Power (C Currently)","Ability paired attribute ratings leaked");

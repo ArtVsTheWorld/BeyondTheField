@@ -35,6 +35,7 @@
 #include "PlayerBlueprintUiPrograms.h"
 #include "PlayerPracticeUiPrograms.h"
 #include "PlayerAbilityDescriptions.h"
+#include "PlayerPresentationPolicy.h"
 #endif
 
 namespace recruitingfog::runtime {
@@ -130,6 +131,17 @@ ScriptSetup originalScriptSetup=nullptr;bool notesSetupInstalled=false;
 using ColorLength=unsigned(__fastcall*)(void*);
 ColorLength originalColorLength=nullptr;bool colorLengthInstalled=false;
 std::atomic<unsigned> notesAttachedMethods{0};
+using PresentationFormat=void(__fastcall*)(void*,const presentation::Value*);
+using PresentationString=presentation::Value*(__fastcall*)(presentation::Value*,const char*,void*);
+using PresentationAssign=presentation::Value*(__fastcall*)(presentation::Value*,const presentation::Value*);
+using PresentationDestroy=void(__fastcall*)(presentation::Value*);
+using PresentationEnvironment=void*(__fastcall*)();
+PresentationFormat originalPresentationFormat=nullptr;
+PresentationString makePresentationString=nullptr;
+PresentationAssign assignPresentationValue=nullptr;
+PresentationDestroy destroyPresentationValue=nullptr;
+PresentationEnvironment presentationEnvironment=nullptr;
+bool presentationInstalled=false;std::atomic<unsigned> presentationChanges{0};
 std::atomic<bool> notesAttachmentFailed{false};
 constexpr uintptr_t scriptSetupRva=0x7c36850,scriptTableRva=0xbc42fe8,scriptSetupSlot=0xc8;
 constexpr std::array<unsigned char,24> scriptSetupPrefix={0x48,0x89,0x5c,0x24,0x10,0x48,0x89,0x6c,0x24,0x18,0x48,0x89,0x74,0x24,0x20,0x57,0x41,0x56,0x41,0x57,0x48,0x83,0xec,0x20};
@@ -228,6 +240,73 @@ Json snapshot(uintptr_t at,unsigned depth=0,bool full=false,size_t rootLimit=2){
 }
 struct CallGuard{CallGuard(){++inflight;}~CallGuard(){--inflight;}};
 #if defined(RECRUIT_NOTES_UI)
+// Callback-local fixed-size reads only. No process-memory syscalls, scans,
+// string discovery, allocations or locks for an unrelated text variable.
+bool presentationRead(uintptr_t at,void* output,size_t size){
+    if(at<0x10000)return false;
+    __try{memcpy(output,reinterpret_cast<const void*>(at),size);return true;}
+    __except(EXCEPTION_EXECUTE_HANDLER){return false;}
+}
+void __fastcall presentationFormatHook(void* object,const presentation::Value* input){
+    CallGuard guard;
+    // Always run native formatting once with the original numeric input.
+    // Its rendered string cache is the only value this hook may replace.
+    originalPresentationFormat(object,input);
+    if(disabled)return;
+    presentation::Value source{};uint32_t column=0;
+    if(!presentationRead(reinterpret_cast<uintptr_t>(input),&source,sizeof(source)))return;
+    const auto presentationObject=reinterpret_cast<uintptr_t>(object);
+    const char label=presentation::select(presentationObject,&source,base,presentationRead,&column);
+    if(!label)return;
+    presentation::Value rendered{};
+    if(!presentationRead(presentationObject+0x28,&rendered,sizeof(rendered))||rendered.kind!=3)return;
+    auto* environment=presentationEnvironment();uintptr_t table=0,accessor=0;
+    if(!presentationRead(reinterpret_cast<uintptr_t>(environment),&table,8)||
+       !presentationRead(table+0x20,&accessor,8)||accessor<base+0x1000||accessor>=base+0xa3b6000)return;
+    auto* allocator=reinterpret_cast<void*(__fastcall*)(void*)>(accessor)(environment);
+    if(!allocator)return;
+    const char text[]={label,0};presentation::Value replacement{};
+    makePresentationString(&replacement,text,allocator);
+    assignPresentationValue(reinterpret_cast<presentation::Value*>(presentationObject+0x28),&replacement);
+    destroyPresentationValue(&replacement);
+    if(presentationChanges.fetch_add(1,std::memory_order_relaxed)<8)
+        note({{"event","player_fog_presentation"},{"column",column},{"grade",std::string(1,label)}});
+}
+void installPresentation(bool preflightOnly){
+    struct Gate{uintptr_t rva;const char* prefix;};
+    constexpr Gate helpers[]={
+        {0x91363e0,"48895c2408488974241048897c241841564883ec204c8bf1c741080300000048"},
+        {0x9136580,"48895c2408574883ec208b7a08488bd9488b0283ff03740583ff057508488bc8"},
+        {0x91364f0,"40534883ec208b4108488bd983f803740583f805750f488b09e852a4c6fa48c7"},
+        {0x7d966b0,"488b05c1d7d307c3cccccccccccccccc488b05e1d5d307c3cccccccccccccccc"},
+        {0x7d78cb0,"48895c240848896c2410488974241848897c24204154415641574883ec30488b"},
+        {0x7d7b560,"40534883ec30488bd9488b49184885c9743e488b01ff5018488b4b18488d5424"}};
+    uintptr_t current=0;
+    if(!read(base+presentation::textTable+presentation::formatSlot,&current,8)||current!=base+presentation::formatRva)
+        throw std::runtime_error("Unsupported or owned football presentation formatter");
+    std::vector<unsigned char> body(437);
+    if(!read(current,body.data(),body.size())||notesui::bodyHash(body)!=0x45e37a1d2780bcbfull)
+        throw std::runtime_error("Unsupported football presentation formatter body");
+    if(!read(base+presentation::queryTable+0x48,&current,8)||current!=base+0x7d78cb0||
+       !read(base+presentation::textTable+0x18,&current,8)||current!=base+0x7d7b560)
+        throw std::runtime_error("Unsupported football presentation expression layout");
+    for(const auto& helper:helpers){
+        std::array<unsigned char,32> bytes{};
+        if(!read(base+helper.rva,bytes.data(),bytes.size()))throw std::runtime_error("Unreadable presentation helper");
+        const auto digit=[](char c){return c<='9'?c-'0':c-'a'+10;};
+        for(size_t i=0;i<bytes.size();++i)if(bytes[i]!=(digit(helper.prefix[i*2])*16+digit(helper.prefix[i*2+1])))
+            throw std::runtime_error("Unsupported presentation helper fingerprint");
+    }
+    if(preflightOnly)return;
+    originalPresentationFormat=reinterpret_cast<PresentationFormat>(base+presentation::formatRva);
+    makePresentationString=reinterpret_cast<PresentationString>(base+0x91363e0);
+    assignPresentationValue=reinterpret_cast<PresentationAssign>(base+0x9136580);
+    destroyPresentationValue=reinterpret_cast<PresentationDestroy>(base+0x91364f0);
+    presentationEnvironment=reinterpret_cast<PresentationEnvironment>(base+0x7d966b0);
+    if(!replace(reinterpret_cast<void*>(originalPresentationFormat),reinterpret_cast<void*>(presentationFormatHook),presentation::textTable,presentation::formatSlot))
+        throw std::runtime_error("Football presentation formatter ownership changed");
+    presentationInstalled=true;
+}
 void attachPlayerGridUi(void* object,bool fixedFrame,const unsigned char* header=nullptr){
     if(disabled||playerUiFailed)return;
     const std::array<notesui::Runtime*,2> banks={&playerUi,&modernPlayerUi};
@@ -427,6 +506,7 @@ void* __fastcall getterHook(void* object,void** out){
 }
 #if defined(RECRUIT_NOTES_UI)
 void installRosterProviders(bool preflightOnly=false){
+    installPresentation(true);
     struct Binding{uintptr_t table,offset,rva;const char* prefix;void* hook;};
     const Binding bindings[]={
         {rosterColumnsTable,0x70,rosterColumnsRva,"488bc455488bec4881ec80000000488958084881c11804000048897010488bda",reinterpret_cast<void*>(rosterColumnsHook)},
@@ -468,6 +548,7 @@ void installRosterProviders(bool preflightOnly=false){
     for(size_t i=0;i<keyedPlayerOriginal.size();++i){const auto& binding=keyedPlayerBindings[i];keyedPlayerOriginal[i]=reinterpret_cast<KeyedPlayerGetter>(base+binding.rva);
         if(!replace(reinterpret_cast<void*>(keyedPlayerOriginal[i]),reinterpret_cast<void*>(keyedPlayerHooks[i]),binding.table,binding.slot))throw std::runtime_error("Keyed player response ownership changed");keyedPlayerInstalled[i]=true;
     }
+    installPresentation(false);
 }
 #endif
 DWORD stop(){
@@ -483,6 +564,7 @@ DWORD stop(){
     bool ownershipFailed=false;
 #if defined(RECRUIT_NOTES_UI)
     ratingGridState=0;
+    if(presentationInstalled){if(replace(reinterpret_cast<void*>(presentationFormatHook),reinterpret_cast<void*>(originalPresentationFormat),presentation::textTable,presentation::formatSlot))presentationInstalled=false;else ownershipFailed=true;}
     for(size_t i=0;i<keyedPlayerOriginal.size();++i)if(keyedPlayerInstalled[i]){const auto& binding=keyedPlayerBindings[i];if(replace(reinterpret_cast<void*>(keyedPlayerHooks[i]),reinterpret_cast<void*>(keyedPlayerOriginal[i]),binding.table,binding.slot))keyedPlayerInstalled[i]=false;else ownershipFailed=true;}
     if(abilitiesInstalled){if(replace(reinterpret_cast<void*>(playerAbilitiesHook),reinterpret_cast<void*>(originalAbilities),abilitiesTable,abilitiesSlot))abilitiesInstalled=false;else ownershipFailed=true;}
     for(size_t i=0;i<mapOriginal.size();++i)if(mapInstalled[i]){const auto& binding=mapBindings[i];if(replace(reinterpret_cast<void*>(mapHooks[i]),reinterpret_cast<void*>(mapOriginal[i]),0xbab1b28,binding.slot))mapInstalled[i]=false;else ownershipFailed=true;}
@@ -506,6 +588,17 @@ DWORD WINAPI worker(void*){
     wchar_t path[32768]{};GetModuleFileNameW(self,path,32768);const auto folder=std::filesystem::path(path).parent_path();base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
     auto flush=[&](){std::deque<Json> items;{std::lock_guard<std::mutex> lock(queueMutex);items.swap(pending);}if(!items.empty()){std::ofstream out(folder/L"recruiting-fog.jsonl",std::ios::app);for(const auto& j:items)out<<j.dump(-1,' ',false,Json::error_handler_t::replace)<<'\n';}};
     try{
+#if defined(PLAYER_PRESENTATION_PREVIEW)
+        // Isolated live check: no recruiting, reader, script, grid or card hooks.
+        // It may coexist with the installed/active fog DLL because that earlier
+        // build does not own this native presentation formatter slot.
+        installPresentation(true);
+        HMODULE presentationPin=nullptr;
+        if(!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,reinterpret_cast<LPCWSTR>(&worker),&presentationPin))throw std::runtime_error("Cannot pin presentation preview");
+        installPresentation(false);
+        note({{"event","player_fog_presentation_preview_active"},{"pid",GetCurrentProcessId()},{"reader",false},{"scriptDefinitions",false}});
+        while(!disabled){flush();Sleep(200);}flush();return 0;
+#endif
 #if defined(PLAYER_FOG_PREVIEW)
         // Development-only bridge into the already installed recruiting hook.
         // This never installs Notes/reader hooks or changes installed files.

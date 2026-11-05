@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name,[switch]$RecruitNotesProbe,[switch]$RecruitNotesUi,[switch]$PlayerFogPreview,[switch]$PlayerFogColors,[switch]$PlayerFogPerf)
+param([Parameter(Mandatory=$true)][ValidatePattern('^DynastyEnhancerRecruitFog-p[0-9]+$')][string]$Name,[switch]$RecruitNotesProbe,[switch]$RecruitNotesUi,[switch]$PlayerFogPreview,[switch]$PlayerFogColors,[switch]$PlayerFogPerf,[switch]$PresentationPreview)
 $ErrorActionPreference='Stop'
 $fogRoot=Split-Path -Parent $PSScriptRoot
 $fogOut=Join-Path $fogRoot 'Build'
@@ -19,6 +19,7 @@ if($RecruitNotesUi){$fogFlags+='/DRECRUIT_NOTES_UI'}
 if($PlayerFogPreview){if(-not $RecruitNotesUi){throw 'Preview requires the shared UI implementation'};$fogFlags+='/DPLAYER_FOG_PREVIEW'}
 if($PlayerFogColors){if(-not $RecruitNotesUi){throw 'Player colors require UI support'};$fogFlags+='/DPLAYER_FOG_COLORS'}
 if($PlayerFogPerf){if(-not $RecruitNotesUi){throw 'Player profiling requires UI support'};$fogFlags+='/DPLAYER_FOG_PERF'}
+if($PresentationPreview){if(-not $RecruitNotesUi -or $PlayerFogPreview -or $RecruitNotesProbe){throw 'Presentation-only preview requires UI support and no other preview/probe mode'};$fogFlags+='/DPLAYER_PRESENTATION_PREVIEW'}
 if($RecruitNotesUi){
  & python (Join-Path $fogRoot 'Tools/build_lower_division_schools.py')
  if($LASTEXITCODE -ne 0){throw 'College school catalog validation failed'}

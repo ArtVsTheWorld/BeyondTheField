@@ -403,6 +403,18 @@
     "preservation": "Label-only; numeric ExtraInfo/source ratings, jersey numbers, depth slot/year, counts, yards, percentages, selection foreground and visibility remain native. Exact fingerprints and fixed register frames verified.",
     "coverageLimit": "Personnel Group label was user-observed; exact card/panel activation must be verified live before claiming coverage."
   },
+  "broadcastPresentations": {
+    "status": "Full p66 built/reviewed/packaged; isolated p67 active beside p64, scene output not yet verified.",
+    "audit": "704 IBX archive entries parsed,1350 definitions including aggregate copies,41 unique player-rating templates,239 direct Format0 rating cells and31 exact AGLP columns. No non-direct or non-default rating expressions found.",
+    "families": ["Kicker and kick-returner graphics", "Pregame/runout/QB trot", "Freshman debuts and player bios", "Position/star-player comparisons", "Matchups to watch", "Legacy QB spotlights"],
+    "nativeBoundary": "Football SystemMuse TextVariable vtBC82C08.slot40 ->7D79160; full437B FNV45E37A1D2780BCBF. Original called once with unmodified numeric input, only self+28 rendered string cache changes.",
+    "semanticGate": "Exact TextVariable and direct GameQueryVariable vtBC82AE8, descriptor+8 tableAGLP, descriptor+C explicit31attribute-column whitelist, Format0 and integral0..100. Team/statistical QB rating and unrelated queries excluded.",
+    "lifetime": "Same native allocator service and Value string ctor91363E0/assign9136580/dtor91364F0; temporary ownsone ref, cacheassignment retains, temporary destroyedonce. Query/evaluator/model remain numeric.",
+    "performance": "One native callback slot; bounded local SEH reads, no RPM/syscalls/process discovery; no reader or extra UI definitions in isolated preview. Only matching rating fields allocate replacement text; logs capped8.",
+    "liveEvidence": "PID25304 exact native body/helper/slot gate reads pass and isolated preview active event confirmed; visual scene check remains pending.",
+    "privateEvidence": "Evidence/PlayerFog/Presentations/rating-audit.json and p66-live-gates.json; not packaged",
+    "publicReport": "docs/player-fog-presentations.md"
+  },
   "preSnapSubstitution": {
     "status": "Observed numeric OVR leak in live pre-snap Subs panel; p65 source correction prepared, live verification pending.",
     "asset": "common/ui/node_ig/scriptpod.ast",
