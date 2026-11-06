@@ -26,6 +26,7 @@
 #include "CurrencyUiPrograms.h"
 #include "CurrencyTopbarUiPrograms.h"
 #include "CurrencyBudgetUiPrograms.h"
+#include "AioCurrencyUiPrograms.h"
 #include "CurrencyRecruitDetailUiPrograms.h"
 #include "CurrencyRecruitEditorUiPrograms.h"
 #include "FogGapUiPrograms.h"
@@ -99,8 +100,10 @@ notesui::Runtime currencyRecruitDetailUi(currencyrecruitdetailui::programs());
 notesui::Runtime currencyRecruitEditorUi(currencyrecruiteditorui::programs());
 notesui::Runtime gapCoreUi(gapui::corePrograms()),gapHubUi(gapui::hubPrograms()),gapRecruitUi(gapui::recruitingPrograms()),gapTeamSelectUi(gapui::teamSelectPrograms());
 notesui::Runtime draftOvrStrategyUi(draftovrui::strategyPrograms()),draftOvrRowsUi(draftovrui::rowPrograms());
-const std::array<notesui::Runtime*,37> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi,&playerPracticeUi,&playerNilEmbeddedUi,&playerKickerUi,&playerIndividualPanelUi,&playerComparisonPanelUi,&playerImpactPanelUi,&playerLineupPanelUi,&playerTrenchPanelUi,&playerInjuryScreenUi,&currencyIconUi,&currencySlotUi,&currencyCellUi,&gapCoreUi,&gapHubUi,&gapRecruitUi,&gapTeamSelectUi,&draftOvrStrategyUi,&draftOvrRowsUi,&currencyTopbarUi,&currencyRecruitingUi,&currencyBudgetUi,&currencyAnimationUi,&currencyBudgetArtUi,&currencyRecruitDetailUi,&currencyRecruitEditorUi};
+notesui::Runtime aioCurrency0(aiocurrencyui::group0()),aioCurrency1(aiocurrencyui::group1()),aioCurrency2(aiocurrencyui::group2()),aioCurrency3(aiocurrencyui::group3());
+const std::array<notesui::Runtime*,41> cardUiBanks={&playerControlUi,&playerCardUi,&playerTemplateUi,&playerSkillUi,&playerHubUi,&playerSliderUi,&playerInGameUi,&playerRecruitUi,&playerFormationUi,&playerLegacyOvrUi,&playerNilUi,&playerBlueprintUi,&playerPracticeUi,&playerNilEmbeddedUi,&playerKickerUi,&playerIndividualPanelUi,&playerComparisonPanelUi,&playerImpactPanelUi,&playerLineupPanelUi,&playerTrenchPanelUi,&playerInjuryScreenUi,&currencyIconUi,&currencySlotUi,&currencyCellUi,&gapCoreUi,&gapHubUi,&gapRecruitUi,&gapTeamSelectUi,&draftOvrStrategyUi,&draftOvrRowsUi,&currencyTopbarUi,&currencyRecruitingUi,&currencyBudgetUi,&currencyAnimationUi,&currencyBudgetArtUi,&currencyRecruitDetailUi,&currencyRecruitEditorUi,&aioCurrency0,&aioCurrency1,&aioCurrency2,&aioCurrency3};
 bool cardBankEnabled(size_t bank){const auto selected=enhancements::options();const auto* runtime=cardUiBanks[bank];
+    if(runtime==&aioCurrency0||runtime==&aioCurrency1||runtime==&aioCurrency2||runtime==&aioCurrency3)return true;
     if(runtime==&gapRecruitUi)return selected.recruiting;
     // Currency layout must undo its own prior fit when dollars is switched Off.
     // The suffix retains the real option gate; fresh Off widgets are a no-op.

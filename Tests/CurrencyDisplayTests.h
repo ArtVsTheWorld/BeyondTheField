@@ -48,7 +48,9 @@ inline void run(){
         check(enhancements::currency::display("150")==std::string(enabled?"600K":"150"),"NIL display depends on a fog/color option");
         check(enhancements::currency::display("1,250")==std::string(enabled?"5.0M":"1,250"),"Grouped NIL display does not obey its own toggle");
         check(enhancements::currency::display(nullptr).empty(),"Null NIL display did not remain empty");
-        for(const auto* source:invalid)check(enhancements::currency::display(source)==source,"Currency adapter rewrote unsupported native text");
+        for(const auto* source:invalid)if(source[0]!='$')check(enhancements::currency::display(source)==source,"Currency adapter rewrote unsupported native text");
+        for(const auto& [source,expected]:std::vector<std::pair<const char*,const char*>>{{"$0","0"},{"$150","0K"},{"$600,000","600K"},{"$4,720,000","4.7M"},{"$2.1M","2.1M"},{"$40K","40K"}})
+            check(enhancements::currency::display(source)==(enabled?expected:source),"AIO preformatted dollars were double-converted or ignored the toggle");
         for(size_t i=0;i<schemas.size();++i){
             if(nilColumns[i]<0)continue;
             Output out{outputTable,{}};GridSink sink{gridTable,&out};sink.schema=schemas[i];sink.count=2;sink.columns[0]=nilColumns[i];sink.columns[1]=0;

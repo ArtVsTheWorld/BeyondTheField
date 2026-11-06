@@ -4,6 +4,10 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
+## AIO Dynasty 1.4.1 compatibility candidate
+
+`Build/DynastyEnhancer-options-p98-MMC.zip` adds exact-version adapters for AIO's recompiled currency callbacks and normalizes already-formatted dollar labels without double conversion. The original asset support remains. Native/UI and MMC package checks pass; live AIO acceptance is pending installation and a clean launch. See [compatibility details](docs/aio-currency-compatibility.md). Build fog with a fresh pNN name, then package it with `-SocialNativeName DynastyEnhancerNative-options-p96 -RecruitingName DynastyEnhancerRecruitFog-p98 -PackageTag options-p98`. Both native payloads must be updated together.
+
 ## Current combined prototype
 
 Social Media, Recruiting Fog, Roster Fog, Team Fog, recruiting Notes and optional dollar-value displays share one **Dynasty Enhancer** MMC plugin. The current built candidate is **options-p96**. The standalone/direct hub-tab experiment remains deferred; use **Team → Social Media**. This is not the planned 1.0 release.

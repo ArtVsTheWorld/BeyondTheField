@@ -21,6 +21,8 @@ if($PlayerFogColors){if(-not $RecruitNotesUi){throw 'Player colors require UI su
 if($PlayerFogPerf){if(-not $RecruitNotesUi){throw 'Player profiling requires UI support'};$fogFlags+='/DPLAYER_FOG_PERF'}
 if($PresentationPreview){if(-not $RecruitNotesUi -or $PlayerFogPreview -or $RecruitNotesProbe){throw 'Presentation-only preview requires UI support and no other preview/probe mode'};$fogFlags+='/DPLAYER_PRESENTATION_PREVIEW'}
 if($RecruitNotesUi){
+ & python (Join-Path $fogRoot 'Tests/aio_currency_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'AIO currency compatibility checks failed'}
  & python (Join-Path $fogRoot 'Tests/currency_topbar_ui_test.py')
  if($LASTEXITCODE -ne 0){throw 'Dynasty topbar dollar checks failed'}
  & python (Join-Path $fogRoot 'Tests/currency_recruiting_ui_test.py')
