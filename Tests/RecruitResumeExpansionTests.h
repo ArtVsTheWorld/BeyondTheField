@@ -1,6 +1,8 @@
 #pragma once
+#include "RecruitTransferClassTests.h"
 inline nlohmann::json expansionTests(){
     using namespace recruitingfog::resume;
+    transferClassLabelTests();
     Prospect p;p.identity="expansion";p.position="QB";p.stars=3;p.state="NorthCarolina";p.ratings={{"OverallRating",70},{"AwarenessRating",70}};
     double gpaTotal=0;int middle=0,edges=0,nearby=0,assigned=0;std::set<std::string> levels;
     const std::set<std::string> active={schoolKey("Elon University"),schoolKey("North Dakota State"),schoolKey("Mount Union")};
@@ -45,5 +47,45 @@ inline nlohmann::json expansionTests(){
     const auto missing=transferSeason(records,Json::object(),1,teams);if(renderTransfer(missing,3.2,2027,1).find("No recorded college statistics")==std::string::npos)throw std::runtime_error("Transfer fallback invented statistics");
     records["career"]={{"type","CareerOffensiveStats"},{"v",{{"GAMESPLAYED",20},{"PASSATTEMPTS",400},{"PASSCOMPLETED",250}}}};player={{"CareerStats","career"},{"TeamIndex",15}};
     if(!transferSeason(records,player,1,teams).at("career").get<bool>())throw std::runtime_error("Actual career fallback was ignored");
-    return {{"academicPairs",6000},{"academicIndependence",true},{"gpaMean",gpaTotal/6000},{"middleGpaShare",double(middle)/6000},{"edgeGpaShare",double(edges)/6000},{"nearbyCollegeShare",double(nearby)/assigned},{"collegeLevels",levels},{"additiveMigration",true},{"actualTransferStats",true}};
+    // Raymond Liggins screenshot regression. Return specialists use a derived
+    // native class, not SeasonOffensiveStats, while retaining receiving fields.
+    Json liggins={{"array",{{"type","SeasonStats[]"},{"v",{{"Member0","line"}}}}},
+        {"line",{{"type","SeasonOffensiveKPReturnStats"},{"v",{{"SEAS_YEAR",2},{"YEARBYYEARTEAMINDEX",98},{"GAMESPLAYED",13},{"GAMESSTARTED",13},{"RECEIVECATCHES",54},{"RECEIVEYARDS",896},{"RECEIVETDS",8},{"RECEIVEYARDSAFTER",218},{"RECEIVELONGEST",75},{"PRETATTEMPTS",4},{"PRETYARDS",39},{"PRETTDS",0}}}}}};
+    const Json ligginsPlayer={{"SeasonStats","array"},{"TeamIndex",255}};const std::map<int,std::string> schools={{98,"UConn"}};
+    const auto recordedLiggins=transferSeason(liggins,ligginsPlayer,3,schools);const auto ligginsBefore=liggins;
+    const auto receiving=renderTransfer(recordedLiggins,3.8,2029,3);
+    for(const auto* expected:{"2028","UConn","13 games played","54 catches, 896 yards, 8 TD","218 YAC","75 long","Punt returns: 4 returns, 39 yards, 0 TD"})if(receiving.find(expected)==std::string::npos)throw std::runtime_error(std::string("Return-specialist transfer missing recorded field: ")+expected);
+    if(receiving.find("starts")!=std::string::npos||liggins!=ligginsBefore)throw std::runtime_error("Transfer report published starts or changed native stats");
+    liggins["line"]["v"].erase("GAMESPLAYED");liggins["line"]["v"].erase("RECEIVETDS");
+    auto sparse=renderTransfer(transferSeason(liggins,ligginsPlayer,3,schools),3.8,2029,3);
+    if(sparse.find("54 catches, 896 yards")==std::string::npos||sparse.find("games played")!=std::string::npos||sparse.find("Receiving: 54 catches, 896 yards, 0 TD")!=std::string::npos)throw std::runtime_error("Missing transfer fields were dropped with valid production or invented as zero");
+    liggins["career"]={{"type","CareerOffensiveKPReturnStats"},{"v",{{"RECEIVECATCHES",95},{"RECEIVEYARDS",1420},{"RECEIVETDS",12}}}};
+    auto totals=renderTransfer(transferSeason(liggins,Json{{"CareerStats","career"}},3,schools),3.8,2029,3);
+    if(totals.find("COLLEGE CAREER RECORD")==std::string::npos||totals.find("95 catches, 1,420 yards, 12 TD")==std::string::npos||totals.find("games played")!=std::string::npos)throw std::runtime_error("Career returner totals require an unavailable games-played field");
+    liggins["line"]["type"]="SeasonDefensiveKPReturnStats";liggins["line"]["v"]={{"SEAS_YEAR",2},{"DEFTACKLES",42},{"ASSDEFTACKLES",15},{"DLINESACKS",2},{"DLINEHALFSACK",1},{"DSECINTS",3},{"PRETATTEMPTS",8},{"PRETYARDS",121},{"PRETTDS",1}};
+    const auto defender=renderTransfer(transferSeason(liggins,ligginsPlayer,3,schools),3.8,2029,3);
+    if(defender.find("Tackles: 57")==std::string::npos||defender.find("Sacks: 2.5")==std::string::npos||defender.find("Punt returns: 8 returns, 121 yards, 1 TD")==std::string::npos||defender.find("starts")!=std::string::npos)throw std::runtime_error("Defensive return specialist was omitted or reported fabricated fields");
+    auto sparseDefense=liggins;sparseDefense["line"]["v"]={{"SEAS_YEAR",2},{"DLINEFORCEDFUMBLES",2},{"DLINEFUMBLERECOVERIES",1}};
+    const auto fumbles=renderTransfer(transferSeason(sparseDefense,ligginsPlayer,3,schools),3.8,2029,3);
+    if(fumbles.find("2 forced fumbles, 1 fumble recoveries")==std::string::npos||fumbles.find("games played")!=std::string::npos)throw std::runtime_error("Partial recorded defense was omitted or given invented games");
+    NativeEntry portal;portal.classYear="JR";portal.redshirt=true;
+    if(nativeTransferClass(portal)!="TR (JR RS)"||nativeRecruitClassLabel(portal,"Transfer (JR)")!="TR (JR RS)"||!nativeRecruitClassLabel(portal,"Transfer (SO)").empty())throw std::runtime_error("Transfer redshirt class labeling lost its year gate");
+    portal.redshirt=false;if(nativeTransferClass(portal)!="TR (JR)"||nativeRecruitClassLabel(portal,"Transfer (JR)")!="TR (JR)")throw std::runtime_error("An eligible/ineligible transfer received an incorrect compact class");
+    portal.redshirt=true;portal.juniorCollege=true;portal.saved={{"competitionClass","FCS"}};
+    if(!nativeTransferClass(portal).empty()||nativeRecruitClassLabel(portal,"JC (JR)")!="FCS (JR)")throw std::runtime_error("Transfer redshirt handling changed the generated JUCO association");
+    if(nativeClassYear("Transfer_Freshman")!="FR"||nativeClassYear("Senior")!="SR"||!nativeClassYear("Unknown").empty())throw std::runtime_error("Native transfer class year mapping differs");
+    // A native transfer's actual RedshirtStatus, not its age/class label,
+    // controls the RS tag. High-school/JUCO generation stays on its own path.
+    Json native={{"format",1},{"sourceKind","runtime"},{"status",{{"league",123},{"season",{{"CurrentSeasonYear",2029},{"CurrentYear",3}}}}},{"records",Json::object()}};
+    native["records"]["1:0"]={{"key","1:0"},{"type","Recruit"},{"capacity",10},{"v",{{"Class","Transfer_Junior"},{"Player","2:0"}}}};
+    native["records"]["2:0"]={{"type","Player"},{"v",{{"FirstName","Raymond"},{"LastName","Liggins"},{"PresentationId",100},{"Position","WR"},{"TraitDevelopment","Normal"},{"PLYR_HOME_STATE","Connecticut"},{"PLYR_HOME_TOWN","Hartford"},{"SchoolYear","Junior"},{"RedshirtStatus","Previous"},{"SeasonStats","array"}}}};
+    native["records"]["array"]=liggins.at("array");native["records"]["line"]=ligginsBefore.at("line");
+    const auto parsedPortal=parseNativeClass(native);const auto& parsedEntry=parsedPortal.entries.at(131072);
+    if(!parsedEntry.redshirt||parsedEntry.classYear!="JR"||parsedEntry.actual.at("rows").size()!=1)throw std::runtime_error("Native transfer source lost its redshirt status or returner stats");
+    native["records"]["2:0"]["v"]["RedshirtStatus"]="Eligible";
+    if(parseNativeClass(native).entries.at(131072).redshirt)throw std::runtime_error("Native eligible transfer was inferred to be redshirted");
+    native["records"]["1:0"]["v"]["Class"]="HighSchool";
+    const auto parsedHighSchool=parseNativeClass(native).entries.at(131072);
+    if(!parsedHighSchool.highSchool||parsedHighSchool.redshirt||!parsedHighSchool.actual.is_null())throw std::runtime_error("High-school prospect was changed to a transfer college record");
+    return {{"academicPairs",6000},{"academicIndependence",true},{"gpaMean",gpaTotal/6000},{"middleGpaShare",double(middle)/6000},{"edgeGpaShare",double(edges)/6000},{"nearbyCollegeShare",double(nearby)/assigned},{"collegeLevels",levels},{"additiveMigration",true},{"actualTransferStats",true},{"returnSpecialistTransferStats",true},{"missingTransferFieldsNotInvented",true},{"transferRedshirtClass",true}};
 }

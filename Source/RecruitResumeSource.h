@@ -23,7 +23,21 @@ inline std::string identity(const std::string& league,const Json& v){
     const auto birth=v.value("PLYR_BIRTHDATE",int64_t(0));
     return digest(Json::array({league,v.at("PresentationId"),v.at("FirstName"),v.at("LastName"),v.at("PLYR_HOME_TOWN"),v.at("PLYR_HOME_STATE"),birth>0?Json(birth):Json(nullptr)}).dump());
 }
-struct NativeEntry {uint32_t nativeId=0;std::string first,last,identity;bool highSchool=false,juniorCollege=false;std::string classYear;Prospect prospect;Json saved,actual;};
+struct NativeEntry {uint32_t nativeId=0;std::string first,last,identity;bool highSchool=false,juniorCollege=false,redshirt=false;std::string classYear;Prospect prospect;Json saved,actual;};
+inline std::string nativeClassYear(const std::string& value){
+    if(value.find("Freshman")!=std::string::npos)return "FR";if(value.find("Sophomore")!=std::string::npos)return "SO";
+    if(value.find("Junior")!=std::string::npos)return "JR";if(value.find("Senior")!=std::string::npos)return "SR";return {};
+}
+inline std::string nativeTransferClass(const NativeEntry& entry){
+    if(entry.highSchool||entry.juniorCollege||entry.classYear.empty())return {};
+    return "TR ("+entry.classYear+(entry.redshirt?" RS)":")");
+}
+inline std::string nativeRecruitClassLabel(const NativeEntry& entry,const char* original){
+    if(!original||entry.classYear.empty()||std::string(original).find(entry.classYear)==std::string::npos)return {};
+    if(entry.juniorCollege)return entry.saved.at("competitionClass").get<std::string>()+" ("+entry.classYear+")";
+    // Use the same compact transfer label in tables and profile panels.
+    return nativeTransferClass(entry);
+}
 struct NativeClass {std::string league;int season=0,relativeYear=0;std::set<std::string> activeSchools;std::map<int,std::string> teams;std::map<uint32_t,NativeEntry> entries;};
 inline NativeClass parseNativeClass(const Json& raw){
     if(raw.at("format")!=1||raw.at("sourceKind")!="runtime")throw std::runtime_error("Not a native resume snapshot");
@@ -43,7 +57,8 @@ inline NativeClass parseNativeClass(const Json& raw){
         const auto table=std::stoull(key.substr(0,colon)),index=std::stoull(key.substr(colon+1));if(table>=16384||index>=131072)throw std::runtime_error("Recruit key exceeds native bounds");
         NativeEntry entry;entry.nativeId=static_cast<uint32_t>(table*131072+index);entry.first=v.at("FirstName");entry.last=v.at("LastName");entry.highSchool=r.at("Class")=="HighSchool";
         const auto classification=r.at("Class").get<std::string>();entry.juniorCollege=classification.rfind("JuniorCollege_",0)==0;
-        entry.classYear=classification.find("Sophomore")!=std::string::npos?"SO":classification.find("Junior")!=std::string::npos?"JR":classification.find("Senior")!=std::string::npos?"SR":"";
+        entry.classYear=nativeClassYear(classification);
+        if(!entry.highSchool&&!entry.juniorCollege){if(entry.classYear.empty())entry.classYear=nativeClassYear(v.value("SchoolYear",std::string()));entry.redshirt=v.value("RedshirtStatus",std::string())=="Previous";}
         {
             Prospect p;p.identity=identity(result.league,v);p.name=entry.first+" "+entry.last;p.position=v.at("Position");p.state=v.at("PLYR_HOME_STATE");p.town=v.at("PLYR_HOME_TOWN");p.development=v.at("TraitDevelopment");p.stateRank=stateRank(p.state);
             const std::map<std::string,int> stars={{"ONE_STAR",1},{"TWO_STAR",2},{"THREE_STAR",3},{"FOUR_STAR",4},{"FIVE_STAR",5}};const auto star=stars.find(v.value("ProspectStarRating",std::string()));p.stars=star==stars.end()?3:star->second;

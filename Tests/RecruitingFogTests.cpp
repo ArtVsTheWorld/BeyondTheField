@@ -9,6 +9,7 @@ std::array<uintptr_t,2> detailArguments{};
 void* __fastcall fakeDetailGetter(void*,void** out,uintptr_t first,uintptr_t second){++forwarded;detailArguments={first,second};return out;}
 #if defined(RECRUIT_NOTES_UI)
 unsigned presentationForwarded=0,presentationCreated=0,presentationAssigned=0,presentationDestroyed=0;
+std::string presentationRenderedText;
 recruitingfog::presentation::Value presentationInput{};
 void __fastcall fakePresentationFormat(void* self,const recruitingfog::presentation::Value* input){
     ++presentationForwarded;presentationInput=*input;
@@ -20,7 +21,8 @@ void* fakePresentationEnvironmentTable[]={nullptr,nullptr,nullptr,nullptr,reinte
 void* fakePresentationEnvironmentObject=fakePresentationEnvironmentTable;
 void* __fastcall fakePresentationEnvironment(){return &fakePresentationEnvironmentObject;}
 recruitingfog::presentation::Value* __fastcall fakePresentationString(recruitingfog::presentation::Value* out,const char* text,void* allocator){
-    if(allocator!=reinterpret_cast<void*>(1)||!text||text[1])throw std::runtime_error("Presentation string ABI changed");
+    if(allocator!=reinterpret_cast<void*>(1)||!text||strlen(text)>8)throw std::runtime_error("Presentation string ABI changed");
+    presentationRenderedText=text;
     ++presentationCreated;*out={static_cast<uint64_t>(text[0]),3,0};return out;
 }
 recruitingfog::presentation::Value* __fastcall fakePresentationAssign(recruitingfog::presentation::Value* out,const recruitingfog::presentation::Value* from){++presentationAssigned;*out=*from;return out;}
@@ -70,7 +72,21 @@ struct FixtureView {
     bool number(uintptr_t at,double& out){if(!numbers.count(at))return false;out=numbers.at(at);return true;}
     bool boolean(uintptr_t at,bool& out){if(!booleans.count(at))return false;out=booleans.at(at);return true;}
 };
+#include "EnhancementOptionsTests.h"
+#include "IndependentGradeOptionsTests.h"
+#if defined(RECRUIT_NOTES_UI)
+#include "CurrencyDisplayTests.h"
+#include "RecruitTransferClassTests.h"
+#endif
 int main(){try{
+    std::cout<<std::unitbuf;
+    using namespace recruitingfog;
+    optiontests::run();
+    optiontests::independentGradeOptions();
+#if defined(RECRUIT_NOTES_UI)
+    currencydisplaytests::run();
+    resume::transferClassLabelTests();
+#endif
     using namespace recruitingfog;
 #if defined(RECRUIT_NOTES_UI)
     {
@@ -103,6 +119,13 @@ int main(){try{
         Value valid{92,1,0};
         const auto reject=[&](){const auto prior=presentationCreated,fwd=presentationForwarded;runtime::presentationFormatHook(object.data(),&valid);require(presentationCreated==prior&&presentationForwarded==fwd+1,"Unrelated/stopped presentation did not forward unchanged");};
         runtime::disabled=true;reject();runtime::disabled=false;
+        enhancements::currentOptions=39&~4u;reject();enhancements::currentOptions=39;
+        for(unsigned scale=0;scale<4;++scale)for(unsigned value=0;value<=100;++value){
+            enhancements::currentOptions=(39&~24u)|(scale<<3);Value input{value,1,0};
+            runtime::presentationFormatHook(object.data(),&input);
+            require(presentationRenderedText==enhancements::gradeLabel(value,enhancements::GradeScale(scale)),"Broadcast formatter ignored the chosen grade scale");
+        }
+        enhancements::currentOptions=39;
         write(descriptor,8,fourcc("TEAM"));reject();write(descriptor,8,fourcc("AGLP"));
         write(descriptor,0xc,fourcc("QBRG"));reject();write(descriptor,0xc,fourcc("RPKP"));
         write(object,0x38,uint32_t(1));reject();write(object,0x38,uint32_t(0));
@@ -198,7 +221,9 @@ int main(){try{
         try{live.beforeInvoke(object.data(),runtime::read);}catch(const std::exception&){rejected=true;}
         require(rejected&&object[11]==assetBase+p.offset&&live.ownerCount()==0,"Notes attached before every method body passed its gate");
         asset[second.offset+48]^=1;
-        require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=assetBase+p.offset&&live.ownerCount()==1,"Notes failed to attach to a newly-created live script");
+        unsigned poolReads=0;const auto coalescedRead=[&](uintptr_t at,void* out,size_t size){if(at==poolAddress&&size==40)++poolReads;return runtime::read(at,out,size);};
+        require(live.beforeInvoke(object.data(),coalescedRead)==0&&object[11]!=assetBase+p.offset&&live.ownerCount()==1,"Notes failed to attach to a newly-created live script");
+        require(poolReads==1,"One source generation reread its identical shared constant pool");
         const auto owned=object[11];object[11]=assetBase+p.offset;
         require(live.beforeInvoke(object.data(),runtime::read,true)==-1&&object[11]==assetBase+p.offset,"Late color hook changed a method requiring more registers");
         auto fixed=p;fixed.newRegisters=fixed.registers;Runtime safe({fixed});safe.prepare();
@@ -217,12 +242,72 @@ int main(){try{
         object[11]=assetBase+p.offset;
         require(live.beforeInvoke(object.data(),runtime::read)==0&&object[11]!=owned,"Reloaded source reused a stale constant-pool header");
         require(field<uintptr_t>(reinterpret_cast<const unsigned char*>(object[11]),40)==nextPool,"Reloaded definition lost its current pool");
+        auto configured=p;configured.newRegisters=configured.registers;
+        configured.code={0xB5,0,0x17,0xB5,1,0x17,0,0,0,0,0,0,0,0,0,0};
+        configured.scaleOffsets={1};configured.colorOffsets={4};
+        Runtime configurable({configured});configurable.prepare();object[11]=assetBase+p.offset;
+        std::array<uintptr_t,8> selections{};
+        for(unsigned pass=0;pass<2;++pass)for(unsigned mode=0;mode<8;++mode){
+            const auto previous=configurable.retainedDefinitionCount();
+            require(configurable.beforeInvoke(object.data(),runtime::read,true,true,mode%4,mode<4)==0,"Live scale/color change failed to redirect its known definition");
+            const auto* bytes=reinterpret_cast<const unsigned char*>(object[11]);
+            require(bytes[49]==mode%4&&bytes[52]==(mode<4?1:0),"Selected scale/color literal differs");
+            require(field<uintptr_t>(bytes,40)==nextPool&&std::equal(original.begin(),original.end(),bytes+56),"Option selection modified native code or pool metadata");
+            if(pass==0){selections[mode]=object[11];require(configurable.retainedDefinitionCount()==previous+1,"New setting did not allocate exactly one lazy definition");}
+            else require(object[11]==selections[mode]&&configurable.retainedDefinitionCount()==previous,"Repeated settings allocated new definitions");
+        }
+        require(configurable.beforeInvoke(object.data(),runtime::read,true,false,0,true)==0&&object[11]==assetBase+p.offset,"Fog Off did not restore the native definition");
+        require(configurable.beforeInvoke(object.data(),runtime::read,true,true,0,true)==0&&object[11]==selections[0],"Fog On did not reuse the retained display definition");
+        require(configurable.retainedSourceByteCount()==original.size()+48,"Grade cache retained expanded program templates per source generation");
+        const auto allocated=configurable.retainedDefinitionCount();unsigned extraReads=0;
+        auto cachedRead=[&](uintptr_t at,void* out,size_t size){++extraReads;return runtime::read(at,out,size);};
+        QueryPerformanceCounter(&started);
+        for(unsigned i=0;i<1000000;++i)require(configurable.beforeInvoke(object.data(),cachedRead,true,true,0,true)==-1,"Stable grade display was redirected again");
+        QueryPerformanceCounter(&finished);
+        require(extraReads==0&&configurable.retainedDefinitionCount()==allocated,"Cached grade display performed guarded reads or allocated new code");
+        std::cout<<"Cached grade selection: "<<double(finished.QuadPart-started.QuadPart)*1e9/frequency.QuadPart/1000000<<" ns/call (standalone mock).\n";
+        auto independent=configured;independent.copyAt=16;
+        independent.code={0xB5,0,0x17,0xB5,1,0x17,0xB5,1,0x17,0xB5,1,0x17,0xB5,0,0x17,0,0,0,0,0,0,0,0,0};
+        independent.fogOffsets={7};independent.teamOffsets={10};independent.dollarOffsets={13};
+        Runtime independentOptions({independent});independentOptions.prepare();object[11]=assetBase+p.offset;
+        std::array<uintptr_t,64> independentSelections{};
+        for(unsigned pass=0;pass<2;++pass)for(unsigned mode=0;mode<64;++mode){
+            const auto before=independentOptions.retainedDefinitionCount();
+            require(independentOptions.beforeInvoke(object.data(),runtime::read,true,true,mode&3,!(mode&4),!(mode&8),!(mode&16),bool(mode&32))==0,"Independent fog/color/scale/dollar selection failed");
+            const auto* bytes=reinterpret_cast<const unsigned char*>(object[11]);
+            require(bytes[49]==(mode&3)&&bytes[52]==!(mode&4)&&bytes[55]==!(mode&8)&&bytes[58]==!(mode&16)&&bytes[61]==((mode&32)?1:0),"Team/player fog or dollar literals were mixed or stale");
+            require(std::equal(original.begin(),original.end(),bytes+64),"Independent options changed the native copied body");
+            if(pass==0){independentSelections[mode]=object[11];require(independentOptions.retainedDefinitionCount()==before+1,"Independent options did not allocate lazily");}
+            else require(object[11]==independentSelections[mode]&&independentOptions.retainedDefinitionCount()==before,"Repeated independent options allocated new definitions");
+        }
+        auto split=independent;split.copyAt=19;
+        split.code={0xB5,0,0x17,0xB5,1,0x17,0xB5,1,0x17,0xB5,1,0x17,0xB5,0,0x17,0xB5,0,0x17,0,0,0,0,0,0,0,0,0};
+        split.teamScaleOffsets={16};Runtime splitOptions({split});splitOptions.prepare();object[11]=assetBase+p.offset;
+        std::array<uintptr_t,25> splitSelections{};
+        for(unsigned pass=0;pass<2;++pass)for(unsigned ps=0;ps<5;++ps)for(unsigned ts=0;ts<5;++ts){
+            const auto before=splitOptions.retainedDefinitionCount();
+            const auto changed=splitOptions.beforeInvoke(object.data(),runtime::read,true,true,ps,true,true,true,false,ts);
+            const auto* bytes=reinterpret_cast<const unsigned char*>(object[11]);
+            require(bytes[49]==ps&&bytes[64]==ts,"Independent grade literals were mixed");
+            require(std::equal(original.begin(),original.end(),bytes+67),"Split scales changed the copied native body");
+            const auto index=ps*5+ts;
+            if(pass==0){require(changed==0&&splitOptions.retainedDefinitionCount()==before+1,"Split scales were not allocated lazily");splitSelections[index]=object[11];}
+            else require(object[11]==splitSelections[index]&&splitOptions.retainedDefinitionCount()==before,"Split scales did not reuse their immutable definition");
+        }
+        auto overlapping=configured;overlapping.copyAt=1;object[11]=assetBase+p.offset;
+        Runtime rejectedLiteral({overlapping});rejectedLiteral.prepare();rejected=false;
+        try{rejectedLiteral.beforeInvoke(object.data(),runtime::read);}catch(const std::exception&){rejected=true;}
+        require(rejected&&object[11]==assetBase+p.offset&&rejectedLiteral.retainedDefinitionCount()==0,"Option literal was allowed to replace native copied code");
+        auto overflowing=configured;overflowing.copyAt=~unsigned(0)-1;rejected=false;
+        std::array<unsigned char,48> liveHeader{};memcpy(liveHeader.data(),asset.data()+p.offset,48);
+        try{makeDefinition(overflowing,liveHeader,original);}catch(const std::exception&){rejected=true;}
+        require(rejected,"Wrapped native-copy bounds were accepted");
     }
 #endif
 #if defined(RECRUIT_NOTES_UI)
     {
         using namespace playerfog;
-        for(int n=0;n<=100;++n){const auto expected=display(Visibility::Revealed,n);for(const auto* suffix:{"",",TrendUp",",TrendDown",",TrendNone"})require(ratingLabel((std::to_string(n)+suffix).c_str())==expected,"Roster rating/trend converted incorrectly");}
+        for(int n=0;n<=100;++n){const auto expected=display(Visibility::Revealed,n);for(const auto* suffix:{"",",TrendUp",",TrendDown",",TrendNone"})require(ratingLabel((std::to_string(n)+suffix).c_str())==expected+suffix,"Roster rating/trend converted incorrectly");}
         for(const auto* hidden:{"?","--","", "Hidden","-1","101","79.5","92 yards"})require(ratingLabel(hidden)==hidden,"Roster transformed hidden or non-rating text");
         std::array<std::string,90> names{};names[1]="RS";names[2]="Name";names[3]="Year";names[4]="POS";names[5]="OVR";names[6]="NIL";names[7]="DEV";names[8]="SPD";names[9]="ACC";
         for(unsigned col=10;col<62;++col)names[col]="LSP";
@@ -231,11 +316,11 @@ int main(){try{
         names[10]="Passing Yards";require(!rosterSchema(names,11),"Position schema admitted a statistic");names[10]="MAC";names[7]="GAMES";require(!rosterSchema(names,11),"Stats identity fields accepted as roster");
         GridTestOutput output{gridTestTable};GridSink cells{gridTable,&output};cells.count=5;cells.columns={6,61,5,8,2};
         gridString(&cells,0,"display","92");gridString(&cells,1,"display","59");gridString(&cells,2,"display","83,TrendUp");gridString(&cells,3,"tooltip","90");gridString(&cells,4,"display","91");
-        require(output.values[0]["value"]=="92"&&output.values[1]["value"]=="F"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="90"&&output.values[8]["value"]=="91","Subset/reordered roster columns changed NIL, names or tooltip unexpectedly");
+        require(output.values[0]["value"]=="92"&&output.values[1]["value"]=="F"&&output.values[4]["value"]=="B,TrendUp"&&output.values[7]["value"]=="90"&&output.values[8]["value"]=="91","Subset/reordered roster columns changed NIL, names or tooltip unexpectedly");
         require(output.values[2]["key"]=="DEPlayerRating"&&output.values[2]["value"]==true&&output.values[3]["value"]==0xF04444&&output.values[6]["value"]==0xA8D943,"Roster color markers lost grade palette");
         ColumnSink columns{columnTable};columnReserve(&columns,62);columnString(&columns,5,"display","OVR");columnInt(&columns,5,"formatType",4);columnBool(&columns,5,"isTrend",true);columnInt(&columns,6,"formatType",4);columnFloat(&columns,5,"width",42.5f);
         output.values=nlohmann::json::array();replayColumns(columns,&output,true);
-        require(output.values[2]["value"]==0&&output.values[3]["value"]==false&&output.values[4]["value"]==4&&output.values[5]["value"]==42.5,"Roster columns changed unrelated metadata");
+        require(output.values[2]["value"]==4&&output.values[3]["value"]==true&&output.values[4]["value"]==4&&output.values[5]["value"]==42.5,"Roster columns changed unrelated metadata");
         output.values=nlohmann::json::array();replayColumns(columns,&output,false);require(output.values[2]["value"]==4&&output.values[3]["value"]==true,"Unknown schema changed formats");
         std::array<std::string,90> depthNames{};const char* depthHeaders[]={"","POS","#","RS","Name","Year","POS","OVR","NIL","MOR","SPD","ACC","AGI","COD","STR","AWR","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","JKM","SPM","BTK","SFA","TRK","IBL","STA","TGH","INJ"};
         for(size_t i=0;i<std::size(depthHeaders);++i)depthNames[i]=depthHeaders[i];
@@ -249,10 +334,10 @@ int main(){try{
         output.values=nlohmann::json::array();GridSink depthCells{gridTable,&output};depthCells.schema=GridSchema::DepthChart;depthCells.count=7;depthCells.columns={2,7,8,9,10,63,4};
         for(unsigned i=0;i<7;++i)gridString(&depthCells,i,"display",std::array<const char*,7>{"1","66,TrendUp","10","76","92","59","Whitaker"}[i]);
         gridInt(&depthCells,1,"intValue",66);
-        require(output.values[0]["value"]=="1"&&output.values[1]["value"]=="D"&&output.values[4]["value"]=="10"&&output.values[5]["value"]=="76"&&output.values[6]["value"]=="A"&&output.values[9]["value"]=="F"&&output.values[12]["value"]=="Whitaker"&&output.values[13]["value"]==66,"Depth cells changed depth/NIL/morale/name/sort value or missed rating subset");
+        require(output.values[0]["value"]=="1"&&output.values[1]["value"]=="D,TrendUp"&&output.values[4]["value"]=="10"&&output.values[5]["value"]=="76"&&output.values[6]["value"]=="A"&&output.values[9]["value"]=="F"&&output.values[12]["value"]=="Whitaker"&&output.values[13]["value"]==66,"Depth cells changed depth/NIL/morale/name/sort value or missed rating subset");
         ColumnSink depthColumns{columnTable};columnString(&depthColumns,7,"display","OVR");columnInt(&depthColumns,7,"formatType",15);columnBool(&depthColumns,7,"isTrend",true);columnInt(&depthColumns,8,"formatType",49);columnInt(&depthColumns,2,"formatType",13);
         output.values=nlohmann::json::array();replayColumns(depthColumns,&output,true,GridSchema::DepthChart);
-        require(output.values[1]["value"]==0&&output.values[2]["value"]==false&&output.values[3]["value"]==49&&output.values[4]["value"]==13,"Depth rating format change affected NIL or ordinal formatter");
+        require(output.values[1]["value"]==15&&output.values[2]["value"]==true&&output.values[3]["value"]==49&&output.values[4]["value"]==13,"Depth conversion removed native boost rendering or affected NIL/ordinal formatter");
         std::array<std::string,90> redshirtNames{};
         const char* redshirtHeaders[]={"RS","Name","POS","Year","OVR","NIL","GP","SPD","ACC","AGI","COD","STR","AWR","CAR","BCV","BTK","TRK","SFA","SPM","JKM","CTH","CIT","SPC","SRR","MRR","DRR","RLS","JMP","THP","SAC","MAC","DAC","RUN","TUP","BSK","PAC","PBK","PBP","PBF","RBK","RBP","RBF","LBK","IBL","PRC","TAK","POW","BSH","FMV","PMV","PUR","MCV","ZCV","PRS","RET","KPW","KAC","STA","TGH","INJ","Last Name"};
         for(size_t i=0;i<std::size(redshirtHeaders);++i)redshirtNames[i]=redshirtHeaders[i];
@@ -263,7 +348,7 @@ int main(){try{
         output.values=nlohmann::json::array();GridSink redshirtCells{gridTable,&output};redshirtCells.schema=GridSchema::Redshirts;redshirtCells.count=6;redshirtCells.columns={4,5,6,7,59,60};
         for(unsigned i=0;i<6;++i)gridString(&redshirtCells,i,"display",std::array<const char*,6>{"83,TrendUp","45","4","90","59","88"}[i]);
         gridInt(&redshirtCells,0,"intValue",83);
-        require(output.values[0]["value"]=="B"&&output.values[3]["value"]=="45"&&output.values[4]["value"]=="4"&&output.values[5]["value"]=="A"&&output.values[8]["value"]=="F"&&output.values[11]["value"]=="88"&&output.values[12]["value"]==83,"Redshirts conversion touched NIL, games played, last name or sorting");
+        require(output.values[0]["value"]=="B,TrendUp"&&output.values[3]["value"]=="45"&&output.values[4]["value"]=="4"&&output.values[5]["value"]=="A"&&output.values[8]["value"]=="F"&&output.values[11]["value"]=="88"&&output.values[12]["value"]==83,"Redshirts conversion touched NIL, games played, last name or sorting");
         std::array<std::string,90> injuryNames{};const char* injuryHeaders[]={"","POS","Name","POS","OVR","Injury","Length","IR","Return","Status"};
         for(size_t i=0;i<std::size(injuryHeaders);++i)injuryNames[i]=injuryHeaders[i];
         require(classifyGrid(injuryNames,10)==GridSchema::InjuryReport,"Captured Injury Report schema not recognized");
@@ -281,7 +366,7 @@ int main(){try{
         output.values=nlohmann::json::array();GridSink athCells{gridTable,&output};athCells.schema=GridSchema::PositionAth;athCells.count=5;athCells.columns={5,6,7,31,2};
         for(unsigned i=0;i<5;++i)gridString(&athCells,i,"display",std::array<const char*,5>{"73,TrendNone","2","86","59","73"}[i]);
         gridInt(&athCells,0,"intValue",73);
-        require(output.values[0]["value"]=="C"&&output.values[3]["value"]=="2"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="F"&&output.values[10]["value"]=="73"&&output.values[11]["value"]==73,"ATH conversion touched hiddenDEV/name/sort or missed ratings");
+        require(output.values[0]["value"]=="C,TrendNone"&&output.values[3]["value"]=="2"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="F"&&output.values[10]["value"]=="73"&&output.values[11]["value"]==73,"ATH conversion touched hiddenDEV/name/sort or missed ratings");
         std::array<std::string,90> leavingNames{};const char* leavingHeaders[]={"Name","","POS","Year","OVR","Reason","Persuasion Chance","RS"};
         for(size_t i=0;i<std::size(leavingHeaders);++i)leavingNames[i]=leavingHeaders[i];
         require(classifyGrid(leavingNames,8)==GridSchema::PlayersLeaving,"Captured Players Leaving schema not recognized");
@@ -319,7 +404,7 @@ int main(){try{
         output.values=nlohmann::json::array();GridSink encourageCells{gridTable,&output};encourageCells.schema=GridSchema::EncourageTransfers;encourageCells.count=6;encourageCells.columns={4,5,6,7,60,1};
         for(unsigned i=0;i<6;++i)gridString(&encourageCells,i,"display",std::array<const char*,6>{"57,TrendNone","10","2","71","88","Joseph"}[i]);
         gridInt(&encourageCells,0,"intValue",57);
-        require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="10"&&output.values[4]["value"]=="2"&&output.values[5]["value"]=="C"&&output.values[8]["value"]=="B"&&output.values[11]["value"]=="Joseph"&&output.values[12]["value"]==57,"Encourage conversion changed NIL,DEV,name or numeric sort value");
+        require(output.values[0]["value"]=="F,TrendNone"&&output.values[3]["value"]=="10"&&output.values[4]["value"]=="2"&&output.values[5]["value"]=="C"&&output.values[8]["value"]=="B"&&output.values[11]["value"]=="Joseph"&&output.values[12]["value"]==57,"Encourage conversion changed NIL,DEV,name or numeric sort value");
         { // Captured Encourage Transfers offense filter; no private player records.
             std::array<std::string,90> filteredNames{};const char* headers[]={"","Name","Year","POS","OVR","NIL","SPD","ACC","AGI","COD","STR","AWR","SAC","MAC","DAC","RUN","TUP","BSK","PAC","CAR","BCV","BTK","TRK","SFA","SPM","JKM","CTH","CIT","SPC","SRR","MRR","DRR","RLS","IBL","LBK","RBK","RBF","RBP","PBK","PBF","PBP","RET","STA","INJ","TGH","LSP"};
             for(size_t i=0;i<std::size(headers);++i)filteredNames[i]=headers[i];
@@ -327,10 +412,10 @@ int main(){try{
             require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,45)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage offense rating column boundaries wrong");
             output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,45};
             gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
-            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage offense changed NIL, unknown, numeric sorting or disabled state");
+            require(output.values[0]["value"]=="F,TrendUp"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage offense changed NIL, unknown, numeric sorting or disabled state");
             ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
             output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
-            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage offense left native numeric OVR formatting or changed NIL formatting");
+            require(output.values[0]["value"]==15&&output.values[1]["value"]==true&&output.values[2]["value"]==49,"Encourage offense removed native boost rendering or changed NIL formatting");
             filteredNames[6]="Yards";require(classifyGrid(filteredNames,46)==GridSchema::None,"Encourage offense admitted statistics");filteredNames[6]=headers[6];
             filteredNames[5]="Salary";require(classifyGrid(filteredNames,46)==GridSchema::None,"Encourage offense admitted another table");
         }
@@ -341,10 +426,10 @@ int main(){try{
             require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,26)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage defense rating column boundaries wrong");
             output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,26};
             gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
-            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage defense changed NIL, unknown, numeric sorting or disabled state");
+            require(output.values[0]["value"]=="F,TrendUp"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage defense changed NIL, unknown, numeric sorting or disabled state");
             ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
             output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
-            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage defense left native numeric OVR formatting or changed NIL formatting");
+            require(output.values[0]["value"]==15&&output.values[1]["value"]==true&&output.values[2]["value"]==49,"Encourage defense removed native boost rendering or changed NIL formatting");
             filteredNames[6]="Yards";require(classifyGrid(filteredNames,27)==GridSchema::None,"Encourage defense admitted statistics");filteredNames[6]=headers[6];
             filteredNames[5]="Salary";require(classifyGrid(filteredNames,27)==GridSchema::None,"Encourage defense admitted another table");
         }
@@ -355,10 +440,10 @@ int main(){try{
             require(ratingColumn(GridSchema::EncourageFiltered,4)&&ratingColumn(GridSchema::EncourageFiltered,6)&&ratingColumn(GridSchema::EncourageFiltered,12)&&!ratingColumn(GridSchema::EncourageFiltered,5),"Encourage special rating column boundaries wrong");
             output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncourageFiltered;filteredCells.count=4;filteredCells.columns={4,5,6,12};
             gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
-            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage special changed NIL, unknown, numeric sorting or disabled state");
+            require(output.values[0]["value"]=="F,TrendUp"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage special changed NIL, unknown, numeric sorting or disabled state");
             ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,4,"formatType",15);columnBool(&filteredColumns,4,"isTrend",true);columnInt(&filteredColumns,5,"formatType",49);columnString(&filteredColumns,6,"display",headers[6]);
             output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncourageFiltered);
-            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage special left native numeric OVR formatting or changed NIL formatting");
+            require(output.values[0]["value"]==15&&output.values[1]["value"]==true&&output.values[2]["value"]==49,"Encourage special removed native boost rendering or changed NIL formatting");
             filteredNames[6]="Yards";require(classifyGrid(filteredNames,13)==GridSchema::None,"Encourage special admitted statistics");filteredNames[6]=headers[6];
             filteredNames[5]="Salary";require(classifyGrid(filteredNames,13)==GridSchema::None,"Encourage special admitted another table");
         }
@@ -369,10 +454,10 @@ int main(){try{
             require(ratingColumn(GridSchema::EncouragePosition,3)&&ratingColumn(GridSchema::EncouragePosition,5)&&ratingColumn(GridSchema::EncouragePosition,29)&&!ratingColumn(GridSchema::EncouragePosition,4),"Encourage qb rating column boundaries wrong");
             output.values=nlohmann::json::array();GridSink filteredCells{gridTable,&output};filteredCells.schema=GridSchema::EncouragePosition;filteredCells.count=4;filteredCells.columns={3,4,5,29};
             gridString(&filteredCells,0,"display","59,TrendUp");gridString(&filteredCells,1,"display","65");gridString(&filteredCells,2,"display","82");gridString(&filteredCells,3,"display","?");gridInt(&filteredCells,0,"intValue",59);gridBool(&filteredCells,0,"isDisabled",true);
-            require(output.values[0]["value"]=="F"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage qb changed NIL, unknown, numeric sorting or disabled state");
+            require(output.values[0]["value"]=="F,TrendUp"&&output.values[3]["value"]=="65"&&output.values[4]["value"]=="B"&&output.values[7]["value"]=="?"&&output.values[8]["value"]==59&&output.values[9]["value"]==true,"Encourage qb changed NIL, unknown, numeric sorting or disabled state");
             ColumnSink filteredColumns{columnTable};columnInt(&filteredColumns,3,"formatType",15);columnBool(&filteredColumns,3,"isTrend",true);columnInt(&filteredColumns,4,"formatType",49);columnString(&filteredColumns,5,"display",headers[5]);
             output.values=nlohmann::json::array();replayColumns(filteredColumns,&output,true,GridSchema::EncouragePosition);
-            require(output.values[0]["value"]==0&&output.values[1]["value"]==false&&output.values[2]["value"]==49,"Encourage qb left native numeric OVR formatting or changed NIL formatting");
+            require(output.values[0]["value"]==15&&output.values[1]["value"]==true&&output.values[2]["value"]==49,"Encourage qb removed native boost rendering or changed NIL formatting");
             filteredNames[5]="Yards";require(classifyGrid(filteredNames,30)==GridSchema::None,"Encourage qb admitted statistics");filteredNames[5]=headers[5];
             filteredNames[4]="Salary";require(classifyGrid(filteredNames,30)==GridSchema::None,"Encourage qb admitted another table");
         }
@@ -442,6 +527,17 @@ int main(){try{
             require(gridTestArgs[0]==1&&gridTestArgs[2]==2&&gridTestArgs[3]==3&&gridTestArgs[4]==reinterpret_cast<uintptr_t>(&columns),"Class grid getter changed native argument registers or fifth stack argument");
             if(stopped)require(gridTestArgs[1]==reinterpret_cast<uintptr_t>(&output),"Stopped class grid failed to pass through");}
         runtime::disabled=false;
+    }
+    {
+        GridTestOutput output{gridTestTable};int count=0;
+        ClassGridSink sink{classGridTable,&output,&count,2,7,
+            +[](void* source,int form,int row,const char* label)->std::string{
+                ++*static_cast<int*>(source);return form==2&&row==7&&!strcmp(label,"Transfer (JR)")?"TR (JR RS)":"";
+            }};
+        classGridString(&sink,0,"display","Transfer (JR)");classGridString(&sink,0,"tooltip","Transfer (JR)");classGridString(&sink,1,"display","HS");
+        require(sink.count==1&&count==0,"Transfer Class resolver reentered the native row getter");classGridFlush(&sink);
+        require(count==1&&output.values.size()==3&&output.values[0]["value"]=="Transfer (JR)"&&output.values[1]["value"]=="HS"&&output.values[2]["value"]=="TR (JR RS)","Transfer Class adapter missed RS or changed unrelated fields");
+        classGridString(&sink,0,"display","Transfer (SO)");classGridFlush(&sink);require(count==2&&output.values.back()["value"]=="Transfer (SO)","Unmatched transfer got another recruit's class");
     }
 #endif
     {

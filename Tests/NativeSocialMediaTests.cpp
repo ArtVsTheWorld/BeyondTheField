@@ -38,6 +38,16 @@ int main(int argc,char** argv){
     using namespace fixture;
     try {
         {
+            const auto savedContainers=containers;const auto savedNav=navRequest;
+            containers=donorRows;navRequest=originalNav;enhancements::currentOptions=38;
+            opened=false;uiReady=false;disabled=false;admittedHubEntries[teamEntry.panel]=true;
+            Collector out{vt,{}};Alias team{aliasVt,teamEntry.panel};containerHook(nullptr,&team,&out);
+            require(out.rows.size()==1&&!admittedHubEntries[teamEntry.panel],"Social Off altered native hub rows or retained its shortcut admission");
+            const auto calls=navForwardCalls;navRequestHook(nullptr,0,"NEWS_MENU",nullptr);
+            require(navForwardCalls==calls+1&&navForwardName=="DO_NOTHING"&&!opened,"Social Off opened a stale cached feed button or stranded navigation");
+            containers=savedContainers;navRequest=savedNav;enhancements::currentOptions=39;
+        }
+        {
             dynasty::live::PackedChangeWatch watch;std::vector<unsigned char> memory(0x4000,7);constexpr uintptr_t start=0x100000;
             watch.record(start+4,{1,2,3,4});watch.record(start+6,{3,4,5});watch.record(start+0x800,{9});
             const auto count=watch.bytes();watch.record(start+4,{1,2,3,4});require(watch.bytes()==count,"Repeated packed reads were retained twice");
@@ -217,6 +227,24 @@ int main(int argc,char** argv){
             for(auto& post:edition["stories"])post["publication"]={{"key",data["key"]},{"week",7}};
             for(const char* scope:{"all","national","conference","team"}){edition["views"][scope]=Json::array();for(const auto& post:edition["stories"])edition["views"][scope].push_back(post["id"]);}
             data["weeks"]=Json::array({edition});
+            {
+                const auto savedBase=base;const auto savedLatest=latestFeed,savedPage=pageFeed;
+                const auto savedIdentity=nativeFeedIdentity;const auto savedLeague=nativeFeedLeague;
+                const auto savedCount=feedPostCount,savedContainers=feedContainerCount;
+                uint32_t activeLeague=2930100523u;base=reinterpret_cast<uintptr_t>(&activeLeague)-0xf55c998;
+                auto native=data;native["sourceKind"]="runtime";native["leagueId"]=-1364866773;
+                publishFeed(native);require(feedReady()&&adoptReadyFeed(),"Signed native LeagueID did not match its unsigned profile identity");
+                activeLeague=1234;
+                require(!feedReady()&&!adoptReadyFeed(),"Cached feed from another Dynasty remained eligible for entry");
+                activeLeague=2930100523u;
+                for(const Json invalid:std::vector<Json>{1.5,true,Json(uint64_t(UINT32_MAX)+1),Json(int64_t(INT32_MIN)-1),nullptr,"2930100523"}){
+                    auto malformed=native;malformed["leagueId"]=invalid;bool refused=false;
+                    try{publishFeed(malformed);}catch(const std::exception&){refused=true;}
+                    require(refused&&feedReady(),"Invalid runtime identity was coerced or replaced the last valid feed");
+                }
+                {std::lock_guard<std::mutex> guard(feedMutex);latestFeed=savedLatest;pageFeed=savedPage;nativeFeedIdentity=savedIdentity;nativeFeedLeague=savedLeague;}
+                base=savedBase;feedPostCount=savedCount;feedContainerCount=savedContainers;
+            }
             validate(data,config);auto wrong=data;wrong["leagueId"]=99;bool rejected=false;try{validate(wrong,config);}catch(...){rejected=true;}require(rejected,"Another Dynasty was accepted");
             wrong=data;wrong["weeks"][0]["stories"][1]["id"]="0";rejected=false;try{validate(wrong,config);}catch(...){rejected=true;}require(rejected,"Duplicate posts were accepted");
             auto catalog=social::decodeFeed(data)->catalog;

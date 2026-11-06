@@ -1,4 +1,4 @@
-param([string]$RecruitingName='DynastyEnhancerRecruitFog-p28',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9._-]*$')][string]$PackageTag='v105')
+param([ValidatePattern('^$|^DynastyEnhancerNative-[a-zA-Z0-9-]+$')][string]$SocialNativeName='DynastyEnhancerNative-options-p96',[string]$RecruitingName='DynastyEnhancerRecruitFog-p96',[string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9._-]*$')][string]$PackageTag='options-p96')
 $ErrorActionPreference='Stop'
 $recruitProject=Split-Path -Parent $PSScriptRoot
 $recruitBuild=Join-Path $recruitProject 'Build'
@@ -12,7 +12,8 @@ New-Item -ItemType Directory -Path $recruitRuntime,(Join-Path $recruitRuntime 'T
 foreach($recruitFile in @('DynastyEnhancerNative-v103.dll','LoadDynastyEnhancer.exe','dynasty-enhancer.json')){
  Copy-Item -LiteralPath (Join-Path $recruitBase $recruitFile) -Destination $recruitRuntime
 }
-Get-ChildItem -LiteralPath (Join-Path $recruitBase 'Tools') -File -Filter '*.mjs' | Copy-Item -Destination (Join-Path $recruitRuntime 'Tools')
+if($SocialNativeName){Copy-Item -LiteralPath (Join-Path $recruitBuild ($SocialNativeName+'.dll')) -Destination (Join-Path $recruitRuntime 'DynastyEnhancerNative-v103.dll')}
+Get-ChildItem -LiteralPath (Join-Path $recruitBase 'Tools') -File -Filter '*.mjs' | Where-Object Name -NE 'export_draft_results.mjs' | Copy-Item -Destination (Join-Path $recruitRuntime 'Tools')
 Get-ChildItem -LiteralPath (Join-Path $recruitBase 'Content/Runtime') -File -Filter '*.json' | Copy-Item -Destination (Join-Path $recruitRuntime 'Content/Runtime')
 Copy-Item -LiteralPath (Join-Path $recruitBuild ($RecruitingName+'.dll')) -Destination (Join-Path $recruitRuntime 'DynastyEnhancerRecruitFog-v1.dll')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'RecruitingPackageREADME.txt') -Destination (Join-Path $recruitStage 'README.txt')

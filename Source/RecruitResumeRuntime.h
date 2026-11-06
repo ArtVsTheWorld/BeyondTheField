@@ -41,6 +41,7 @@ public:
         auto notes=publicNotes;
         notes.identity=found->identity;
         if(found->juniorCollege&&!found->classYear.empty())publicNotes.classification=found->saved.at("competitionClass").get<std::string>()+" ("+found->classYear+")";
+        else if(const auto classification=nativeTransferClass(*found);!classification.empty())publicNotes.classification=classification;
         if(found->highSchool||found->juniorCollege)return composeNotes(found->saved,notes);
         loading=GetTickCount64()-cache->capturedAt>=15000;
         return renderTransfer(found->actual,found->saved.at("gpa"),cache->data.season,cache->data.relativeYear)+"\n"+scoutingSection(notes);

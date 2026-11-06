@@ -21,6 +21,30 @@ if($PlayerFogColors){if(-not $RecruitNotesUi){throw 'Player colors require UI su
 if($PlayerFogPerf){if(-not $RecruitNotesUi){throw 'Player profiling requires UI support'};$fogFlags+='/DPLAYER_FOG_PERF'}
 if($PresentationPreview){if(-not $RecruitNotesUi -or $PlayerFogPreview -or $RecruitNotesProbe){throw 'Presentation-only preview requires UI support and no other preview/probe mode'};$fogFlags+='/DPLAYER_PRESENTATION_PREVIEW'}
 if($RecruitNotesUi){
+ & python (Join-Path $fogRoot 'Tests/currency_topbar_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Dynasty topbar dollar checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_recruiting_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Recruiting currency display checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_recruitdetail_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Recruiting scholarship detail currency checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_recruiteditor_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Recruiting scholarship editor currency checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_budget_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Budget and offer currency display checks failed'}
+ & python (Join-Path $fogRoot 'Tests/draft_ovr_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Stock Draft Results OVR presentation checks failed'}
+ & python (Join-Path $fogRoot 'Tests/fog_gap_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Reported rating gap checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_ui_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Dollar presentation checks failed'}
+ & python (Join-Path $fogRoot 'Tests/currency_slot_layout_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Class and NIL layout checks failed'}
+ & python (Join-Path $fogRoot 'Tests/enhancement_native_settings_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Native Dynasty settings callback checks failed'}
+ & python (Join-Path $fogRoot 'Tests/enhancement_grade_scales_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Configurable grade scale/color checks failed'}
+ & python (Join-Path $fogRoot 'Tests/independent_grade_modes_test.py')
+ if($LASTEXITCODE -ne 0){throw 'Independent player/team and Blind grade checks failed'}
  & python (Join-Path $fogRoot 'Tools/build_lower_division_schools.py')
  if($LASTEXITCODE -ne 0){throw 'College school catalog validation failed'}
  & python (Join-Path $fogRoot 'Tools/build_recruit_notes_prose.py')

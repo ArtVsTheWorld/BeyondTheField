@@ -25,8 +25,8 @@ for marked in [False,True]:
         before=copy.deepcopy(data)
         Machine({},[]).run(program(generic_slider_draw_suffix),{1:{'mData':data,'mcRightValue':target}})
         assert data==before, 'Shared slider model was changed'
-        if marked and isinstance(grade,str) and grade in GRADE_COLORS:
-            assert target['mData']['display']==grade and target['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
+        if marked and ((isinstance(grade,str) and grade in GRADE_COLORS) or grade in ['85',85]):
+            assert target['mData']['display']==grade and target['mData']['ExtraInfo']['fontColor']==GRADE_COLORS.get(grade,GRADE_COLORS['B'])
         else:assert target['mData']['display']=='native' and target['mData']['ExtraInfo']['fontColor']==0xFFFFFF
         assert target['mData']['ExtraInfo']['font']=='native'
 
@@ -138,7 +138,7 @@ for revealed in [True,False]:
     Machine({},[]).run(program(attribute_slots_suffix),{1:receiver})
     assert entries==before
     for grade,widget in zip(['A','B','C','D','F','?'],widgets):
-        if revealed and grade!='?':assert widget['mData']['ExtraInfo']['fontColor']==GRADE_COLORS[grade]
+        if revealed and grade!='?':assert widget['mData']['ExtraInfo']['fontColor']==GRADE_COLORS.get(grade,GRADE_COLORS['B'])
         else:assert widget['calls']==[]
 for rating in [59,70,90]:
     entry={'Rating':rating,'Level':3,'SkillGroupCap':8,'MaxSkillGroupCap':10}

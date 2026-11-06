@@ -6,8 +6,8 @@ template<class View,class Setter>bool ratingField(View& view,uintptr_t object,co
     std::map<std::string,uintptr_t> fields;if(!view.members(object,fields))return false;
     const auto found=fields.find(key);if(found==fields.end())return false;
     double value=0;std::string text,label;
-    if(view.number(found->second,value))label=display(Visibility::Revealed,value);
-    else if(view.string(found->second,text)){int rating=0;if(!ratingText(text,rating))return false;label=display(Visibility::Revealed,rating);}
+    if(view.number(found->second,value))label=playerDisplay(value);
+    else if(view.string(found->second,text)){int rating=0;if(!ratingText(text,rating))return false;label=playerDisplay(rating);}
     else return false;
     if(label=="?")return false;set(object,key,label.c_str());return true;
 }
@@ -31,7 +31,7 @@ template<class View,class Setter>unsigned convert(View& view,uintptr_t root,Surf
         for(auto attribute:attributes){
             std::map<std::string,uintptr_t> info;bool revealed=false;double value=0;
             if(!view.members(attribute,info)||!info.count("isFullyScouted")||!info.count("ratingValue")||!view.boolean(info.at("isFullyScouted"),revealed)||!revealed||!view.number(info.at("ratingValue"),value)||value<0||value>100||std::floor(value)!=value)continue;
-            const auto label=display(Visibility::Revealed,value);set(attribute,"ratingValue",label.c_str());++changed;
+            const auto label=playerDisplay(value);set(attribute,"ratingValue",label.c_str());++changed;
         }
         return changed;
     }

@@ -1,5 +1,6 @@
 #pragma once
 #include "RecruitingGradePolicy.h"
+#include "CurrencyDisplay.h"
 #include <array>
 #include <cstring>
 #include <map>
@@ -7,10 +8,19 @@
 #include <vector>
 
 namespace recruitingfog::playerfog {
+inline std::string playerDisplay(double rating){
+    if(!std::isfinite(rating)||rating<0||rating>100||rating!=std::floor(rating))return "?";
+    return enhancements::scopedRatingDisplay(static_cast<int>(rating),enhancements::options().roster);
+}
 // Semantic column IDs, not screen positions. Native position/team filters may
 // reorder or request only a subset of these columns.
 inline bool rosterRatingColumn(int id){return id==5||(id>=8&&id<=61);}
 enum class GridSchema{None,Roster,DepthChart,Redshirts,InjuryReport,PositionAth,PlayersLeaving,Training,EncourageTransfers,EncourageFiltered,EncouragePosition};
+inline bool nilColumn(GridSchema schema,int id){
+    return schema==GridSchema::Roster?id==6:schema==GridSchema::DepthChart?id==8:
+        (schema==GridSchema::Redshirts||schema==GridSchema::EncourageTransfers||schema==GridSchema::EncourageFiltered)?id==5:
+        schema==GridSchema::Training?id==6:schema==GridSchema::EncouragePosition?id==4:false;
+}
 inline uint64_t gridState(int form,GridSchema schema){return form<0||schema==GridSchema::None?0:(uint64_t(uint32_t(form)+1)<<32)|uint32_t(schema);}
 inline int gridStateForm(uint64_t state){return state?int((state>>32)-1):-1;}
 inline GridSchema gridStateSchema(uint64_t state){return GridSchema(uint32_t(state));}
@@ -26,16 +36,21 @@ inline bool ratingText(std::string_view text,int& value){
     value=int(result);return true;
 }
 inline std::string ratingLabel(const char* value){
-    int rating=0;if(value&&ratingText(value,rating))return display(Visibility::Revealed,rating);
+    int rating=0;if(value&&ratingText(value,rating)){
+        const std::string_view text(value);const auto comma=text.find(',');
+        // The native trend cell reads the label and indicator separately.
+        // Convert only the rating; retain coach boosts/drops and their colors.
+        return playerDisplay(rating)+(comma==std::string_view::npos?std::string():std::string(text.substr(comma)));
+    }
     // Hidden/unsupported cells stay hidden; never interpret a sentinel as zero.
     return value?value:"";
 }
-inline std::string trainingRatingLabel(const char* value){
+inline std::string trainingRatingLabel(const char* value,bool fog=enhancements::options().roster){
     if(!value)return {};
     const std::string_view text(value);const auto comma=text.find(',');
     const auto base=text.substr(0,comma);int rating=0;
     if(!ratingText(base,rating)||base!=std::to_string(rating))return value;
-    if(comma==std::string_view::npos)return display(Visibility::Revealed,rating);
+    if(comma==std::string_view::npos)return enhancements::scopedRatingDisplay(rating,fog);
     // Native format35 emits current,TrendWithDelta,(+delta) or (-delta).
     // Preserve its delimiter/token/adjustment exactly for SpreadsheetTrendCell.
     const auto suffix=text.substr(comma);constexpr std::string_view prefix=",TrendWithDelta,(";
@@ -44,7 +59,7 @@ inline std::string trainingRatingLabel(const char* value){
     if(signedDelta[0]!='+'&&signedDelta[0]!='-')return value;
     const auto digits=signedDelta.substr(1);int delta=0;
     if(!ratingText(digits,delta)||delta==0||digits!=std::to_string(delta))return value;
-    return display(Visibility::Revealed,rating)+std::string(suffix);
+    return enhancements::scopedRatingDisplay(rating,fog)+std::string(suffix);
 }
 inline int gradeColor(char value){
     switch(value){case 'A':return 0x1FE840;case 'B':return 0xA8D943;case 'C':return 0xFFD34D;case 'D':return 0xF68C2E;default:return 0xF04444;}
@@ -95,9 +110,20 @@ inline void __fastcall gridBool(GridSink* s,unsigned r,const char* k,bool v){put
 inline void __fastcall gridInt(GridSink* s,unsigned r,const char* k,int v){put(s->target,r,k,v,4);}
 inline void __fastcall gridFloat(GridSink* s,unsigned r,const char* k,float v){put(s->target,r,k,v,5);}
 inline void __fastcall gridString(GridSink* s,unsigned r,const char* k,const char* v){
+    if(v&&r<s->count&&nilColumn(s->schema,s->columns[r])&&k&&!strcmp(k,"display")&&enhancements::options().dollars){
+        const auto label=enhancements::currency::display(v);put(s->target,r,k,label.c_str(),6);return;
+    }
     if(r<s->count&&ratingColumn(s->schema,s->columns[r])&&k&&!strcmp(k,"display")){
         const auto label=s->schema==GridSchema::Training?trainingRatingLabel(v):ratingLabel(v);put(s->target,r,k,label.c_str(),6);
-        if(v&&label!=v){++s->changed;put(s->target,r,"DEPlayerRating",true,3);put(s->target,r,"DEGradeColor",gradeColor(label[0]),4);}
+        if(v){
+            int rating=0;const std::string_view source(v);
+            const bool valid=s->schema==GridSchema::Training?trainingRatingLabel(v,true)!=v:ratingText(source,rating);
+            if(label!=v)++s->changed;
+            if(valid&&enhancements::playerColors()){
+                ratingText(source.substr(0,source.find(',')),rating);
+                put(s->target,r,"DEPlayerRating",true,3);put(s->target,r,"DEGradeColor",enhancements::ratingColor(rating),4);
+            }
+        }
     }else put(s->target,r,k,v,6);
 }
 inline void* gridTable[]={nullptr,reinterpret_cast<void*>(gridReserve),nullptr,reinterpret_cast<void*>(gridBool),reinterpret_cast<void*>(gridInt),reinterpret_cast<void*>(gridFloat),reinterpret_cast<void*>(gridString)};
@@ -126,11 +152,11 @@ inline void __fastcall columnString(ColumnSink* s,unsigned r,const char* k,const
 }
 inline void* columnTable[]={nullptr,reinterpret_cast<void*>(columnReserve),nullptr,reinterpret_cast<void*>(columnBool),reinterpret_cast<void*>(columnInt),reinterpret_cast<void*>(columnFloat),reinterpret_cast<void*>(columnString)};
 inline void replayColumns(const ColumnSink& sink,void* target,bool roster,GridSchema schema=GridSchema::Roster){
-    for(const auto& f:sink.fields){const bool rating=roster&&ratingColumn(schema,int(f.row));const bool plainRating=rating&&schema!=GridSchema::Training;
+    for(const auto& f:sink.fields){
         switch(f.slot){
         case 1:reserve(target,f.row);break;
-        case 3:put(target,f.row,f.key.c_str(),plainRating&&f.key=="isTrend"?false:f.flag,3);break;
-        case 4:put(target,f.row,f.key.c_str(),plainRating&&f.key=="formatType"?0:f.integer,4);break;
+        case 3:put(target,f.row,f.key.c_str(),f.flag,3);break;
+        case 4:put(target,f.row,f.key.c_str(),f.integer,4);break;
         case 5:put(target,f.row,f.key.c_str(),f.real,5);break;
         case 6:put(target,f.row,f.key.c_str(),f.nullText?nullptr:f.text.c_str(),6);break;
         }
@@ -140,7 +166,7 @@ inline void replayColumns(const ColumnSink& sink,void* target,bool roster,GridSc
 template<class View,class Setter>bool selectedOverall(View& view,uintptr_t root,Setter setString){
     std::map<std::string,uintptr_t> fields;double rating=0;
     if(!view.members(root,fields)||!fields.count("overall")||!view.number(fields.at("overall"),rating))return false;
-    const auto label=display(Visibility::Revealed,rating);if(label=="?")return false;
+    const auto label=playerDisplay(rating);if(label=="?")return false;
     setString(root,"overall",label.c_str());return true;
 }
 }

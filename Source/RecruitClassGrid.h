@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <array>
 #include <cstdint>
+#include <string_view>
 namespace recruitingfog {
 struct ClassKeySink {void** vtable;std::string value;};
 inline void __fastcall classKeyString(ClassKeySink* sink,const char* value){if(value&&strlen(value)<32)sink->value=value;}
@@ -14,13 +15,20 @@ inline bool juniorCollegeLabel(const char* text){
     if(!text||text[0]!='J'||text[1]!='C')return false;
     return !strcmp(text,"JC (SO)")||!strcmp(text,"JC (JR)")||!strcmp(text,"JC (SR)")||!strcmp(text,"JC(SO)")||!strcmp(text,"JC(JR)")||!strcmp(text,"JC(SR)");
 }
+inline bool transferCollegeLabel(const char* text){
+    if(!text)return false;
+    if(strncmp(text,"Transfer",8)&&strncmp(text,"TR (",4))return false;
+    const std::string_view label(text);
+    for(const auto* candidate:{"Transfer (FR)","Transfer (SO)","Transfer (JR)","Transfer (SR)","Transfer(FR)","Transfer(SO)","Transfer(JR)","Transfer(SR)","TR (FR)","TR (SO)","TR (JR)","TR (SR)"})if(label==candidate)return true;
+    return false;
+}
 inline bool classGridColumns(void* columns){
     auto** table=*reinterpret_cast<void***>(columns);const auto count=reinterpret_cast<int(__fastcall*)(void*)>(table[1])(columns);
     if(count<0||count>90)return false;
     for(int i=0;i<count;++i)if(reinterpret_cast<int(__fastcall*)(void*,int)>(table[2])(columns,i)==15)return true;
     return false;
 }
-// A synchronous, per-call adapter. Only the displayed JC Class cell is eligible;
+// A synchronous, per-call adapter. Only displayed JC/Transfer Class cells qualify;
 // every other typed callback and all original getter arguments pass through.
 struct ClassGridSink {
     void** vtable;void* target;void* source;int form,row;
@@ -36,7 +44,7 @@ inline void __fastcall classGridBool(ClassGridSink* s,unsigned r,const char* k,b
 inline void __fastcall classGridInt(ClassGridSink* s,unsigned r,const char* k,int v){classGridPut(s,r,k,v,4);}
 inline void __fastcall classGridFloat(ClassGridSink* s,unsigned r,const char* k,float v){classGridPut(s,r,k,v,5);}
 inline void __fastcall classGridString(ClassGridSink* s,unsigned r,const char* k,const char* v){
-    if(k&&strcmp(k,"display")==0&&juniorCollegeLabel(v)&&s->count<s->pending.size()){
+    if(k&&strcmp(k,"display")==0&&(juniorCollegeLabel(v)||transferCollegeLabel(v))&&s->count<s->pending.size()){
         // Defer the one Class field until the native row getter returns. Never
         // reenter its data source from inside a typed collector callback.
         s->pending[s->count++]={r,v};return;

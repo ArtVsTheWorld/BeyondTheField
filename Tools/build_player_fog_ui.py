@@ -95,6 +95,12 @@ def generate(asset, destination):
         for p,off,argc,regs,flags,native_size,hash_,copy_at,copy_size in specs:
             array='{'+','.join(hex(b) for b in p.code)+'}'
             lines.append(f'result.push_back({{{off},{argc},{regs},{flags},{native_size},{hash_}ull,{regs},{copy_at},{copy_size},{array}}});')
+            for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+            for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+            for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+            for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+            for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+            for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
             for at,text in p.literals:
                 lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
         lines.append('return result;}')

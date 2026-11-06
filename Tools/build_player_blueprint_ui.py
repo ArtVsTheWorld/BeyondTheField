@@ -46,6 +46,12 @@ def generate(destination):
            'inline std::vector<notesui::Program> programs(){std::vector<notesui::Program> result;']
     code='{'+','.join(hex(b) for b in p.code)+'}'
     lines.append(f'result.push_back({{{off},0,5,25,{size},{expected}ull,5,0,{size},{code}}});')
+    for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+    for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+    for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+    for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+    for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+    for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
     for at,value in p.literals:lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(value)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
     lines+=['return result;}','}'];destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
     print(json.dumps({'blueprintPlayerMethods':1,'budgetModelChanges':False}))

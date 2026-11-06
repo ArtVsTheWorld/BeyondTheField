@@ -4,27 +4,40 @@ Dynasty Enhancer improves the offline College Football 27 Dynasty experience thr
 
 This is a development prototype, not the planned 1.0 release.
 
-## Combined prototype on main
+## Current combined prototype
 
-Social Media and recruiting Fog of War now share one **Dynasty Enhancer** MMC plugin and installation. The current candidate combines Social Media v103 with recruiting p28; p27 remains the installed, live-verified UI build. Active-roster Fog and player analytics remain later work toward 1.0; the separate hub-tab experiment stays deferred.
+Social Media, Recruiting Fog, Roster Fog, Team Fog, recruiting Notes and optional dollar-value displays share one **Dynasty Enhancer** MMC plugin. The current built candidate is **options-p96**. The standalone/direct hub-tab experiment remains deferred; use **Team → Social Media**. This is not the planned 1.0 release.
 
-Recruiting includes native letter grades and public-bound ranges, midpoint grade colors that survive profile-tab changes, Playing Time masking (including the Prospect List preview), and a Notes tab. Notes contain persistent generated high-school résumés, completion and blocking percentages, independent, middle-weighted academic GPA, and fictional D3/D2/FCS backgrounds for game JUCO entries. College transfers use actual linked college statistics. The Board, Prospect List Class column and side panel share the same stored college association. Player attributes, recruiting decisions and game saves are not rewritten.
+**Dynasty Settings → Dynasty Enhancements** appears immediately after Commissioner Settings and preserves the other settings mods' sections. Options are saved per native Dynasty identity:
 
-The package is `Build/DynastyEnhancer-v105-MMC.zip`. Its single installed plugin is `Plugins/DynastyEnhancer.dll`; Social Media and recruiting run as two internal native components managed by that plugin. This avoids a second mod-manager entry or manual per-session loading. Existing Social Media history, configuration and résumé journals are preserved on installation.
+| Setting | Default | Behavior |
+|---|---|---|
+| Social Media Feed | On | Native weekly/midweek feed, scopes, categories, archives and replies |
+| Recruiting Fog | On | Scouting letters/ranges and Playing Time masking; Notes remain when Off |
+| Roster Fog | On | Active-player rating displays throughout the covered menus and gameplay UI |
+| Team Fog | On | Team OVR/OFF/DEF displays independently of player fog |
+| Player Grade Scale | A+- | A, A+-, S, Descriptive or Blind for players and recruits |
+| Team Grade Scale | A+- | The same choices, independently for teams |
+| Rating Colors | On | Scale-derived colors, including numeric ratings with fog Off; native selected/disabled table contrast remains |
+| Dollar Values | Off | Display Dynasty/NIL points at 4,000 dollars per point, with K/M suffixes and native currency icons |
 
-Build and validate the components sequentially from this repository:
+Descriptive uses Elite/purple, Great/blue, Good/green, Fair/amber and Poor/red with stronger colors. **Blind** shows an en dash and retains native text colors. With the corresponding fog Off, Blind leaves the numeric rating and native color. Existing format-1 profiles initialize both new scales from their old saved selection; new profiles default both to A+-. Numeric gameplay, scouting, sorting and save data are unchanged.
+
+Recruiting Notes include persistent generated high-school résumés, competition context, completion/blocking rates and independent academic GPA. Football intelligence observations unlock through scouting. Game JUCO entries receive fictional D3/D2/FCS backgrounds with stable school/class labels. College transfers use recorded statistics. GPA draws are independent of stars, ratings, Awareness and development.
+
+The coverage audit includes roster/player cards, depth charts, redshirts, injury reports, Formation Subs, NIL, training/position changes, leaving/encouraged-transfer tables, statistics/award sidebars, pregame team selection, playcall panels, in-play substitutions and selected presentation paths. Stock Draft Results keeps its original filters and displays OVR grades. **Opening-lineup and Game Changers/Lightning Combination Rime broadcast OVRs remain unresolved.** Edit Player ratings deliberately remain numeric. See [settings and migration](docs/dynasty-enhancement-options.md), [coverage](docs/player-fog-coverage.json), and [presentation audit](docs/player-fog-presentations.md).
+
+Build and validate both payloads sequentially; they share options protocol 4:
 
 ```powershell
-.\Source\build.ps1 -NativeName DynastyEnhancerNative-v103
-.\Source\build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-p28 -RecruitNotesUi
-.\Source\Package-DynastyEnhancer.ps1
+.\Source\build.ps1 -NativeName DynastyEnhancerNative-options-p96
+.\Source\build-recruiting-fog.ps1 -Name DynastyEnhancerRecruitFog-p96 -RecruitNotesUi -PlayerFogPerf
+.\Source\Package-DynastyEnhancer.ps1 -SocialNativeName DynastyEnhancerNative-options-p96 -RecruitingName DynastyEnhancerRecruitFog-p96 -PackageTag options-p96
 ```
 
-Use a fresh `pNN` filename for subsequent development candidates; pinned DLLs must not be overwritten. The package builder preserves the installed, verified Social Media payload. After closing CFB and MMC, install with `Source/Install-Mmc.ps1 -RecruitResumeHistoryFrom <existing-RecruitResumeHistory-folder>`. Generated history is intentionally excluded from the distributable ZIP.
+Use a fresh pNN name for subsequent candidates; an existing DLL may be pinned in a running game. The package is `Build/DynastyEnhancer-options-p96-MMC.zip`, containing one MMC adapter and both internal native payloads. Packaging verifies registration, integrity, tamper rejection and path bounds. The development packager takes the existing installed Social Media scripts/content/configuration as its base and replaces both native payloads together. It does not distribute generated journals, settings, save files, extracted game assets or test-Dynasty data.
 
-Academic background is independent of every football input. A stable identity-only draw produces GPA from 2.0–4.5, concentrated around the middle. Existing awareness-correlated GPAs migrate once; every saved stat, competition assignment and other résumé field is preserved. GPA remains visible immediately. Position-specific Awareness observations use only revealed scouting bounds and the existing scouting-progress gates. See [academic separation and migration checks](docs/academic-background-v105.json).
-
-The user verified p27's stable colors, midpoint ranges, Prospect List labels and responsive menus. Native checks and 375 JavaScript tests pass. The combined adapter/package passes MMC registration, payload-integrity and path-boundary checks. The v104 launcher logs confirm automatic activation of both components. The v105 academic update is built and staged for installation. See [recruiting UI verification](docs/recruiting-ui-colors-class-fix.json) and [résumé details](docs/recruit-resume-additions.json).
+Install only with CFB and MMC closed, using `Source/Install-Mmc.ps1` with the staged package metadata. Preserve **RuntimeHistory**, **RecruitResumeHistory** and **DynastyEnhancementSettings** when moving installations. Copied native UI definitions require a clean restart for safe replacement. The p96 scales/settings build passes offline checks; its new options still need live acceptance after installation. Historical development notes follow.
 
 ## Content and menu performance review (v103)
 

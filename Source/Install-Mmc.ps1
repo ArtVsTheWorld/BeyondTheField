@@ -1,8 +1,9 @@
-param([string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[string]$HistoryFrom='',[string]$RecruitResumeHistoryFrom='')
+param([string]$MmcRoot='C:/Apps/CFB 27/MMC/MMC_ModManager_v1.1.0.6',[string]$HistoryFrom='',[string]$RecruitResumeHistoryFrom='',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9._-]*$')][string]$PackageTag='options-p96')
 $ErrorActionPreference='Stop'
 $installProject=Split-Path -Parent $PSScriptRoot
 $installBuild=Join-Path $installProject 'Build'
-$installInfo=Get-Content -LiteralPath (Join-Path $installBuild 'mmc-package.json') -Raw | ConvertFrom-Json
+$installMetadata=if($PackageTag -eq 'v105'){'mmc-package.json'}else{'mmc-package-'+$PackageTag+'.json'}
+$installInfo=Get-Content -LiteralPath (Join-Path $installBuild $installMetadata) -Raw | ConvertFrom-Json
 $installRoot=[IO.Path]::GetFullPath($MmcRoot)
 if(-not (Test-Path -LiteralPath (Join-Path $installRoot 'MMCModManager.exe') -PathType Leaf)){throw 'MMC executable is unavailable at the selected root'}
 if(Get-Process MMCModManager -ErrorAction SilentlyContinue){throw 'Close MMC before installing the package'}
@@ -10,7 +11,7 @@ $installPlugins=Join-Path $installRoot 'Plugins'
 $installRuntime=[IO.Path]::GetFullPath((Join-Path $installPlugins 'DynastyEnhancer/Runtime-v103'))
 if(-not $installRuntime.StartsWith($installRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Runtime target is outside MMC root'}
 foreach($game in Get-Process CollegeFB27 -ErrorAction SilentlyContinue){foreach($module in $game.Modules){if($module.FileName.StartsWith($installRuntime+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'The target runtime is active in CFB; use a new version folder or close the game before replacing it'}}}
-$installBackup=Join-Path $installProject ('Backups/MMC-v103-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
+$installBackup=Join-Path $installProject ('Backups/MMC-'+$PackageTag+'-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))
 New-Item -ItemType Directory -Path $installBackup,$installRuntime -Force | Out-Null
 $installAdapter=Join-Path $installPlugins 'DynastyEnhancer.dll'
 if(Test-Path -LiteralPath $installAdapter){Copy-Item -LiteralPath $installAdapter -Destination (Join-Path $installBackup 'DynastyEnhancer.dll')}

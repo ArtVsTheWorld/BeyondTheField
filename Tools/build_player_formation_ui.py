@@ -77,17 +77,8 @@ def detail_suffix(a):
 
 
 def legacy_ovr_suffix(a):
-    # OVRItem also renders team OVR/OFF/DEF: opt in only the private marker
-    # placed on the legacy Formation Subs player child above.
-    done='legacyOvrDone'
-    path(a,1,'mData');a.raw(0x76,0x49);a.branch(done)
-    path(a,1,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
-    path(a,1,'mData','ExtraInfo','DEPlayerRating');a.raw(0x73,0x66);a.branch(done,0xB8)
-    path(a,1,'mData','value');a.store(0)
-    numeric_grade(a,0,2,done,'legacyOvrGrade');palette(a,2,3,done,'legacyOvrPalette')
-    path(a,1,'mcValue');a.store(4)
-    text_label(a,4,2,3,5,done,'legacyOvrText')
-    a.label(done);a.ret()
+    from build_player_card_ui import ovr_item_suffix
+    ovr_item_suffix(a);a.ret()
 
 
 SPECS=[(0x3E70,1,7,41,348,0x18D00AA7087BBB23,module_suffix),
@@ -112,6 +103,12 @@ def generate(destination):
             a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
             code='{'+','.join(hex(b) for b in p.code)+'}'
             lines.append(f'result.push_back({{{offset},{argc},{regs},{flags},{size},{expected}ull,{regs},0,{size},{code}}});')
+            for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+            for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+            for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+            for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+            for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+            for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
             for at,text in p.literals:
                 lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
         lines.append('return result;}')

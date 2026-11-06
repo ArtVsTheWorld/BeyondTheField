@@ -24,11 +24,14 @@
 #include "NewsPolish.h"
 #include "NewsDiscovery.h"
 #include "RuntimeFeed.h"
+#include "EnhancementOptionsRuntime.h"
 #include "Startup.h"
 #include "NativeMapValue.h"
 #include "NewsAssetDiscovery.h"
 namespace {
 using Json=nlohmann::json;
+uintptr_t base=0;
+bool read(uintptr_t,void*,size_t) noexcept;
 #ifdef SOCIAL_SCROLL_TEST
 unsigned feedPostCount=12;
 #else
@@ -43,10 +46,12 @@ unsigned feedContainerCount=listFeed?1:feedPostCount;
 std::mutex feedMutex;
 std::shared_ptr<const social::Feed> latestFeed=social::statusFeed(feedPostCount),pageFeed=latestFeed;
 std::deque<std::shared_ptr<const social::Feed>> retiredFeeds;
+bool nativeFeedIdentity=false;uint32_t nativeFeedLeague=0; // Protected by feedMutex.
+bool currentFeedLeague(){uint32_t league=0;return !nativeFeedIdentity||(read(base+0xf55c998,&league,4)&&league==nativeFeedLeague);}
 void collectRetiredFeeds(){std::deque<std::shared_ptr<const social::Feed>> retired;{std::lock_guard<std::mutex> lock(feedMutex);retired.swap(retiredFeeds);}}
 void adoptFeed(){std::lock_guard<std::mutex> lock(feedMutex);if(pageFeed!=latestFeed){retiredFeeds.push_back(std::move(pageFeed));pageFeed=latestFeed;}feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;}
-bool feedReady(){std::lock_guard<std::mutex> lock(feedMutex);return latestFeed&&latestFeed->catalog!=nullptr;}
-bool adoptReadyFeed(){std::lock_guard<std::mutex> lock(feedMutex);if(!latestFeed||!latestFeed->catalog)return false;if(pageFeed!=latestFeed){retiredFeeds.push_back(std::move(pageFeed));pageFeed=latestFeed;}feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;return true;}
+bool feedReady(){std::lock_guard<std::mutex> lock(feedMutex);return latestFeed&&latestFeed->catalog!=nullptr&&currentFeedLeague();}
+bool adoptReadyFeed(){std::lock_guard<std::mutex> lock(feedMutex);if(!latestFeed||!latestFeed->catalog||!currentFeedLeague())return false;if(pageFeed!=latestFeed){retiredFeeds.push_back(std::move(pageFeed));pageFeed=latestFeed;}feedPostCount=static_cast<unsigned>(pageFeed->posts.size());feedContainerCount=listFeed?1:feedPostCount;return true;}
 void publishFeed(const Json&);
 void waitingFeed(){auto feed=social::statusFeed();std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(latestFeed));latestFeed=std::move(feed);}
 
@@ -62,10 +67,12 @@ unsigned postNumber(std::string_view value){
     auto result=std::from_chars(value.data(),value.data()+value.size(),number);
     return !value.empty()&&value.front()!='0'&&result.ec==std::errc()&&result.ptr==value.data()+value.size()&&number>=1&&number<=feedPostCount?number:0;
 }
-uintptr_t base=0;
 HMODULE module=nullptr;
 std::filesystem::path folder;
 std::string buildId;
+enhancements::SharedOptions enhancementOptions;
+std::atomic<uint64_t> enhancementProfile{UINT64_MAX};
+bool socialEnabled(){enhancements::Options selected;uint32_t league=0;if(enhancementOptions.read(selected,&league)){enhancements::currentOptions=selected.packed();enhancementProfile=league;}return enhancements::options().social;}
 std::atomic<bool> disabled{false},opened{false},uiReady{false};
 std::atomic<unsigned> callbacks{0};
 std::atomic<bool> preflightRunning{false},preflightReady{false},preflightAttempted{false};
@@ -491,7 +498,7 @@ bool appendContainer(ContainerProxy& proxy,const HubEntry& entry=cfbEntry){
     note({{"event","social_hub_donor_missing"},{"panel",entry.panel},{"rows",proxy.captured}});return false;
 }
 void __fastcall containerHook(void* self,void* panel,void* out){
-    Guard guard;auto name=argument(panel);
+    Guard guard;auto name=argument(panel);const bool feedEnabled=socialEnabled();
     const auto entry=hubEntry(name);
     if(!disabled&&uiReady&&!preflightRunning&&entry){configureNewsDropdowns(false);configureNewsPolish(false);}
     if(!disabled&&uiReady&&opened&&!preflightRunning&&entry){opened=false;configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}
@@ -507,7 +514,7 @@ void __fastcall containerHook(void* self,void* panel,void* out){
             if constexpr(listFeed){rowText(out,row,"linkage","art_control.group.PanelListContainer");rowSet(out,row,"Width",1200,4);rowSet(out,row,"Height",600,4);rowSet(out,row,"ScrollByMount",false,3);rowSet(out,row,"UseScrollArrows",false,3);rowSet(out,row,"ShowScroller",true,3);rowSet(out,row,"WrapList",false,3);}
         }note({{"event","social_feed_containers"},{"donor",proxy.captured},{"listFeed",listFeed}});return;
     }
-    if(disabled||!entry){containers(self,panel,out);return;}const bool first=entry==&teamEntry;ContainerProxy proxy{containerVt,out,{},first};containers(self,panel,&proxy);admittedHubEntries[entry->panel]=appendContainer(proxy,*entry);
+    if(disabled||!feedEnabled||!entry){if(entry&&!feedEnabled)admittedHubEntries[entry->panel]=false;containers(self,panel,out);return;}const bool first=entry==&teamEntry;ContainerProxy proxy{containerVt,out,{},first};containers(self,panel,&proxy);admittedHubEntries[entry->panel]=appendContainer(proxy,*entry);
     if(first&&!admittedHubEntries[entry->panel])for(const auto& [r,fields]:proxy.captured)forwardContainerFields(out,r,fields);
 }
 void populatePost(void* tile,unsigned number){
@@ -558,7 +565,7 @@ void* __fastcall tileHook(void* self,void** out,void* panel,void* coords){
         if(out&&*out&&read(reinterpret_cast<uintptr_t>(*out)+0x10,&kind,4)&&kind==4&&read(reinterpret_cast<uintptr_t>(*out)+0x18,span,16)&&span[1]>=span[0]&&span[1]-span[0]<=128){
             for(uintptr_t a=span[0];a<span[1];a+=8){void* tile=nullptr;if(!read(a,&tile,8)||!tile)continue;
                 tileText(tile,"Coordinates",c.c_str());
-                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1",feedReady()?"See what everyone is saying around college football":"Preparing weekly news - please wait");tileText(tile,"NavigationId","NEWS_MENU");note({{"event","social_button_added"},{"panel",entry->panel}});
+                tileText(tile,"Id","SOCIAL_MEDIA");tileText(tile,"Text0","Social Media");tileText(tile,"Text1",feedReady()?"See what everyone is saying around college football":"Preparing weekly news - please wait");tileText(tile,"NavigationId",enhancements::options().social?"NEWS_MENU":"DO_NOTHING");tileBool(tile,"isInteractive",enhancements::options().social);note({{"event","social_button_added"},{"panel",entry->panel}});
             }
         }
     }else result=tiles(self,out,panel,coords);
@@ -641,7 +648,7 @@ void __fastcall infoFloat(InfoProxy* p,const char* k,float v){infoValue(p,k,v,3)
 void __fastcall infoString(InfoProxy* p,const char* k,const char* v){infoValue(p,k,v,4);}
 void* infoVt[]={reinterpret_cast<void*>(unmapped),reinterpret_cast<void*>(infoBool),reinterpret_cast<void*>(infoInt),reinterpret_cast<void*>(infoFloat),reinterpret_cast<void*>(infoString)};
 bool runPreflight();
-const char* socialDestination(){return uiReady&&feedReady()&&newsLayoutUsable()&&ensureNewsModel()?"NEWS":"DO_NOTHING";}
+const char* socialDestination(){return socialEnabled()&&uiReady&&feedReady()&&newsLayoutUsable()&&ensureNewsModel()?"NEWS":"DO_NOTHING";}
 void __fastcall navInfoHook(void* self,void* arg,void* out){Guard guard;auto name=argument(arg);if(!disabled&&name=="NEWS_MENU"){const auto destination=socialDestination();Alias alias{aliasVt,destination};InfoProxy proxy{infoVt,out};navInfo(self,&alias,&proxy);if(strcmp(destination,"NEWS")==0)objectText(out,"Id","NEWS_MENU");}else navInfo(self,arg,out);
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(!disabled&&uiReady&&name=="HEISMAN_WATCH"&&!preflightAttempted.exchange(true))runPreflight();
@@ -652,6 +659,7 @@ void __fastcall navRequestHook(void* self,unsigned user,const char* name,void* p
     // The native caller has already begun a navigation transaction. Silently
     // returning leaves it pending, so finish through its genuine inert action.
     if(selected&&uiReady&&!newsLayoutUsable()){cancel("Native news assets are being refreshed");return;}
+    if(selected&&!socialEnabled()){cancel("Social Media is disabled for this Dynasty");return;}
     if(selected&&(!uiReady||!adoptReadyFeed())){cancel("Weekly news is still preparing");return;}
 #ifdef SOCIAL_PREFLIGHT_ONLY
     if(selected){cancel("Panel initialization preflight only");return;}
@@ -736,12 +744,17 @@ Binding bindings[]={
     {0xbac63a8,0xd0,0x7a2def0,reinterpret_cast<void*>(filterChangedHook)}
 };
 void stop(){disabled=true;opened=false;if(uiReady){configureNewsPolish(false);configureNewsDropdowns(false);configureNewsScroll(false);configureNewsFlow(false);alignNewsFrame(false);}for(auto& b:bindings)if(b.installed)replace(reinterpret_cast<void**>(base+b.vt+b.offset),b.hook,reinterpret_cast<void*>(base+b.rva));}
-void publishFeed(const Json& data){auto feed=social::decodeFeed(data);std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(latestFeed));latestFeed=std::move(feed);}
+void publishFeed(const Json& data){
+    const bool runtime=data.value("sourceKind",std::string())=="runtime";uint32_t league=0;
+    if(runtime){const auto& id=data.at("leagueId");if(!id.is_number_integer()||id<INT32_MIN||id>UINT32_MAX)throw std::runtime_error("Invalid runtime feed Dynasty identity");league=static_cast<uint32_t>(id.get<int64_t>());}
+    auto feed=social::decodeFeed(data);std::lock_guard<std::mutex> lock(feedMutex);retiredFeeds.push_back(std::move(latestFeed));latestFeed=std::move(feed);nativeFeedIdentity=runtime;nativeFeedLeague=league;
+}
 void flush(){std::deque<Json> batch;{std::lock_guard<std::mutex> lock(logMutex);batch.swap(messages);}if(batch.empty())return;std::ofstream out(folder/L"social-media.jsonl",std::ios::app);for(const auto& x:batch)out<<x.dump()<<'\n';}
 DWORD WINAPI worker(void*){
     SetThreadPriority(GetCurrentThread(),THREAD_PRIORITY_BELOW_NORMAL);
     wchar_t path[32768]{};GetModuleFileNameW(module,path,32768);folder=std::filesystem::path(path).parent_path();buildId=std::filesystem::path(path).filename().u8string();base=reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr));
     try{
+        enhancementOptions.open();
         dynasty::live::FeedWorker refresh;refresh.configure(folder,base);waitingFeed();adoptFeed();
         for(const auto& g:socialGates){unsigned char bytes[32]{};if(!read(base+g.rva,bytes,32)||memcmp(bytes,g.bytes,32))throw std::runtime_error("Unsupported game code at "+std::to_string(g.rva));}
         for(const auto& b:bindings){uintptr_t pointer=0;if(!read(base+b.vt+b.offset,&pointer,8)||pointer!=base+b.rva)throw std::runtime_error("Native UI slot is owned or unsupported");}
@@ -756,13 +769,16 @@ DWORD WINAPI worker(void*){
         note({{"event","menu_hooks_active"},{"pid",GetCurrentProcessId()}});flush();
         // The read-only collector runs even when no News UI assets exist.
         // In particular, cold loading Training Results must seed the ledger.
-        uint64_t uiProbeAt=0,modelScanAt=0;std::string previousUiReason;
+        uint64_t uiProbeAt=0,modelScanAt=0;std::string previousUiReason;bool previousSocial=true;uint64_t previousProfile=UINT64_MAX;
         note({{"event","background_capture_started"},{"uiRequired",false}});
         while(!disabled){
+            const auto feedEnabled=socialEnabled();
+            const auto profile=enhancementProfile.load();
+            if(feedEnabled!=previousSocial||profile!=previousProfile){refresh.restart();waitingFeed();previousSocial=feedEnabled;previousProfile=profile;note({{"event","social_media_option"},{"enabled",feedEnabled}});}
             collectRetiredFeeds();flush();
-            if(auto feed=refresh.tick([]{return disabled.load();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);
+            if(feedEnabled)if(auto feed=refresh.tick([]{return disabled.load()||!socialEnabled();},[](Json j){note(std::move(j));},[]{waitingFeed();}))publishFeed(*feed);
             if(uiReady&&!opened&&!layoutDiscoveryNeeded&&!newsLayoutUsable())note({{"event","social_layout_refresh_requested"}});
-            if((!uiReady||(layoutDiscoveryNeeded&&feedReady()))&&!opened&&!callbacks.load()&&GetTickCount64()>=uiProbeAt&&!disabled){
+            if(enhancements::options().social&&(!uiReady||(layoutDiscoveryNeeded&&feedReady()))&&!opened&&!callbacks.load()&&GetTickCount64()>=uiProbeAt&&!disabled){
                 uiProbeAt=GetTickCount64()+3000;std::string reason;
                 if(!locateNewsLayout())reason="Waiting for the supported native Dynasty news layout";
 #ifdef SOCIAL_DUAL_DROPDOWN

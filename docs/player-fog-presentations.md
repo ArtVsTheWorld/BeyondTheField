@@ -165,3 +165,60 @@ shared builder. No new production native hook or background work is introduced.
 Native tests, all 11 UI suites, independent review and MMC packaging pass.
 The diagnostic probes are stopped; final p71 Kicker Range visual confirmation
 remains pending.
+
+## Separate Rime lineup and Game Changers reports
+
+The user later reported numeric player OVRs in the opening offensive-line
+lineup and Game Changers. These are **not** the playcall Trench panel or direct
+Muse player-rating queries. The lineup banner supplies player IDs to a Rime
+screen; its reusable `PlayerInfoDisplay` widget reads `PROP_OVERALLRATING` from
+a player datasource and converts that integer with `IntToFormattedString`.
+Jersey numbers use a separate converter. Game Changers corresponds to
+`CFB_Dynamic_Duo`, with two analogous OVR connections. Their nearby yards,
+catches and touchdown counts are ordinary statistics.
+
+The read-only asset audit resolved these exact native graphs and identified
+the integer formatter's handlers and native string lifetime. However, no live
+entity was captured before the user left the game, so the association between
+a live converter and its owning rating connection is not yet verified. The
+temporary observer was stopped successfully. p72 includes **no** Rime formatter
+replacement and no Flags-only or blanket numeric conversion. These two reported
+broadcast leaks remain open; the existing direct-Muse formatter coverage does
+not imply coverage of Rime datasource labels.
+
+## Pause Injury Report attributes (p72)
+
+The in-game Injury Report uses a legacy adapter that calls
+`GetRelevantSkillsFromPlayer`. The shared player module normalizes its
+`skillLabel`/`skillValue` records into six attribute slots. This bypasses the
+modern Injury response conversion: the reported screenshot had a graded Overall
+badge but numeric values in all six tiles.
+
+p72 marks the module only from that exact screen's selection/refresh method.
+The parent passes a private injury marker to its attribute slots, which convert
+only fully revealed values. This path's native `roster` flag defaults to false,
+so it is not used as a guard. Source skill values, Overall, player identity,
+injury status and recovery text remain untouched. Unknown values and unrelated
+shared modules retain their existing behavior. One additional asset bank uses
+the existing script dispatch, retention and stop guards; no native hook or
+background search is added.
+
+Numeric/text six-attribute fixtures, changed players, native `roster=false`,
+hidden values and unmarked modules pass alongside the card, Formation and full
+native/UI suites. The combined p72 package includes the p71 Kicker Range change.
+Both new fixes still require visual confirmation after installation.
+
+## Lightning Combination follow-up (options-p96)
+
+The user reported numeric OVR72 for both players in the Lightning Combination
+banner. This belongs to the same separate Dynamic Duo family as Game Changers;
+its passing/receiving statistics are not player ratings. A development-only,
+four-minute pass-through observer captured 58 integer formatter instances in
+the running game. None established a verified live association with the OVR
+connection. It restored both observed vtable slots and drained all in-flight
+callbacks (stop result 0). It did not change source values or displayed text.
+
+The package therefore retains this as an open leak, alongside opening lineups.
+The production build does not contain that observer or a generic numeric
+formatter replacement. The five-scale/player-team separation work does not
+close this independent Rime presentation gap.

@@ -1,5 +1,5 @@
 #pragma once
-#include "RecruitingGradePolicy.h"
+#include "PlayerRatingGrid.h"
 #include <cstring>
 namespace recruitingfog::playerfog {
 // Native property-map collector, distinct from the row-indexed spreadsheet ABI.
@@ -8,7 +8,7 @@ struct MapSink{void** vtable;void* target;const char* key;unsigned changed=0;con
 template<class T>inline void mapPut(MapSink* s,const char* key,T value,unsigned slot){reinterpret_cast<void(__fastcall*)(void*,const char*,T)>((*reinterpret_cast<void***>(s->target))[slot])(s->target,key,value);}
 inline void __fastcall mapBool(MapSink* s,const char* k,bool v){mapPut(s,k,v,1);}
 inline void __fastcall mapInt(MapSink* s,const char* k,int v){
-    if(k&&!strcmp(k,s->key)&&v>=0&&v<=100){const auto text=display(Visibility::Revealed,v);
+    if(k&&!strcmp(k,s->key)&&v>=0&&v<=100){const auto text=playerDisplay(v);
         // Shared progression models still require their numeric Overall.
         // Supply a separate display field rather than changing that input.
         if(s->labelKey)mapPut(s,k,v,2);mapPut(s,s->labelKey?s->labelKey:k,text.c_str(),4);++s->changed;}

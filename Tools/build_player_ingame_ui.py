@@ -75,6 +75,18 @@ def kicker_range_suffix(a):
     a.ret()
 
 
+def injury_module_suffix(a):
+    # This exact pause Injury Report screen supplies active-player skills via
+    # its legacy adapter. Mark only its existing PlayerModule, never the data
+    # service response or the injury/health/recovery records.
+    done='injuryModuleDone'
+    path(a,1,'mcModule');a.store(0);a.missing(0,done)
+    path(a,0,'mData');a.raw(0x76,0x49);a.branch(done)
+    path(a,0,'mData','ExtraInfo');a.raw(0x76,0x49);a.branch(done)
+    path(a,0,'mData','ExtraInfo');a.string('DEInjuryPlayerRatings');a.raw(0x73,0x4F)
+    a.label(done);a.ret()
+
+
 SPECS=[(0x37FE8,0,7,25,674,0xA570B1AFB77C6507,13,player_ratings_suffix),
        (0x2EB18,0,4,25,384,0xA4ED8C8AB9298E2B,4,key_player_suffix),
        (0x32720,0,13,41,3669,0xBDCD7B378AF81866,13,playcall_player_suffix),
@@ -84,6 +96,7 @@ SPECS=[(0x37FE8,0,7,25,674,0xA570B1AFB77C6507,13,player_ratings_suffix),
 
 KICKER_SPECS=[(0x11F0,1,13,41,679,0x73D8E5A514962C4A,13,kicker_range_suffix),
               (0x14D0,2,7,41,381,0xB737A3A22902C70B,7,kicker_range_suffix)]
+INJURY_SPECS=[(0x1F48,0,7,41,484,0x595EFEA5CE60D248,7,injury_module_suffix)]
 
 
 def generate(destination):
@@ -95,7 +108,8 @@ def generate(destination):
     # Each Runtime validates every method against one asset. Keep this panel
     # in a separate program set instead of mixing its offsets with node_ig.
     for name,asset,specs in [('programs','node-ig-scriptpod.ast',SPECS),
-                             ('kickerPrograms','Presentations/common__ui__art_screen__playcall__panel__kickerrange.ast',KICKER_SPECS)]:
+                             ('kickerPrograms','Presentations/common__ui__art_screen__playcall__panel__kickerrange.ast',KICKER_SPECS),
+                             ('injuryPrograms','Lineup/madden_scrinjuryreport.ast',INJURY_SPECS)]:
         apt=load(Path('Evidence/PlayerFog')/asset)
         lines.append(f'inline std::vector<notesui::Program> {name}(){{std::vector<notesui::Program> result;')
         for offset,argc,regs,flags,size,expected,newregs,suffix in specs:
@@ -104,6 +118,12 @@ def generate(destination):
             a=Assembler();a.code.extend(bytes(size));suffix(a);p=a.finish()
             code='{'+','.join(hex(b) for b in p.code)+'}'
             lines.append(f'result.push_back({{{offset},{argc},{regs},{flags},{size},{expected}ull,{newregs},0,{size},{code}}});')
+            for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+            for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+            for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+            for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+            for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+            for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
             for at,text in p.literals:
                 lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
         lines.append('return result;}')

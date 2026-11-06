@@ -121,7 +121,7 @@ for marked in [False,True]:
                 slots[f'mcValueSlotText{i}']['mData']['ExtraInfo']['fontColor']=0xFFFFFF
             Machine({},[]).run(program(badge_suffix),{1:module})
             Machine({},[]).run(program(attribute_slots_suffix),{1:slots})
-            assert badge['mcValue']['mData']['display']==(grade(n) if marked else n)
+            assert badge['mcValue']['mData']['display']==grade(n), 'Native roster=true identifies the player badge even without the formation marker'
             for i,v in enumerate(values):
                 target=slots[f'mcValueSlotText{i}']['mData']
                 assert target['display']==(grade(v) if marked else v)

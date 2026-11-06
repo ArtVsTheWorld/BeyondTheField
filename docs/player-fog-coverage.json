@@ -11,7 +11,15 @@
     "unknown": "remain hidden",
     "partialColor": "public grade midpoint",
     "selectedRow": "Native black foreground on light selection highlight, per user readability preference",
-    "editPlayer": "Explicit user exception: leave Edit Player Ratings numeric. No adapter implemented for that screen."
+    "editPlayer": "Explicit user exception: leave Edit Player Ratings numeric. No adapter implemented for that screen.",
+    "defaultScale": "A+- for new profiles; preserve explicit saved choices",
+    "descriptive": {
+      "90-100": "Elite, muted purple",
+      "80-89": "Great, muted blue",
+      "70-79": "Good, muted green",
+      "60-69": "Fair, muted amber",
+      "0-59": "Poor, muted red"
+    }
   },
   "surfaces": [
     {
@@ -687,20 +695,26 @@
     "p70KickerRangeFailure": "User screenshot and actual live window show ACC64/PWR64 in Kicker Range. Both bank14 methods attached. Corrected bounded read-only _SetRange capture resolves live MovieClip script objects and confirms both badge mData.value fields are AptValueString(vtableBC41750), string64, with no DEPlayerRating marker. Native child labels also string64. Source value type is now verified, not inferred. All diagnostic probes stopped0.",
     "p71KickerTextFix": "Two KickerRange badges opt into strict canonical0..100 integer-text parsing. Mark before value/child readiness; initial suffix, privately marked RatingValueItem.Draw and new exact RatingValueItem.SetValue suffix share parser, preserving underlying numeric/text values. SetValue native20byte body hash6D730F72E674695B verified from unwrapped Apt Data, fixed4register frame retained. No new production native hook, scan or background polling. Nonkicker shared badges keep existing path.",
     "p71BuildReview": "MSVC/W4/WX/native tests/all11UIVM suites passed; independent card/ingame/playcall tests and exact SetValue body/scope/frame/aliasing/lifecycle review pass. Tests cover101 numeric/text ratings, deferred child initialization, native SetValue+Draw resets, recycled players, unknown/formatted strings, nonmarked badges, numeric stats/geometry/circle colors and Trench notification regression.",
-    "p71Package": "Build/DynastyEnhancer-player-fog-p71-MMC.zip staged with combined Social Media and Fog of War. MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256091d90d89842bb6a0213c792638e21cb82de9a1c171d6000ae7ad3fa7dac60ea. Installed p70 files/history unchanged; p71 not yet loaded. Await user installation/visual check."
+    "p71Package": "Build/DynastyEnhancer-player-fog-p71-MMC.zip staged with combined Social Media and Fog of War. MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256091d90d89842bb6a0213c792638e21cb82de9a1c171d6000ae7ad3fa7dac60ea. Installed p70 files/history unchanged; p71 not yet loaded. Await user installation/visual check.",
+    "p72InGameInjuryFailure": "User in-game pause Injury Report screenshot: Overall B already graded; six attributes raw91/94/65/81/84/89. Exact legacy selection method calls GetRelevantSkillsFromPlayer then PlayerModule.SetExtraInfo; bypasses modern injury response conversion.",
+    "p72InGameInjuryFix": "Exact screen method1F48/body1F78 argc0 regs7 flags41 size484 hash595EFEA5CE60D248 verified noouterReturn/nonested. Mark its mcModule.DEInjuryPlayerRatings; shared PlayerModule.Draw forwards marker and AttributesInfoSlot.Draw converts fully revealed values only. Native roster defaultsfalse, so no rostertrue guard. Original skillValue/ratingValue/Overall/injury/status/recovery remain unchanged. One additional asset bank21st uses existing lifecycle/dispatch hooks.",
+    "p72BuildReview": "MSVC/W4/WX/native tests/all11UIVM suites and independent source/frame/lifecycle review pass. Numeric and text six-value native injury fixtures with rosterfalse, changing selected player, unknown/scouting hidden values, missing/deferred widgets and unmarked labels pass; card and Formation regression suites pass.",
+    "p72Package": "Combined Build/DynastyEnhancer-player-fog-p72-MMC.zip packaged with p71 kicker correction plus new injury attributes. MMC registration/launch/tamper/path/config smoke checks pass. DLL SHA256cab266f2753fe7fc9281a06a4c83265ea91867ff4333802f10f09533a1a1ff8f. Not installed or loaded by agent; installed p70 runtime unchanged. Injury and kicker visual checks pending.",
+    "rimeLineupDuoOpen": "Two user screenshots expose separate Rime player-datasource OVRs: CFB_Lineup->PlayerInfoDisplay uses player overallrating hash936363213 through IntToFormattedString; CFB_Dynamic_Duo has analogous2OVR converters. Nearby jerseys/statistics excluded. Offline graph/native formatter audit completed; live source/owner association remains unverified. Bounded read-only observer got noinstances before user left game; explicitly stopped0/inflight0. No production Rime replacement or Flags-only gate shipped."
   },
   "stages": {
     "roster": "Passed p46 clean session; user-confirmed position/team filters and far-right columns; Edit Player excluded by user.",
     "depthCardsHub": "Passed p61: all requested roster/depth filters/far-right, Ratings/Physicals/Mentals/injuredHealth, StartingOffense/MismatchOnPaper, Formation offense/defense details and reentry. Numeric teamratings, jerseys, costs, NIL, health/recovery and native selection styles preserved. EditPlayer remains numeric per user.",
-    "remainingMenusLeakAudit": "Menu/in-game audits, pre-snap Subs and user-confirmed Trench p70 correction pass. Kicker Range p70 live failure diagnosed as canonical text bypassing numeric guard; p71 built/reviewed/packaged with initial/SetValue/Draw fix, visual confirmation pending. Other encountered panels show grades; unseen scenes are not claimed verified.",
+    "remainingMenusLeakAudit": "Prior menu audits, pre-snap Subs and Trench p70 pass. Newly reported pause Injury attribute leak fixed/built/reviewed/packaged p72 but needs visual check. Kicker p71 correction included; visual check pending. Opening lineup and Game Changers use separate Rime path and remain open pending verified live source/owner binding.",
     "performanceRegressionPackage": "Development packages built/verified; callback timings recorded, release regression still pending."
   },
   "completionAudit": {
     "scope": "Finite observed/native-supported surfaces; no speculative adapter work",
     "remainingPriority": [
-      "Playcall Kicker Range ACC/PWR badges: p70 string64 leak confirmed in live objects; p71 correction built/reviewed/packaged, awaiting installation and visual check",
-      "Broadcast player-rating graphics: four live conversions logged; catalog-wide visual coverage not claimed",
-      "Combined Social Media/recruiting/roster regression and bounded performance measurement; installed recruiting runtime checksum matches p70"
+      "In-game pause Injury Report six attribute tiles: p72 built/reviewed/packaged; visual check pending",
+      "Playcall Kicker Range ACC/PWR: string64 source confirmed, p71 fix included in p72; visual check pending",
+      "Rime opening lineup and Game Changers OVR labels: exact native graph and formatter identified; live source/owner association unresolved, no formatter change shipped",
+      "Combined Social Media/recruiting/roster regression and bounded performance measurement; latest installed runtime checksum observed matches p70"
     ],
     "excluded": [
       "Edit Player numeric ratings per user",
@@ -708,5 +722,57 @@
       "Dormant uncalled templates without visible ratings",
       "Statistics, Auto Subs thresholds, health deductions, costs, and unrelated metadata"
     ]
+  },
+  "enhancementOptions": {
+    "candidate": "options-p83",
+    "state": "Built, native/UI tested and packaged; installation and live verification pending",
+    "documentation": "docs/dynasty-enhancement-options.md",
+    "settings": [
+      "Social Media Feed",
+      "Recruiting Fog",
+      "Roster Fog",
+      "Team Fog",
+      "Rating Grade Scale",
+      "Rating Colors"
+    ],
+    "perDynasty": true,
+    "nativeAndUiTests": "Passed",
+    "installed": false,
+    "additionalChecks": [
+      "strict settings file types and old-profile write retry",
+      "concurrent settings flushes",
+      "active LeagueID guards for settings and feed entry",
+      "one million cached selections without reads or new allocations",
+      "shared constant pool read coalescing",
+      "native copy/literal bounds"
+    ],
+    "sourceCacheAudit": {
+      "methods": 63,
+      "previousBytes": 360072,
+      "currentBytes": 44762,
+      "scope": "cached source component only; not total runtime memory or measured FPS"
+    },
+    "previousInstalled": "options-p80"
+  },
+  "coachBoostIndicators": {
+    "candidate": "options-p83",
+    "implemented": true,
+    "liveVerified": false,
+    "state": "Built and packaged; installation/live verification pending",
+    "policy": "Retain native trend tokens and renderer independently of grade scale/color selection; keep base and boosted ratings distinct",
+    "evidence": "Evidence/EnhancementOptions/p81-verification.json"
+  },
+  "teamFog": {
+    "candidate": "options-p83",
+    "implemented": true,
+    "liveVerified": false,
+    "coverage": [
+      "TeamModuleHorizontal OVR/OFF/DEF",
+      "Older OVRItem player badges in Select Your Team",
+      "Explicit team OFF/DEF OVRItem captions"
+    ],
+    "independentOfRosterFog": true,
+    "numericColorMode": true,
+    "otherNativeLayouts": "Coverage audit remains open"
   }
 }

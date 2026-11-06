@@ -79,6 +79,7 @@ def rows_suffix(a):
     a.reg(4);a.string('display');a.reg(6);a.raw(0x4F)
     a.set_field(4,'DEPausePlayerRating',True)
     palette(a,6,0,'depthRowNext','depthRowPalette')
+    a.reg(0);a.number(0);a.raw(0x48);a.branch('depthRowNext')
     a.reg(4);a.string('DEPauseGradeColor');a.reg(0);a.raw(0x4F)
     a.label('depthRowNext');path(a,1,'DEPauseRatingColumns');a.store(0)
     a.reg(2);a.raw(0x50);a.store(2);a.branch('depthRowLoop',0x99)
@@ -90,6 +91,7 @@ def color_prefix(a):
     # highlight colors remain native. Non-rating tables fall straight through
     # to an exact copied original body with its original branch structure.
     fallback='depthColorNative'
+    a.grade_scale();a.number(4);a.raw(0x66);a.branch(fallback)
     named_sheet(a,fallback)
     path(a,1,'DEPauseRatingColumns');a.store(0);a.missing(0,fallback)
     a.reg(0);a.reg(8);a.raw(0x4E,0x73,0x66);a.branch(fallback,0xB8)

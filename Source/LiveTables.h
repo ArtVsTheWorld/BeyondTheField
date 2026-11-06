@@ -120,6 +120,9 @@ inline Json decodedEnum(const std::string& schema,const std::string& field,uint3
     throw std::runtime_error("Unknown native enum: "+schema+"."+field+" value="+std::to_string(raw));
 }
 class Capture {
+    using FieldSelector=std::set<std::string>(*)(const std::string&);
+    using RootSelector=bool(*)(const std::string&);
+    FieldSelector selectedFields=nullptr;RootSelector selectedRoots=nullptr;
     Memory memory;Address image=0,root=0,context=0,sessionContext=0;bool ownerBound=false;SessionBinding session;std::map<Address,Schema> schemas;std::map<Address,Table> tables;std::map<uint32_t,Address> ids;std::map<Address,std::map<uint32_t,uint32_t>> referenceMaps;
     std::vector<std::pair<Address,uint32_t>> pending;std::set<std::pair<Address,uint32_t>> scheduled;Json records=Json::object();size_t recordCount=0;
     Address parent(Address ctx){return memory.at<Address>(ctx+0x1a8);}
@@ -129,7 +132,7 @@ class Capture {
         s.name=memory.text(memory.at<Address>(address+0x18));s.capacity=memory.at<uint32_t>(address+0x28);
         const auto begin=memory.at<Address>(address+0x40),end=memory.at<Address>(address+0x48);
         if(end<begin||(end-begin)%0x58||end-begin>0x40000)throw std::runtime_error("Invalid runtime schema");
-        auto selected=wanted(s.name);
+        auto selected=selectedFields?selectedFields(s.name):wanted(s.name);
 #if defined(RECRUIT_RESUME_AUDIT)
         // Opt-in, read-only Notes research capture. Ordinary Social Media/Fog
         // builds retain their existing field selection and change-watch cost.
@@ -225,7 +228,7 @@ class Capture {
         }catch(const std::exception& e){throw std::runtime_error(std::string(step)+" context="+std::to_string(context)+": "+e.what());}
     }
 public:
-    explicit Capture(Address base,HANDLE process=GetCurrentProcess()):image(base){memory.process=process;}
+    explicit Capture(Address base,HANDLE process=GetCurrentProcess(),FieldSelector fields=nullptr,RootSelector roots=nullptr):selectedFields(fields),selectedRoots(roots),image(base){memory.process=process;}
     Json inspectSchemas(){
         const auto identity=status();Json result={{"status",identity},{"tables",Json::array()}};std::set<Address> described;
         for(const auto& [id,a]:ids){const auto descriptor=memory.at<Address>(a+8);if(!described.insert(descriptor).second)continue;
@@ -251,12 +254,38 @@ public:
         return result;
     }
     Json observedTables()const{Json out=Json::array();for(const auto& [a,t]:tables)out.push_back({{"table",a},{"name",t.schema->name},{"data",t.dataAddress},{"size",t.data.size()},{"words",t.words},{"first",t.first},{"rows",t.rows}});return out;}
+    // Worker-created proof for small callback-local reads. Preserve packed
+    // offsets/masks and their metadata, not unrelated bytes in these rows.
+    Json identityProof(){
+        Json out=Json::array();std::set<std::string> seen;
+        for(const auto& [address,t]:tables){
+            const auto& name=t.schema->name;std::set<std::string> selected;
+            if(name=="SeasonInfo")selected={"CurrentSeasonYear","CurrentYear","CurrentWeek","CurrentWeekType","CurrentStage","CurrentOffseasonStage"};
+            else if(name=="Franchise")selected={"LeagueID"};
+            else if(name=="FranchiseServer_CareerFlow")selected={"IsStageActive","IsStageAdvancing"};else continue;
+            if(!seen.insert(name).second||t.array||!t.rows||t.free.count(0))throw std::runtime_error("Ambiguous draft identity proof");
+            const auto descriptor=memory.at<Address>(address+8),fields=memory.at<Address>(descriptor+0x40);Json checks=Json::array();
+            auto add=[&](Address at,unsigned size,uint64_t expected,uint64_t mask){checks.push_back({{"address",at},{"size",size},{"expected",expected},{"mask",mask}});};
+            add(address+8,8,descriptor,UINT64_MAX);add(descriptor+0x40,8,fields,UINT64_MAX);add(address+0x38,8,t.dataAddress,UINT64_MAX);
+            add(t.dataAddress+0xc,4,t.words,UINT32_MAX);add(t.dataAddress+0x10,4,t.rows,UINT32_MAX);add(t.dataAddress+0x18,4,t.first,UINT32_MAX);
+            for(const auto& f:t.schema->fields)if(selected.erase(f.name)){
+                add(fields+size_t(f.id)*0x58+0x30,2,f.width,0xffff);add(fields+size_t(f.id)*0x58+0x40,4,f.kind,UINT32_MAX);
+                if(f.width){const auto offset=value<uint32_t>(t.data,0x20+size_t(f.id)*4);const auto mask=(f.width==32?UINT32_MAX:((1u<<f.width)-1))<<(offset%32);
+                    add(t.dataAddress+0x20+size_t(f.id)*4,4,offset,UINT32_MAX);
+                    add(t.dataAddress+(size_t(t.first)+offset/32)*4,4,value<uint32_t>(t.data,(size_t(t.first)+offset/32)*4),mask);
+                }else add(fields+size_t(f.id)*0x58+0x48,8,f.fallback,UINT64_MAX);
+            }
+            if(!selected.empty()||checks.size()>40)throw std::runtime_error("Incomplete draft identity proof");out.push_back({{"name",name},{"checks",std::move(checks)}});
+        }
+        if(seen.size()!=3)throw std::runtime_error("Missing draft identity proof");return out;
+    }
     Json run(PackedChangeWatch* observation=nullptr){
         memory.observation=observation;
         const auto before=status();
         for(const auto& [id,a]:ids){(void)id;Schema s;s.name=memory.text(memory.at<Address>(memory.at<Address>(a+8)+0x18));
+            if(selectedRoots&&!selectedRoots(s.name))continue;
 #if defined(RECRUIT_RESUME_CAPTURE)
-            if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="Recruit"&&s.name!="Team")continue;
+            if(!selectedRoots&&s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="Recruit"&&s.name!="Team")continue;
 #endif
             if(s.name!="SeasonInfo"&&s.name!="Franchise"&&s.name!="FranchiseServer_CareerFlow"&&s.name!="FranchiseUser"&&s.name!="Team"&&s.name!="Conference"&&s.name!="Player"&&s.name!="SeasonGame"&&s.name!="Awards"&&s.name!="League"&&s.name!="Recruit"&&s.name!="StaffHiringEval"&&s.name!="PlayersLeavingEval"&&s.name!="PlayersLeavingEndOfSeason"&&s.name!="OffseasonStageTypeEnumTableEntry")continue;auto& t=table(a);for(uint32_t row=0;row<t.rows;++row)if(!t.free.count(row))schedule(a,row);}
         for(size_t i=0;i<pending.size();++i){if(++recordCount>350000)throw std::runtime_error("Runtime record budget exceeded");auto [a,row]=pending[i];auto& t=table(a);auto v=record(t,row);if(t.schema->name=="OffseasonStageTypeEnumTableEntry"&&v.contains("Value")){for(const auto& f:t.schema->fields)if(f.name=="Value")for(const auto& [code,label]:f.labels)if(v["Value"]==label)v["NativeValueCode"]=code;}records[key(t,row)]={{"key",key(t,row)},{"type",t.schema->name},{"capacity",t.rows},{"v",std::move(v)}};}

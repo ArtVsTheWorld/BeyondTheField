@@ -7,7 +7,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Tools'))
 from build_recruit_notes_ui import Assembler,GRADE_COLORS
 from build_player_ingame_ui import (FIELDS,player_ratings_suffix,key_player_suffix,
                                   playcall_player_suffix,substitution_player_suffix,depth_panel_player_suffix,
-                                  preplay_sub_player_suffix,kicker_range_suffix,SPECS,KICKER_SPECS)
+                                  preplay_sub_player_suffix,kicker_range_suffix,injury_module_suffix,SPECS,KICKER_SPECS,INJURY_SPECS)
 from recruit_notes_vm import Machine,UNDEFINED
 
 
@@ -84,7 +84,7 @@ class BoundedAssembler(Assembler):
     def __init__(self,limit):super().__init__();self.limit=limit
     def reg(self,n):assert 0<=n<self.limit,(n,self.limit);super().reg(n)
     def store(self,n):assert 0<=n<self.limit,(n,self.limit);super().store(n)
-for off,argc,regs,flags,size,expected,newregs,suffix in [*SPECS,*KICKER_SPECS]:
+for off,argc,regs,flags,size,expected,newregs,suffix in [*SPECS,*KICKER_SPECS,*INJURY_SPECS]:
     a=BoundedAssembler(newregs);suffix(a);a.finish()
 print('Passed:5 in-game player label paths,101 boundaries each, hidden/invalid/absent fields, recycled players, native focus colors and non-rating playcall statistics.')
 
@@ -181,3 +181,37 @@ for extra in [{},{'DEPlayerRating':True},{'DEPlayerRatingNumericText':False}]:
     assert badge['mcValue']['mData']['display']=='64'
 assert len(draw.code)+1730<32768 and len(set_value.code)+20<32768
 print('Passed: kicker canonical numeric text at initial paint, deferred initialization, SetValue and Draw; reused kicker/unknown values, four-register frame and unmarked team/stat badges preserved.')
+
+# Actual pause Injury Report: the legacy player module defaults roster=false,
+# even for active players. Its skills normalize to AttributesData0..5. Only
+# this screen's private marker permits raw values to be displayed as grades.
+from build_player_card_ui import badge_suffix,attribute_slots_suffix
+mark=Assembler();injury_module_suffix(mark);mark=mark.finish()
+parent=Assembler();badge_suffix(parent);parent=parent.finish()
+slots=Assembler();attribute_slots_suffix(slots);slots=slots.finish()
+for raw in [[91,94,65,81,84,89],['91','94','65','81','84','89']]:
+    source=[{'skillLabel':n,'skillValue':v} for n,v in zip(['Speed','Agility','Awareness','Medium Route','Catching','Spec Catch'],raw)]
+    before=copy.deepcopy(source)
+    extra={f'AttributesData{i}':{'ratingName':s['skillLabel'],'ratingValue':s['skillValue'],'isFullyScouted':True} for i,s in enumerate(source)}
+    attributes={'mData':{'ExtraInfo':extra},**{f'mcValueSlotText{i}':widget(v) for i,v in enumerate(raw)}}
+    info={'PlayerId':127,'roster':False,'overall':'B','injury':'Broken Collarbone','length':'Multiple Weeks',
+          'attributesSubpanelInfo':source}
+    module={'mData':{'ExtraInfo':info},'mcInfoSlotAttributes':attributes}
+    Machine({},[]).run(mark,{1:{'mcModule':module}})
+    Machine({},[]).run(parent,{1:module});Machine({},[]).run(slots,{1:attributes})
+    assert [attributes[f'mcValueSlotText{i}']['mData']['display'] for i in range(6)]==['A','A','D','B','B','B']
+    assert source==before and info['overall']=='B' and info['roster'] is False
+    assert info['injury']=='Broken Collarbone' and info['length']=='Multiple Weeks'
+    assert [extra[f'AttributesData{i}']['ratingValue'] for i in range(6)]==raw
+    # A reused player selection replaces all six labels from fresh values.
+    for i in range(6):extra[f'AttributesData{i}']['ratingValue']='72';attributes[f'mcValueSlotText{i}']['mData']['display']='72'
+    Machine({},[]).run(slots,{1:attributes});assert all(attributes[f'mcValueSlotText{i}']['mData']['display']=='C' for i in range(6))
+for revealed in [False,UNDEFINED]:
+    attributes={'mData':{'ExtraInfo':{'DEInjuryPlayerRatings':True,'AttributesData0':{'isFullyScouted':revealed,'ratingValue':91}}},'mcValueSlotText0':widget('?')}
+    Machine({},[]).run(slots,{1:attributes});assert attributes['mcValueSlotText0']['mData']['display']=='?'
+for module in [{},{'mData':{}},{'mData':{'ExtraInfo':{'roster':False}}}]:
+    Machine({},[]).run(mark,{1:{'mcModule':module}});Machine({},[]).run(parent,{1:module})
+unmarked={'mData':{'ExtraInfo':{'AttributesData0':{'isFullyScouted':True,'ratingValue':91}}},'mcValueSlotText0':widget(91)}
+Machine({},[]).run(slots,{1:unmarked});assert unmarked['mcValueSlotText0']['mData']['display']==91
+assert len(slots.code)+388<32768
+print('Passed: pause Injury Report six numeric/text attributes with native roster=false, private marker forwarding, unknowns/reused players; source skills, Overall, injury status/recovery and unmarked displays preserved.')

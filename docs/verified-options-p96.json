@@ -1,0 +1,38 @@
+{
+  "candidate": "options-p96",
+  "optionsProtocol": 4,
+  "settingsFormat": 2,
+  "features": [
+    "Independent Player Grade Scale and Team Grade Scale",
+    "Blind en dash with native colors",
+    "Brighter Descriptive palette",
+    "Preserved format-1 scale on migration",
+    "Previous recruiting currency layout changes retained"
+  ],
+  "checks": {
+    "nativeFog": "passed",
+    "uiVmSuites": "passed",
+    "independentScalePairs": 25,
+    "nativeSocial": "passed",
+    "nodeTests": 376,
+    "mmcRegistrationIntegrityTamperPaths": "passed"
+  },
+  "liveAcceptance": "pending clean installation",
+  "openCoverage": [
+    "Rime opening lineups",
+    "Rime Game Changers/Lightning Combination OVR"
+  ],
+  "hashes": {
+    "DynastyEnhancerRecruitFog-p96.dll": "ff3f3efb0879a7be43281b57ddd618514dd066d9b9f7da1e99460bb0b00370ad",
+    "DynastyEnhancerNative-options-p96.dll": "9ced5c57e05f093dd00e8a6de5b57bb039701ae22ec45eba7fb9a54ad70fd07a",
+    "DynastyEnhancer-options-p96-MMC.zip": "858904e29c3917ffa5a621a1be16e49fbc76d58727ecd8be53544ba776eee7ae"
+  },
+  "privateDataExcluded": [
+    "Saves",
+    "RuntimeHistory",
+    "RecruitResumeHistory",
+    "DynastyEnhancementSettings",
+    "ResumePersistenceTests",
+    "Native extracted assets and diagnostics"
+  ]
+}

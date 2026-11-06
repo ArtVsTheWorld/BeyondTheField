@@ -32,6 +32,7 @@ def ovr_template_suffix(a):
     path(a,2,'ExtraInfo');a.string('DEPlayerRating');a.raw(0x73,0x4F)
     # Clone an existing ValueTextStyle; absence leaves the native default style
     # intact rather than inventing an unverified default font or widget type.
+    a.reg(6);a.number(0);a.raw(0x48);a.branch('templateReturn')
     path(a,2,'ExtraInfo','ValueTextStyle');a.store(7);a.missing(7,'templateReturn')
     a.empty_object(8);a.reg(8);a.string('fontColor');a.reg(6);a.raw(0x4F)
     path(a,2,'ExtraInfo');a.string('ValueTextStyle');a.reg(8);a.number(1);a.reg(7);a.string('CloneAndModify');a.raw(0x52,0x4F)
@@ -77,6 +78,7 @@ def comparison_stat_suffix(a):
     a.reg(2);a.string('display');a.reg(4);a.raw(0x4F)
     # Native _GetStatValueExtraInfo returns a fresh cloned FontStyle directly.
     path(a,2,'ExtraInfo');a.raw(0x76,0x49);a.branch('comparisonReturn')
+    a.reg(3);a.number(0);a.raw(0x48);a.branch('comparisonReturn')
     path(a,2,'ExtraInfo');a.string('fontColor');a.reg(3);a.raw(0x4F)
     a.label('comparisonReturn');a.reg(2);a.raw(0x3E)
 
@@ -106,6 +108,12 @@ def generate(destination):
         if len(p.code)>32768:raise ValueError('Player hub adapter exceeds runtime bytecode bound')
         code='{'+','.join(hex(b) for b in p.code)+'}'
         lines.append(f'result.push_back({{{off},{argc},{original_regs},41,{size},{expected}ull,{regs},0,{count},{code}}});')
+        for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+        for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+        for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+        for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+        for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+        for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
         for at,text in p.literals:lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
     lines+=['return result;}','}'];destination.write_text('\n'.join(lines)+'\n',encoding='utf8')
     print(json.dumps({'playerHubMethods':len(SPECS),'teamRatingFieldsChanged':False}))

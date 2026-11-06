@@ -16,6 +16,7 @@ class FeedWorker {
     std::string lastError,lastStatus;unsigned failures=0;
     PackedChangeWatch settledProbe;uint64_t fastPolls=0,lastProbeReport=0,sameContentRefreshes=0,lastSameReport=0;
 public:
+    void restart(){pollAt=0;haveObserved=false;haveAccepted=false;lastStatus.clear();lastContext=0;lastError.clear();failures=0;}
     void configure(const std::filesystem::path& directory,Address image){
         folder=directory;base=image;auto c=social::refresh::readJson(folder/L"dynasty-enhancer.json");
         auto resolve=[&](const char* key){auto p=std::filesystem::u8path(c.at(key).get<std::string>());return std::filesystem::absolute(p.is_absolute()?p:folder/p);};node=resolve("node");exporter=resolve("exporter");

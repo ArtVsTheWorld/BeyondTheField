@@ -3,7 +3,7 @@
 Only custom instructions and hashes are emitted. Original game method bodies
 are verified and copied at runtime; no extracted AST is shipped in the DLL.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 import argparse
 import json
@@ -16,6 +16,12 @@ class Program:
     code: bytes
     literals: list
     references: list
+    scale_offsets: list = field(default_factory=list)
+    color_offsets: list = field(default_factory=list)
+    fog_offsets: list = field(default_factory=list)
+    team_offsets: list = field(default_factory=list)
+    dollar_offsets: list = field(default_factory=list)
+    team_scale_offsets: list = field(default_factory=list)
 
 
 class Assembler:
@@ -23,6 +29,8 @@ class Assembler:
         self.code = bytearray()
         self.literals, self.references, self.branches = [], [], []
         self.labels = {}
+        self.scale_offsets, self.color_offsets, self.fog_offsets, self.team_offsets, self.dollar_offsets = [], [], [], [], []
+        self.team_scale_offsets=[]
 
     def raw(self, *values): self.code.extend(values)
     def reg(self, n): self.raw(0xB9, n)
@@ -42,6 +50,21 @@ class Assembler:
             self.number((n >> 8) & 255); self.raw(0x47)
             self.number(256); self.raw(0x0C); self.number(n & 255); self.raw(0x47)
         else: raise ValueError('Unsupported numeric literal')
+    def grade_scale(self, team=False):
+        # Immutable per-scale copies are selected at native invocation setup.
+        if team=='auto':
+            suffix=str(len(self.code));self.reg(1);self.member('mDEActiveRatingTeam');self.raw(0x73,0x66)
+            self.branch('autoTeamScale'+suffix)
+            self.grade_scale();self.branch('autoScaleReady'+suffix,0x99)
+            self.label('autoTeamScale'+suffix);self.grade_scale(True);self.label('autoScaleReady'+suffix)
+        else:
+            self.raw(0xB5);(self.team_scale_offsets if team else self.scale_offsets).append(len(self.code));self.raw(0)
+    def grade_colors_enabled(self):
+        self.raw(0xB5);self.color_offsets.append(len(self.code));self.raw(1)
+    def fog_enabled(self, team=False):
+        self.raw(0xB5);(self.team_offsets if team else self.fog_offsets).append(len(self.code));self.raw(1)
+    def dollars_enabled(self):
+        self.raw(0xB5);self.dollar_offsets.append(len(self.code));self.raw(0)
     def member(self, name): self.string(name); self.raw(0x4E)
     def store(self, n):
         self.raw(0x87); self.align(); self.code.extend(struct.pack('<I', n)); self.raw(0x17)
@@ -71,7 +94,7 @@ class Assembler:
         for _ in range(n//2): self.raw(0x76, 0x17)
     def finish(self):
         for at, label in self.branches: struct.pack_into('<i', self.code, at, self.labels[label]-at-4)
-        return Program(bytes(self.code), self.literals, self.references)
+        return Program(bytes(self.code), self.literals, self.references, self.scale_offsets, self.color_offsets, self.fog_offsets, self.team_offsets, self.dollar_offsets,self.team_scale_offsets)
 
 
 HIDDEN = ('mcCircularBar', 'mcBarIcon', 'mcScoutBtn', 'mcTotalHours',
@@ -230,21 +253,15 @@ def fnv(data):
 GRADE_COLORS={'A':0x1FE840,'B':0xA8D943,'C':0xFFD34D,'D':0xF68C2E,'F':0xF04444}
 
 
-def grade_palette():
-    # Ordinal midpoint of the public letter bands. Half steps blend adjacent
-    # palette colors; no hidden numeric rating is consulted.
-    order='FDCBA';palette=dict(GRADE_COLORS)
-    for lo in range(5):
-        for hi in range(lo+1,5):
-            middle=(lo+hi)/2;left=GRADE_COLORS[order[int(middle)]];right=GRADE_COLORS[order[int(middle+.5)]]
-            color=left if middle.is_integer() else sum(round((((left>>shift)&255)+((right>>shift)&255))/2)<<shift for shift in (16,8,0))
-            palette[order[lo]+'–'+order[hi]]=color
-    return palette
+def grade_palette(scale=0):
+    from grade_scales import palette
+    return palette(scale)
 
 
 def grade_colors(a):
     # Register 1 only: the small focus callbacks can be redirected at the body
     # accessor without changing an already-established native call frame.
+    a.grade_scale();a.number(4);a.raw(0x66);a.branch('color_done')
     def get(*parts):
         a.reg(1)
         for part in parts:a.member(part)
@@ -254,15 +271,42 @@ def grade_colors(a):
         a.raw(0x76);get(*parts);a.raw(0x49);a.branch('color_done')
     missing(('mData',));missing(('mData','ExtraInfo'))
     set_('mDEColorLabel',lambda:get('mData','ExtraInfo','Points'))
+    get('mDEColorLabel');a.raw(0x44);a.string('number');a.raw(0x66);a.branch('color_numeric')
     get('mDEColorLabel');a.raw(0x44);a.string('string');a.raw(0x66);a.branch('color_done',0xB8)
+    a.branch('color_label_ready',0x99)
+    a.label('color_numeric');get('mDEColorLabel');a.store(0)
+    from build_player_card_ui import numeric_grade
+    numeric_grade(a,0,0,'color_done','scoutColorGrade',force=True)
+    set_('mDEColorLabel',lambda:a.reg(0))
+    a.label('color_label_ready')
     missing(('mcPoints',))
+    get('mDEColorsEnabled');a.grade_colors_enabled();a.raw(0x66);a.branch('color_newscale',0xB8)
+    get('mDEGradeScale');a.grade_scale();a.raw(0x66);a.branch('color_newscale',0xB8)
     get('mDEColorLabel');get('mDEGradeLabel');a.raw(0x66);a.branch('color_check')
+    a.label('color_newscale');set_('mDEGradeScale',lambda:a.grade_scale());set_('mDEColorsEnabled',lambda:a.grade_colors_enabled())
     set_('mDEGradeLabel',lambda:get('mDEColorLabel'))
     set_('mDEGradeStyle',lambda:(a.number(0),a.raw(0x43)))
     get('mDEGradeStyle');a.string('fontColor');a.global_object('art_styleguide','Color','UNFOCUS_BUTTON_FONT_COLOR');a.raw(0x4F)
-    for index,(label,color) in enumerate(grade_palette().items()):
-        get('mDEColorLabel');a.string(label);a.raw(0x66);a.branch(f'grade_next{index}',0xB8)
-        get('mDEGradeStyle');a.string('fontColor');a.number(color);a.raw(0x4F);a.branch('color_check',0x99);a.label(f'grade_next{index}')
+    for scale in [1,3]:
+        a.grade_scale();a.number(scale);a.raw(0x66);a.branch('color_fit')
+    a.branch('color_fit_done',0x99)
+    a.label('color_fit')
+    get('mDEGradeStyle');a.string('resize');a.global_object('art_styleguide','Font','RESIZE_SCALEDOWN');a.raw(0x4F)
+    get('mDEGradeStyle');a.string('maxNumLines');a.number(1);a.raw(0x4F)
+    get('mcPoints','_width');a.raw(0x44);a.string('number');a.raw(0x66);a.branch('color_fit_done',0xB8)
+    get('mcPoints','_width');a.number(0);a.raw(0x67);a.branch('color_fit_done',0xB8)
+    get('mDEGradeStyle');a.string('resizeWidth');get('mcPoints','_width');a.raw(0x4F)
+    a.label('color_fit_done')
+    a.grade_colors_enabled();a.number(1);a.raw(0x66);a.branch('color_check',0xB8)
+    for scale in range(1,4):
+        a.grade_scale();a.number(scale);a.raw(0x66);a.branch('color_scale'+str(scale))
+    for scale in range(4):
+        if scale:a.label('color_scale'+str(scale))
+        for index,(label,color) in enumerate(grade_palette(scale).items()):
+            next_label=f'grade_next{scale}_{index}'
+            get('mDEColorLabel');a.string(label);a.raw(0x66);a.branch(next_label,0xB8)
+            get('mDEGradeStyle');a.string('fontColor');a.number(color);a.raw(0x4F);a.branch('color_check',0x99);a.label(next_label)
+        a.branch('color_check',0x99)
     a.label('color_check')
     # The label cache alone is insufficient: native focus/reentry can replace
     # the child's style while retaining the same public grade string.
@@ -311,10 +355,16 @@ def generate_header(destination, evidence):
         p=a.finish();newregs=registers[0] if mode in ('grade_colors','grade_focus') else max(registers[0],10)
         programs.append((offset-0x30,argc,registers[0],registers[1],size,fnv(original),newregs,copy_at,copy_size,p))
         report.append(dict(name=cls+name,definition=offset-0x30,argc=argc,registers=registers[0],flags=registers[1],size=size,hash=fnv(original),customBytes=len(p.code),copyAt=copy_at,copyBytes=copy_size))
-    lines=['// Generated by Tools/build_recruit_notes_ui.py; custom bytecode only.','#pragma once','#include <vector>','#include <cstdint>','#include <cstring>','namespace recruitingfog::notesui {','struct NestedDefinition {unsigned offset;uintptr_t name,params;};','struct Program {uintptr_t offset;unsigned argc,registers,flags,size;uint64_t hash;unsigned newRegisters,copyAt,copyBytes;std::vector<unsigned char> code;std::vector<NestedDefinition> nestedDefinitions{};};','inline std::vector<Program> programs(){std::vector<Program> result;']
+    lines=['// Generated by Tools/build_recruit_notes_ui.py; custom bytecode only.','#pragma once','#include <vector>','#include <cstdint>','#include <cstring>','namespace recruitingfog::notesui {','struct NestedDefinition {unsigned offset;uintptr_t name,params;};','struct Program {uintptr_t offset;unsigned argc,registers,flags,size;uint64_t hash;unsigned newRegisters,copyAt,copyBytes;std::vector<unsigned char> code;std::vector<NestedDefinition> nestedDefinitions{};std::vector<unsigned> scaleOffsets{};std::vector<unsigned> colorOffsets{};std::vector<unsigned> fogOffsets{};std::vector<unsigned> teamOffsets{};std::vector<unsigned> dollarOffsets{};std::vector<unsigned> teamScaleOffsets{};};','inline std::vector<Program> programs(){std::vector<Program> result;']
     for offset,argc,regs,flags,size,hash_,newregs,copy_at,copy_size,p in programs:
         array='{'+','.join(hex(b) for b in p.code)+'}'
         lines.append(f'result.push_back({{{offset},{argc},{regs},{flags},{size},{hash_}ull,{newregs},{copy_at},{copy_size},{array}}});')
+        for at in p.color_offsets:lines.append(f"result.back().colorOffsets.push_back({at});")
+        for at in p.scale_offsets:lines.append(f"result.back().scaleOffsets.push_back({at});")
+        for at in p.team_scale_offsets:lines.append(f"result.back().teamScaleOffsets.push_back({at});")
+        for at in p.fog_offsets:lines.append(f"result.back().fogOffsets.push_back({at});")
+        for at in p.team_offsets:lines.append(f"result.back().teamOffsets.push_back({at});")
+        for at in p.dollar_offsets:lines.append(f"result.back().dollarOffsets.push_back({at});")
         for at,text in p.literals:lines.append('{const auto pointer=reinterpret_cast<uintptr_t>('+json.dumps(text)+f');memcpy(result.back().code.data()+{at},&pointer,8);}}')
     lines+=['return result;}','}']
     destination.write_text('\n'.join(lines)+'\n',encoding='utf8')

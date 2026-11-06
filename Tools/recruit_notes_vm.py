@@ -1,3 +1,4 @@
+import math
 """Offline verifier for the small emitted APT subset, never a game bridge."""
 import struct
 
@@ -36,9 +37,11 @@ class Machine:
         if isinstance(receiver,str):
             if key=='charAt':return lambda i:receiver[i:i+1]
             if key=='length':return len(receiver)
+            if key=='split':return lambda delimiter:receiver.split(delimiter)
         if isinstance(receiver, list):
             if key == 'length':
                 return len(receiver)
+            if key == 'join':return lambda delimiter:delimiter.join(str(v) for v in receiver)
             if key == 'push':
                 def push(*args):
                     receiver.extend(args)
@@ -54,6 +57,8 @@ class Machine:
             return True
         if isinstance(left, (dict, list, ScriptFunction)) or isinstance(right, (dict, list, ScriptFunction)):
             return left is right
+        if type(left) in (int,float) and type(right) in (int,float):
+            return left==right
         return type(left) is type(right) and left == right
 
     def run(self, program, registers, begin=0, end=None):
@@ -142,6 +147,8 @@ class Machine:
                     if name != 'Object' or count != 0:
                         raise AssertionError('Unverified constructor')
                     stack.append({})
+                elif op == 0x4C:
+                    stack.append(stack[-1])
                 elif op == 0x4E:
                     key, receiver = stack.pop(), stack.pop()
                     stack.append(self.member(receiver, key))
@@ -152,9 +159,13 @@ class Machine:
                     right, left = stack.pop(), stack.pop()
                     stack.append(self.equal(left, right, loose=op == 0x49))
                 elif op==0x44:
-                    value=stack.pop();stack.append('string' if isinstance(value,str) else 'undefined' if value is UNDEFINED else 'number' if isinstance(value,(int,float)) else 'object')
+                    value=stack.pop();stack.append('boolean' if isinstance(value,bool) else 'string' if isinstance(value,str) else 'undefined' if value is UNDEFINED else 'number' if isinstance(value,(int,float)) else 'object')
+                elif op==0x0D:
+                    right,left=stack.pop(),stack.pop();stack.append(left/right)
                 elif op==0x0C:
                     right,left=stack.pop(),stack.pop();stack.append(left*right)
+                elif op==0x4B:
+                    value=stack.pop();stack.append(str(int(value)) if isinstance(value,(int,float)) and math.isfinite(value) and value==int(value) else 'NaN' if isinstance(value,float) and math.isnan(value) else str(value))
                 elif op==0x4A:
                     value=stack.pop()
                     try:stack.append(float(value))

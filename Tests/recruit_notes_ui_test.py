@@ -95,7 +95,7 @@ def main():
         machine.run(program(grade_colors),{1:widget});assert points['mData']['ExtraInfo']['fontColor']==expected,'Same-label native focus reset was not repaired'
     assert grade_palette()['C–A']==GRADE_COLORS['B']
     assert grade_palette()['D–B']==GRADE_COLORS['C']
-    widget['mData']['ExtraInfo']['Points']=0;before=len(colors);machine.run(program(grade_colors),{1:widget});assert len(colors)==before
+    widget['mData']['ExtraInfo']['Points']=0;machine.run(program(grade_colors),{1:widget});assert points['mData']['ExtraInfo']['fontColor']==grade_palette()['F']
     machine.run(program(grade_colors),{1:{}})
     print('Passed: fourth-tab metadata, same-state input-lock handling, Notes rendering, recruit changes, absent widgets, and native Scouting layout restoration.')
 
