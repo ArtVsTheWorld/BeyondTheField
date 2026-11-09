@@ -1,4 +1,4 @@
-# Beyond the Field 1.0.2 - first standalone preview
+# Beyond the Field 1.0.2 - first standalone release
 
 This repository was previously named Dynasty-Enhancer. It had **no previous published GitHub release**. This is its first standalone release of the Beyond the Field suite; the old private prototype is not treated as a released version.
 
@@ -14,6 +14,8 @@ New shipped runtime filenames use Beyond the Field branding, including `BeyondTh
 
 Remove old `DynastyEnhancer.dll` and `PlayerAnalytics.dll` copies from Plugins, keeping their data folders. If using COT's other modules, disable its Beyond the Field module first. Main-menu and Play Now ratings remain native; this is an offline Dynasty suite.
 
-Validation: 465 generator/content tests, the source-built native Social Media fixture, all-four packaging/coexistence/COT round-trip checks, and the 5,009-check shared practice contract passed. The native Social Media source changes only its configuration filename for this packaging; recruiting and the remaining runtime content/helpers retain COT 1.0.2 bytes. **New standalone wrapper/native configuration-path live acceptance remains pending; this is a preview.** Other game/overhaul versions are not certified by offline checks.
+Validation: 465 generator/content tests, the source-built native Social Media fixture, all-four packaging/coexistence/COT round-trip checks, and the 5,009-check shared practice contract passed. The native Social Media source changes only its configuration filename for this packaging; recruiting and the remaining runtime content/helpers retain COT 1.0.2 bytes. **Ace reported all four standalone releases verified working on November 9, 2026.** Other game/overhaul versions are not certified by offline checks.
 
 Baseline: no previous release; old prototype source commit `32fe13eb04d4e29749455b2e5d06c16d38b08b7e`. Current maintained source is pinned in `source-release.json`. Checked additions/corrections include the Analytics native bridge/models, story renderer/author crash regression, publication/selection budgets, enhancement scope, money-label adapters and card UI programs. See FEATURES.md for the complete user-facing feature list.
+
+Stable promotion: the ZIP and DLL are unchanged from the tested preview. Enclosed preview labels describe the build-time status. Acceptance is user-reported for the tested setup; other game/overhaul combinations are not automatically certified.

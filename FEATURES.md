@@ -42,4 +42,4 @@ A standalone suite for **offline Dynasty**. No other COT module is required.
 - Use one Beyond the Field provider. Remove the older standalone Analytics/Enhancer DLLs, or use COT's copy instead. Keep all data folders.
 - Current Extra Settings, Expanded Practice and Gameday Atmosphere retain their existing native compatibility contracts. Mixed older versions can fail those checks.
 - The standalone embeds its generator, native engines and required Node/notices. It prepares verified files outside the recursive Plugins DLL scan; no separate dependency download is required.
-- This is a new standalone packaging preview. Existing COT live results and offline checks do not certify this packaging in a clean game process.
+- Ace reported this standalone release working on November 9, 2026. Other game/overhaul combinations still need their own live checks.
