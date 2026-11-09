@@ -1,0 +1,17 @@
+{
+  "format": 1,
+  "title": "Beyond the Field",
+  "version": "1.0.2",
+  "repository": "https://github.com/ArtVsTheWorld/DynastyCOT",
+  "revision": "0c387c580473a84b7e5e5e8ff5ee44f8117fb5cf",
+  "modulePath": "Modules/DynastyEnhancer",
+  "baselineTag": null,
+  "baselineCommit": null,
+  "firstPublishedStandalone": true,
+  "archive": "BeyondTheField-1.0.2.zip",
+  "archiveSha256": "2838140503433a45657fba484e5bf7fe0766bad91d9677a55c37ac3949cbb3eb",
+  "dllSha256": "ea0c9f1aa02ec3e57c8588fe0ec2561f52eb2c5c6d012ca9eb02adf9d344fdda",
+  "threeFileZip": true,
+  "preview": true,
+  "sourceTreeHere": "historical; use pinned integration workspace"
+}
