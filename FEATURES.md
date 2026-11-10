@@ -25,6 +25,7 @@ A standalone suite for **offline Dynasty**. No other COT module is required.
 - Choose ordinary letter grades, A+/A/A- grades, S-tier grades or descriptive words such as GOOD and ELITE. The supported Blind option hides exact grades further. Player and team style choices are independent.
 - Optional rating colors help distinguish grades. Colors off retains native display colors. Descriptive words are capitalized and fitted to supported rating circles.
 - Supported player-card Ratings buckets keep their selection highlight, formatted attributes and matching rating bars without exposing the underlying numbers between bucket changes.
+- Projected overalls in Position Changes follow the player grade and Roster Fog choices. Position-change calculations, sorting and player counts remain native.
 - Optional compact dollar labels show readable $K/$M values in supported recruiting, offers, NIL, budgets and player-card displays, including edited/redrawn values. Numeric editing values and sorting data remain numeric.
 - Defaults: Social Media and the three fog options On; A+/- grades; colors and dollar formatting Off. Choices are saved by Dynasty rather than copied globally to every save.
 
@@ -42,4 +43,4 @@ A standalone suite for **offline Dynasty**. No other COT module is required.
 - Use one Beyond the Field provider. Remove the older standalone Analytics/Enhancer DLLs, or use COT's copy instead. Keep all data folders.
 - Current Extra Settings, Expanded Practice and Gameday Atmosphere retain their existing native compatibility contracts. Mixed older versions can fail those checks.
 - The standalone embeds its generator, native engines and required Node/notices. It prepares verified files outside the recursive Plugins DLL scan; no separate dependency download is required.
-- Ace reported this standalone release working on November 9, 2026. Other game/overhaul combinations still need their own live checks.
+- The 1.0.2 standalone was reported working on November 9, 2026. The 1.0.3 Position Changes correction was confirmed with a targeted live adapter; the packaged update still needs its own clean-launch performance check. Other game/overhaul combinations need their own live checks.

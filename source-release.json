@@ -1,24 +1,17 @@
 {
   "format": 1,
   "title": "Beyond the Field",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "https://github.com/ArtVsTheWorld/DynastyCOT",
-  "revision": "e9322de06b3309b113d1e98b169a76a68ad22b25",
+  "revision": "8f806b4abcf2be070e040d0dacc19aa7778b610e",
   "modulePath": "Modules/DynastyEnhancer",
-  "baselineTag": null,
-  "baselineCommit": null,
-  "firstPublishedStandalone": true,
-  "archive": "BeyondTheField-1.0.2.zip",
-  "archiveSha256": "2838140503433a45657fba484e5bf7fe0766bad91d9677a55c37ac3949cbb3eb",
-  "dllSha256": "ea0c9f1aa02ec3e57c8588fe0ec2561f52eb2c5c6d012ca9eb02adf9d344fdda",
+  "baselineTag": "v1.0.2",
+  "baselineCommit": "2b7f2708ebb396cd662141e4cff1d91061c367cb",
+  "firstPublishedStandalone": false,
+  "archive": "BeyondTheField-1.0.3.zip",
+  "archiveSha256": "cb9d0b73172a10e69ae105b481bca82bc3ade0d5d2116819d1ffe7b8071a7395",
+  "dllSha256": "3118b70ebc4c68cf621dd74844b19f47f453ace33f7c981bb5ca60aaa1fc3dfb",
   "threeFileZip": true,
   "preview": false,
-  "sourceTreeHere": "historical; use pinned integration workspace",
-  "releaseStatusRevision": "55f977425d09f5777161a9d815b8df209fa0f8d3",
-  "acceptance": {
-    "kind": "user-reported",
-    "date": "2026-11-09",
-    "scope": "All four standalone releases confirmed verified working in this chat",
-    "testedArchiveUnchanged": true
-  }
+  "sourceTreeHere": "historical; use pinned integration workspace"
 }
