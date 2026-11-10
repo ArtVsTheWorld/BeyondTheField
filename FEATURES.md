@@ -10,12 +10,15 @@ A standalone suite for **offline Dynasty**. No other COT module is required.
 - For You favors user programs and selected major national news. National displays up to 300 cards. Routine team coverage has a 15-root-post budget, with important-news protections; replies and recruit statlines have separate treatment. More wording choices do not mean more weekly posts.
 - Recruiting posts can include persistent mod-generated high-school game/film records. These are scouting clues, not native game records or reliable development-trait reveals. The mod does not overwrite native player ratings or development traits with those results.
 - Casual chatter, rival reactions, seasonal posts and guarded pre-2026 references add variety when their facts/date context qualify. Sparse data uses factual fallbacks.
-- PFF College posts can cover verified mod grades, positional leaders and qualifying weekly individual/team performances. These are mod-calculated grades, not official PFF reporting.
+- GPI (@GPIndex) posts can cover verified mod grades, positional leaders and qualifying weekly individual/team performances. Gridiron Performance Index is a fictional account using mod-calculated grades from tracked Dynasty statistics.
 - Accounts and published wording/history survive updates. Refreshing the same edition does not reroll the feed. The 1.0.2 generator hotfix prevents a missing personal-account identity from stopping the rest of the feed.
 
 ## Scouting and recruiting
 
 - Separate Recruiting Fog, Roster Fog and Team Fog choices control how much exact rating information is shown inside Dynasty.
+- Recruiting Fog includes Default (initial choice), Recruit Feedback and Rank Only interest displays. Feedback uses relative standing words, allows tied tiers, groups schools without exact ranks and preserves movement arrows. Blind hides interest; switching fog off restores the native view.
+- Recruit Feedback and Blind remove the misleading Projected Cutoff divider. Default and Rank Only retain it. Actual lockout notices and the game's cut/advancement rules are preserved.
+- A scouting-progress icon appears in the Target column for previously scouted prospects who are off your board and uncommitted. It uses tracked scouting progress, refreshes after scouting/removal and preserves prospect names and protected native icons. This quality-of-life feature has no toggle.
 - Recruiting Notes collect a recruit's developing evaluation in the supported native UI.
 - Roster fog extends to supported small and full player-card rating displays. Main-menu and Play Now displays keep native ratings.
 - No native ratings, simulation outcomes or development traits are changed by the presentation fog.
@@ -44,3 +47,11 @@ A standalone suite for **offline Dynasty**. No other COT module is required.
 - Current Extra Settings, Expanded Practice and Gameday Atmosphere retain their existing native compatibility contracts. Mixed older versions can fail those checks.
 - The standalone embeds its generator, native engines and required Node/notices. It prepares verified files outside the recursive Plugins DLL scan; no separate dependency download is required.
 - The 1.0.2 standalone was reported working on November 9, 2026. The 1.0.3 Position Changes correction was confirmed with a targeted live adapter; the packaged update still needs its own clean-launch performance check. Other game/overhaul combinations need their own live checks.
+
+## Release verification and limits
+
+- Startup now waits for verified native settings code instead of permanently stopping if injected while the game is initializing. It requires two stable preflight checks, rejects unknown hook owners and times out after a bounded wait. Ace installed 1.0.6, restarted MMC/game and reported it working; this release retains that startup adapter.
+- The user confirmed left-aligned full Overview standings, immediate off-board 100% scouting-icon refresh and the small Prospect List card interest display with temporary live adapters.
+- The cutoff adapter now targets the verified native Top Schools list population method and removes only its Projected Cutoff item in Feedback/Blind. Isolated tests cover all four modes, repeated redraw, school-row identity, retained lockout notices and malformed provider counts. Ace reported the clean-installed 1.0.6 build working.
+- 1.0.7 changes only the initial interest preference and its Default label after that 1.0.6 test. Saved preferences retain their numeric IDs and values. Save/reload, another Dynasty and other overhaul versions still need their own live checks. Full Overview header progress hiding remains a live-review item.
+- Windows recorded a graphics timeout and game hang in an earlier test session. This does not establish whether the mod contributed; stability acceptance remains open.
