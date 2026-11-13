@@ -1,0 +1,17 @@
+**BeyondTheField 1.0.23**
+Changes since 1.0.7
+
+- Choose separate grade scales for recruiting, rosters and teams, including Off and Blind
+- Use optional Athletic Measurables and interest-display choices independently of Recruiting Fog
+- Recruit Notes load more reliably and offer shorter, more varied observations, coherent ATH secondary roles and improved new prospect backgrounds
+- Previously saved Notes keep their data while technical labels are hidden; compact transfer labels retain year and redshirt status
+- Confirmed signing news now follows the actual signing school, including recruits whose interest list still names another leader
+- Fans and official accounts have more personality, clearer rivalry references and cleaner grammar; unchanged preseason stories and milestone repetition are reduced
+- Social Media reuses unchanged work and handles available historical editions more efficiently without increasing weekly post budgets
+- GPI Season matches the weekly grade when a player has only one graded game
+- Fog covers additional depth-chart, hub and supported Dynasty Extensions report/drill displays; money formatting and navigation fixes remain
+- Settings and history move safely to shared AppData, helping installs in protected folders
+
+Full multi-coach active-school selection and private Notes ownership remain unsupported outside the verified Owner-school perspective. Saved backgrounds are not rerolled. Installed-menu acceptance is still required.
+
+Close MMC/game before replacing the DLL. Keep settings/history.

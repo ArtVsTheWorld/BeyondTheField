@@ -1,23 +1,25 @@
-# Beyond the Field
+# BeyondTheField by Ace
 
-**By Ace.** Dynasty Social Media, scouting fog, clearer ratings/money labels and team Player Analytics.
+An independent part of [Dynasty COT](https://github.com/ArtVsTheWorld/DynastyCOT). You do not need the other modules.
 
-**[Download 1.0.7 ZIP](https://github.com/ArtVsTheWorld/BeyondTheField/releases/download/v1.0.7/BeyondTheField-1.0.7.zip)** · [Full feature list](FEATURES.md) · [What's new](RELEASES.md)
+[Download published versions](https://github.com/ArtVsTheWorld/BeyondTheField/releases) · [Full feature list](FEATURES.md) · [Release history](RELEASES.md)
 
-Ace installed 1.0.6, restarted MMC/game and reported it working. 1.0.7 sets the initial interest choice to Default and renames its label; existing saved choices are preserved. Other setups still need their own checks.
+**This branch prepares private candidate 1.0.23. Its release assets are not published yet.** The last public version used for comparison is 1.0.7.
 
 ## Install or update
 
-1. Close the game and MMC Mod Manager.
-2. Put **BeyondTheField.dll** directly in the versioned Mod Manager's **Plugins** folder. The ZIP contains that DLL, README.txt and FEATURES.md. Matching support files are embedded and prepared automatically.
-3. Move older duplicate plugin DLLs outside Plugins, keeping settings/history folders. Restart MMC and launch normally. Use a writable MMC folder outside Program Files.
+1. Close MMC and the game and back up your previous DLL
+2. Download the chosen public ZIP and copy BeyondTheField.dll into the versioned Mod Manager's Plugins folder
+3. Replace the old copy and launch MMC normally; matching support files prepare automatically
 
-Read README.txt in the ZIP for this module's menu, old filenames, logs and removal steps. Use one provider of each feature. If keeping COT for other modules, disable this feature in COT before using the standalone. You can install any combination of matching current standalone modules.
+Use one provider per module. The COT installer can retire recognized older copies with backups. Keep all settings/history folders. To roll back, close MMC/game and restore your older DLL.
 
-**Want one feature? Download its standalone ZIP. Want the collection? [Download Dynasty COT](https://github.com/ArtVsTheWorld/DynastyCOT/releases).** See the [compatibility and saved-data guide](https://github.com/ArtVsTheWorld/DynastyCOT/blob/d2b98e9918930cf0bb3dd4070db072b5f06ed5d8/docs/standalones.md).
+Current candidates store settings/history/logs in `%LOCALAPPDATA%\Ace\DynastyCOT`, shared across MMC copies. Installation into protected folders still requires permission to replace DLLs.
 
-## Source and verification
+Want one feature? Download its standalone ZIP. Want several? Use the [optional COT installer](https://github.com/ArtVsTheWorld/DynastyCOT/releases).
 
-This repository is the standalone download/help front door. Current releases are built from the [single maintained COT workspace](https://github.com/ArtVsTheWorld/DynastyCOT/tree/d2b98e9918930cf0bb3dd4070db072b5f06ed5d8), including [this module's source](https://github.com/ArtVsTheWorld/DynastyCOT/tree/d2b98e9918930cf0bb3dd4070db072b5f06ed5d8/Modules/DynastyEnhancer) and shared build/packaging code. `source-release.json` pins the exact source revision, baseline and artifact hashes.
+## Source and support
 
-The older source tree retained in this repository is historical; it is **not** the build input for this standalone release. Fixes are maintained in COT rather than separately editing four forks. Release assets include integrity metadata; successful offline checks do not certify every game/overhaul combination.
+Maintained source and compatibility checks are together in [Dynasty COT at 226a6b6c](https://github.com/ArtVsTheWorld/DynastyCOT/tree/226a6b6c6292d202498e7d7fe1c7399335d40f43/Modules/DynastyEnhancer). This repository's older source tree is historical; use that pinned integration source for current development.
+
+See RELEASE_NOTES.md for the candidate's changes and limits. Automated checks do not establish universal live-game compatibility. Keep your previous working DLL and report your game/mod versions with logs when requesting support.
