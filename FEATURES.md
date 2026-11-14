@@ -1,57 +1,46 @@
-# Beyond the Field by Ace
+# Ace’s Beyond the Field 1.0.24
 
-A standalone suite for **offline Dynasty**. No other COT module is required.
+## Read the news in your Dynasty
 
-## Social Media
+Open **Team > Social Media** in an offline Dynasty. **Social Media Feed** starts on. Switch it off in **Dynasty Settings > Beyond the Field** if you want to hide the feed for that league.
 
-- A feed follows captured results, rankings, recruiting, awards, transfers, coaching, conference changes, draft results and other supported Dynasty developments.
-- Reporters, analysts, official teams, fans, players and recruits have persistent accounts and different voices. Replies engage with the parent story; stories do not all need replies.
-- Browse For You, National, conference, team and topic categories. Choose a past weekly edition to revisit published posts.
-- For You favors user programs and selected major national news. National displays up to 300 cards. Routine team coverage has a 15-root-post budget, with important-news protections; replies and recruit statlines have separate treatment. More wording choices do not mean more weekly posts.
-- Recruiting posts can include persistent mod-generated high-school game/film records. These are scouting clues, not native game records or reliable development-trait reveals. The mod does not overwrite native player ratings or development traits with those results.
-- Casual chatter, rival reactions, seasonal posts and guarded pre-2026 references add variety when their facts/date context qualify. Sparse data uses factual fallbacks.
-- GPI (@GPIndex) posts can cover verified mod grades, positional leaders and qualifying weekly individual/team performances. Gridiron Performance Index is a fictional account using mod-calculated grades from tracked Dynasty statistics.
-- Accounts and published wording/history survive updates. Refreshing the same edition does not reroll the feed. The 1.0.2 generator hotfix prevents a missing personal-account identity from stopping the rest of the feed.
+- Choose **For You** for your program's week and big news from around the country. Choose **National** for up to 300 cards. Pick a conference or a school to see its own news. A team story can appear there even when it misses the national feed.
+- Choose **All Types**, Recruiting, Recaps, Upcoming, Rankings & Awards, Analysts, Beat Reporters, Official Accounts, Players, Injuries, Fans or Transactions. Replies stay with the post they answer.
+- Read previews, picks and made-up point spreads, then check the real results in a recap. Reporters can cover matchups, game stats, upsets, streaks, rivalries, injuries and return estimates. Follow the polls, conference races, playoff bracket, bowls, Heisman watch, awards, records, milestones and season reviews.
+- Follow offers, commitments, flips, signings, transfers, draft rounds, players leaving, coaching moves, conference changes, NIL and offseason news. A signing follows the school the player joined. Some draft posts add a made-up pick or pro team to the round the game recorded. Spring exhibitions stay separate from competitive results. Fall preview stories wait for the season opener.
+- Schools, players, recruits, fans, beat writers and analysts keep their own accounts. They can post, reply and draw likes. A school can welcome a signing while a rival fan reacts. Recruiting posts can include made-up high-school game or film reports. Those numbers give you story clues. They do not predict a hidden development trait.
+- The feed can add news during the week. Open an earlier edition to read its published words again. Accounts, already published stories and replies carry over on reload. A school usually gets up to 15 main posts in a week. Big news can still make the cut, and replies and recruit film have their own rules. Quiet weeks can have fewer posts. Some missed public news can be rebuilt from saved results. Missing private recruiting events can stay missing.
 
-## Scouting and recruiting
+## Choose how much ratings tell you
 
-- Separate Recruiting Fog, Roster Fog and Team Fog choices control how much exact rating information is shown inside Dynasty.
-- Recruiting Fog includes Default (initial choice), Recruit Feedback and Rank Only interest displays. Feedback uses relative standing words, allows tied tiers, groups schools without exact ranks and preserves movement arrows. Blind hides interest; switching fog off restores the native view.
-- Recruit Feedback and Blind remove the misleading Projected Cutoff divider. Default and Rank Only retain it. Actual lockout notices and the game's cut/advancement rules are preserved.
-- A scouting-progress icon appears in the Target column for previously scouted prospects who are off your board and uncommitted. It uses tracked scouting progress, refreshes after scouting/removal and preserves prospect names and protected native icons. This quality-of-life feature has no toggle.
-- Recruiting Notes collect a recruit's developing evaluation in the supported native UI.
-- Roster fog extends to supported small and full player-card rating displays. Main-menu and Play Now displays keep native ratings.
-- No native ratings, simulation outcomes or development traits are changed by the presentation fog.
+Open **Dynasty Settings > Beyond the Field**. These choices save separately for each Dynasty. They change what you see on supported screens. The game still uses each player's real ratings for play, sorting and simulation.
 
-## Rating and money displays
+| Setting | Starting choice | What it does |
+| --- | --- | --- |
+| Recruiting Fog | A+- | Changes scout ratings on the prospect board and cards. Unscouted traits can show a question mark. A partly known trait can show a range. Some Playing Time clues are hidden. |
+| Roster Fog | A+- | Changes rating labels for players on rosters, including the Overall rating and individual skills. |
+| Team Fog | A+- | Changes a team's Overall, Offense and Defense ratings. You can give teams a different scale from players or recruits. |
+| Measurables Display | Default | Choose **Athletic Measurables** for estimated workout results as scouting reveals the needed traits. |
+| Interest Display | Default | Choose the game's usual interest bars, broader **Recruit Feedback**, or **Rank Only**. |
+| Rating Colors | Off | Adds a color to help tell grades apart. Supported number displays can also use color. Blind uses a plain dash. |
+| Dollar Values | Off | Shows short money amounts on supported Dynasty budgets, NIL, offers, prospect and player cards. One game point displays as $4,000. Ten points display as $40K. You still edit the real game amount. |
 
-- Choose ordinary letter grades, A+/A/A- grades, S-tier grades or descriptive words such as GOOD and ELITE. The supported Blind option hides exact grades further. Player and team style choices are independent.
-- Optional rating colors help distinguish grades. Colors off retains native display colors. Descriptive words are capitalized and fitted to supported rating circles.
-- Supported player-card Ratings buckets keep their selection highlight, formatted attributes and matching rating bars without exposing the underlying numbers between bucket changes.
-- Projected overalls in Position Changes follow the player grade and Roster Fog choices. Position-change calculations, sorting and player counts remain native.
-- Optional compact dollar labels show readable $K/$M values in supported recruiting, offers, NIL, budgets and player-card displays, including edited/redrawn values. Numeric editing values and sorting data remain numeric.
-- Defaults: Social Media and the three fog options On; A+/- grades; colors and dollar formatting Off. Choices are saved by Dynasty rather than copied globally to every save.
+Each fog row has the same six choices. **Off** shows the game's normal numbers. **A+-** splits letter grades with plus and minus signs. **A** uses plain A, B, C, D and F. **S** adds an S at 95 or above. **Descriptive** uses Elite, Great, Good, Fair and Poor. **Blind** hides the rating with a dash. For example, an 87 can read **B+**, **B** or **Great**, depending on the scale.
 
-## Player Analytics
+On supported screens the displays follow you through the depth chart, player cards, redshirts, injuries, training, position changes and projected ratings, formation subs, NIL, and players leaving. Coverage also reaches stats and award sidebars, draft-result Overall, team comparisons, pregame selection, play selection, in-game subs and selected broadcast graphics. Recognized Dynasty Extensions weekly reports and drill menus use the matching grade scale. Roster editing, other layouts and some graphics can still show their usual values. Play Now and the main menu use the game's normal ratings.
 
-- Browse a selected team's weekly and season performance grades, snaps and player cards in the native UI. The National Analytics list and nonworking Player Stats shortcut are intentionally omitted.
-- Only completed weeks appear: Week 0 becomes available in Week 1. Season combines the completed weeks, excluding the current unfinished week.
-- Position-appropriate mod grades use the statistics the captured Dynasty actually provides. Available evidence, sampling and program prestige affect uncertainty; these are estimates rather than official film grades.
-- Open a player's full card and return to Analytics. Supported card attributes/abilities respect roster fog. No underlying native player rating is replaced by an analytics grade.
+## Scout a recruit
 
-## Limits and compatibility
+- **Recruit Feedback** groups schools by where they stand, from Favorite to Long Shot. Schools can share a group. Movement arrows still show changes. **Rank Only** keeps the order and hides the bars. Feedback hides the projected cutoff line. Actual lockouts still count.
+- **Athletic Measurables** can show a 40-yard dash, bench and squat, 3-cone drill, 20-yard shuttle or vertical jump. The dash needs both speed and acceleration. These are estimates, and a reload keeps the same estimate for the same prospect. Interest and workout choices work with Recruiting Fog off. Recruiting **Blind** hides workouts, interest, ranks and cutoff clues.
+- Open a prospect's **Notes** for observations. They work with Recruiting Fog off, too. Starting at 25% scouted, you can see up to two observations. At 50% you can see up to three, and at 75% up to four if there is evidence. Your school's recruiting pipeline can affect how close a new assessment is. Scouting can reveal strengths, weak spots and technique while leaving some doubt.
+- High-school recruits can get a made-up previous season with a hometown, level of competition, position, workload, stats and GPA. A two-way athlete can have a second role that fits his skills. Supported junior-college prospects can get a lower-division college background. College transfers use available college records and scouting observations. A short label such as **TR RSFR** means redshirt freshman transfer. GPA is background detail.
+- Saved backgrounds and existing assessments stay with their prospect. An uncommitted recruit you scouted and then took off your board can keep a scouting icon in the Target column. This helps you find him again.
 
-- Offline Dynasty only. This does not add online Dynasty support or change Play Now gameplay ratings.
-- Targeted AIO 1.4.1/TeamBuilder adapters are included, but other game/overhaul versions still need their own live checks. Unknown hook owners/layouts are not overwritten.
-- Use one Beyond the Field provider. Remove the older standalone Analytics/Enhancer DLLs, or use COT's copy instead. Keep all data folders.
-- Current Extra Settings, Expanded Practice and Gameday Atmosphere retain their existing native compatibility contracts. Mixed older versions can fail those checks.
-- The standalone embeds its generator, native engines and required Node/notices. It prepares verified files outside the recursive Plugins DLL scan; no separate dependency download is required.
-- The 1.0.2 standalone was reported working on November 9, 2026. The 1.0.3 Position Changes correction was confirmed with a targeted live adapter; the packaged update still needs its own clean-launch performance check. Other game/overhaul combinations need their own live checks.
+## Check who played well
 
-## Release verification and limits
+Open **Stats & Records > Player Analytics**, choose a school and pick a finished week or **Season**. Sort the list, check a player's snaps and Gridiron Performance Index (GPI) grade, then open his full player card. GPI estimates how well a player performed from the stats available for his position. It is separate from his skill rating.
 
-- Startup now waits for verified native settings code instead of permanently stopping if injected while the game is initializing. It requires two stable preflight checks, rejects unknown hook owners and times out after a bounded wait. Ace installed 1.0.6, restarted MMC/game and reported it working; this release retains that startup adapter.
-- The user confirmed left-aligned full Overview standings, immediate off-board 100% scouting-icon refresh and the small Prospect List card interest display with temporary live adapters.
-- The cutoff adapter now targets the verified native Top Schools list population method and removes only its Projected Cutoff item in Feedback/Blind. Isolated tests cover all four modes, repeated redraw, school-row identity, retained lockout notices and malformed provider counts. Ace reported the clean-installed 1.0.6 build working.
-- 1.0.7 changes only the initial interest preference and its Default label after that 1.0.6 test. Saved preferences retain their numeric IDs and values. Save/reload, another Dynasty and other overhaul versions still need their own live checks. Full Overview header progress hiding remains a live-review item.
-- Windows recorded a graphics timeout and game hang in an earlier test session. This does not establish whether the mod contributed; stability acceptance remains open.
+Week 0 appears after you reach Week 1. Season uses completed weeks. With one graded game, the weekly and season grades match. The fictional **@GPIndex** account can highlight position leaders and standout players or teams in Social Media.
+
+This module works on its own. In a Dynasty with several coaches, the checked view is the owner's school. Switching to another coach's perspective and keeping Notes private to each coach still have limits. Support for certain AIO 1.4.1, TeamBuilder and Dynasty Extensions screens depends on the version and menu. Some card, Notes and grade layouts still need an in-game check. See **BeyondTheField-Player-Guide.pdf** in the ZIP for pictures and help.
