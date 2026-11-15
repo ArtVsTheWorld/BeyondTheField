@@ -1,4 +1,4 @@
-# Ace’s Beyond the Field 1.0.25
+# Ace’s Beyond the Field 1.0.26
 
 ## Read the news in your Dynasty
 

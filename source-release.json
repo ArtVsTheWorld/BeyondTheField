@@ -1,13 +1,13 @@
 {
   "format": 2,
-  "version": "1.0.25",
+  "version": "1.0.26",
   "repository": "ArtVsTheWorld/DynastyCOT",
-  "revision": "78dfe9d0cb3a2abbe2d7ebf44059f11d37c09f78",
+  "revision": "5ef7eb5f05af9678cad922386157de88216d5c7d",
   "modulePath": "Modules/DynastyEnhancer",
-  "archive": "BeyondTheField-1.0.25.zip",
-  "archiveSha256": "84573336803117e4f5a4f1fb1c03637dbe8eecacb181a3e52da236073cfcb2ba",
-  "dllSha256": "31b7d00b1c03ba56c3431a4a63ee77969881ebeb22b9aec30268425fee7749ea",
+  "archive": "BeyondTheField-1.0.26.zip",
+  "archiveSha256": "c3449812eebccb59eed805e7b3df04d0c32e9304c440a46776fef95d6c507be5",
+  "dllSha256": "9cd916d27026e39f069dd0ed8cb3b7aaeb2caf1c7332b87a7b56f393f38009eb",
   "playerGuideSha256": "9bc7cb375114c56d59ac89336f3c339e2a43e9fa0040ae9a85d474355a6158f0",
   "fourFileZip": true,
-  "publicBaseline": "1.0.24"
+  "publicBaseline": "1.0.25"
 }
