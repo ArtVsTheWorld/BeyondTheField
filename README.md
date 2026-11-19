@@ -1,6 +1,6 @@
 # Ace’s Beyond the Field
 
-**[Download 1.0.32 ZIP](https://github.com/ArtVsTheWorld/BeyondTheField/releases/download/v1.0.32/BeyondTheField-1.0.32.zip)** · [Illustrated player guide](https://github.com/ArtVsTheWorld/BeyondTheField/releases/download/v1.0.32/BeyondTheField-Player-Guide.pdf) · [All features](FEATURES.md) · [What changed](RELEASES.md)
+**[Download 1.0.43 ZIP](https://github.com/ArtVsTheWorld/BeyondTheField/releases/download/v1.0.43/BeyondTheField-1.0.43.zip)** · [Illustrated player guide](https://github.com/ArtVsTheWorld/BeyondTheField/releases/download/v1.0.43/BeyondTheField-Player-Guide.pdf) · [All features](FEATURES.md) · [What changed](RELEASES.md)
 
 Close MMC/game. Copy **BeyondTheField.dll** from the ZIP into the **Plugins** folder beside the MMCModManager.exe you actually use, replacing the prior copy. Keep the included README, feature list and illustrated guide. The ZIP has exactly those four files; required notices are in the README appendix where needed. Matching support prepares automatically outside Plugins.
 
@@ -12,4 +12,4 @@ Read the release notes for supported contexts and remaining live acceptance. Off
 
 ## Source and verification
 
-Development stays in the [shared COT workspace](https://github.com/ArtVsTheWorld/DynastyCOT/tree/7cf66157484e1d47daac0b3731b868c11002fd5b); [current module source](https://github.com/ArtVsTheWorld/DynastyCOT/tree/7cf66157484e1d47daac0b3731b868c11002fd5b/Modules/DynastyEnhancer). The older tree in this download/support repository is historical and is not the current build input. `source-release.json` pins the source revision and artifact hashes. Verification JSON and SHA-256 files are separate release assets; the editable guide is also available.
+Development stays in the [shared COT workspace](https://github.com/ArtVsTheWorld/DynastyCOT/tree/ae9910561de6e6c327fb6051926e8a3087f7b242); [current module source](https://github.com/ArtVsTheWorld/DynastyCOT/tree/ae9910561de6e6c327fb6051926e8a3087f7b242/Modules/DynastyEnhancer). The older tree in this download/support repository is historical and is not the current build input. `source-release.json` pins the source revision and artifact hashes. Verification JSON and SHA-256 files are separate release assets; the editable guide is also available.

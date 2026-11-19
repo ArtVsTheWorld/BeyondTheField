@@ -1,4 +1,4 @@
-# Ace’s Beyond the Field 1.0.26
+# Ace’s Beyond the Field 1.0.43
 
 ## Read the news in your Dynasty
 
@@ -32,9 +32,10 @@ On supported screens the displays follow you through the depth chart, player car
 ## Scout a recruit
 
 - **Recruit Feedback** groups schools by where they stand, from Favorite to Long Shot. Schools can share a group. Movement arrows still show changes. **Rank Only** keeps the order and hides the bars. Feedback hides the projected cutoff line. Actual lockouts still count.
-- **Athletic Measurables** can show a 40-yard dash, bench and squat, 3-cone drill, 20-yard shuttle or vertical jump. The dash needs both speed and acceleration. These are estimates, and a reload keeps the same estimate for the same prospect. Interest and workout choices work with Recruiting Fog off. Recruiting **Blind** hides workouts, interest, ranks and cutoff clues.
+- **Athletic Measurables** can show a 40-yard dash, 10-yard split, bench and squat, 3-cone drill, 20-yard shuttle or vertical jump. The dash needs both speed and acceleration. These are estimates, and a reload keeps the same estimate for the same prospect. Interest and workout choices work with Recruiting Fog off. Recruiting **Blind** hides workouts, interest, ranks and cutoff clues.
 - Open a prospect's **Notes** for observations. They work with Recruiting Fog off, too. Starting at 25% scouted, you can see up to two observations. At 50% you can see up to three, and at 75% up to four if there is evidence. Your school's recruiting pipeline can affect how close a new assessment is. Scouting can reveal strengths, weak spots and technique while leaving some doubt.
 - High-school recruits can get a made-up previous season with a hometown, level of competition, position, workload, stats and GPA. A two-way athlete can have a second role that fits his skills. Supported junior-college prospects can get a lower-division college background. College transfers use available college records and scouting observations. A short label such as **TR RSFR** means redshirt freshman transfer. GPA is background detail.
+- At 100% scouting, Notes can show all seven estimated measurements when the required ratings are available. Fully scouted high school and JUCO recruits get one stable Background note. Transfers do not get a Background note.
 - Saved backgrounds and existing assessments stay with their prospect. An uncommitted recruit you scouted and then took off your board can keep a scouting icon in the Target column. This helps you find him again.
 
 ## Check who played well
